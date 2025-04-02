@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
-public sealed partial class DeleteLifecycleRequestParameters : RequestParameters
+public sealed partial class DeleteLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -49,6 +42,35 @@ public sealed partial class DeleteLifecycleRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class DeleteLifecycleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest>
+{
+	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Delete a policy.
@@ -56,15 +78,27 @@ public sealed partial class DeleteLifecycleRequestParameters : RequestParameters
 /// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 /// </para>
 /// </summary>
-public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestConverter))]
+public sealed partial class DeleteLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteLifecycleRequest(Elastic.Clients.Elasticsearch.Name policyId) : base(r => r.Required("policy_id", policyId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteLifecycleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementDeleteLifecycle;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotLifecycleManagementDeleteLifecycle;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
@@ -72,11 +106,21 @@ public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycl
 
 	/// <summary>
 	/// <para>
+	/// The id of the snapshot lifecycle policy to remove
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name PolicyId { get => P<Elastic.Clients.Elasticsearch.Name>("policy_id"); set => PR("policy_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -85,7 +129,6 @@ public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycl
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
@@ -96,32 +139,112 @@ public sealed partial class DeleteLifecycleRequest : PlainRequest<DeleteLifecycl
 /// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 /// </para>
 /// </summary>
-public sealed partial class DeleteLifecycleRequestDescriptor : RequestDescriptor<DeleteLifecycleRequestDescriptor, DeleteLifecycleRequestParameters>
+public readonly partial struct DeleteLifecycleRequestDescriptor
 {
-	internal DeleteLifecycleRequestDescriptor(Action<DeleteLifecycleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest Instance { get; init; }
 
-	public DeleteLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Name policyId) : base(r => r.Required("policy_id", policyId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementDeleteLifecycle;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "slm.delete_lifecycle";
-
-	public DeleteLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public DeleteLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public DeleteLifecycleRequestDescriptor PolicyId(Elastic.Clients.Elasticsearch.Name policyId)
+	public DeleteLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Name policyId)
 	{
-		RouteValues.Required("policy_id", policyId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest(policyId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteLifecycleRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The id of the snapshot lifecycle policy to remove
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor PolicyId(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.PolicyId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest Build(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

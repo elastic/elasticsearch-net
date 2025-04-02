@@ -17,17 +17,75 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class ProcessorGrokResponse : ElasticsearchResponse
+internal sealed partial class ProcessorGrokResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse>
 {
-	[JsonInclude, JsonPropertyName("patterns")]
-	public IReadOnlyDictionary<string, string> Patterns { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropPatterns = System.Text.Json.JsonEncodedText.Encode("patterns");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>> propPatterns = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPatterns.TryReadProperty(ref reader, options, PropPatterns, static System.Collections.Generic.IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Patterns = propPatterns.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPatterns, value.Patterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponseConverter))]
+public sealed partial class ProcessorGrokResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ProcessorGrokResponse(System.Collections.Generic.IReadOnlyDictionary<string, string> patterns)
+	{
+		Patterns = patterns;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ProcessorGrokResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ProcessorGrokResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		System.Collections.Generic.IReadOnlyDictionary<string, string> Patterns { get; set; }
 }

@@ -17,43 +17,235 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public sealed partial class UpdateTransformResponse : ElasticsearchResponse
+internal sealed partial class UpdateTransformResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse>
 {
-	[JsonInclude, JsonPropertyName("authorization")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization? Authorization { get; init; }
-	[JsonInclude, JsonPropertyName("create_time")]
-	public long CreateTime { get; init; }
-	[JsonInclude, JsonPropertyName("description")]
-	public string Description { get; init; }
-	[JsonInclude, JsonPropertyName("dest")]
-	public Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; init; }
-	[JsonInclude, JsonPropertyName("frequency")]
-	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("latest")]
-	public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; init; }
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("pivot")]
-	public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; init; }
-	[JsonInclude, JsonPropertyName("retention_policy")]
-	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; init; }
-	[JsonInclude, JsonPropertyName("settings")]
-	public Elastic.Clients.Elasticsearch.TransformManagement.Settings Settings { get; init; }
-	[JsonInclude, JsonPropertyName("source")]
-	public Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; init; }
-	[JsonInclude, JsonPropertyName("sync")]
-	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; init; }
-	[JsonInclude, JsonPropertyName("version")]
-	public string Version { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropAuthorization = System.Text.Json.JsonEncodedText.Encode("authorization");
+	private static readonly System.Text.Json.JsonEncodedText PropCreateTime = System.Text.Json.JsonEncodedText.Encode("create_time");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
+	private static readonly System.Text.Json.JsonEncodedText PropFrequency = System.Text.Json.JsonEncodedText.Encode("frequency");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropLatest = System.Text.Json.JsonEncodedText.Encode("latest");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot");
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionPolicy = System.Text.Json.JsonEncodedText.Encode("retention_policy");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropSync = System.Text.Json.JsonEncodedText.Encode("sync");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization?> propAuthorization = default;
+		LocalJsonValue<long> propCreateTime = default;
+		LocalJsonValue<string> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Destination> propDest = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Latest?> propLatest = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Pivot?> propPivot = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy?> propRetentionPolicy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Settings> propSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Source> propSource = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Sync?> propSync = default;
+		LocalJsonValue<string> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAuthorization.TryReadProperty(ref reader, options, PropAuthorization, null))
+			{
+				continue;
+			}
+
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
+			{
+				continue;
+			}
+
+			if (propFrequency.TryReadProperty(ref reader, options, PropFrequency, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propLatest.TryReadProperty(ref reader, options, PropLatest, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPivot.TryReadProperty(ref reader, options, PropPivot, null))
+			{
+				continue;
+			}
+
+			if (propRetentionPolicy.TryReadProperty(ref reader, options, PropRetentionPolicy, null))
+			{
+				continue;
+			}
+
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (propSync.TryReadProperty(ref reader, options, PropSync, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Authorization = propAuthorization.Value,
+			CreateTime = propCreateTime.Value,
+			Description = propDescription.Value,
+			Dest = propDest.Value,
+			Frequency = propFrequency.Value,
+			Id = propId.Value,
+			Latest = propLatest.Value,
+			Meta = propMeta.Value,
+			Pivot = propPivot.Value,
+			RetentionPolicy = propRetentionPolicy.Value,
+			Settings = propSettings.Value,
+			Source = propSource.Value,
+			Sync = propSync.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAuthorization, value.Authorization, null, null);
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDest, value.Dest, null, null);
+		writer.WriteProperty(options, PropFrequency, value.Frequency, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropLatest, value.Latest, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPivot, value.Pivot, null, null);
+		writer.WriteProperty(options, PropRetentionPolicy, value.RetentionPolicy, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropSync, value.Sync, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponseConverter))]
+public sealed partial class UpdateTransformResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateTransformResponse(long createTime, string description, Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest, string id, Elastic.Clients.Elasticsearch.TransformManagement.Settings settings, Elastic.Clients.Elasticsearch.Core.Reindex.Source source, string version)
+	{
+		CreateTime = createTime;
+		Description = description;
+		Dest = dest;
+		Id = id;
+		Settings = settings;
+		Source = source;
+		Version = version;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateTransformResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateTransformResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization? Authorization { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		long CreateTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		string Description { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		string Id { get; set; }
+	public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
+	public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
+	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.TransformManagement.Settings Settings { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
+	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		string Version { get; set; }
 }

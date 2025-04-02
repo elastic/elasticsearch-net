@@ -17,135 +17,240 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class NodeJvmInfoConverter : JsonConverter<NodeJvmInfo>
+internal sealed partial class NodeJvmInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo>
 {
-	public override NodeJvmInfo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropGcCollectors = System.Text.Json.JsonEncodedText.Encode("gc_collectors");
+	private static readonly System.Text.Json.JsonEncodedText PropInputArguments = System.Text.Json.JsonEncodedText.Encode("input_arguments");
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryPools = System.Text.Json.JsonEncodedText.Encode("memory_pools");
+	private static readonly System.Text.Json.JsonEncodedText PropPid = System.Text.Json.JsonEncodedText.Encode("pid");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropUsingBundledJdk = System.Text.Json.JsonEncodedText.Encode("using_bundled_jdk");
+	private static readonly System.Text.Json.JsonEncodedText PropUsingBundledJdk1 = System.Text.Json.JsonEncodedText.Encode("bundled_jdk");
+	private static readonly System.Text.Json.JsonEncodedText PropUsingCompressedOrdinaryObjectPointers = System.Text.Json.JsonEncodedText.Encode("using_compressed_ordinary_object_pointers");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVmName = System.Text.Json.JsonEncodedText.Encode("vm_name");
+	private static readonly System.Text.Json.JsonEncodedText PropVmVendor = System.Text.Json.JsonEncodedText.Encode("vm_vendor");
+	private static readonly System.Text.Json.JsonEncodedText PropVmVersion = System.Text.Json.JsonEncodedText.Encode("vm_version");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		IReadOnlyCollection<string> gcCollectors = default;
-		IReadOnlyCollection<string> inputArguments = default;
-		Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory mem = default;
-		IReadOnlyCollection<string> memoryPools = default;
-		int pid = default;
-		long startTimeInMillis = default;
-		bool usingBundledJdk = default;
-		object? usingCompressedOrdinaryObjectPointers = default;
-		string version = default;
-		string vmName = default;
-		string vmVendor = default;
-		string vmVersion = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propGcCollectors = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propInputArguments = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory> propMem = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propMemoryPools = default;
+		LocalJsonValue<int> propPid = default;
+		LocalJsonValue<System.DateTime> propStartTimeInMillis = default;
+		LocalJsonValue<bool> propUsingBundledJdk = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<bool, string>?> propUsingCompressedOrdinaryObjectPointers = default;
+		LocalJsonValue<string> propVersion = default;
+		LocalJsonValue<string> propVmName = default;
+		LocalJsonValue<string> propVmVendor = default;
+		LocalJsonValue<string> propVmVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propGcCollectors.TryReadProperty(ref reader, options, PropGcCollectors, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
-				var property = reader.GetString();
-				if (property == "gc_collectors")
-				{
-					gcCollectors = JsonSerializer.Deserialize<IReadOnlyCollection<string>>(ref reader, options);
-					continue;
-				}
-
-				if (property == "input_arguments")
-				{
-					inputArguments = JsonSerializer.Deserialize<IReadOnlyCollection<string>>(ref reader, options);
-					continue;
-				}
-
-				if (property == "mem")
-				{
-					mem = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory>(ref reader, options);
-					continue;
-				}
-
-				if (property == "memory_pools")
-				{
-					memoryPools = JsonSerializer.Deserialize<IReadOnlyCollection<string>>(ref reader, options);
-					continue;
-				}
-
-				if (property == "pid")
-				{
-					pid = JsonSerializer.Deserialize<int>(ref reader, options);
-					continue;
-				}
-
-				if (property == "start_time_in_millis")
-				{
-					startTimeInMillis = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
-
-				if (property == "using_bundled_jdk" || property == "bundled_jdk")
-				{
-					usingBundledJdk = JsonSerializer.Deserialize<bool>(ref reader, options);
-					continue;
-				}
-
-				if (property == "using_compressed_ordinary_object_pointers")
-				{
-					usingCompressedOrdinaryObjectPointers = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "version")
-				{
-					version = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "vm_name")
-				{
-					vmName = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "vm_vendor")
-				{
-					vmVendor = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
-
-				if (property == "vm_version")
-				{
-					vmVersion = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propInputArguments.TryReadProperty(ref reader, options, PropInputArguments, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propMem.TryReadProperty(ref reader, options, PropMem, null))
+			{
+				continue;
+			}
+
+			if (propMemoryPools.TryReadProperty(ref reader, options, PropMemoryPools, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propPid.TryReadProperty(ref reader, options, PropPid, null))
+			{
+				continue;
+			}
+
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propUsingBundledJdk.TryReadProperty(ref reader, options, PropUsingBundledJdk, null) || propUsingBundledJdk.TryReadProperty(ref reader, options, PropUsingBundledJdk1, null))
+			{
+				continue;
+			}
+
+			if (propUsingCompressedOrdinaryObjectPointers.TryReadProperty(ref reader, options, PropUsingCompressedOrdinaryObjectPointers, static Elastic.Clients.Elasticsearch.Union<bool, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<bool, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), null, null)))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (propVmName.TryReadProperty(ref reader, options, PropVmName, null))
+			{
+				continue;
+			}
+
+			if (propVmVendor.TryReadProperty(ref reader, options, PropVmVendor, null))
+			{
+				continue;
+			}
+
+			if (propVmVersion.TryReadProperty(ref reader, options, PropVmVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return new NodeJvmInfo { GcCollectors = gcCollectors, InputArguments = inputArguments, Mem = mem, MemoryPools = memoryPools, Pid = pid, StartTimeInMillis = startTimeInMillis, UsingBundledJdk = usingBundledJdk, UsingCompressedOrdinaryObjectPointers = usingCompressedOrdinaryObjectPointers, Version = version, VmName = vmName, VmVendor = vmVendor, VmVersion = vmVersion };
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			GcCollectors = propGcCollectors.Value,
+			InputArguments = propInputArguments.Value,
+			Mem = propMem.Value,
+			MemoryPools = propMemoryPools.Value,
+			Pid = propPid.Value,
+			StartTimeInMillis = propStartTimeInMillis.Value,
+			UsingBundledJdk = propUsingBundledJdk.Value,
+			UsingCompressedOrdinaryObjectPointers = propUsingCompressedOrdinaryObjectPointers.Value,
+			Version = propVersion.Value,
+			VmName = propVmName.Value,
+			VmVendor = propVmVendor.Value,
+			VmVersion = propVmVersion.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, NodeJvmInfo value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo value, System.Text.Json.JsonSerializerOptions options)
 	{
-		throw new NotImplementedException("'NodeJvmInfo' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropGcCollectors, value.GcCollectors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropInputArguments, value.InputArguments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMem, value.Mem, null, null);
+		writer.WriteProperty(options, PropMemoryPools, value.MemoryPools, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPid, value.Pid, null, null);
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropUsingBundledJdk, value.UsingBundledJdk, null, null);
+		writer.WriteProperty(options, PropUsingCompressedOrdinaryObjectPointers, value.UsingCompressedOrdinaryObjectPointers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, string>? v) => w.WriteUnionValue<bool, string>(o, v, null, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVmName, value.VmName, null, null);
+		writer.WriteProperty(options, PropVmVendor, value.VmVendor, null, null);
+		writer.WriteProperty(options, PropVmVersion, value.VmVersion, null, null);
+		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(NodeJvmInfoConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfoConverter))]
 public sealed partial class NodeJvmInfo
 {
-	public IReadOnlyCollection<string> GcCollectors { get; init; }
-	public IReadOnlyCollection<string> InputArguments { get; init; }
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory Mem { get; init; }
-	public IReadOnlyCollection<string> MemoryPools { get; init; }
-	public int Pid { get; init; }
-	public long StartTimeInMillis { get; init; }
-	public bool UsingBundledJdk { get; init; }
-	public object? UsingCompressedOrdinaryObjectPointers { get; init; }
-	public string Version { get; init; }
-	public string VmName { get; init; }
-	public string VmVendor { get; init; }
-	public string VmVersion { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeJvmInfo(System.Collections.Generic.IReadOnlyCollection<string> gcCollectors, System.Collections.Generic.IReadOnlyCollection<string> inputArguments, Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory mem, System.Collections.Generic.IReadOnlyCollection<string> memoryPools, int pid, System.DateTime startTimeInMillis, bool usingBundledJdk, string version, string vmName, string vmVendor, string vmVersion)
+	{
+		GcCollectors = gcCollectors;
+		InputArguments = inputArguments;
+		Mem = mem;
+		MemoryPools = memoryPools;
+		Pid = pid;
+		StartTimeInMillis = startTimeInMillis;
+		UsingBundledJdk = usingBundledJdk;
+		Version = version;
+		VmName = vmName;
+		VmVendor = vmVendor;
+		VmVersion = vmVersion;
+	}
+#if NET7_0_OR_GREATER
+	public NodeJvmInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeJvmInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeJvmInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> GcCollectors { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> InputArguments { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory Mem { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> MemoryPools { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Pid { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTime StartTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool UsingBundledJdk { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<bool, string>? UsingCompressedOrdinaryObjectPointers { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Version { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string VmName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string VmVendor { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string VmVersion { get; set; }
 }

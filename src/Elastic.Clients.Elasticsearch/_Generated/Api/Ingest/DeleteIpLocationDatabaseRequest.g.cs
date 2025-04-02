@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class DeleteIpLocationDatabaseRequestParameters : RequestParameters
+public sealed partial class DeleteIpLocationDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -51,24 +44,76 @@ public sealed partial class DeleteIpLocationDatabaseRequestParameters : RequestP
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class DeleteIpLocationDatabaseRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Delete IP geolocation database configurations.
 /// </para>
 /// </summary>
-public sealed partial class DeleteIpLocationDatabaseRequest : PlainRequest<DeleteIpLocationDatabaseRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestConverter))]
+public sealed partial class DeleteIpLocationDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Ids id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteIpLocationDatabaseRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeleteIpLocationDatabase;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IngestDeleteIpLocationDatabase;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ingest.delete_ip_location_database";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of IP location database configurations.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Ids Id { get => P<Elastic.Clients.Elasticsearch.Ids>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -77,7 +122,6 @@ public sealed partial class DeleteIpLocationDatabaseRequest : PlainRequest<Delet
 	/// A value of <c>-1</c> indicates that the request should never time out.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -87,7 +131,6 @@ public sealed partial class DeleteIpLocationDatabaseRequest : PlainRequest<Delet
 	/// A value of <c>-1</c> indicates that the request should never time out.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
@@ -96,67 +139,114 @@ public sealed partial class DeleteIpLocationDatabaseRequest : PlainRequest<Delet
 /// Delete IP geolocation database configurations.
 /// </para>
 /// </summary>
-public sealed partial class DeleteIpLocationDatabaseRequestDescriptor<TDocument> : RequestDescriptor<DeleteIpLocationDatabaseRequestDescriptor<TDocument>, DeleteIpLocationDatabaseRequestParameters>
+public readonly partial struct DeleteIpLocationDatabaseRequestDescriptor
 {
-	internal DeleteIpLocationDatabaseRequestDescriptor(Action<DeleteIpLocationDatabaseRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest Instance { get; init; }
 
-	public DeleteIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeleteIpLocationDatabase;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ingest.delete_ip_location_database";
-
-	public DeleteIpLocationDatabaseRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public DeleteIpLocationDatabaseRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public DeleteIpLocationDatabaseRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Ids id)
+	public DeleteIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteIpLocationDatabaseRequestDescriptor()
 	{
-	}
-}
-
-/// <summary>
-/// <para>
-/// Delete IP geolocation database configurations.
-/// </para>
-/// </summary>
-public sealed partial class DeleteIpLocationDatabaseRequestDescriptor : RequestDescriptor<DeleteIpLocationDatabaseRequestDescriptor, DeleteIpLocationDatabaseRequestParameters>
-{
-	internal DeleteIpLocationDatabaseRequestDescriptor(Action<DeleteIpLocationDatabaseRequestDescriptor> configure) => configure.Invoke(this);
-
-	public DeleteIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids id) : base(r => r.Required("id", id))
-	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeleteIpLocationDatabase;
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ingest.delete_ip_location_database";
-
-	public DeleteIpLocationDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public DeleteIpLocationDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public DeleteIpLocationDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Ids id)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of IP location database configurations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Ids value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// A value of <c>-1</c> indicates that the request should never time out.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// A value of <c>-1</c> indicates that the request should never time out.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor(new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

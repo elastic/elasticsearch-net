@@ -17,55 +17,169 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class DataStreamIndexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIlmPolicy = System.Text.Json.JsonEncodedText.Encode("ilm_policy");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexMode = System.Text.Json.JsonEncodedText.Encode("index_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexName = System.Text.Json.JsonEncodedText.Encode("index_name");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropManagedBy = System.Text.Json.JsonEncodedText.Encode("managed_by");
+	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propIlmPolicy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode?> propIndexMode = default;
+		LocalJsonValue<string> propIndexName = default;
+		LocalJsonValue<string> propIndexUuid = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy?> propManagedBy = default;
+		LocalJsonValue<bool?> propPreferIlm = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIlmPolicy.TryReadProperty(ref reader, options, PropIlmPolicy, null))
+			{
+				continue;
+			}
+
+			if (propIndexMode.TryReadProperty(ref reader, options, PropIndexMode, null))
+			{
+				continue;
+			}
+
+			if (propIndexName.TryReadProperty(ref reader, options, PropIndexName, null))
+			{
+				continue;
+			}
+
+			if (propIndexUuid.TryReadProperty(ref reader, options, PropIndexUuid, null))
+			{
+				continue;
+			}
+
+			if (propManagedBy.TryReadProperty(ref reader, options, PropManagedBy, null))
+			{
+				continue;
+			}
+
+			if (propPreferIlm.TryReadProperty(ref reader, options, PropPreferIlm, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IlmPolicy = propIlmPolicy.Value,
+			IndexMode = propIndexMode.Value,
+			IndexName = propIndexName.Value,
+			IndexUuid = propIndexUuid.Value,
+			ManagedBy = propManagedBy.Value,
+			PreferIlm = propPreferIlm.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIlmPolicy, value.IlmPolicy, null, null);
+		writer.WriteProperty(options, PropIndexMode, value.IndexMode, null, null);
+		writer.WriteProperty(options, PropIndexName, value.IndexName, null, null);
+		writer.WriteProperty(options, PropIndexUuid, value.IndexUuid, null, null);
+		writer.WriteProperty(options, PropManagedBy, value.ManagedBy, null, null);
+		writer.WriteProperty(options, PropPreferIlm, value.PreferIlm, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndexConverter))]
 public sealed partial class DataStreamIndex
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamIndex(string indexName, string indexUuid)
+	{
+		IndexName = indexName;
+		IndexUuid = indexUuid;
+	}
+#if NET7_0_OR_GREATER
+	public DataStreamIndex()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataStreamIndex()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataStreamIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Name of the current ILM lifecycle policy configured for this backing index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ilm_policy")]
-	public string? IlmPolicy { get; init; }
+	public string? IlmPolicy { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The index mode of this backing index of the data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexMode? IndexMode { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the backing index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_name")]
-	public string IndexName { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string IndexName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Universally unique identifier (UUID) for the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_uuid")]
-	public string IndexUuid { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string IndexUuid { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the lifecycle system that's currently managing this backing index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("managed_by")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy? ManagedBy { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy? ManagedBy { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Indicates if ILM should take precedence over DSL in case both are configured to manage this index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefer_ilm")]
-	public bool? PreferIlm { get; init; }
+	public bool? PreferIlm { get; set; }
 }

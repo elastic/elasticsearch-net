@@ -17,28 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class AllocationStoreConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.AllocationStore>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllocationId = System.Text.Json.JsonEncodedText.Encode("allocation_id");
+	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found");
+	private static readonly System.Text.Json.JsonEncodedText PropInSync = System.Text.Json.JsonEncodedText.Encode("in_sync");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchingSizeInBytes = System.Text.Json.JsonEncodedText.Encode("matching_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchingSyncId = System.Text.Json.JsonEncodedText.Encode("matching_sync_id");
+	private static readonly System.Text.Json.JsonEncodedText PropStoreException = System.Text.Json.JsonEncodedText.Encode("store_exception");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.AllocationStore Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propAllocationId = default;
+		LocalJsonValue<bool> propFound = default;
+		LocalJsonValue<bool> propInSync = default;
+		LocalJsonValue<long> propMatchingSizeInBytes = default;
+		LocalJsonValue<bool> propMatchingSyncId = default;
+		LocalJsonValue<string> propStoreException = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllocationId.TryReadProperty(ref reader, options, PropAllocationId, null))
+			{
+				continue;
+			}
+
+			if (propFound.TryReadProperty(ref reader, options, PropFound, null))
+			{
+				continue;
+			}
+
+			if (propInSync.TryReadProperty(ref reader, options, PropInSync, null))
+			{
+				continue;
+			}
+
+			if (propMatchingSizeInBytes.TryReadProperty(ref reader, options, PropMatchingSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propMatchingSyncId.TryReadProperty(ref reader, options, PropMatchingSyncId, null))
+			{
+				continue;
+			}
+
+			if (propStoreException.TryReadProperty(ref reader, options, PropStoreException, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.AllocationStore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllocationId = propAllocationId.Value,
+			Found = propFound.Value,
+			InSync = propInSync.Value,
+			MatchingSizeInBytes = propMatchingSizeInBytes.Value,
+			MatchingSyncId = propMatchingSyncId.Value,
+			StoreException = propStoreException.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.AllocationStore value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllocationId, value.AllocationId, null, null);
+		writer.WriteProperty(options, PropFound, value.Found, null, null);
+		writer.WriteProperty(options, PropInSync, value.InSync, null, null);
+		writer.WriteProperty(options, PropMatchingSizeInBytes, value.MatchingSizeInBytes, null, null);
+		writer.WriteProperty(options, PropMatchingSyncId, value.MatchingSyncId, null, null);
+		writer.WriteProperty(options, PropStoreException, value.StoreException, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.AllocationStoreConverter))]
 public sealed partial class AllocationStore
 {
-	[JsonInclude, JsonPropertyName("allocation_id")]
-	public string AllocationId { get; init; }
-	[JsonInclude, JsonPropertyName("found")]
-	public bool Found { get; init; }
-	[JsonInclude, JsonPropertyName("in_sync")]
-	public bool InSync { get; init; }
-	[JsonInclude, JsonPropertyName("matching_size_in_bytes")]
-	public long MatchingSizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("matching_sync_id")]
-	public bool MatchingSyncId { get; init; }
-	[JsonInclude, JsonPropertyName("store_exception")]
-	public string StoreException { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AllocationStore(string allocationId, bool found, bool inSync, long matchingSizeInBytes, bool matchingSyncId, string storeException)
+	{
+		AllocationId = allocationId;
+		Found = found;
+		InSync = inSync;
+		MatchingSizeInBytes = matchingSizeInBytes;
+		MatchingSyncId = matchingSyncId;
+		StoreException = storeException;
+	}
+#if NET7_0_OR_GREATER
+	public AllocationStore()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AllocationStore()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AllocationStore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string AllocationId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Found { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool InSync { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MatchingSizeInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool MatchingSyncId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string StoreException { get; set; }
 }

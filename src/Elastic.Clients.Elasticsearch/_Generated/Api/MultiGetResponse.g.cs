@@ -17,17 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class MultiGetResponse<TDocument> : ElasticsearchResponse
+internal sealed partial class MultiGetResponseConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+
+	public override Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>>> propDocs = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Docs = propDocs.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class MultiGetResponseConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(MultiGetResponse<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(MultiGetResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MultiGetResponseConverterFactory))]
+public sealed partial class MultiGetResponse<TDocument> : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiGetResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> docs)
+	{
+		Docs = docs;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiGetResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MultiGetResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The response includes a docs array that contains the documents in the order specified in the request.
@@ -35,6 +107,9 @@ public sealed partial class MultiGetResponse<TDocument> : ElasticsearchResponse
 	/// If there is a failure getting a particular document, the error is included in place of the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docs")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> Docs { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> Docs { get; set; }
 }

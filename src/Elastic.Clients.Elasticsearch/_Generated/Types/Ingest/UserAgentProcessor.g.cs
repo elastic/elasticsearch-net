@@ -17,25 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class UserAgentProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropExtractDeviceType = System.Text.Json.JsonEncodedText.Encode("extract_device_type");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropRegexFile = System.Text.Json.JsonEncodedText.Encode("regex_file");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<bool?> propExtractDeviceType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>?> propProperties = default;
+		LocalJsonValue<string?> propRegexFile = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propExtractDeviceType.TryReadProperty(ref reader, options, PropExtractDeviceType, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRegexFile.TryReadProperty(ref reader, options, PropRegexFile, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			ExtractDeviceType = propExtractDeviceType.Value,
+			Field = propField.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			OnFailure = propOnFailure.Value,
+			Properties = propProperties.Value,
+			RegexFile = propRegexFile.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropExtractDeviceType, value.ExtractDeviceType, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropProperties, value.Properties, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>(o, v, null));
+		writer.WriteProperty(options, PropRegexFile, value.RegexFile, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorConverter))]
 public sealed partial class UserAgentProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserAgentProcessor(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public UserAgentProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UserAgentProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UserAgentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -43,7 +190,6 @@ public sealed partial class UserAgentProcessor
 	/// Extracts device type from the user agent string on a best-effort basis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("extract_device_type")]
 	public bool? ExtractDeviceType { get; set; }
 
 	/// <summary>
@@ -51,23 +197,24 @@ public sealed partial class UserAgentProcessor
 	/// The field containing the user agent string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -75,7 +222,6 @@ public sealed partial class UserAgentProcessor
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -83,23 +229,20 @@ public sealed partial class UserAgentProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Controls what properties are added to <c>target_field</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("properties")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? Properties { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? Properties { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("regex_file")]
 	public string? RegexFile { get; set; }
 
 	/// <summary>
@@ -108,7 +251,6 @@ public sealed partial class UserAgentProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -116,34 +258,27 @@ public sealed partial class UserAgentProcessor
 	/// The field that will be filled with the user agent details.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(UserAgentProcessor userAgentProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.UserAgent(userAgentProcessor);
 }
 
-public sealed partial class UserAgentProcessorDescriptor<TDocument> : SerializableDescriptor<UserAgentProcessorDescriptor<TDocument>>
+public readonly partial struct UserAgentProcessorDescriptor<TDocument>
 {
-	internal UserAgentProcessorDescriptor(Action<UserAgentProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor Instance { get; init; }
 
-	public UserAgentProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserAgentProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private bool? ExtractDeviceTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? PropertiesValue { get; set; }
-	private string? RegexFileValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserAgentProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -151,10 +286,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -162,10 +297,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// Extracts device type from the user agent string on a best-effort basis.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> ExtractDeviceType(bool? extractDeviceType = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> ExtractDeviceType(bool? value = true)
 	{
-		ExtractDeviceTypeValue = extractDeviceType;
-		return Self;
+		Instance.ExtractDeviceType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -173,10 +308,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// The field containing the user agent string.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -184,21 +319,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// The field containing the user agent string.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field containing the user agent string.
-	/// </para>
-	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -206,10 +330,32 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -217,10 +363,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -228,10 +374,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -239,40 +385,60 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public UserAgentProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public UserAgentProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public UserAgentProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -280,10 +446,43 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// Controls what properties are added to <c>target_field</c>.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> Properties(ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? properties)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to <c>target_field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Properties()
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to <c>target_field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty>? action)
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to <c>target_field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Properties(params Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty[] values)
+	{
+		Instance.Properties = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -291,10 +490,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> RegexFile(string? regexFile)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> RegexFile(string? value)
 	{
-		RegexFileValue = regexFile;
-		return Self;
+		Instance.RegexFile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -303,10 +502,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -314,10 +513,10 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// The field that will be filled with the user agent details.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -325,139 +524,39 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 	/// The field that will be filled with the user agent details.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will be filled with the user agent details.
-	/// </para>
-	/// </summary>
-	public UserAgentProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (ExtractDeviceTypeValue.HasValue)
-		{
-			writer.WritePropertyName("extract_device_type");
-			writer.WriteBooleanValue(ExtractDeviceTypeValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(RegexFileValue))
-		{
-			writer.WritePropertyName("regex_file");
-			writer.WriteStringValue(RegexFileValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class UserAgentProcessorDescriptor : SerializableDescriptor<UserAgentProcessorDescriptor>
+public readonly partial struct UserAgentProcessorDescriptor
 {
-	internal UserAgentProcessorDescriptor(Action<UserAgentProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor Instance { get; init; }
 
-	public UserAgentProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserAgentProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private bool? ExtractDeviceTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? PropertiesValue { get; set; }
-	private string? RegexFileValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserAgentProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -465,10 +564,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -476,10 +575,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// Extracts device type from the user agent string on a best-effort basis.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor ExtractDeviceType(bool? extractDeviceType = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor ExtractDeviceType(bool? value = true)
 	{
-		ExtractDeviceTypeValue = extractDeviceType;
-		return Self;
+		Instance.ExtractDeviceType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -487,10 +586,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// The field containing the user agent string.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -498,21 +597,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// The field containing the user agent string.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field containing the user agent string.
-	/// </para>
-	/// </summary>
-	public UserAgentProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -520,10 +608,32 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -531,10 +641,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -542,10 +652,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -553,40 +663,88 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public UserAgentProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
 	}
 
-	public UserAgentProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
 	}
 
-	public UserAgentProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -594,10 +752,43 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// Controls what properties are added to <c>target_field</c>.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor Properties(ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? properties)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Properties(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to <c>target_field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Properties()
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to <c>target_field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty>? action)
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to <c>target_field</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Properties(params Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty[] values)
+	{
+		Instance.Properties = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -605,10 +796,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor RegexFile(string? regexFile)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor RegexFile(string? value)
 	{
-		RegexFileValue = regexFile;
-		return Self;
+		Instance.RegexFile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -617,10 +808,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -628,10 +819,10 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// The field that will be filled with the user agent details.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -639,113 +830,17 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 	/// The field that will be filled with the user agent details.
 	/// </para>
 	/// </summary>
-	public UserAgentProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will be filled with the user agent details.
-	/// </para>
-	/// </summary>
-	public UserAgentProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (ExtractDeviceTypeValue.HasValue)
-		{
-			writer.WritePropertyName("extract_device_type");
-			writer.WriteBooleanValue(ExtractDeviceTypeValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(RegexFileValue))
-		{
-			writer.WritePropertyName("regex_file");
-			writer.WriteStringValue(RegexFileValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

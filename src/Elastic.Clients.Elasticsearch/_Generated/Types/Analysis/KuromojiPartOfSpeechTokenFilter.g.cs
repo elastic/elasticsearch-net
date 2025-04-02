@@ -17,70 +17,158 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KuromojiPartOfSpeechTokenFilter : ITokenFilter
+internal sealed partial class KuromojiPartOfSpeechTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("stoptags")]
-	public ICollection<string> Stoptags { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropStoptags = System.Text.Json.JsonEncodedText.Encode("stoptags");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propStoptags = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStoptags.TryReadProperty(ref reader, options, PropStoptags, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Stoptags = propStoptags.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStoptags, value.Stoptags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterConverter))]
+public sealed partial class KuromojiPartOfSpeechTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiPartOfSpeechTokenFilter(System.Collections.Generic.ICollection<string> stoptags)
+	{
+		Stoptags = stoptags;
+	}
+#if NET7_0_OR_GREATER
+	public KuromojiPartOfSpeechTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public KuromojiPartOfSpeechTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KuromojiPartOfSpeechTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Stoptags { get; set; }
+
 	public string Type => "kuromoji_part_of_speech";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class KuromojiPartOfSpeechTokenFilterDescriptor : SerializableDescriptor<KuromojiPartOfSpeechTokenFilterDescriptor>, IBuildableDescriptor<KuromojiPartOfSpeechTokenFilter>
+public readonly partial struct KuromojiPartOfSpeechTokenFilterDescriptor
 {
-	internal KuromojiPartOfSpeechTokenFilterDescriptor(Action<KuromojiPartOfSpeechTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter Instance { get; init; }
 
-	public KuromojiPartOfSpeechTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiPartOfSpeechTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string> StoptagsValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(ICollection<string> stoptags)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiPartOfSpeechTokenFilterDescriptor()
 	{
-		StoptagsValue = stoptags;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KuromojiPartOfSpeechTokenFilterDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(System.Collections.Generic.ICollection<string> value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Stoptags = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor Stoptags()
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("stoptags");
-		JsonSerializer.Serialize(writer, StoptagsValue, options);
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("kuromoji_part_of_speech");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Stoptags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	KuromojiPartOfSpeechTokenFilter IBuildableDescriptor<KuromojiPartOfSpeechTokenFilter>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		Stoptags = StoptagsValue,
-		Version = VersionValue
-	};
+		Instance.Stoptags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(params string[] values)
+	{
+		Instance.Stoptags = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

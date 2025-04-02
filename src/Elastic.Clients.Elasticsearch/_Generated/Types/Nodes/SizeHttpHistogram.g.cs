@@ -17,22 +17,99 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class SizeHttpHistogramConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropGeBytes = System.Text.Json.JsonEncodedText.Encode("ge_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropLtBytes = System.Text.Json.JsonEncodedText.Encode("lt_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<long?> propGeBytes = default;
+		LocalJsonValue<long?> propLtBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propGeBytes.TryReadProperty(ref reader, options, PropGeBytes, null))
+			{
+				continue;
+			}
+
+			if (propLtBytes.TryReadProperty(ref reader, options, PropLtBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			GeBytes = propGeBytes.Value,
+			LtBytes = propLtBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropGeBytes, value.GeBytes, null, null);
+		writer.WriteProperty(options, PropLtBytes, value.LtBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogramConverter))]
 public sealed partial class SizeHttpHistogram
 {
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("ge_bytes")]
-	public long? GeBytes { get; init; }
-	[JsonInclude, JsonPropertyName("lt_bytes")]
-	public long? LtBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SizeHttpHistogram(long count)
+	{
+		Count = count;
+	}
+#if NET7_0_OR_GREATER
+	public SizeHttpHistogram()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SizeHttpHistogram()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SizeHttpHistogram(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
+	public long? GeBytes { get; set; }
+	public long? LtBytes { get; set; }
 }

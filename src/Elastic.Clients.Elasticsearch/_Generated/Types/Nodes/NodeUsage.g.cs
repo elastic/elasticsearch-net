@@ -17,24 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeUsage>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropRestActions = System.Text.Json.JsonEncodedText.Encode("rest_actions");
+	private static readonly System.Text.Json.JsonEncodedText PropSince = System.Text.Json.JsonEncodedText.Encode("since");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propAggregations = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propRestActions = default;
+		LocalJsonValue<System.DateTime> propSince = default;
+		LocalJsonValue<System.DateTime> propTimestamp = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propRestActions.TryReadProperty(ref reader, options, PropRestActions, static System.Collections.Generic.IReadOnlyDictionary<string, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propSince.TryReadProperty(ref reader, options, PropSince, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregations = propAggregations.Value,
+			RestActions = propRestActions.Value,
+			Since = propSince.Value,
+			Timestamp = propTimestamp.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeUsage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRestActions, value.RestActions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
+		writer.WriteProperty(options, PropSince, value.Since, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeUsageConverter))]
 public sealed partial class NodeUsage
 {
-	[JsonInclude, JsonPropertyName("aggregations")]
-	public IReadOnlyDictionary<string, object> Aggregations { get; init; }
-	[JsonInclude, JsonPropertyName("rest_actions")]
-	public IReadOnlyDictionary<string, int> RestActions { get; init; }
-	[JsonInclude, JsonPropertyName("since")]
-	public long Since { get; init; }
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public long Timestamp { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeUsage(System.Collections.Generic.IReadOnlyDictionary<string, object> aggregations, System.Collections.Generic.IReadOnlyDictionary<string, int> restActions, System.DateTime since, System.DateTime timestamp)
+	{
+		Aggregations = aggregations;
+		RestActions = restActions;
+		Since = since;
+		Timestamp = timestamp;
+	}
+#if NET7_0_OR_GREATER
+	public NodeUsage()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeUsage()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, object> Aggregations { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, int> RestActions { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTime Since { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTime Timestamp { get; set; }
 }

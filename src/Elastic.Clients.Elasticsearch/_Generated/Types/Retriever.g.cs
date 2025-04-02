@@ -17,271 +17,544 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(RetrieverConverter))]
+internal sealed partial class RetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Retriever>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantKnn = System.Text.Json.JsonEncodedText.Encode("knn");
+	private static readonly System.Text.Json.JsonEncodedText VariantRrf = System.Text.Json.JsonEncodedText.Encode("rrf");
+	private static readonly System.Text.Json.JsonEncodedText VariantRule = System.Text.Json.JsonEncodedText.Encode("rule");
+	private static readonly System.Text.Json.JsonEncodedText VariantStandard = System.Text.Json.JsonEncodedText.Encode("standard");
+	private static readonly System.Text.Json.JsonEncodedText VariantTextSimilarityReranker = System.Text.Json.JsonEncodedText.Encode("text_similarity_reranker");
+
+	public override Elastic.Clients.Elasticsearch.Retriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantKnn))
+			{
+				variantType = VariantKnn.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.KnnRetriever>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRrf))
+			{
+				variantType = VariantRrf.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RRFRetriever>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRule))
+			{
+				variantType = VariantRule.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RuleRetriever>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantStandard))
+			{
+				variantType = VariantStandard.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.StandardRetriever>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTextSimilarityReranker))
+			{
+				variantType = VariantTextSimilarityReranker.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TextSimilarityReranker>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Retriever value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "knn":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.KnnRetriever)value.Variant, null, null);
+				break;
+			case "rrf":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RRFRetriever)value.Variant, null, null);
+				break;
+			case "rule":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RuleRetriever)value.Variant, null, null);
+				break;
+			case "standard":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.StandardRetriever)value.Variant, null, null);
+				break;
+			case "text_similarity_reranker":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TextSimilarityReranker)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Retriever)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RetrieverConverter))]
 public sealed partial class Retriever
 {
-	internal Retriever(string variantName, object variant)
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public Retriever()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Retriever()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Retriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality  of a knn search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetriever? Knn { get => GetVariant<Elastic.Clients.Elasticsearch.KnnRetriever>("knn"); set => SetVariant("knn", value); }
 
-	public static Retriever Knn(Elastic.Clients.Elasticsearch.KnnRetriever knnRetriever) => new Retriever("knn", knnRetriever);
-	public static Retriever Rrf(Elastic.Clients.Elasticsearch.RRFRetriever rRFRetriever) => new Retriever("rrf", rRFRetriever);
-	public static Retriever Rule(Elastic.Clients.Elasticsearch.RuleRetriever ruleRetriever) => new Retriever("rule", ruleRetriever);
-	public static Retriever Standard(Elastic.Clients.Elasticsearch.StandardRetriever standardRetriever) => new Retriever("standard", standardRetriever);
-	public static Retriever TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityReranker textSimilarityReranker) => new Retriever("text_similarity_reranker", textSimilarityReranker);
+	/// <summary>
+	/// <para>
+	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RRFRetriever? Rrf { get => GetVariant<Elastic.Clients.Elasticsearch.RRFRetriever>("rrf"); set => SetVariant("rrf", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a rule query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RuleRetriever? Rule { get => GetVariant<Elastic.Clients.Elasticsearch.RuleRetriever>("rule"); set => SetVariant("rule", value); }
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a traditional query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetriever? Standard { get => GetVariant<Elastic.Clients.Elasticsearch.StandardRetriever>("standard"); set => SetVariant("standard", value); }
+
+	/// <summary>
+	/// <para>
+	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityReranker? TextSimilarityReranker { get => GetVariant<Elastic.Clients.Elasticsearch.TextSimilarityReranker>("text_similarity_reranker"); set => SetVariant("text_similarity_reranker", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.KnnRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Knn = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RRFRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Rrf = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RuleRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Rule = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.StandardRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Standard = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.TextSimilarityReranker value) => new Elastic.Clients.Elasticsearch.Retriever { TextSimilarityReranker = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class RetrieverConverter : JsonConverter<Retriever>
+public readonly partial struct RetrieverDescriptor<TDocument>
 {
-	public override Retriever Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.Retriever Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetrieverDescriptor(Elastic.Clients.Elasticsearch.Retriever instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "knn")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.KnnRetriever?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "rrf")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.RRFRetriever?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "rule")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.RuleRetriever?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "standard")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.StandardRetriever?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "text_similarity_reranker")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TextSimilarityReranker?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Retriever' from the response.");
-		}
-
-		var result = new Retriever(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, Retriever value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetrieverDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "knn":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.KnnRetriever>(writer, (Elastic.Clients.Elasticsearch.KnnRetriever)value.Variant, options);
-					break;
-				case "rrf":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.RRFRetriever>(writer, (Elastic.Clients.Elasticsearch.RRFRetriever)value.Variant, options);
-					break;
-				case "rule":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.RuleRetriever>(writer, (Elastic.Clients.Elasticsearch.RuleRetriever)value.Variant, options);
-					break;
-				case "standard":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.StandardRetriever>(writer, (Elastic.Clients.Elasticsearch.StandardRetriever)value.Variant, options);
-					break;
-				case "text_similarity_reranker":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TextSimilarityReranker>(writer, (Elastic.Clients.Elasticsearch.TextSimilarityReranker)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Retriever instance) => new Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality  of a knn search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnRetriever? value)
+	{
+		Instance.Knn = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality  of a knn search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Knn(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>> action)
+	{
+		Instance.Knn = Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rrf(Elastic.Clients.Elasticsearch.RRFRetriever? value)
+	{
+		Instance.Rrf = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rrf(System.Action<Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument>> action)
+	{
+		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a rule query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rule(Elastic.Clients.Elasticsearch.RuleRetriever? value)
+	{
+		Instance.Rule = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a rule query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rule(System.Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>> action)
+	{
+		Instance.Rule = Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a traditional query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Standard(Elastic.Clients.Elasticsearch.StandardRetriever? value)
+	{
+		Instance.Standard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a traditional query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Standard()
+	{
+		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a traditional query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Standard(System.Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>>? action)
+	{
+		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityReranker? value)
+	{
+		Instance.TextSimilarityReranker = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> TextSimilarityReranker(System.Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>> action)
+	{
+		Instance.TextSimilarityReranker = Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Retriever Build(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RetrieverDescriptor<TDocument> : SerializableDescriptor<RetrieverDescriptor<TDocument>>
+public readonly partial struct RetrieverDescriptor
 {
-	internal RetrieverDescriptor(Action<RetrieverDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Retriever Instance { get; init; }
 
-	public RetrieverDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetrieverDescriptor(Elastic.Clients.Elasticsearch.Retriever instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private RetrieverDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetrieverDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private RetrieverDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.RetrieverDescriptor(Elastic.Clients.Elasticsearch.Retriever instance) => new Elastic.Clients.Elasticsearch.RetrieverDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality  of a knn search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Knn(Elastic.Clients.Elasticsearch.KnnRetriever? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Knn = value;
+		return this;
 	}
 
-	public RetrieverDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnRetriever knnRetriever) => Set(knnRetriever, "knn");
-	public RetrieverDescriptor<TDocument> Knn(Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>> configure) => Set(configure, "knn");
-	public RetrieverDescriptor<TDocument> Rrf(Elastic.Clients.Elasticsearch.RRFRetriever rRFRetriever) => Set(rRFRetriever, "rrf");
-	public RetrieverDescriptor<TDocument> Rrf(Action<Elastic.Clients.Elasticsearch.RRFRetrieverDescriptor<TDocument>> configure) => Set(configure, "rrf");
-	public RetrieverDescriptor<TDocument> Rule(Elastic.Clients.Elasticsearch.RuleRetriever ruleRetriever) => Set(ruleRetriever, "rule");
-	public RetrieverDescriptor<TDocument> Rule(Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>> configure) => Set(configure, "rule");
-	public RetrieverDescriptor<TDocument> Standard(Elastic.Clients.Elasticsearch.StandardRetriever standardRetriever) => Set(standardRetriever, "standard");
-	public RetrieverDescriptor<TDocument> Standard(Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>> configure) => Set(configure, "standard");
-	public RetrieverDescriptor<TDocument> TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityReranker textSimilarityReranker) => Set(textSimilarityReranker, "text_similarity_reranker");
-	public RetrieverDescriptor<TDocument> TextSimilarityReranker(Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>> configure) => Set(configure, "text_similarity_reranker");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality  of a knn search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Knn(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class RetrieverDescriptor : SerializableDescriptor<RetrieverDescriptor>
-{
-	internal RetrieverDescriptor(Action<RetrieverDescriptor> configure) => configure.Invoke(this);
-
-	public RetrieverDescriptor() : base()
-	{
+		Instance.Knn = Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor.Build(action);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private RetrieverDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality  of a knn search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Knn<T>(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<T>> action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Knn = Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<T>.Build(action);
+		return this;
 	}
 
-	private RetrieverDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rrf(Elastic.Clients.Elasticsearch.RRFRetriever? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Rrf = value;
+		return this;
 	}
 
-	public RetrieverDescriptor Knn(Elastic.Clients.Elasticsearch.KnnRetriever knnRetriever) => Set(knnRetriever, "knn");
-	public RetrieverDescriptor Knn<TDocument>(Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor> configure) => Set(configure, "knn");
-	public RetrieverDescriptor Rrf(Elastic.Clients.Elasticsearch.RRFRetriever rRFRetriever) => Set(rRFRetriever, "rrf");
-	public RetrieverDescriptor Rrf<TDocument>(Action<Elastic.Clients.Elasticsearch.RRFRetrieverDescriptor> configure) => Set(configure, "rrf");
-	public RetrieverDescriptor Rule(Elastic.Clients.Elasticsearch.RuleRetriever ruleRetriever) => Set(ruleRetriever, "rule");
-	public RetrieverDescriptor Rule<TDocument>(Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor> configure) => Set(configure, "rule");
-	public RetrieverDescriptor Standard(Elastic.Clients.Elasticsearch.StandardRetriever standardRetriever) => Set(standardRetriever, "standard");
-	public RetrieverDescriptor Standard<TDocument>(Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor> configure) => Set(configure, "standard");
-	public RetrieverDescriptor TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityReranker textSimilarityReranker) => Set(textSimilarityReranker, "text_similarity_reranker");
-	public RetrieverDescriptor TextSimilarityReranker<TDocument>(Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor> configure) => Set(configure, "text_similarity_reranker");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rrf(System.Action<Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rrf<T>(System.Action<Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<T>> action)
+	{
+		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<T>.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a rule query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rule(Elastic.Clients.Elasticsearch.RuleRetriever? value)
+	{
+		Instance.Rule = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a rule query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rule(System.Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor> action)
+	{
+		Instance.Rule = Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a rule query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rule<T>(System.Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<T>> action)
+	{
+		Instance.Rule = Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a traditional query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Standard(Elastic.Clients.Elasticsearch.StandardRetriever? value)
+	{
+		Instance.Standard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a traditional query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Standard()
+	{
+		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a traditional query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Standard(System.Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor>? action)
+	{
+		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that replaces the functionality of a traditional query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Standard<T>(System.Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<T>>? action)
+	{
+		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityReranker? value)
+	{
+		Instance.TextSimilarityReranker = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor TextSimilarityReranker(System.Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor> action)
+	{
+		Instance.TextSimilarityReranker = Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor TextSimilarityReranker<T>(System.Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<T>> action)
+	{
+		Instance.TextSimilarityReranker = Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Retriever Build(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.RetrieverDescriptor(new Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

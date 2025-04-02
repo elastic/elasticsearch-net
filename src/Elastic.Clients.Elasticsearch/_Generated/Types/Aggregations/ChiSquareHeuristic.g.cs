@@ -17,75 +17,155 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class ChiSquareHeuristic
+internal sealed partial class ChiSquareHeuristicConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic>
 {
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("background_is_superset")]
-	public bool BackgroundIsSuperset { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundIsSuperset = System.Text.Json.JsonEncodedText.Encode("background_is_superset");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeNegatives = System.Text.Json.JsonEncodedText.Encode("include_negatives");
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("include_negatives")]
-	public bool IncludeNegatives { get; set; }
-}
-
-public sealed partial class ChiSquareHeuristicDescriptor : SerializableDescriptor<ChiSquareHeuristicDescriptor>
-{
-	internal ChiSquareHeuristicDescriptor(Action<ChiSquareHeuristicDescriptor> configure) => configure.Invoke(this);
-
-	public ChiSquareHeuristicDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propBackgroundIsSuperset = default;
+		LocalJsonValue<bool> propIncludeNegatives = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBackgroundIsSuperset.TryReadProperty(ref reader, options, PropBackgroundIsSuperset, null))
+			{
+				continue;
+			}
+
+			if (propIncludeNegatives.TryReadProperty(ref reader, options, PropIncludeNegatives, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BackgroundIsSuperset = propBackgroundIsSuperset.Value,
+			IncludeNegatives = propIncludeNegatives.Value
+		};
 	}
 
-	private bool BackgroundIsSupersetValue { get; set; }
-	private bool IncludeNegativesValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
-	/// </para>
-	/// </summary>
-	public ChiSquareHeuristicDescriptor BackgroundIsSuperset(bool backgroundIsSuperset = true)
-	{
-		BackgroundIsSupersetValue = backgroundIsSuperset;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
-	/// </para>
-	/// </summary>
-	public ChiSquareHeuristicDescriptor IncludeNegatives(bool includeNegatives = true)
-	{
-		IncludeNegativesValue = includeNegatives;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("background_is_superset");
-		writer.WriteBooleanValue(BackgroundIsSupersetValue);
-		writer.WritePropertyName("include_negatives");
-		writer.WriteBooleanValue(IncludeNegativesValue);
+		writer.WriteProperty(options, PropBackgroundIsSuperset, value.BackgroundIsSuperset, null, null);
+		writer.WriteProperty(options, PropIncludeNegatives, value.IncludeNegatives, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicConverter))]
+public sealed partial class ChiSquareHeuristic
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ChiSquareHeuristic(bool backgroundIsSuperset, bool includeNegatives)
+	{
+		BackgroundIsSuperset = backgroundIsSuperset;
+		IncludeNegatives = includeNegatives;
+	}
+#if NET7_0_OR_GREATER
+	public ChiSquareHeuristic()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ChiSquareHeuristic()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ChiSquareHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool BackgroundIsSuperset { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool IncludeNegatives { get; set; }
+}
+
+public readonly partial struct ChiSquareHeuristicDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ChiSquareHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ChiSquareHeuristicDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic instance) => new Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor BackgroundIsSuperset(bool value = true)
+	{
+		Instance.BackgroundIsSuperset = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor IncludeNegatives(bool value = true)
+	{
+		Instance.IncludeNegatives = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

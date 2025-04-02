@@ -17,25 +17,136 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class SetSecurityUserProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propProperties = default;
+		LocalJsonValue<string?> propTag = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Field = propField.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			OnFailure = propOnFailure.Value,
+			Properties = propProperties.Value,
+			Tag = propTag.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropProperties, value.Properties, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorConverter))]
 public sealed partial class SetSecurityUserProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public SetSecurityUserProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SetSecurityUserProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -43,23 +154,24 @@ public sealed partial class SetSecurityUserProcessor
 	/// The field to store the user information into.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -67,16 +179,14 @@ public sealed partial class SetSecurityUserProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Controls what user related properties are added to the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("properties")]
-	public ICollection<string>? Properties { get; set; }
+	public System.Collections.Generic.ICollection<string>? Properties { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -84,30 +194,27 @@ public sealed partial class SetSecurityUserProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(SetSecurityUserProcessor setSecurityUserProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.SetSecurityUser(setSecurityUserProcessor);
 }
 
-public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : SerializableDescriptor<SetSecurityUserProcessorDescriptor<TDocument>>
+public readonly partial struct SetSecurityUserProcessorDescriptor<TDocument>
 {
-	internal SetSecurityUserProcessorDescriptor(Action<SetSecurityUserProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor Instance { get; init; }
 
-	public SetSecurityUserProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SetSecurityUserProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<string>? PropertiesValue { get; set; }
-	private string? TagValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SetSecurityUserProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -115,10 +222,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -126,10 +233,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	/// The field to store the user information into.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -137,21 +244,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	/// The field to store the user information into.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to store the user information into.
-	/// </para>
-	/// </summary>
-	public SetSecurityUserProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -159,10 +255,32 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -170,10 +288,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -181,40 +299,60 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public SetSecurityUserProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public SetSecurityUserProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public SetSecurityUserProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -222,10 +360,43 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	/// Controls what user related properties are added to the field.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor<TDocument> Properties(ICollection<string>? properties)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<string>? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what user related properties are added to the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Properties()
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what user related properties are added to the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what user related properties are added to the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Properties(params string[] values)
+	{
+		Instance.Properties = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -234,100 +405,39 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDescriptor<SetSecurityUserProcessorDescriptor>
+public readonly partial struct SetSecurityUserProcessorDescriptor
 {
-	internal SetSecurityUserProcessorDescriptor(Action<SetSecurityUserProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor Instance { get; init; }
 
-	public SetSecurityUserProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SetSecurityUserProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<string>? PropertiesValue { get; set; }
-	private string? TagValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SetSecurityUserProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -335,10 +445,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -346,10 +456,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	/// The field to store the user information into.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -357,21 +467,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	/// The field to store the user information into.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to store the user information into.
-	/// </para>
-	/// </summary>
-	public SetSecurityUserProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -379,10 +478,32 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -390,10 +511,10 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -401,40 +522,88 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public SetSecurityUserProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
 	}
 
-	public SetSecurityUserProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
 	}
 
-	public SetSecurityUserProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -442,10 +611,43 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	/// Controls what user related properties are added to the field.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor Properties(ICollection<string>? properties)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Properties(System.Collections.Generic.ICollection<string>? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what user related properties are added to the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Properties()
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what user related properties are added to the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what user related properties are added to the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Properties(params string[] values)
+	{
+		Instance.Properties = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -454,78 +656,17 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public SetSecurityUserProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

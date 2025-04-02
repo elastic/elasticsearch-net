@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
-public sealed partial class ExecuteRetentionRequestParameters : RequestParameters
+public sealed partial class ExecuteRetentionRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -49,6 +42,35 @@ public sealed partial class ExecuteRetentionRequestParameters : RequestParameter
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class ExecuteRetentionRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest>
+{
+	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Run a retention policy.
@@ -56,11 +78,28 @@ public sealed partial class ExecuteRetentionRequestParameters : RequestParameter
 /// The retention policy is normally applied according to its schedule.
 /// </para>
 /// </summary>
-public sealed partial class ExecuteRetentionRequest : PlainRequest<ExecuteRetentionRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestConverter))]
+public sealed partial class ExecuteRetentionRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementExecuteRetention;
+#if NET7_0_OR_GREATER
+	public ExecuteRetentionRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ExecuteRetentionRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ExecuteRetentionRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotLifecycleManagementExecuteRetention;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -72,7 +111,6 @@ public sealed partial class ExecuteRetentionRequest : PlainRequest<ExecuteRetent
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -81,7 +119,6 @@ public sealed partial class ExecuteRetentionRequest : PlainRequest<ExecuteRetent
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
@@ -92,26 +129,100 @@ public sealed partial class ExecuteRetentionRequest : PlainRequest<ExecuteRetent
 /// The retention policy is normally applied according to its schedule.
 /// </para>
 /// </summary>
-public sealed partial class ExecuteRetentionRequestDescriptor : RequestDescriptor<ExecuteRetentionRequestDescriptor, ExecuteRetentionRequestParameters>
+public readonly partial struct ExecuteRetentionRequestDescriptor
 {
-	internal ExecuteRetentionRequestDescriptor(Action<ExecuteRetentionRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExecuteRetentionRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ExecuteRetentionRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotLifecycleManagementExecuteRetention;
+	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "slm.execute_retention";
-
-	public ExecuteRetentionRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public ExecuteRetentionRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest Build(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor(new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

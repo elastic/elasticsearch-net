@@ -17,79 +17,116 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class StringTermsBucketConverter : JsonConverter<StringTermsBucket>
+internal sealed partial class StringTermsBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket>
 {
-	public override StringTermsBucket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropDocCountErrorUpperBound = System.Text.Json.JsonEncodedText.Encode("doc_count_error_upper_bound");
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		long docCount = default;
-		long? docCountErrorUpperBound = default;
-		Elastic.Clients.Elasticsearch.FieldValue key = default;
-		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>? propAggregations = default;
+		LocalJsonValue<long> propDocCount = default;
+		LocalJsonValue<long?> propDocCountErrorUpperBound = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldValue> propKey = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
 			{
-				var property = reader.GetString();
-				if (property == "doc_count")
-				{
-					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "doc_count_error_upper_bound")
-				{
-					docCountErrorUpperBound = JsonSerializer.Deserialize<long?>(ref reader, options);
-					continue;
-				}
+			if (propDocCountErrorUpperBound.TryReadProperty(ref reader, options, PropDocCountErrorUpperBound, null))
+			{
+				continue;
+			}
 
-				if (property == "key")
-				{
-					key = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.FieldValue>(ref reader, options);
-					continue;
-				}
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
+			{
+				continue;
+			}
 
-				if (property.Contains("#"))
-				{
-					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
-					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
-					continue;
-				}
+			propAggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
+			Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.ReadItem(ref reader, options, out string key, out Elastic.Clients.Elasticsearch.Aggregations.IAggregate value);
+			propAggregations[key] = value;
+		}
 
-				throw new JsonException("Unknown property read from JSON.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(propAggregations),
+			DocCount = propDocCount.Value,
+			DocCountErrorUpperBound = propDocCountErrorUpperBound.Value,
+			Key = propKey.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropDocCountErrorUpperBound, value.DocCountErrorUpperBound, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		if (value.Aggregations is not null)
+		{
+			foreach (var item in value.Aggregations)
+			{
+				Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.WriteItem(writer, options, item.Key, item.Value);
 			}
 		}
 
-		return new StringTermsBucket { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, DocCountErrorUpperBound = docCountErrorUpperBound, Key = key };
-	}
-
-	public override void Write(Utf8JsonWriter writer, StringTermsBucket value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'StringTermsBucket' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(StringTermsBucketConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucketConverter))]
 public sealed partial class StringTermsBucket
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StringTermsBucket(long docCount, Elastic.Clients.Elasticsearch.FieldValue key)
+	{
+		DocCount = docCount;
+		Key = key;
+	}
+#if NET7_0_OR_GREATER
+	public StringTermsBucket()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StringTermsBucket()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StringTermsBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Nested aggregations
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
-	public long DocCount { get; init; }
-	public long? DocCountErrorUpperBound { get; init; }
-	public Elastic.Clients.Elasticsearch.FieldValue Key { get; init; }
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DocCount { get; set; }
+	public long? DocCountErrorUpperBound { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.FieldValue Key { get; set; }
 }

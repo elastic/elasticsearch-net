@@ -17,26 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+internal sealed partial class SlmPolicyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropConfig = System.Text.Json.JsonEncodedText.Encode("config");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
+	private static readonly System.Text.Json.JsonEncodedText PropRetention = System.Text.Json.JsonEncodedText.Encode("retention");
+	private static readonly System.Text.Json.JsonEncodedText PropSchedule = System.Text.Json.JsonEncodedText.Encode("schedule");
+
+	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration?> propConfig = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<string> propRepository = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention?> propRetention = default;
+		LocalJsonValue<string> propSchedule = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propConfig.TryReadProperty(ref reader, options, PropConfig, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propRepository.TryReadProperty(ref reader, options, PropRepository, null))
+			{
+				continue;
+			}
+
+			if (propRetention.TryReadProperty(ref reader, options, PropRetention, null))
+			{
+				continue;
+			}
+
+			if (propSchedule.TryReadProperty(ref reader, options, PropSchedule, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Config = propConfig.Value,
+			Name = propName.Value,
+			Repository = propRepository.Value,
+			Retention = propRetention.Value,
+			Schedule = propSchedule.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropConfig, value.Config, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropRepository, value.Repository, null, null);
+		writer.WriteProperty(options, PropRetention, value.Retention, null, null);
+		writer.WriteProperty(options, PropSchedule, value.Schedule, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicyConverter))]
 public sealed partial class SlmPolicy
 {
-	[JsonInclude, JsonPropertyName("config")]
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration? Config { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("repository")]
-	public string Repository { get; init; }
-	[JsonInclude, JsonPropertyName("retention")]
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention? Retention { get; init; }
-	[JsonInclude, JsonPropertyName("schedule")]
-	public string Schedule { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SlmPolicy(string name, string repository, string schedule)
+	{
+		Name = name;
+		Repository = repository;
+		Schedule = schedule;
+	}
+#if NET7_0_OR_GREATER
+	public SlmPolicy()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SlmPolicy()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SlmPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration? Config { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Repository { get; set; }
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention? Retention { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Schedule { get; set; }
 }

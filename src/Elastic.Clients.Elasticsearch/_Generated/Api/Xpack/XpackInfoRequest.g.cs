@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-public sealed partial class XpackInfoRequestParameters : RequestParameters
+public sealed partial class XpackInfoRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -45,7 +38,36 @@ public sealed partial class XpackInfoRequestParameters : RequestParameters
 	/// For example, <c>build,license,features</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? Categories { get => Q<ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>?>("categories"); set => Q("categories", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? Categories { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>?>("categories"); set => Q("categories", value); }
+}
+
+internal sealed partial class XpackInfoRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -71,11 +93,28 @@ public sealed partial class XpackInfoRequestParameters : RequestParameters
 /// </item>
 /// </list>
 /// </summary>
-public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestConverter))]
+public sealed partial class XpackInfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.XpackInfo;
+#if NET7_0_OR_GREATER
+	public XpackInfoRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public XpackInfoRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal XpackInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.XpackInfo;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -86,7 +125,6 @@ public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestPara
 	/// If this param is used it must be set to true
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
 	/// <summary>
@@ -95,8 +133,7 @@ public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestPara
 	/// For example, <c>build,license,features</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? Categories { get => Q<ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>?>("categories"); set => Q("categories", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? Categories { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>?>("categories"); set => Q("categories", value); }
 }
 
 /// <summary>
@@ -122,26 +159,135 @@ public sealed partial class XpackInfoRequest : PlainRequest<XpackInfoRequestPara
 /// </item>
 /// </list>
 /// </summary>
-public sealed partial class XpackInfoRequestDescriptor : RequestDescriptor<XpackInfoRequestDescriptor, XpackInfoRequestParameters>
+public readonly partial struct XpackInfoRequestDescriptor
 {
-	internal XpackInfoRequestDescriptor(Action<XpackInfoRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public XpackInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public XpackInfoRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.XpackInfo;
+	public static explicit operator Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest instance) => new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "xpack.info";
-
-	public XpackInfoRequestDescriptor AcceptEnterprise(bool? acceptEnterprise = true) => Qs("accept_enterprise", acceptEnterprise);
-	public XpackInfoRequestDescriptor Categories(ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? categories) => Qs("categories", categories);
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If this param is used it must be set to true
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor AcceptEnterprise(bool? value = true)
 	{
+		Instance.AcceptEnterprise = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of the information categories to include in the response.
+	/// For example, <c>build,license,features</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Categories(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? value)
+	{
+		Instance.Categories = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of the information categories to include in the response.
+	/// For example, <c>build,license,features</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Categories()
+	{
+		Instance.Categories = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfXPackCategory.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of the information categories to include in the response.
+	/// For example, <c>build,license,features</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Categories(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfXPackCategory>? action)
+	{
+		Instance.Categories = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfXPackCategory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of the information categories to include in the response.
+	/// For example, <c>build,license,features</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Categories(params Elastic.Clients.Elasticsearch.Xpack.XPackCategory[] values)
+	{
+		Instance.Categories = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest Build(System.Action<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor(new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

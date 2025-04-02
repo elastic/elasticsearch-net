@@ -17,24 +17,117 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class QuestionAnsweringInferenceUpdateOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAnswerLength = System.Text.Json.JsonEncodedText.Encode("max_answer_length");
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopClasses = System.Text.Json.JsonEncodedText.Encode("num_top_classes");
+	private static readonly System.Text.Json.JsonEncodedText PropQuestion = System.Text.Json.JsonEncodedText.Encode("question");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propMaxAnswerLength = default;
+		LocalJsonValue<int?> propNumTopClasses = default;
+		LocalJsonValue<string> propQuestion = default;
+		LocalJsonValue<string?> propResultsField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions?> propTokenization = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxAnswerLength.TryReadProperty(ref reader, options, PropMaxAnswerLength, null))
+			{
+				continue;
+			}
+
+			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, null))
+			{
+				continue;
+			}
+
+			if (propQuestion.TryReadProperty(ref reader, options, PropQuestion, null))
+			{
+				continue;
+			}
+
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
+
+			if (propTokenization.TryReadProperty(ref reader, options, PropTokenization, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxAnswerLength = propMaxAnswerLength.Value,
+			NumTopClasses = propNumTopClasses.Value,
+			Question = propQuestion.Value,
+			ResultsField = propResultsField.Value,
+			Tokenization = propTokenization.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxAnswerLength, value.MaxAnswerLength, null, null);
+		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, null);
+		writer.WriteProperty(options, PropQuestion, value.Question, null, null);
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsConverter))]
 public sealed partial class QuestionAnsweringInferenceUpdateOptions
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QuestionAnsweringInferenceUpdateOptions(string question)
+	{
+		Question = question;
+	}
+#if NET7_0_OR_GREATER
+	public QuestionAnsweringInferenceUpdateOptions()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public QuestionAnsweringInferenceUpdateOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal QuestionAnsweringInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The maximum answer length to consider for extraction
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_answer_length")]
 	public int? MaxAnswerLength { get; set; }
 
 	/// <summary>
@@ -42,7 +135,6 @@ public sealed partial class QuestionAnsweringInferenceUpdateOptions
 	/// Specifies the number of top class predictions to return. Defaults to 0.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
 	/// <summary>
@@ -50,15 +142,17 @@ public sealed partial class QuestionAnsweringInferenceUpdateOptions
 	/// The question to answer given the inference context
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("question")]
-	public string Question { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Question { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
@@ -66,37 +160,37 @@ public sealed partial class QuestionAnsweringInferenceUpdateOptions
 	/// The tokenization options to update when inferring
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? Tokenization { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate(QuestionAnsweringInferenceUpdateOptions questionAnsweringInferenceUpdateOptions) => Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate.QuestionAnswering(questionAnsweringInferenceUpdateOptions);
 }
 
-public sealed partial class QuestionAnsweringInferenceUpdateOptionsDescriptor : SerializableDescriptor<QuestionAnsweringInferenceUpdateOptionsDescriptor>
+public readonly partial struct QuestionAnsweringInferenceUpdateOptionsDescriptor
 {
-	internal QuestionAnsweringInferenceUpdateOptionsDescriptor(Action<QuestionAnsweringInferenceUpdateOptionsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions Instance { get; init; }
 
-	public QuestionAnsweringInferenceUpdateOptionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QuestionAnsweringInferenceUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions instance)
 	{
+		Instance = instance;
 	}
 
-	private int? MaxAnswerLengthValue { get; set; }
-	private int? NumTopClassesValue { get; set; }
-	private string QuestionValue { get; set; }
-	private string? ResultsFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? TokenizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor TokenizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QuestionAnsweringInferenceUpdateOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The maximum answer length to consider for extraction
 	/// </para>
 	/// </summary>
-	public QuestionAnsweringInferenceUpdateOptionsDescriptor MaxAnswerLength(int? maxAnswerLength)
+	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor MaxAnswerLength(int? value)
 	{
-		MaxAnswerLengthValue = maxAnswerLength;
-		return Self;
+		Instance.MaxAnswerLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -104,10 +198,10 @@ public sealed partial class QuestionAnsweringInferenceUpdateOptionsDescriptor : 
 	/// Specifies the number of top class predictions to return. Defaults to 0.
 	/// </para>
 	/// </summary>
-	public QuestionAnsweringInferenceUpdateOptionsDescriptor NumTopClasses(int? numTopClasses)
+	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor NumTopClasses(int? value)
 	{
-		NumTopClassesValue = numTopClasses;
-		return Self;
+		Instance.NumTopClasses = value;
+		return this;
 	}
 
 	/// <summary>
@@ -115,10 +209,10 @@ public sealed partial class QuestionAnsweringInferenceUpdateOptionsDescriptor : 
 	/// The question to answer given the inference context
 	/// </para>
 	/// </summary>
-	public QuestionAnsweringInferenceUpdateOptionsDescriptor Question(string question)
+	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor Question(string value)
 	{
-		QuestionValue = question;
-		return Self;
+		Instance.Question = value;
+		return this;
 	}
 
 	/// <summary>
@@ -126,10 +220,10 @@ public sealed partial class QuestionAnsweringInferenceUpdateOptionsDescriptor : 
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	public QuestionAnsweringInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor ResultsField(string? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -137,69 +231,39 @@ public sealed partial class QuestionAnsweringInferenceUpdateOptionsDescriptor : 
 	/// The tokenization options to update when inferring
 	/// </para>
 	/// </summary>
-	public QuestionAnsweringInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? tokenization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? value)
 	{
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = null;
-		TokenizationValue = tokenization;
-		return Self;
+		Instance.Tokenization = value;
+		return this;
 	}
 
-	public QuestionAnsweringInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor Tokenization()
 	{
-		TokenizationValue = null;
-		TokenizationDescriptorAction = null;
-		TokenizationDescriptor = descriptor;
-		return Self;
+		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor.Build(null);
+		return this;
 	}
 
-	public QuestionAnsweringInferenceUpdateOptionsDescriptor Tokenization(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor>? action)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = configure;
-		return Self;
+		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (MaxAnswerLengthValue.HasValue)
-		{
-			writer.WritePropertyName("max_answer_length");
-			writer.WriteNumberValue(MaxAnswerLengthValue.Value);
-		}
-
-		if (NumTopClassesValue.HasValue)
-		{
-			writer.WritePropertyName("num_top_classes");
-			writer.WriteNumberValue(NumTopClassesValue.Value);
-		}
-
-		writer.WritePropertyName("question");
-		writer.WriteStringValue(QuestionValue);
-		if (!string.IsNullOrEmpty(ResultsFieldValue))
-		{
-			writer.WritePropertyName("results_field");
-			writer.WriteStringValue(ResultsFieldValue);
-		}
-
-		if (TokenizationDescriptor is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-		}
-		else if (TokenizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor(TokenizationDescriptorAction), options);
-		}
-		else if (TokenizationValue is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

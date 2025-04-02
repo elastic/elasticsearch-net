@@ -17,18 +17,149 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class HasChildQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
+	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxChildren = System.Text.Json.JsonEncodedText.Encode("max_children");
+	private static readonly System.Text.Json.JsonEncodedText PropMinChildren = System.Text.Json.JsonEncodedText.Encode("min_children");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<bool?> propIgnoreUnmapped = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.InnerHits?> propInnerHits = default;
+		LocalJsonValue<int?> propMaxChildren = default;
+		LocalJsonValue<int?> propMinChildren = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode?> propScoreMode = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			{
+				continue;
+			}
+
+			if (propInnerHits.TryReadProperty(ref reader, options, PropInnerHits, null))
+			{
+				continue;
+			}
+
+			if (propMaxChildren.TryReadProperty(ref reader, options, PropMaxChildren, null))
+			{
+				continue;
+			}
+
+			if (propMinChildren.TryReadProperty(ref reader, options, PropMinChildren, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propScoreMode.TryReadProperty(ref reader, options, PropScoreMode, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			IgnoreUnmapped = propIgnoreUnmapped.Value,
+			InnerHits = propInnerHits.Value,
+			MaxChildren = propMaxChildren.Value,
+			MinChildren = propMinChildren.Value,
+			Query = propQuery.Value,
+			QueryName = propQueryName.Value,
+			ScoreMode = propScoreMode.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, null);
+		writer.WriteProperty(options, PropMaxChildren, value.MaxChildren, null, null);
+		writer.WriteProperty(options, PropMinChildren, value.MinChildren, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropScoreMode, value.ScoreMode, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryConverter))]
 public sealed partial class HasChildQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasChildQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query query, string type)
+	{
+		Query = query;
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public HasChildQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public HasChildQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HasChildQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +168,6 @@ public sealed partial class HasChildQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,7 +175,6 @@ public sealed partial class HasChildQuery
 	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
 
 	/// <summary>
@@ -53,7 +182,6 @@ public sealed partial class HasChildQuery
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
 	/// <summary>
@@ -62,7 +190,6 @@ public sealed partial class HasChildQuery
 	/// If the parent document exceeds this limit, it is excluded from the search results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_children")]
 	public int? MaxChildren { get; set; }
 
 	/// <summary>
@@ -71,7 +198,6 @@ public sealed partial class HasChildQuery
 	/// If the parent document does not meet this limit, it is excluded from the search results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_children")]
 	public int? MinChildren { get; set; }
 
 	/// <summary>
@@ -80,9 +206,11 @@ public sealed partial class HasChildQuery
 	/// If a child document matches the search, the query returns the parent document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -90,7 +218,6 @@ public sealed partial class HasChildQuery
 	/// Indicates how scores for matching child documents affect the root parent document’s relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 
 	/// <summary>
@@ -98,33 +225,31 @@ public sealed partial class HasChildQuery
 	/// Name of the child relationship mapped for the <c>join</c> field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(HasChildQuery hasChildQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.HasChild(hasChildQuery);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }
 
-public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDescriptor<HasChildQueryDescriptor<TDocument>>
+public readonly partial struct HasChildQueryDescriptor<TDocument>
 {
-	internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery Instance { get; init; }
 
-	public HasChildQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasChildQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
-	private int? MaxChildrenValue { get; set; }
-	private int? MinChildrenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
-	private string TypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasChildQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -134,10 +259,10 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -145,10 +270,10 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
 	/// <summary>
@@ -156,28 +281,32 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsValue = innerHits;
-		return Self;
+		Instance.InnerHits = value;
+		return this;
 	}
 
-	public HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> InnerHits()
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsDescriptor = descriptor;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public HasChildQueryDescriptor<TDocument> InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>>? action)
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = configure;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -186,10 +315,10 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	/// If the parent document exceeds this limit, it is excluded from the search results.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor<TDocument> MaxChildren(int? maxChildren)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> MaxChildren(int? value)
 	{
-		MaxChildrenValue = maxChildren;
-		return Self;
+		Instance.MaxChildren = value;
+		return this;
 	}
 
 	/// <summary>
@@ -198,10 +327,10 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	/// If the parent document does not meet this limit, it is excluded from the search results.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor<TDocument> MinChildren(int? minChildren)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> MinChildren(int? value)
 	{
-		MinChildrenValue = minChildren;
-		return Self;
+		Instance.MinChildren = value;
+		return this;
 	}
 
 	/// <summary>
@@ -210,34 +339,28 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	/// If a child document matches the search, the query returns the parent document.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public HasChildQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Query you wish to run on child documents of the <c>type</c> field.
+	/// If a child document matches the search, the query returns the parent document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public HasChildQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	public HasChildQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -245,10 +368,10 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	/// Indicates how scores for matching child documents affect the root parent document’s relevance score.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? value)
 	{
-		ScoreModeValue = scoreMode;
-		return Self;
+		Instance.ScoreMode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -256,110 +379,39 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	/// Name of the child relationship mapped for the <c>join</c> field.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor<TDocument> Type(string type)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> Type(string value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (InnerHitsDescriptor is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
-		}
-		else if (InnerHitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
-		}
-		else if (InnerHitsValue is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsValue, options);
-		}
-
-		if (MaxChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("max_children");
-			writer.WriteNumberValue(MaxChildrenValue.Value);
-		}
-
-		if (MinChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("min_children");
-			writer.WriteNumberValue(MinChildrenValue.Value);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ScoreModeValue is not null)
-		{
-			writer.WritePropertyName("score_mode");
-			JsonSerializer.Serialize(writer, ScoreModeValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue(TypeValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<HasChildQueryDescriptor>
+public readonly partial struct HasChildQueryDescriptor
 {
-	internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery Instance { get; init; }
 
-	public HasChildQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasChildQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
-	private int? MaxChildrenValue { get; set; }
-	private int? MinChildrenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
-	private string TypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasChildQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -369,10 +421,10 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -380,10 +432,10 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
 	/// <summary>
@@ -391,28 +443,43 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsValue = innerHits;
-		return Self;
+		Instance.InnerHits = value;
+		return this;
 	}
 
-	public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor InnerHits()
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsDescriptor = descriptor;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(null);
+		return this;
 	}
 
-	public HasChildQueryDescriptor InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor>? action)
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = configure;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor InnerHits<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>>? action)
+	{
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -421,10 +488,10 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	/// If the parent document exceeds this limit, it is excluded from the search results.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor MaxChildren(int? maxChildren)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor MaxChildren(int? value)
 	{
-		MaxChildrenValue = maxChildren;
-		return Self;
+		Instance.MaxChildren = value;
+		return this;
 	}
 
 	/// <summary>
@@ -433,10 +500,10 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	/// If the parent document does not meet this limit, it is excluded from the search results.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor MinChildren(int? minChildren)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor MinChildren(int? value)
 	{
-		MinChildrenValue = minChildren;
-		return Self;
+		Instance.MinChildren = value;
+		return this;
 	}
 
 	/// <summary>
@@ -445,34 +512,40 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	/// If a child document matches the search, the query returns the parent document.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query you wish to run on child documents of the <c>type</c> field.
+	/// If a child document matches the search, the query returns the parent document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public HasChildQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query you wish to run on child documents of the <c>type</c> field.
+	/// If a child document matches the search, the query returns the parent document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public HasChildQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -480,10 +553,10 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	/// Indicates how scores for matching child documents affect the root parent document’s relevance score.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? value)
 	{
-		ScoreModeValue = scoreMode;
-		return Self;
+		Instance.ScoreMode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -491,85 +564,17 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	/// Name of the child relationship mapped for the <c>join</c> field.
 	/// </para>
 	/// </summary>
-	public HasChildQueryDescriptor Type(string type)
+	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Type(string value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (InnerHitsDescriptor is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
-		}
-		else if (InnerHitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor(InnerHitsDescriptorAction), options);
-		}
-		else if (InnerHitsValue is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsValue, options);
-		}
-
-		if (MaxChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("max_children");
-			writer.WriteNumberValue(MaxChildrenValue.Value);
-		}
-
-		if (MinChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("min_children");
-			writer.WriteNumberValue(MinChildrenValue.Value);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ScoreModeValue is not null)
-		{
-			writer.WritePropertyName("score_mode");
-			JsonSerializer.Serialize(writer, ScoreModeValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue(TypeValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

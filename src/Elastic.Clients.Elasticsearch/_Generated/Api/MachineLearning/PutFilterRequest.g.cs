@@ -17,21 +17,62 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutFilterRequestParameters : RequestParameters
+public sealed partial class PutFilterRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class PutFilterRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropItems = System.Text.Json.JsonEncodedText.Encode("items");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propItems = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propItems.TryReadProperty(ref reader, options, PropItems, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Items = propItems.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropItems, value.Items, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,15 +82,27 @@ public sealed partial class PutFilterRequestParameters : RequestParameters
 /// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 /// </para>
 /// </summary>
-public sealed partial class PutFilterRequest : PlainRequest<PutFilterRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestConverter))]
+public sealed partial class PutFilterRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutFilterRequest(Elastic.Clients.Elasticsearch.Id filterId) : base(r => r.Required("filter_id", filterId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutFilterRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutFilterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutFilter;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPutFilter;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -57,10 +110,20 @@ public sealed partial class PutFilterRequest : PlainRequest<PutFilterRequestPara
 
 	/// <summary>
 	/// <para>
+	/// A string that uniquely identifies a filter.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// A description of the filter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -69,8 +132,7 @@ public sealed partial class PutFilterRequest : PlainRequest<PutFilterRequestPara
 	/// Up to 10000 items are allowed in each filter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("items")]
-	public ICollection<string>? Items { get; set; }
+	public System.Collections.Generic.ICollection<string>? Items { get; set; }
 }
 
 /// <summary>
@@ -80,40 +142,50 @@ public sealed partial class PutFilterRequest : PlainRequest<PutFilterRequestPara
 /// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 /// </para>
 /// </summary>
-public sealed partial class PutFilterRequestDescriptor : RequestDescriptor<PutFilterRequestDescriptor, PutFilterRequestParameters>
+public readonly partial struct PutFilterRequestDescriptor
 {
-	internal PutFilterRequestDescriptor(Action<PutFilterRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest Instance { get; init; }
 
-	public PutFilterRequestDescriptor(Elastic.Clients.Elasticsearch.Id filterId) : base(r => r.Required("filter_id", filterId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutFilterRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutFilter;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_filter";
-
-	public PutFilterRequestDescriptor FilterId(Elastic.Clients.Elasticsearch.Id filterId)
+	public PutFilterRequestDescriptor(Elastic.Clients.Elasticsearch.Id filterId)
 	{
-		RouteValues.Required("filter_id", filterId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest(filterId);
 	}
 
-	private string? DescriptionValue { get; set; }
-	private ICollection<string>? ItemsValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutFilterRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor FilterId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.FilterId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// A description of the filter.
 	/// </para>
 	/// </summary>
-	public PutFilterRequestDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -122,27 +194,95 @@ public sealed partial class PutFilterRequestDescriptor : RequestDescriptor<PutFi
 	/// Up to 10000 items are allowed in each filter.
 	/// </para>
 	/// </summary>
-	public PutFilterRequestDescriptor Items(ICollection<string>? items)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Items(System.Collections.Generic.ICollection<string>? value)
 	{
-		ItemsValue = items;
-		return Self;
+		Instance.Items = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
+	/// Up to 10000 items are allowed in each filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Items()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+		Instance.Items = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
 
-		if (ItemsValue is not null)
-		{
-			writer.WritePropertyName("items");
-			JsonSerializer.Serialize(writer, ItemsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
+	/// Up to 10000 items are allowed in each filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Items(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Items = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
+	/// Up to 10000 items are allowed in each filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Items(params string[] values)
+	{
+		Instance.Items = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

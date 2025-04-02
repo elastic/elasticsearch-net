@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class PutGeoipDatabaseRequestParameters : RequestParameters
+public sealed partial class PutGeoipDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -48,21 +41,91 @@ public sealed partial class PutGeoipDatabaseRequestParameters : RequestParameter
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PutGeoipDatabaseRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxmind = System.Text.Json.JsonEncodedText.Encode("maxmind");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.Maxmind> propMaxmind = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name> propName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxmind.TryReadProperty(ref reader, options, PropMaxmind, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Maxmind = propMaxmind.Value,
+			Name = propName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxmind, value.Maxmind, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update a GeoIP database configuration.
+/// </para>
+/// <para>
 /// Refer to the create or update IP geolocation database configuration API.
 /// </para>
 /// </summary>
-public sealed partial class PutGeoipDatabaseRequest : PlainRequest<PutGeoipDatabaseRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestConverter))]
+public sealed partial class PutGeoipDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestParameters>
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutGeoipDatabase;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Ingest.Maxmind maxmind, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("id", id))
+	{
+		Maxmind = maxmind;
+		Name = name;
+	}
+#if NET7_0_OR_GREATER
+	public PutGeoipDatabaseRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IngestPutGeoipDatabase;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -70,11 +133,21 @@ public sealed partial class PutGeoipDatabaseRequest : PlainRequest<PutGeoipDatab
 
 	/// <summary>
 	/// <para>
+	/// ID of the database configuration to create or update.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -82,7 +155,6 @@ public sealed partial class PutGeoipDatabaseRequest : PlainRequest<PutGeoipDatab
 	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -91,53 +163,91 @@ public sealed partial class PutGeoipDatabaseRequest : PlainRequest<PutGeoipDatab
 	/// At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("maxmind")]
-	public Elastic.Clients.Elasticsearch.Ingest.Maxmind Maxmind { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Ingest.Maxmind Maxmind { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The provider-assigned name of the IP geolocation database to download.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Create or update a GeoIP database configuration.
+/// </para>
+/// <para>
 /// Refer to the create or update IP geolocation database configuration API.
 /// </para>
 /// </summary>
-public sealed partial class PutGeoipDatabaseRequestDescriptor<TDocument> : RequestDescriptor<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseRequestParameters>
+public readonly partial struct PutGeoipDatabaseRequestDescriptor
 {
-	internal PutGeoipDatabaseRequestDescriptor(Action<PutGeoipDatabaseRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest Instance { get; init; }
 
-	public PutGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutGeoipDatabase;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ingest.put_geoip_database";
-
-	public PutGeoipDatabaseRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutGeoipDatabaseRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutGeoipDatabaseRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public PutGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest(id);
+#pragma warning restore CS0618
 	}
 
-	private Elastic.Clients.Elasticsearch.Ingest.Maxmind MaxmindValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor MaxmindDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor> MaxmindDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutGeoipDatabaseRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// ID of the database configuration to create or update.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -145,101 +255,11 @@ public sealed partial class PutGeoipDatabaseRequestDescriptor<TDocument> : Reque
 	/// At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
 	/// </para>
 	/// </summary>
-	public PutGeoipDatabaseRequestDescriptor<TDocument> Maxmind(Elastic.Clients.Elasticsearch.Ingest.Maxmind maxmind)
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Maxmind(Elastic.Clients.Elasticsearch.Ingest.Maxmind value)
 	{
-		MaxmindDescriptor = null;
-		MaxmindDescriptorAction = null;
-		MaxmindValue = maxmind;
-		return Self;
+		Instance.Maxmind = value;
+		return this;
 	}
-
-	public PutGeoipDatabaseRequestDescriptor<TDocument> Maxmind(Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor descriptor)
-	{
-		MaxmindValue = null;
-		MaxmindDescriptorAction = null;
-		MaxmindDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutGeoipDatabaseRequestDescriptor<TDocument> Maxmind(Action<Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor> configure)
-	{
-		MaxmindValue = null;
-		MaxmindDescriptor = null;
-		MaxmindDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The provider-assigned name of the IP geolocation database to download.
-	/// </para>
-	/// </summary>
-	public PutGeoipDatabaseRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (MaxmindDescriptor is not null)
-		{
-			writer.WritePropertyName("maxmind");
-			JsonSerializer.Serialize(writer, MaxmindDescriptor, options);
-		}
-		else if (MaxmindDescriptorAction is not null)
-		{
-			writer.WritePropertyName("maxmind");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor(MaxmindDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("maxmind");
-			JsonSerializer.Serialize(writer, MaxmindValue, options);
-		}
-
-		writer.WritePropertyName("name");
-		JsonSerializer.Serialize(writer, NameValue, options);
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Create or update a GeoIP database configuration.
-/// Refer to the create or update IP geolocation database configuration API.
-/// </para>
-/// </summary>
-public sealed partial class PutGeoipDatabaseRequestDescriptor : RequestDescriptor<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseRequestParameters>
-{
-	internal PutGeoipDatabaseRequestDescriptor(Action<PutGeoipDatabaseRequestDescriptor> configure) => configure.Invoke(this);
-
-	public PutGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutGeoipDatabase;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ingest.put_geoip_database";
-
-	public PutGeoipDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutGeoipDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutGeoipDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-	{
-		RouteValues.Required("id", id);
-		return Self;
-	}
-
-	private Elastic.Clients.Elasticsearch.Ingest.Maxmind MaxmindValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor MaxmindDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor> MaxmindDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -247,28 +267,10 @@ public sealed partial class PutGeoipDatabaseRequestDescriptor : RequestDescripto
 	/// At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
 	/// </para>
 	/// </summary>
-	public PutGeoipDatabaseRequestDescriptor Maxmind(Elastic.Clients.Elasticsearch.Ingest.Maxmind maxmind)
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Maxmind(System.Action<Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor> action)
 	{
-		MaxmindDescriptor = null;
-		MaxmindDescriptorAction = null;
-		MaxmindValue = maxmind;
-		return Self;
-	}
-
-	public PutGeoipDatabaseRequestDescriptor Maxmind(Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor descriptor)
-	{
-		MaxmindValue = null;
-		MaxmindDescriptorAction = null;
-		MaxmindDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutGeoipDatabaseRequestDescriptor Maxmind(Action<Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor> configure)
-	{
-		MaxmindValue = null;
-		MaxmindDescriptor = null;
-		MaxmindDescriptorAction = configure;
-		return Self;
+		Instance.Maxmind = Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -276,33 +278,59 @@ public sealed partial class PutGeoipDatabaseRequestDescriptor : RequestDescripto
 	/// The provider-assigned name of the IP geolocation database to download.
 	/// </para>
 	/// </summary>
-	public PutGeoipDatabaseRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
-		NameValue = name;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (MaxmindDescriptor is not null)
-		{
-			writer.WritePropertyName("maxmind");
-			JsonSerializer.Serialize(writer, MaxmindDescriptor, options);
-		}
-		else if (MaxmindDescriptorAction is not null)
-		{
-			writer.WritePropertyName("maxmind");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor(MaxmindDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("maxmind");
-			JsonSerializer.Serialize(writer, MaxmindValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor(new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("name");
-		JsonSerializer.Serialize(writer, NameValue, options);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

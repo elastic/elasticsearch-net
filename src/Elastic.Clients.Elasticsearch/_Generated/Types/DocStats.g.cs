@@ -17,26 +17,96 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class DocStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DocStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted");
+
+	public override Elastic.Clients.Elasticsearch.DocStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<long?> propDeleted = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.DocStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			Deleted = propDeleted.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DocStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropDeleted, value.Deleted, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DocStatsConverter))]
 public sealed partial class DocStats
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DocStats(long count)
+	{
+		Count = count;
+	}
+#if NET7_0_OR_GREATER
+	public DocStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DocStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DocStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Total number of non-deleted documents across all primary shards assigned to selected nodes.
 	/// This number is based on documents in Lucene segments and may include documents from nested fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -45,6 +115,5 @@ public sealed partial class DocStats
 	/// Elasticsearch reclaims the disk space of deleted Lucene documents when a segment is merged.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("deleted")]
-	public long? Deleted { get; init; }
+	public long? Deleted { get; set; }
 }

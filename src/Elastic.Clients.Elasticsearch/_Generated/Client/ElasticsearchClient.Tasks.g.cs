@@ -18,1126 +18,179 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-public partial class TasksNamespacedClient : NamespacedClientProxy
+public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="TasksNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Tasks.TasksNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected TasksNamespacedClient() : base()
 	{
 	}
 
-	internal TasksNamespacedClient(ElasticsearchClient client) : base(client)
+	internal TasksNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CancelResponse Cancel(CancelRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.Tasks.CancelRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<CancelRequest, CancelResponse, CancelRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CancelResponse> CancelAsync(CancelRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.Tasks.CancelRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<CancelRequest, CancelResponse, CancelRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CancelResponse Cancel(CancelRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action)
 	{
-		var descriptor = new CancelRequestDescriptor(taskId);
-		descriptor.BeforeRequest();
-		return DoRequest<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId, Action<CancelRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new CancelRequestDescriptor(taskId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CancelResponse Cancel()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new CancelRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CancelResponse Cancel(Action<CancelRequestDescriptor> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId taskId)
 	{
-		var descriptor = new CancelRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CancelResponse> CancelAsync(CancelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new CancelRequestDescriptor(taskId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, Action<CancelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new CancelRequestDescriptor(taskId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CancelResponse> CancelAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CancelRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Cancel a task.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-	/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-	/// The get task information API will continue to list these cancelled tasks until they complete.
-	/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-	/// </para>
-	/// <para>
-	/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-	/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CancelResponse> CancelAsync(Action<CancelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CancelRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get task information.
-	/// Get information about a task currently running in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTasksResponse Get(GetTasksRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse Get(Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetTasksRequest, GetTasksResponse, GetTasksRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get task information.
-	/// Get information about a task currently running in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetTasksRequest, GetTasksResponse, GetTasksRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get task information.
-	/// Get information about a task currently running in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTasksResponse Get(GetTasksRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get task information.
-	/// Get information about a task currently running in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id taskId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTasksRequestDescriptor(taskId);
-		descriptor.BeforeRequest();
-		return DoRequest<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get task information.
-	/// Get information about a task currently running in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id taskId, Action<GetTasksRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetTasksRequestDescriptor(taskId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get task information.
-	/// Get information about a task currently running in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get task information.
-	/// Get information about a task currently running in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTasksRequestDescriptor(taskId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get task information.
-	/// Get information about a task currently running in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, Action<GetTasksRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTasksRequestDescriptor(taskId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get all tasks.
-	/// Get information about the tasks currently running on one or more nodes in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// <strong>Identifying running tasks</strong>
-	/// </para>
-	/// <para>
-	/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-	/// This enables you to track certain calls or associate certain tasks with the client that started them.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-	/// </code>
-	/// <para>
-	/// The API returns the following result:
-	/// </para>
-	/// <code>
-	/// HTTP/1.1 200 OK
-	/// X-Opaque-Id: 123456
-	/// content-type: application/json; charset=UTF-8
-	/// content-length: 831
-	/// 
-	/// {
-	///   "tasks" : {
-	///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-	///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///       "id" : 45,
-	///       "type" : "transport",
-	///       "action" : "cluster:monitor/tasks/lists",
-	///       "start_time_in_millis" : 1513823752749,
-	///       "running_time_in_nanos" : 293139,
-	///       "cancellable" : false,
-	///       "headers" : {
-	///         "X-Opaque-Id" : "123456"
-	///       },
-	///       "children" : [
-	///         {
-	///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///           "id" : 46,
-	///           "type" : "direct",
-	///           "action" : "cluster:monitor/tasks/lists[n]",
-	///           "start_time_in_millis" : 1513823752750,
-	///           "running_time_in_nanos" : 92133,
-	///           "cancellable" : false,
-	///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-	///           "headers" : {
-	///             "X-Opaque-Id" : "123456"
-	///           }
-	///         }
-	///       ]
-	///     }
-	///   }
-	///  }
-	/// </code>
-	/// <para>
-	/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-	/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-	/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List(ListRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.ListResponse List(Elastic.Clients.Elasticsearch.Tasks.ListRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ListRequest, ListResponse, ListRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all tasks.
-	/// Get information about the tasks currently running on one or more nodes in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// <strong>Identifying running tasks</strong>
-	/// </para>
-	/// <para>
-	/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-	/// This enables you to track certain calls or associate certain tasks with the client that started them.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-	/// </code>
-	/// <para>
-	/// The API returns the following result:
-	/// </para>
-	/// <code>
-	/// HTTP/1.1 200 OK
-	/// X-Opaque-Id: 123456
-	/// content-type: application/json; charset=UTF-8
-	/// content-length: 831
-	/// 
-	/// {
-	///   "tasks" : {
-	///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-	///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///       "id" : 45,
-	///       "type" : "transport",
-	///       "action" : "cluster:monitor/tasks/lists",
-	///       "start_time_in_millis" : 1513823752749,
-	///       "running_time_in_nanos" : 293139,
-	///       "cancellable" : false,
-	///       "headers" : {
-	///         "X-Opaque-Id" : "123456"
-	///       },
-	///       "children" : [
-	///         {
-	///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///           "id" : 46,
-	///           "type" : "direct",
-	///           "action" : "cluster:monitor/tasks/lists[n]",
-	///           "start_time_in_millis" : 1513823752750,
-	///           "running_time_in_nanos" : 92133,
-	///           "cancellable" : false,
-	///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-	///           "headers" : {
-	///             "X-Opaque-Id" : "123456"
-	///           }
-	///         }
-	///       ]
-	///     }
-	///   }
-	///  }
-	/// </code>
-	/// <para>
-	/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-	/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-	/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListResponse> ListAsync(ListRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.ListResponse> ListAsync(Elastic.Clients.Elasticsearch.Tasks.ListRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ListRequest, ListResponse, ListRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all tasks.
-	/// Get information about the tasks currently running on one or more nodes in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// <strong>Identifying running tasks</strong>
-	/// </para>
-	/// <para>
-	/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-	/// This enables you to track certain calls or associate certain tasks with the client that started them.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-	/// </code>
-	/// <para>
-	/// The API returns the following result:
-	/// </para>
-	/// <code>
-	/// HTTP/1.1 200 OK
-	/// X-Opaque-Id: 123456
-	/// content-type: application/json; charset=UTF-8
-	/// content-length: 831
-	/// 
-	/// {
-	///   "tasks" : {
-	///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-	///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///       "id" : 45,
-	///       "type" : "transport",
-	///       "action" : "cluster:monitor/tasks/lists",
-	///       "start_time_in_millis" : 1513823752749,
-	///       "running_time_in_nanos" : 293139,
-	///       "cancellable" : false,
-	///       "headers" : {
-	///         "X-Opaque-Id" : "123456"
-	///       },
-	///       "children" : [
-	///         {
-	///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///           "id" : 46,
-	///           "type" : "direct",
-	///           "action" : "cluster:monitor/tasks/lists[n]",
-	///           "start_time_in_millis" : 1513823752750,
-	///           "running_time_in_nanos" : 92133,
-	///           "cancellable" : false,
-	///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-	///           "headers" : {
-	///             "X-Opaque-Id" : "123456"
-	///           }
-	///         }
-	///       ]
-	///     }
-	///   }
-	///  }
-	/// </code>
-	/// <para>
-	/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-	/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-	/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List(ListRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.ListResponse List()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all tasks.
-	/// Get information about the tasks currently running on one or more nodes in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// <strong>Identifying running tasks</strong>
-	/// </para>
-	/// <para>
-	/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-	/// This enables you to track certain calls or associate certain tasks with the client that started them.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-	/// </code>
-	/// <para>
-	/// The API returns the following result:
-	/// </para>
-	/// <code>
-	/// HTTP/1.1 200 OK
-	/// X-Opaque-Id: 123456
-	/// content-type: application/json; charset=UTF-8
-	/// content-length: 831
-	/// 
-	/// {
-	///   "tasks" : {
-	///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-	///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///       "id" : 45,
-	///       "type" : "transport",
-	///       "action" : "cluster:monitor/tasks/lists",
-	///       "start_time_in_millis" : 1513823752749,
-	///       "running_time_in_nanos" : 293139,
-	///       "cancellable" : false,
-	///       "headers" : {
-	///         "X-Opaque-Id" : "123456"
-	///       },
-	///       "children" : [
-	///         {
-	///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///           "id" : 46,
-	///           "type" : "direct",
-	///           "action" : "cluster:monitor/tasks/lists[n]",
-	///           "start_time_in_millis" : 1513823752750,
-	///           "running_time_in_nanos" : 92133,
-	///           "cancellable" : false,
-	///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-	///           "headers" : {
-	///             "X-Opaque-Id" : "123456"
-	///           }
-	///         }
-	///       ]
-	///     }
-	///   }
-	///  }
-	/// </code>
-	/// <para>
-	/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-	/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-	/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List()
+	public virtual Elastic.Clients.Elasticsearch.Tasks.ListResponse List(System.Action<Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor> action)
 	{
-		var descriptor = new ListRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all tasks.
-	/// Get information about the tasks currently running on one or more nodes in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// <strong>Identifying running tasks</strong>
-	/// </para>
-	/// <para>
-	/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-	/// This enables you to track certain calls or associate certain tasks with the client that started them.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-	/// </code>
-	/// <para>
-	/// The API returns the following result:
-	/// </para>
-	/// <code>
-	/// HTTP/1.1 200 OK
-	/// X-Opaque-Id: 123456
-	/// content-type: application/json; charset=UTF-8
-	/// content-length: 831
-	/// 
-	/// {
-	///   "tasks" : {
-	///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-	///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///       "id" : 45,
-	///       "type" : "transport",
-	///       "action" : "cluster:monitor/tasks/lists",
-	///       "start_time_in_millis" : 1513823752749,
-	///       "running_time_in_nanos" : 293139,
-	///       "cancellable" : false,
-	///       "headers" : {
-	///         "X-Opaque-Id" : "123456"
-	///       },
-	///       "children" : [
-	///         {
-	///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///           "id" : 46,
-	///           "type" : "direct",
-	///           "action" : "cluster:monitor/tasks/lists[n]",
-	///           "start_time_in_millis" : 1513823752750,
-	///           "running_time_in_nanos" : 92133,
-	///           "cancellable" : false,
-	///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-	///           "headers" : {
-	///             "X-Opaque-Id" : "123456"
-	///           }
-	///         }
-	///       ]
-	///     }
-	///   }
-	///  }
-	/// </code>
-	/// <para>
-	/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-	/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-	/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List(Action<ListRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.ListResponse> ListAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ListRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all tasks.
-	/// Get information about the tasks currently running on one or more nodes in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// <strong>Identifying running tasks</strong>
-	/// </para>
-	/// <para>
-	/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-	/// This enables you to track certain calls or associate certain tasks with the client that started them.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-	/// </code>
-	/// <para>
-	/// The API returns the following result:
-	/// </para>
-	/// <code>
-	/// HTTP/1.1 200 OK
-	/// X-Opaque-Id: 123456
-	/// content-type: application/json; charset=UTF-8
-	/// content-length: 831
-	/// 
-	/// {
-	///   "tasks" : {
-	///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-	///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///       "id" : 45,
-	///       "type" : "transport",
-	///       "action" : "cluster:monitor/tasks/lists",
-	///       "start_time_in_millis" : 1513823752749,
-	///       "running_time_in_nanos" : 293139,
-	///       "cancellable" : false,
-	///       "headers" : {
-	///         "X-Opaque-Id" : "123456"
-	///       },
-	///       "children" : [
-	///         {
-	///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///           "id" : 46,
-	///           "type" : "direct",
-	///           "action" : "cluster:monitor/tasks/lists[n]",
-	///           "start_time_in_millis" : 1513823752750,
-	///           "running_time_in_nanos" : 92133,
-	///           "cancellable" : false,
-	///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-	///           "headers" : {
-	///             "X-Opaque-Id" : "123456"
-	///           }
-	///         }
-	///       ]
-	///     }
-	///   }
-	///  }
-	/// </code>
-	/// <para>
-	/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-	/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-	/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.ListResponse> ListAsync(System.Action<Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get all tasks.
-	/// Get information about the tasks currently running on one or more nodes in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// <strong>Identifying running tasks</strong>
-	/// </para>
-	/// <para>
-	/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-	/// This enables you to track certain calls or associate certain tasks with the client that started them.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-	/// </code>
-	/// <para>
-	/// The API returns the following result:
-	/// </para>
-	/// <code>
-	/// HTTP/1.1 200 OK
-	/// X-Opaque-Id: 123456
-	/// content-type: application/json; charset=UTF-8
-	/// content-length: 831
-	/// 
-	/// {
-	///   "tasks" : {
-	///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-	///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///       "id" : 45,
-	///       "type" : "transport",
-	///       "action" : "cluster:monitor/tasks/lists",
-	///       "start_time_in_millis" : 1513823752749,
-	///       "running_time_in_nanos" : 293139,
-	///       "cancellable" : false,
-	///       "headers" : {
-	///         "X-Opaque-Id" : "123456"
-	///       },
-	///       "children" : [
-	///         {
-	///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///           "id" : 46,
-	///           "type" : "direct",
-	///           "action" : "cluster:monitor/tasks/lists[n]",
-	///           "start_time_in_millis" : 1513823752750,
-	///           "running_time_in_nanos" : 92133,
-	///           "cancellable" : false,
-	///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-	///           "headers" : {
-	///             "X-Opaque-Id" : "123456"
-	///           }
-	///         }
-	///       ]
-	///     }
-	///   }
-	///  }
-	/// </code>
-	/// <para>
-	/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-	/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-	/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListResponse> ListAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ListRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get all tasks.
-	/// Get information about the tasks currently running on one or more nodes in the cluster.
-	/// </para>
-	/// <para>
-	/// WARNING: The task management API is new and should still be considered a beta feature.
-	/// The API may change in ways that are not backwards compatible.
-	/// </para>
-	/// <para>
-	/// <strong>Identifying running tasks</strong>
-	/// </para>
-	/// <para>
-	/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-	/// This enables you to track certain calls or associate certain tasks with the client that started them.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-	/// </code>
-	/// <para>
-	/// The API returns the following result:
-	/// </para>
-	/// <code>
-	/// HTTP/1.1 200 OK
-	/// X-Opaque-Id: 123456
-	/// content-type: application/json; charset=UTF-8
-	/// content-length: 831
-	/// 
-	/// {
-	///   "tasks" : {
-	///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-	///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///       "id" : 45,
-	///       "type" : "transport",
-	///       "action" : "cluster:monitor/tasks/lists",
-	///       "start_time_in_millis" : 1513823752749,
-	///       "running_time_in_nanos" : 293139,
-	///       "cancellable" : false,
-	///       "headers" : {
-	///         "X-Opaque-Id" : "123456"
-	///       },
-	///       "children" : [
-	///         {
-	///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-	///           "id" : 46,
-	///           "type" : "direct",
-	///           "action" : "cluster:monitor/tasks/lists[n]",
-	///           "start_time_in_millis" : 1513823752750,
-	///           "running_time_in_nanos" : 92133,
-	///           "cancellable" : false,
-	///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-	///           "headers" : {
-	///             "X-Opaque-Id" : "123456"
-	///           }
-	///         }
-	///       ]
-	///     }
-	///   }
-	///  }
-	/// </code>
-	/// <para>
-	/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-	/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-	/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListResponse> ListAsync(Action<ListRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ListRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request, cancellationToken);
 	}
 }

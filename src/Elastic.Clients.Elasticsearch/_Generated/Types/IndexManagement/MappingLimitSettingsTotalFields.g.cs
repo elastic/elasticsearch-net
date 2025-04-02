@@ -17,95 +17,157 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class MappingLimitSettingsTotalFields
+internal sealed partial class MappingLimitSettingsTotalFieldsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields>
 {
-	/// <summary>
-	/// <para>
-	/// This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set
-	/// to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail
-	/// with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.
-	/// Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.
-	/// The fields that were not added to the mapping will be added to the _ignored field.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_dynamic_beyond_limit")]
-	public object? IgnoreDynamicBeyondLimit { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreDynamicBeyondLimit = System.Text.Json.JsonEncodedText.Encode("ignore_dynamic_beyond_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit");
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.
-	/// The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance
-	/// degradations and memory issues, especially in clusters with a high load or few resources.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("limit")]
-	public object? Limit { get; set; }
-}
-
-public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsTotalFieldsDescriptor>
-{
-	internal MappingLimitSettingsTotalFieldsDescriptor(Action<MappingLimitSettingsTotalFieldsDescriptor> configure) => configure.Invoke(this);
-
-	public MappingLimitSettingsTotalFieldsDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<bool, string>?> propIgnoreDynamicBeyondLimit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<long, string>?> propLimit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIgnoreDynamicBeyondLimit.TryReadProperty(ref reader, options, PropIgnoreDynamicBeyondLimit, static Elastic.Clients.Elasticsearch.Union<bool, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<bool, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), null, null)))
+			{
+				continue;
+			}
+
+			if (propLimit.TryReadProperty(ref reader, options, PropLimit, static Elastic.Clients.Elasticsearch.Union<long, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<long, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IgnoreDynamicBeyondLimit = propIgnoreDynamicBeyondLimit.Value,
+			Limit = propLimit.Value
+		};
 	}
 
-	private object? IgnoreDynamicBeyondLimitValue { get; set; }
-	private object? LimitValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set
-	/// to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail
-	/// with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.
-	/// Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.
-	/// The fields that were not added to the mapping will be added to the _ignored field.
-	/// </para>
-	/// </summary>
-	public MappingLimitSettingsTotalFieldsDescriptor IgnoreDynamicBeyondLimit(object? ignoreDynamicBeyondLimit)
-	{
-		IgnoreDynamicBeyondLimitValue = ignoreDynamicBeyondLimit;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.
-	/// The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance
-	/// degradations and memory issues, especially in clusters with a high load or few resources.
-	/// </para>
-	/// </summary>
-	public MappingLimitSettingsTotalFieldsDescriptor Limit(object? limit)
-	{
-		LimitValue = limit;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (IgnoreDynamicBeyondLimitValue is not null)
-		{
-			writer.WritePropertyName("ignore_dynamic_beyond_limit");
-			JsonSerializer.Serialize(writer, IgnoreDynamicBeyondLimitValue, options);
-		}
-
-		if (LimitValue is not null)
-		{
-			writer.WritePropertyName("limit");
-			JsonSerializer.Serialize(writer, LimitValue, options);
-		}
-
+		writer.WriteProperty(options, PropIgnoreDynamicBeyondLimit, value.IgnoreDynamicBeyondLimit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, string>? v) => w.WriteUnionValue<bool, string>(o, v, null, null));
+		writer.WriteProperty(options, PropLimit, value.Limit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<long, string>? v) => w.WriteUnionValue<long, string>(o, v, null, null));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsConverter))]
+public sealed partial class MappingLimitSettingsTotalFields
+{
+#if NET7_0_OR_GREATER
+	public MappingLimitSettingsTotalFields()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MappingLimitSettingsTotalFields()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MappingLimitSettingsTotalFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set
+	/// to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail
+	/// with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.
+	/// Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.
+	/// The fields that were not added to the mapping will be added to the _ignored field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Union<bool, string>? IgnoreDynamicBeyondLimit { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.
+	/// The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance
+	/// degradations and memory issues, especially in clusters with a high load or few resources.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Union<long, string>? Limit { get; set; }
+}
+
+public readonly partial struct MappingLimitSettingsTotalFieldsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsTotalFieldsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsTotalFieldsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set
+	/// to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail
+	/// with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.
+	/// Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.
+	/// The fields that were not added to the mapping will be added to the _ignored field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor IgnoreDynamicBeyondLimit(Elastic.Clients.Elasticsearch.Union<bool, string>? value)
+	{
+		Instance.IgnoreDynamicBeyondLimit = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.
+	/// The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance
+	/// degradations and memory issues, especially in clusters with a high load or few resources.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor Limit(Elastic.Clients.Elasticsearch.Union<long, string>? value)
+	{
+		Instance.Limit = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

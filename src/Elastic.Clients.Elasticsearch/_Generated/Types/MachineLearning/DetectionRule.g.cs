@@ -17,67 +17,171 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DetectionRuleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
+	private static readonly System.Text.Json.JsonEncodedText PropConditions = System.Text.Json.JsonEncodedText.Encode("conditions");
+	private static readonly System.Text.Json.JsonEncodedText PropScope = System.Text.Json.JsonEncodedText.Encode("scope");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>?> propActions = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>?> propConditions = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>?> propScope = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActions.TryReadProperty(ref reader, options, PropActions, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>(o, null)))
+			{
+				continue;
+			}
+
+			if (propConditions.TryReadProperty(ref reader, options, PropConditions, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>(o, null)))
+			{
+				continue;
+			}
+
+			if (propScope.TryReadProperty(ref reader, options, PropScope, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Actions = propActions.Value,
+			Conditions = propConditions.Value,
+			Scope = propScope.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActions, value.Actions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>(o, v, null));
+		writer.WriteProperty(options, PropConditions, value.Conditions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>(o, v, null));
+		writer.WriteProperty(options, PropScope, value.Scope, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleConverter))]
 public sealed partial class DetectionRule
 {
+#if NET7_0_OR_GREATER
+	public DetectionRule()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DetectionRule()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DetectionRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("actions")]
-	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? Actions { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? Actions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("conditions")]
-	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? Conditions { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? Conditions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scope")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>? Scope { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>? Scope { get; set; }
 }
 
-public sealed partial class DetectionRuleDescriptor<TDocument> : SerializableDescriptor<DetectionRuleDescriptor<TDocument>>
+public readonly partial struct DetectionRuleDescriptor<TDocument>
 {
-	internal DetectionRuleDescriptor(Action<DetectionRuleDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule Instance { get; init; }
 
-	public DetectionRuleDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectionRuleDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? ActionsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? ConditionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor ConditionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor> ConditionsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor>[] ConditionsDescriptorActions { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor> ScopeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectionRuleDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
 	/// </para>
 	/// </summary>
-	public DetectionRuleDescriptor<TDocument> Actions(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? actions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Actions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? value)
 	{
-		ActionsValue = actions;
-		return Self;
+		Instance.Actions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Actions()
+	{
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction>? action)
+	{
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Actions(params Elastic.Clients.Elasticsearch.MachineLearning.RuleAction[] values)
+	{
+		Instance.Actions = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -85,40 +189,60 @@ public sealed partial class DetectionRuleDescriptor<TDocument> : SerializableDes
 	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
 	/// </para>
 	/// </summary>
-	public DetectionRuleDescriptor<TDocument> Conditions(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? conditions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Conditions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? value)
 	{
-		ConditionsDescriptor = null;
-		ConditionsDescriptorAction = null;
-		ConditionsDescriptorActions = null;
-		ConditionsValue = conditions;
-		return Self;
+		Instance.Conditions = value;
+		return this;
 	}
 
-	public DetectionRuleDescriptor<TDocument> Conditions(Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Conditions()
 	{
-		ConditionsValue = null;
-		ConditionsDescriptorAction = null;
-		ConditionsDescriptorActions = null;
-		ConditionsDescriptor = descriptor;
-		return Self;
+		Instance.Conditions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition.Build(null);
+		return this;
 	}
 
-	public DetectionRuleDescriptor<TDocument> Conditions(Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Conditions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition>? action)
 	{
-		ConditionsValue = null;
-		ConditionsDescriptor = null;
-		ConditionsDescriptorActions = null;
-		ConditionsDescriptorAction = configure;
-		return Self;
+		Instance.Conditions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition.Build(action);
+		return this;
 	}
 
-	public DetectionRuleDescriptor<TDocument> Conditions(params Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Conditions(params Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition[] values)
 	{
-		ConditionsValue = null;
-		ConditionsDescriptor = null;
-		ConditionsDescriptorAction = null;
-		ConditionsDescriptorActions = configure;
-		return Self;
+		Instance.Conditions = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Conditions(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor.Build(action));
+		}
+
+		Instance.Conditions = items;
+		return this;
 	}
 
 	/// <summary>
@@ -126,86 +250,137 @@ public sealed partial class DetectionRuleDescriptor<TDocument> : SerializableDes
 	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	public DetectionRuleDescriptor<TDocument> Scope(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Scope(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>? value)
 	{
-		ScopeValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>());
-		return Self;
+		Instance.Scope = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Scope()
 	{
-		writer.WriteStartObject();
-		if (ActionsValue is not null)
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Scope(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<TDocument>>? action)
+	{
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> AddScope(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef value)
+	{
+		Instance.Scope ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>();
+		Instance.Scope.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> AddScope(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef value)
+	{
+		Instance.Scope ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>();
+		Instance.Scope.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> AddScope(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor> action)
+	{
+		Instance.Scope ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>();
+		Instance.Scope.Add(key, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> AddScope(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor> action)
+	{
+		Instance.Scope ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>();
+		Instance.Scope.Add(key, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, ActionsValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ConditionsDescriptor is not null)
-		{
-			writer.WritePropertyName("conditions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ConditionsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ConditionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("conditions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor(ConditionsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ConditionsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("conditions");
-			writer.WriteStartArray();
-			foreach (var action in ConditionsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (ConditionsValue is not null)
-		{
-			writer.WritePropertyName("conditions");
-			JsonSerializer.Serialize(writer, ConditionsValue, options);
-		}
-
-		if (ScopeValue is not null)
-		{
-			writer.WritePropertyName("scope");
-			JsonSerializer.Serialize(writer, ScopeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DetectionRuleDescriptor : SerializableDescriptor<DetectionRuleDescriptor>
+public readonly partial struct DetectionRuleDescriptor
 {
-	internal DetectionRuleDescriptor(Action<DetectionRuleDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule Instance { get; init; }
 
-	public DetectionRuleDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectionRuleDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? ActionsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? ConditionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor ConditionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor> ConditionsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor>[] ConditionsDescriptorActions { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor> ScopeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectionRuleDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
 	/// </para>
 	/// </summary>
-	public DetectionRuleDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? actions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Actions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>? value)
 	{
-		ActionsValue = actions;
-		return Self;
+		Instance.Actions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Actions()
+	{
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction>? action)
+	{
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Actions(params Elastic.Clients.Elasticsearch.MachineLearning.RuleAction[] values)
+	{
+		Instance.Actions = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -213,40 +388,60 @@ public sealed partial class DetectionRuleDescriptor : SerializableDescriptor<Det
 	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
 	/// </para>
 	/// </summary>
-	public DetectionRuleDescriptor Conditions(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? conditions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Conditions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? value)
 	{
-		ConditionsDescriptor = null;
-		ConditionsDescriptorAction = null;
-		ConditionsDescriptorActions = null;
-		ConditionsValue = conditions;
-		return Self;
+		Instance.Conditions = value;
+		return this;
 	}
 
-	public DetectionRuleDescriptor Conditions(Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Conditions()
 	{
-		ConditionsValue = null;
-		ConditionsDescriptorAction = null;
-		ConditionsDescriptorActions = null;
-		ConditionsDescriptor = descriptor;
-		return Self;
+		Instance.Conditions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition.Build(null);
+		return this;
 	}
 
-	public DetectionRuleDescriptor Conditions(Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Conditions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition>? action)
 	{
-		ConditionsValue = null;
-		ConditionsDescriptor = null;
-		ConditionsDescriptorActions = null;
-		ConditionsDescriptorAction = configure;
-		return Self;
+		Instance.Conditions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition.Build(action);
+		return this;
 	}
 
-	public DetectionRuleDescriptor Conditions(params Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Conditions(params Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition[] values)
 	{
-		ConditionsValue = null;
-		ConditionsDescriptor = null;
-		ConditionsDescriptorAction = null;
-		ConditionsDescriptorActions = configure;
-		return Self;
+		Instance.Conditions = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Conditions(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor.Build(action));
+		}
+
+		Instance.Conditions = items;
+		return this;
 	}
 
 	/// <summary>
@@ -254,58 +449,83 @@ public sealed partial class DetectionRuleDescriptor : SerializableDescriptor<Det
 	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	public DetectionRuleDescriptor Scope(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Scope(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>? value)
 	{
-		ScopeValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor>());
-		return Self;
+		Instance.Scope = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Scope()
 	{
-		writer.WriteStartObject();
-		if (ActionsValue is not null)
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Scope(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef>? action)
+	{
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Scope<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<T>>? action)
+	{
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor AddScope(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef value)
+	{
+		Instance.Scope ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>();
+		Instance.Scope.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor AddScope<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef value)
+	{
+		Instance.Scope ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>();
+		Instance.Scope.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor AddScope(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor> action)
+	{
+		Instance.Scope ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>();
+		Instance.Scope.Add(key, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor AddScope<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor> action)
+	{
+		Instance.Scope ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>();
+		Instance.Scope.Add(key, Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, ActionsValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ConditionsDescriptor is not null)
-		{
-			writer.WritePropertyName("conditions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ConditionsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ConditionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("conditions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor(ConditionsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ConditionsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("conditions");
-			writer.WriteStartArray();
-			foreach (var action in ConditionsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (ConditionsValue is not null)
-		{
-			writer.WritePropertyName("conditions");
-			JsonSerializer.Serialize(writer, ConditionsValue, options);
-		}
-
-		if (ScopeValue is not null)
-		{
-			writer.WritePropertyName("scope");
-			JsonSerializer.Serialize(writer, ScopeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

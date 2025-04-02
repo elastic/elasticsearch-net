@@ -17,32 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
+internal sealed partial class ContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.Context>
+{
+	public override Elastic.Clients.Elasticsearch.Core.Search.Context Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT1(ref r, o, "dummy");
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Core.Search.Context(reader.ReadValue<string>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Core.Search.Context(reader.ReadValue<Elastic.Clients.Elasticsearch.GeoLocation>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.Context)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.Context value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
+	}
+}
 
 /// <summary>
 /// <para>
 /// Text or location that we want similar documents for or a lookup to a document's field for the text.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-public sealed partial class Context : Union<string, Elastic.Clients.Elasticsearch.GeoLocation>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.ContextConverter))]
+public sealed partial class Context : Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.GeoLocation>
 {
-	public Context(string Category) : base(Category)
+	public Context(string value) : base(value)
 	{
 	}
 
-	public Context(Elastic.Clients.Elasticsearch.GeoLocation Location) : base(Location)
+	public Context(Elastic.Clients.Elasticsearch.GeoLocation value) : base(value)
 	{
+	}
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Context(string value) => new Elastic.Clients.Elasticsearch.Core.Search.Context(value);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Context(Elastic.Clients.Elasticsearch.GeoLocation value) => new Elastic.Clients.Elasticsearch.Core.Search.Context(value);
+}
+
+public readonly partial struct ContextBuilder
+{
+	public Elastic.Clients.Elasticsearch.Core.Search.Context Category(string value)
+	{
+		return new Elastic.Clients.Elasticsearch.Core.Search.Context(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.Context Location(Elastic.Clients.Elasticsearch.GeoLocation value)
+	{
+		return new Elastic.Clients.Elasticsearch.Core.Search.Context(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.Context Location(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	{
+		return new Elastic.Clients.Elasticsearch.Core.Search.Context(Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action));
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.Context Build(System.Func<Elastic.Clients.Elasticsearch.Core.Search.ContextBuilder, Elastic.Clients.Elasticsearch.Core.Search.Context> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.ContextBuilder();
+		return action.Invoke(builder);
 	}
 }

@@ -17,39 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class CgroupCpuStatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfElapsedPeriods = System.Text.Json.JsonEncodedText.Encode("number_of_elapsed_periods");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfTimesThrottled = System.Text.Json.JsonEncodedText.Encode("number_of_times_throttled");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeThrottledNanos = System.Text.Json.JsonEncodedText.Encode("time_throttled_nanos");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propNumberOfElapsedPeriods = default;
+		LocalJsonValue<long?> propNumberOfTimesThrottled = default;
+		LocalJsonValue<System.TimeSpan?> propTimeThrottledNanos = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNumberOfElapsedPeriods.TryReadProperty(ref reader, options, PropNumberOfElapsedPeriods, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfTimesThrottled.TryReadProperty(ref reader, options, PropNumberOfTimesThrottled, null))
+			{
+				continue;
+			}
+
+			if (propTimeThrottledNanos.TryReadProperty(ref reader, options, PropTimeThrottledNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			NumberOfElapsedPeriods = propNumberOfElapsedPeriods.Value,
+			NumberOfTimesThrottled = propNumberOfTimesThrottled.Value,
+			TimeThrottledNanos = propTimeThrottledNanos.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNumberOfElapsedPeriods, value.NumberOfElapsedPeriods, null, null);
+		writer.WriteProperty(options, PropNumberOfTimesThrottled, value.NumberOfTimesThrottled, null, null);
+		writer.WriteProperty(options, PropTimeThrottledNanos, value.TimeThrottledNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStatConverter))]
 public sealed partial class CgroupCpuStat
 {
+#if NET7_0_OR_GREATER
+	public CgroupCpuStat()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CgroupCpuStat()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CgroupCpuStat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The number of reporting periods (as specified by <c>cfs_period_micros</c>) that have elapsed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_elapsed_periods")]
-	public long? NumberOfElapsedPeriods { get; init; }
+	public long? NumberOfElapsedPeriods { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of times all tasks in the same cgroup as the Elasticsearch process have been throttled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_times_throttled")]
-	public long? NumberOfTimesThrottled { get; init; }
+	public long? NumberOfTimesThrottled { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total amount of time, in nanoseconds, for which all tasks in the same cgroup as the Elasticsearch process have been throttled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_throttled_nanos")]
-	public long? TimeThrottledNanos { get; init; }
+	public System.TimeSpan? TimeThrottledNanos { get; set; }
 }

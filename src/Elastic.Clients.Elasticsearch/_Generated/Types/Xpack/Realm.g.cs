@@ -17,36 +17,174 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class RealmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Realm>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropCache = System.Text.Json.JsonEncodedText.Encode("cache");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropHasAuthorizationRealms = System.Text.Json.JsonEncodedText.Encode("has_authorization_realms");
+	private static readonly System.Text.Json.JsonEncodedText PropHasDefaultUsernamePattern = System.Text.Json.JsonEncodedText.Encode("has_default_username_pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropHasTruststore = System.Text.Json.JsonEncodedText.Encode("has_truststore");
+	private static readonly System.Text.Json.JsonEncodedText PropIsAuthenticationDelegated = System.Text.Json.JsonEncodedText.Encode("is_authentication_delegated");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.Realm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAvailable = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.RealmCache>?> propCache = default;
+		LocalJsonValue<bool> propEnabled = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<bool>?> propHasAuthorizationRealms = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<bool>?> propHasDefaultUsernamePattern = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<bool>?> propHasTruststore = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<bool>?> propIsAuthenticationDelegated = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propName = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<long>?> propOrder = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<long>?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propCache.TryReadProperty(ref reader, options, PropCache, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.RealmCache>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Xpack.RealmCache>(o, null)))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propHasAuthorizationRealms.TryReadProperty(ref reader, options, PropHasAuthorizationRealms, static System.Collections.Generic.IReadOnlyCollection<bool>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<bool>(o, null)))
+			{
+				continue;
+			}
+
+			if (propHasDefaultUsernamePattern.TryReadProperty(ref reader, options, PropHasDefaultUsernamePattern, static System.Collections.Generic.IReadOnlyCollection<bool>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<bool>(o, null)))
+			{
+				continue;
+			}
+
+			if (propHasTruststore.TryReadProperty(ref reader, options, PropHasTruststore, static System.Collections.Generic.IReadOnlyCollection<bool>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<bool>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIsAuthenticationDelegated.TryReadProperty(ref reader, options, PropIsAuthenticationDelegated, static System.Collections.Generic.IReadOnlyCollection<bool>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<bool>(o, null)))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static System.Collections.Generic.IReadOnlyCollection<long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<long>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static System.Collections.Generic.IReadOnlyCollection<long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<long>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.Realm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Available = propAvailable.Value,
+			Cache = propCache.Value,
+			Enabled = propEnabled.Value,
+			HasAuthorizationRealms = propHasAuthorizationRealms.Value,
+			HasDefaultUsernamePattern = propHasDefaultUsernamePattern.Value,
+			HasTruststore = propHasTruststore.Value,
+			IsAuthenticationDelegated = propIsAuthenticationDelegated.Value,
+			Name = propName.Value,
+			Order = propOrder.Value,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.Realm value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropCache, value.Cache, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.RealmCache>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Xpack.RealmCache>(o, v, null));
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropHasAuthorizationRealms, value.HasAuthorizationRealms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<bool>? v) => w.WriteCollectionValue<bool>(o, v, null));
+		writer.WriteProperty(options, PropHasDefaultUsernamePattern, value.HasDefaultUsernamePattern, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<bool>? v) => w.WriteCollectionValue<bool>(o, v, null));
+		writer.WriteProperty(options, PropHasTruststore, value.HasTruststore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<bool>? v) => w.WriteCollectionValue<bool>(o, v, null));
+		writer.WriteProperty(options, PropIsAuthenticationDelegated, value.IsAuthenticationDelegated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<bool>? v) => w.WriteCollectionValue<bool>(o, v, null));
+		writer.WriteProperty(options, PropName, value.Name, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<long>? v) => w.WriteCollectionValue<long>(o, v, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<long>? v) => w.WriteCollectionValue<long>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.RealmConverter))]
 public sealed partial class Realm
 {
-	[JsonInclude, JsonPropertyName("available")]
-	public bool Available { get; init; }
-	[JsonInclude, JsonPropertyName("cache")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.RealmCache>? Cache { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("has_authorization_realms")]
-	public IReadOnlyCollection<bool>? HasAuthorizationRealms { get; init; }
-	[JsonInclude, JsonPropertyName("has_default_username_pattern")]
-	public IReadOnlyCollection<bool>? HasDefaultUsernamePattern { get; init; }
-	[JsonInclude, JsonPropertyName("has_truststore")]
-	public IReadOnlyCollection<bool>? HasTruststore { get; init; }
-	[JsonInclude, JsonPropertyName("is_authentication_delegated")]
-	public IReadOnlyCollection<bool>? IsAuthenticationDelegated { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public IReadOnlyCollection<string>? Name { get; init; }
-	[JsonInclude, JsonPropertyName("order")]
-	public IReadOnlyCollection<long>? Order { get; init; }
-	[JsonInclude, JsonPropertyName("size")]
-	public IReadOnlyCollection<long>? Size { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Realm(bool available, bool enabled)
+	{
+		Available = available;
+		Enabled = enabled;
+	}
+#if NET7_0_OR_GREATER
+	public Realm()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Realm()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Realm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Available { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.RealmCache>? Cache { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<bool>? HasAuthorizationRealms { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<bool>? HasDefaultUsernamePattern { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<bool>? HasTruststore { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<bool>? IsAuthenticationDelegated { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? Name { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<long>? Order { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<long>? Size { get; set; }
 }

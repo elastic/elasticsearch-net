@@ -17,26 +17,126 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+internal sealed partial class QueryRuleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
+	private static readonly System.Text.Json.JsonEncodedText PropCriteria = System.Text.Json.JsonEncodedText.Encode("criteria");
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
+	private static readonly System.Text.Json.JsonEncodedText PropRuleId = System.Text.Json.JsonEncodedText.Encode("rule_id");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.QueryRules.QueryRule Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions> propActions = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>> propCriteria = default;
+		LocalJsonValue<int?> propPriority = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propRuleId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActions.TryReadProperty(ref reader, options, PropActions, null))
+			{
+				continue;
+			}
+
+			if (propCriteria.TryReadProperty(ref reader, options, PropCriteria, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
+			{
+				continue;
+			}
+
+			if (propRuleId.TryReadProperty(ref reader, options, PropRuleId, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryRules.QueryRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Actions = propActions.Value,
+			Criteria = propCriteria.Value,
+			Priority = propPriority.Value,
+			RuleId = propRuleId.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryRules.QueryRule value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActions, value.Actions, null, null);
+		writer.WriteProperty(options, PropCriteria, value.Criteria, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>(o, v, null));
+		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteProperty(options, PropRuleId, value.RuleId, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleConverter))]
 public sealed partial class QueryRule
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryRule(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions actions, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> criteria, Elastic.Clients.Elasticsearch.Id ruleId, Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType type)
+	{
+		Actions = actions;
+		Criteria = criteria;
+		RuleId = ruleId;
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public QueryRule()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public QueryRule()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal QueryRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The actions to take when the rule is matched.
 	/// The format of this action depends on the rule type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("actions")]
-	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -44,10 +144,11 @@ public sealed partial class QueryRule
 	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("criteria")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
-	[JsonInclude, JsonPropertyName("priority")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
 	public int? Priority { get; set; }
 
 	/// <summary>
@@ -55,8 +156,11 @@ public sealed partial class QueryRule
 	/// A unique identifier for the rule.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rule_id")]
-	public Elastic.Clients.Elasticsearch.Id RuleId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id RuleId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -65,28 +169,31 @@ public sealed partial class QueryRule
 	/// <c>exclude</c> will exclude specific documents from search results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }
 
-public sealed partial class QueryRuleDescriptor : SerializableDescriptor<QueryRuleDescriptor>
+public readonly partial struct QueryRuleDescriptor
 {
-	internal QueryRuleDescriptor(Action<QueryRuleDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryRules.QueryRule Instance { get; init; }
 
-	public QueryRuleDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryRuleDescriptor(Elastic.Clients.Elasticsearch.QueryRules.QueryRule instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions ActionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor ActionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor> ActionsDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> CriteriaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor CriteriaDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor> CriteriaDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor>[] CriteriaDescriptorActions { get; set; }
-	private int? PriorityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Id RuleIdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType TypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryRuleDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryRules.QueryRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor(Elastic.Clients.Elasticsearch.QueryRules.QueryRule instance) => new Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.QueryRule(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -94,28 +201,34 @@ public sealed partial class QueryRuleDescriptor : SerializableDescriptor<QueryRu
 	/// The format of this action depends on the rule type.
 	/// </para>
 	/// </summary>
-	public QueryRuleDescriptor Actions(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions actions)
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Actions(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions value)
 	{
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = null;
-		ActionsValue = actions;
-		return Self;
+		Instance.Actions = value;
+		return this;
 	}
 
-	public QueryRuleDescriptor Actions(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The actions to take when the rule is matched.
+	/// The format of this action depends on the rule type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Actions()
 	{
-		ActionsValue = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptor = descriptor;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor.Build(null);
+		return this;
 	}
 
-	public QueryRuleDescriptor Actions(Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The actions to take when the rule is matched.
+	/// The format of this action depends on the rule type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor>? action)
 	{
-		ActionsValue = null;
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = configure;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -124,46 +237,70 @@ public sealed partial class QueryRuleDescriptor : SerializableDescriptor<QueryRu
 	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
 	/// </para>
 	/// </summary>
-	public QueryRuleDescriptor Criteria(ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> criteria)
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Criteria(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> value)
 	{
-		CriteriaDescriptor = null;
-		CriteriaDescriptorAction = null;
-		CriteriaDescriptorActions = null;
-		CriteriaValue = criteria;
-		return Self;
+		Instance.Criteria = value;
+		return this;
 	}
 
-	public QueryRuleDescriptor Criteria(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The criteria that must be met for the rule to be applied.
+	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Criteria()
 	{
-		CriteriaValue = null;
-		CriteriaDescriptorAction = null;
-		CriteriaDescriptorActions = null;
-		CriteriaDescriptor = descriptor;
-		return Self;
+		Instance.Criteria = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRuleCriteria.Build(null);
+		return this;
 	}
 
-	public QueryRuleDescriptor Criteria(Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The criteria that must be met for the rule to be applied.
+	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Criteria(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRuleCriteria>? action)
 	{
-		CriteriaValue = null;
-		CriteriaDescriptor = null;
-		CriteriaDescriptorActions = null;
-		CriteriaDescriptorAction = configure;
-		return Self;
+		Instance.Criteria = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRuleCriteria.Build(action);
+		return this;
 	}
 
-	public QueryRuleDescriptor Criteria(params Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// The criteria that must be met for the rule to be applied.
+	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Criteria(params Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria[] values)
 	{
-		CriteriaValue = null;
-		CriteriaDescriptor = null;
-		CriteriaDescriptorAction = null;
-		CriteriaDescriptorActions = configure;
-		return Self;
+		Instance.Criteria = [.. values];
+		return this;
 	}
 
-	public QueryRuleDescriptor Priority(int? priority)
+	/// <summary>
+	/// <para>
+	/// The criteria that must be met for the rule to be applied.
+	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Criteria(params System.Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor>[] actions)
 	{
-		PriorityValue = priority;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor.Build(action));
+		}
+
+		Instance.Criteria = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Priority(int? value)
+	{
+		Instance.Priority = value;
+		return this;
 	}
 
 	/// <summary>
@@ -171,10 +308,10 @@ public sealed partial class QueryRuleDescriptor : SerializableDescriptor<QueryRu
 	/// A unique identifier for the rule.
 	/// </para>
 	/// </summary>
-	public QueryRuleDescriptor RuleId(Elastic.Clients.Elasticsearch.Id ruleId)
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
 	{
-		RuleIdValue = ruleId;
-		return Self;
+		Instance.RuleId = value;
+		return this;
 	}
 
 	/// <summary>
@@ -184,70 +321,17 @@ public sealed partial class QueryRuleDescriptor : SerializableDescriptor<QueryRu
 	/// <c>exclude</c> will exclude specific documents from search results.
 	/// </para>
 	/// </summary>
-	public QueryRuleDescriptor Type(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType type)
+	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Type(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryRules.QueryRule Build(System.Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ActionsDescriptor is not null)
-		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, ActionsDescriptor, options);
-		}
-		else if (ActionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor(ActionsDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, ActionsValue, options);
-		}
-
-		if (CriteriaDescriptor is not null)
-		{
-			writer.WritePropertyName("criteria");
-			JsonSerializer.Serialize(writer, CriteriaDescriptor, options);
-		}
-		else if (CriteriaDescriptorAction is not null)
-		{
-			writer.WritePropertyName("criteria");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor(CriteriaDescriptorAction), options);
-		}
-		else if (CriteriaDescriptorActions is not null)
-		{
-			writer.WritePropertyName("criteria");
-			if (CriteriaDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in CriteriaDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor(action), options);
-			}
-
-			if (CriteriaDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("criteria");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>(CriteriaValue, writer, options);
-		}
-
-		if (PriorityValue.HasValue)
-		{
-			writer.WritePropertyName("priority");
-			writer.WriteNumberValue(PriorityValue.Value);
-		}
-
-		writer.WritePropertyName("rule_id");
-		JsonSerializer.Serialize(writer, RuleIdValue, options);
-		writer.WritePropertyName("type");
-		JsonSerializer.Serialize(writer, TypeValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor(new Elastic.Clients.Elasticsearch.QueryRules.QueryRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

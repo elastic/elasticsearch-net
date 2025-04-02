@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
-public sealed partial class MountRequestParameters : RequestParameters
+public sealed partial class MountRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -56,6 +49,72 @@ public sealed partial class MountRequestParameters : RequestParameters
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
+internal sealed partial class MountRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreIndexSettings = System.Text.Json.JsonEncodedText.Encode("ignore_index_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexSettings = System.Text.Json.JsonEncodedText.Encode("index_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropRenamedIndex = System.Text.Json.JsonEncodedText.Encode("renamed_index");
+
+	public override Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIgnoreIndexSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propIndexSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propRenamedIndex = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIgnoreIndexSettings.TryReadProperty(ref reader, options, PropIgnoreIndexSettings, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIndexSettings.TryReadProperty(ref reader, options, PropIndexSettings, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRenamedIndex.TryReadProperty(ref reader, options, PropRenamedIndex, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IgnoreIndexSettings = propIgnoreIndexSettings.Value,
+			Index = propIndex.Value,
+			IndexSettings = propIndexSettings.Value,
+			RenamedIndex = propRenamedIndex.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIgnoreIndexSettings, value.IgnoreIndexSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexSettings, value.IndexSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRenamedIndex, value.RenamedIndex, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Mount a snapshot.
@@ -64,19 +123,60 @@ public sealed partial class MountRequestParameters : RequestParameters
 /// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 /// </para>
 /// </summary>
-public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestConverter))]
+public sealed partial class MountRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MountRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchableSnapshotsMount;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MountRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+	{
+		Index = index;
+	}
+#if NET7_0_OR_GREATER
+	public MountRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MountRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SearchableSnapshotsMount;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "searchable_snapshots.mount";
+
+	/// <summary>
+	/// <para>
+	/// The name of the repository containing the snapshot of the index to mount.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot of the index to mount.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>
@@ -85,7 +185,6 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -93,7 +192,6 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 	/// The mount option for the searchable snapshot index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
 
 	/// <summary>
@@ -101,7 +199,6 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 	/// If true, the request blocks until the operation is complete.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 	/// <summary>
@@ -109,8 +206,7 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 	/// The names of settings that should be removed from the index when it is mounted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_index_settings")]
-	public ICollection<string>? IgnoreIndexSettings { get; set; }
+	public System.Collections.Generic.ICollection<string>? IgnoreIndexSettings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -118,23 +214,24 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 	/// If no <c>renamed_index</c> is specified, this name will also be used to create the new index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The settings that should be added to the index when it is mounted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_settings")]
-	public IDictionary<string, object>? IndexSettings { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? IndexSettings { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the index that will be created.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("renamed_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? RenamedIndex { get; set; }
 }
 
@@ -146,52 +243,131 @@ public sealed partial class MountRequest : PlainRequest<MountRequestParameters>
 /// Manually mounting ILM-managed snapshots can interfere with ILM processes.
 /// </para>
 /// </summary>
-public sealed partial class MountRequestDescriptor : RequestDescriptor<MountRequestDescriptor, MountRequestParameters>
+public readonly partial struct MountRequestDescriptor
 {
-	internal MountRequestDescriptor(Action<MountRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest Instance { get; init; }
 
-	public MountRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MountRequestDescriptor(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchableSnapshotsMount;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "searchable_snapshots.mount";
-
-	public MountRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public MountRequestDescriptor Storage(string? storage) => Qs("storage", storage);
-	public MountRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public MountRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name repository)
+	public MountRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
-		RouteValues.Required("repository", repository);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest(repository, snapshot);
+#pragma warning restore CS0618
 	}
 
-	public MountRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name snapshot)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MountRequestDescriptor()
 	{
-		RouteValues.Required("snapshot", snapshot);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private ICollection<string>? IgnoreIndexSettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private IDictionary<string, object>? IndexSettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? RenamedIndexValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest instance) => new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the repository containing the snapshot of the index to mount.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Repository = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot of the index to mount.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Snapshot = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The mount option for the searchable snapshot index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Storage(string? value)
+	{
+		Instance.Storage = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the request blocks until the operation is complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The names of settings that should be removed from the index when it is mounted.
 	/// </para>
 	/// </summary>
-	public MountRequestDescriptor IgnoreIndexSettings(ICollection<string>? ignoreIndexSettings)
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IgnoreIndexSettings(System.Collections.Generic.ICollection<string>? value)
 	{
-		IgnoreIndexSettingsValue = ignoreIndexSettings;
-		return Self;
+		Instance.IgnoreIndexSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The names of settings that should be removed from the index when it is mounted.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IgnoreIndexSettings()
+	{
+		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The names of settings that should be removed from the index when it is mounted.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IgnoreIndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The names of settings that should be removed from the index when it is mounted.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IgnoreIndexSettings(params string[] values)
+	{
+		Instance.IgnoreIndexSettings = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -200,10 +376,10 @@ public sealed partial class MountRequestDescriptor : RequestDescriptor<MountRequ
 	/// If no <c>renamed_index</c> is specified, this name will also be used to create the new index.
 	/// </para>
 	/// </summary>
-	public MountRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -211,10 +387,39 @@ public sealed partial class MountRequestDescriptor : RequestDescriptor<MountRequ
 	/// The settings that should be added to the index when it is mounted.
 	/// </para>
 	/// </summary>
-	public MountRequestDescriptor IndexSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IndexSettings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		IndexSettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.IndexSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The settings that should be added to the index when it is mounted.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IndexSettings()
+	{
+		Instance.IndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The settings that should be added to the index when it is mounted.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.IndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor AddIndexSetting(string key, object value)
+	{
+		Instance.IndexSettings ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.IndexSettings.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -222,35 +427,59 @@ public sealed partial class MountRequestDescriptor : RequestDescriptor<MountRequ
 	/// The name of the index that will be created.
 	/// </para>
 	/// </summary>
-	public MountRequestDescriptor RenamedIndex(Elastic.Clients.Elasticsearch.IndexName? renamedIndex)
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor RenamedIndex(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		RenamedIndexValue = renamedIndex;
-		return Self;
+		Instance.RenamedIndex = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (IgnoreIndexSettingsValue is not null)
-		{
-			writer.WritePropertyName("ignore_index_settings");
-			JsonSerializer.Serialize(writer, IgnoreIndexSettingsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (IndexSettingsValue is not null)
-		{
-			writer.WritePropertyName("index_settings");
-			JsonSerializer.Serialize(writer, IndexSettingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (RenamedIndexValue is not null)
-		{
-			writer.WritePropertyName("renamed_index");
-			JsonSerializer.Serialize(writer, RenamedIndexValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

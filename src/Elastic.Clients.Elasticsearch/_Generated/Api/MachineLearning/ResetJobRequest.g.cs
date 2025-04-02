@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class ResetJobRequestParameters : RequestParameters
+public sealed partial class ResetJobRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -50,6 +43,35 @@ public sealed partial class ResetJobRequestParameters : RequestParameters
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
+internal sealed partial class ResetJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Reset an anomaly detection job.
@@ -59,19 +81,42 @@ public sealed partial class ResetJobRequestParameters : RequestParameters
 /// comma separated list.
 /// </para>
 /// </summary>
-public sealed partial class ResetJobRequest : PlainRequest<ResetJobRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestConverter))]
+public sealed partial class ResetJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ResetJobRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ResetJobRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ResetJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningResetJob;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningResetJob;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.reset_job";
+
+	/// <summary>
+	/// <para>
+	/// The ID of the job to reset.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -80,7 +125,6 @@ public sealed partial class ResetJobRequest : PlainRequest<ResetJobRequestParame
 	/// reset.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? DeleteUserAnnotations { get => Q<bool?>("delete_user_annotations"); set => Q("delete_user_annotations", value); }
 
 	/// <summary>
@@ -89,7 +133,6 @@ public sealed partial class ResetJobRequest : PlainRequest<ResetJobRequestParame
 	/// returning.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
@@ -102,32 +145,113 @@ public sealed partial class ResetJobRequest : PlainRequest<ResetJobRequestParame
 /// comma separated list.
 /// </para>
 /// </summary>
-public sealed partial class ResetJobRequestDescriptor : RequestDescriptor<ResetJobRequestDescriptor, ResetJobRequestParameters>
+public readonly partial struct ResetJobRequestDescriptor
 {
-	internal ResetJobRequestDescriptor(Action<ResetJobRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest Instance { get; init; }
 
-	public ResetJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ResetJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningResetJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.reset_job";
-
-	public ResetJobRequestDescriptor DeleteUserAnnotations(bool? deleteUserAnnotations = true) => Qs("delete_user_annotations", deleteUserAnnotations);
-	public ResetJobRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public ResetJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public ResetJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest(jobId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ResetJobRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The ID of the job to reset.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether annotations that have been added by the
+	/// user should be deleted along with any auto-generated annotations when the job is
+	/// reset.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor DeleteUserAnnotations(bool? value = true)
+	{
+		Instance.DeleteUserAnnotations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Should this request wait until the operation has completed before
+	/// returning.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

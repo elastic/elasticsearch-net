@@ -18,763 +18,107 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Simulate;
 
-public partial class SimulateNamespacedClient : NamespacedClientProxy
+public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="SimulateNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Simulate.SimulateNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected SimulateNamespacedClient() : base()
 	{
 	}
 
-	internal SimulateNamespacedClient(ElasticsearchClient client) : base(client)
+	internal SimulateNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest(IngestRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.Simulate.IngestRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<IngestRequest, IngestResponse, IngestRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync(IngestRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.Simulate.IngestRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<IngestRequest, IngestResponse, IngestRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest<TDocument>(IngestRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action)
 	{
-		var descriptor = new IngestRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<IngestRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new IngestRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest<TDocument>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new IngestRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest<TDocument>(Action<IngestRequestDescriptor<TDocument>> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
 	{
-		var descriptor = new IngestRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest(IngestRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName? index)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new IngestRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName? index, Action<IngestRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new IngestRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest()
-	{
-		var descriptor = new IngestRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual IngestResponse Ingest(Action<IngestRequestDescriptor> configureRequest)
-	{
-		var descriptor = new IngestRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync<TDocument>(IngestRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new IngestRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<IngestRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new IngestRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new IngestRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync<TDocument>(Action<IngestRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new IngestRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor<TDocument>, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync(IngestRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new IngestRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName? index, Action<IngestRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new IngestRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new IngestRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Simulate data ingestion.
-	/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-	/// </para>
-	/// <para>
-	/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-	/// </para>
-	/// <para>
-	/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-	/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-	/// No data is indexed into Elasticsearch.
-	/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-	/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-	/// </para>
-	/// <para>
-	/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-	/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-	/// </para>
-	/// <para>
-	/// By default, the pipeline definitions that are currently in the system are used.
-	/// However, you can supply substitute pipeline definitions in the body of the request.
-	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<IngestResponse> IngestAsync(Action<IngestRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new IngestRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<IngestRequestDescriptor, IngestResponse, IngestRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 }

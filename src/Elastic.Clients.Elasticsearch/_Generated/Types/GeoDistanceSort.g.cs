@@ -17,453 +17,378 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class GeoDistanceSortConverter : JsonConverter<GeoDistanceSort>
+internal sealed partial class GeoDistanceSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GeoDistanceSort>
 {
-	public override GeoDistanceSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropDistanceType = System.Text.Json.JsonEncodedText.Encode("distance_type");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropUnit = System.Text.Json.JsonEncodedText.Encode("unit");
+
+	public override Elastic.Clients.Elasticsearch.GeoDistanceSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new GeoDistanceSort();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoDistanceType?> propDistanceType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<bool?> propIgnoreUnmapped = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation>> propLocation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortMode?> propMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NestedSortValue?> propNested = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.DistanceUnit?> propUnit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, null))
 			{
-				var property = reader.GetString();
-				if (property == "distance_type")
-				{
-					variant.DistanceType = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceType?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "ignore_unmapped")
-				{
-					variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "mode")
-				{
-					variant.Mode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortMode?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "nested")
-				{
-					variant.Nested = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.NestedSortValue?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "order")
-				{
-					variant.Order = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortOrder?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "unit")
-				{
-					variant.Unit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DistanceUnit?>(ref reader, options);
-					continue;
-				}
-
-				variant.Field = property;
-				reader.Read();
-				variant.Location = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.GeoLocation>>(ref reader, options);
+				continue;
 			}
+
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			{
+				continue;
+			}
+
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (propNested.TryReadProperty(ref reader, options, PropNested, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			{
+				continue;
+			}
+
+			if (propUnit.TryReadProperty(ref reader, options, PropUnit, null))
+			{
+				continue;
+			}
+
+			propField.Initialized = propLocation.Initialized = true;
+			reader.ReadProperty(options, out propField.Value, out propLocation.Value, null, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, null)!);
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.GeoDistanceSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DistanceType = propDistanceType.Value,
+			Field = propField.Value,
+			IgnoreUnmapped = propIgnoreUnmapped.Value,
+			Location = propLocation.Value,
+			Mode = propMode.Value,
+			Nested = propNested.Value,
+			Order = propOrder.Value,
+			Unit = propUnit.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, GeoDistanceSort value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.GeoDistanceSort value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Location is not null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-			{
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-			}
-
-			var propertyName = settings.Inferrer.Field(value.Field);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Location, options);
-		}
-
-		if (value.DistanceType is not null)
-		{
-			writer.WritePropertyName("distance_type");
-			JsonSerializer.Serialize(writer, value.DistanceType, options);
-		}
-
-		if (value.IgnoreUnmapped.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
-		}
-
-		if (value.Mode is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, value.Mode, options);
-		}
-
-		if (value.Nested is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, value.Nested, options);
-		}
-
-		if (value.Order is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, value.Order, options);
-		}
-
-		if (value.Unit is not null)
-		{
-			writer.WritePropertyName("unit");
-			JsonSerializer.Serialize(writer, value.Unit, options);
-		}
-
+		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNested, value.Nested, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropUnit, value.Unit, null, null);
+		writer.WriteProperty(options, value.Field, value.Location, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, v, null));
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(GeoDistanceSortConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.GeoDistanceSortConverter))]
 public sealed partial class GeoDistanceSort
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDistanceSort(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> location)
+	{
+		Field = field;
+		Location = location;
+	}
+#if NET7_0_OR_GREATER
+	public GeoDistanceSort()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeoDistanceSort()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoDistanceSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public bool? IgnoreUnmapped { get; set; }
-	public ICollection<Elastic.Clients.Elasticsearch.GeoLocation> Location { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> Location { get; set; }
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 	public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(GeoDistanceSort geoDistanceSort) => Elastic.Clients.Elasticsearch.SortOptions.GeoDistance(geoDistanceSort);
 }
 
-public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableDescriptor<GeoDistanceSortDescriptor<TDocument>>
+public readonly partial struct GeoDistanceSortDescriptor<TDocument>
 {
-	internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.GeoDistanceSort Instance { get; init; }
 
-	public GeoDistanceSortDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDistanceSortDescriptor(Elastic.Clients.Elasticsearch.GeoDistanceSort instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
-
-	public GeoDistanceSortDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDistanceSortDescriptor()
 	{
-		DistanceTypeValue = distanceType;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.GeoDistanceSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public GeoDistanceSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public static explicit operator Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument>(Elastic.Clients.Elasticsearch.GeoDistanceSort instance) => new Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoDistanceSort(Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.DistanceType = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor<TDocument> Location(ICollection<Elastic.Clients.Elasticsearch.GeoLocation> location)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Location(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> value)
 	{
-		LocationValue = location;
-		return Self;
+		Instance.Location = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Location()
 	{
-		ModeValue = mode;
-		return Self;
+		Instance.Location = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfGeoLocation.Build(null);
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Location(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfGeoLocation>? action)
 	{
-		NestedDescriptor = null;
-		NestedDescriptorAction = null;
-		NestedValue = nested;
-		return Self;
+		Instance.Location = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfGeoLocation.Build(action);
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Location(params Elastic.Clients.Elasticsearch.GeoLocation[] values)
 	{
-		NestedValue = null;
-		NestedDescriptorAction = null;
-		NestedDescriptor = descriptor;
-		return Self;
+		Instance.Location = [.. values];
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Location(params System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation>[] actions)
 	{
-		NestedValue = null;
-		NestedDescriptor = null;
-		NestedDescriptorAction = configure;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
-	{
-		OrderValue = order;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
-	{
-		UnitValue = unit;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && LocationValue is not null)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.GeoLocation>();
+		foreach (var action in actions)
 		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, LocationValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action));
 		}
 
-		if (DistanceTypeValue is not null)
-		{
-			writer.WritePropertyName("distance_type");
-			JsonSerializer.Serialize(writer, DistanceTypeValue, options);
-		}
+		Instance.Location = items;
+		return this;
+	}
 
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? value)
+	{
+		Instance.Mode = value;
+		return this;
+	}
 
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? value)
+	{
+		Instance.Nested = value;
+		return this;
+	}
 
-		if (NestedDescriptor is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedDescriptor, options);
-		}
-		else if (NestedDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
-		}
-		else if (NestedValue is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Nested(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> action)
+	{
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? value)
+	{
+		Instance.Order = value;
+		return this;
+	}
 
-		if (UnitValue is not null)
-		{
-			writer.WritePropertyName("unit");
-			JsonSerializer.Serialize(writer, UnitValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? value)
+	{
+		Instance.Unit = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.GeoDistanceSort Build(System.Action<Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.GeoDistanceSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptor<GeoDistanceSortDescriptor>
+public readonly partial struct GeoDistanceSortDescriptor
 {
-	internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.GeoDistanceSort Instance { get; init; }
 
-	public GeoDistanceSortDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDistanceSortDescriptor(Elastic.Clients.Elasticsearch.GeoDistanceSort instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor NestedDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
-
-	public GeoDistanceSortDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDistanceSortDescriptor()
 	{
-		DistanceTypeValue = distanceType;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.GeoDistanceSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public GeoDistanceSortDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public static explicit operator Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor(Elastic.Clients.Elasticsearch.GeoDistanceSort instance) => new Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoDistanceSort(Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.DistanceType = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor Location(ICollection<Elastic.Clients.Elasticsearch.GeoLocation> location)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Location(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> value)
 	{
-		LocationValue = location;
-		return Self;
+		Instance.Location = value;
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Location()
 	{
-		ModeValue = mode;
-		return Self;
+		Instance.Location = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfGeoLocation.Build(null);
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Location(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfGeoLocation>? action)
 	{
-		NestedDescriptor = null;
-		NestedDescriptorAction = null;
-		NestedValue = nested;
-		return Self;
+		Instance.Location = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfGeoLocation.Build(action);
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Location(params Elastic.Clients.Elasticsearch.GeoLocation[] values)
 	{
-		NestedValue = null;
-		NestedDescriptorAction = null;
-		NestedDescriptor = descriptor;
-		return Self;
+		Instance.Location = [.. values];
+		return this;
 	}
 
-	public GeoDistanceSortDescriptor Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Location(params System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation>[] actions)
 	{
-		NestedValue = null;
-		NestedDescriptor = null;
-		NestedDescriptorAction = configure;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
-	{
-		OrderValue = order;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit)
-	{
-		UnitValue = unit;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && LocationValue is not null)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.GeoLocation>();
+		foreach (var action in actions)
 		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, LocationValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action));
 		}
 
-		if (DistanceTypeValue is not null)
-		{
-			writer.WritePropertyName("distance_type");
-			JsonSerializer.Serialize(writer, DistanceTypeValue, options);
-		}
+		Instance.Location = items;
+		return this;
+	}
 
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? value)
+	{
+		Instance.Mode = value;
+		return this;
+	}
 
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? value)
+	{
+		Instance.Nested = value;
+		return this;
+	}
 
-		if (NestedDescriptor is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedDescriptor, options);
-		}
-		else if (NestedDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(NestedDescriptorAction), options);
-		}
-		else if (NestedValue is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Nested(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> action)
+	{
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor.Build(action);
+		return this;
+	}
 
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Nested<T>(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<T>> action)
+	{
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<T>.Build(action);
+		return this;
+	}
 
-		if (UnitValue is not null)
-		{
-			writer.WritePropertyName("unit");
-			JsonSerializer.Serialize(writer, UnitValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? value)
+	{
+		Instance.Order = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor Unit(Elastic.Clients.Elasticsearch.DistanceUnit? value)
+	{
+		Instance.Unit = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.GeoDistanceSort Build(System.Action<Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor(new Elastic.Clients.Elasticsearch.GeoDistanceSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

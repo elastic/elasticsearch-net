@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class UpdateByQueryRequestParameters : RequestParameters
+public sealed partial class UpdateByQueryRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -81,11 +74,11 @@ public sealed partial class UpdateByQueryRequestParameters : RequestParameters
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
-	/// Starting offset (default: 0)
+	/// Skips the specified number of documents.
 	/// </para>
 	/// </summary>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
@@ -200,14 +193,14 @@ public sealed partial class UpdateByQueryRequestParameters : RequestParameters
 	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? Sort { get => Q<ICollection<string>?>("sort"); set => Q("sort", value); }
+	public System.Collections.Generic.ICollection<string>? Sort { get => Q<System.Collections.Generic.ICollection<string>?>("sort"); set => Q("sort", value); }
 
 	/// <summary>
 	/// <para>
 	/// The specific <c>tag</c> of the request for logging and statistical purposes.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? Stats { get => Q<ICollection<string>?>("stats"); set => Q("stats", value); }
+	public System.Collections.Generic.ICollection<string>? Stats { get => Q<System.Collections.Generic.ICollection<string>?>("stats"); set => Q("stats", value); }
 
 	/// <summary>
 	/// <para>
@@ -266,6 +259,81 @@ public sealed partial class UpdateByQueryRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+}
+
+internal sealed partial class UpdateByQueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.UpdateByQueryRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropConflicts = System.Text.Json.JsonEncodedText.Encode("conflicts");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice");
+
+	public override Elastic.Clients.Elasticsearch.UpdateByQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Conflicts?> propConflicts = default;
+		LocalJsonValue<long?> propMaxDocs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propConflicts.TryReadProperty(ref reader, options, PropConflicts, null))
+			{
+				continue;
+			}
+
+			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propSlice.TryReadProperty(ref reader, options, PropSlice, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.UpdateByQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Conflicts = propConflicts.Value,
+			MaxDocs = propMaxDocs.Value,
+			Query = propQuery.Value,
+			Script = propScript.Value,
+			Slice = propSlice.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.UpdateByQueryRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, null);
+		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -426,19 +494,44 @@ public sealed partial class UpdateByQueryRequestParameters : RequestParameters
 /// This API enables you to only modify the source of matching documents; you cannot move them.
 /// </para>
 /// </summary>
-public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.UpdateByQueryRequestConverter))]
+public sealed partial class UpdateByQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateByQueryRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public UpdateByQueryRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateByQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQuery;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceUpdateByQuery;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "update_by_query";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -447,7 +540,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -456,7 +548,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
@@ -465,7 +556,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
@@ -474,7 +564,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
@@ -483,7 +572,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
@@ -494,15 +582,13 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
-	/// Starting offset (default: 0)
+	/// Skips the specified number of documents.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -510,7 +596,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -519,7 +604,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
@@ -529,7 +613,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
@@ -538,7 +621,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// It is random by default.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
@@ -546,7 +628,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// A query in the Lucene query string syntax.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
@@ -555,7 +636,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// This is different than the update API's <c>refresh</c> parameter, which causes just the shard that received the request to be refreshed.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
@@ -564,7 +644,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// It defaults to the index-level setting.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 	/// <summary>
@@ -572,7 +651,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The throttle for this request in sub-requests per second.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 	/// <summary>
@@ -580,7 +658,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -588,7 +665,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The period to retain the search context for scrolling.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
@@ -596,7 +672,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The size of the scroll request that powers the operation.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
 	/// <summary>
@@ -605,7 +680,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// By default, there is no timeout.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
 
 	/// <summary>
@@ -613,7 +687,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The type of the search operation. Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
@@ -621,7 +694,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The number of slices this task should be divided into.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	/// <summary>
@@ -629,16 +701,14 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<string>? Sort { get => Q<ICollection<string>?>("sort"); set => Q("sort", value); }
+	public System.Collections.Generic.ICollection<string>? Sort { get => Q<System.Collections.Generic.ICollection<string>?>("sort"); set => Q("sort", value); }
 
 	/// <summary>
 	/// <para>
 	/// The specific <c>tag</c> of the request for logging and statistical purposes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<string>? Stats { get => Q<ICollection<string>?>("stats"); set => Q("stats", value); }
+	public System.Collections.Generic.ICollection<string>? Stats { get => Q<System.Collections.Generic.ICollection<string>?>("stats"); set => Q("stats", value); }
 
 	/// <summary>
 	/// <para>
@@ -653,7 +723,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 	/// <summary>
@@ -664,7 +733,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -672,7 +740,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// If <c>true</c>, returns the document version as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 
 	/// <summary>
@@ -680,7 +747,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// Should the document increment the version number (internal) on hit or not (reindex)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? VersionType { get => Q<bool?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
@@ -691,7 +757,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// Both work exactly the way they work in the bulk API.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
@@ -701,7 +766,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 	/// <summary>
@@ -709,7 +773,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The preferred behavior when update by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("conflicts")]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
 
 	/// <summary>
@@ -717,7 +780,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The maximum number of documents to update.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
 
 	/// <summary>
@@ -725,7 +787,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The documents to update using the Query DSL.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
@@ -733,7 +794,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// The script to run to update the document source or metadata when updating.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
@@ -741,7 +801,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// Slice the request manually using the provided slice ID and total number of slices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 }
 
@@ -903,83 +962,522 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 /// This API enables you to only modify the source of matching documents; you cannot move them.
 /// </para>
 /// </summary>
-public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestDescriptor<UpdateByQueryRequestDescriptor<TDocument>, UpdateByQueryRequestParameters>
+public readonly partial struct UpdateByQueryRequestDescriptor
 {
-	internal UpdateByQueryRequestDescriptor(Action<UpdateByQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.UpdateByQueryRequest Instance { get; init; }
 
-	public UpdateByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.UpdateByQueryRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public UpdateByQueryRequestDescriptor() : this(typeof(TDocument))
+	public UpdateByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.UpdateByQueryRequest(indices);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQuery;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "update_by_query";
-
-	public UpdateByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public UpdateByQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-	public UpdateByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
-	public UpdateByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-	public UpdateByQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-	public UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public UpdateByQueryRequestDescriptor<TDocument> From(long? from) => Qs("from", from);
-	public UpdateByQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public UpdateByQueryRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
-	public UpdateByQueryRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-	public UpdateByQueryRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public UpdateByQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
-	public UpdateByQueryRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
-	public UpdateByQueryRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
-	public UpdateByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-	public UpdateByQueryRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public UpdateByQueryRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-	public UpdateByQueryRequestDescriptor<TDocument> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
-	public UpdateByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
-	public UpdateByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public UpdateByQueryRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public UpdateByQueryRequestDescriptor<TDocument> Sort(ICollection<string>? sort) => Qs("sort", sort);
-	public UpdateByQueryRequestDescriptor<TDocument> Stats(ICollection<string>? stats) => Qs("stats", stats);
-	public UpdateByQueryRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-	public UpdateByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public UpdateByQueryRequestDescriptor<TDocument> Version(bool? version = true) => Qs("version", version);
-	public UpdateByQueryRequestDescriptor<TDocument> VersionType(bool? versionType = true) => Qs("version_type", versionType);
-	public UpdateByQueryRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-	public UpdateByQueryRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public UpdateByQueryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UpdateByQueryRequestDescriptor()
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-	private long? MaxDocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.UpdateByQueryRequest instance) => new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRequest(Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The analyzer to use for the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Analyzer(string? value)
+	{
+		Instance.Analyzer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor AnalyzeWildcard(bool? value = true)
+	{
+		Instance.AnalyzeWildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
+	{
+		Instance.DefaultOperator = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field to use as default where no field prefix is given in the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Df(string? value)
+	{
+		Instance.Df = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor From(long? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Lenient(bool? value = true)
+	{
+		Instance.Lenient = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ID of the pipeline to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
+	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Pipeline(string? value)
+	{
+		Instance.Pipeline = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A query in the Lucene query string syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor QueryLuceneSyntax(string? value)
+	{
+		Instance.QueryLuceneSyntax = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, Elasticsearch refreshes affected shards to make the operation visible to search after the request completes.
+	/// This is different than the update API's <c>refresh</c> parameter, which causes just the shard that received the request to be refreshed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Refresh(bool? value = true)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request cache is used for this request.
+	/// It defaults to the index-level setting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor RequestCache(bool? value = true)
+	{
+		Instance.RequestCache = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor RequestsPerSecond(float? value)
+	{
+		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to retain the search context for scrolling.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Scroll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The size of the scroll request that powers the operation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ScrollSize(long? value)
+	{
+		Instance.ScrollSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An explicit timeout for each search request.
+	/// By default, there is no timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.SearchTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of the search operation. Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? value)
+	{
+		Instance.Slices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesBuilder, Elastic.Clients.Elasticsearch.Slices> action)
+	{
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Sort(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Sort = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Sort()
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Sort(params string[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Stats = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Stats()
+	{
+		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Stats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Stats(params string[] values)
+	{
+		Instance.Stats = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of documents to collect for each shard.
+	/// If a query reaches this limit, Elasticsearch terminates the query early.
+	/// Elasticsearch collects documents before sorting.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: Use with caution.
+	/// Elasticsearch applies this parameter to each shard handling the request.
+	/// When possible, let Elasticsearch perform early termination automatically.
+	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor TerminateAfter(long? value)
+	{
+		Instance.TerminateAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
+	/// By default, it is one minute.
+	/// This guarantees Elasticsearch waits for at least the timeout before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns the document version as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Version(bool? value = true)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Should the document increment the version number (internal) on hit or not (reindex)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor VersionType(bool? value = true)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The <c>timeout</c> parameter controls how long each write request waits for unavailable shards to become available.
+	/// Both work exactly the way they work in the bulk API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task ID that you can use to cancel or get the status of the task.
+	/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The preferred behavior when update by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
 	{
-		ConflictsValue = conflicts;
-		return Self;
+		Instance.Conflicts = value;
+		return this;
 	}
 
 	/// <summary>
@@ -987,10 +1485,10 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	/// The maximum number of documents to update.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor MaxDocs(long? value)
 	{
-		MaxDocsValue = maxDocs;
-		return Self;
+		Instance.MaxDocs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -998,28 +1496,32 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	/// The documents to update using the Query DSL.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The documents to update using the Query DSL.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The documents to update using the Query DSL.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1027,28 +1529,32 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	/// The script to run to update the document source or metadata when updating.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when updating.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when updating.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1056,94 +1562,82 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	/// Slice the request manually using the provided slice ID and total number of slices.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
-		SliceDescriptor = null;
-		SliceDescriptorAction = null;
-		SliceValue = slice;
-		return Self;
+		Instance.Slice = value;
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Slice the request manually using the provided slice ID and total number of slices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> action)
 	{
-		SliceValue = null;
-		SliceDescriptorAction = null;
-		SliceDescriptor = descriptor;
-		return Self;
+		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.Build(action);
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Slice the request manually using the provided slice ID and total number of slices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
 	{
-		SliceValue = null;
-		SliceDescriptor = null;
-		SliceDescriptorAction = configure;
-		return Self;
+		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.UpdateByQueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ConflictsValue is not null)
-		{
-			writer.WritePropertyName("conflicts");
-			JsonSerializer.Serialize(writer, ConflictsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor(new Elastic.Clients.Elasticsearch.UpdateByQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (SliceDescriptor is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, SliceDescriptor, options);
-		}
-		else if (SliceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>(SliceDescriptorAction), options);
-		}
-		else if (SliceValue is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, SliceValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -1305,79 +1799,522 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 /// This API enables you to only modify the source of matching documents; you cannot move them.
 /// </para>
 /// </summary>
-public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<UpdateByQueryRequestDescriptor, UpdateByQueryRequestParameters>
+public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 {
-	internal UpdateByQueryRequestDescriptor(Action<UpdateByQueryRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.UpdateByQueryRequest Instance { get; init; }
 
-	public UpdateByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.UpdateByQueryRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQuery;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "update_by_query";
-
-	public UpdateByQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public UpdateByQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-	public UpdateByQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
-	public UpdateByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-	public UpdateByQueryRequestDescriptor Df(string? df) => Qs("df", df);
-	public UpdateByQueryRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public UpdateByQueryRequestDescriptor From(long? from) => Qs("from", from);
-	public UpdateByQueryRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public UpdateByQueryRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
-	public UpdateByQueryRequestDescriptor Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-	public UpdateByQueryRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public UpdateByQueryRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
-	public UpdateByQueryRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
-	public UpdateByQueryRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
-	public UpdateByQueryRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-	public UpdateByQueryRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public UpdateByQueryRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-	public UpdateByQueryRequestDescriptor ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
-	public UpdateByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Duration? searchTimeout) => Qs("search_timeout", searchTimeout);
-	public UpdateByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public UpdateByQueryRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public UpdateByQueryRequestDescriptor Sort(ICollection<string>? sort) => Qs("sort", sort);
-	public UpdateByQueryRequestDescriptor Stats(ICollection<string>? stats) => Qs("stats", stats);
-	public UpdateByQueryRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-	public UpdateByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public UpdateByQueryRequestDescriptor Version(bool? version = true) => Qs("version", version);
-	public UpdateByQueryRequestDescriptor VersionType(bool? versionType = true) => Qs("version_type", versionType);
-	public UpdateByQueryRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-	public UpdateByQueryRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public UpdateByQueryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public UpdateByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.UpdateByQueryRequest(indices);
 	}
 
-	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-	private long? MaxDocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor SliceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UpdateByQueryRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.UpdateByQueryRequest instance) => new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRequest(Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The analyzer to use for the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Analyzer(string? value)
+	{
+		Instance.Analyzer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
+	{
+		Instance.AnalyzeWildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
+	{
+		Instance.DefaultOperator = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field to use as default where no field prefix is given in the query string.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Df(string? value)
+	{
+		Instance.Df = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> From(long? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Lenient(bool? value = true)
+	{
+		Instance.Lenient = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ID of the pipeline to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
+	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Pipeline(string? value)
+	{
+		Instance.Pipeline = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A query in the Lucene query string syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
+	{
+		Instance.QueryLuceneSyntax = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, Elasticsearch refreshes affected shards to make the operation visible to search after the request completes.
+	/// This is different than the update API's <c>refresh</c> parameter, which causes just the shard that received the request to be refreshed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Refresh(bool? value = true)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request cache is used for this request.
+	/// It defaults to the index-level setting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> RequestCache(bool? value = true)
+	{
+		Instance.RequestCache = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? value)
+	{
+		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to retain the search context for scrolling.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Scroll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The size of the scroll request that powers the operation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ScrollSize(long? value)
+	{
+		Instance.ScrollSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An explicit timeout for each search request.
+	/// By default, there is no timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.SearchTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of the search operation. Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? value)
+	{
+		Instance.Slices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesBuilder, Elastic.Clients.Elasticsearch.Slices> action)
+	{
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Sort = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Sort()
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Sort(params string[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Stats = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Stats()
+	{
+		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Stats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The specific <c>tag</c> of the request for logging and statistical purposes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Stats(params string[] values)
+	{
+		Instance.Stats = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of documents to collect for each shard.
+	/// If a query reaches this limit, Elasticsearch terminates the query early.
+	/// Elasticsearch collects documents before sorting.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: Use with caution.
+	/// Elasticsearch applies this parameter to each shard handling the request.
+	/// When possible, let Elasticsearch perform early termination automatically.
+	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> TerminateAfter(long? value)
+	{
+		Instance.TerminateAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
+	/// By default, it is one minute.
+	/// This guarantees Elasticsearch waits for at least the timeout before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns the document version as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Version(bool? value = true)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Should the document increment the version number (internal) on hit or not (reindex)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> VersionType(bool? value = true)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The <c>timeout</c> parameter controls how long each write request waits for unavailable shards to become available.
+	/// Both work exactly the way they work in the bulk API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task ID that you can use to cancel or get the status of the task.
+	/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The preferred behavior when update by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
 	{
-		ConflictsValue = conflicts;
-		return Self;
+		Instance.Conflicts = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1385,10 +2322,10 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	/// The maximum number of documents to update.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor MaxDocs(long? maxDocs)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> MaxDocs(long? value)
 	{
-		MaxDocsValue = maxDocs;
-		return Self;
+		Instance.MaxDocs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1396,28 +2333,21 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	/// The documents to update using the Query DSL.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The documents to update using the Query DSL.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public UpdateByQueryRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1425,28 +2355,32 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	/// The script to run to update the document source or metadata when updating.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when updating.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when updating.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1454,93 +2388,70 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	/// Slice the request manually using the provided slice ID and total number of slices.
 	/// </para>
 	/// </summary>
-	public UpdateByQueryRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
-		SliceDescriptor = null;
-		SliceDescriptorAction = null;
-		SliceValue = slice;
-		return Self;
+		Instance.Slice = value;
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Slice the request manually using the provided slice ID and total number of slices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
 	{
-		SliceValue = null;
-		SliceDescriptorAction = null;
-		SliceDescriptor = descriptor;
-		return Self;
+		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public UpdateByQueryRequestDescriptor Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.UpdateByQueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>> action)
 	{
-		SliceValue = null;
-		SliceDescriptor = null;
-		SliceDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.UpdateByQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (ConflictsValue is not null)
-		{
-			writer.WritePropertyName("conflicts");
-			JsonSerializer.Serialize(writer, ConflictsValue, options);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (SliceDescriptor is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, SliceDescriptor, options);
-		}
-		else if (SliceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SlicedScrollDescriptor(SliceDescriptorAction), options);
-		}
-		else if (SliceValue is not null)
-		{
-			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, SliceValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,36 +17,199 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class GetStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GetStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
+	private static readonly System.Text.Json.JsonEncodedText PropExistsTime = System.Text.Json.JsonEncodedText.Encode("exists_time");
+	private static readonly System.Text.Json.JsonEncodedText PropExistsTimeInMillis = System.Text.Json.JsonEncodedText.Encode("exists_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropExistsTotal = System.Text.Json.JsonEncodedText.Encode("exists_total");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingTime = System.Text.Json.JsonEncodedText.Encode("missing_time");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingTimeInMillis = System.Text.Json.JsonEncodedText.Encode("missing_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropMissingTotal = System.Text.Json.JsonEncodedText.Encode("missing_total");
+	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.GetStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCurrent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propExistsTime = default;
+		LocalJsonValue<System.TimeSpan> propExistsTimeInMillis = default;
+		LocalJsonValue<long> propExistsTotal = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propMissingTime = default;
+		LocalJsonValue<System.TimeSpan> propMissingTimeInMillis = default;
+		LocalJsonValue<long> propMissingTotal = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTime = default;
+		LocalJsonValue<System.TimeSpan> propTimeInMillis = default;
+		LocalJsonValue<long> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCurrent.TryReadProperty(ref reader, options, PropCurrent, null))
+			{
+				continue;
+			}
+
+			if (propExistsTime.TryReadProperty(ref reader, options, PropExistsTime, null))
+			{
+				continue;
+			}
+
+			if (propExistsTimeInMillis.TryReadProperty(ref reader, options, PropExistsTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propExistsTotal.TryReadProperty(ref reader, options, PropExistsTotal, null))
+			{
+				continue;
+			}
+
+			if (propMissingTime.TryReadProperty(ref reader, options, PropMissingTime, null))
+			{
+				continue;
+			}
+
+			if (propMissingTimeInMillis.TryReadProperty(ref reader, options, PropMissingTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propMissingTotal.TryReadProperty(ref reader, options, PropMissingTotal, null))
+			{
+				continue;
+			}
+
+			if (propTime.TryReadProperty(ref reader, options, PropTime, null))
+			{
+				continue;
+			}
+
+			if (propTimeInMillis.TryReadProperty(ref reader, options, PropTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.GetStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Current = propCurrent.Value,
+			ExistsTime = propExistsTime.Value,
+			ExistsTimeInMillis = propExistsTimeInMillis.Value,
+			ExistsTotal = propExistsTotal.Value,
+			MissingTime = propMissingTime.Value,
+			MissingTimeInMillis = propMissingTimeInMillis.Value,
+			MissingTotal = propMissingTotal.Value,
+			Time = propTime.Value,
+			TimeInMillis = propTimeInMillis.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.GetStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCurrent, value.Current, null, null);
+		writer.WriteProperty(options, PropExistsTime, value.ExistsTime, null, null);
+		writer.WriteProperty(options, PropExistsTimeInMillis, value.ExistsTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropExistsTotal, value.ExistsTotal, null, null);
+		writer.WriteProperty(options, PropMissingTime, value.MissingTime, null, null);
+		writer.WriteProperty(options, PropMissingTimeInMillis, value.MissingTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropMissingTotal, value.MissingTotal, null, null);
+		writer.WriteProperty(options, PropTime, value.Time, null, null);
+		writer.WriteProperty(options, PropTimeInMillis, value.TimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.GetStatsConverter))]
 public sealed partial class GetStats
 {
-	[JsonInclude, JsonPropertyName("current")]
-	public long Current { get; init; }
-	[JsonInclude, JsonPropertyName("exists_time")]
-	public Elastic.Clients.Elasticsearch.Duration? ExistsTime { get; init; }
-	[JsonInclude, JsonPropertyName("exists_time_in_millis")]
-	public long ExistsTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("exists_total")]
-	public long ExistsTotal { get; init; }
-	[JsonInclude, JsonPropertyName("missing_time")]
-	public Elastic.Clients.Elasticsearch.Duration? MissingTime { get; init; }
-	[JsonInclude, JsonPropertyName("missing_time_in_millis")]
-	public long MissingTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("missing_total")]
-	public long MissingTotal { get; init; }
-	[JsonInclude, JsonPropertyName("time")]
-	public Elastic.Clients.Elasticsearch.Duration? Time { get; init; }
-	[JsonInclude, JsonPropertyName("time_in_millis")]
-	public long TimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public long Total { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetStats(long current, System.TimeSpan existsTimeInMillis, long existsTotal, System.TimeSpan missingTimeInMillis, long missingTotal, System.TimeSpan timeInMillis, long total)
+	{
+		Current = current;
+		ExistsTimeInMillis = existsTimeInMillis;
+		ExistsTotal = existsTotal;
+		MissingTimeInMillis = missingTimeInMillis;
+		MissingTotal = missingTotal;
+		TimeInMillis = timeInMillis;
+		Total = total;
+	}
+#if NET7_0_OR_GREATER
+	public GetStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GetStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Current { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? ExistsTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan ExistsTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ExistsTotal { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? MissingTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan MissingTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MissingTotal { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Total { get; set; }
 }

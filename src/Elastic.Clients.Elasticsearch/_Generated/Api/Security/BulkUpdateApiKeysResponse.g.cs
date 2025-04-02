@@ -17,21 +17,100 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class BulkUpdateApiKeysResponse : ElasticsearchResponse
+internal sealed partial class BulkUpdateApiKeysResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse>
 {
-	[JsonInclude, JsonPropertyName("errors")]
-	public Elastic.Clients.Elasticsearch.Security.BulkError? Errors { get; init; }
-	[JsonInclude, JsonPropertyName("noops")]
-	public IReadOnlyCollection<string> Noops { get; init; }
-	[JsonInclude, JsonPropertyName("updated")]
-	public IReadOnlyCollection<string> Updated { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
+	private static readonly System.Text.Json.JsonEncodedText PropNoops = System.Text.Json.JsonEncodedText.Encode("noops");
+	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated");
+
+	public override Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.BulkError?> propErrors = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propNoops = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propUpdated = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, null))
+			{
+				continue;
+			}
+
+			if (propNoops.TryReadProperty(ref reader, options, PropNoops, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propUpdated.TryReadProperty(ref reader, options, PropUpdated, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Errors = propErrors.Value,
+			Noops = propNoops.Value,
+			Updated = propUpdated.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
+		writer.WriteProperty(options, PropNoops, value.Noops, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUpdated, value.Updated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponseConverter))]
+public sealed partial class BulkUpdateApiKeysResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BulkUpdateApiKeysResponse(System.Collections.Generic.IReadOnlyCollection<string> noops, System.Collections.Generic.IReadOnlyCollection<string> updated)
+	{
+		Noops = noops;
+		Updated = updated;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BulkUpdateApiKeysResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BulkUpdateApiKeysResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.BulkError? Errors { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		System.Collections.Generic.IReadOnlyCollection<string> Noops { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		System.Collections.Generic.IReadOnlyCollection<string> Updated { get; set; }
 }

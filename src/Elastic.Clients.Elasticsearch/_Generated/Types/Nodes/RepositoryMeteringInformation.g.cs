@@ -17,18 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class RepositoryMeteringInformationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropArchived = System.Text.Json.JsonEncodedText.Encode("archived");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterVersion = System.Text.Json.JsonEncodedText.Encode("cluster_version");
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryEphemeralId = System.Text.Json.JsonEncodedText.Encode("repository_ephemeral_id");
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryLocation = System.Text.Json.JsonEncodedText.Encode("repository_location");
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryName = System.Text.Json.JsonEncodedText.Encode("repository_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryStartedAt = System.Text.Json.JsonEncodedText.Encode("repository_started_at");
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryStoppedAt = System.Text.Json.JsonEncodedText.Encode("repository_stopped_at");
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryType = System.Text.Json.JsonEncodedText.Encode("repository_type");
+	private static readonly System.Text.Json.JsonEncodedText PropRequestCounts = System.Text.Json.JsonEncodedText.Encode("request_counts");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propArchived = default;
+		LocalJsonValue<long?> propClusterVersion = default;
+		LocalJsonValue<string> propRepositoryEphemeralId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation> propRepositoryLocation = default;
+		LocalJsonValue<string> propRepositoryName = default;
+		LocalJsonValue<System.DateTime> propRepositoryStartedAt = default;
+		LocalJsonValue<System.DateTime?> propRepositoryStoppedAt = default;
+		LocalJsonValue<string> propRepositoryType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.RequestCounts> propRequestCounts = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propArchived.TryReadProperty(ref reader, options, PropArchived, null))
+			{
+				continue;
+			}
+
+			if (propClusterVersion.TryReadProperty(ref reader, options, PropClusterVersion, null))
+			{
+				continue;
+			}
+
+			if (propRepositoryEphemeralId.TryReadProperty(ref reader, options, PropRepositoryEphemeralId, null))
+			{
+				continue;
+			}
+
+			if (propRepositoryLocation.TryReadProperty(ref reader, options, PropRepositoryLocation, null))
+			{
+				continue;
+			}
+
+			if (propRepositoryName.TryReadProperty(ref reader, options, PropRepositoryName, null))
+			{
+				continue;
+			}
+
+			if (propRepositoryStartedAt.TryReadProperty(ref reader, options, PropRepositoryStartedAt, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propRepositoryStoppedAt.TryReadProperty(ref reader, options, PropRepositoryStoppedAt, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propRepositoryType.TryReadProperty(ref reader, options, PropRepositoryType, null))
+			{
+				continue;
+			}
+
+			if (propRequestCounts.TryReadProperty(ref reader, options, PropRequestCounts, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Archived = propArchived.Value,
+			ClusterVersion = propClusterVersion.Value,
+			RepositoryEphemeralId = propRepositoryEphemeralId.Value,
+			RepositoryLocation = propRepositoryLocation.Value,
+			RepositoryName = propRepositoryName.Value,
+			RepositoryStartedAt = propRepositoryStartedAt.Value,
+			RepositoryStoppedAt = propRepositoryStoppedAt.Value,
+			RepositoryType = propRepositoryType.Value,
+			RequestCounts = propRequestCounts.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropArchived, value.Archived, null, null);
+		writer.WriteProperty(options, PropClusterVersion, value.ClusterVersion, null, null);
+		writer.WriteProperty(options, PropRepositoryEphemeralId, value.RepositoryEphemeralId, null, null);
+		writer.WriteProperty(options, PropRepositoryLocation, value.RepositoryLocation, null, null);
+		writer.WriteProperty(options, PropRepositoryName, value.RepositoryName, null, null);
+		writer.WriteProperty(options, PropRepositoryStartedAt, value.RepositoryStartedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropRepositoryStoppedAt, value.RepositoryStoppedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropRepositoryType, value.RepositoryType, null, null);
+		writer.WriteProperty(options, PropRequestCounts, value.RequestCounts, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformationConverter))]
 public sealed partial class RepositoryMeteringInformation
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RepositoryMeteringInformation(bool archived, string repositoryEphemeralId, Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation repositoryLocation, string repositoryName, System.DateTime repositoryStartedAt, string repositoryType, Elastic.Clients.Elasticsearch.Nodes.RequestCounts requestCounts)
+	{
+		Archived = archived;
+		RepositoryEphemeralId = repositoryEphemeralId;
+		RepositoryLocation = repositoryLocation;
+		RepositoryName = repositoryName;
+		RepositoryStartedAt = repositoryStartedAt;
+		RepositoryType = repositoryType;
+		RequestCounts = requestCounts;
+	}
+#if NET7_0_OR_GREATER
+	public RepositoryMeteringInformation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RepositoryMeteringInformation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RepositoryMeteringInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A flag that tells whether or not this object has been archived. When a repository is closed or updated the
@@ -36,8 +172,11 @@ public sealed partial class RepositoryMeteringInformation
 	/// repository metering information of previous repository instantiations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("archived")]
-	public bool Archived { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Archived { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -47,62 +186,78 @@ public sealed partial class RepositoryMeteringInformation
 	/// information deletions, i.e. deleting archived repositories metering information that we haven’t observed yet.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_version")]
-	public long? ClusterVersion { get; init; }
+	public long? ClusterVersion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An identifier that changes every time the repository is updated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("repository_ephemeral_id")]
-	public string RepositoryEphemeralId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RepositoryEphemeralId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Represents an unique location within the repository.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("repository_location")]
-	public Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation RepositoryLocation { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation RepositoryLocation { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Repository name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("repository_name")]
-	public string RepositoryName { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RepositoryName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Time the repository was created or updated. Recorded in milliseconds since the Unix Epoch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("repository_started_at")]
-	public long RepositoryStartedAt { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTime RepositoryStartedAt { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Time the repository was deleted or updated. Recorded in milliseconds since the Unix Epoch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("repository_stopped_at")]
-	public long? RepositoryStoppedAt { get; init; }
+	public System.DateTime? RepositoryStoppedAt { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Repository type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("repository_type")]
-	public string RepositoryType { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RepositoryType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An object with the number of request performed against the repository grouped by request type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("request_counts")]
-	public Elastic.Clients.Elasticsearch.Nodes.RequestCounts RequestCounts { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Nodes.RequestCounts RequestCounts { get; set; }
 }

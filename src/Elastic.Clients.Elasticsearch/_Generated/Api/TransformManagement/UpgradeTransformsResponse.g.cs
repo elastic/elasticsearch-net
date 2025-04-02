@@ -17,38 +17,122 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public sealed partial class UpgradeTransformsResponse : ElasticsearchResponse
+internal sealed partial class UpgradeTransformsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropNeedsUpdate = System.Text.Json.JsonEncodedText.Encode("needs_update");
+	private static readonly System.Text.Json.JsonEncodedText PropNoAction = System.Text.Json.JsonEncodedText.Encode("no_action");
+	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propNeedsUpdate = default;
+		LocalJsonValue<int> propNoAction = default;
+		LocalJsonValue<int> propUpdated = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNeedsUpdate.TryReadProperty(ref reader, options, PropNeedsUpdate, null))
+			{
+				continue;
+			}
+
+			if (propNoAction.TryReadProperty(ref reader, options, PropNoAction, null))
+			{
+				continue;
+			}
+
+			if (propUpdated.TryReadProperty(ref reader, options, PropUpdated, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			NeedsUpdate = propNeedsUpdate.Value,
+			NoAction = propNoAction.Value,
+			Updated = propUpdated.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNeedsUpdate, value.NeedsUpdate, null, null);
+		writer.WriteProperty(options, PropNoAction, value.NoAction, null, null);
+		writer.WriteProperty(options, PropUpdated, value.Updated, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponseConverter))]
+public sealed partial class UpgradeTransformsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpgradeTransformsResponse(int needsUpdate, int noAction, int updated)
+	{
+		NeedsUpdate = needsUpdate;
+		NoAction = noAction;
+		Updated = updated;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpgradeTransformsResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpgradeTransformsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The number of transforms that need to be upgraded.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("needs_update")]
-	public int NeedsUpdate { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NeedsUpdate { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of transforms that don’t require upgrading.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("no_action")]
-	public int NoAction { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NoAction { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of transforms that have been upgraded.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("updated")]
-	public int Updated { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Updated { get; set; }
 }

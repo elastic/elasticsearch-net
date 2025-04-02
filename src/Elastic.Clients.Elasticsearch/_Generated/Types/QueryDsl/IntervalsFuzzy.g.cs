@@ -17,24 +17,126 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class IntervalsFuzzyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropTerm = System.Text.Json.JsonEncodedText.Encode("term");
+	private static readonly System.Text.Json.JsonEncodedText PropTranspositions = System.Text.Json.JsonEncodedText.Encode("transpositions");
+	private static readonly System.Text.Json.JsonEncodedText PropUseField = System.Text.Json.JsonEncodedText.Encode("use_field");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fuzziness?> propFuzziness = default;
+		LocalJsonValue<int?> propPrefixLength = default;
+		LocalJsonValue<string> propTerm = default;
+		LocalJsonValue<bool?> propTranspositions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propUseField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propFuzziness.TryReadProperty(ref reader, options, PropFuzziness, null))
+			{
+				continue;
+			}
+
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			{
+				continue;
+			}
+
+			if (propTerm.TryReadProperty(ref reader, options, PropTerm, null))
+			{
+				continue;
+			}
+
+			if (propTranspositions.TryReadProperty(ref reader, options, PropTranspositions, null))
+			{
+				continue;
+			}
+
+			if (propUseField.TryReadProperty(ref reader, options, PropUseField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analyzer = propAnalyzer.Value,
+			Fuzziness = propFuzziness.Value,
+			PrefixLength = propPrefixLength.Value,
+			Term = propTerm.Value,
+			Transpositions = propTranspositions.Value,
+			UseField = propUseField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteProperty(options, PropTerm, value.Term, null, null);
+		writer.WriteProperty(options, PropTranspositions, value.Transpositions, null, null);
+		writer.WriteProperty(options, PropUseField, value.UseField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyConverter))]
 public sealed partial class IntervalsFuzzy
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsFuzzy(string term)
+	{
+		Term = term;
+	}
+#if NET7_0_OR_GREATER
+	public IntervalsFuzzy()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IntervalsFuzzy()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IntervalsFuzzy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Analyzer used to normalize the term.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -42,7 +144,6 @@ public sealed partial class IntervalsFuzzy
 	/// Maximum edit distance allowed for matching.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
 	/// <summary>
@@ -50,7 +151,6 @@ public sealed partial class IntervalsFuzzy
 	/// Number of beginning characters left unchanged when creating expansions.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
 	/// <summary>
@@ -58,15 +158,17 @@ public sealed partial class IntervalsFuzzy
 	/// The term to match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("term")]
-	public string Term { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Term { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Indicates whether edits include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("transpositions")]
 	public bool? Transpositions { get; set; }
 
 	/// <summary>
@@ -75,37 +177,37 @@ public sealed partial class IntervalsFuzzy
 	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(IntervalsFuzzy intervalsFuzzy) => Elastic.Clients.Elasticsearch.QueryDsl.Intervals.Fuzzy(intervalsFuzzy);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(IntervalsFuzzy intervalsFuzzy) => Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery.Fuzzy(intervalsFuzzy);
 }
 
-public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDescriptor<IntervalsFuzzyDescriptor<TDocument>>
+public readonly partial struct IntervalsFuzzyDescriptor<TDocument>
 {
-	internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy Instance { get; init; }
 
-	public IntervalsFuzzyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsFuzzyDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-	private int? PrefixLengthValue { get; set; }
-	private string TermValue { get; set; }
-	private bool? TranspositionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsFuzzyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Analyzer used to normalize the term.
 	/// </para>
 	/// </summary>
-	public IntervalsFuzzyDescriptor<TDocument> Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -113,144 +215,10 @@ public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDe
 	/// Maximum edit distance allowed for matching.
 	/// </para>
 	/// </summary>
-	public IntervalsFuzzyDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
-		FuzzinessValue = fuzziness;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
-	public IntervalsFuzzyDescriptor<TDocument> PrefixLength(int? prefixLength)
-	{
-		PrefixLengthValue = prefixLength;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The term to match.
-	/// </para>
-	/// </summary>
-	public IntervalsFuzzyDescriptor<TDocument> Term(string term)
-	{
-		TermValue = term;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Indicates whether edits include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
-	public IntervalsFuzzyDescriptor<TDocument> Transpositions(bool? transpositions = true)
-	{
-		TranspositionsValue = transpositions;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
-	public IntervalsFuzzyDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
-	{
-		UseFieldValue = useField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
-	public IntervalsFuzzyDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
-	{
-		UseFieldValue = useField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
-	public IntervalsFuzzyDescriptor<TDocument> UseField(Expression<Func<TDocument, object>> useField)
-	{
-		UseFieldValue = useField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (FuzzinessValue is not null)
-		{
-			writer.WritePropertyName("fuzziness");
-			JsonSerializer.Serialize(writer, FuzzinessValue, options);
-		}
-
-		if (PrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(PrefixLengthValue.Value);
-		}
-
-		writer.WritePropertyName("term");
-		writer.WriteStringValue(TermValue);
-		if (TranspositionsValue.HasValue)
-		{
-			writer.WritePropertyName("transpositions");
-			writer.WriteBooleanValue(TranspositionsValue.Value);
-		}
-
-		if (UseFieldValue is not null)
-		{
-			writer.WritePropertyName("use_field");
-			JsonSerializer.Serialize(writer, UseFieldValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<IntervalsFuzzyDescriptor>
-{
-	internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor> configure) => configure.Invoke(this);
-
-	public IntervalsFuzzyDescriptor() : base()
-	{
-	}
-
-	private string? AnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-	private int? PrefixLengthValue { get; set; }
-	private string TermValue { get; set; }
-	private bool? TranspositionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Analyzer used to normalize the term.
-	/// </para>
-	/// </summary>
-	public IntervalsFuzzyDescriptor Analyzer(string? analyzer)
-	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Fuzziness = value;
+		return this;
 	}
 
 	/// <summary>
@@ -258,10 +226,10 @@ public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<In
 	/// Maximum edit distance allowed for matching.
 	/// </para>
 	/// </summary>
-	public IntervalsFuzzyDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessBuilder, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
-		FuzzinessValue = fuzziness;
-		return Self;
+		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessBuilder.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -269,10 +237,10 @@ public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<In
 	/// Number of beginning characters left unchanged when creating expansions.
 	/// </para>
 	/// </summary>
-	public IntervalsFuzzyDescriptor PrefixLength(int? prefixLength)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> PrefixLength(int? value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -280,10 +248,10 @@ public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<In
 	/// The term to match.
 	/// </para>
 	/// </summary>
-	public IntervalsFuzzyDescriptor Term(string term)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Term(string value)
 	{
-		TermValue = term;
-		return Self;
+		Instance.Term = value;
+		return this;
 	}
 
 	/// <summary>
@@ -291,10 +259,10 @@ public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<In
 	/// Indicates whether edits include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
 	/// </para>
 	/// </summary>
-	public IntervalsFuzzyDescriptor Transpositions(bool? transpositions = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Transpositions(bool? value = true)
 	{
-		TranspositionsValue = transpositions;
-		return Self;
+		Instance.Transpositions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -303,10 +271,10 @@ public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<In
 	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsFuzzyDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -315,10 +283,104 @@ public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<In
 	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsFuzzyDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> UseField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct IntervalsFuzzyDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsFuzzyDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsFuzzyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Analyzer used to normalize the term.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Analyzer(string? value)
+	{
+		Instance.Analyzer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
+	{
+		Instance.Fuzziness = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum edit distance allowed for matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessBuilder, Elastic.Clients.Elasticsearch.Fuzziness> action)
+	{
+		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Number of beginning characters left unchanged when creating expansions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor PrefixLength(int? value)
+	{
+		Instance.PrefixLength = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The term to match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Term(string value)
+	{
+		Instance.Term = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether edits include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Transpositions(bool? value = true)
+	{
+		Instance.Transpositions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -327,47 +389,29 @@ public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<In
 	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
 	/// </para>
 	/// </summary>
-	public IntervalsFuzzyDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		UseFieldValue = useField;
-		return Self;
+		Instance.UseField = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If specified, match intervals from this field rather than the top-level field.
+	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor UseField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
+		Instance.UseField = value;
+		return this;
+	}
 
-		if (FuzzinessValue is not null)
-		{
-			writer.WritePropertyName("fuzziness");
-			JsonSerializer.Serialize(writer, FuzzinessValue, options);
-		}
-
-		if (PrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(PrefixLengthValue.Value);
-		}
-
-		writer.WritePropertyName("term");
-		writer.WriteStringValue(TermValue);
-		if (TranspositionsValue.HasValue)
-		{
-			writer.WritePropertyName("transpositions");
-			writer.WriteBooleanValue(TranspositionsValue.Value);
-		}
-
-		if (UseFieldValue is not null)
-		{
-			writer.WritePropertyName("use_field");
-			JsonSerializer.Serialize(writer, UseFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

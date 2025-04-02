@@ -17,21 +17,49 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
+using System;
+using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class GetRepositoryResponse : DictionaryResponse<string, Elastic.Clients.Elasticsearch.Snapshot.IRepository>
+internal sealed partial class GetRepositoryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse>
 {
-	public GetRepositoryResponse(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IRepository> dictionary) : base(dictionary)
+	public override Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Repositories = reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.Repositories>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Repositories, null);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponseConverter))]
+public sealed partial class GetRepositoryResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRepositoryResponse(Elastic.Clients.Elasticsearch.Snapshot.Repositories repositories)
+	{
+		Repositories = repositories;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRepositoryResponse()
 	{
 	}
 
-	public GetRepositoryResponse() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetRepositoryResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
+		_ = sentinel;
 	}
+
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+Elastic.Clients.Elasticsearch.Snapshot.Repositories Repositories { get; set; }
 }

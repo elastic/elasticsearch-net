@@ -17,77 +17,125 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class IndexingPressure
+internal sealed partial class IndexingPressureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure>
 {
-	[JsonInclude, JsonPropertyName("memory")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory Memory { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory");
 
-public sealed partial class IndexingPressureDescriptor : SerializableDescriptor<IndexingPressureDescriptor>
-{
-	internal IndexingPressureDescriptor(Action<IndexingPressureDescriptor> configure) => configure.Invoke(this);
-
-	public IndexingPressureDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory> propMemory = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMemory.TryReadProperty(ref reader, options, PropMemory, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Memory = propMemory.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory MemoryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor MemoryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor> MemoryDescriptorAction { get; set; }
-
-	public IndexingPressureDescriptor Memory(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory memory)
-	{
-		MemoryDescriptor = null;
-		MemoryDescriptorAction = null;
-		MemoryValue = memory;
-		return Self;
-	}
-
-	public IndexingPressureDescriptor Memory(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor descriptor)
-	{
-		MemoryValue = null;
-		MemoryDescriptorAction = null;
-		MemoryDescriptor = descriptor;
-		return Self;
-	}
-
-	public IndexingPressureDescriptor Memory(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor> configure)
-	{
-		MemoryValue = null;
-		MemoryDescriptor = null;
-		MemoryDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (MemoryDescriptor is not null)
-		{
-			writer.WritePropertyName("memory");
-			JsonSerializer.Serialize(writer, MemoryDescriptor, options);
-		}
-		else if (MemoryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("memory");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor(MemoryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("memory");
-			JsonSerializer.Serialize(writer, MemoryValue, options);
-		}
-
+		writer.WriteProperty(options, PropMemory, value.Memory, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureConverter))]
+public sealed partial class IndexingPressure
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory memory)
+	{
+		Memory = memory;
+	}
+#if NET7_0_OR_GREATER
+	public IndexingPressure()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IndexingPressure()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexingPressure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory Memory { get; set; }
+}
+
+public readonly partial struct IndexingPressureDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingPressureDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingPressureDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor Memory(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory value)
+	{
+		Instance.Memory = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor Memory()
+	{
+		Instance.Memory = Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor Memory(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor>? action)
+	{
+		Instance.Memory = Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

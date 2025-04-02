@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class PerPartitionCategorizationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropStopOnWarn = System.Text.Json.JsonEncodedText.Encode("stop_on_warn");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<bool?> propStopOnWarn = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propStopOnWarn.TryReadProperty(ref reader, options, PropStopOnWarn, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Enabled = propEnabled.Value,
+			StopOnWarn = propStopOnWarn.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropStopOnWarn, value.StopOnWarn, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationConverter))]
 public sealed partial class PerPartitionCategorization
 {
+#if NET7_0_OR_GREATER
+	public PerPartitionCategorization()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PerPartitionCategorization()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PerPartitionCategorization(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// To enable this setting, you must also set the <c>partition_field_name</c> property to the same value in every detector that uses the keyword <c>mlcategory</c>. Otherwise, job creation fails.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 
 	/// <summary>
@@ -42,30 +102,37 @@ public sealed partial class PerPartitionCategorization
 	/// This setting can be set to true only if per-partition categorization is enabled. If true, both categorization and subsequent anomaly detection stops for partitions where the categorization status changes to warn. This setting makes it viable to have a job where it is expected that categorization works well for some partitions but not others; you do not pay the cost of bad categorization forever in the partitions where it works badly.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stop_on_warn")]
 	public bool? StopOnWarn { get; set; }
 }
 
-public sealed partial class PerPartitionCategorizationDescriptor : SerializableDescriptor<PerPartitionCategorizationDescriptor>
+public readonly partial struct PerPartitionCategorizationDescriptor
 {
-	internal PerPartitionCategorizationDescriptor(Action<PerPartitionCategorizationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization Instance { get; init; }
 
-	public PerPartitionCategorizationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PerPartitionCategorizationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? EnabledValue { get; set; }
-	private bool? StopOnWarnValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PerPartitionCategorizationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// To enable this setting, you must also set the <c>partition_field_name</c> property to the same value in every detector that uses the keyword <c>mlcategory</c>. Otherwise, job creation fails.
 	/// </para>
 	/// </summary>
-	public PerPartitionCategorizationDescriptor Enabled(bool? enabled = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor Enabled(bool? value = true)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,22 @@ public sealed partial class PerPartitionCategorizationDescriptor : SerializableD
 	/// This setting can be set to true only if per-partition categorization is enabled. If true, both categorization and subsequent anomaly detection stops for partitions where the categorization status changes to warn. This setting makes it viable to have a job where it is expected that categorization works well for some partitions but not others; you do not pay the cost of bad categorization forever in the partitions where it works badly.
 	/// </para>
 	/// </summary>
-	public PerPartitionCategorizationDescriptor StopOnWarn(bool? stopOnWarn = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor StopOnWarn(bool? value = true)
 	{
-		StopOnWarnValue = stopOnWarn;
-		return Self;
+		Instance.StopOnWarn = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (EnabledValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (StopOnWarnValue.HasValue)
-		{
-			writer.WritePropertyName("stop_on_warn");
-			writer.WriteBooleanValue(StopOnWarnValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

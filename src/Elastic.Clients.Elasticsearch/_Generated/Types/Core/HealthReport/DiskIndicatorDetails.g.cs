@@ -17,26 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class DiskIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicatorDetails>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesWithReadonlyBlock = System.Text.Json.JsonEncodedText.Encode("indices_with_readonly_block");
+	private static readonly System.Text.Json.JsonEncodedText PropNodesOverFloodStageWatermark = System.Text.Json.JsonEncodedText.Encode("nodes_over_flood_stage_watermark");
+	private static readonly System.Text.Json.JsonEncodedText PropNodesOverHighWatermark = System.Text.Json.JsonEncodedText.Encode("nodes_over_high_watermark");
+	private static readonly System.Text.Json.JsonEncodedText PropNodesWithEnoughDiskSpace = System.Text.Json.JsonEncodedText.Encode("nodes_with_enough_disk_space");
+	private static readonly System.Text.Json.JsonEncodedText PropNodesWithUnknownDiskStatus = System.Text.Json.JsonEncodedText.Encode("nodes_with_unknown_disk_status");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propIndicesWithReadonlyBlock = default;
+		LocalJsonValue<long> propNodesOverFloodStageWatermark = default;
+		LocalJsonValue<long> propNodesOverHighWatermark = default;
+		LocalJsonValue<long> propNodesWithEnoughDiskSpace = default;
+		LocalJsonValue<long> propNodesWithUnknownDiskStatus = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndicesWithReadonlyBlock.TryReadProperty(ref reader, options, PropIndicesWithReadonlyBlock, null))
+			{
+				continue;
+			}
+
+			if (propNodesOverFloodStageWatermark.TryReadProperty(ref reader, options, PropNodesOverFloodStageWatermark, null))
+			{
+				continue;
+			}
+
+			if (propNodesOverHighWatermark.TryReadProperty(ref reader, options, PropNodesOverHighWatermark, null))
+			{
+				continue;
+			}
+
+			if (propNodesWithEnoughDiskSpace.TryReadProperty(ref reader, options, PropNodesWithEnoughDiskSpace, null))
+			{
+				continue;
+			}
+
+			if (propNodesWithUnknownDiskStatus.TryReadProperty(ref reader, options, PropNodesWithUnknownDiskStatus, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IndicesWithReadonlyBlock = propIndicesWithReadonlyBlock.Value,
+			NodesOverFloodStageWatermark = propNodesOverFloodStageWatermark.Value,
+			NodesOverHighWatermark = propNodesOverHighWatermark.Value,
+			NodesWithEnoughDiskSpace = propNodesWithEnoughDiskSpace.Value,
+			NodesWithUnknownDiskStatus = propNodesWithUnknownDiskStatus.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicatorDetails value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndicesWithReadonlyBlock, value.IndicesWithReadonlyBlock, null, null);
+		writer.WriteProperty(options, PropNodesOverFloodStageWatermark, value.NodesOverFloodStageWatermark, null, null);
+		writer.WriteProperty(options, PropNodesOverHighWatermark, value.NodesOverHighWatermark, null, null);
+		writer.WriteProperty(options, PropNodesWithEnoughDiskSpace, value.NodesWithEnoughDiskSpace, null, null);
+		writer.WriteProperty(options, PropNodesWithUnknownDiskStatus, value.NodesWithUnknownDiskStatus, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicatorDetailsConverter))]
 public sealed partial class DiskIndicatorDetails
 {
-	[JsonInclude, JsonPropertyName("indices_with_readonly_block")]
-	public long IndicesWithReadonlyBlock { get; init; }
-	[JsonInclude, JsonPropertyName("nodes_over_flood_stage_watermark")]
-	public long NodesOverFloodStageWatermark { get; init; }
-	[JsonInclude, JsonPropertyName("nodes_over_high_watermark")]
-	public long NodesOverHighWatermark { get; init; }
-	[JsonInclude, JsonPropertyName("nodes_with_enough_disk_space")]
-	public long NodesWithEnoughDiskSpace { get; init; }
-	[JsonInclude, JsonPropertyName("nodes_with_unknown_disk_status")]
-	public long NodesWithUnknownDiskStatus { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DiskIndicatorDetails(long indicesWithReadonlyBlock, long nodesOverFloodStageWatermark, long nodesOverHighWatermark, long nodesWithEnoughDiskSpace, long nodesWithUnknownDiskStatus)
+	{
+		IndicesWithReadonlyBlock = indicesWithReadonlyBlock;
+		NodesOverFloodStageWatermark = nodesOverFloodStageWatermark;
+		NodesOverHighWatermark = nodesOverHighWatermark;
+		NodesWithEnoughDiskSpace = nodesWithEnoughDiskSpace;
+		NodesWithUnknownDiskStatus = nodesWithUnknownDiskStatus;
+	}
+#if NET7_0_OR_GREATER
+	public DiskIndicatorDetails()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DiskIndicatorDetails()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DiskIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long IndicesWithReadonlyBlock { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NodesOverFloodStageWatermark { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NodesOverHighWatermark { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NodesWithEnoughDiskSpace { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NodesWithUnknownDiskStatus { get; set; }
 }

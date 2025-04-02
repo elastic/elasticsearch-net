@@ -17,26 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class SerializedClusterStateDetailConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetail>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCompressedSize = System.Text.Json.JsonEncodedText.Encode("compressed_size");
+	private static readonly System.Text.Json.JsonEncodedText PropCompressedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("compressed_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropUncompressedSize = System.Text.Json.JsonEncodedText.Encode("uncompressed_size");
+	private static readonly System.Text.Json.JsonEncodedText PropUncompressedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("uncompressed_size_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetail Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propCompressedSize = default;
+		LocalJsonValue<long?> propCompressedSizeInBytes = default;
+		LocalJsonValue<long?> propCount = default;
+		LocalJsonValue<string?> propUncompressedSize = default;
+		LocalJsonValue<long?> propUncompressedSizeInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCompressedSize.TryReadProperty(ref reader, options, PropCompressedSize, null))
+			{
+				continue;
+			}
+
+			if (propCompressedSizeInBytes.TryReadProperty(ref reader, options, PropCompressedSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propUncompressedSize.TryReadProperty(ref reader, options, PropUncompressedSize, null))
+			{
+				continue;
+			}
+
+			if (propUncompressedSizeInBytes.TryReadProperty(ref reader, options, PropUncompressedSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetail(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CompressedSize = propCompressedSize.Value,
+			CompressedSizeInBytes = propCompressedSizeInBytes.Value,
+			Count = propCount.Value,
+			UncompressedSize = propUncompressedSize.Value,
+			UncompressedSizeInBytes = propUncompressedSizeInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetail value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCompressedSize, value.CompressedSize, null, null);
+		writer.WriteProperty(options, PropCompressedSizeInBytes, value.CompressedSizeInBytes, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropUncompressedSize, value.UncompressedSize, null, null);
+		writer.WriteProperty(options, PropUncompressedSizeInBytes, value.UncompressedSizeInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetailConverter))]
 public sealed partial class SerializedClusterStateDetail
 {
-	[JsonInclude, JsonPropertyName("compressed_size")]
-	public string? CompressedSize { get; init; }
-	[JsonInclude, JsonPropertyName("compressed_size_in_bytes")]
-	public long? CompressedSizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
-	public long? Count { get; init; }
-	[JsonInclude, JsonPropertyName("uncompressed_size")]
-	public string? UncompressedSize { get; init; }
-	[JsonInclude, JsonPropertyName("uncompressed_size_in_bytes")]
-	public long? UncompressedSizeInBytes { get; init; }
+#if NET7_0_OR_GREATER
+	public SerializedClusterStateDetail()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SerializedClusterStateDetail()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SerializedClusterStateDetail(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public string? CompressedSize { get; set; }
+	public long? CompressedSizeInBytes { get; set; }
+	public long? Count { get; set; }
+	public string? UncompressedSize { get; set; }
+	public long? UncompressedSizeInBytes { get; set; }
 }

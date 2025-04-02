@@ -17,19 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class ForecastResponse : ElasticsearchResponse
+internal sealed partial class ForecastResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse>
 {
-	[JsonInclude, JsonPropertyName("acknowledged")]
-	public bool Acknowledged { get; init; }
-	[JsonInclude, JsonPropertyName("forecast_id")]
-	public string ForecastId { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropForecastId = System.Text.Json.JsonEncodedText.Encode("forecast_id");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<string> propForecastId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
+			{
+				continue;
+			}
+
+			if (propForecastId.TryReadProperty(ref reader, options, PropForecastId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Acknowledged = propAcknowledged.Value,
+			ForecastId = propForecastId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropForecastId, value.ForecastId, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponseConverter))]
+public sealed partial class ForecastResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ForecastResponse(bool acknowledged, string forecastId)
+	{
+		Acknowledged = acknowledged;
+		ForecastId = forecastId;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ForecastResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ForecastResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool Acknowledged { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		string ForecastId { get; set; }
 }

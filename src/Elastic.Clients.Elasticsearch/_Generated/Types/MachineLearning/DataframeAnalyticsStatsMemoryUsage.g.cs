@@ -17,47 +17,137 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalyticsStatsMemoryUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryReestimateBytes = System.Text.Json.JsonEncodedText.Encode("memory_reestimate_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPeakUsageBytes = System.Text.Json.JsonEncodedText.Encode("peak_usage_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propMemoryReestimateBytes = default;
+		LocalJsonValue<long> propPeakUsageBytes = default;
+		LocalJsonValue<string> propStatus = default;
+		LocalJsonValue<System.DateTime?> propTimestamp = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMemoryReestimateBytes.TryReadProperty(ref reader, options, PropMemoryReestimateBytes, null))
+			{
+				continue;
+			}
+
+			if (propPeakUsageBytes.TryReadProperty(ref reader, options, PropPeakUsageBytes, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MemoryReestimateBytes = propMemoryReestimateBytes.Value,
+			PeakUsageBytes = propPeakUsageBytes.Value,
+			Status = propStatus.Value,
+			Timestamp = propTimestamp.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMemoryReestimateBytes, value.MemoryReestimateBytes, null, null);
+		writer.WriteProperty(options, PropPeakUsageBytes, value.PeakUsageBytes, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsageConverter))]
 public sealed partial class DataframeAnalyticsStatsMemoryUsage
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalyticsStatsMemoryUsage(long peakUsageBytes, string status)
+	{
+		PeakUsageBytes = peakUsageBytes;
+		Status = status;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeAnalyticsStatsMemoryUsage()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeAnalyticsStatsMemoryUsage()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalyticsStatsMemoryUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// This value is present when the status is hard_limit and it is a new estimate of how much memory the job needs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("memory_reestimate_bytes")]
-	public long? MemoryReestimateBytes { get; init; }
+	public long? MemoryReestimateBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of bytes used at the highest peak of memory usage.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("peak_usage_bytes")]
-	public long PeakUsageBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long PeakUsageBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The memory usage status.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("status")]
-	public string Status { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Status { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The timestamp when memory usage was calculated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public long? Timestamp { get; init; }
+	public System.DateTime? Timestamp { get; set; }
 }

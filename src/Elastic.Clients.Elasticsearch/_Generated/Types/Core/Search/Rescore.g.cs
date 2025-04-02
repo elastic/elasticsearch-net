@@ -17,271 +17,252 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-[JsonConverter(typeof(RescoreConverter))]
+internal sealed partial class RescoreConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.Rescore>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropWindowSize = System.Text.Json.JsonEncodedText.Encode("window_size");
+	private static readonly System.Text.Json.JsonEncodedText VariantLearningToRank = System.Text.Json.JsonEncodedText.Encode("learning_to_rank");
+	private static readonly System.Text.Json.JsonEncodedText VariantQuery = System.Text.Json.JsonEncodedText.Encode("query");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.Rescore Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propWindowSize = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propWindowSize.TryReadProperty(ref reader, options, PropWindowSize, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLearningToRank))
+			{
+				variantType = VariantLearningToRank.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantQuery))
+			{
+				variantType = VariantQuery.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant,
+			WindowSize = propWindowSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.Rescore value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "learning_to_rank":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.LearningToRank)value.Variant, null, null);
+				break;
+			case "query":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.Rescore)}'.");
+		}
+
+		writer.WriteProperty(options, PropWindowSize, value.WindowSize, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.RescoreConverter))]
 public sealed partial class Rescore
 {
-	internal Rescore(string variantName, object variant)
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public Rescore()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Rescore()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Rescore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
-
-	public static Rescore LearningToRank(Elastic.Clients.Elasticsearch.Core.Search.LearningToRank learningToRank) => new Rescore("learning_to_rank", learningToRank);
-	public static Rescore Query(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery rescoreQuery) => new Rescore("query", rescoreQuery);
-
-	[JsonInclude, JsonPropertyName("window_size")]
+	public Elastic.Clients.Elasticsearch.Core.Search.LearningToRank? LearningToRank { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank>("learning_to_rank"); set => SetVariant("learning_to_rank", value); }
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery? Query { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery>("query"); set => SetVariant("query", value); }
 	public int? WindowSize { get; set; }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Core.Search.LearningToRank value) => new Elastic.Clients.Elasticsearch.Core.Search.Rescore { LearningToRank = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery value) => new Elastic.Clients.Elasticsearch.Core.Search.Rescore { Query = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class RescoreConverter : JsonConverter<Rescore>
+public readonly partial struct RescoreDescriptor<TDocument>
 {
-	public override Rescore Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.Core.Search.Rescore Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RescoreDescriptor(Elastic.Clients.Elasticsearch.Core.Search.Rescore instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		int? windowSizeValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "window_size")
-			{
-				windowSizeValue = JsonSerializer.Deserialize<int?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "learning_to_rank")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "query")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Rescore' from the response.");
-		}
-
-		var result = new Rescore(variantNameValue, variantValue);
-		result.WindowSize = windowSizeValue;
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, Rescore value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RescoreDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.WindowSize.HasValue)
-		{
-			writer.WritePropertyName("window_size");
-			writer.WriteNumberValue(value.WindowSize.Value);
-		}
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "learning_to_rank":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LearningToRank)value.Variant, options);
-					break;
-				case "query":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery>(writer, (Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery)value.Variant, options);
-					break;
-			}
-		}
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.Rescore instance) => new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> LearningToRank(Elastic.Clients.Elasticsearch.Core.Search.LearningToRank? value)
+	{
+		Instance.LearningToRank = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> LearningToRank(System.Action<Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor> action)
+	{
+		Instance.LearningToRank = Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery? value)
+	{
+		Instance.Query = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> WindowSize(int? value)
+	{
+		Instance.WindowSize = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.Rescore Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RescoreDescriptor<TDocument> : SerializableDescriptor<RescoreDescriptor<TDocument>>
+public readonly partial struct RescoreDescriptor
 {
-	internal RescoreDescriptor(Action<RescoreDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.Rescore Instance { get; init; }
 
-	public RescoreDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RescoreDescriptor(Elastic.Clients.Elasticsearch.Core.Search.Rescore instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private RescoreDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RescoreDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private RescoreDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor(Elastic.Clients.Elasticsearch.Core.Search.Rescore instance) => new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor LearningToRank(Elastic.Clients.Elasticsearch.Core.Search.LearningToRank? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.LearningToRank = value;
+		return this;
 	}
 
-	private int? WindowSizeValue { get; set; }
-
-	public RescoreDescriptor<TDocument> WindowSize(int? windowSize)
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor LearningToRank(System.Action<Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor> action)
 	{
-		WindowSizeValue = windowSize;
-		return Self;
+		Instance.LearningToRank = Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor.Build(action);
+		return this;
 	}
 
-	public RescoreDescriptor<TDocument> LearningToRank(Elastic.Clients.Elasticsearch.Core.Search.LearningToRank learningToRank) => Set(learningToRank, "learning_to_rank");
-	public RescoreDescriptor<TDocument> LearningToRank(Action<Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor> configure) => Set(configure, "learning_to_rank");
-	public RescoreDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery rescoreQuery) => Set(rescoreQuery, "query");
-	public RescoreDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>> configure) => Set(configure, "query");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor Query(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery? value)
 	{
-		writer.WriteStartObject();
-		if (WindowSizeValue.HasValue)
-		{
-			writer.WritePropertyName("window_size");
-			writer.WriteNumberValue(WindowSizeValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class RescoreDescriptor : SerializableDescriptor<RescoreDescriptor>
-{
-	internal RescoreDescriptor(Action<RescoreDescriptor> configure) => configure.Invoke(this);
-
-	public RescoreDescriptor() : base()
-	{
+		Instance.Query = value;
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private RescoreDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor> action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor.Build(action);
+		return this;
 	}
 
-	private RescoreDescriptor Set(object variant, string variantName)
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<T>> action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	private int? WindowSizeValue { get; set; }
-
-	public RescoreDescriptor WindowSize(int? windowSize)
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor WindowSize(int? value)
 	{
-		WindowSizeValue = windowSize;
-		return Self;
+		Instance.WindowSize = value;
+		return this;
 	}
 
-	public RescoreDescriptor LearningToRank(Elastic.Clients.Elasticsearch.Core.Search.LearningToRank learningToRank) => Set(learningToRank, "learning_to_rank");
-	public RescoreDescriptor LearningToRank(Action<Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor> configure) => Set(configure, "learning_to_rank");
-	public RescoreDescriptor Query(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery rescoreQuery) => Set(rescoreQuery, "query");
-	public RescoreDescriptor Query<TDocument>(Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor> configure) => Set(configure, "query");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.Rescore Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (WindowSizeValue.HasValue)
-		{
-			writer.WritePropertyName("window_size");
-			writer.WriteNumberValue(WindowSizeValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

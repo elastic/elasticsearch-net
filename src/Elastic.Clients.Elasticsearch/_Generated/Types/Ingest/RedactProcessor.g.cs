@@ -17,25 +17,191 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class RedactProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropPatternDefinitions = System.Text.Json.JsonEncodedText.Encode("pattern_definitions");
+	private static readonly System.Text.Json.JsonEncodedText PropPatterns = System.Text.Json.JsonEncodedText.Encode("patterns");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText PropSkipIfUnlicensed = System.Text.Json.JsonEncodedText.Encode("skip_if_unlicensed");
+	private static readonly System.Text.Json.JsonEncodedText PropSuffix = System.Text.Json.JsonEncodedText.Encode("suffix");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTraceRedact = System.Text.Json.JsonEncodedText.Encode("trace_redact");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.RedactProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propPatternDefinitions = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propPatterns = default;
+		LocalJsonValue<string?> propPrefix = default;
+		LocalJsonValue<bool?> propSkipIfUnlicensed = default;
+		LocalJsonValue<string?> propSuffix = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<bool?> propTraceRedact = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propPatternDefinitions.TryReadProperty(ref reader, options, PropPatternDefinitions, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPatterns.TryReadProperty(ref reader, options, PropPatterns, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propPrefix.TryReadProperty(ref reader, options, PropPrefix, null))
+			{
+				continue;
+			}
+
+			if (propSkipIfUnlicensed.TryReadProperty(ref reader, options, PropSkipIfUnlicensed, null))
+			{
+				continue;
+			}
+
+			if (propSuffix.TryReadProperty(ref reader, options, PropSuffix, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTraceRedact.TryReadProperty(ref reader, options, PropTraceRedact, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.RedactProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Field = propField.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			OnFailure = propOnFailure.Value,
+			PatternDefinitions = propPatternDefinitions.Value,
+			Patterns = propPatterns.Value,
+			Prefix = propPrefix.Value,
+			SkipIfUnlicensed = propSkipIfUnlicensed.Value,
+			Suffix = propSuffix.Value,
+			Tag = propTag.Value,
+			TraceRedact = propTraceRedact.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.RedactProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropPatternDefinitions, value.PatternDefinitions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropPatterns, value.Patterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
+		writer.WriteProperty(options, PropSkipIfUnlicensed, value.SkipIfUnlicensed, null, null);
+		writer.WriteProperty(options, PropSuffix, value.Suffix, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTraceRedact, value.TraceRedact, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.RedactProcessorConverter))]
 public sealed partial class RedactProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RedactProcessor(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.ICollection<string> patterns)
+	{
+		Field = field;
+		Patterns = patterns;
+	}
+#if NET7_0_OR_GREATER
+	public RedactProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RedactProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RedactProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -43,23 +209,24 @@ public sealed partial class RedactProcessor
 	/// The field to be redacted
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -67,7 +234,6 @@ public sealed partial class RedactProcessor
 	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -75,25 +241,25 @@ public sealed partial class RedactProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
-	[JsonInclude, JsonPropertyName("pattern_definitions")]
-	public IDictionary<string, string>? PatternDefinitions { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.IDictionary<string, string>? PatternDefinitions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of grok expressions to match and redact named captures with
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("patterns")]
-	public ICollection<string> Patterns { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Patterns { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Start a redacted section with this token
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
 
 	/// <summary>
@@ -101,7 +267,6 @@ public sealed partial class RedactProcessor
 	/// If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("skip_if_unlicensed")]
 	public bool? SkipIfUnlicensed { get; set; }
 
 	/// <summary>
@@ -109,7 +274,6 @@ public sealed partial class RedactProcessor
 	/// End a redacted section with this token
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("suffix")]
 	public string? Suffix { get; set; }
 
 	/// <summary>
@@ -118,7 +282,6 @@ public sealed partial class RedactProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -126,36 +289,27 @@ public sealed partial class RedactProcessor
 	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("trace_redact")]
 	public bool? TraceRedact { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(RedactProcessor redactProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Redact(redactProcessor);
 }
 
-public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableDescriptor<RedactProcessorDescriptor<TDocument>>
+public readonly partial struct RedactProcessorDescriptor<TDocument>
 {
-	internal RedactProcessorDescriptor(Action<RedactProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.RedactProcessor Instance { get; init; }
 
-	public RedactProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RedactProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
-	private ICollection<string> PatternsValue { get; set; }
-	private string? PrefixValue { get; set; }
-	private bool? SkipIfUnlicensedValue { get; set; }
-	private string? SuffixValue { get; set; }
-	private string? TagValue { get; set; }
-	private bool? TraceRedactValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RedactProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.RedactProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RedactProcessor(Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -163,10 +317,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -174,10 +328,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// The field to be redacted
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -185,21 +339,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// The field to be redacted
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to be redacted
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -207,10 +350,32 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -218,10 +383,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -229,10 +394,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -240,46 +405,85 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public RedactProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public RedactProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public RedactProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
 	}
 
-	public RedactProcessorDescriptor<TDocument> PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
-		PatternDefinitionsValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> PatternDefinitions(System.Collections.Generic.IDictionary<string, string>? value)
+	{
+		Instance.PatternDefinitions = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> PatternDefinitions()
+	{
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	{
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> AddPatternDefinition(string key, string value)
+	{
+		Instance.PatternDefinitions ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.PatternDefinitions.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -287,10 +491,43 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// A list of grok expressions to match and redact named captures with
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Patterns(ICollection<string> patterns)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Patterns(System.Collections.Generic.ICollection<string> value)
 	{
-		PatternsValue = patterns;
-		return Self;
+		Instance.Patterns = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of grok expressions to match and redact named captures with
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Patterns()
+	{
+		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of grok expressions to match and redact named captures with
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Patterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of grok expressions to match and redact named captures with
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Patterns(params string[] values)
+	{
+		Instance.Patterns = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -298,10 +535,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Start a redacted section with this token
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Prefix(string? prefix)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Prefix(string? value)
 	{
-		PrefixValue = prefix;
-		return Self;
+		Instance.Prefix = value;
+		return this;
 	}
 
 	/// <summary>
@@ -309,10 +546,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> SkipIfUnlicensed(bool? skipIfUnlicensed = true)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> SkipIfUnlicensed(bool? value = true)
 	{
-		SkipIfUnlicensedValue = skipIfUnlicensed;
-		return Self;
+		Instance.SkipIfUnlicensed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -320,10 +557,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// End a redacted section with this token
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Suffix(string? suffix)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Suffix(string? value)
 	{
-		SuffixValue = suffix;
-		return Self;
+		Instance.Suffix = value;
+		return this;
 	}
 
 	/// <summary>
@@ -332,10 +569,10 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -343,138 +580,39 @@ public sealed partial class RedactProcessorDescriptor<TDocument> : SerializableD
 	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor<TDocument> TraceRedact(bool? traceRedact = true)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> TraceRedact(bool? value = true)
 	{
-		TraceRedactValue = traceRedact;
-		return Self;
+		Instance.TraceRedact = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.RedactProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PatternDefinitionsValue is not null)
-		{
-			writer.WritePropertyName("pattern_definitions");
-			JsonSerializer.Serialize(writer, PatternDefinitionsValue, options);
-		}
-
-		writer.WritePropertyName("patterns");
-		JsonSerializer.Serialize(writer, PatternsValue, options);
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
-
-		if (SkipIfUnlicensedValue.HasValue)
-		{
-			writer.WritePropertyName("skip_if_unlicensed");
-			writer.WriteBooleanValue(SkipIfUnlicensedValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(SuffixValue))
-		{
-			writer.WritePropertyName("suffix");
-			writer.WriteStringValue(SuffixValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TraceRedactValue.HasValue)
-		{
-			writer.WritePropertyName("trace_redact");
-			writer.WriteBooleanValue(TraceRedactValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.RedactProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<RedactProcessorDescriptor>
+public readonly partial struct RedactProcessorDescriptor
 {
-	internal RedactProcessorDescriptor(Action<RedactProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.RedactProcessor Instance { get; init; }
 
-	public RedactProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RedactProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
-	private ICollection<string> PatternsValue { get; set; }
-	private string? PrefixValue { get; set; }
-	private bool? SkipIfUnlicensedValue { get; set; }
-	private string? SuffixValue { get; set; }
-	private string? TagValue { get; set; }
-	private bool? TraceRedactValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RedactProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.RedactProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RedactProcessor(Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -482,10 +620,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -493,10 +631,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// The field to be redacted
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -504,21 +642,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// The field to be redacted
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to be redacted
-	/// </para>
-	/// </summary>
-	public RedactProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -526,10 +653,32 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -537,10 +686,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -548,10 +697,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -559,46 +708,113 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public RedactProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
 	}
 
-	public RedactProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
 	}
 
-	public RedactProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
 	}
 
-	public RedactProcessorDescriptor PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		PatternDefinitionsValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor PatternDefinitions(System.Collections.Generic.IDictionary<string, string>? value)
+	{
+		Instance.PatternDefinitions = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor PatternDefinitions()
+	{
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	{
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor AddPatternDefinition(string key, string value)
+	{
+		Instance.PatternDefinitions ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.PatternDefinitions.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -606,10 +822,43 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// A list of grok expressions to match and redact named captures with
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Patterns(ICollection<string> patterns)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Patterns(System.Collections.Generic.ICollection<string> value)
 	{
-		PatternsValue = patterns;
-		return Self;
+		Instance.Patterns = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of grok expressions to match and redact named captures with
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Patterns()
+	{
+		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of grok expressions to match and redact named captures with
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Patterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of grok expressions to match and redact named captures with
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Patterns(params string[] values)
+	{
+		Instance.Patterns = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -617,10 +866,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Start a redacted section with this token
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Prefix(string? prefix)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Prefix(string? value)
 	{
-		PrefixValue = prefix;
-		return Self;
+		Instance.Prefix = value;
+		return this;
 	}
 
 	/// <summary>
@@ -628,10 +877,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor SkipIfUnlicensed(bool? skipIfUnlicensed = true)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor SkipIfUnlicensed(bool? value = true)
 	{
-		SkipIfUnlicensedValue = skipIfUnlicensed;
-		return Self;
+		Instance.SkipIfUnlicensed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -639,10 +888,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// End a redacted section with this token
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Suffix(string? suffix)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Suffix(string? value)
 	{
-		SuffixValue = suffix;
-		return Self;
+		Instance.Suffix = value;
+		return this;
 	}
 
 	/// <summary>
@@ -651,10 +900,10 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -662,110 +911,17 @@ public sealed partial class RedactProcessorDescriptor : SerializableDescriptor<R
 	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
 	/// </para>
 	/// </summary>
-	public RedactProcessorDescriptor TraceRedact(bool? traceRedact = true)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor TraceRedact(bool? value = true)
 	{
-		TraceRedactValue = traceRedact;
-		return Self;
+		Instance.TraceRedact = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.RedactProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PatternDefinitionsValue is not null)
-		{
-			writer.WritePropertyName("pattern_definitions");
-			JsonSerializer.Serialize(writer, PatternDefinitionsValue, options);
-		}
-
-		writer.WritePropertyName("patterns");
-		JsonSerializer.Serialize(writer, PatternsValue, options);
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
-
-		if (SkipIfUnlicensedValue.HasValue)
-		{
-			writer.WritePropertyName("skip_if_unlicensed");
-			writer.WriteBooleanValue(SkipIfUnlicensedValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(SuffixValue))
-		{
-			writer.WritePropertyName("suffix");
-			writer.WriteStringValue(SuffixValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TraceRedactValue.HasValue)
-		{
-			writer.WritePropertyName("trace_redact");
-			writer.WriteBooleanValue(TraceRedactValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.RedactProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,49 +17,184 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.KnnRetriever>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropNumCandidates = System.Text.Json.JsonEncodedText.Encode("num_candidates");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryVector = System.Text.Json.JsonEncodedText.Encode("query_vector");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryVectorBuilder = System.Text.Json.JsonEncodedText.Encode("query_vector_builder");
+	private static readonly System.Text.Json.JsonEncodedText PropRescoreVector = System.Text.Json.JsonEncodedText.Encode("rescore_vector");
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
+
+	public override Elastic.Clients.Elasticsearch.KnnRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propField = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<int> propK = default;
+		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<int> propNumCandidates = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<float>?> propQueryVector = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryVectorBuilder?> propQueryVectorBuilder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.RescoreVector?> propRescoreVector = default;
+		LocalJsonValue<float?> propSimilarity = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propK.TryReadProperty(ref reader, options, PropK, null))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propNumCandidates.TryReadProperty(ref reader, options, PropNumCandidates, null))
+			{
+				continue;
+			}
+
+			if (propQueryVector.TryReadProperty(ref reader, options, PropQueryVector, static System.Collections.Generic.ICollection<float>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<float>(o, null)))
+			{
+				continue;
+			}
+
+			if (propQueryVectorBuilder.TryReadProperty(ref reader, options, PropQueryVectorBuilder, null))
+			{
+				continue;
+			}
+
+			if (propRescoreVector.TryReadProperty(ref reader, options, PropRescoreVector, null))
+			{
+				continue;
+			}
+
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.KnnRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			Filter = propFilter.Value,
+			K = propK.Value,
+			MinScore = propMinScore.Value,
+			NumCandidates = propNumCandidates.Value,
+			QueryVector = propQueryVector.Value,
+			QueryVectorBuilder = propQueryVectorBuilder.Value,
+			RescoreVector = propRescoreVector.Value,
+			Similarity = propSimilarity.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.KnnRetriever value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropK, value.K, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, null);
+		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
+		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
+		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.KnnRetrieverConverter))]
 public sealed partial class KnnRetriever
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KnnRetriever(string field, int k, int numCandidates)
+	{
+		Field = field;
+		K = k;
+		NumCandidates = numCandidates;
+	}
+#if NET7_0_OR_GREATER
+	public KnnRetriever()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public KnnRetriever()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KnnRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The name of the vector field to search against.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public string Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of nearest neighbors to return as top hits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("k")]
-	public int k { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int K { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
@@ -67,67 +202,69 @@ public sealed partial class KnnRetriever
 	/// Number of nearest neighbor candidates to consider per shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_candidates")]
-	public int NumCandidates { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NumCandidates { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_vector")]
-	public ICollection<float>? QueryVector { get; set; }
+	public System.Collections.Generic.ICollection<float>? QueryVector { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Defines a model to build a query vector.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_vector_builder")]
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
 
 	/// <summary>
 	/// <para>
+	/// Apply oversampling and rescoring to quantized vectors *
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RescoreVector? RescoreVector { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The minimum similarity required for a document to be considered a match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("similarity")]
 	public float? Similarity { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(KnnRetriever knnRetriever) => Elastic.Clients.Elasticsearch.Retriever.Knn(knnRetriever);
 }
 
-public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDescriptor<KnnRetrieverDescriptor<TDocument>>
+public readonly partial struct KnnRetrieverDescriptor<TDocument>
 {
-	internal KnnRetrieverDescriptor(Action<KnnRetrieverDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.KnnRetriever Instance { get; init; }
 
-	public KnnRetrieverDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KnnRetrieverDescriptor(Elastic.Clients.Elasticsearch.KnnRetriever instance)
 	{
+		Instance = instance;
 	}
 
-	private string FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private int kValue { get; set; }
-	private float? MinScoreValue { get; set; }
-	private int NumCandidatesValue { get; set; }
-	private ICollection<float>? QueryVectorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
-	private float? SimilarityValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KnnRetrieverDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.KnnRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.KnnRetriever instance) => new Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.KnnRetriever(Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The name of the vector field to search against.
 	/// </para>
 	/// </summary>
-	public KnnRetrieverDescriptor<TDocument> Field(string field)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Field(string value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -135,233 +272,10 @@ public sealed partial class KnnRetrieverDescriptor<TDocument> : SerializableDesc
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public KnnRetrieverDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public KnnRetrieverDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public KnnRetrieverDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
-
-	public KnnRetrieverDescriptor<TDocument> Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Number of nearest neighbors to return as top hits.
-	/// </para>
-	/// </summary>
-	public KnnRetrieverDescriptor<TDocument> k(int k)
-	{
-		kValue = k;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
-	public KnnRetrieverDescriptor<TDocument> MinScore(float? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Number of nearest neighbor candidates to consider per shard.
-	/// </para>
-	/// </summary>
-	public KnnRetrieverDescriptor<TDocument> NumCandidates(int numCandidates)
-	{
-		NumCandidatesValue = numCandidates;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
-	public KnnRetrieverDescriptor<TDocument> QueryVector(ICollection<float>? queryVector)
-	{
-		QueryVectorValue = queryVector;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines a model to build a query vector.
-	/// </para>
-	/// </summary>
-	public KnnRetrieverDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? queryVectorBuilder)
-	{
-		QueryVectorBuilderDescriptor = null;
-		QueryVectorBuilderDescriptorAction = null;
-		QueryVectorBuilderValue = queryVectorBuilder;
-		return Self;
-	}
-
-	public KnnRetrieverDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor descriptor)
-	{
-		QueryVectorBuilderValue = null;
-		QueryVectorBuilderDescriptorAction = null;
-		QueryVectorBuilderDescriptor = descriptor;
-		return Self;
-	}
-
-	public KnnRetrieverDescriptor<TDocument> QueryVectorBuilder(Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> configure)
-	{
-		QueryVectorBuilderValue = null;
-		QueryVectorBuilderDescriptor = null;
-		QueryVectorBuilderDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The minimum similarity required for a document to be considered a match.
-	/// </para>
-	/// </summary>
-	public KnnRetrieverDescriptor<TDocument> Similarity(float? similarity)
-	{
-		SimilarityValue = similarity;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		writer.WriteStringValue(FieldValue);
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
-
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		writer.WritePropertyName("k");
-		writer.WriteNumberValue(kValue);
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		writer.WritePropertyName("num_candidates");
-		writer.WriteNumberValue(NumCandidatesValue);
-		if (QueryVectorValue is not null)
-		{
-			writer.WritePropertyName("query_vector");
-			JsonSerializer.Serialize(writer, QueryVectorValue, options);
-		}
-
-		if (QueryVectorBuilderDescriptor is not null)
-		{
-			writer.WritePropertyName("query_vector_builder");
-			JsonSerializer.Serialize(writer, QueryVectorBuilderDescriptor, options);
-		}
-		else if (QueryVectorBuilderDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query_vector_builder");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor(QueryVectorBuilderDescriptorAction), options);
-		}
-		else if (QueryVectorBuilderValue is not null)
-		{
-			writer.WritePropertyName("query_vector_builder");
-			JsonSerializer.Serialize(writer, QueryVectorBuilderValue, options);
-		}
-
-		if (SimilarityValue.HasValue)
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteNumberValue(SimilarityValue.Value);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnRetrieverDescriptor>
-{
-	internal KnnRetrieverDescriptor(Action<KnnRetrieverDescriptor> configure) => configure.Invoke(this);
-
-	public KnnRetrieverDescriptor() : base()
-	{
-	}
-
-	private string FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private int kValue { get; set; }
-	private float? MinScoreValue { get; set; }
-	private int NumCandidatesValue { get; set; }
-	private ICollection<float>? QueryVectorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
-	private float? SimilarityValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The name of the vector field to search against.
-	/// </para>
-	/// </summary>
-	public KnnRetrieverDescriptor Field(string field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -369,40 +283,49 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public KnnRetrieverDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter()
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
+		return this;
 	}
 
-	public KnnRetrieverDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
+		return this;
 	}
 
-	public KnnRetrieverDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
 	}
 
-	public KnnRetrieverDescriptor Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -410,10 +333,10 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	/// Number of nearest neighbors to return as top hits.
 	/// </para>
 	/// </summary>
-	public KnnRetrieverDescriptor k(int k)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> K(int value)
 	{
-		kValue = k;
-		return Self;
+		Instance.K = value;
+		return this;
 	}
 
 	/// <summary>
@@ -421,10 +344,10 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	public KnnRetrieverDescriptor MinScore(float? minScore)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
-		MinScoreValue = minScore;
-		return Self;
+		Instance.MinScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -432,10 +355,10 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	/// Number of nearest neighbor candidates to consider per shard.
 	/// </para>
 	/// </summary>
-	public KnnRetrieverDescriptor NumCandidates(int numCandidates)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> NumCandidates(int value)
 	{
-		NumCandidatesValue = numCandidates;
-		return Self;
+		Instance.NumCandidates = value;
+		return this;
 	}
 
 	/// <summary>
@@ -443,10 +366,43 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
 	/// </para>
 	/// </summary>
-	public KnnRetrieverDescriptor QueryVector(ICollection<float>? queryVector)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
-		QueryVectorValue = queryVector;
-		return Self;
+		Instance.QueryVector = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector()
+	{
+		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat>? action)
+	{
+		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(params float[] values)
+	{
+		Instance.QueryVector = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -454,28 +410,43 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	/// Defines a model to build a query vector.
 	/// </para>
 	/// </summary>
-	public KnnRetrieverDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? queryVectorBuilder)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
 	{
-		QueryVectorBuilderDescriptor = null;
-		QueryVectorBuilderDescriptorAction = null;
-		QueryVectorBuilderValue = queryVectorBuilder;
-		return Self;
+		Instance.QueryVectorBuilder = value;
+		return this;
 	}
 
-	public KnnRetrieverDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines a model to build a query vector.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
 	{
-		QueryVectorBuilderValue = null;
-		QueryVectorBuilderDescriptorAction = null;
-		QueryVectorBuilderDescriptor = descriptor;
-		return Self;
+		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
+		return this;
 	}
 
-	public KnnRetrieverDescriptor QueryVectorBuilder(Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Apply oversampling and rescoring to quantized vectors *
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
 	{
-		QueryVectorBuilderValue = null;
-		QueryVectorBuilderDescriptor = null;
-		QueryVectorBuilderDescriptorAction = configure;
-		return Self;
+		Instance.RescoreVector = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Apply oversampling and rescoring to quantized vectors *
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)
+	{
+		Instance.RescoreVector = Elastic.Clients.Elasticsearch.RescoreVectorDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -483,84 +454,277 @@ public sealed partial class KnnRetrieverDescriptor : SerializableDescriptor<KnnR
 	/// The minimum similarity required for a document to be considered a match.
 	/// </para>
 	/// </summary>
-	public KnnRetrieverDescriptor Similarity(float? similarity)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Similarity(float? value)
 	{
-		SimilarityValue = similarity;
-		return Self;
+		Instance.Similarity = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.KnnRetriever Build(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		writer.WriteStringValue(FieldValue);
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
+		var builder = new Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.KnnRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
 
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
+public readonly partial struct KnnRetrieverDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.KnnRetriever Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KnnRetrieverDescriptor(Elastic.Clients.Elasticsearch.KnnRetriever instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KnnRetrieverDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.KnnRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor(Elastic.Clients.Elasticsearch.KnnRetriever instance) => new Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.KnnRetriever(Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the vector field to search against.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Field(string value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter()
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
+	{
+		Instance.Filter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
 		}
 
-		writer.WritePropertyName("k");
-		writer.WriteNumberValue(kValue);
-		if (MinScoreValue.HasValue)
+		Instance.Filter = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
 		}
 
-		writer.WritePropertyName("num_candidates");
-		writer.WriteNumberValue(NumCandidatesValue);
-		if (QueryVectorValue is not null)
-		{
-			writer.WritePropertyName("query_vector");
-			JsonSerializer.Serialize(writer, QueryVectorValue, options);
-		}
+		Instance.Filter = items;
+		return this;
+	}
 
-		if (QueryVectorBuilderDescriptor is not null)
-		{
-			writer.WritePropertyName("query_vector_builder");
-			JsonSerializer.Serialize(writer, QueryVectorBuilderDescriptor, options);
-		}
-		else if (QueryVectorBuilderDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query_vector_builder");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor(QueryVectorBuilderDescriptorAction), options);
-		}
-		else if (QueryVectorBuilderValue is not null)
-		{
-			writer.WritePropertyName("query_vector_builder");
-			JsonSerializer.Serialize(writer, QueryVectorBuilderValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Number of nearest neighbors to return as top hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor K(int value)
+	{
+		Instance.K = value;
+		return this;
+	}
 
-		if (SimilarityValue.HasValue)
-		{
-			writer.WritePropertyName("similarity");
-			writer.WriteNumberValue(SimilarityValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor MinScore(float? value)
+	{
+		Instance.MinScore = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Number of nearest neighbor candidates to consider per shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor NumCandidates(int value)
+	{
+		Instance.NumCandidates = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(System.Collections.Generic.ICollection<float>? value)
+	{
+		Instance.QueryVector = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector()
+	{
+		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat>? action)
+	{
+		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(params float[] values)
+	{
+		Instance.QueryVector = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a model to build a query vector.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
+	{
+		Instance.QueryVectorBuilder = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a model to build a query vector.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
+	{
+		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Apply oversampling and rescoring to quantized vectors *
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
+	{
+		Instance.RescoreVector = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Apply oversampling and rescoring to quantized vectors *
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)
+	{
+		Instance.RescoreVector = Elastic.Clients.Elasticsearch.RescoreVectorDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The minimum similarity required for a document to be considered a match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Similarity(float? value)
+	{
+		Instance.Similarity = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.KnnRetriever Build(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor(new Elastic.Clients.Elasticsearch.KnnRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

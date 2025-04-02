@@ -17,92 +17,141 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class RoleTemplate
+internal sealed partial class RoleTemplateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleTemplate>
 {
-	[JsonInclude, JsonPropertyName("format")]
-	public Elastic.Clients.Elasticsearch.Security.TemplateFormat? Format { get; set; }
-	[JsonInclude, JsonPropertyName("template")]
-	public Elastic.Clients.Elasticsearch.Script Template { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
 
-public sealed partial class RoleTemplateDescriptor : SerializableDescriptor<RoleTemplateDescriptor>
-{
-	internal RoleTemplateDescriptor(Action<RoleTemplateDescriptor> configure) => configure.Invoke(this);
-
-	public RoleTemplateDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Security.RoleTemplate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.TemplateFormat?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script> propTemplate = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.RoleTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Format = propFormat.Value,
+			Template = propTemplate.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Security.TemplateFormat? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script TemplateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor TemplateDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> TemplateDescriptorAction { get; set; }
-
-	public RoleTemplateDescriptor Format(Elastic.Clients.Elasticsearch.Security.TemplateFormat? format)
-	{
-		FormatValue = format;
-		return Self;
-	}
-
-	public RoleTemplateDescriptor Template(Elastic.Clients.Elasticsearch.Script template)
-	{
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = null;
-		TemplateValue = template;
-		return Self;
-	}
-
-	public RoleTemplateDescriptor Template(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		TemplateValue = null;
-		TemplateDescriptorAction = null;
-		TemplateDescriptor = descriptor;
-		return Self;
-	}
-
-	public RoleTemplateDescriptor Template(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		TemplateValue = null;
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RoleTemplate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (FormatValue is not null)
-		{
-			writer.WritePropertyName("format");
-			JsonSerializer.Serialize(writer, FormatValue, options);
-		}
-
-		if (TemplateDescriptor is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateDescriptor, options);
-		}
-		else if (TemplateDescriptorAction is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(TemplateDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateValue, options);
-		}
-
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RoleTemplateConverter))]
+public sealed partial class RoleTemplate
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleTemplate(Elastic.Clients.Elasticsearch.Script template)
+	{
+		Template = template;
+	}
+#if NET7_0_OR_GREATER
+	public RoleTemplate()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RoleTemplate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RoleTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.TemplateFormat? Format { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Script Template { get; set; }
+}
+
+public readonly partial struct RoleTemplateDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.RoleTemplate Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleTemplateDescriptor(Elastic.Clients.Elasticsearch.Security.RoleTemplate instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleTemplateDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.RoleTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor(Elastic.Clients.Elasticsearch.Security.RoleTemplate instance) => new Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleTemplate(Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor Format(Elastic.Clients.Elasticsearch.Security.TemplateFormat? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor Template(Elastic.Clients.Elasticsearch.Script value)
+	{
+		Instance.Template = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor Template()
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.RoleTemplate Build(System.Action<Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.RoleTemplateDescriptor(new Elastic.Clients.Elasticsearch.Security.RoleTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,24 +17,114 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndicesValidationExplanationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
+	private static readonly System.Text.Json.JsonEncodedText PropExplanation = System.Text.Json.JsonEncodedText.Encode("explanation");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropValid = System.Text.Json.JsonEncodedText.Encode("valid");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propError = default;
+		LocalJsonValue<string?> propExplanation = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<bool> propValid = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
+			{
+				continue;
+			}
+
+			if (propExplanation.TryReadProperty(ref reader, options, PropExplanation, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propValid.TryReadProperty(ref reader, options, PropValid, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Error = propError.Value,
+			Explanation = propExplanation.Value,
+			Index = propIndex.Value,
+			Valid = propValid.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropExplanation, value.Explanation, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropValid, value.Valid, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanationConverter))]
 public sealed partial class IndicesValidationExplanation
 {
-	[JsonInclude, JsonPropertyName("error")]
-	public string? Error { get; init; }
-	[JsonInclude, JsonPropertyName("explanation")]
-	public string? Explanation { get; init; }
-	[JsonInclude, JsonPropertyName("index")]
-	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("valid")]
-	public bool Valid { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndicesValidationExplanation(string index, bool valid)
+	{
+		Index = index;
+		Valid = valid;
+	}
+#if NET7_0_OR_GREATER
+	public IndicesValidationExplanation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IndicesValidationExplanation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndicesValidationExplanation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public string? Error { get; set; }
+	public string? Explanation { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Valid { get; set; }
 }

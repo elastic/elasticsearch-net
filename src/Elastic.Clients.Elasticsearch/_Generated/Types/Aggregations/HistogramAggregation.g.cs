@@ -17,34 +17,164 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class HistogramAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExtendedBounds = System.Text.Json.JsonEncodedText.Encode("extended_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropHardBounds = System.Text.Json.JsonEncodedText.Encode("hard_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropInterval = System.Text.Json.JsonEncodedText.Encode("interval");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>?> propExtendedBounds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>?> propHardBounds = default;
+		LocalJsonValue<double?> propInterval = default;
+		LocalJsonValue<int?> propMinDocCount = default;
+		LocalJsonValue<double?> propMissing = default;
+		LocalJsonValue<double?> propOffset = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExtendedBounds.TryReadProperty(ref reader, options, PropExtendedBounds, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propHardBounds.TryReadProperty(ref reader, options, PropHardBounds, null))
+			{
+				continue;
+			}
+
+			if (propInterval.TryReadProperty(ref reader, options, PropInterval, null))
+			{
+				continue;
+			}
+
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, static System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>(o, null, null))))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ExtendedBounds = propExtendedBounds.Value,
+			Field = propField.Value,
+			Format = propFormat.Value,
+			HardBounds = propHardBounds.Value,
+			Interval = propInterval.Value,
+			MinDocCount = propMinDocCount.Value,
+			Missing = propMissing.Value,
+			Offset = propOffset.Value,
+			Order = propOrder.Value,
+			Script = propScript.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExtendedBounds, value.ExtendedBounds, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropHardBounds, value.HardBounds, null, null);
+		writer.WriteProperty(options, PropInterval, value.Interval, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> v) => w.WriteKeyValuePairValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>(o, v, null, null)));
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationConverter))]
 public sealed partial class HistogramAggregation
 {
+#if NET7_0_OR_GREATER
+	public HistogramAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public HistogramAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Enables extending the bounds of the histogram beyond the data itself.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("extended_bounds")]
-	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? ExtendedBounds { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? ExtendedBounds { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the field to aggregate on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -53,8 +183,7 @@ public sealed partial class HistogramAggregation
 	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("hard_bounds")]
-	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? HardBounds { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? HardBounds { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -62,7 +191,6 @@ public sealed partial class HistogramAggregation
 	/// Must be a positive decimal.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("interval")]
 	public double? Interval { get; set; }
 
 	/// <summary>
@@ -71,7 +199,6 @@ public sealed partial class HistogramAggregation
 	/// By default, the response will fill gaps in the histogram with empty buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
 
 	/// <summary>
@@ -80,7 +207,6 @@ public sealed partial class HistogramAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
 
 	/// <summary>
@@ -89,7 +215,6 @@ public sealed partial class HistogramAggregation
 	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("offset")]
 	public double? Offset { get; set; }
 
 	/// <summary>
@@ -98,68 +223,60 @@ public sealed partial class HistogramAggregation
 	/// By default, the returned buckets are sorted by their key ascending.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("order")]
-	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
-	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
+	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(HistogramAggregation histogramAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Histogram(histogramAggregation);
-	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(HistogramAggregation histogramAggregation) => Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy.Histogram(histogramAggregation);
 }
 
-public sealed partial class HistogramAggregationDescriptor<TDocument> : SerializableDescriptor<HistogramAggregationDescriptor<TDocument>>
+public readonly partial struct HistogramAggregationDescriptor<TDocument>
 {
-	internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation Instance { get; init; }
 
-	public HistogramAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? ExtendedBoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor ExtendedBoundsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor> ExtendedBoundsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? HardBoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor HardBoundsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor> HardBoundsDescriptorAction { get; set; }
-	private double? IntervalValue { get; set; }
-	private int? MinDocCountValue { get; set; }
-	private double? MissingValue { get; set; }
-	private double? OffsetValue { get; set; }
-	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HistogramAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Enables extending the bounds of the histogram beyond the data itself.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? extendedBounds)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? value)
 	{
-		ExtendedBoundsDescriptor = null;
-		ExtendedBoundsDescriptorAction = null;
-		ExtendedBoundsValue = extendedBounds;
-		return Self;
+		Instance.ExtendedBounds = value;
+		return this;
 	}
 
-	public HistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> ExtendedBounds()
 	{
-		ExtendedBoundsValue = null;
-		ExtendedBoundsDescriptorAction = null;
-		ExtendedBoundsDescriptor = descriptor;
-		return Self;
+		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(null);
+		return this;
 	}
 
-	public HistogramAggregationDescriptor<TDocument> ExtendedBounds(Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> ExtendedBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor>? action)
 	{
-		ExtendedBoundsValue = null;
-		ExtendedBoundsDescriptor = null;
-		ExtendedBoundsDescriptorAction = configure;
-		return Self;
+		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -167,10 +284,10 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	/// The name of the field to aggregate on.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -178,27 +295,16 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	/// The name of the field to aggregate on.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to aggregate on.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Format(string? value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor<TDocument> Format(string? format)
-	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -207,302 +313,10 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? hardBounds)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? value)
 	{
-		HardBoundsDescriptor = null;
-		HardBoundsDescriptorAction = null;
-		HardBoundsValue = hardBounds;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor descriptor)
-	{
-		HardBoundsValue = null;
-		HardBoundsDescriptorAction = null;
-		HardBoundsDescriptor = descriptor;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor<TDocument> HardBounds(Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor> configure)
-	{
-		HardBoundsValue = null;
-		HardBoundsDescriptor = null;
-		HardBoundsDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The interval for the buckets.
-	/// Must be a positive decimal.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> Interval(double? interval)
-	{
-		IntervalValue = interval;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
-	/// By default, the response will fill gaps in the histogram with empty buckets.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
-	{
-		MinDocCountValue = minDocCount;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> Missing(double? missing)
-	{
-		MissingValue = missing;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// By default, the bucket keys start with 0 and then continue in even spaced steps of <c>interval</c>.
-	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> Offset(double? offset)
-	{
-		OffsetValue = offset;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// By default, the returned buckets are sorted by their key ascending.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
-	{
-		OrderValue = order;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ExtendedBoundsDescriptor is not null)
-		{
-			writer.WritePropertyName("extended_bounds");
-			JsonSerializer.Serialize(writer, ExtendedBoundsDescriptor, options);
-		}
-		else if (ExtendedBoundsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("extended_bounds");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor(ExtendedBoundsDescriptorAction), options);
-		}
-		else if (ExtendedBoundsValue is not null)
-		{
-			writer.WritePropertyName("extended_bounds");
-			JsonSerializer.Serialize(writer, ExtendedBoundsValue, options);
-		}
-
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (HardBoundsDescriptor is not null)
-		{
-			writer.WritePropertyName("hard_bounds");
-			JsonSerializer.Serialize(writer, HardBoundsDescriptor, options);
-		}
-		else if (HardBoundsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("hard_bounds");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor(HardBoundsDescriptorAction), options);
-		}
-		else if (HardBoundsValue is not null)
-		{
-			writer.WritePropertyName("hard_bounds");
-			JsonSerializer.Serialize(writer, HardBoundsValue, options);
-		}
-
-		if (IntervalValue.HasValue)
-		{
-			writer.WritePropertyName("interval");
-			writer.WriteNumberValue(IntervalValue.Value);
-		}
-
-		if (MinDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (MissingValue.HasValue)
-		{
-			writer.WritePropertyName("missing");
-			writer.WriteNumberValue(MissingValue.Value);
-		}
-
-		if (OffsetValue.HasValue)
-		{
-			writer.WritePropertyName("offset");
-			writer.WriteNumberValue(OffsetValue.Value);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class HistogramAggregationDescriptor : SerializableDescriptor<HistogramAggregationDescriptor>
-{
-	internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public HistogramAggregationDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? ExtendedBoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor ExtendedBoundsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor> ExtendedBoundsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? HardBoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor HardBoundsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor> HardBoundsDescriptorAction { get; set; }
-	private double? IntervalValue { get; set; }
-	private int? MinDocCountValue { get; set; }
-	private double? MissingValue { get; set; }
-	private double? OffsetValue { get; set; }
-	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? extendedBounds)
-	{
-		ExtendedBoundsDescriptor = null;
-		ExtendedBoundsDescriptorAction = null;
-		ExtendedBoundsValue = extendedBounds;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor descriptor)
-	{
-		ExtendedBoundsValue = null;
-		ExtendedBoundsDescriptorAction = null;
-		ExtendedBoundsDescriptor = descriptor;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor ExtendedBounds(Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor> configure)
-	{
-		ExtendedBoundsValue = null;
-		ExtendedBoundsDescriptor = null;
-		ExtendedBoundsDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field to aggregate on.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field to aggregate on.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field to aggregate on.
-	/// </para>
-	/// </summary>
-	public HistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor Format(string? format)
-	{
-		FormatValue = format;
-		return Self;
+		Instance.HardBounds = value;
+		return this;
 	}
 
 	/// <summary>
@@ -511,28 +325,22 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat? hardBounds)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> HardBounds()
 	{
-		HardBoundsDescriptor = null;
-		HardBoundsDescriptorAction = null;
-		HardBoundsValue = hardBounds;
-		return Self;
+		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(null);
+		return this;
 	}
 
-	public HistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Limits the range of buckets in the histogram.
+	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> HardBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor>? action)
 	{
-		HardBoundsValue = null;
-		HardBoundsDescriptorAction = null;
-		HardBoundsDescriptor = descriptor;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor HardBounds(Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor> configure)
-	{
-		HardBoundsValue = null;
-		HardBoundsDescriptor = null;
-		HardBoundsDescriptorAction = configure;
-		return Self;
+		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -541,10 +349,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	/// Must be a positive decimal.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor Interval(double? interval)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Interval(double? value)
 	{
-		IntervalValue = interval;
-		return Self;
+		Instance.Interval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -553,10 +361,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	/// By default, the response will fill gaps in the histogram with empty buckets.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor MinDocCount(int? minDocCount)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> MinDocCount(int? value)
 	{
-		MinDocCountValue = minDocCount;
-		return Self;
+		Instance.MinDocCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -565,10 +373,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor Missing(double? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Missing(double? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -577,10 +385,10 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor Offset(double? offset)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Offset(double? value)
 	{
-		OffsetValue = offset;
-		return Self;
+		Instance.Offset = value;
+		return this;
 	}
 
 	/// <summary>
@@ -589,129 +397,336 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	/// By default, the returned buckets are sorted by their key ascending.
 	/// </para>
 	/// </summary>
-	public HistogramAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
 	{
-		OrderValue = order;
-		return Self;
+		Instance.Order = value;
+		return this;
 	}
 
-	public HistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	/// <summary>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// By default, the returned buckets are sorted by their key ascending.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Order()
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
+		return this;
 	}
 
-	public HistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// By default, the returned buckets are sorted by their key ascending.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
+		return this;
 	}
 
-	public HistogramAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> AddOrder(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.SortOrder value)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Order ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>();
+		Instance.Order.Add(new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>(key, value));
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> AddOrder(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.SortOrder value)
 	{
-		writer.WriteStartObject();
-		if (ExtendedBoundsDescriptor is not null)
+		Instance.Order ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>();
+		Instance.Order.Add(new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>(key, value));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("extended_bounds");
-			JsonSerializer.Serialize(writer, ExtendedBoundsDescriptor, options);
-		}
-		else if (ExtendedBoundsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("extended_bounds");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor(ExtendedBoundsDescriptorAction), options);
-		}
-		else if (ExtendedBoundsValue is not null)
-		{
-			writer.WritePropertyName("extended_bounds");
-			JsonSerializer.Serialize(writer, ExtendedBoundsValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct HistogramAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HistogramAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? value)
+	{
+		Instance.ExtendedBounds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor ExtendedBounds()
+	{
+		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Enables extending the bounds of the histogram beyond the data itself.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor ExtendedBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor>? action)
+	{
+		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the field to aggregate on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the field to aggregate on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Format(string? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limits the range of buckets in the histogram.
+	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? value)
+	{
+		Instance.HardBounds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limits the range of buckets in the histogram.
+	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor HardBounds()
+	{
+		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limits the range of buckets in the histogram.
+	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor HardBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor>? action)
+	{
+		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The interval for the buckets.
+	/// Must be a positive decimal.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Interval(double? value)
+	{
+		Instance.Interval = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
+	/// By default, the response will fill gaps in the histogram with empty buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor MinDocCount(int? value)
+	{
+		Instance.MinDocCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Missing(double? value)
+	{
+		Instance.Missing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// By default, the bucket keys start with 0 and then continue in even spaced steps of <c>interval</c>.
+	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Offset(double? value)
+	{
+		Instance.Offset = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// By default, the returned buckets are sorted by their key ascending.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
+	{
+		Instance.Order = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// By default, the returned buckets are sorted by their key ascending.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order()
+	{
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// By default, the returned buckets are sorted by their key ascending.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder>? action)
+	{
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort order of the returned buckets.
+	/// By default, the returned buckets are sorted by their key ascending.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
+	{
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor AddOrder(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.SortOrder value)
+	{
+		Instance.Order ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>();
+		Instance.Order.Add(new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>(key, value));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor AddOrder<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.SortOrder value)
+	{
+		Instance.Order ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>();
+		Instance.Order.Add(new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>(key, value));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (HardBoundsDescriptor is not null)
-		{
-			writer.WritePropertyName("hard_bounds");
-			JsonSerializer.Serialize(writer, HardBoundsDescriptor, options);
-		}
-		else if (HardBoundsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("hard_bounds");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor(HardBoundsDescriptorAction), options);
-		}
-		else if (HardBoundsValue is not null)
-		{
-			writer.WritePropertyName("hard_bounds");
-			JsonSerializer.Serialize(writer, HardBoundsValue, options);
-		}
-
-		if (IntervalValue.HasValue)
-		{
-			writer.WritePropertyName("interval");
-			writer.WriteNumberValue(IntervalValue.Value);
-		}
-
-		if (MinDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (MissingValue.HasValue)
-		{
-			writer.WritePropertyName("missing");
-			writer.WriteNumberValue(MissingValue.Value);
-		}
-
-		if (OffsetValue.HasValue)
-		{
-			writer.WritePropertyName("offset");
-			writer.WriteNumberValue(OffsetValue.Value);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

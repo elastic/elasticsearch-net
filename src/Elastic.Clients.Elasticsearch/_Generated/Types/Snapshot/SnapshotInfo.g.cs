@@ -17,59 +17,289 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class SnapshotInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams");
+	private static readonly System.Text.Json.JsonEncodedText PropDuration = System.Text.Json.JsonEncodedText.Encode("duration");
+	private static readonly System.Text.Json.JsonEncodedText PropDurationInMillis = System.Text.Json.JsonEncodedText.Encode("duration_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropEndTime = System.Text.Json.JsonEncodedText.Encode("end_time");
+	private static readonly System.Text.Json.JsonEncodedText PropEndTimeInMillis = System.Text.Json.JsonEncodedText.Encode("end_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexDetails = System.Text.Json.JsonEncodedText.Encode("index_details");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
+	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionId = System.Text.Json.JsonEncodedText.Encode("version_id");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propDataStreams = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDuration = default;
+		LocalJsonValue<System.TimeSpan?> propDurationInMillis = default;
+		LocalJsonValue<System.DateTime?> propEndTime = default;
+		LocalJsonValue<System.DateTime?> propEndTimeInMillis = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>?> propFailures = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>?> propFeatureStates = default;
+		LocalJsonValue<bool?> propIncludeGlobalState = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>?> propIndexDetails = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propIndices = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<string?> propReason = default;
+		LocalJsonValue<string?> propRepository = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics?> propShards = default;
+		LocalJsonValue<string> propSnapshot = default;
+		LocalJsonValue<System.DateTime?> propStartTime = default;
+		LocalJsonValue<System.DateTime?> propStartTimeInMillis = default;
+		LocalJsonValue<string?> propState = default;
+		LocalJsonValue<string> propUuid = default;
+		LocalJsonValue<string?> propVersion = default;
+		LocalJsonValue<long?> propVersionId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDataStreams.TryReadProperty(ref reader, options, PropDataStreams, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propDuration.TryReadProperty(ref reader, options, PropDuration, null))
+			{
+				continue;
+			}
+
+			if (propDurationInMillis.TryReadProperty(ref reader, options, PropDurationInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propEndTime.TryReadProperty(ref reader, options, PropEndTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propEndTimeInMillis.TryReadProperty(ref reader, options, PropEndTimeInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propFailures.TryReadProperty(ref reader, options, PropFailures, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>(o, null)))
+			{
+				continue;
+			}
+
+			if (propFeatureStates.TryReadProperty(ref reader, options, PropFeatureStates, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIncludeGlobalState.TryReadProperty(ref reader, options, PropIncludeGlobalState, null))
+			{
+				continue;
+			}
+
+			if (propIndexDetails.TryReadProperty(ref reader, options, PropIndexDetails, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
+			{
+				continue;
+			}
+
+			if (propRepository.TryReadProperty(ref reader, options, PropRepository, null))
+			{
+				continue;
+			}
+
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
+			{
+				continue;
+			}
+
+			if (propSnapshot.TryReadProperty(ref reader, options, PropSnapshot, null))
+			{
+				continue;
+			}
+
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propState.TryReadProperty(ref reader, options, PropState, null))
+			{
+				continue;
+			}
+
+			if (propUuid.TryReadProperty(ref reader, options, PropUuid, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (propVersionId.TryReadProperty(ref reader, options, PropVersionId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DataStreams = propDataStreams.Value,
+			Duration = propDuration.Value,
+			DurationInMillis = propDurationInMillis.Value,
+			EndTime = propEndTime.Value,
+			EndTimeInMillis = propEndTimeInMillis.Value,
+			Failures = propFailures.Value,
+			FeatureStates = propFeatureStates.Value,
+			IncludeGlobalState = propIncludeGlobalState.Value,
+			IndexDetails = propIndexDetails.Value,
+			Indices = propIndices.Value,
+			Metadata = propMetadata.Value,
+			Reason = propReason.Value,
+			Repository = propRepository.Value,
+			Shards = propShards.Value,
+			Snapshot = propSnapshot.Value,
+			StartTime = propStartTime.Value,
+			StartTimeInMillis = propStartTimeInMillis.Value,
+			State = propState.Value,
+			Uuid = propUuid.Value,
+			Version = propVersion.Value,
+			VersionId = propVersionId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDuration, value.Duration, null, null);
+		writer.WriteProperty(options, PropDurationInMillis, value.DurationInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropEndTime, value.EndTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropEndTimeInMillis, value.EndTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>(o, v, null));
+		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>(o, v, null));
+		writer.WriteProperty(options, PropIncludeGlobalState, value.IncludeGlobalState, null, null);
+		writer.WriteProperty(options, PropIndexDetails, value.IndexDetails, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>(o, v, null, null));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropReason, value.Reason, null, null);
+		writer.WriteProperty(options, PropRepository, value.Repository, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropSnapshot, value.Snapshot, null, null);
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropState, value.State, null, null);
+		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersionId, value.VersionId, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfoConverter))]
 public sealed partial class SnapshotInfo
 {
-	[JsonInclude, JsonPropertyName("data_streams")]
-	public IReadOnlyCollection<string> DataStreams { get; init; }
-	[JsonInclude, JsonPropertyName("duration")]
-	public Elastic.Clients.Elasticsearch.Duration? Duration { get; init; }
-	[JsonInclude, JsonPropertyName("duration_in_millis")]
-	public long? DurationInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("end_time")]
-	public DateTimeOffset? EndTime { get; init; }
-	[JsonInclude, JsonPropertyName("end_time_in_millis")]
-	public long? EndTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>? Failures { get; init; }
-	[JsonInclude, JsonPropertyName("feature_states")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>? FeatureStates { get; init; }
-	[JsonInclude, JsonPropertyName("include_global_state")]
-	public bool? IncludeGlobalState { get; init; }
-	[JsonInclude, JsonPropertyName("index_details")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.IndexDetails))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>? IndexDetails { get; init; }
-	[JsonInclude, JsonPropertyName("indices")]
-	public IReadOnlyCollection<string>? Indices { get; init; }
-	[JsonInclude, JsonPropertyName("metadata")]
-	public IReadOnlyDictionary<string, object>? Metadata { get; init; }
-	[JsonInclude, JsonPropertyName("reason")]
-	public string? Reason { get; init; }
-	[JsonInclude, JsonPropertyName("repository")]
-	public string? Repository { get; init; }
-	[JsonInclude, JsonPropertyName("shards")]
-	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
-	[JsonInclude, JsonPropertyName("snapshot")]
-	public string Snapshot { get; init; }
-	[JsonInclude, JsonPropertyName("start_time")]
-	public DateTimeOffset? StartTime { get; init; }
-	[JsonInclude, JsonPropertyName("start_time_in_millis")]
-	public long? StartTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("state")]
-	public string? State { get; init; }
-	[JsonInclude, JsonPropertyName("uuid")]
-	public string Uuid { get; init; }
-	[JsonInclude, JsonPropertyName("version")]
-	public string? Version { get; init; }
-	[JsonInclude, JsonPropertyName("version_id")]
-	public long? VersionId { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SnapshotInfo(System.Collections.Generic.IReadOnlyCollection<string> dataStreams, string snapshot, string uuid)
+	{
+		DataStreams = dataStreams;
+		Snapshot = snapshot;
+		Uuid = uuid;
+	}
+#if NET7_0_OR_GREATER
+	public SnapshotInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SnapshotInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SnapshotInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> DataStreams { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? Duration { get; set; }
+	public System.TimeSpan? DurationInMillis { get; set; }
+	public System.DateTime? EndTime { get; set; }
+	public System.DateTime? EndTimeInMillis { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>? Failures { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>? FeatureStates { get; set; }
+	public bool? IncludeGlobalState { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>? IndexDetails { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? Indices { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Metadata { get; set; }
+	public string? Reason { get; set; }
+	public string? Repository { get; set; }
+	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Snapshot { get; set; }
+	public System.DateTime? StartTime { get; set; }
+	public System.DateTime? StartTimeInMillis { get; set; }
+	public string? State { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Uuid { get; set; }
+	public string? Version { get; set; }
+	public long? VersionId { get; set; }
 }

@@ -17,23 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class RankFeatureProperty : IProperty
+internal sealed partial class RankFeaturePropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty>
 {
-	[JsonInclude, JsonPropertyName("dynamic")]
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropPositiveScoreImpact = System.Text.Json.JsonEncodedText.Encode("positive_score_impact");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<bool?> propPositiveScoreImpact = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPositiveScoreImpact.TryReadProperty(ref reader, options, PropPositiveScoreImpact, null))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Dynamic = propDynamic.Value,
+			Fields = propFields.Value,
+			IgnoreAbove = propIgnoreAbove.Value,
+			Meta = propMeta.Value,
+			PositiveScoreImpact = propPositiveScoreImpact.Value,
+			Properties = propProperties.Value,
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropPositiveScoreImpact, value.PositiveScoreImpact, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyConverter))]
+public sealed partial class RankFeatureProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
+{
+#if NET7_0_OR_GREATER
+	public RankFeatureProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RankFeatureProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankFeatureProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
 	/// <summary>
@@ -41,65 +152,55 @@ public sealed partial class RankFeatureProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("positive_score_impact")]
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public bool? PositiveScoreImpact { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "rank_feature";
 }
 
-public sealed partial class RankFeaturePropertyDescriptor<TDocument> : SerializableDescriptor<RankFeaturePropertyDescriptor<TDocument>>, IBuildableDescriptor<RankFeatureProperty>
+public readonly partial struct RankFeaturePropertyDescriptor<TDocument>
 {
-	internal RankFeaturePropertyDescriptor(Action<RankFeaturePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty Instance { get; init; }
 
-	public RankFeaturePropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeaturePropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private bool? PositiveScoreImpactValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-
-	public RankFeaturePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeaturePropertyDescriptor()
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty(Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
 	/// <summary>
@@ -107,152 +208,126 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public RankFeaturePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> PositiveScoreImpact(bool? positiveScoreImpact = true)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> Meta()
 	{
-		PositiveScoreImpactValue = positiveScoreImpact;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> AddMeta(string key, string value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> PositiveScoreImpact(bool? value = true)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.PositiveScoreImpact = value;
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (PositiveScoreImpactValue.HasValue)
-		{
-			writer.WritePropertyName("positive_score_impact");
-			writer.WriteBooleanValue(PositiveScoreImpactValue.Value);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("rank_feature");
-		writer.WriteEndObject();
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	RankFeatureProperty IBuildableDescriptor<RankFeatureProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Meta = MetaValue,
-		PositiveScoreImpact = PositiveScoreImpactValue,
-		Properties = PropertiesValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
+		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }
 
-public sealed partial class RankFeaturePropertyDescriptor : SerializableDescriptor<RankFeaturePropertyDescriptor>, IBuildableDescriptor<RankFeatureProperty>
+public readonly partial struct RankFeaturePropertyDescriptor
 {
-	internal RankFeaturePropertyDescriptor(Action<RankFeaturePropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty Instance { get; init; }
 
-	public RankFeaturePropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeaturePropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private bool? PositiveScoreImpactValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-
-	public RankFeaturePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeaturePropertyDescriptor()
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public RankFeaturePropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty(Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor IgnoreAbove(int? value)
+	{
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
 	/// <summary>
@@ -260,102 +335,81 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public RankFeaturePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor PositiveScoreImpact(bool? positiveScoreImpact = true)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Meta()
 	{
-		PositiveScoreImpactValue = positiveScoreImpact;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor AddMeta(string key, string value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor PositiveScoreImpact(bool? value = true)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.PositiveScoreImpact = value;
+		return this;
 	}
 
-	public RankFeaturePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (PositiveScoreImpactValue.HasValue)
-		{
-			writer.WritePropertyName("positive_score_impact");
-			writer.WriteBooleanValue(PositiveScoreImpactValue.Value);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("rank_feature");
-		writer.WriteEndObject();
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	RankFeatureProperty IBuildableDescriptor<RankFeatureProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Meta = MetaValue,
-		PositiveScoreImpact = PositiveScoreImpactValue,
-		Properties = PropertiesValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
+	{
+		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

@@ -17,21 +17,71 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class StopDatafeedRequestParameters : RequestParameters
+public sealed partial class StopDatafeedRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class StopDatafeedRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowNoMatch = System.Text.Json.JsonEncodedText.Encode("allow_no_match");
+	private static readonly System.Text.Json.JsonEncodedText PropForce = System.Text.Json.JsonEncodedText.Encode("force");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowNoMatch = default;
+		LocalJsonValue<bool?> propForce = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowNoMatch.TryReadProperty(ref reader, options, PropAllowNoMatch, null))
+			{
+				continue;
+			}
+
+			if (propForce.TryReadProperty(ref reader, options, PropForce, null))
+			{
+				continue;
+			}
+
+			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowNoMatch = propAllowNoMatch.Value,
+			Force = propForce.Value,
+			Timeout = propTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowNoMatch, value.AllowNoMatch, null, null);
+		writer.WriteProperty(options, PropForce, value.Force, null, null);
+		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,15 +91,27 @@ public sealed partial class StopDatafeedRequestParameters : RequestParameters
 /// multiple times throughout its lifecycle.
 /// </para>
 /// </summary>
-public sealed partial class StopDatafeedRequest : PlainRequest<StopDatafeedRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestConverter))]
+public sealed partial class StopDatafeedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StopDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public StopDatafeedRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StopDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStopDatafeed;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningStopDatafeed;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -57,10 +119,22 @@ public sealed partial class StopDatafeedRequest : PlainRequest<StopDatafeedReque
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the datafeed. You can stop multiple datafeeds in a single API request by using a comma-separated
+	/// list of datafeeds or a wildcard expression. You can close all datafeeds by using <c>_all</c> or by specifying <c>*</c> as
+	/// the identifier.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Refer to the description for the <c>allow_no_match</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_no_match")]
 	public bool? AllowNoMatch { get; set; }
 
 	/// <summary>
@@ -68,7 +142,6 @@ public sealed partial class StopDatafeedRequest : PlainRequest<StopDatafeedReque
 	/// Refer to the description for the <c>force</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("force")]
 	public bool? Force { get; set; }
 
 	/// <summary>
@@ -76,7 +149,6 @@ public sealed partial class StopDatafeedRequest : PlainRequest<StopDatafeedReque
 	/// Refer to the description for the <c>timeout</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
@@ -87,41 +159,52 @@ public sealed partial class StopDatafeedRequest : PlainRequest<StopDatafeedReque
 /// multiple times throughout its lifecycle.
 /// </para>
 /// </summary>
-public sealed partial class StopDatafeedRequestDescriptor : RequestDescriptor<StopDatafeedRequestDescriptor, StopDatafeedRequestParameters>
+public readonly partial struct StopDatafeedRequestDescriptor
 {
-	internal StopDatafeedRequestDescriptor(Action<StopDatafeedRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest Instance { get; init; }
 
-	public StopDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StopDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStopDatafeed;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.stop_datafeed";
-
-	public StopDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id datafeedId)
+	public StopDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
-		RouteValues.Required("datafeed_id", datafeedId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest(datafeedId);
 	}
 
-	private bool? AllowNoMatchValue { get; set; }
-	private bool? ForceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StopDatafeedRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the datafeed. You can stop multiple datafeeds in a single API request by using a comma-separated
+	/// list of datafeeds or a wildcard expression. You can close all datafeeds by using <c>_all</c> or by specifying <c>*</c> as
+	/// the identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.DatafeedId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>allow_no_match</c> query parameter.
 	/// </para>
 	/// </summary>
-	public StopDatafeedRequestDescriptor AllowNoMatch(bool? allowNoMatch = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor AllowNoMatch(bool? value = true)
 	{
-		AllowNoMatchValue = allowNoMatch;
-		return Self;
+		Instance.AllowNoMatch = value;
+		return this;
 	}
 
 	/// <summary>
@@ -129,10 +212,10 @@ public sealed partial class StopDatafeedRequestDescriptor : RequestDescriptor<St
 	/// Refer to the description for the <c>force</c> query parameter.
 	/// </para>
 	/// </summary>
-	public StopDatafeedRequestDescriptor Force(bool? force = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor Force(bool? value = true)
 	{
-		ForceValue = force;
-		return Self;
+		Instance.Force = value;
+		return this;
 	}
 
 	/// <summary>
@@ -140,33 +223,59 @@ public sealed partial class StopDatafeedRequestDescriptor : RequestDescriptor<St
 	/// Refer to the description for the <c>timeout</c> query parameter.
 	/// </para>
 	/// </summary>
-	public StopDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AllowNoMatchValue.HasValue)
-		{
-			writer.WritePropertyName("allow_no_match");
-			writer.WriteBooleanValue(AllowNoMatchValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ForceValue.HasValue)
-		{
-			writer.WritePropertyName("force");
-			writer.WriteBooleanValue(ForceValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

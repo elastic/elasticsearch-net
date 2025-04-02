@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class StopTrainedModelDeploymentRequestParameters : RequestParameters
+public sealed partial class StopTrainedModelDeploymentRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -51,24 +44,76 @@ public sealed partial class StopTrainedModelDeploymentRequestParameters : Reques
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
+internal sealed partial class StopTrainedModelDeploymentRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Stop a trained model deployment.
 /// </para>
 /// </summary>
-public sealed partial class StopTrainedModelDeploymentRequest : PlainRequest<StopTrainedModelDeploymentRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestConverter))]
+public sealed partial class StopTrainedModelDeploymentRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StopTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public StopTrainedModelDeploymentRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StopTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStopTrainedModelDeployment;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningStopTrainedModelDeployment;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.stop_trained_model_deployment";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -78,7 +123,6 @@ public sealed partial class StopTrainedModelDeploymentRequest : PlainRequest<Sto
 	/// If <c>false</c>, the request returns a 404 status code when there are no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
@@ -87,7 +131,6 @@ public sealed partial class StopTrainedModelDeploymentRequest : PlainRequest<Sto
 	/// restart the model deployment.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
@@ -96,32 +139,114 @@ public sealed partial class StopTrainedModelDeploymentRequest : PlainRequest<Sto
 /// Stop a trained model deployment.
 /// </para>
 /// </summary>
-public sealed partial class StopTrainedModelDeploymentRequestDescriptor : RequestDescriptor<StopTrainedModelDeploymentRequestDescriptor, StopTrainedModelDeploymentRequestParameters>
+public readonly partial struct StopTrainedModelDeploymentRequestDescriptor
 {
-	internal StopTrainedModelDeploymentRequestDescriptor(Action<StopTrainedModelDeploymentRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest Instance { get; init; }
 
-	public StopTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StopTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStopTrainedModelDeployment;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.stop_trained_model_deployment";
-
-	public StopTrainedModelDeploymentRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-	public StopTrainedModelDeploymentRequestDescriptor Force(bool? force = true) => Qs("force", force);
-
-	public StopTrainedModelDeploymentRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public StopTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest(modelId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StopTrainedModelDeploymentRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;
+	/// contains the  <c>_all</c> string or no identifiers and there are no matches; or contains wildcard expressions and
+	/// there are only partial matches. By default, it returns an empty array when there are no matches and the subset of results when there are partial matches.
+	/// If <c>false</c>, the request returns a 404 status code when there are no matches or only partial matches.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor AllowNoMatch(bool? value = true)
+	{
+		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Forcefully stops the deployment, even if it is used by ingest pipelines. You can't use these pipelines until you
+	/// restart the model deployment.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor Force(bool? value = true)
+	{
+		Instance.Force = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

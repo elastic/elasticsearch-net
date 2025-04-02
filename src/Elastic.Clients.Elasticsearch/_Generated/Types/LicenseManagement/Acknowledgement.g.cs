@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+internal sealed partial class AcknowledgementConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license");
+	private static readonly System.Text.Json.JsonEncodedText PropMessage = System.Text.Json.JsonEncodedText.Encode("message");
+
+	public override Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propLicense = default;
+		LocalJsonValue<string> propMessage = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLicense.TryReadProperty(ref reader, options, PropLicense, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propMessage.TryReadProperty(ref reader, options, PropMessage, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			License = propLicense.Value,
+			Message = propMessage.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLicense, value.License, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMessage, value.Message, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.AcknowledgementConverter))]
 public sealed partial class Acknowledgement
 {
-	[JsonInclude, JsonPropertyName("license")]
-	public IReadOnlyCollection<string> License { get; init; }
-	[JsonInclude, JsonPropertyName("message")]
-	public string Message { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Acknowledgement(System.Collections.Generic.IReadOnlyCollection<string> license, string message)
+	{
+		License = license;
+		Message = message;
+	}
+#if NET7_0_OR_GREATER
+	public Acknowledgement()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Acknowledgement()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Acknowledgement(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> License { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Message { get; set; }
 }

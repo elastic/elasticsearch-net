@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public sealed partial class ScheduleNowTransformRequestParameters : RequestParameters
+public sealed partial class ScheduleNowTransformRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -40,27 +33,68 @@ public sealed partial class ScheduleNowTransformRequestParameters : RequestParam
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class ScheduleNowTransformRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest>
+{
+	public override Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Schedule a transform to start now.
-/// Instantly runs a transform to process data.
 /// </para>
 /// <para>
-/// If you _schedule_now a transform, it will process the new data instantly,
-/// without waiting for the configured frequency interval. After _schedule_now API is called,
-/// the transform will be processed again at now + frequency unless _schedule_now API
+/// Instantly run a transform to process data.
+/// If you run this API, the transform will process the new data instantly,
+/// without waiting for the configured frequency interval. After the API is called,
+/// the transform will be processed again at <c>now + frequency</c> unless the API
 /// is called again in the meantime.
 /// </para>
 /// </summary>
-public sealed partial class ScheduleNowTransformRequest : PlainRequest<ScheduleNowTransformRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestConverter))]
+public sealed partial class ScheduleNowTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ScheduleNowTransformRequest(Elastic.Clients.Elasticsearch.Id transformId) : base(r => r.Required("transform_id", transformId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ScheduleNowTransformRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ScheduleNowTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementScheduleNowTransform;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.TransformManagementScheduleNowTransform;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -68,50 +102,128 @@ public sealed partial class ScheduleNowTransformRequest : PlainRequest<ScheduleN
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the transform.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Controls the time to wait for the scheduling to take place
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Schedule a transform to start now.
-/// Instantly runs a transform to process data.
 /// </para>
 /// <para>
-/// If you _schedule_now a transform, it will process the new data instantly,
-/// without waiting for the configured frequency interval. After _schedule_now API is called,
-/// the transform will be processed again at now + frequency unless _schedule_now API
+/// Instantly run a transform to process data.
+/// If you run this API, the transform will process the new data instantly,
+/// without waiting for the configured frequency interval. After the API is called,
+/// the transform will be processed again at <c>now + frequency</c> unless the API
 /// is called again in the meantime.
 /// </para>
 /// </summary>
-public sealed partial class ScheduleNowTransformRequestDescriptor : RequestDescriptor<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformRequestParameters>
+public readonly partial struct ScheduleNowTransformRequestDescriptor
 {
-	internal ScheduleNowTransformRequestDescriptor(Action<ScheduleNowTransformRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest Instance { get; init; }
 
-	public ScheduleNowTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId) : base(r => r.Required("transform_id", transformId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScheduleNowTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementScheduleNowTransform;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "transform.schedule_now_transform";
-
-	public ScheduleNowTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public ScheduleNowTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id transformId)
+	public ScheduleNowTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId)
 	{
-		RouteValues.Required("transform_id", transformId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest(transformId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ScheduleNowTransformRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.TransformId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls the time to wait for the scheduling to take place
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

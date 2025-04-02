@@ -17,32 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class FieldLookupConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propPath = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Index = propIndex.Value,
+			Path = propPath.Value,
+			Routing = propRouting.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupConverter))]
 public sealed partial class FieldLookup
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldLookup(Elastic.Clients.Elasticsearch.Id id)
+	{
+		Id = id;
+	}
+#if NET7_0_OR_GREATER
+	public FieldLookup()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FieldLookup()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldLookup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// <c>id</c> of the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
-	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Index from which to retrieve the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -50,7 +137,6 @@ public sealed partial class FieldLookup
 	/// Name of the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 
 	/// <summary>
@@ -58,32 +144,37 @@ public sealed partial class FieldLookup
 	/// Custom routing value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 }
 
-public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescriptor<FieldLookupDescriptor<TDocument>>
+public readonly partial struct FieldLookupDescriptor<TDocument>
 {
-	internal FieldLookupDescriptor(Action<FieldLookupDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup Instance { get; init; }
 
-	public FieldLookupDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldLookupDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldLookupDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// <c>id</c> of the document.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -91,10 +182,10 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	/// Index from which to retrieve the document.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -102,10 +193,10 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	/// Name of the field.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? path)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -113,21 +204,10 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	/// Name of the field.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Path(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PathValue = path;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Name of the field.
-	/// </para>
-	/// </summary>
-	public FieldLookupDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
-	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -135,61 +215,49 @@ public sealed partial class FieldLookupDescriptor<TDocument> : SerializableDescr
 	/// Custom routing value.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("id");
-		JsonSerializer.Serialize(writer, IdValue, options);
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (PathValue is not null)
-		{
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class FieldLookupDescriptor : SerializableDescriptor<FieldLookupDescriptor>
+public readonly partial struct FieldLookupDescriptor
 {
-	internal FieldLookupDescriptor(Action<FieldLookupDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup Instance { get; init; }
 
-	public FieldLookupDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldLookupDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldLookupDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// <c>id</c> of the document.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -197,10 +265,10 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	/// Index from which to retrieve the document.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -208,10 +276,10 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	/// Name of the field.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor Path(Elastic.Clients.Elasticsearch.Field? path)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -219,21 +287,10 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	/// Name of the field.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Path<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		PathValue = path;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Name of the field.
-	/// </para>
-	/// </summary>
-	public FieldLookupDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
-	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -241,35 +298,17 @@ public sealed partial class FieldLookupDescriptor : SerializableDescriptor<Field
 	/// Custom routing value.
 	/// </para>
 	/// </summary>
-	public FieldLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("id");
-		JsonSerializer.Serialize(writer, IdValue, options);
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (PathValue is not null)
-		{
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

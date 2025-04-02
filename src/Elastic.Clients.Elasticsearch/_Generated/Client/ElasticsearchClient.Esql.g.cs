@@ -18,1108 +18,209 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
-public partial class EsqlNamespacedClient : NamespacedClientProxy
+public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="EsqlNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Esql.EsqlNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected EsqlNamespacedClient() : base()
 	{
 	}
 
-	internal EsqlNamespacedClient(ElasticsearchClient client) : base(client)
+	internal EsqlNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryResponse AsyncQuery(AsyncQueryRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse AsyncQuery(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<AsyncQueryRequest, AsyncQueryResponse, AsyncQueryRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryResponse> AsyncQueryAsync(AsyncQueryRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse> AsyncQueryAsync(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<AsyncQueryRequest, AsyncQueryResponse, AsyncQueryRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryResponse AsyncQuery<TDocument>(AsyncQueryRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse AsyncQuery(System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryRequestDescriptor<TDocument>, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryResponse AsyncQuery<TDocument>()
+	public virtual Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse AsyncQuery<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>> action)
 	{
-		var descriptor = new AsyncQueryRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryRequestDescriptor<TDocument>, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryResponse AsyncQuery<TDocument>(Action<AsyncQueryRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse> AsyncQueryAsync(System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new AsyncQueryRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryRequestDescriptor<TDocument>, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryResponse AsyncQuery(AsyncQueryRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse> AsyncQueryAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryRequestDescriptor, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryResponse AsyncQuery()
-	{
-		var descriptor = new AsyncQueryRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryRequestDescriptor, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryResponse AsyncQuery(Action<AsyncQueryRequestDescriptor> configureRequest)
-	{
-		var descriptor = new AsyncQueryRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryRequestDescriptor, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryResponse> AsyncQueryAsync<TDocument>(AsyncQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryRequestDescriptor<TDocument>, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryResponse> AsyncQueryAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryRequestDescriptor<TDocument>, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryResponse> AsyncQueryAsync<TDocument>(Action<AsyncQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryRequestDescriptor<TDocument>, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryResponse> AsyncQueryAsync(AsyncQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryRequestDescriptor, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryResponse> AsyncQueryAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryRequestDescriptor, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an async ES|QL query.
-	/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-	/// </para>
-	/// <para>
-	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryResponse> AsyncQueryAsync(Action<AsyncQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryRequestDescriptor, AsyncQueryResponse, AsyncQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryDeleteResponse AsyncQueryDelete(AsyncQueryDeleteRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteResponse AsyncQueryDelete(Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<AsyncQueryDeleteRequest, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(AsyncQueryDeleteRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<AsyncQueryDeleteRequest, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryDeleteResponse AsyncQueryDelete<TDocument>(AsyncQueryDeleteRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteResponse AsyncQueryDelete(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryDeleteRequestDescriptor<TDocument>, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryDeleteResponse AsyncQueryDelete<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new AsyncQueryDeleteRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryDeleteRequestDescriptor<TDocument>, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryDeleteResponse AsyncQueryDelete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryDeleteRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new AsyncQueryDeleteRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryDeleteRequestDescriptor<TDocument>, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryDeleteResponse AsyncQueryDelete(AsyncQueryDeleteRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryDeleteRequestDescriptor, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryDeleteResponse AsyncQueryDelete(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new AsyncQueryDeleteRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryDeleteRequestDescriptor, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryDeleteResponse AsyncQueryDelete(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryDeleteRequestDescriptor> configureRequest)
-	{
-		var descriptor = new AsyncQueryDeleteRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryDeleteRequestDescriptor, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync<TDocument>(AsyncQueryDeleteRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryDeleteRequestDescriptor<TDocument>, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryDeleteRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryDeleteRequestDescriptor<TDocument>, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryDeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryDeleteRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryDeleteRequestDescriptor<TDocument>, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(AsyncQueryDeleteRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryDeleteRequestDescriptor, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryDeleteRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryDeleteRequestDescriptor, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an async ES|QL query.
-	/// If the query is still running, it is cancelled.
-	/// Otherwise, the stored results are deleted.
-	/// </para>
-	/// <para>
-	/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The authenticated user that submitted the original query request
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Users with the <c>cancel_task</c> cluster privilege
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryDeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryDeleteRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryDeleteRequestDescriptor, AsyncQueryDeleteResponse, AsyncQueryDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryGetResponse AsyncQueryGet(AsyncQueryGetRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetResponse AsyncQueryGet(Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<AsyncQueryGetRequest, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync(AsyncQueryGetRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetResponse> AsyncQueryGetAsync(Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<AsyncQueryGetRequest, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryGetResponse AsyncQueryGet<TDocument>(AsyncQueryGetRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetResponse AsyncQueryGet(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryGetRequestDescriptor<TDocument>, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryGetResponse AsyncQueryGet<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetResponse> AsyncQueryGetAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new AsyncQueryGetRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryGetRequestDescriptor<TDocument>, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryGetResponse AsyncQueryGet<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryGetRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new AsyncQueryGetRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryGetRequestDescriptor<TDocument>, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryGetResponse AsyncQueryGet(AsyncQueryGetRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryGetRequestDescriptor, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryGetResponse AsyncQueryGet(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new AsyncQueryGetRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryGetRequestDescriptor, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AsyncQueryGetResponse AsyncQueryGet(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryGetRequestDescriptor> configureRequest)
-	{
-		var descriptor = new AsyncQueryGetRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncQueryGetRequestDescriptor, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync<TDocument>(AsyncQueryGetRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryGetRequestDescriptor<TDocument>, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryGetRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryGetRequestDescriptor<TDocument>, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryGetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryGetRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryGetRequestDescriptor<TDocument>, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync(AsyncQueryGetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryGetRequestDescriptor, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryGetRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryGetRequestDescriptor, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get async ES|QL query results.
-	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryGetRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncQueryGetRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncQueryGetRequestDescriptor, AsyncQueryGetResponse, AsyncQueryGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EsqlQueryResponse Query(EsqlQueryRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse AsyncQueryStop(Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<EsqlQueryRequest, EsqlQueryResponse, EsqlQueryRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EsqlQueryResponse> QueryAsync(EsqlQueryRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse> AsyncQueryStopAsync(Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequest, EsqlQueryResponse, EsqlQueryRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EsqlQueryResponse Query<TDocument>(EsqlQueryRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse AsyncQueryStop(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EsqlQueryResponse Query<TDocument>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse> AsyncQueryStopAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EsqlQueryRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EsqlQueryResponse Query<TDocument>(Action<EsqlQueryRequestDescriptor<TDocument>> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse Query(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest request)
 	{
-		var descriptor = new EsqlQueryRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest, Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse, Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EsqlQueryResponse Query(EsqlQueryRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse> QueryAsync(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest, Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse, Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EsqlQueryResponse Query()
+	public virtual Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse Query(System.Action<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor> action)
 	{
-		var descriptor = new EsqlQueryRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest, Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse, Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EsqlQueryResponse Query(Action<EsqlQueryRequestDescriptor> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse Query<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>> action)
 	{
-		var descriptor = new EsqlQueryRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest, Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse, Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(EsqlQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse> QueryAsync(System.Action<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest, Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse, Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse> QueryAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EsqlQueryRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(Action<EsqlQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EsqlQueryRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EsqlQueryResponse> QueryAsync(EsqlQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EsqlQueryResponse> QueryAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EsqlQueryRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run an ES|QL query.
-	/// Get search results for an ES|QL (Elasticsearch query language) query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EsqlQueryResponse> QueryAsync(Action<EsqlQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EsqlQueryRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest, Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse, Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestParameters>(request, cancellationToken);
 	}
 }

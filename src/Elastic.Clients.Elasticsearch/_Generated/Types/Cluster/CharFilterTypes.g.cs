@@ -17,79 +17,231 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class CharFilterTypesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzerTypes = System.Text.Json.JsonEncodedText.Encode("analyzer_types");
+	private static readonly System.Text.Json.JsonEncodedText PropBuiltInAnalyzers = System.Text.Json.JsonEncodedText.Encode("built_in_analyzers");
+	private static readonly System.Text.Json.JsonEncodedText PropBuiltInCharFilters = System.Text.Json.JsonEncodedText.Encode("built_in_char_filters");
+	private static readonly System.Text.Json.JsonEncodedText PropBuiltInFilters = System.Text.Json.JsonEncodedText.Encode("built_in_filters");
+	private static readonly System.Text.Json.JsonEncodedText PropBuiltInTokenizers = System.Text.Json.JsonEncodedText.Encode("built_in_tokenizers");
+	private static readonly System.Text.Json.JsonEncodedText PropCharFilterTypes2 = System.Text.Json.JsonEncodedText.Encode("char_filter_types");
+	private static readonly System.Text.Json.JsonEncodedText PropFilterTypes = System.Text.Json.JsonEncodedText.Encode("filter_types");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenizerTypes = System.Text.Json.JsonEncodedText.Encode("tokenizer_types");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propAnalyzerTypes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propBuiltInAnalyzers = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propBuiltInCharFilters = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propBuiltInFilters = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propBuiltInTokenizers = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propCharFilterTypes2 = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propFilterTypes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propTokenizerTypes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzerTypes.TryReadProperty(ref reader, options, PropAnalyzerTypes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propBuiltInAnalyzers.TryReadProperty(ref reader, options, PropBuiltInAnalyzers, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propBuiltInCharFilters.TryReadProperty(ref reader, options, PropBuiltInCharFilters, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propBuiltInFilters.TryReadProperty(ref reader, options, PropBuiltInFilters, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propBuiltInTokenizers.TryReadProperty(ref reader, options, PropBuiltInTokenizers, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propCharFilterTypes2.TryReadProperty(ref reader, options, PropCharFilterTypes2, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propFilterTypes.TryReadProperty(ref reader, options, PropFilterTypes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propTokenizerTypes.TryReadProperty(ref reader, options, PropTokenizerTypes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AnalyzerTypes = propAnalyzerTypes.Value,
+			BuiltInAnalyzers = propBuiltInAnalyzers.Value,
+			BuiltInCharFilters = propBuiltInCharFilters.Value,
+			BuiltInFilters = propBuiltInFilters.Value,
+			BuiltInTokenizers = propBuiltInTokenizers.Value,
+			CharFilterTypes2 = propCharFilterTypes2.Value,
+			FilterTypes = propFilterTypes.Value,
+			TokenizerTypes = propTokenizerTypes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzerTypes, value.AnalyzerTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropBuiltInAnalyzers, value.BuiltInAnalyzers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropBuiltInCharFilters, value.BuiltInCharFilters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropBuiltInFilters, value.BuiltInFilters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropBuiltInTokenizers, value.BuiltInTokenizers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropCharFilterTypes2, value.CharFilterTypes2, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropFilterTypes, value.FilterTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropTokenizerTypes, value.TokenizerTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.CharFilterTypesConverter))]
 public sealed partial class CharFilterTypes
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CharFilterTypes(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> analyzerTypes, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> builtInAnalyzers, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> builtInCharFilters, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> builtInFilters, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> builtInTokenizers, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> charFilterTypes2, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> filterTypes, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> tokenizerTypes)
+	{
+		AnalyzerTypes = analyzerTypes;
+		BuiltInAnalyzers = builtInAnalyzers;
+		BuiltInCharFilters = builtInCharFilters;
+		BuiltInFilters = builtInFilters;
+		BuiltInTokenizers = builtInTokenizers;
+		CharFilterTypes2 = charFilterTypes2;
+		FilterTypes = filterTypes;
+		TokenizerTypes = tokenizerTypes;
+	}
+#if NET7_0_OR_GREATER
+	public CharFilterTypes()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CharFilterTypes()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CharFilterTypes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Contains statistics about analyzer types used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer_types")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> AnalyzerTypes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> AnalyzerTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about built-in analyzers used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("built_in_analyzers")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInAnalyzers { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInAnalyzers { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about built-in character filters used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("built_in_char_filters")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInCharFilters { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInCharFilters { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about built-in token filters used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("built_in_filters")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInFilters { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInFilters { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about built-in tokenizers used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("built_in_tokenizers")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInTokenizers { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInTokenizers { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about character filter types used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("char_filter_types")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> CharFilterTypes2 { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> CharFilterTypes2 { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about token filter types used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter_types")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FilterTypes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FilterTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about tokenizer types used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tokenizer_types")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> TokenizerTypes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> TokenizerTypes { get; set; }
 }

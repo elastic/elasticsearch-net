@@ -17,23 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class ConstantKeywordProperty : IProperty
+internal sealed partial class ConstantKeywordPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty>
 {
-	[JsonInclude, JsonPropertyName("dynamic")]
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		LocalJsonValue<object?> propValue = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Dynamic = propDynamic.Value,
+			Fields = propFields.Value,
+			IgnoreAbove = propIgnoreAbove.Value,
+			Meta = propMeta.Value,
+			Properties = propProperties.Value,
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value,
+			Value = propValue.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyConverter))]
+public sealed partial class ConstantKeywordProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
+{
+#if NET7_0_OR_GREATER
+	public ConstantKeywordProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ConstantKeywordProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
 
 	/// <summary>
@@ -41,66 +152,56 @@ public sealed partial class ConstantKeywordProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "constant_keyword";
 
-	[JsonInclude, JsonPropertyName("value")]
 	public object? Value { get; set; }
 }
 
-public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : SerializableDescriptor<ConstantKeywordPropertyDescriptor<TDocument>>, IBuildableDescriptor<ConstantKeywordProperty>
+public readonly partial struct ConstantKeywordPropertyDescriptor<TDocument>
 {
-	internal ConstantKeywordPropertyDescriptor(Action<ConstantKeywordPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty Instance { get; init; }
 
-	public ConstantKeywordPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ConstantKeywordPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-	private object? ValueValue { get; set; }
-
-	public ConstantKeywordPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ConstantKeywordPropertyDescriptor()
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ConstantKeywordPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
 	/// <summary>
@@ -108,152 +209,126 @@ public sealed partial class ConstantKeywordPropertyDescriptor<TDocument> : Seria
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public ConstantKeywordPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Meta()
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> AddMeta(string key, string value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor<TDocument> Value(object? value)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		ValueValue = value;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		writer.WriteStartObject();
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("constant_keyword");
-		if (ValueValue is not null)
-		{
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, ValueValue, options);
-		}
-
-		writer.WriteEndObject();
+		Instance.SyntheticSourceKeep = value;
+		return this;
 	}
 
-	ConstantKeywordProperty IBuildableDescriptor<ConstantKeywordProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Value(object? value)
 	{
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Meta = MetaValue,
-		Properties = PropertiesValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue,
-		Value = ValueValue
-	};
+		Instance.Value = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }
 
-public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDescriptor<ConstantKeywordPropertyDescriptor>, IBuildableDescriptor<ConstantKeywordProperty>
+public readonly partial struct ConstantKeywordPropertyDescriptor
 {
-	internal ConstantKeywordPropertyDescriptor(Action<ConstantKeywordPropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty Instance { get; init; }
 
-	public ConstantKeywordPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ConstantKeywordPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-	private object? ValueValue { get; set; }
-
-	public ConstantKeywordPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ConstantKeywordPropertyDescriptor()
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ConstantKeywordPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor IgnoreAbove(int? value)
+	{
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
 	/// <summary>
@@ -261,102 +336,81 @@ public sealed partial class ConstantKeywordPropertyDescriptor : SerializableDesc
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public ConstantKeywordPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Meta()
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor AddMeta(string key, string value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public ConstantKeywordPropertyDescriptor Value(object? value)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		ValueValue = value;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		writer.WriteStartObject();
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("constant_keyword");
-		if (ValueValue is not null)
-		{
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, ValueValue, options);
-		}
-
-		writer.WriteEndObject();
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	ConstantKeywordProperty IBuildableDescriptor<ConstantKeywordProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		Meta = MetaValue,
-		Properties = PropertiesValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue,
-		Value = ValueValue
-	};
+		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Value(object? value)
+	{
+		Instance.Value = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

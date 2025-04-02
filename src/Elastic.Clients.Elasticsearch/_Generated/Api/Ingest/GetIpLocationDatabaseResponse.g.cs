@@ -17,17 +17,75 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class GetIpLocationDatabaseResponse : ElasticsearchResponse
+internal sealed partial class GetIpLocationDatabaseResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse>
 {
-	[JsonInclude, JsonPropertyName("databases")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata> Databases { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropDatabases = System.Text.Json.JsonEncodedText.Encode("databases");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata>> propDatabases = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDatabases.TryReadProperty(ref reader, options, PropDatabases, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Databases = propDatabases.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDatabases, value.Databases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponseConverter))]
+public sealed partial class GetIpLocationDatabaseResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetIpLocationDatabaseResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata> databases)
+	{
+		Databases = databases;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetIpLocationDatabaseResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetIpLocationDatabaseResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata> Databases { get; set; }
 }

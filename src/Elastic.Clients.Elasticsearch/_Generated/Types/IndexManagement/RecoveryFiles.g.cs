@@ -17,26 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class RecoveryFilesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFiles>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
+	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent");
+	private static readonly System.Text.Json.JsonEncodedText PropRecovered = System.Text.Json.JsonEncodedText.Encode("recovered");
+	private static readonly System.Text.Json.JsonEncodedText PropReused = System.Text.Json.JsonEncodedText.Encode("reused");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFiles Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.FileDetails>?> propDetails = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Percentage> propPercent = default;
+		LocalJsonValue<long> propRecovered = default;
+		LocalJsonValue<long> propReused = default;
+		LocalJsonValue<long> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDetails.TryReadProperty(ref reader, options, PropDetails, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.FileDetails>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.FileDetails>(o, null)))
+			{
+				continue;
+			}
+
+			if (propPercent.TryReadProperty(ref reader, options, PropPercent, null))
+			{
+				continue;
+			}
+
+			if (propRecovered.TryReadProperty(ref reader, options, PropRecovered, null))
+			{
+				continue;
+			}
+
+			if (propReused.TryReadProperty(ref reader, options, PropReused, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFiles(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Details = propDetails.Value,
+			Percent = propPercent.Value,
+			Recovered = propRecovered.Value,
+			Reused = propReused.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFiles value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDetails, value.Details, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.FileDetails>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.FileDetails>(o, v, null));
+		writer.WriteProperty(options, PropPercent, value.Percent, null, null);
+		writer.WriteProperty(options, PropRecovered, value.Recovered, null, null);
+		writer.WriteProperty(options, PropReused, value.Reused, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFilesConverter))]
 public sealed partial class RecoveryFiles
 {
-	[JsonInclude, JsonPropertyName("details")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.FileDetails>? Details { get; init; }
-	[JsonInclude, JsonPropertyName("percent")]
-	public double Percent { get; init; }
-	[JsonInclude, JsonPropertyName("recovered")]
-	public long Recovered { get; init; }
-	[JsonInclude, JsonPropertyName("reused")]
-	public long Reused { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public long Total { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RecoveryFiles(Elastic.Clients.Elasticsearch.Percentage percent, long recovered, long reused, long total)
+	{
+		Percent = percent;
+		Recovered = recovered;
+		Reused = reused;
+		Total = total;
+	}
+#if NET7_0_OR_GREATER
+	public RecoveryFiles()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RecoveryFiles()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RecoveryFiles(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.FileDetails>? Details { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Percentage Percent { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Recovered { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Reused { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Total { get; set; }
 }

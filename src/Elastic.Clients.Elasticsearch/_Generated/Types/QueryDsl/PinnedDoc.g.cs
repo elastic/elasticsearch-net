@@ -17,75 +17,150 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class PinnedDoc
+internal sealed partial class PinnedDocConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>
 {
-	/// <summary>
-	/// <para>
-	/// The unique document ID.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("_id")]
-	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
 
-	/// <summary>
-	/// <para>
-	/// The index that contains the document.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("_index")]
-	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
-}
-
-public sealed partial class PinnedDocDescriptor : SerializableDescriptor<PinnedDocDescriptor>
-{
-	internal PinnedDocDescriptor(Action<PinnedDocDescriptor> configure) => configure.Invoke(this);
-
-	public PinnedDocDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Index = propIndex.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The unique document ID.
-	/// </para>
-	/// </summary>
-	public PinnedDocDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-	{
-		IdValue = id;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The index that contains the document.
-	/// </para>
-	/// </summary>
-	public PinnedDocDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
-	{
-		IndexValue = index;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("_id");
-		JsonSerializer.Serialize(writer, IdValue, options);
-		writer.WritePropertyName("_index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocConverter))]
+public sealed partial class PinnedDoc
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PinnedDoc(Elastic.Clients.Elasticsearch.Id id)
+	{
+		Id = id;
+	}
+#if NET7_0_OR_GREATER
+	public PinnedDoc()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PinnedDoc()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PinnedDoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The unique document ID.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The index that contains the document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+}
+
+public readonly partial struct PinnedDocDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PinnedDocDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PinnedDocDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc(Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique document ID.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The index that contains the document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class HealthReportRequestParameters : RequestParameters
+public sealed partial class HealthReportRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -52,6 +45,35 @@ public sealed partial class HealthReportRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
+}
+
+internal sealed partial class HealthReportRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.HealthReportRequest>
+{
+	public override Elastic.Clients.Elasticsearch.HealthReportRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.HealthReportRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.HealthReportRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -81,19 +103,31 @@ public sealed partial class HealthReportRequestParameters : RequestParameters
 /// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 /// </para>
 /// </summary>
-public sealed partial class HealthReportRequest : PlainRequest<HealthReportRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.HealthReportRequestConverter))]
+public sealed partial class HealthReportRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.HealthReportRequestParameters>
 {
+	public HealthReportRequest(System.Collections.Generic.ICollection<string>? feature) : base(r => r.Optional("feature", feature))
+	{
+	}
+#if NET7_0_OR_GREATER
 	public HealthReportRequest()
 	{
 	}
-
-	public HealthReportRequest(IReadOnlyCollection<string>? feature) : base(r => r.Optional("feature", feature))
+#endif
+#if !NET7_0_OR_GREATER
+	public HealthReportRequest()
 	{
 	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HealthReportRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceHealthReport;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceHealthReport;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -101,10 +135,16 @@ public sealed partial class HealthReportRequest : PlainRequest<HealthReportReque
 
 	/// <summary>
 	/// <para>
+	/// A feature of the cluster, as returned by the top-level health report API.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? Feature { get => P<System.Collections.Generic.ICollection<string>?>("feature"); set => PO("feature", value); }
+
+	/// <summary>
+	/// <para>
 	/// Limit the number of affected resources the health report API returns.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
@@ -112,7 +152,6 @@ public sealed partial class HealthReportRequest : PlainRequest<HealthReportReque
 	/// Explicit operation timeout.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -120,7 +159,6 @@ public sealed partial class HealthReportRequest : PlainRequest<HealthReportReque
 	/// Opt-in for more information about the health of the system.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
@@ -151,37 +189,158 @@ public sealed partial class HealthReportRequest : PlainRequest<HealthReportReque
 /// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 /// </para>
 /// </summary>
-public sealed partial class HealthReportRequestDescriptor : RequestDescriptor<HealthReportRequestDescriptor, HealthReportRequestParameters>
+public readonly partial struct HealthReportRequestDescriptor
 {
-	internal HealthReportRequestDescriptor(Action<HealthReportRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.HealthReportRequest Instance { get; init; }
 
-	public HealthReportRequestDescriptor(IReadOnlyCollection<string>? feature) : base(r => r.Optional("feature", feature))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HealthReportRequestDescriptor(Elastic.Clients.Elasticsearch.HealthReportRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public HealthReportRequestDescriptor(System.Collections.Generic.ICollection<string> feature)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.HealthReportRequest(feature);
 	}
 
 	public HealthReportRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.HealthReportRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceHealthReport;
+	public static explicit operator Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor(Elastic.Clients.Elasticsearch.HealthReportRequest instance) => new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.HealthReportRequest(Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "health_report";
-
-	public HealthReportRequestDescriptor Size(int? size) => Qs("size", size);
-	public HealthReportRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public HealthReportRequestDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-
-	public HealthReportRequestDescriptor Feature(IReadOnlyCollection<string>? feature)
+	/// <summary>
+	/// <para>
+	/// A feature of the cluster, as returned by the top-level health report API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Feature(System.Collections.Generic.ICollection<string>? value)
 	{
-		RouteValues.Optional("feature", feature);
-		return Self;
+		Instance.Feature = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A feature of the cluster, as returned by the top-level health report API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Feature()
 	{
+		Instance.Feature = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A feature of the cluster, as returned by the top-level health report API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Feature(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Feature = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A feature of the cluster, as returned by the top-level health report API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Feature(params string[] values)
+	{
+		Instance.Feature = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limit the number of affected resources the health report API returns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Explicit operation timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Opt-in for more information about the health of the system.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Verbose(bool? value = true)
+	{
+		Instance.Verbose = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.HealthReportRequest Build(System.Action<Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.HealthReportRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor(new Elastic.Clients.Elasticsearch.HealthReportRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

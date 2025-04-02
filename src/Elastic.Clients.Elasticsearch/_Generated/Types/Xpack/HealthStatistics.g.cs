@@ -17,22 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class HealthStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.HealthStatistics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropInvocations = System.Text.Json.JsonEncodedText.Encode("invocations");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.HealthStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAvailable = default;
+		LocalJsonValue<bool> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Invocations> propInvocations = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propInvocations.TryReadProperty(ref reader, options, PropInvocations, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.HealthStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Available = propAvailable.Value,
+			Enabled = propEnabled.Value,
+			Invocations = propInvocations.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.HealthStatistics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropInvocations, value.Invocations, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.HealthStatisticsConverter))]
 public sealed partial class HealthStatistics
 {
-	[JsonInclude, JsonPropertyName("available")]
-	public bool Available { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("invocations")]
-	public Elastic.Clients.Elasticsearch.Xpack.Invocations Invocations { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HealthStatistics(bool available, bool enabled, Elastic.Clients.Elasticsearch.Xpack.Invocations invocations)
+	{
+		Available = available;
+		Enabled = enabled;
+		Invocations = invocations;
+	}
+#if NET7_0_OR_GREATER
+	public HealthStatistics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public HealthStatistics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HealthStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Available { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.Invocations Invocations { get; set; }
 }

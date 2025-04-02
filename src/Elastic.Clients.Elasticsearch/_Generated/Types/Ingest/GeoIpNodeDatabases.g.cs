@@ -17,36 +17,110 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
+internal sealed partial class GeoIpNodeDatabasesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDatabases = System.Text.Json.JsonEncodedText.Encode("databases");
+	private static readonly System.Text.Json.JsonEncodedText PropFilesInTemp = System.Text.Json.JsonEncodedText.Encode("files_in_temp");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName>> propDatabases = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propFilesInTemp = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDatabases.TryReadProperty(ref reader, options, PropDatabases, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propFilesInTemp.TryReadProperty(ref reader, options, PropFilesInTemp, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Databases = propDatabases.Value,
+			FilesInTemp = propFilesInTemp.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDatabases, value.Databases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName>(o, v, null));
+		writer.WriteProperty(options, PropFilesInTemp, value.FilesInTemp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Downloaded databases for the node. The field key is the node ID.
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabasesConverter))]
 public sealed partial class GeoIpNodeDatabases
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoIpNodeDatabases(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> databases, System.Collections.Generic.IReadOnlyCollection<string> filesInTemp)
+	{
+		Databases = databases;
+		FilesInTemp = filesInTemp;
+	}
+#if NET7_0_OR_GREATER
+	public GeoIpNodeDatabases()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeoIpNodeDatabases()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoIpNodeDatabases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Downloaded databases for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("databases")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> Databases { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> Databases { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Downloaded database files, including related license files. Elasticsearch stores these files in the node’s temporary directory: $ES_TMPDIR/geoip-databases/&lt;node_id>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("files_in_temp")]
-	public IReadOnlyCollection<string> FilesInTemp { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> FilesInTemp { get; set; }
 }

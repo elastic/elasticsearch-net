@@ -17,25 +17,103 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class PercentilesBucketAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropGapPolicy = System.Text.Json.JsonEncodedText.Encode("gap_policy");
+	private static readonly System.Text.Json.JsonEncodedText PropPercents = System.Text.Json.JsonEncodedText.Encode("percents");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<object?> propBucketsPath = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?> propGapPolicy = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<double>?> propPercents = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBucketsPath.TryReadProperty(ref reader, options, PropBucketsPath, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, null))
+			{
+				continue;
+			}
+
+			if (propPercents.TryReadProperty(ref reader, options, PropPercents, static System.Collections.Generic.ICollection<double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BucketsPath = propBucketsPath.Value,
+			Format = propFormat.Value,
+			GapPolicy = propGapPolicy.Value,
+			Percents = propPercents.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBucketsPath, value.BucketsPath, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, null);
+		writer.WriteProperty(options, PropPercents, value.Percents, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double>? v) => w.WriteCollectionValue<double>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationConverter))]
 public sealed partial class PercentilesBucketAggregation
 {
+#if NET7_0_OR_GREATER
+	public PercentilesBucketAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PercentilesBucketAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PercentilesBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("buckets_path")]
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
+	public object? BucketsPath { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,7 +121,6 @@ public sealed partial class PercentilesBucketAggregation
 	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -51,7 +128,6 @@ public sealed partial class PercentilesBucketAggregation
 	/// Policy to apply when gaps are found in the data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
@@ -59,34 +135,37 @@ public sealed partial class PercentilesBucketAggregation
 	/// The list of percentiles to calculate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("percents")]
-	public ICollection<double>? Percents { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(PercentilesBucketAggregation percentilesBucketAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.PercentilesBucket(percentilesBucketAggregation);
+	public System.Collections.Generic.ICollection<double>? Percents { get; set; }
 }
 
-public sealed partial class PercentilesBucketAggregationDescriptor : SerializableDescriptor<PercentilesBucketAggregationDescriptor>
+public readonly partial struct PercentilesBucketAggregationDescriptor
 {
-	internal PercentilesBucketAggregationDescriptor(Action<PercentilesBucketAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation Instance { get; init; }
 
-	public PercentilesBucketAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercentilesBucketAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-	private ICollection<double>? PercentsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercentilesBucketAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	public PercentilesBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor BucketsPath(object? value)
 	{
-		BucketsPathValue = bucketsPath;
-		return Self;
+		Instance.BucketsPath = value;
+		return this;
 	}
 
 	/// <summary>
@@ -95,10 +174,10 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
 	/// </para>
 	/// </summary>
-	public PercentilesBucketAggregationDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -106,10 +185,10 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 	/// Policy to apply when gaps are found in the data.
 	/// </para>
 	/// </summary>
-	public PercentilesBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
-		GapPolicyValue = gapPolicy;
-		return Self;
+		Instance.GapPolicy = value;
+		return this;
 	}
 
 	/// <summary>
@@ -117,39 +196,55 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 	/// The list of percentiles to calculate.
 	/// </para>
 	/// </summary>
-	public PercentilesBucketAggregationDescriptor Percents(ICollection<double>? percents)
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Percents(System.Collections.Generic.ICollection<double>? value)
 	{
-		PercentsValue = percents;
-		return Self;
+		Instance.Percents = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The list of percentiles to calculate.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Percents()
 	{
-		writer.WriteStartObject();
-		if (BucketsPathValue is not null)
+		Instance.Percents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of percentiles to calculate.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Percents(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
+	{
+		Instance.Percents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of percentiles to calculate.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Percents(params double[] values)
+	{
+		Instance.Percents = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("buckets_path");
-			JsonSerializer.Serialize(writer, BucketsPathValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (GapPolicyValue is not null)
-		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, GapPolicyValue, options);
-		}
-
-		if (PercentsValue is not null)
-		{
-			writer.WritePropertyName("percents");
-			JsonSerializer.Serialize(writer, PercentsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

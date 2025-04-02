@@ -17,28 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class StandardDeviationBoundsAsStringConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLower = System.Text.Json.JsonEncodedText.Encode("lower");
+	private static readonly System.Text.Json.JsonEncodedText PropLowerPopulation = System.Text.Json.JsonEncodedText.Encode("lower_population");
+	private static readonly System.Text.Json.JsonEncodedText PropLowerSampling = System.Text.Json.JsonEncodedText.Encode("lower_sampling");
+	private static readonly System.Text.Json.JsonEncodedText PropUpper = System.Text.Json.JsonEncodedText.Encode("upper");
+	private static readonly System.Text.Json.JsonEncodedText PropUpperPopulation = System.Text.Json.JsonEncodedText.Encode("upper_population");
+	private static readonly System.Text.Json.JsonEncodedText PropUpperSampling = System.Text.Json.JsonEncodedText.Encode("upper_sampling");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propLower = default;
+		LocalJsonValue<string> propLowerPopulation = default;
+		LocalJsonValue<string> propLowerSampling = default;
+		LocalJsonValue<string> propUpper = default;
+		LocalJsonValue<string> propUpperPopulation = default;
+		LocalJsonValue<string> propUpperSampling = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLower.TryReadProperty(ref reader, options, PropLower, null))
+			{
+				continue;
+			}
+
+			if (propLowerPopulation.TryReadProperty(ref reader, options, PropLowerPopulation, null))
+			{
+				continue;
+			}
+
+			if (propLowerSampling.TryReadProperty(ref reader, options, PropLowerSampling, null))
+			{
+				continue;
+			}
+
+			if (propUpper.TryReadProperty(ref reader, options, PropUpper, null))
+			{
+				continue;
+			}
+
+			if (propUpperPopulation.TryReadProperty(ref reader, options, PropUpperPopulation, null))
+			{
+				continue;
+			}
+
+			if (propUpperSampling.TryReadProperty(ref reader, options, PropUpperSampling, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Lower = propLower.Value,
+			LowerPopulation = propLowerPopulation.Value,
+			LowerSampling = propLowerSampling.Value,
+			Upper = propUpper.Value,
+			UpperPopulation = propUpperPopulation.Value,
+			UpperSampling = propUpperSampling.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLower, value.Lower, null, null);
+		writer.WriteProperty(options, PropLowerPopulation, value.LowerPopulation, null, null);
+		writer.WriteProperty(options, PropLowerSampling, value.LowerSampling, null, null);
+		writer.WriteProperty(options, PropUpper, value.Upper, null, null);
+		writer.WriteProperty(options, PropUpperPopulation, value.UpperPopulation, null, null);
+		writer.WriteProperty(options, PropUpperSampling, value.UpperSampling, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsStringConverter))]
 public sealed partial class StandardDeviationBoundsAsString
 {
-	[JsonInclude, JsonPropertyName("lower")]
-	public string Lower { get; init; }
-	[JsonInclude, JsonPropertyName("lower_population")]
-	public string LowerPopulation { get; init; }
-	[JsonInclude, JsonPropertyName("lower_sampling")]
-	public string LowerSampling { get; init; }
-	[JsonInclude, JsonPropertyName("upper")]
-	public string Upper { get; init; }
-	[JsonInclude, JsonPropertyName("upper_population")]
-	public string UpperPopulation { get; init; }
-	[JsonInclude, JsonPropertyName("upper_sampling")]
-	public string UpperSampling { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StandardDeviationBoundsAsString(string lower, string lowerPopulation, string lowerSampling, string upper, string upperPopulation, string upperSampling)
+	{
+		Lower = lower;
+		LowerPopulation = lowerPopulation;
+		LowerSampling = lowerSampling;
+		Upper = upper;
+		UpperPopulation = upperPopulation;
+		UpperSampling = upperSampling;
+	}
+#if NET7_0_OR_GREATER
+	public StandardDeviationBoundsAsString()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StandardDeviationBoundsAsString()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StandardDeviationBoundsAsString(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Lower { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string LowerPopulation { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string LowerSampling { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Upper { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string UpperPopulation { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string UpperSampling { get; set; }
 }

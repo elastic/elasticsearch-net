@@ -17,18 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class SpanMultiTermQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propMatch = default;
+		LocalJsonValue<string?> propQueryName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propMatch.TryReadProperty(ref reader, options, PropMatch, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Match = propMatch.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropMatch, value.Match, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryConverter))]
 public sealed partial class SpanMultiTermQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanMultiTermQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query match)
+	{
+		Match = match;
+	}
+#if NET7_0_OR_GREATER
+	public SpanMultiTermQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SpanMultiTermQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SpanMultiTermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +113,6 @@ public sealed partial class SpanMultiTermQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,28 +120,32 @@ public sealed partial class SpanMultiTermQuery
 	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("match")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Match { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Match { get; set; }
 	public string? QueryName { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanMultiTermQuery spanMultiTermQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanMulti(spanMultiTermQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanMultiTermQuery spanMultiTermQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.SpanMulti(spanMultiTermQuery);
 }
 
-public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : SerializableDescriptor<SpanMultiTermQueryDescriptor<TDocument>>
+public readonly partial struct SpanMultiTermQueryDescriptor<TDocument>
 {
-	internal SpanMultiTermQueryDescriptor(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery Instance { get; init; }
 
-	public SpanMultiTermQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanMultiTermQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query MatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> MatchDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanMultiTermQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -76,10 +155,10 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanMultiTermQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -87,84 +166,56 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
 	/// </para>
 	/// </summary>
-	public SpanMultiTermQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.Query match)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		MatchDescriptor = null;
-		MatchDescriptorAction = null;
-		MatchValue = match;
-		return Self;
+		Instance.Match = value;
+		return this;
 	}
 
-	public SpanMultiTermQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		MatchValue = null;
-		MatchDescriptorAction = null;
-		MatchDescriptor = descriptor;
-		return Self;
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public SpanMultiTermQueryDescriptor<TDocument> Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		MatchValue = null;
-		MatchDescriptor = null;
-		MatchDescriptorAction = configure;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public SpanMultiTermQueryDescriptor<TDocument> QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (MatchDescriptor is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchDescriptor, options);
-		}
-		else if (MatchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(MatchDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescriptor<SpanMultiTermQueryDescriptor>
+public readonly partial struct SpanMultiTermQueryDescriptor
 {
-	internal SpanMultiTermQueryDescriptor(Action<SpanMultiTermQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery Instance { get; init; }
 
-	public SpanMultiTermQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanMultiTermQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query MatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> MatchDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanMultiTermQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -174,10 +225,10 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanMultiTermQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -185,67 +236,45 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
 	/// </para>
 	/// </summary>
-	public SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.Query match)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		MatchDescriptor = null;
-		MatchDescriptorAction = null;
-		MatchValue = match;
-		return Self;
+		Instance.Match = value;
+		return this;
 	}
 
-	public SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		MatchValue = null;
-		MatchDescriptorAction = null;
-		MatchDescriptor = descriptor;
-		return Self;
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SpanMultiTermQueryDescriptor Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		MatchValue = null;
-		MatchDescriptor = null;
-		MatchDescriptorAction = configure;
-		return Self;
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public SpanMultiTermQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (MatchDescriptor is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchDescriptor, options);
-		}
-		else if (MatchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(MatchDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

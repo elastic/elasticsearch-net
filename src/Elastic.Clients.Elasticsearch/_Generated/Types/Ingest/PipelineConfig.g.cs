@@ -17,25 +17,100 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class PipelineConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PipelineConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.PipelineConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Processor>> propProcessors = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propProcessors.TryReadProperty(ref reader, options, PropProcessors, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Processor> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.PipelineConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Processors = propProcessors.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.PipelineConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropProcessors, value.Processors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Processor> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PipelineConfigConverter))]
 public sealed partial class PipelineConfig
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PipelineConfig(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Processor> processors)
+	{
+		Processors = processors;
+	}
+#if NET7_0_OR_GREATER
+	public PipelineConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PipelineConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PipelineConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the ingest pipeline.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
-	public string? Description { get; init; }
+	public string? Description { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,14 +118,16 @@ public sealed partial class PipelineConfig
 	/// Processors run sequentially in the order specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("processors")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Processor> Processors { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Processor> Processors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Version number used by external systems to track ingest pipelines.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
-	public long? Version { get; init; }
+	public long? Version { get; set; }
 }

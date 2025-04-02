@@ -17,24 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class TimeSyncConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDelay = System.Text.Json.JsonEncodedText.Encode("delay");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.TimeSync Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDelay = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDelay.TryReadProperty(ref reader, options, PropDelay, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.TimeSync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Delay = propDelay.Value,
+			Field = propField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.TimeSync value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDelay, value.Delay, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncConverter))]
 public sealed partial class TimeSync
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeSync(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public TimeSync()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TimeSync()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TimeSync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The time delay between the current time and the latest input data time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("delay")]
 	public Elastic.Clients.Elasticsearch.Duration? Delay { get; set; }
 
 	/// <summary>
@@ -44,32 +110,41 @@ public sealed partial class TimeSync
 	/// accounts for data transmission delays.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Sync(TimeSync timeSync) => Elastic.Clients.Elasticsearch.TransformManagement.Sync.Time(timeSync);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
 
-public sealed partial class TimeSyncDescriptor<TDocument> : SerializableDescriptor<TimeSyncDescriptor<TDocument>>
+public readonly partial struct TimeSyncDescriptor<TDocument>
 {
-	internal TimeSyncDescriptor(Action<TimeSyncDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.TimeSync Instance { get; init; }
 
-	public TimeSyncDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeSyncDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? DelayValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeSyncDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.TimeSync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync instance) => new Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeSync(Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The time delay between the current time and the latest input data time.
 	/// </para>
 	/// </summary>
-	public TimeSyncDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Duration? delay)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		DelayValue = delay;
-		return Self;
+		Instance.Delay = value;
+		return this;
 	}
 
 	/// <summary>
@@ -79,10 +154,10 @@ public sealed partial class TimeSyncDescriptor<TDocument> : SerializableDescript
 	/// accounts for data transmission delays.
 	/// </para>
 	/// </summary>
-	public TimeSyncDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -92,60 +167,49 @@ public sealed partial class TimeSyncDescriptor<TDocument> : SerializableDescript
 	/// accounts for data transmission delays.
 	/// </para>
 	/// </summary>
-	public TimeSyncDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
-	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
-	/// accounts for data transmission delays.
-	/// </para>
-	/// </summary>
-	public TimeSyncDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.TimeSync Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>> action)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (DelayValue is not null)
-		{
-			writer.WritePropertyName("delay");
-			JsonSerializer.Serialize(writer, DelayValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TransformManagement.TimeSync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class TimeSyncDescriptor : SerializableDescriptor<TimeSyncDescriptor>
+public readonly partial struct TimeSyncDescriptor
 {
-	internal TimeSyncDescriptor(Action<TimeSyncDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.TimeSync Instance { get; init; }
 
-	public TimeSyncDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeSyncDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? DelayValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TimeSyncDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.TimeSync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync instance) => new Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeSync(Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The time delay between the current time and the latest input data time.
 	/// </para>
 	/// </summary>
-	public TimeSyncDescriptor Delay(Elastic.Clients.Elasticsearch.Duration? delay)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor Delay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		DelayValue = delay;
-		return Self;
+		Instance.Delay = value;
+		return this;
 	}
 
 	/// <summary>
@@ -155,10 +219,10 @@ public sealed partial class TimeSyncDescriptor : SerializableDescriptor<TimeSync
 	/// accounts for data transmission delays.
 	/// </para>
 	/// </summary>
-	public TimeSyncDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -168,36 +232,17 @@ public sealed partial class TimeSyncDescriptor : SerializableDescriptor<TimeSync
 	/// accounts for data transmission delays.
 	/// </para>
 	/// </summary>
-	public TimeSyncDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
-	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
-	/// accounts for data transmission delays.
-	/// </para>
-	/// </summary>
-	public TimeSyncDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.TimeSync Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor> action)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (DelayValue is not null)
-		{
-			writer.WritePropertyName("delay");
-			JsonSerializer.Serialize(writer, DelayValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.TimeSync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

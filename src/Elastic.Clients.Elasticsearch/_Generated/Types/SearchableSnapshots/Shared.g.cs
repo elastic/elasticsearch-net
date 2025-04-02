@@ -17,32 +17,184 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
+internal sealed partial class SharedConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchableSnapshots.Shared>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBytesReadInBytes = System.Text.Json.JsonEncodedText.Encode("bytes_read_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropBytesWrittenInBytes = System.Text.Json.JsonEncodedText.Encode("bytes_written_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions");
+	private static readonly System.Text.Json.JsonEncodedText PropNumRegions = System.Text.Json.JsonEncodedText.Encode("num_regions");
+	private static readonly System.Text.Json.JsonEncodedText PropReads = System.Text.Json.JsonEncodedText.Encode("reads");
+	private static readonly System.Text.Json.JsonEncodedText PropRegionSizeInBytes = System.Text.Json.JsonEncodedText.Encode("region_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropWrites = System.Text.Json.JsonEncodedText.Encode("writes");
+
+	public override Elastic.Clients.Elasticsearch.SearchableSnapshots.Shared Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propBytesReadInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propBytesWrittenInBytes = default;
+		LocalJsonValue<long> propEvictions = default;
+		LocalJsonValue<int> propNumRegions = default;
+		LocalJsonValue<long> propReads = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propRegionSizeInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propSizeInBytes = default;
+		LocalJsonValue<long> propWrites = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBytesReadInBytes.TryReadProperty(ref reader, options, PropBytesReadInBytes, null))
+			{
+				continue;
+			}
+
+			if (propBytesWrittenInBytes.TryReadProperty(ref reader, options, PropBytesWrittenInBytes, null))
+			{
+				continue;
+			}
+
+			if (propEvictions.TryReadProperty(ref reader, options, PropEvictions, null))
+			{
+				continue;
+			}
+
+			if (propNumRegions.TryReadProperty(ref reader, options, PropNumRegions, null))
+			{
+				continue;
+			}
+
+			if (propReads.TryReadProperty(ref reader, options, PropReads, null))
+			{
+				continue;
+			}
+
+			if (propRegionSizeInBytes.TryReadProperty(ref reader, options, PropRegionSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propSizeInBytes.TryReadProperty(ref reader, options, PropSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propWrites.TryReadProperty(ref reader, options, PropWrites, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchableSnapshots.Shared(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BytesReadInBytes = propBytesReadInBytes.Value,
+			BytesWrittenInBytes = propBytesWrittenInBytes.Value,
+			Evictions = propEvictions.Value,
+			NumRegions = propNumRegions.Value,
+			Reads = propReads.Value,
+			RegionSizeInBytes = propRegionSizeInBytes.Value,
+			SizeInBytes = propSizeInBytes.Value,
+			Writes = propWrites.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchableSnapshots.Shared value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBytesReadInBytes, value.BytesReadInBytes, null, null);
+		writer.WriteProperty(options, PropBytesWrittenInBytes, value.BytesWrittenInBytes, null, null);
+		writer.WriteProperty(options, PropEvictions, value.Evictions, null, null);
+		writer.WriteProperty(options, PropNumRegions, value.NumRegions, null, null);
+		writer.WriteProperty(options, PropReads, value.Reads, null, null);
+		writer.WriteProperty(options, PropRegionSizeInBytes, value.RegionSizeInBytes, null, null);
+		writer.WriteProperty(options, PropSizeInBytes, value.SizeInBytes, null, null);
+		writer.WriteProperty(options, PropWrites, value.Writes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.SharedConverter))]
 public sealed partial class Shared
 {
-	[JsonInclude, JsonPropertyName("bytes_read_in_bytes")]
-	public Elastic.Clients.Elasticsearch.ByteSize BytesReadInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("bytes_written_in_bytes")]
-	public Elastic.Clients.Elasticsearch.ByteSize BytesWrittenInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("evictions")]
-	public long Evictions { get; init; }
-	[JsonInclude, JsonPropertyName("num_regions")]
-	public int NumRegions { get; init; }
-	[JsonInclude, JsonPropertyName("reads")]
-	public long Reads { get; init; }
-	[JsonInclude, JsonPropertyName("region_size_in_bytes")]
-	public Elastic.Clients.Elasticsearch.ByteSize RegionSizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("size_in_bytes")]
-	public Elastic.Clients.Elasticsearch.ByteSize SizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("writes")]
-	public long Writes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Shared(Elastic.Clients.Elasticsearch.ByteSize bytesReadInBytes, Elastic.Clients.Elasticsearch.ByteSize bytesWrittenInBytes, long evictions, int numRegions, long reads, Elastic.Clients.Elasticsearch.ByteSize regionSizeInBytes, Elastic.Clients.Elasticsearch.ByteSize sizeInBytes, long writes)
+	{
+		BytesReadInBytes = bytesReadInBytes;
+		BytesWrittenInBytes = bytesWrittenInBytes;
+		Evictions = evictions;
+		NumRegions = numRegions;
+		Reads = reads;
+		RegionSizeInBytes = regionSizeInBytes;
+		SizeInBytes = sizeInBytes;
+		Writes = writes;
+	}
+#if NET7_0_OR_GREATER
+	public Shared()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Shared()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Shared(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize BytesReadInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize BytesWrittenInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Evictions { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NumRegions { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Reads { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize RegionSizeInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize SizeInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Writes { get; set; }
 }

@@ -17,33 +17,136 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class TrainedModelStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDeploymentStats = System.Text.Json.JsonEncodedText.Encode("deployment_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceStats = System.Text.Json.JsonEncodedText.Encode("inference_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeStats = System.Text.Json.JsonEncodedText.Encode("model_size_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropPipelineCount = System.Text.Json.JsonEncodedText.Encode("pipeline_count");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats?> propDeploymentStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats?> propInferenceStats = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propIngest = default;
+		LocalJsonValue<string> propModelId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats> propModelSizeStats = default;
+		LocalJsonValue<int> propPipelineCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeploymentStats.TryReadProperty(ref reader, options, PropDeploymentStats, null))
+			{
+				continue;
+			}
+
+			if (propInferenceStats.TryReadProperty(ref reader, options, PropInferenceStats, null))
+			{
+				continue;
+			}
+
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propModelId.TryReadProperty(ref reader, options, PropModelId, null))
+			{
+				continue;
+			}
+
+			if (propModelSizeStats.TryReadProperty(ref reader, options, PropModelSizeStats, null))
+			{
+				continue;
+			}
+
+			if (propPipelineCount.TryReadProperty(ref reader, options, PropPipelineCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DeploymentStats = propDeploymentStats.Value,
+			InferenceStats = propInferenceStats.Value,
+			Ingest = propIngest.Value,
+			ModelId = propModelId.Value,
+			ModelSizeStats = propModelSizeStats.Value,
+			PipelineCount = propPipelineCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeploymentStats, value.DeploymentStats, null, null);
+		writer.WriteProperty(options, PropInferenceStats, value.InferenceStats, null, null);
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
+		writer.WriteProperty(options, PropModelSizeStats, value.ModelSizeStats, null, null);
+		writer.WriteProperty(options, PropPipelineCount, value.PipelineCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStatsConverter))]
 public sealed partial class TrainedModelStats
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelStats(string modelId, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats modelSizeStats, int pipelineCount)
+	{
+		ModelId = modelId;
+		ModelSizeStats = modelSizeStats;
+		PipelineCount = pipelineCount;
+	}
+#if NET7_0_OR_GREATER
+	public TrainedModelStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TrainedModelStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TrainedModelStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A collection of deployment stats, which is present when the models are deployed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("deployment_stats")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats? DeploymentStats { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats? DeploymentStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A collection of inference stats fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inference_stats")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats? InferenceStats { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats? InferenceStats { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -52,30 +155,38 @@ public sealed partial class TrainedModelStats
 	/// The format matches the ingest section in the nodes stats API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ingest")]
-	public IReadOnlyDictionary<string, object>? Ingest { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Ingest { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unique identifier of the trained model.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_id")]
-	public string ModelId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A collection of model size stats.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_size_stats")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats ModelSizeStats { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats ModelSizeStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of ingest pipelines that currently refer to the model.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pipeline_count")]
-	public int PipelineCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int PipelineCount { get; set; }
 }

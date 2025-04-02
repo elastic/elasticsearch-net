@@ -17,18 +17,114 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class UntypedDistanceFeatureQuery
+internal sealed partial class UntypedDistanceFeatureQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin");
+	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<object> propOrigin = default;
+		LocalJsonValue<object> propPivot = default;
+		LocalJsonValue<string?> propQueryName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propOrigin.TryReadProperty(ref reader, options, PropOrigin, null))
+			{
+				continue;
+			}
+
+			if (propPivot.TryReadProperty(ref reader, options, PropPivot, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			Origin = propOrigin.Value,
+			Pivot = propPivot.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropOrigin, value.Origin, null, null);
+		writer.WriteProperty(options, PropPivot, value.Pivot, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryConverter))]
+public sealed partial class UntypedDistanceFeatureQuery : Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.Field field, object origin, object pivot)
+	{
+		Field = field;
+		Origin = origin;
+		Pivot = pivot;
+	}
+#if NET7_0_OR_GREATER
+	public UntypedDistanceFeatureQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UntypedDistanceFeatureQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +133,6 @@ public sealed partial class UntypedDistanceFeatureQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -48,8 +143,11 @@ public sealed partial class UntypedDistanceFeatureQuery
 	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -59,8 +157,11 @@ public sealed partial class UntypedDistanceFeatureQuery
 	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("origin")]
-	public object Origin { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	object Origin { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -68,25 +169,34 @@ public sealed partial class UntypedDistanceFeatureQuery
 	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pivot")]
-	public object Pivot { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	object Pivot { get; set; }
 	public string? QueryName { get; set; }
+
+	string Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery.Type => "untyped";
 }
 
-public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : SerializableDescriptor<UntypedDistanceFeatureQueryDescriptor<TDocument>>
+public readonly partial struct UntypedDistanceFeatureQueryDescriptor<TDocument>
 {
-	internal UntypedDistanceFeatureQueryDescriptor(Action<UntypedDistanceFeatureQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery Instance { get; init; }
 
-	public UntypedDistanceFeatureQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UntypedDistanceFeatureQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private object OriginValue { get; set; }
-	private object PivotValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UntypedDistanceFeatureQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -96,10 +206,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -110,10 +220,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -124,24 +234,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -152,10 +248,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor<TDocument> Origin(object origin)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Origin(object value)
 	{
-		OriginValue = origin;
-		return Self;
+		Instance.Origin = value;
+		return this;
 	}
 
 	/// <summary>
@@ -164,56 +260,45 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor<TDocument> : S
 	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor<TDocument> Pivot(object pivot)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Pivot(object value)
 	{
-		PivotValue = pivot;
-		return Self;
+		Instance.Pivot = value;
+		return this;
 	}
 
-	public UntypedDistanceFeatureQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("origin");
-		JsonSerializer.Serialize(writer, OriginValue, options);
-		writer.WritePropertyName("pivot");
-		JsonSerializer.Serialize(writer, PivotValue, options);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class UntypedDistanceFeatureQueryDescriptor : SerializableDescriptor<UntypedDistanceFeatureQueryDescriptor>
+public readonly partial struct UntypedDistanceFeatureQueryDescriptor
 {
-	internal UntypedDistanceFeatureQueryDescriptor(Action<UntypedDistanceFeatureQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery Instance { get; init; }
 
-	public UntypedDistanceFeatureQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UntypedDistanceFeatureQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private object OriginValue { get; set; }
-	private object PivotValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UntypedDistanceFeatureQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -223,10 +308,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -237,10 +322,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -251,24 +336,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -279,10 +350,10 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor Origin(object origin)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Origin(object value)
 	{
-		OriginValue = origin;
-		return Self;
+		Instance.Origin = value;
+		return this;
 	}
 
 	/// <summary>
@@ -291,39 +362,23 @@ public sealed partial class UntypedDistanceFeatureQueryDescriptor : Serializable
 	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
 	/// </para>
 	/// </summary>
-	public UntypedDistanceFeatureQueryDescriptor Pivot(object pivot)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Pivot(object value)
 	{
-		PivotValue = pivot;
-		return Self;
+		Instance.Pivot = value;
+		return this;
 	}
 
-	public UntypedDistanceFeatureQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("origin");
-		JsonSerializer.Serialize(writer, OriginValue, options);
-		writer.WritePropertyName("pivot");
-		JsonSerializer.Serialize(writer, PivotValue, options);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

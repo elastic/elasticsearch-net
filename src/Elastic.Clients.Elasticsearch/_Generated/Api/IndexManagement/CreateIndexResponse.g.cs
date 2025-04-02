@@ -17,21 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class CreateIndexResponse : ElasticsearchResponse
+internal sealed partial class CreateIndexResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse>
 {
-	[JsonInclude, JsonPropertyName("acknowledged")]
-	public bool Acknowledged { get; init; }
-	[JsonInclude, JsonPropertyName("index")]
-	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("shards_acknowledged")]
-	public bool ShardsAcknowledged { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropShardsAcknowledged = System.Text.Json.JsonEncodedText.Encode("shards_acknowledged");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<bool> propShardsAcknowledged = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propShardsAcknowledged.TryReadProperty(ref reader, options, PropShardsAcknowledged, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Acknowledged = propAcknowledged.Value,
+			Index = propIndex.Value,
+			ShardsAcknowledged = propShardsAcknowledged.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropShardsAcknowledged, value.ShardsAcknowledged, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponseConverter))]
+public sealed partial class CreateIndexResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateIndexResponse(bool acknowledged, string index, bool shardsAcknowledged)
+	{
+		Acknowledged = acknowledged;
+		Index = index;
+		ShardsAcknowledged = shardsAcknowledged;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateIndexResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CreateIndexResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool Acknowledged { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		string Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool ShardsAcknowledged { get; set; }
 }

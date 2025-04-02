@@ -17,29 +17,116 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
+internal sealed partial class UnmappedSignificantTermsAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBgCount = System.Text.Json.JsonEncodedText.Encode("bg_count");
+	private static readonly System.Text.Json.JsonEncodedText PropBuckets = System.Text.Json.JsonEncodedText.Encode("buckets");
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propBgCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<object>> propBuckets = default;
+		LocalJsonValue<long?> propDocCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBgCount.TryReadProperty(ref reader, options, PropBgCount, null))
+			{
+				continue;
+			}
+
+			if (propBuckets.TryReadProperty(ref reader, options, PropBuckets, static System.Collections.Generic.IReadOnlyCollection<object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BgCount = propBgCount.Value,
+			Buckets = propBuckets.Value,
+			DocCount = propDocCount.Value,
+			Meta = propMeta.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBgCount, value.BgCount, null, null);
+		writer.WriteProperty(options, PropBuckets, value.Buckets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<object> v) => w.WriteCollectionValue<object>(o, v, null));
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Result of the <c>significant_terms</c> aggregation on an unmapped field. <c>buckets</c> is always empty.
 /// </para>
 /// </summary>
-public sealed partial class UnmappedSignificantTermsAggregate : IAggregate
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregateConverter))]
+public sealed partial class UnmappedSignificantTermsAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
-	[JsonInclude, JsonPropertyName("bg_count")]
-	public long? BgCount { get; init; }
-	[JsonInclude, JsonPropertyName("buckets")]
-	public IReadOnlyCollection<object> Buckets { get; init; }
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public long? DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UnmappedSignificantTermsAggregate(System.Collections.Generic.IReadOnlyCollection<object> buckets)
+	{
+		Buckets = buckets;
+	}
+#if NET7_0_OR_GREATER
+	public UnmappedSignificantTermsAggregate()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UnmappedSignificantTermsAggregate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UnmappedSignificantTermsAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public long? BgCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<object> Buckets { get; set; }
+	public long? DocCount { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
+
+	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "umsigterms";
 }

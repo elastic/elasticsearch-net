@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class SnapshotShardsStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropStage = System.Text.Json.JsonEncodedText.Encode("stage");
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage> propStage = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummary> propStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStage.TryReadProperty(ref reader, options, PropStage, null))
+			{
+				continue;
+			}
+
+			if (propStats.TryReadProperty(ref reader, options, PropStats, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Stage = propStage.Value,
+			Stats = propStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStage, value.Stage, null, null);
+		writer.WriteProperty(options, PropStats, value.Stats, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatusConverter))]
 public sealed partial class SnapshotShardsStatus
 {
-	[JsonInclude, JsonPropertyName("stage")]
-	public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage Stage { get; init; }
-	[JsonInclude, JsonPropertyName("stats")]
-	public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummary Stats { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SnapshotShardsStatus(Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage stage, Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummary stats)
+	{
+		Stage = stage;
+		Stats = stats;
+	}
+#if NET7_0_OR_GREATER
+	public SnapshotShardsStatus()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SnapshotShardsStatus()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SnapshotShardsStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage Stage { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummary Stats { get; set; }
 }

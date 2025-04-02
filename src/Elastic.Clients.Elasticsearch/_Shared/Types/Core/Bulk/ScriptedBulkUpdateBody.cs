@@ -4,7 +4,6 @@
 
 using System.Text.Json;
 using Elastic.Transport.Extensions;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
@@ -37,7 +36,7 @@ internal class ScriptedBulkUpdateBody<TDocument> : ScriptedBulkUpdateBody
 		if (Upsert is not null)
 		{
 			writer.WritePropertyName("upsert");
-			settings.SourceSerializer.Serialize(Upsert, writer, null);
+			settings.SourceSerializer.Serialize(Upsert, writer, settings.MemoryStreamFactory);
 		}
 	}
 }

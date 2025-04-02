@@ -17,34 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class RestoreRequestParameters : RequestParameters
+public sealed partial class RestoreRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Should this request wait until the operation has completed before returning
+	/// If <c>true</c>, the request returns a response when the restore operation completes.
+	/// The operation is complete when it finishes all attempts to recover primary shards for restored indices.
+	/// This applies even if one or more of the recovery attempts fail.
+	/// </para>
+	/// <para>
+	/// If <c>false</c>, the request returns a response when the restore operation initializes.
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+}
+
+internal sealed partial class RestoreRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreIndexSettings = System.Text.Json.JsonEncodedText.Encode("ignore_index_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeAliases = System.Text.Json.JsonEncodedText.Encode("include_aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexSettings = System.Text.Json.JsonEncodedText.Encode("index_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial");
+	private static readonly System.Text.Json.JsonEncodedText PropRenamePattern = System.Text.Json.JsonEncodedText.Encode("rename_pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropRenameReplacement = System.Text.Json.JsonEncodedText.Encode("rename_replacement");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propFeatureStates = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIgnoreIndexSettings = default;
+		LocalJsonValue<bool?> propIgnoreUnavailable = default;
+		LocalJsonValue<bool?> propIncludeAliases = default;
+		LocalJsonValue<bool?> propIncludeGlobalState = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propIndexSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
+		LocalJsonValue<bool?> propPartial = default;
+		LocalJsonValue<string?> propRenamePattern = default;
+		LocalJsonValue<string?> propRenameReplacement = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatureStates.TryReadProperty(ref reader, options, PropFeatureStates, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIgnoreIndexSettings.TryReadProperty(ref reader, options, PropIgnoreIndexSettings, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, null))
+			{
+				continue;
+			}
+
+			if (propIncludeAliases.TryReadProperty(ref reader, options, PropIncludeAliases, null))
+			{
+				continue;
+			}
+
+			if (propIncludeGlobalState.TryReadProperty(ref reader, options, PropIncludeGlobalState, null))
+			{
+				continue;
+			}
+
+			if (propIndexSettings.TryReadProperty(ref reader, options, PropIndexSettings, null))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
+			{
+				continue;
+			}
+
+			if (propPartial.TryReadProperty(ref reader, options, PropPartial, null))
+			{
+				continue;
+			}
+
+			if (propRenamePattern.TryReadProperty(ref reader, options, PropRenamePattern, null))
+			{
+				continue;
+			}
+
+			if (propRenameReplacement.TryReadProperty(ref reader, options, PropRenameReplacement, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FeatureStates = propFeatureStates.Value,
+			IgnoreIndexSettings = propIgnoreIndexSettings.Value,
+			IgnoreUnavailable = propIgnoreUnavailable.Value,
+			IncludeAliases = propIncludeAliases.Value,
+			IncludeGlobalState = propIncludeGlobalState.Value,
+			IndexSettings = propIndexSettings.Value,
+			Indices = propIndices.Value,
+			Partial = propPartial.Value,
+			RenamePattern = propRenamePattern.Value,
+			RenameReplacement = propRenameReplacement.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIgnoreIndexSettings, value.IgnoreIndexSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, null);
+		writer.WriteProperty(options, PropIncludeAliases, value.IncludeAliases, null, null);
+		writer.WriteProperty(options, PropIncludeGlobalState, value.IncludeGlobalState, null, null);
+		writer.WriteProperty(options, PropIndexSettings, value.IndexSettings, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropPartial, value.Partial, null, null);
+		writer.WriteProperty(options, PropRenamePattern, value.RenamePattern, null, null);
+		writer.WriteProperty(options, PropRenameReplacement, value.RenameReplacement, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -73,15 +193,27 @@ public sealed partial class RestoreRequestParameters : RequestParameters
 /// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 /// </para>
 /// </summary>
-public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestConverter))]
+public sealed partial class RestoreRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RestoreRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public RestoreRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RestoreRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotRestore;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotRestore;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -89,38 +221,193 @@ public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The name of the repository to restore a snapshot from.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot to restore.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Should this request wait until the operation has completed before returning
+	/// If <c>true</c>, the request returns a response when the restore operation completes.
+	/// The operation is complete when it finishes all attempts to recover primary shards for restored indices.
+	/// This applies even if one or more of the recovery attempts fail.
+	/// </para>
+	/// <para>
+	/// If <c>false</c>, the request returns a response when the restore operation initializes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-	[JsonInclude, JsonPropertyName("feature_states")]
-	public ICollection<string>? FeatureStates { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_index_settings")]
-	public ICollection<string>? IgnoreIndexSettings { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_unavailable")]
+
+	/// <summary>
+	/// <para>
+	/// The feature states to restore.
+	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+	/// Note that specifying an empty array will result in the default behavior.
+	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? FeatureStates { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The index settings to not restore from the snapshot.
+	/// You can't use this option to ignore <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? IgnoreIndexSettings { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request ignores any index or data stream in indices that's missing from the snapshot.
+	/// If <c>false</c>, the request returns an error for any missing index or data stream.
+	/// </para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get; set; }
-	[JsonInclude, JsonPropertyName("include_aliases")]
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request restores aliases for any restored data streams and indices.
+	/// If <c>false</c>, the request doesn’t restore aliases.
+	/// </para>
+	/// </summary>
 	public bool? IncludeAliases { get; set; }
-	[JsonInclude, JsonPropertyName("include_global_state")]
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, restore the cluster state. The cluster state includes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Persistent cluster settings
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Index templates
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Legacy index templates
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Ingest pipelines
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Index lifecycle management (ILM) policies
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Stored scripts
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// For snapshots taken after 7.12.0, feature states
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If <c>include_global_state</c> is <c>true</c>, the restore operation merges the legacy index templates in your cluster with the templates contained in the snapshot, replacing any existing ones whose name matches one in the snapshot.
+	/// It completely removes all persistent settings, non-legacy index templates, ingest pipelines, and ILM lifecycle policies that exist in your cluster and replaces them with the corresponding items from the snapshot.
+	/// </para>
+	/// <para>
+	/// Use the <c>feature_states</c> parameter to configure how feature states are restored.
+	/// </para>
+	/// <para>
+	/// If <c>include_global_state</c> is <c>true</c> and a snapshot was created without a global state then the restore request will fail.
+	/// </para>
+	/// </summary>
 	public bool? IncludeGlobalState { get; set; }
-	[JsonInclude, JsonPropertyName("index_settings")]
+
+	/// <summary>
+	/// <para>
+	/// Index settings to add or change in restored indices, including backing indices.
+	/// You can't use this option to change <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexSettings { get; set; }
-	[JsonInclude, JsonPropertyName("indices")]
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of indices and data streams to restore.
+	/// It supports a multi-target syntax.
+	/// The default behavior is all regular indices and regular data streams in the snapshot.
+	/// </para>
+	/// <para>
+	/// You can't use this parameter to restore system indices or system data streams.
+	/// Use <c>feature_states</c> instead.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
-	[JsonInclude, JsonPropertyName("partial")]
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the entire restore operation will fail if one or more indices included in the snapshot do not have all primary shards available.
+	/// </para>
+	/// <para>
+	/// If true, it allows restoring a partial snapshot of indices with unavailable shards.
+	/// Only shards that were successfully included in the snapshot will be restored.
+	/// All missing shards will be recreated as empty.
+	/// </para>
+	/// </summary>
 	public bool? Partial { get; set; }
-	[JsonInclude, JsonPropertyName("rename_pattern")]
+
+	/// <summary>
+	/// <para>
+	/// A rename pattern to apply to restored data streams and indices.
+	/// Data streams and indices matching the rename pattern will be renamed according to <c>rename_replacement</c>.
+	/// </para>
+	/// <para>
+	/// The rename pattern is applied as defined by the regular expression that supports referencing the original text, according to the <c>appendReplacement</c> logic.
+	/// </para>
+	/// </summary>
 	public string? RenamePattern { get; set; }
-	[JsonInclude, JsonPropertyName("rename_replacement")]
+
+	/// <summary>
+	/// <para>
+	/// The rename replacement string that is used with the <c>rename_pattern</c>.
+	/// </para>
+	/// </summary>
 	public string? RenameReplacement { get; set; }
 }
 
@@ -150,202 +437,458 @@ public sealed partial class RestoreRequest : PlainRequest<RestoreRequestParamete
 /// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 /// </para>
 /// </summary>
-public sealed partial class RestoreRequestDescriptor<TDocument> : RequestDescriptor<RestoreRequestDescriptor<TDocument>, RestoreRequestParameters>
+public readonly partial struct RestoreRequestDescriptor
 {
-	internal RestoreRequestDescriptor(Action<RestoreRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest Instance { get; init; }
 
-	public RestoreRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RestoreRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotRestore;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "snapshot.restore";
-
-	public RestoreRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public RestoreRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public RestoreRequestDescriptor<TDocument> Repository(Elastic.Clients.Elasticsearch.Name repository)
+	public RestoreRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
-		RouteValues.Required("repository", repository);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(repository, snapshot);
 	}
 
-	public RestoreRequestDescriptor<TDocument> Snapshot(Elastic.Clients.Elasticsearch.Name snapshot)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RestoreRequestDescriptor()
 	{
-		RouteValues.Required("snapshot", snapshot);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private ICollection<string>? FeatureStatesValue { get; set; }
-	private ICollection<string>? IgnoreIndexSettingsValue { get; set; }
-	private bool? IgnoreUnavailableValue { get; set; }
-	private bool? IncludeAliasesValue { get; set; }
-	private bool? IncludeGlobalStateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexSettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> IndexSettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> IndexSettingsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-	private bool? PartialValue { get; set; }
-	private string? RenamePatternValue { get; set; }
-	private string? RenameReplacementValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor descriptor) => descriptor.Instance;
 
-	public RestoreRequestDescriptor<TDocument> FeatureStates(ICollection<string>? featureStates)
+	/// <summary>
+	/// <para>
+	/// The name of the repository to restore a snapshot from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name value)
 	{
-		FeatureStatesValue = featureStates;
-		return Self;
+		Instance.Repository = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> IgnoreIndexSettings(ICollection<string>? ignoreIndexSettings)
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot to restore.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name value)
 	{
-		IgnoreIndexSettingsValue = ignoreIndexSettings;
-		return Self;
+		Instance.Snapshot = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true)
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		IgnoreUnavailableValue = ignoreUnavailable;
-		return Self;
+		Instance.MasterTimeout = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> IncludeAliases(bool? includeAliases = true)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a response when the restore operation completes.
+	/// The operation is complete when it finishes all attempts to recover primary shards for restored indices.
+	/// This applies even if one or more of the recovery attempts fail.
+	/// </para>
+	/// <para>
+	/// If <c>false</c>, the request returns a response when the restore operation initializes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor WaitForCompletion(bool? value = true)
 	{
-		IncludeAliasesValue = includeAliases;
-		return Self;
+		Instance.WaitForCompletion = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> IncludeGlobalState(bool? includeGlobalState = true)
+	/// <summary>
+	/// <para>
+	/// The feature states to restore.
+	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+	/// Note that specifying an empty array will result in the default behavior.
+	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor FeatureStates(System.Collections.Generic.ICollection<string>? value)
 	{
-		IncludeGlobalStateValue = includeGlobalState;
-		return Self;
+		Instance.FeatureStates = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> IndexSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? indexSettings)
+	/// <summary>
+	/// <para>
+	/// The feature states to restore.
+	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+	/// Note that specifying an empty array will result in the default behavior.
+	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor FeatureStates()
 	{
-		IndexSettingsDescriptor = null;
-		IndexSettingsDescriptorAction = null;
-		IndexSettingsValue = indexSettings;
-		return Self;
+		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> IndexSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The feature states to restore.
+	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+	/// Note that specifying an empty array will result in the default behavior.
+	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor FeatureStates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		IndexSettingsValue = null;
-		IndexSettingsDescriptorAction = null;
-		IndexSettingsDescriptor = descriptor;
-		return Self;
+		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> IndexSettings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The feature states to restore.
+	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+	/// Note that specifying an empty array will result in the default behavior.
+	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor FeatureStates(params string[] values)
 	{
-		IndexSettingsValue = null;
-		IndexSettingsDescriptor = null;
-		IndexSettingsDescriptorAction = configure;
-		return Self;
+		Instance.FeatureStates = [.. values];
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// The index settings to not restore from the snapshot.
+	/// You can't use this option to ignore <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IgnoreIndexSettings(System.Collections.Generic.ICollection<string>? value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.IgnoreIndexSettings = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> Partial(bool? partial = true)
+	/// <summary>
+	/// <para>
+	/// The index settings to not restore from the snapshot.
+	/// You can't use this option to ignore <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IgnoreIndexSettings()
 	{
-		PartialValue = partial;
-		return Self;
+		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> RenamePattern(string? renamePattern)
+	/// <summary>
+	/// <para>
+	/// The index settings to not restore from the snapshot.
+	/// You can't use this option to ignore <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IgnoreIndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		RenamePatternValue = renamePattern;
-		return Self;
+		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	public RestoreRequestDescriptor<TDocument> RenameReplacement(string? renameReplacement)
+	/// <summary>
+	/// <para>
+	/// The index settings to not restore from the snapshot.
+	/// You can't use this option to ignore <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IgnoreIndexSettings(params string[] values)
 	{
-		RenameReplacementValue = renameReplacement;
-		return Self;
+		Instance.IgnoreIndexSettings = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request ignores any index or data stream in indices that's missing from the snapshot.
+	/// If <c>false</c>, the request returns an error for any missing index or data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
-		writer.WriteStartObject();
-		if (FeatureStatesValue is not null)
-		{
-			writer.WritePropertyName("feature_states");
-			JsonSerializer.Serialize(writer, FeatureStatesValue, options);
-		}
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
 
-		if (IgnoreIndexSettingsValue is not null)
-		{
-			writer.WritePropertyName("ignore_index_settings");
-			JsonSerializer.Serialize(writer, IgnoreIndexSettingsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request restores aliases for any restored data streams and indices.
+	/// If <c>false</c>, the request doesn’t restore aliases.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IncludeAliases(bool? value = true)
+	{
+		Instance.IncludeAliases = value;
+		return this;
+	}
 
-		if (IgnoreUnavailableValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unavailable");
-			writer.WriteBooleanValue(IgnoreUnavailableValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, restore the cluster state. The cluster state includes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Persistent cluster settings
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Index templates
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Legacy index templates
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Ingest pipelines
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Index lifecycle management (ILM) policies
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Stored scripts
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// For snapshots taken after 7.12.0, feature states
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If <c>include_global_state</c> is <c>true</c>, the restore operation merges the legacy index templates in your cluster with the templates contained in the snapshot, replacing any existing ones whose name matches one in the snapshot.
+	/// It completely removes all persistent settings, non-legacy index templates, ingest pipelines, and ILM lifecycle policies that exist in your cluster and replaces them with the corresponding items from the snapshot.
+	/// </para>
+	/// <para>
+	/// Use the <c>feature_states</c> parameter to configure how feature states are restored.
+	/// </para>
+	/// <para>
+	/// If <c>include_global_state</c> is <c>true</c> and a snapshot was created without a global state then the restore request will fail.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IncludeGlobalState(bool? value = true)
+	{
+		Instance.IncludeGlobalState = value;
+		return this;
+	}
 
-		if (IncludeAliasesValue.HasValue)
-		{
-			writer.WritePropertyName("include_aliases");
-			writer.WriteBooleanValue(IncludeAliasesValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Index settings to add or change in restored indices, including backing indices.
+	/// You can't use this option to change <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IndexSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
+	{
+		Instance.IndexSettings = value;
+		return this;
+	}
 
-		if (IncludeGlobalStateValue.HasValue)
-		{
-			writer.WritePropertyName("include_global_state");
-			writer.WriteBooleanValue(IncludeGlobalStateValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Index settings to add or change in restored indices, including backing indices.
+	/// You can't use this option to change <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IndexSettings()
+	{
+		Instance.IndexSettings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(null);
+		return this;
+	}
 
-		if (IndexSettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("index_settings");
-			JsonSerializer.Serialize(writer, IndexSettingsDescriptor, options);
-		}
-		else if (IndexSettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_settings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>(IndexSettingsDescriptorAction), options);
-		}
-		else if (IndexSettingsValue is not null)
-		{
-			writer.WritePropertyName("index_settings");
-			JsonSerializer.Serialize(writer, IndexSettingsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Index settings to add or change in restored indices, including backing indices.
+	/// You can't use this option to change <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IndexSettings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>? action)
+	{
+		Instance.IndexSettings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(action);
+		return this;
+	}
 
-		if (IndicesValue is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Index settings to add or change in restored indices, including backing indices.
+	/// You can't use this option to change <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IndexSettings<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>>? action)
+	{
+		Instance.IndexSettings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>.Build(action);
+		return this;
+	}
 
-		if (PartialValue.HasValue)
-		{
-			writer.WritePropertyName("partial");
-			writer.WriteBooleanValue(PartialValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of indices and data streams to restore.
+	/// It supports a multi-target syntax.
+	/// The default behavior is all regular indices and regular data streams in the snapshot.
+	/// </para>
+	/// <para>
+	/// You can't use this parameter to restore system indices or system data streams.
+	/// Use <c>feature_states</c> instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(RenamePatternValue))
-		{
-			writer.WritePropertyName("rename_pattern");
-			writer.WriteStringValue(RenamePatternValue);
-		}
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the entire restore operation will fail if one or more indices included in the snapshot do not have all primary shards available.
+	/// </para>
+	/// <para>
+	/// If true, it allows restoring a partial snapshot of indices with unavailable shards.
+	/// Only shards that were successfully included in the snapshot will be restored.
+	/// All missing shards will be recreated as empty.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor Partial(bool? value = true)
+	{
+		Instance.Partial = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(RenameReplacementValue))
-		{
-			writer.WritePropertyName("rename_replacement");
-			writer.WriteStringValue(RenameReplacementValue);
-		}
+	/// <summary>
+	/// <para>
+	/// A rename pattern to apply to restored data streams and indices.
+	/// Data streams and indices matching the rename pattern will be renamed according to <c>rename_replacement</c>.
+	/// </para>
+	/// <para>
+	/// The rename pattern is applied as defined by the regular expression that supports referencing the original text, according to the <c>appendReplacement</c> logic.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor RenamePattern(string? value)
+	{
+		Instance.RenamePattern = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// The rename replacement string that is used with the <c>rename_pattern</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor RenameReplacement(string? value)
+	{
+		Instance.RenameReplacement = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -375,201 +918,441 @@ public sealed partial class RestoreRequestDescriptor<TDocument> : RequestDescrip
 /// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 /// </para>
 /// </summary>
-public sealed partial class RestoreRequestDescriptor : RequestDescriptor<RestoreRequestDescriptor, RestoreRequestParameters>
+public readonly partial struct RestoreRequestDescriptor<TDocument>
 {
-	internal RestoreRequestDescriptor(Action<RestoreRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest Instance { get; init; }
 
-	public RestoreRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RestoreRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotRestore;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "snapshot.restore";
-
-	public RestoreRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public RestoreRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public RestoreRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name repository)
+	public RestoreRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
-		RouteValues.Required("repository", repository);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(repository, snapshot);
 	}
 
-	public RestoreRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name snapshot)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RestoreRequestDescriptor()
 	{
-		RouteValues.Required("snapshot", snapshot);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private ICollection<string>? FeatureStatesValue { get; set; }
-	private ICollection<string>? IgnoreIndexSettingsValue { get; set; }
-	private bool? IgnoreUnavailableValue { get; set; }
-	private bool? IncludeAliasesValue { get; set; }
-	private bool? IncludeGlobalStateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexSettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor IndexSettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> IndexSettingsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-	private bool? PartialValue { get; set; }
-	private string? RenamePatternValue { get; set; }
-	private string? RenameReplacementValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	public RestoreRequestDescriptor FeatureStates(ICollection<string>? featureStates)
+	/// <summary>
+	/// <para>
+	/// The name of the repository to restore a snapshot from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> Repository(Elastic.Clients.Elasticsearch.Name value)
 	{
-		FeatureStatesValue = featureStates;
-		return Self;
+		Instance.Repository = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor IgnoreIndexSettings(ICollection<string>? ignoreIndexSettings)
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot to restore.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> Snapshot(Elastic.Clients.Elasticsearch.Name value)
 	{
-		IgnoreIndexSettingsValue = ignoreIndexSettings;
-		return Self;
+		Instance.Snapshot = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true)
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		IgnoreUnavailableValue = ignoreUnavailable;
-		return Self;
+		Instance.MasterTimeout = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor IncludeAliases(bool? includeAliases = true)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a response when the restore operation completes.
+	/// The operation is complete when it finishes all attempts to recover primary shards for restored indices.
+	/// This applies even if one or more of the recovery attempts fail.
+	/// </para>
+	/// <para>
+	/// If <c>false</c>, the request returns a response when the restore operation initializes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
 	{
-		IncludeAliasesValue = includeAliases;
-		return Self;
+		Instance.WaitForCompletion = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor IncludeGlobalState(bool? includeGlobalState = true)
+	/// <summary>
+	/// <para>
+	/// The feature states to restore.
+	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+	/// Note that specifying an empty array will result in the default behavior.
+	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> FeatureStates(System.Collections.Generic.ICollection<string>? value)
 	{
-		IncludeGlobalStateValue = includeGlobalState;
-		return Self;
+		Instance.FeatureStates = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor IndexSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? indexSettings)
+	/// <summary>
+	/// <para>
+	/// The feature states to restore.
+	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+	/// Note that specifying an empty array will result in the default behavior.
+	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> FeatureStates()
 	{
-		IndexSettingsDescriptor = null;
-		IndexSettingsDescriptorAction = null;
-		IndexSettingsValue = indexSettings;
-		return Self;
+		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public RestoreRequestDescriptor IndexSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The feature states to restore.
+	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+	/// Note that specifying an empty array will result in the default behavior.
+	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> FeatureStates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		IndexSettingsValue = null;
-		IndexSettingsDescriptorAction = null;
-		IndexSettingsDescriptor = descriptor;
-		return Self;
+		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	public RestoreRequestDescriptor IndexSettings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The feature states to restore.
+	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+	/// Note that specifying an empty array will result in the default behavior.
+	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> FeatureStates(params string[] values)
 	{
-		IndexSettingsValue = null;
-		IndexSettingsDescriptor = null;
-		IndexSettingsDescriptorAction = configure;
-		return Self;
+		Instance.FeatureStates = [.. values];
+		return this;
 	}
 
-	public RestoreRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// The index settings to not restore from the snapshot.
+	/// You can't use this option to ignore <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IgnoreIndexSettings(System.Collections.Generic.ICollection<string>? value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.IgnoreIndexSettings = value;
+		return this;
 	}
 
-	public RestoreRequestDescriptor Partial(bool? partial = true)
+	/// <summary>
+	/// <para>
+	/// The index settings to not restore from the snapshot.
+	/// You can't use this option to ignore <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IgnoreIndexSettings()
 	{
-		PartialValue = partial;
-		return Self;
+		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public RestoreRequestDescriptor RenamePattern(string? renamePattern)
+	/// <summary>
+	/// <para>
+	/// The index settings to not restore from the snapshot.
+	/// You can't use this option to ignore <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IgnoreIndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		RenamePatternValue = renamePattern;
-		return Self;
+		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	public RestoreRequestDescriptor RenameReplacement(string? renameReplacement)
+	/// <summary>
+	/// <para>
+	/// The index settings to not restore from the snapshot.
+	/// You can't use this option to ignore <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IgnoreIndexSettings(params string[] values)
 	{
-		RenameReplacementValue = renameReplacement;
-		return Self;
+		Instance.IgnoreIndexSettings = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request ignores any index or data stream in indices that's missing from the snapshot.
+	/// If <c>false</c>, the request returns an error for any missing index or data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
-		writer.WriteStartObject();
-		if (FeatureStatesValue is not null)
-		{
-			writer.WritePropertyName("feature_states");
-			JsonSerializer.Serialize(writer, FeatureStatesValue, options);
-		}
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
 
-		if (IgnoreIndexSettingsValue is not null)
-		{
-			writer.WritePropertyName("ignore_index_settings");
-			JsonSerializer.Serialize(writer, IgnoreIndexSettingsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request restores aliases for any restored data streams and indices.
+	/// If <c>false</c>, the request doesn’t restore aliases.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IncludeAliases(bool? value = true)
+	{
+		Instance.IncludeAliases = value;
+		return this;
+	}
 
-		if (IgnoreUnavailableValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unavailable");
-			writer.WriteBooleanValue(IgnoreUnavailableValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, restore the cluster state. The cluster state includes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Persistent cluster settings
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Index templates
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Legacy index templates
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Ingest pipelines
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Index lifecycle management (ILM) policies
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Stored scripts
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// For snapshots taken after 7.12.0, feature states
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If <c>include_global_state</c> is <c>true</c>, the restore operation merges the legacy index templates in your cluster with the templates contained in the snapshot, replacing any existing ones whose name matches one in the snapshot.
+	/// It completely removes all persistent settings, non-legacy index templates, ingest pipelines, and ILM lifecycle policies that exist in your cluster and replaces them with the corresponding items from the snapshot.
+	/// </para>
+	/// <para>
+	/// Use the <c>feature_states</c> parameter to configure how feature states are restored.
+	/// </para>
+	/// <para>
+	/// If <c>include_global_state</c> is <c>true</c> and a snapshot was created without a global state then the restore request will fail.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IncludeGlobalState(bool? value = true)
+	{
+		Instance.IncludeGlobalState = value;
+		return this;
+	}
 
-		if (IncludeAliasesValue.HasValue)
-		{
-			writer.WritePropertyName("include_aliases");
-			writer.WriteBooleanValue(IncludeAliasesValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Index settings to add or change in restored indices, including backing indices.
+	/// You can't use this option to change <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IndexSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
+	{
+		Instance.IndexSettings = value;
+		return this;
+	}
 
-		if (IncludeGlobalStateValue.HasValue)
-		{
-			writer.WritePropertyName("include_global_state");
-			writer.WriteBooleanValue(IncludeGlobalStateValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Index settings to add or change in restored indices, including backing indices.
+	/// You can't use this option to change <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IndexSettings()
+	{
+		Instance.IndexSettings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(null);
+		return this;
+	}
 
-		if (IndexSettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("index_settings");
-			JsonSerializer.Serialize(writer, IndexSettingsDescriptor, options);
-		}
-		else if (IndexSettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_settings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor(IndexSettingsDescriptorAction), options);
-		}
-		else if (IndexSettingsValue is not null)
-		{
-			writer.WritePropertyName("index_settings");
-			JsonSerializer.Serialize(writer, IndexSettingsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Index settings to add or change in restored indices, including backing indices.
+	/// You can't use this option to change <c>index.number_of_shards</c>.
+	/// </para>
+	/// <para>
+	/// For data streams, this option applies only to restored backing indices.
+	/// New backing indices are configured using the data stream's matching index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IndexSettings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>? action)
+	{
+		Instance.IndexSettings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
-		if (IndicesValue is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of indices and data streams to restore.
+	/// It supports a multi-target syntax.
+	/// The default behavior is all regular indices and regular data streams in the snapshot.
+	/// </para>
+	/// <para>
+	/// You can't use this parameter to restore system indices or system data streams.
+	/// Use <c>feature_states</c> instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
 
-		if (PartialValue.HasValue)
-		{
-			writer.WritePropertyName("partial");
-			writer.WriteBooleanValue(PartialValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the entire restore operation will fail if one or more indices included in the snapshot do not have all primary shards available.
+	/// </para>
+	/// <para>
+	/// If true, it allows restoring a partial snapshot of indices with unavailable shards.
+	/// Only shards that were successfully included in the snapshot will be restored.
+	/// All missing shards will be recreated as empty.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> Partial(bool? value = true)
+	{
+		Instance.Partial = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(RenamePatternValue))
-		{
-			writer.WritePropertyName("rename_pattern");
-			writer.WriteStringValue(RenamePatternValue);
-		}
+	/// <summary>
+	/// <para>
+	/// A rename pattern to apply to restored data streams and indices.
+	/// Data streams and indices matching the rename pattern will be renamed according to <c>rename_replacement</c>.
+	/// </para>
+	/// <para>
+	/// The rename pattern is applied as defined by the regular expression that supports referencing the original text, according to the <c>appendReplacement</c> logic.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> RenamePattern(string? value)
+	{
+		Instance.RenamePattern = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(RenameReplacementValue))
-		{
-			writer.WritePropertyName("rename_replacement");
-			writer.WriteStringValue(RenameReplacementValue);
-		}
+	/// <summary>
+	/// <para>
+	/// The rename replacement string that is used with the <c>rename_pattern</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> RenameReplacement(string? value)
+	{
+		Instance.RenameReplacement = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

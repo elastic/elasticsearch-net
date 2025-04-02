@@ -17,24 +17,145 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class CombinedFieldsQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
+	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropZeroTermsQuery = System.Text.Json.JsonEncodedText.Encode("zero_terms_query");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAutoGenerateSynonymsPhraseQuery = default;
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MinimumShouldMatch?> propMinimumShouldMatch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator?> propOperator = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms?> propZeroTermsQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAutoGenerateSynonymsPhraseQuery.TryReadProperty(ref reader, options, PropAutoGenerateSynonymsPhraseQuery, null))
+			{
+				continue;
+			}
+
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propMinimumShouldMatch.TryReadProperty(ref reader, options, PropMinimumShouldMatch, null))
+			{
+				continue;
+			}
+
+			if (propOperator.TryReadProperty(ref reader, options, PropOperator, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propZeroTermsQuery.TryReadProperty(ref reader, options, PropZeroTermsQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AutoGenerateSynonymsPhraseQuery = propAutoGenerateSynonymsPhraseQuery.Value,
+			Boost = propBoost.Value,
+			Fields = propFields.Value,
+			MinimumShouldMatch = propMinimumShouldMatch.Value,
+			Operator = propOperator.Value,
+			Query = propQuery.Value,
+			QueryName = propQueryName.Value,
+			ZeroTermsQuery = propZeroTermsQuery.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
+		writer.WriteProperty(options, PropOperator, value.Operator, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryConverter))]
 public sealed partial class CombinedFieldsQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CombinedFieldsQuery(Elastic.Clients.Elasticsearch.Fields fields, string query)
+	{
+		Fields = fields;
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public CombinedFieldsQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CombinedFieldsQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CombinedFieldsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If true, match phrase queries are automatically created for multi-term synonyms.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 	/// <summary>
@@ -45,7 +166,6 @@ public sealed partial class CombinedFieldsQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -53,16 +173,17 @@ public sealed partial class CombinedFieldsQuery
 	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(FieldsConverter))]
-	public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Minimum number of clauses that must match for a document to be returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
@@ -70,7 +191,6 @@ public sealed partial class CombinedFieldsQuery
 	/// Boolean logic used to interpret text in the query value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
 
 	/// <summary>
@@ -79,9 +199,11 @@ public sealed partial class CombinedFieldsQuery
 	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public string Query { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -89,38 +211,37 @@ public sealed partial class CombinedFieldsQuery
 	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(CombinedFieldsQuery combinedFieldsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.CombinedFields(combinedFieldsQuery);
 }
 
-public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : SerializableDescriptor<CombinedFieldsQueryDescriptor<TDocument>>
+public readonly partial struct CombinedFieldsQueryDescriptor<TDocument>
 {
-	internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery Instance { get; init; }
 
-	public CombinedFieldsQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CombinedFieldsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
-	private string QueryValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CombinedFieldsQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// If true, match phrase queries are automatically created for multi-term synonyms.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
-		AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
-		return Self;
+		Instance.AutoGenerateSynonymsPhraseQuery = value;
+		return this;
 	}
 
 	/// <summary>
@@ -131,10 +252,10 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -142,10 +263,21 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -153,10 +285,10 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	/// Minimum number of clauses that must match for a document to be returned.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
+		Instance.MinimumShouldMatch = value;
+		return this;
 	}
 
 	/// <summary>
@@ -164,10 +296,10 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	/// Boolean logic used to interpret text in the query value.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? value)
 	{
-		OperatorValue = value;
-		return Self;
+		Instance.Operator = value;
+		return this;
 	}
 
 	/// <summary>
@@ -176,16 +308,16 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> Query(string query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public CombinedFieldsQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -193,85 +325,49 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? value)
 	{
-		ZeroTermsQueryValue = zeroTermsQuery;
-		return Self;
+		Instance.ZeroTermsQuery = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
-		{
-			writer.WritePropertyName("auto_generate_synonyms_phrase_query");
-			writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		if (MinimumShouldMatchValue is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-		}
-
-		if (OperatorValue is not null)
-		{
-			writer.WritePropertyName("operator");
-			JsonSerializer.Serialize(writer, OperatorValue, options);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ZeroTermsQueryValue is not null)
-		{
-			writer.WritePropertyName("zero_terms_query");
-			JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescriptor<CombinedFieldsQueryDescriptor>
+public readonly partial struct CombinedFieldsQueryDescriptor
 {
-	internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery Instance { get; init; }
 
-	public CombinedFieldsQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CombinedFieldsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
-	private string QueryValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CombinedFieldsQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// If true, match phrase queries are automatically created for multi-term synonyms.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
-		AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
-		return Self;
+		Instance.AutoGenerateSynonymsPhraseQuery = value;
+		return this;
 	}
 
 	/// <summary>
@@ -282,10 +378,10 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -293,10 +389,21 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -304,10 +411,10 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	/// Minimum number of clauses that must match for a document to be returned.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
+		Instance.MinimumShouldMatch = value;
+		return this;
 	}
 
 	/// <summary>
@@ -315,10 +422,10 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	/// Boolean logic used to interpret text in the query value.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? value)
 	{
-		OperatorValue = value;
-		return Self;
+		Instance.Operator = value;
+		return this;
 	}
 
 	/// <summary>
@@ -327,16 +434,16 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor Query(string query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public CombinedFieldsQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -344,55 +451,17 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
 	/// </para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery)
+	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? value)
 	{
-		ZeroTermsQueryValue = zeroTermsQuery;
-		return Self;
+		Instance.ZeroTermsQuery = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
-		{
-			writer.WritePropertyName("auto_generate_synonyms_phrase_query");
-			writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		if (MinimumShouldMatchValue is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-		}
-
-		if (OperatorValue is not null)
-		{
-			writer.WritePropertyName("operator");
-			JsonSerializer.Serialize(writer, OperatorValue, options);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ZeroTermsQueryValue is not null)
-		{
-			writer.WritePropertyName("zero_terms_query");
-			JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

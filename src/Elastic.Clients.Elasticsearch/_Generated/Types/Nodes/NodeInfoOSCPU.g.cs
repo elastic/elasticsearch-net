@@ -17,32 +17,184 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeInfoOSCPUConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCacheSize = System.Text.Json.JsonEncodedText.Encode("cache_size");
+	private static readonly System.Text.Json.JsonEncodedText PropCacheSizeInBytes = System.Text.Json.JsonEncodedText.Encode("cache_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCoresPerSocket = System.Text.Json.JsonEncodedText.Encode("cores_per_socket");
+	private static readonly System.Text.Json.JsonEncodedText PropMhz = System.Text.Json.JsonEncodedText.Encode("mhz");
+	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCores = System.Text.Json.JsonEncodedText.Encode("total_cores");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSockets = System.Text.Json.JsonEncodedText.Encode("total_sockets");
+	private static readonly System.Text.Json.JsonEncodedText PropVendor = System.Text.Json.JsonEncodedText.Encode("vendor");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propCacheSize = default;
+		LocalJsonValue<int> propCacheSizeInBytes = default;
+		LocalJsonValue<int> propCoresPerSocket = default;
+		LocalJsonValue<int> propMhz = default;
+		LocalJsonValue<string> propModel = default;
+		LocalJsonValue<int> propTotalCores = default;
+		LocalJsonValue<int> propTotalSockets = default;
+		LocalJsonValue<string> propVendor = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCacheSize.TryReadProperty(ref reader, options, PropCacheSize, null))
+			{
+				continue;
+			}
+
+			if (propCacheSizeInBytes.TryReadProperty(ref reader, options, PropCacheSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propCoresPerSocket.TryReadProperty(ref reader, options, PropCoresPerSocket, null))
+			{
+				continue;
+			}
+
+			if (propMhz.TryReadProperty(ref reader, options, PropMhz, null))
+			{
+				continue;
+			}
+
+			if (propModel.TryReadProperty(ref reader, options, PropModel, null))
+			{
+				continue;
+			}
+
+			if (propTotalCores.TryReadProperty(ref reader, options, PropTotalCores, null))
+			{
+				continue;
+			}
+
+			if (propTotalSockets.TryReadProperty(ref reader, options, PropTotalSockets, null))
+			{
+				continue;
+			}
+
+			if (propVendor.TryReadProperty(ref reader, options, PropVendor, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CacheSize = propCacheSize.Value,
+			CacheSizeInBytes = propCacheSizeInBytes.Value,
+			CoresPerSocket = propCoresPerSocket.Value,
+			Mhz = propMhz.Value,
+			Model = propModel.Value,
+			TotalCores = propTotalCores.Value,
+			TotalSockets = propTotalSockets.Value,
+			Vendor = propVendor.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCacheSize, value.CacheSize, null, null);
+		writer.WriteProperty(options, PropCacheSizeInBytes, value.CacheSizeInBytes, null, null);
+		writer.WriteProperty(options, PropCoresPerSocket, value.CoresPerSocket, null, null);
+		writer.WriteProperty(options, PropMhz, value.Mhz, null, null);
+		writer.WriteProperty(options, PropModel, value.Model, null, null);
+		writer.WriteProperty(options, PropTotalCores, value.TotalCores, null, null);
+		writer.WriteProperty(options, PropTotalSockets, value.TotalSockets, null, null);
+		writer.WriteProperty(options, PropVendor, value.Vendor, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPUConverter))]
 public sealed partial class NodeInfoOSCPU
 {
-	[JsonInclude, JsonPropertyName("cache_size")]
-	public string CacheSize { get; init; }
-	[JsonInclude, JsonPropertyName("cache_size_in_bytes")]
-	public int CacheSizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("cores_per_socket")]
-	public int CoresPerSocket { get; init; }
-	[JsonInclude, JsonPropertyName("mhz")]
-	public int Mhz { get; init; }
-	[JsonInclude, JsonPropertyName("model")]
-	public string Model { get; init; }
-	[JsonInclude, JsonPropertyName("total_cores")]
-	public int TotalCores { get; init; }
-	[JsonInclude, JsonPropertyName("total_sockets")]
-	public int TotalSockets { get; init; }
-	[JsonInclude, JsonPropertyName("vendor")]
-	public string Vendor { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeInfoOSCPU(string cacheSize, int cacheSizeInBytes, int coresPerSocket, int mhz, string model, int totalCores, int totalSockets, string vendor)
+	{
+		CacheSize = cacheSize;
+		CacheSizeInBytes = cacheSizeInBytes;
+		CoresPerSocket = coresPerSocket;
+		Mhz = mhz;
+		Model = model;
+		TotalCores = totalCores;
+		TotalSockets = totalSockets;
+		Vendor = vendor;
+	}
+#if NET7_0_OR_GREATER
+	public NodeInfoOSCPU()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeInfoOSCPU()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeInfoOSCPU(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string CacheSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int CacheSizeInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int CoresPerSocket { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Mhz { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Model { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int TotalCores { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int TotalSockets { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Vendor { get; set; }
 }

@@ -17,20 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class FieldMemoryUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.FieldMemoryUsage>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMemorySize = System.Text.Json.JsonEncodedText.Encode("memory_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMemorySizeInBytes = System.Text.Json.JsonEncodedText.Encode("memory_size_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.FieldMemoryUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMemorySize = default;
+		LocalJsonValue<long> propMemorySizeInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMemorySize.TryReadProperty(ref reader, options, PropMemorySize, null))
+			{
+				continue;
+			}
+
+			if (propMemorySizeInBytes.TryReadProperty(ref reader, options, PropMemorySizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.FieldMemoryUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MemorySize = propMemorySize.Value,
+			MemorySizeInBytes = propMemorySizeInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.FieldMemoryUsage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMemorySize, value.MemorySize, null, null);
+		writer.WriteProperty(options, PropMemorySizeInBytes, value.MemorySizeInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.FieldMemoryUsageConverter))]
 public sealed partial class FieldMemoryUsage
 {
-	[JsonInclude, JsonPropertyName("memory_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; init; }
-	[JsonInclude, JsonPropertyName("memory_size_in_bytes")]
-	public long MemorySizeInBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldMemoryUsage(long memorySizeInBytes)
+	{
+		MemorySizeInBytes = memorySizeInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public FieldMemoryUsage()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FieldMemoryUsage()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldMemoryUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MemorySizeInBytes { get; set; }
 }

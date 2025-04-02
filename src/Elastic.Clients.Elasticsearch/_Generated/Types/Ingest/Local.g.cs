@@ -17,45 +17,79 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class Local
+internal sealed partial class LocalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.Local>
 {
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFull(Local local) => Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFull.Local(local);
-}
-
-public sealed partial class LocalDescriptor : SerializableDescriptor<LocalDescriptor>
-{
-	internal LocalDescriptor(Action<LocalDescriptor> configure) => configure.Invoke(this);
-
-	public LocalDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Ingest.Local Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.Local(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Type = propType.Value
+		};
 	}
 
-	private string TypeValue { get; set; }
-
-	public LocalDescriptor Type(string type)
-	{
-		TypeValue = type;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.Local value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("type");
-		writer.WriteStringValue(TypeValue);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.LocalConverter))]
+public sealed partial class Local
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Local(string type)
+	{
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public Local()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Local()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Local(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }

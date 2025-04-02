@@ -17,70 +17,140 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KuromojiAnalyzer : IAnalyzer
+internal sealed partial class KuromojiAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer>
 {
-	[JsonInclude, JsonPropertyName("mode")]
-	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUserDictionary = System.Text.Json.JsonEncodedText.Encode("user_dictionary");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode> propMode = default;
+		LocalJsonValue<string?> propUserDictionary = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propUserDictionary.TryReadProperty(ref reader, options, PropUserDictionary, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Mode = propMode.Value,
+			UserDictionary = propUserDictionary.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUserDictionary, value.UserDictionary, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerConverter))]
+public sealed partial class KuromojiAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode mode)
+	{
+		Mode = mode;
+	}
+#if NET7_0_OR_GREATER
+	public KuromojiAnalyzer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public KuromojiAnalyzer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
+
 	public string Type => "kuromoji";
 
-	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
 }
 
-public sealed partial class KuromojiAnalyzerDescriptor : SerializableDescriptor<KuromojiAnalyzerDescriptor>, IBuildableDescriptor<KuromojiAnalyzer>
+public readonly partial struct KuromojiAnalyzerDescriptor
 {
-	internal KuromojiAnalyzerDescriptor(Action<KuromojiAnalyzerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer Instance { get; init; }
 
-	public KuromojiAnalyzerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode ModeValue { get; set; }
-	private string? UserDictionaryValue { get; set; }
-
-	public KuromojiAnalyzerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode mode)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiAnalyzerDescriptor()
 	{
-		ModeValue = mode;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KuromojiAnalyzerDescriptor UserDictionary(string? userDictionary)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode value)
 	{
-		UserDictionaryValue = userDictionary;
-		return Self;
+		Instance.Mode = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor UserDictionary(string? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("mode");
-		JsonSerializer.Serialize(writer, ModeValue, options);
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("kuromoji");
-		if (!string.IsNullOrEmpty(UserDictionaryValue))
-		{
-			writer.WritePropertyName("user_dictionary");
-			writer.WriteStringValue(UserDictionaryValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.UserDictionary = value;
+		return this;
 	}
 
-	KuromojiAnalyzer IBuildableDescriptor<KuromojiAnalyzer>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor> action)
 	{
-		Mode = ModeValue,
-		UserDictionary = UserDictionaryValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

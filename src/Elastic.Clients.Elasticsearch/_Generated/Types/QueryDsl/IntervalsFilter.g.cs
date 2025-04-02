@@ -17,331 +17,832 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-[JsonConverter(typeof(IntervalsFilterConverter))]
+internal sealed partial class IntervalsFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantAfter = System.Text.Json.JsonEncodedText.Encode("after");
+	private static readonly System.Text.Json.JsonEncodedText VariantBefore = System.Text.Json.JsonEncodedText.Encode("before");
+	private static readonly System.Text.Json.JsonEncodedText VariantContainedBy = System.Text.Json.JsonEncodedText.Encode("contained_by");
+	private static readonly System.Text.Json.JsonEncodedText VariantContaining = System.Text.Json.JsonEncodedText.Encode("containing");
+	private static readonly System.Text.Json.JsonEncodedText VariantNotContainedBy = System.Text.Json.JsonEncodedText.Encode("not_contained_by");
+	private static readonly System.Text.Json.JsonEncodedText VariantNotContaining = System.Text.Json.JsonEncodedText.Encode("not_containing");
+	private static readonly System.Text.Json.JsonEncodedText VariantNotOverlapping = System.Text.Json.JsonEncodedText.Encode("not_overlapping");
+	private static readonly System.Text.Json.JsonEncodedText VariantOverlapping = System.Text.Json.JsonEncodedText.Encode("overlapping");
+	private static readonly System.Text.Json.JsonEncodedText VariantScript = System.Text.Json.JsonEncodedText.Encode("script");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantAfter))
+			{
+				variantType = VariantAfter.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantBefore))
+			{
+				variantType = VariantBefore.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantContainedBy))
+			{
+				variantType = VariantContainedBy.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantContaining))
+			{
+				variantType = VariantContaining.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNotContainedBy))
+			{
+				variantType = VariantNotContainedBy.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNotContaining))
+			{
+				variantType = VariantNotContaining.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNotOverlapping))
+			{
+				variantType = VariantNotOverlapping.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantOverlapping))
+			{
+				variantType = VariantOverlapping.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantScript))
+			{
+				variantType = VariantScript.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Script>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "after":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, null, null);
+				break;
+			case "before":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, null, null);
+				break;
+			case "contained_by":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, null, null);
+				break;
+			case "containing":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, null, null);
+				break;
+			case "not_contained_by":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, null, null);
+				break;
+			case "not_containing":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, null, null);
+				break;
+			case "not_overlapping":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, null, null);
+				break;
+			case "overlapping":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, null, null);
+				break;
+			case "script":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Script)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterConverter))]
 public sealed partial class IntervalsFilter
 {
-	internal IntervalsFilter(string variantName, object variant)
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public IntervalsFilter()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IntervalsFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IntervalsFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? After { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("after"); set => SetVariant("after", value); }
 
-	public static IntervalsFilter After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("after", intervalsContainer);
-	public static IntervalsFilter Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("before", intervalsContainer);
-	public static IntervalsFilter ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("contained_by", intervalsContainer);
-	public static IntervalsFilter Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("containing", intervalsContainer);
-	public static IntervalsFilter NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("not_contained_by", intervalsContainer);
-	public static IntervalsFilter NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("not_containing", intervalsContainer);
-	public static IntervalsFilter NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("not_overlapping", intervalsContainer);
-	public static IntervalsFilter Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("overlapping", intervalsContainer);
-	public static IntervalsFilter Script(Elastic.Clients.Elasticsearch.Script script) => new IntervalsFilter("script", script);
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? Before { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("before"); set => SetVariant("before", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? ContainedBy { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("contained_by"); set => SetVariant("contained_by", value); }
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? Containing { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("containing"); set => SetVariant("containing", value); }
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? NotContainedBy { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("not_contained_by"); set => SetVariant("not_contained_by", value); }
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? NotContaining { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("not_containing"); set => SetVariant("not_containing", value); }
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? NotOverlapping { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("not_overlapping"); set => SetVariant("not_overlapping", value); }
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? Overlapping { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("overlapping"); set => SetVariant("overlapping", value); }
+
+	/// <summary>
+	/// <para>
+	/// Script used to return matching documents.
+	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Script? Script { get => GetVariant<Elastic.Clients.Elasticsearch.Script>("script"); set => SetVariant("script", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.Script value) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter { Script = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class IntervalsFilterConverter : JsonConverter<IntervalsFilter>
+public readonly partial struct IntervalsFilterDescriptor<TDocument>
 {
-	public override IntervalsFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsFilterDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "after")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "before")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "contained_by")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "containing")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "not_contained_by")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "not_containing")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "not_overlapping")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "overlapping")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "script")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IntervalsFilter' from the response.");
-		}
-
-		var result = new IntervalsFilter(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, IntervalsFilter value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsFilterDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "after":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "before":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "contained_by":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "containing":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "not_contained_by":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "not_containing":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "not_overlapping":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "overlapping":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
-					break;
-				case "script":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Script>(writer, (Elastic.Clients.Elasticsearch.Script)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.After = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> After(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
+	{
+		Instance.After = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.Before = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Before(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
+	{
+		Instance.Before = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.ContainedBy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> ContainedBy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
+	{
+		Instance.ContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.Containing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Containing(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
+	{
+		Instance.Containing = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.NotContainedBy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotContainedBy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
+	{
+		Instance.NotContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.NotContaining = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotContaining(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
+	{
+		Instance.NotContaining = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.NotOverlapping = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotOverlapping(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
+	{
+		Instance.NotOverlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.Overlapping = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Overlapping(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
+	{
+		Instance.Overlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Script used to return matching documents.
+	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Script used to return matching documents.
+	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Script used to return matching documents.
+	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class IntervalsFilterDescriptor<TDocument> : SerializableDescriptor<IntervalsFilterDescriptor<TDocument>>
+public readonly partial struct IntervalsFilterDescriptor
 {
-	internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter Instance { get; init; }
 
-	public IntervalsFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsFilterDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private IntervalsFilterDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntervalsFilterDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private IntervalsFilterDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.After = value;
+		return this;
 	}
 
-	public IntervalsFilterDescriptor<TDocument> After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "after");
-	public IntervalsFilterDescriptor<TDocument> After(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "after");
-	public IntervalsFilterDescriptor<TDocument> Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "before");
-	public IntervalsFilterDescriptor<TDocument> Before(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "before");
-	public IntervalsFilterDescriptor<TDocument> ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "contained_by");
-	public IntervalsFilterDescriptor<TDocument> ContainedBy(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "contained_by");
-	public IntervalsFilterDescriptor<TDocument> Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "containing");
-	public IntervalsFilterDescriptor<TDocument> Containing(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "containing");
-	public IntervalsFilterDescriptor<TDocument> NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_contained_by");
-	public IntervalsFilterDescriptor<TDocument> NotContainedBy(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "not_contained_by");
-	public IntervalsFilterDescriptor<TDocument> NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_containing");
-	public IntervalsFilterDescriptor<TDocument> NotContaining(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "not_containing");
-	public IntervalsFilterDescriptor<TDocument> NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_overlapping");
-	public IntervalsFilterDescriptor<TDocument> NotOverlapping(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "not_overlapping");
-	public IntervalsFilterDescriptor<TDocument> Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "overlapping");
-	public IntervalsFilterDescriptor<TDocument> Overlapping(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "overlapping");
-	public IntervalsFilterDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script) => Set(script, "script");
-	public IntervalsFilterDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure) => Set(configure, "script");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor After(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class IntervalsFilterDescriptor : SerializableDescriptor<IntervalsFilterDescriptor>
-{
-	internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor> configure) => configure.Invoke(this);
-
-	public IntervalsFilterDescriptor() : base()
-	{
+		Instance.After = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private IntervalsFilterDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor After<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.After = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
+		return this;
 	}
 
-	private IntervalsFilterDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Before = value;
+		return this;
 	}
 
-	public IntervalsFilterDescriptor After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "after");
-	public IntervalsFilterDescriptor After<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "after");
-	public IntervalsFilterDescriptor Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "before");
-	public IntervalsFilterDescriptor Before<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "before");
-	public IntervalsFilterDescriptor ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "contained_by");
-	public IntervalsFilterDescriptor ContainedBy<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "contained_by");
-	public IntervalsFilterDescriptor Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "containing");
-	public IntervalsFilterDescriptor Containing<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "containing");
-	public IntervalsFilterDescriptor NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_contained_by");
-	public IntervalsFilterDescriptor NotContainedBy<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "not_contained_by");
-	public IntervalsFilterDescriptor NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_containing");
-	public IntervalsFilterDescriptor NotContaining<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "not_containing");
-	public IntervalsFilterDescriptor NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_overlapping");
-	public IntervalsFilterDescriptor NotOverlapping<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "not_overlapping");
-	public IntervalsFilterDescriptor Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "overlapping");
-	public IntervalsFilterDescriptor Overlapping<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "overlapping");
-	public IntervalsFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script script) => Set(script, "script");
-	public IntervalsFilterDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure) => Set(configure, "script");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Before(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.Before = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Before<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
+	{
+		Instance.Before = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.ContainedBy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor ContainedBy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
+	{
+		Instance.ContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor ContainedBy<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
+	{
+		Instance.ContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.Containing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Containing(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
+	{
+		Instance.Containing = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Containing<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
+	{
+		Instance.Containing = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.NotContainedBy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContainedBy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
+	{
+		Instance.NotContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContainedBy<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
+	{
+		Instance.NotContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.NotContaining = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContaining(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
+	{
+		Instance.NotContaining = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContaining<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
+	{
+		Instance.NotContaining = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.NotOverlapping = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotOverlapping(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
+	{
+		Instance.NotOverlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotOverlapping<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
+	{
+		Instance.NotOverlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
+	{
+		Instance.Overlapping = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Overlapping(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
+	{
+		Instance.Overlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Overlapping<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
+	{
+		Instance.Overlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Script used to return matching documents.
+	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Script used to return matching documents.
+	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Script used to return matching documents.
+	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

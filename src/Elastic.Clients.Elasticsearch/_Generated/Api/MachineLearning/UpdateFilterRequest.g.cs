@@ -17,21 +17,71 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class UpdateFilterRequestParameters : RequestParameters
+public sealed partial class UpdateFilterRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class UpdateFilterRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAddItems = System.Text.Json.JsonEncodedText.Encode("add_items");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoveItems = System.Text.Json.JsonEncodedText.Encode("remove_items");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propAddItems = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRemoveItems = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAddItems.TryReadProperty(ref reader, options, PropAddItems, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propRemoveItems.TryReadProperty(ref reader, options, PropRemoveItems, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AddItems = propAddItems.Value,
+			Description = propDescription.Value,
+			RemoveItems = propRemoveItems.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAddItems, value.AddItems, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropRemoveItems, value.RemoveItems, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,15 +90,27 @@ public sealed partial class UpdateFilterRequestParameters : RequestParameters
 /// Updates the description of a filter, adds items, or removes items from the list.
 /// </para>
 /// </summary>
-public sealed partial class UpdateFilterRequest : PlainRequest<UpdateFilterRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestConverter))]
+public sealed partial class UpdateFilterRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateFilterRequest(Elastic.Clients.Elasticsearch.Id filterId) : base(r => r.Required("filter_id", filterId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public UpdateFilterRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateFilterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateFilter;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningUpdateFilter;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -56,18 +118,27 @@ public sealed partial class UpdateFilterRequest : PlainRequest<UpdateFilterReque
 
 	/// <summary>
 	/// <para>
+	/// A string that uniquely identifies a filter.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The items to add to the filter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("add_items")]
-	public ICollection<string>? AddItems { get; set; }
+	public System.Collections.Generic.ICollection<string>? AddItems { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A description for the filter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -75,8 +146,7 @@ public sealed partial class UpdateFilterRequest : PlainRequest<UpdateFilterReque
 	/// The items to remove from the filter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("remove_items")]
-	public ICollection<string>? RemoveItems { get; set; }
+	public System.Collections.Generic.ICollection<string>? RemoveItems { get; set; }
 }
 
 /// <summary>
@@ -85,41 +155,83 @@ public sealed partial class UpdateFilterRequest : PlainRequest<UpdateFilterReque
 /// Updates the description of a filter, adds items, or removes items from the list.
 /// </para>
 /// </summary>
-public sealed partial class UpdateFilterRequestDescriptor : RequestDescriptor<UpdateFilterRequestDescriptor, UpdateFilterRequestParameters>
+public readonly partial struct UpdateFilterRequestDescriptor
 {
-	internal UpdateFilterRequestDescriptor(Action<UpdateFilterRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest Instance { get; init; }
 
-	public UpdateFilterRequestDescriptor(Elastic.Clients.Elasticsearch.Id filterId) : base(r => r.Required("filter_id", filterId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateFilterRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateFilter;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.update_filter";
-
-	public UpdateFilterRequestDescriptor FilterId(Elastic.Clients.Elasticsearch.Id filterId)
+	public UpdateFilterRequestDescriptor(Elastic.Clients.Elasticsearch.Id filterId)
 	{
-		RouteValues.Required("filter_id", filterId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest(filterId);
 	}
 
-	private ICollection<string>? AddItemsValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private ICollection<string>? RemoveItemsValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UpdateFilterRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor FilterId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.FilterId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The items to add to the filter.
 	/// </para>
 	/// </summary>
-	public UpdateFilterRequestDescriptor AddItems(ICollection<string>? addItems)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor AddItems(System.Collections.Generic.ICollection<string>? value)
 	{
-		AddItemsValue = addItems;
-		return Self;
+		Instance.AddItems = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The items to add to the filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor AddItems()
+	{
+		Instance.AddItems = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The items to add to the filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor AddItems(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.AddItems = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The items to add to the filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor AddItems(params string[] values)
+	{
+		Instance.AddItems = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -127,10 +239,10 @@ public sealed partial class UpdateFilterRequestDescriptor : RequestDescriptor<Up
 	/// A description for the filter.
 	/// </para>
 	/// </summary>
-	public UpdateFilterRequestDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -138,33 +250,92 @@ public sealed partial class UpdateFilterRequestDescriptor : RequestDescriptor<Up
 	/// The items to remove from the filter.
 	/// </para>
 	/// </summary>
-	public UpdateFilterRequestDescriptor RemoveItems(ICollection<string>? removeItems)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RemoveItems(System.Collections.Generic.ICollection<string>? value)
 	{
-		RemoveItemsValue = removeItems;
-		return Self;
+		Instance.RemoveItems = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The items to remove from the filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RemoveItems()
 	{
-		writer.WriteStartObject();
-		if (AddItemsValue is not null)
-		{
-			writer.WritePropertyName("add_items");
-			JsonSerializer.Serialize(writer, AddItemsValue, options);
-		}
+		Instance.RemoveItems = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+	/// <summary>
+	/// <para>
+	/// The items to remove from the filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RemoveItems(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.RemoveItems = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
 
-		if (RemoveItemsValue is not null)
-		{
-			writer.WritePropertyName("remove_items");
-			JsonSerializer.Serialize(writer, RemoveItemsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// The items to remove from the filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RemoveItems(params string[] values)
+	{
+		Instance.RemoveItems = [.. values];
+		return this;
+	}
 
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,30 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class TransformStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TransformStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCheckpointing = System.Text.Json.JsonEncodedText.Encode("checkpointing");
+	private static readonly System.Text.Json.JsonEncodedText PropHealth = System.Text.Json.JsonEncodedText.Encode("health");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.TransformStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Checkpointing> propCheckpointing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth?> propHealth = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeAttributes?> propNode = default;
+		LocalJsonValue<string?> propReason = default;
+		LocalJsonValue<string> propState = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats> propStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCheckpointing.TryReadProperty(ref reader, options, PropCheckpointing, null))
+			{
+				continue;
+			}
+
+			if (propHealth.TryReadProperty(ref reader, options, PropHealth, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
+			{
+				continue;
+			}
+
+			if (propState.TryReadProperty(ref reader, options, PropState, null))
+			{
+				continue;
+			}
+
+			if (propStats.TryReadProperty(ref reader, options, PropStats, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.TransformStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Checkpointing = propCheckpointing.Value,
+			Health = propHealth.Value,
+			Id = propId.Value,
+			Node = propNode.Value,
+			Reason = propReason.Value,
+			State = propState.Value,
+			Stats = propStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.TransformStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCheckpointing, value.Checkpointing, null, null);
+		writer.WriteProperty(options, PropHealth, value.Health, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropReason, value.Reason, null, null);
+		writer.WriteProperty(options, PropState, value.State, null, null);
+		writer.WriteProperty(options, PropStats, value.Stats, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsConverter))]
 public sealed partial class TransformStats
 {
-	[JsonInclude, JsonPropertyName("checkpointing")]
-	public Elastic.Clients.Elasticsearch.TransformManagement.Checkpointing Checkpointing { get; init; }
-	[JsonInclude, JsonPropertyName("health")]
-	public Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth? Health { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
-	public Elastic.Clients.Elasticsearch.NodeAttributes? Node { get; init; }
-	[JsonInclude, JsonPropertyName("reason")]
-	public string? Reason { get; init; }
-	[JsonInclude, JsonPropertyName("state")]
-	public string State { get; init; }
-	[JsonInclude, JsonPropertyName("stats")]
-	public Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats Stats { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TransformStats(Elastic.Clients.Elasticsearch.TransformManagement.Checkpointing checkpointing, string id, string state, Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats stats)
+	{
+		Checkpointing = checkpointing;
+		Id = id;
+		State = state;
+		Stats = stats;
+	}
+#if NET7_0_OR_GREATER
+	public TransformStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TransformStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TransformStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.TransformManagement.Checkpointing Checkpointing { get; set; }
+	public Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth? Health { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
+	public Elastic.Clients.Elasticsearch.NodeAttributes? Node { get; set; }
+	public string? Reason { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string State { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats Stats { get; set; }
 }

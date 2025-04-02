@@ -10,12 +10,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public partial class GetAliasResponse
 {
 	/// <summary>
-	/// A dictionary containing the <see cref="IndexAliases"/> organised by <see cref="IndexName"/>.
-	/// </summary>
-	[JsonIgnore]
-	public IReadOnlyDictionary<IndexName, IndexAliases> Aliases => BackingDictionary;
-
-	/// <summary>
 	/// Checks if a response is functionally valid or not.
 	/// This is a client abstraction to have a single property to check whether there was something wrong with a request.
 	/// <para>

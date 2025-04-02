@@ -17,24 +17,99 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+internal sealed partial class HopConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.Hop>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropConnections = System.Text.Json.JsonEncodedText.Encode("connections");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropVertices = System.Text.Json.JsonEncodedText.Encode("vertices");
+
+	public override Elastic.Clients.Elasticsearch.Graph.Hop Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Graph.Hop?> propConnections = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>> propVertices = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propConnections.TryReadProperty(ref reader, options, PropConnections, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propVertices.TryReadProperty(ref reader, options, PropVertices, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Graph.Hop(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Connections = propConnections.Value,
+			Query = propQuery.Value,
+			Vertices = propVertices.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.Hop value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropConnections, value.Connections, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropVertices, value.Vertices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.HopConverter))]
 public sealed partial class Hop
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Hop(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> vertices)
+	{
+		Vertices = vertices;
+	}
+#if NET7_0_OR_GREATER
+	public Hop()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Hop()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Hop(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("connections")]
 	public Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
 
 	/// <summary>
@@ -42,64 +117,59 @@ public sealed partial class Hop
 	/// An optional guiding query that constrains the Graph API as it explores connected terms.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains the fields you are interested in.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("vertices")]
-	public ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> Vertices { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> Vertices { get; set; }
 }
 
-public sealed partial class HopDescriptor<TDocument> : SerializableDescriptor<HopDescriptor<TDocument>>
+public readonly partial struct HopDescriptor<TDocument>
 {
-	internal HopDescriptor(Action<HopDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Graph.Hop Instance { get; init; }
 
-	public HopDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HopDescriptor(Elastic.Clients.Elasticsearch.Graph.Hop instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Graph.Hop? ConnectionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> ConnectionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>> ConnectionsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> VerticesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> VerticesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>> VerticesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>>[] VerticesDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HopDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Graph.Hop(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Graph.Hop instance) => new Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Graph.Hop(Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
 	/// </para>
 	/// </summary>
-	public HopDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections)
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Graph.Hop? value)
 	{
-		ConnectionsDescriptor = null;
-		ConnectionsDescriptorAction = null;
-		ConnectionsValue = connections;
-		return Self;
+		Instance.Connections = value;
+		return this;
 	}
 
-	public HopDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Connections(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>> action)
 	{
-		ConnectionsValue = null;
-		ConnectionsDescriptorAction = null;
-		ConnectionsDescriptor = descriptor;
-		return Self;
-	}
-
-	public HopDescriptor<TDocument> Connections(Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>> configure)
-	{
-		ConnectionsValue = null;
-		ConnectionsDescriptor = null;
-		ConnectionsDescriptorAction = configure;
-		return Self;
+		Instance.Connections = Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -107,187 +177,10 @@ public sealed partial class HopDescriptor<TDocument> : SerializableDescriptor<Ho
 	/// An optional guiding query that constrains the Graph API as it explores connected terms.
 	/// </para>
 	/// </summary>
-	public HopDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
-	}
-
-	public HopDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public HopDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
-	public HopDescriptor<TDocument> Vertices(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> vertices)
-	{
-		VerticesDescriptor = null;
-		VerticesDescriptorAction = null;
-		VerticesDescriptorActions = null;
-		VerticesValue = vertices;
-		return Self;
-	}
-
-	public HopDescriptor<TDocument> Vertices(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> descriptor)
-	{
-		VerticesValue = null;
-		VerticesDescriptorAction = null;
-		VerticesDescriptorActions = null;
-		VerticesDescriptor = descriptor;
-		return Self;
-	}
-
-	public HopDescriptor<TDocument> Vertices(Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>> configure)
-	{
-		VerticesValue = null;
-		VerticesDescriptor = null;
-		VerticesDescriptorActions = null;
-		VerticesDescriptorAction = configure;
-		return Self;
-	}
-
-	public HopDescriptor<TDocument> Vertices(params Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>>[] configure)
-	{
-		VerticesValue = null;
-		VerticesDescriptor = null;
-		VerticesDescriptorAction = null;
-		VerticesDescriptorActions = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ConnectionsDescriptor is not null)
-		{
-			writer.WritePropertyName("connections");
-			JsonSerializer.Serialize(writer, ConnectionsDescriptor, options);
-		}
-		else if (ConnectionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("connections");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>(ConnectionsDescriptorAction), options);
-		}
-		else if (ConnectionsValue is not null)
-		{
-			writer.WritePropertyName("connections");
-			JsonSerializer.Serialize(writer, ConnectionsValue, options);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (VerticesDescriptor is not null)
-		{
-			writer.WritePropertyName("vertices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, VerticesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (VerticesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("vertices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>(VerticesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (VerticesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("vertices");
-			writer.WriteStartArray();
-			foreach (var action in VerticesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("vertices");
-			JsonSerializer.Serialize(writer, VerticesValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class HopDescriptor : SerializableDescriptor<HopDescriptor>
-{
-	internal HopDescriptor(Action<HopDescriptor> configure) => configure.Invoke(this);
-
-	public HopDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.Graph.Hop? ConnectionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Graph.HopDescriptor ConnectionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor> ConnectionsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> VerticesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor VerticesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor> VerticesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor>[] VerticesDescriptorActions { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
-	public HopDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections)
-	{
-		ConnectionsDescriptor = null;
-		ConnectionsDescriptorAction = null;
-		ConnectionsValue = connections;
-		return Self;
-	}
-
-	public HopDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.HopDescriptor descriptor)
-	{
-		ConnectionsValue = null;
-		ConnectionsDescriptorAction = null;
-		ConnectionsDescriptor = descriptor;
-		return Self;
-	}
-
-	public HopDescriptor Connections(Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor> configure)
-	{
-		ConnectionsValue = null;
-		ConnectionsDescriptor = null;
-		ConnectionsDescriptorAction = configure;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
 	/// <summary>
@@ -295,28 +188,10 @@ public sealed partial class HopDescriptor : SerializableDescriptor<HopDescriptor
 	/// An optional guiding query that constrains the Graph API as it explores connected terms.
 	/// </para>
 	/// </summary>
-	public HopDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
-	}
-
-	public HopDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
-	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public HopDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -324,108 +199,250 @@ public sealed partial class HopDescriptor : SerializableDescriptor<HopDescriptor
 	/// Contains the fields you are interested in.
 	/// </para>
 	/// </summary>
-	public HopDescriptor Vertices(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> vertices)
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> value)
 	{
-		VerticesDescriptor = null;
-		VerticesDescriptorAction = null;
-		VerticesDescriptorActions = null;
-		VerticesValue = vertices;
-		return Self;
+		Instance.Vertices = value;
+		return this;
 	}
 
-	public HopDescriptor Vertices(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices()
 	{
-		VerticesValue = null;
-		VerticesDescriptorAction = null;
-		VerticesDescriptorActions = null;
-		VerticesDescriptor = descriptor;
-		return Self;
+		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<TDocument>.Build(null);
+		return this;
 	}
 
-	public HopDescriptor Vertices(Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<TDocument>>? action)
 	{
-		VerticesValue = null;
-		VerticesDescriptor = null;
-		VerticesDescriptorActions = null;
-		VerticesDescriptorAction = configure;
-		return Self;
+		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<TDocument>.Build(action);
+		return this;
 	}
 
-	public HopDescriptor Vertices(params Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices(params Elastic.Clients.Elasticsearch.Graph.VertexDefinition[] values)
 	{
-		VerticesValue = null;
-		VerticesDescriptor = null;
-		VerticesDescriptorAction = null;
-		VerticesDescriptorActions = configure;
-		return Self;
+		Instance.Vertices = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>>[] actions)
 	{
-		writer.WriteStartObject();
-		if (ConnectionsDescriptor is not null)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("connections");
-			JsonSerializer.Serialize(writer, ConnectionsDescriptor, options);
-		}
-		else if (ConnectionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("connections");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.HopDescriptor(ConnectionsDescriptorAction), options);
-		}
-		else if (ConnectionsValue is not null)
-		{
-			writer.WritePropertyName("connections");
-			JsonSerializer.Serialize(writer, ConnectionsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>.Build(action));
 		}
 
-		if (QueryDescriptor is not null)
+		Instance.Vertices = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Graph.Hop Build(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Graph.Hop(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct HopDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Graph.Hop Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HopDescriptor(Elastic.Clients.Elasticsearch.Graph.Hop instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HopDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Graph.Hop(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Graph.HopDescriptor(Elastic.Clients.Elasticsearch.Graph.Hop instance) => new Elastic.Clients.Elasticsearch.Graph.HopDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Graph.Hop(Elastic.Clients.Elasticsearch.Graph.HopDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.Hop? value)
+	{
+		Instance.Connections = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Connections(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor> action)
+	{
+		Instance.Connections = Elastic.Clients.Elasticsearch.Graph.HopDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Connections<T>(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor<T>> action)
+	{
+		Instance.Connections = Elastic.Clients.Elasticsearch.Graph.HopDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An optional guiding query that constrains the Graph API as it explores connected terms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
+	{
+		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An optional guiding query that constrains the Graph API as it explores connected terms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An optional guiding query that constrains the Graph API as it explores connected terms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> value)
+	{
+		Instance.Vertices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices()
+	{
+		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition>? action)
+	{
+		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<T>>? action)
+	{
+		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices(params Elastic.Clients.Elasticsearch.Graph.VertexDefinition[] values)
+	{
+		Instance.Vertices = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor.Build(action));
 		}
 
-		if (VerticesDescriptor is not null)
-		{
-			writer.WritePropertyName("vertices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, VerticesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (VerticesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("vertices");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor(VerticesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (VerticesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("vertices");
-			writer.WriteStartArray();
-			foreach (var action in VerticesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor(action), options);
-			}
+		Instance.Vertices = items;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else
+	/// <summary>
+	/// <para>
+	/// Contains the fields you are interested in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices<T>(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("vertices");
-			JsonSerializer.Serialize(writer, VerticesValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<T>.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.Vertices = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Graph.Hop Build(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Graph.HopDescriptor(new Elastic.Clients.Elasticsearch.Graph.Hop(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

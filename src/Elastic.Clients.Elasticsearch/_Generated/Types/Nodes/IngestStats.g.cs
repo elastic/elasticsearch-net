@@ -17,41 +17,168 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class IngestStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.IngestStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
+	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+	private static readonly System.Text.Json.JsonEncodedText PropIngestedAsFirstPipelineInBytes = System.Text.Json.JsonEncodedText.Encode("ingested_as_first_pipeline_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors");
+	private static readonly System.Text.Json.JsonEncodedText PropProducedAsFirstPipelineInBytes = System.Text.Json.JsonEncodedText.Encode("produced_as_first_pipeline_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.IngestStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<long> propCurrent = default;
+		LocalJsonValue<long> propFailed = default;
+		LocalJsonValue<long> propIngestedAsFirstPipelineInBytes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>>> propProcessors = default;
+		LocalJsonValue<long> propProducedAsFirstPipelineInBytes = default;
+		LocalJsonValue<System.TimeSpan> propTimeInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propCurrent.TryReadProperty(ref reader, options, PropCurrent, null))
+			{
+				continue;
+			}
+
+			if (propFailed.TryReadProperty(ref reader, options, PropFailed, null))
+			{
+				continue;
+			}
+
+			if (propIngestedAsFirstPipelineInBytes.TryReadProperty(ref reader, options, PropIngestedAsFirstPipelineInBytes, null))
+			{
+				continue;
+			}
+
+			if (propProcessors.TryReadProperty(ref reader, options, PropProcessors, static System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>>(o, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>(o, null, null)!)!))
+			{
+				continue;
+			}
+
+			if (propProducedAsFirstPipelineInBytes.TryReadProperty(ref reader, options, PropProducedAsFirstPipelineInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTimeInMillis.TryReadProperty(ref reader, options, PropTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.IngestStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			Current = propCurrent.Value,
+			Failed = propFailed.Value,
+			IngestedAsFirstPipelineInBytes = propIngestedAsFirstPipelineInBytes.Value,
+			Processors = propProcessors.Value,
+			ProducedAsFirstPipelineInBytes = propProducedAsFirstPipelineInBytes.Value,
+			TimeInMillis = propTimeInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.IngestStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropCurrent, value.Current, null, null);
+		writer.WriteProperty(options, PropFailed, value.Failed, null, null);
+		writer.WriteProperty(options, PropIngestedAsFirstPipelineInBytes, value.IngestedAsFirstPipelineInBytes, null, null);
+		writer.WriteProperty(options, PropProcessors, value.Processors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> v) => w.WriteCollectionValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>(o, v, null, null)));
+		writer.WriteProperty(options, PropProducedAsFirstPipelineInBytes, value.ProducedAsFirstPipelineInBytes, null, null);
+		writer.WriteProperty(options, PropTimeInMillis, value.TimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.IngestStatsConverter))]
 public sealed partial class IngestStats
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IngestStats(long count, long current, long failed, long ingestedAsFirstPipelineInBytes, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> processors, long producedAsFirstPipelineInBytes, System.TimeSpan timeInMillis)
+	{
+		Count = count;
+		Current = current;
+		Failed = failed;
+		IngestedAsFirstPipelineInBytes = ingestedAsFirstPipelineInBytes;
+		Processors = processors;
+		ProducedAsFirstPipelineInBytes = producedAsFirstPipelineInBytes;
+		TimeInMillis = timeInMillis;
+	}
+#if NET7_0_OR_GREATER
+	public IngestStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IngestStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IngestStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Total number of documents ingested during the lifetime of this node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of documents currently being ingested.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("current")]
-	public long Current { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Current { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of failed ingest operations during the lifetime of this node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("failed")]
-	public long Failed { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Failed { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -60,16 +187,22 @@ public sealed partial class IngestStats
 	/// Thus, it is not present on pipelines which only serve as a final pipeline after a default pipeline, a pipeline run after a reroute processor, or pipelines in pipeline processors.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ingested_as_first_pipeline_in_bytes")]
-	public long IngestedAsFirstPipelineInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long IngestedAsFirstPipelineInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of ingest processors.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("processors")]
-	public IReadOnlyCollection<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> Processors { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> Processors { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,14 +212,20 @@ public sealed partial class IngestStats
 	/// In situations where there are subsequent pipelines, the value represents the size of the document after all pipelines have run.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("produced_as_first_pipeline_in_bytes")]
-	public long ProducedAsFirstPipelineInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ProducedAsFirstPipelineInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total time, in milliseconds, spent preprocessing ingest documents during the lifetime of this node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_in_millis")]
-	public long TimeInMillis { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TimeInMillis { get; set; }
 }

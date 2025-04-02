@@ -17,24 +17,93 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class DateRangeExpressionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
+	private static readonly System.Text.Json.JsonEncodedText PropTo = System.Text.Json.JsonEncodedText.Encode("to");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath?> propFrom = default;
+		LocalJsonValue<string?> propKey = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath?> propTo = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
+			{
+				continue;
+			}
+
+			if (propTo.TryReadProperty(ref reader, options, PropTo, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			From = propFrom.Value,
+			Key = propKey.Value,
+			To = propTo.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropTo, value.To, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionConverter))]
 public sealed partial class DateRangeExpression
 {
+#if NET7_0_OR_GREATER
+	public DateRangeExpression()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DateRangeExpression()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DateRangeExpression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Start of the range (inclusive).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? From { get; set; }
 
 	/// <summary>
@@ -42,7 +111,6 @@ public sealed partial class DateRangeExpression
 	/// Custom key to return the range with.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; set; }
 
 	/// <summary>
@@ -50,31 +118,48 @@ public sealed partial class DateRangeExpression
 	/// End of the range (exclusive).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("to")]
 	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? To { get; set; }
 }
 
-public sealed partial class DateRangeExpressionDescriptor : SerializableDescriptor<DateRangeExpressionDescriptor>
+public readonly partial struct DateRangeExpressionDescriptor
 {
-	internal DateRangeExpressionDescriptor(Action<DateRangeExpressionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression Instance { get; init; }
 
-	public DateRangeExpressionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DateRangeExpressionDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? FromValue { get; set; }
-	private string? KeyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? ToValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DateRangeExpressionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression instance) => new Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression(Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Start of the range (inclusive).
 	/// </para>
 	/// </summary>
-	public DateRangeExpressionDescriptor From(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? from)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor From(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Start of the range (inclusive).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor From(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
+	{
+		Instance.From = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -82,10 +167,10 @@ public sealed partial class DateRangeExpressionDescriptor : SerializableDescript
 	/// Custom key to return the range with.
 	/// </para>
 	/// </summary>
-	public DateRangeExpressionDescriptor Key(string? key)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor Key(string? value)
 	{
-		KeyValue = key;
-		return Self;
+		Instance.Key = value;
+		return this;
 	}
 
 	/// <summary>
@@ -93,33 +178,33 @@ public sealed partial class DateRangeExpressionDescriptor : SerializableDescript
 	/// End of the range (exclusive).
 	/// </para>
 	/// </summary>
-	public DateRangeExpressionDescriptor To(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? to)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor To(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? value)
 	{
-		ToValue = to;
-		return Self;
+		Instance.To = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// End of the range (exclusive).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor To(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
 	{
-		writer.WriteStartObject();
-		if (FromValue is not null)
+		Instance.To = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, FromValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(KeyValue))
-		{
-			writer.WritePropertyName("key");
-			writer.WriteStringValue(KeyValue);
-		}
-
-		if (ToValue is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, ToValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,115 +17,173 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class DataStreamLifecycleDownsampling
+internal sealed partial class DataStreamLifecycleDownsamplingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling>
 {
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("rounds")]
-	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> Rounds { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropRounds = System.Text.Json.JsonEncodedText.Encode("rounds");
 
-public sealed partial class DataStreamLifecycleDownsamplingDescriptor : SerializableDescriptor<DataStreamLifecycleDownsamplingDescriptor>
-{
-	internal DataStreamLifecycleDownsamplingDescriptor(Action<DataStreamLifecycleDownsamplingDescriptor> configure) => configure.Invoke(this);
-
-	public DataStreamLifecycleDownsamplingDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> RoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor RoundsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor> RoundsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor>[] RoundsDescriptorActions { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
-	public DataStreamLifecycleDownsamplingDescriptor Rounds(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> rounds)
-	{
-		RoundsDescriptor = null;
-		RoundsDescriptorAction = null;
-		RoundsDescriptorActions = null;
-		RoundsValue = rounds;
-		return Self;
-	}
-
-	public DataStreamLifecycleDownsamplingDescriptor Rounds(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor descriptor)
-	{
-		RoundsValue = null;
-		RoundsDescriptorAction = null;
-		RoundsDescriptorActions = null;
-		RoundsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DataStreamLifecycleDownsamplingDescriptor Rounds(Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor> configure)
-	{
-		RoundsValue = null;
-		RoundsDescriptor = null;
-		RoundsDescriptorActions = null;
-		RoundsDescriptorAction = configure;
-		return Self;
-	}
-
-	public DataStreamLifecycleDownsamplingDescriptor Rounds(params Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor>[] configure)
-	{
-		RoundsValue = null;
-		RoundsDescriptor = null;
-		RoundsDescriptorAction = null;
-		RoundsDescriptorActions = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (RoundsDescriptor is not null)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>> propRounds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			writer.WritePropertyName("rounds");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RoundsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RoundsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rounds");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor(RoundsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RoundsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("rounds");
-			writer.WriteStartArray();
-			foreach (var action in RoundsDescriptorActions)
+			if (propRounds.TryReadProperty(ref reader, options, PropRounds, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, null)!))
 			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor(action), options);
+				continue;
 			}
 
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("rounds");
-			JsonSerializer.Serialize(writer, RoundsValue, options);
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Rounds = propRounds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRounds, value.Rounds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, v, null));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingConverter))]
+public sealed partial class DataStreamLifecycleDownsampling
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamLifecycleDownsampling(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> rounds)
+	{
+		Rounds = rounds;
+	}
+#if NET7_0_OR_GREATER
+	public DataStreamLifecycleDownsampling()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataStreamLifecycleDownsampling()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataStreamLifecycleDownsampling(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> Rounds { get; set; }
+}
+
+public readonly partial struct DataStreamLifecycleDownsamplingDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamLifecycleDownsamplingDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamLifecycleDownsamplingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor Rounds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> value)
+	{
+		Instance.Rounds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor Rounds()
+	{
+		Instance.Rounds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDownsamplingRound.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor Rounds(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDownsamplingRound>? action)
+	{
+		Instance.Rounds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDownsamplingRound.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor Rounds(params Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound[] values)
+	{
+		Instance.Rounds = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor Rounds(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor.Build(action));
+		}
+
+		Instance.Rounds = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,109 +17,309 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class CategoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Category>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCategoryId = System.Text.Json.JsonEncodedText.Encode("category_id");
+	private static readonly System.Text.Json.JsonEncodedText PropExamples = System.Text.Json.JsonEncodedText.Encode("examples");
+	private static readonly System.Text.Json.JsonEncodedText PropGrokPattern = System.Text.Json.JsonEncodedText.Encode("grok_pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMatchingLength = System.Text.Json.JsonEncodedText.Encode("max_matching_length");
+	private static readonly System.Text.Json.JsonEncodedText PropMlcategory = System.Text.Json.JsonEncodedText.Encode("mlcategory");
+	private static readonly System.Text.Json.JsonEncodedText PropNumMatches = System.Text.Json.JsonEncodedText.Encode("num_matches");
+	private static readonly System.Text.Json.JsonEncodedText PropP = System.Text.Json.JsonEncodedText.Encode("p");
+	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldName = System.Text.Json.JsonEncodedText.Encode("partition_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldValue = System.Text.Json.JsonEncodedText.Encode("partition_field_value");
+	private static readonly System.Text.Json.JsonEncodedText PropPreferredToCategories = System.Text.Json.JsonEncodedText.Encode("preferred_to_categories");
+	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex");
+	private static readonly System.Text.Json.JsonEncodedText PropResultType = System.Text.Json.JsonEncodedText.Encode("result_type");
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Category Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCategoryId = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propExamples = default;
+		LocalJsonValue<string?> propGrokPattern = default;
+		LocalJsonValue<string> propJobId = default;
+		LocalJsonValue<long> propMaxMatchingLength = default;
+		LocalJsonValue<string> propMlcategory = default;
+		LocalJsonValue<long?> propNumMatches = default;
+		LocalJsonValue<string?> propP = default;
+		LocalJsonValue<string?> propPartitionFieldName = default;
+		LocalJsonValue<string?> propPartitionFieldValue = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propPreferredToCategories = default;
+		LocalJsonValue<string> propRegex = default;
+		LocalJsonValue<string> propResultType = default;
+		LocalJsonValue<string> propTerms = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCategoryId.TryReadProperty(ref reader, options, PropCategoryId, null))
+			{
+				continue;
+			}
+
+			if (propExamples.TryReadProperty(ref reader, options, PropExamples, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propGrokPattern.TryReadProperty(ref reader, options, PropGrokPattern, null))
+			{
+				continue;
+			}
+
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
+			{
+				continue;
+			}
+
+			if (propMaxMatchingLength.TryReadProperty(ref reader, options, PropMaxMatchingLength, null))
+			{
+				continue;
+			}
+
+			if (propMlcategory.TryReadProperty(ref reader, options, PropMlcategory, null))
+			{
+				continue;
+			}
+
+			if (propNumMatches.TryReadProperty(ref reader, options, PropNumMatches, null))
+			{
+				continue;
+			}
+
+			if (propP.TryReadProperty(ref reader, options, PropP, null))
+			{
+				continue;
+			}
+
+			if (propPartitionFieldName.TryReadProperty(ref reader, options, PropPartitionFieldName, null))
+			{
+				continue;
+			}
+
+			if (propPartitionFieldValue.TryReadProperty(ref reader, options, PropPartitionFieldValue, null))
+			{
+				continue;
+			}
+
+			if (propPreferredToCategories.TryReadProperty(ref reader, options, PropPreferredToCategories, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRegex.TryReadProperty(ref reader, options, PropRegex, null))
+			{
+				continue;
+			}
+
+			if (propResultType.TryReadProperty(ref reader, options, PropResultType, null))
+			{
+				continue;
+			}
+
+			if (propTerms.TryReadProperty(ref reader, options, PropTerms, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Category(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CategoryId = propCategoryId.Value,
+			Examples = propExamples.Value,
+			GrokPattern = propGrokPattern.Value,
+			JobId = propJobId.Value,
+			MaxMatchingLength = propMaxMatchingLength.Value,
+			Mlcategory = propMlcategory.Value,
+			NumMatches = propNumMatches.Value,
+			P = propP.Value,
+			PartitionFieldName = propPartitionFieldName.Value,
+			PartitionFieldValue = propPartitionFieldValue.Value,
+			PreferredToCategories = propPreferredToCategories.Value,
+			Regex = propRegex.Value,
+			ResultType = propResultType.Value,
+			Terms = propTerms.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Category value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCategoryId, value.CategoryId, null, null);
+		writer.WriteProperty(options, PropExamples, value.Examples, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropGrokPattern, value.GrokPattern, null, null);
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropMaxMatchingLength, value.MaxMatchingLength, null, null);
+		writer.WriteProperty(options, PropMlcategory, value.Mlcategory, null, null);
+		writer.WriteProperty(options, PropNumMatches, value.NumMatches, null, null);
+		writer.WriteProperty(options, PropP, value.P, null, null);
+		writer.WriteProperty(options, PropPartitionFieldName, value.PartitionFieldName, null, null);
+		writer.WriteProperty(options, PropPartitionFieldValue, value.PartitionFieldValue, null, null);
+		writer.WriteProperty(options, PropPreferredToCategories, value.PreferredToCategories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRegex, value.Regex, null, null);
+		writer.WriteProperty(options, PropResultType, value.ResultType, null, null);
+		writer.WriteProperty(options, PropTerms, value.Terms, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.CategoryConverter))]
 public sealed partial class Category
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Category(long categoryId, System.Collections.Generic.IReadOnlyCollection<string> examples, string jobId, long maxMatchingLength, string mlcategory, string regex, string resultType, string terms)
+	{
+		CategoryId = categoryId;
+		Examples = examples;
+		JobId = jobId;
+		MaxMatchingLength = maxMatchingLength;
+		Mlcategory = mlcategory;
+		Regex = regex;
+		ResultType = resultType;
+		Terms = terms;
+	}
+#if NET7_0_OR_GREATER
+	public Category()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Category()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Category(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A unique identifier for the category. category_id is unique at the job level, even when per-partition categorization is enabled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("category_id")]
-	public long CategoryId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CategoryId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of examples of actual values that matched the category.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("examples")]
-	public IReadOnlyCollection<string> Examples { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> Examples { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// [experimental] A Grok pattern that could be used in Logstash or an ingest pipeline to extract fields from messages that match the category. This field is experimental and may be changed or removed in a future release. The Grok patterns that are found are not optimal, but are often a good starting point for manual tweaking.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grok_pattern")]
-	public string? GrokPattern { get; init; }
+	public string? GrokPattern { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("job_id")]
-	public string JobId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum length of the fields that matched the category. The value is increased by 10% to enable matching for similar fields that have not been analyzed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_matching_length")]
-	public long MaxMatchingLength { get; init; }
-	[JsonInclude, JsonPropertyName("mlcategory")]
-	public string Mlcategory { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MaxMatchingLength { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Mlcategory { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of messages that have been matched by this category. This is only guaranteed to have the latest accurate count after a job _flush or _close
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_matches")]
-	public long? NumMatches { get; init; }
-	[JsonInclude, JsonPropertyName("p")]
-	public string? p { get; init; }
+	public long? NumMatches { get; set; }
+	public string? P { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If per-partition categorization is enabled, this property identifies the field used to segment the categorization. It is not present when per-partition categorization is disabled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("partition_field_name")]
-	public string? PartitionFieldName { get; init; }
+	public string? PartitionFieldName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If per-partition categorization is enabled, this property identifies the value of the partition_field_name for the category. It is not present when per-partition categorization is disabled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("partition_field_value")]
-	public string? PartitionFieldValue { get; init; }
+	public string? PartitionFieldValue { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of category_id entries that this current category encompasses. Any new message that is processed by the categorizer will match against this category and not any of the categories in this list. This is only guaranteed to have the latest accurate list of categories after a job _flush or _close
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("preferred_to_categories")]
-	public IReadOnlyCollection<string>? PreferredToCategories { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? PreferredToCategories { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A regular expression that is used to search for values that match the category.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("regex")]
-	public string Regex { get; init; }
-	[JsonInclude, JsonPropertyName("result_type")]
-	public string ResultType { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Regex { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ResultType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A space separated list of the common tokens that are matched in values of the category.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terms")]
-	public string Terms { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Terms { get; set; }
 }

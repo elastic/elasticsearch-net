@@ -17,148 +17,447 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class ReadOnlyUrlRepositorySettings
+internal sealed partial class ReadOnlyUrlRepositorySettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings>
 {
-	[JsonInclude, JsonPropertyName("chunk_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? ChunkSize { get; set; }
-	[JsonInclude, JsonPropertyName("compress")]
-	public bool? Compress { get; set; }
-	[JsonInclude, JsonPropertyName("http_max_retries")]
-	public int? HttpMaxRetries { get; set; }
-	[JsonInclude, JsonPropertyName("http_socket_timeout")]
-	public Elastic.Clients.Elasticsearch.Duration? HttpSocketTimeout { get; set; }
-	[JsonInclude, JsonPropertyName("max_number_of_snapshots")]
-	public int? MaxNumberOfSnapshots { get; set; }
-	[JsonInclude, JsonPropertyName("max_restore_bytes_per_sec")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxRestoreBytesPerSec { get; set; }
-	[JsonInclude, JsonPropertyName("max_snapshot_bytes_per_sec")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxSnapshotBytesPerSec { get; set; }
-	[JsonInclude, JsonPropertyName("url")]
-	public string Url { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size");
+	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress");
+	private static readonly System.Text.Json.JsonEncodedText PropHttpMaxRetries = System.Text.Json.JsonEncodedText.Encode("http_max_retries");
+	private static readonly System.Text.Json.JsonEncodedText PropHttpSocketTimeout = System.Text.Json.JsonEncodedText.Encode("http_socket_timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumberOfSnapshots = System.Text.Json.JsonEncodedText.Encode("max_number_of_snapshots");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec");
+	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url");
 
-public sealed partial class ReadOnlyUrlRepositorySettingsDescriptor : SerializableDescriptor<ReadOnlyUrlRepositorySettingsDescriptor>
-{
-	internal ReadOnlyUrlRepositorySettingsDescriptor(Action<ReadOnlyUrlRepositorySettingsDescriptor> configure) => configure.Invoke(this);
-
-	public ReadOnlyUrlRepositorySettingsDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propChunkSize = default;
+		LocalJsonValue<bool?> propCompress = default;
+		LocalJsonValue<int?> propHttpMaxRetries = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propHttpSocketTimeout = default;
+		LocalJsonValue<int?> propMaxNumberOfSnapshots = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxRestoreBytesPerSec = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxSnapshotBytesPerSec = default;
+		LocalJsonValue<string> propUrl = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propChunkSize.TryReadProperty(ref reader, options, PropChunkSize, null))
+			{
+				continue;
+			}
+
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
+			{
+				continue;
+			}
+
+			if (propHttpMaxRetries.TryReadProperty(ref reader, options, PropHttpMaxRetries, null))
+			{
+				continue;
+			}
+
+			if (propHttpSocketTimeout.TryReadProperty(ref reader, options, PropHttpSocketTimeout, null))
+			{
+				continue;
+			}
+
+			if (propMaxNumberOfSnapshots.TryReadProperty(ref reader, options, PropMaxNumberOfSnapshots, null))
+			{
+				continue;
+			}
+
+			if (propMaxRestoreBytesPerSec.TryReadProperty(ref reader, options, PropMaxRestoreBytesPerSec, null))
+			{
+				continue;
+			}
+
+			if (propMaxSnapshotBytesPerSec.TryReadProperty(ref reader, options, PropMaxSnapshotBytesPerSec, null))
+			{
+				continue;
+			}
+
+			if (propUrl.TryReadProperty(ref reader, options, PropUrl, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ChunkSize = propChunkSize.Value,
+			Compress = propCompress.Value,
+			HttpMaxRetries = propHttpMaxRetries.Value,
+			HttpSocketTimeout = propHttpSocketTimeout.Value,
+			MaxNumberOfSnapshots = propMaxNumberOfSnapshots.Value,
+			MaxRestoreBytesPerSec = propMaxRestoreBytesPerSec.Value,
+			MaxSnapshotBytesPerSec = propMaxSnapshotBytesPerSec.Value,
+			Url = propUrl.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.ByteSize? ChunkSizeValue { get; set; }
-	private bool? CompressValue { get; set; }
-	private int? HttpMaxRetriesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? HttpSocketTimeoutValue { get; set; }
-	private int? MaxNumberOfSnapshotsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ByteSize? MaxRestoreBytesPerSecValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ByteSize? MaxSnapshotBytesPerSecValue { get; set; }
-	private string UrlValue { get; set; }
-
-	public ReadOnlyUrlRepositorySettingsDescriptor ChunkSize(Elastic.Clients.Elasticsearch.ByteSize? chunkSize)
-	{
-		ChunkSizeValue = chunkSize;
-		return Self;
-	}
-
-	public ReadOnlyUrlRepositorySettingsDescriptor Compress(bool? compress = true)
-	{
-		CompressValue = compress;
-		return Self;
-	}
-
-	public ReadOnlyUrlRepositorySettingsDescriptor HttpMaxRetries(int? httpMaxRetries)
-	{
-		HttpMaxRetriesValue = httpMaxRetries;
-		return Self;
-	}
-
-	public ReadOnlyUrlRepositorySettingsDescriptor HttpSocketTimeout(Elastic.Clients.Elasticsearch.Duration? httpSocketTimeout)
-	{
-		HttpSocketTimeoutValue = httpSocketTimeout;
-		return Self;
-	}
-
-	public ReadOnlyUrlRepositorySettingsDescriptor MaxNumberOfSnapshots(int? maxNumberOfSnapshots)
-	{
-		MaxNumberOfSnapshotsValue = maxNumberOfSnapshots;
-		return Self;
-	}
-
-	public ReadOnlyUrlRepositorySettingsDescriptor MaxRestoreBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? maxRestoreBytesPerSec)
-	{
-		MaxRestoreBytesPerSecValue = maxRestoreBytesPerSec;
-		return Self;
-	}
-
-	public ReadOnlyUrlRepositorySettingsDescriptor MaxSnapshotBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? maxSnapshotBytesPerSec)
-	{
-		MaxSnapshotBytesPerSecValue = maxSnapshotBytesPerSec;
-		return Self;
-	}
-
-	public ReadOnlyUrlRepositorySettingsDescriptor Url(string url)
-	{
-		UrlValue = url;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (ChunkSizeValue is not null)
-		{
-			writer.WritePropertyName("chunk_size");
-			JsonSerializer.Serialize(writer, ChunkSizeValue, options);
-		}
-
-		if (CompressValue.HasValue)
-		{
-			writer.WritePropertyName("compress");
-			writer.WriteBooleanValue(CompressValue.Value);
-		}
-
-		if (HttpMaxRetriesValue.HasValue)
-		{
-			writer.WritePropertyName("http_max_retries");
-			writer.WriteNumberValue(HttpMaxRetriesValue.Value);
-		}
-
-		if (HttpSocketTimeoutValue is not null)
-		{
-			writer.WritePropertyName("http_socket_timeout");
-			JsonSerializer.Serialize(writer, HttpSocketTimeoutValue, options);
-		}
-
-		if (MaxNumberOfSnapshotsValue.HasValue)
-		{
-			writer.WritePropertyName("max_number_of_snapshots");
-			writer.WriteNumberValue(MaxNumberOfSnapshotsValue.Value);
-		}
-
-		if (MaxRestoreBytesPerSecValue is not null)
-		{
-			writer.WritePropertyName("max_restore_bytes_per_sec");
-			JsonSerializer.Serialize(writer, MaxRestoreBytesPerSecValue, options);
-		}
-
-		if (MaxSnapshotBytesPerSecValue is not null)
-		{
-			writer.WritePropertyName("max_snapshot_bytes_per_sec");
-			JsonSerializer.Serialize(writer, MaxSnapshotBytesPerSecValue, options);
-		}
-
-		writer.WritePropertyName("url");
-		writer.WriteStringValue(UrlValue);
+		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
+		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
+		writer.WriteProperty(options, PropHttpMaxRetries, value.HttpMaxRetries, null, null);
+		writer.WriteProperty(options, PropHttpSocketTimeout, value.HttpSocketTimeout, null, null);
+		writer.WriteProperty(options, PropMaxNumberOfSnapshots, value.MaxNumberOfSnapshots, null, null);
+		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
+		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
+		writer.WriteProperty(options, PropUrl, value.Url, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsConverter))]
+public sealed partial class ReadOnlyUrlRepositorySettings
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReadOnlyUrlRepositorySettings(string url)
+	{
+		Url = url;
+	}
+#if NET7_0_OR_GREATER
+	public ReadOnlyUrlRepositorySettings()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ReadOnlyUrlRepositorySettings()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ReadOnlyUrlRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
+	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
+	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
+	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
+	/// The default varies by repository type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? ChunkSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c>, metadata files are stored in compressed format.
+	/// This setting doesn't affect index files that are already compressed by default.
+	/// </para>
+	/// </summary>
+	public bool? Compress { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of retries for HTTP and HTTPS URLs.
+	/// </para>
+	/// </summary>
+	public int? HttpMaxRetries { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum wait time for data transfers over a connection.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? HttpSocketTimeout { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of snapshots the repository can contain.
+	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
+	/// </para>
+	/// </summary>
+	public int? MaxNumberOfSnapshots { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum snapshot restore rate per node.
+	/// It defaults to unlimited.
+	/// Note that restores are also throttled through recovery settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxRestoreBytesPerSec { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum snapshot creation rate per node.
+	/// It defaults to 40mb per second.
+	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxSnapshotBytesPerSec { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The URL location of the root of the shared filesystem repository.
+	/// The following protocols are supported:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>file</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>ftp</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>http</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>https</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>jar</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// URLs using the HTTP, HTTPS, or FTP protocols must be explicitly allowed with the <c>repositories.url.allowed_urls</c> cluster setting.
+	/// This setting supports wildcards in the place of a host, path, query, or fragment in the URL.
+	/// </para>
+	/// <para>
+	/// URLs using the file protocol must point to the location of a shared filesystem accessible to all master and data nodes in the cluster.
+	/// This location must be registered in the <c>path.repo</c> setting.
+	/// You don't need to register URLs using the FTP, HTTP, HTTPS, or JAR protocols in the <c>path.repo</c> setting.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Url { get; set; }
+}
+
+public readonly partial struct ReadOnlyUrlRepositorySettingsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReadOnlyUrlRepositorySettingsDescriptor(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReadOnlyUrlRepositorySettingsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings instance) => new Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
+	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
+	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
+	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
+	/// The default varies by repository type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor ChunkSize(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.ChunkSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
+	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
+	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
+	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
+	/// The default varies by repository type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor ChunkSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.ChunkSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c>, metadata files are stored in compressed format.
+	/// This setting doesn't affect index files that are already compressed by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor Compress(bool? value = true)
+	{
+		Instance.Compress = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of retries for HTTP and HTTPS URLs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor HttpMaxRetries(int? value)
+	{
+		Instance.HttpMaxRetries = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum wait time for data transfers over a connection.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor HttpSocketTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.HttpSocketTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of snapshots the repository can contain.
+	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxNumberOfSnapshots(int? value)
+	{
+		Instance.MaxNumberOfSnapshots = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum snapshot restore rate per node.
+	/// It defaults to unlimited.
+	/// Note that restores are also throttled through recovery settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxRestoreBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.MaxRestoreBytesPerSec = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum snapshot restore rate per node.
+	/// It defaults to unlimited.
+	/// Note that restores are also throttled through recovery settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxRestoreBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxRestoreBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum snapshot creation rate per node.
+	/// It defaults to 40mb per second.
+	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxSnapshotBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.MaxSnapshotBytesPerSec = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum snapshot creation rate per node.
+	/// It defaults to 40mb per second.
+	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxSnapshotBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxSnapshotBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The URL location of the root of the shared filesystem repository.
+	/// The following protocols are supported:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>file</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>ftp</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>http</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>https</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>jar</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// URLs using the HTTP, HTTPS, or FTP protocols must be explicitly allowed with the <c>repositories.url.allowed_urls</c> cluster setting.
+	/// This setting supports wildcards in the place of a host, path, query, or fragment in the URL.
+	/// </para>
+	/// <para>
+	/// URLs using the file protocol must point to the location of a shared filesystem accessible to all master and data nodes in the cluster.
+	/// This location must be registered in the <c>path.repo</c> setting.
+	/// You don't need to register URLs using the FTP, HTTP, HTTPS, or JAR protocols in the <c>path.repo</c> setting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor Url(string value)
+	{
+		Instance.Url = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

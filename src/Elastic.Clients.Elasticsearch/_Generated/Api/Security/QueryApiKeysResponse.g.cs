@@ -17,46 +17,138 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class QueryApiKeysResponse : ElasticsearchResponse
+internal sealed partial class QueryApiKeysResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropApiKeys = System.Text.Json.JsonEncodedText.Encode("api_keys");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary?> propAggregations = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey>> propApiKeys = default;
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<int> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, null))
+			{
+				continue;
+			}
+
+			if (propApiKeys.TryReadProperty(ref reader, options, PropApiKeys, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ApiKey>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregations = propAggregations.Value,
+			ApiKeys = propApiKeys.Value,
+			Count = propCount.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, null);
+		writer.WriteProperty(options, PropApiKeys, value.ApiKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApiKey>(o, v, null));
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponseConverter))]
+public sealed partial class QueryApiKeysResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryApiKeysResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> apiKeys, int count, int total)
+	{
+		ApiKeys = apiKeys;
+		Count = count;
+		Total = total;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryApiKeysResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal QueryApiKeysResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The aggregations result, if requested.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggregations")]
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; init; }
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of API key information.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("api_keys")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> ApiKeys { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> ApiKeys { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of API keys returned in the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public int Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of API keys found.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Total { get; set; }
 }

@@ -17,34 +17,194 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class AnalyticsStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.AnalyticsStatistics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoxplotUsage = System.Text.Json.JsonEncodedText.Encode("boxplot_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropCumulativeCardinalityUsage = System.Text.Json.JsonEncodedText.Encode("cumulative_cardinality_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropMovingPercentilesUsage = System.Text.Json.JsonEncodedText.Encode("moving_percentiles_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropMultiTermsUsage = System.Text.Json.JsonEncodedText.Encode("multi_terms_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizeUsage = System.Text.Json.JsonEncodedText.Encode("normalize_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropRateUsage = System.Text.Json.JsonEncodedText.Encode("rate_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropStringStatsUsage = System.Text.Json.JsonEncodedText.Encode("string_stats_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropTopMetricsUsage = System.Text.Json.JsonEncodedText.Encode("top_metrics_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropTTestUsage = System.Text.Json.JsonEncodedText.Encode("t_test_usage");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.AnalyticsStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propBoxplotUsage = default;
+		LocalJsonValue<long> propCumulativeCardinalityUsage = default;
+		LocalJsonValue<long> propMovingPercentilesUsage = default;
+		LocalJsonValue<long?> propMultiTermsUsage = default;
+		LocalJsonValue<long> propNormalizeUsage = default;
+		LocalJsonValue<long> propRateUsage = default;
+		LocalJsonValue<long> propStringStatsUsage = default;
+		LocalJsonValue<long> propTopMetricsUsage = default;
+		LocalJsonValue<long> propTTestUsage = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoxplotUsage.TryReadProperty(ref reader, options, PropBoxplotUsage, null))
+			{
+				continue;
+			}
+
+			if (propCumulativeCardinalityUsage.TryReadProperty(ref reader, options, PropCumulativeCardinalityUsage, null))
+			{
+				continue;
+			}
+
+			if (propMovingPercentilesUsage.TryReadProperty(ref reader, options, PropMovingPercentilesUsage, null))
+			{
+				continue;
+			}
+
+			if (propMultiTermsUsage.TryReadProperty(ref reader, options, PropMultiTermsUsage, null))
+			{
+				continue;
+			}
+
+			if (propNormalizeUsage.TryReadProperty(ref reader, options, PropNormalizeUsage, null))
+			{
+				continue;
+			}
+
+			if (propRateUsage.TryReadProperty(ref reader, options, PropRateUsage, null))
+			{
+				continue;
+			}
+
+			if (propStringStatsUsage.TryReadProperty(ref reader, options, PropStringStatsUsage, null))
+			{
+				continue;
+			}
+
+			if (propTopMetricsUsage.TryReadProperty(ref reader, options, PropTopMetricsUsage, null))
+			{
+				continue;
+			}
+
+			if (propTTestUsage.TryReadProperty(ref reader, options, PropTTestUsage, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.AnalyticsStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BoxplotUsage = propBoxplotUsage.Value,
+			CumulativeCardinalityUsage = propCumulativeCardinalityUsage.Value,
+			MovingPercentilesUsage = propMovingPercentilesUsage.Value,
+			MultiTermsUsage = propMultiTermsUsage.Value,
+			NormalizeUsage = propNormalizeUsage.Value,
+			RateUsage = propRateUsage.Value,
+			StringStatsUsage = propStringStatsUsage.Value,
+			TopMetricsUsage = propTopMetricsUsage.Value,
+			TTestUsage = propTTestUsage.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.AnalyticsStatistics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoxplotUsage, value.BoxplotUsage, null, null);
+		writer.WriteProperty(options, PropCumulativeCardinalityUsage, value.CumulativeCardinalityUsage, null, null);
+		writer.WriteProperty(options, PropMovingPercentilesUsage, value.MovingPercentilesUsage, null, null);
+		writer.WriteProperty(options, PropMultiTermsUsage, value.MultiTermsUsage, null, null);
+		writer.WriteProperty(options, PropNormalizeUsage, value.NormalizeUsage, null, null);
+		writer.WriteProperty(options, PropRateUsage, value.RateUsage, null, null);
+		writer.WriteProperty(options, PropStringStatsUsage, value.StringStatsUsage, null, null);
+		writer.WriteProperty(options, PropTopMetricsUsage, value.TopMetricsUsage, null, null);
+		writer.WriteProperty(options, PropTTestUsage, value.TTestUsage, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.AnalyticsStatisticsConverter))]
 public sealed partial class AnalyticsStatistics
 {
-	[JsonInclude, JsonPropertyName("boxplot_usage")]
-	public long BoxplotUsage { get; init; }
-	[JsonInclude, JsonPropertyName("cumulative_cardinality_usage")]
-	public long CumulativeCardinalityUsage { get; init; }
-	[JsonInclude, JsonPropertyName("moving_percentiles_usage")]
-	public long MovingPercentilesUsage { get; init; }
-	[JsonInclude, JsonPropertyName("multi_terms_usage")]
-	public long? MultiTermsUsage { get; init; }
-	[JsonInclude, JsonPropertyName("normalize_usage")]
-	public long NormalizeUsage { get; init; }
-	[JsonInclude, JsonPropertyName("rate_usage")]
-	public long RateUsage { get; init; }
-	[JsonInclude, JsonPropertyName("string_stats_usage")]
-	public long StringStatsUsage { get; init; }
-	[JsonInclude, JsonPropertyName("top_metrics_usage")]
-	public long TopMetricsUsage { get; init; }
-	[JsonInclude, JsonPropertyName("t_test_usage")]
-	public long TTestUsage { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalyticsStatistics(long boxplotUsage, long cumulativeCardinalityUsage, long movingPercentilesUsage, long normalizeUsage, long rateUsage, long stringStatsUsage, long topMetricsUsage, long tTestUsage)
+	{
+		BoxplotUsage = boxplotUsage;
+		CumulativeCardinalityUsage = cumulativeCardinalityUsage;
+		MovingPercentilesUsage = movingPercentilesUsage;
+		NormalizeUsage = normalizeUsage;
+		RateUsage = rateUsage;
+		StringStatsUsage = stringStatsUsage;
+		TopMetricsUsage = topMetricsUsage;
+		TTestUsage = tTestUsage;
+	}
+#if NET7_0_OR_GREATER
+	public AnalyticsStatistics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AnalyticsStatistics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AnalyticsStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long BoxplotUsage { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CumulativeCardinalityUsage { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MovingPercentilesUsage { get; set; }
+	public long? MultiTermsUsage { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NormalizeUsage { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long RateUsage { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long StringStatsUsage { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TopMetricsUsage { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TTestUsage { get; set; }
 }

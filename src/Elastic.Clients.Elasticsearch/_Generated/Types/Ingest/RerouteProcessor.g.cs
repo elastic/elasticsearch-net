@@ -17,18 +17,133 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class RerouteProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDataset = System.Text.Json.JsonEncodedText.Encode("dataset");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDestination = System.Text.Json.JsonEncodedText.Encode("destination");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropNamespace = System.Text.Json.JsonEncodedText.Encode("namespace");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propDataset = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<string?> propDestination = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNamespace = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<string?> propTag = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDataset.TryReadProperty(ref reader, options, PropDataset, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDestination.TryReadProperty(ref reader, options, PropDestination, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propNamespace.TryReadProperty(ref reader, options, PropNamespace, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Dataset = propDataset.Value,
+			Description = propDescription.Value,
+			Destination = propDestination.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			Namespace = propNamespace.Value,
+			OnFailure = propOnFailure.Value,
+			Tag = propTag.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDataset, value.Dataset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDestination, value.Destination, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropNamespace, value.Namespace, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorConverter))]
 public sealed partial class RerouteProcessor
 {
+#if NET7_0_OR_GREATER
+	public RerouteProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RerouteProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RerouteProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Field references or a static value for the dataset part of the data stream name.
@@ -44,9 +159,7 @@ public sealed partial class RerouteProcessor
 	/// default {{data_stream.dataset}}
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dataset")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Dataset { get; set; }
+	public System.Collections.Generic.ICollection<string>? Dataset { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -54,7 +167,6 @@ public sealed partial class RerouteProcessor
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -62,7 +174,6 @@ public sealed partial class RerouteProcessor
 	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("destination")]
 	public string? Destination { get; set; }
 
 	/// <summary>
@@ -70,15 +181,13 @@ public sealed partial class RerouteProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -95,17 +204,14 @@ public sealed partial class RerouteProcessor
 	/// default {{data_stream.namespace}}
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("namespace")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Namespace { get; set; }
+	public System.Collections.Generic.ICollection<string>? Namespace { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -113,31 +219,27 @@ public sealed partial class RerouteProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(RerouteProcessor rerouteProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Reroute(rerouteProcessor);
 }
 
-public sealed partial class RerouteProcessorDescriptor<TDocument> : SerializableDescriptor<RerouteProcessorDescriptor<TDocument>>
+public readonly partial struct RerouteProcessorDescriptor<TDocument>
 {
-	internal RerouteProcessorDescriptor(Action<RerouteProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor Instance { get; init; }
 
-	public RerouteProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RerouteProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? DatasetValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private string? DestinationValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private ICollection<string>? NamespaceValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private string? TagValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RerouteProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -154,229 +256,11 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	/// default {{data_stream.dataset}}
 	/// </para>
 	/// </summary>
-	public RerouteProcessorDescriptor<TDocument> Dataset(ICollection<string>? dataset)
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Dataset(System.Collections.Generic.ICollection<string>? value)
 	{
-		DatasetValue = dataset;
-		return Self;
+		Instance.Dataset = value;
+		return this;
 	}
-
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
-	public RerouteProcessorDescriptor<TDocument> Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
-	/// </para>
-	/// </summary>
-	public RerouteProcessorDescriptor<TDocument> Destination(string? destination)
-	{
-		DestinationValue = destination;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public RerouteProcessorDescriptor<TDocument> If(string? value)
-	{
-		IfValue = value;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
-	public RerouteProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
-	public RerouteProcessorDescriptor<TDocument> Namespace(ICollection<string>? value)
-	{
-		NamespaceValue = value;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public RerouteProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public RerouteProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public RerouteProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public RerouteProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
-	public RerouteProcessorDescriptor<TDocument> Tag(string? tag)
-	{
-		TagValue = tag;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (DatasetValue is not null)
-		{
-			writer.WritePropertyName("dataset");
-			SingleOrManySerializationHelper.Serialize<string>(DatasetValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (!string.IsNullOrEmpty(DestinationValue))
-		{
-			writer.WritePropertyName("destination");
-			writer.WriteStringValue(DestinationValue);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (NamespaceValue is not null)
-		{
-			writer.WritePropertyName("namespace");
-			SingleOrManySerializationHelper.Serialize<string>(NamespaceValue, writer, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<RerouteProcessorDescriptor>
-{
-	internal RerouteProcessorDescriptor(Action<RerouteProcessorDescriptor> configure) => configure.Invoke(this);
-
-	public RerouteProcessorDescriptor() : base()
-	{
-	}
-
-	private ICollection<string>? DatasetValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private string? DestinationValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private ICollection<string>? NamespaceValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private string? TagValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -393,10 +277,52 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	/// default {{data_stream.dataset}}
 	/// </para>
 	/// </summary>
-	public RerouteProcessorDescriptor Dataset(ICollection<string>? dataset)
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Dataset()
 	{
-		DatasetValue = dataset;
-		return Self;
+		Instance.Dataset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the dataset part of the data stream name.
+	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+	/// Example values are nginx.access and nginx.error.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.dataset}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Dataset(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Dataset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the dataset part of the data stream name.
+	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+	/// Example values are nginx.access and nginx.error.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.dataset}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Dataset(params string[] values)
+	{
+		Instance.Dataset = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -405,10 +331,10 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public RerouteProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -416,10 +342,10 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
 	/// </para>
 	/// </summary>
-	public RerouteProcessorDescriptor Destination(string? destination)
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Destination(string? value)
 	{
-		DestinationValue = destination;
-		return Self;
+		Instance.Destination = value;
+		return this;
 	}
 
 	/// <summary>
@@ -427,10 +353,32 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public RerouteProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -438,10 +386,10 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public RerouteProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -458,10 +406,70 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	/// default {{data_stream.namespace}}
 	/// </para>
 	/// </summary>
-	public RerouteProcessorDescriptor Namespace(ICollection<string>? value)
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Namespace(System.Collections.Generic.ICollection<string>? value)
 	{
-		NamespaceValue = value;
-		return Self;
+		Instance.Namespace = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Namespace()
+	{
+		Instance.Namespace = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Namespace(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Namespace = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Namespace(params string[] values)
+	{
+		Instance.Namespace = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -469,40 +477,60 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public RerouteProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public RerouteProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public RerouteProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public RerouteProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -511,88 +539,387 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public RerouteProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (DatasetValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("dataset");
-			SingleOrManySerializationHelper.Serialize<string>(DatasetValue, writer, options);
+			return new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct RerouteProcessorDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RerouteProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RerouteProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the dataset part of the data stream name.
+	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+	/// Example values are nginx.access and nginx.error.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.dataset}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Dataset(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Dataset = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the dataset part of the data stream name.
+	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+	/// Example values are nginx.access and nginx.error.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.dataset}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Dataset()
+	{
+		Instance.Dataset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the dataset part of the data stream name.
+	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+	/// Example values are nginx.access and nginx.error.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.dataset}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Dataset(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Dataset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the dataset part of the data stream name.
+	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+	/// Example values are nginx.access and nginx.error.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.dataset}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Dataset(params string[] values)
+	{
+		Instance.Dataset = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Description(string? value)
+	{
+		Instance.Description = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Destination(string? value)
+	{
+		Instance.Destination = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor IgnoreFailure(bool? value = true)
+	{
+		Instance.IgnoreFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Namespace(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Namespace = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Namespace()
+	{
+		Instance.Namespace = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Namespace(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Namespace = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
+	/// index names for allowed characters. Must be no longer than 100 characters.
+	/// </para>
+	/// <para>
+	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+	/// </para>
+	/// <para>
+	/// default {{data_stream.namespace}}
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Namespace(params string[] values)
+	{
+		Instance.Namespace = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
+	{
+		Instance.OnFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure()
+	{
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
+	{
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
+	{
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
 		}
 
-		if (!string.IsNullOrEmpty(DestinationValue))
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("destination");
-			writer.WriteStringValue(DestinationValue);
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
 		}
 
-		if (!string.IsNullOrEmpty(IfValue))
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Tag(string? value)
+	{
+		Instance.Tag = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
+			return new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (NamespaceValue is not null)
-		{
-			writer.WritePropertyName("namespace");
-			SingleOrManySerializationHelper.Serialize<string>(NamespaceValue, writer, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

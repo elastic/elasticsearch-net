@@ -17,32 +17,111 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeEvaluationRegressionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field");
+	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedField = System.Text.Json.JsonEncodedText.Encode("predicted_field");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propActualField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics?> propMetrics = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propPredictedField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActualField.TryReadProperty(ref reader, options, PropActualField, null))
+			{
+				continue;
+			}
+
+			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, null))
+			{
+				continue;
+			}
+
+			if (propPredictedField.TryReadProperty(ref reader, options, PropPredictedField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ActualField = propActualField.Value,
+			Metrics = propMetrics.Value,
+			PredictedField = propPredictedField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActualField, value.ActualField, null, null);
+		writer.WriteProperty(options, PropMetrics, value.Metrics, null, null);
+		writer.WriteProperty(options, PropPredictedField, value.PredictedField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionConverter))]
 public sealed partial class DataframeEvaluationRegression
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.Field actualField, Elastic.Clients.Elasticsearch.Field predictedField)
+	{
+		ActualField = actualField;
+		PredictedField = predictedField;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeEvaluationRegression()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeEvaluationRegression()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("actual_field")]
-	public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metrics")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? Metrics { get; set; }
 
 	/// <summary>
@@ -50,46 +129,41 @@ public sealed partial class DataframeEvaluationRegression
 	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("predicted_field")]
-	public Elastic.Clients.Elasticsearch.Field PredictedField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation(DataframeEvaluationRegression dataframeEvaluationRegression) => Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation.Regression(dataframeEvaluationRegression);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field PredictedField { get; set; }
 }
 
-public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> : SerializableDescriptor<DataframeEvaluationRegressionDescriptor<TDocument>>
+public readonly partial struct DataframeEvaluationRegressionDescriptor<TDocument>
 {
-	internal DataframeEvaluationRegressionDescriptor(Action<DataframeEvaluationRegressionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression Instance { get; init; }
 
-	public DataframeEvaluationRegressionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationRegressionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field ActualFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? MetricsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor MetricsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor> MetricsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field PredictedFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationRegressionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field actualField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		ActualFieldValue = actualField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationRegressionDescriptor<TDocument> ActualField<TValue>(Expression<Func<TDocument, TValue>> actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
+		Instance.ActualField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -97,10 +171,10 @@ public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> :
 	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionDescriptor<TDocument> ActualField(Expression<Func<TDocument, object>> actualField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> ActualField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		ActualFieldValue = actualField;
-		return Self;
+		Instance.ActualField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -108,135 +182,10 @@ public sealed partial class DataframeEvaluationRegressionDescriptor<TDocument> :
 	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? metrics)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? value)
 	{
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsValue = metrics;
-		return Self;
-	}
-
-	public DataframeEvaluationRegressionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor descriptor)
-	{
-		MetricsValue = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DataframeEvaluationRegressionDescriptor<TDocument> Metrics(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor> configure)
-	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationRegressionDescriptor<TDocument> PredictedField(Elastic.Clients.Elasticsearch.Field predictedField)
-	{
-		PredictedFieldValue = predictedField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationRegressionDescriptor<TDocument> PredictedField<TValue>(Expression<Func<TDocument, TValue>> predictedField)
-	{
-		PredictedFieldValue = predictedField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationRegressionDescriptor<TDocument> PredictedField(Expression<Func<TDocument, object>> predictedField)
-	{
-		PredictedFieldValue = predictedField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("actual_field");
-		JsonSerializer.Serialize(writer, ActualFieldValue, options);
-		if (MetricsDescriptor is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-		}
-		else if (MetricsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor(MetricsDescriptorAction), options);
-		}
-		else if (MetricsValue is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
-		}
-
-		writer.WritePropertyName("predicted_field");
-		JsonSerializer.Serialize(writer, PredictedFieldValue, options);
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class DataframeEvaluationRegressionDescriptor : SerializableDescriptor<DataframeEvaluationRegressionDescriptor>
-{
-	internal DataframeEvaluationRegressionDescriptor(Action<DataframeEvaluationRegressionDescriptor> configure) => configure.Invoke(this);
-
-	public DataframeEvaluationRegressionDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.Field ActualFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? MetricsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor MetricsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor> MetricsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field PredictedFieldValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationRegressionDescriptor ActualField(Elastic.Clients.Elasticsearch.Field actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationRegressionDescriptor ActualField<TDocument, TValue>(Expression<Func<TDocument, TValue>> actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationRegressionDescriptor ActualField<TDocument>(Expression<Func<TDocument, object>> actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
+		Instance.Metrics = value;
+		return this;
 	}
 
 	/// <summary>
@@ -244,28 +193,21 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? metrics)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> Metrics()
 	{
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsValue = metrics;
-		return Self;
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor.Build(null);
+		return this;
 	}
 
-	public DataframeEvaluationRegressionDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor>? action)
 	{
-		MetricsValue = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DataframeEvaluationRegressionDescriptor Metrics(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor> configure)
-	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = configure;
-		return Self;
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -273,10 +215,10 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionDescriptor PredictedField(Elastic.Clients.Elasticsearch.Field predictedField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> PredictedField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		PredictedFieldValue = predictedField;
-		return Self;
+		Instance.PredictedField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -284,10 +226,93 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionDescriptor PredictedField<TDocument, TValue>(Expression<Func<TDocument, TValue>> predictedField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> PredictedField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PredictedFieldValue = predictedField;
-		return Self;
+		Instance.PredictedField = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct DataframeEvaluationRegressionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationRegressionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationRegressionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor ActualField(Elastic.Clients.Elasticsearch.Field value)
+	{
+		Instance.ActualField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor ActualField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.ActualField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? value)
+	{
+		Instance.Metrics = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor Metrics()
+	{
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor>? action)
+	{
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -295,35 +320,28 @@ public sealed partial class DataframeEvaluationRegressionDescriptor : Serializab
 	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionDescriptor PredictedField<TDocument>(Expression<Func<TDocument, object>> predictedField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor PredictedField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		PredictedFieldValue = predictedField;
-		return Self;
+		Instance.PredictedField = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor PredictedField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("actual_field");
-		JsonSerializer.Serialize(writer, ActualFieldValue, options);
-		if (MetricsDescriptor is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-		}
-		else if (MetricsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor(MetricsDescriptorAction), options);
-		}
-		else if (MetricsValue is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
-		}
+		Instance.PredictedField = value;
+		return this;
+	}
 
-		writer.WritePropertyName("predicted_field");
-		JsonSerializer.Serialize(writer, PredictedFieldValue, options);
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

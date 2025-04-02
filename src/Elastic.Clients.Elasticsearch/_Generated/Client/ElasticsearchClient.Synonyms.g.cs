@@ -18,1481 +18,249 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
-public partial class SynonymsNamespacedClient : NamespacedClientProxy
+public partial class SynonymsNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="SynonymsNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected SynonymsNamespacedClient() : base()
 	{
 	}
 
-	internal SynonymsNamespacedClient(ElasticsearchClient client) : base(client)
+	internal SynonymsNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymResponse DeleteSynonym(DeleteSynonymRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse DeleteSynonym(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteSynonymRequest, DeleteSynonymResponse, DeleteSynonymRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(DeleteSynonymRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRequest, DeleteSynonymResponse, DeleteSynonymRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymResponse DeleteSynonym<TDocument>(DeleteSynonymRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse DeleteSynonym(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSynonymRequestDescriptor<TDocument>, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymResponse DeleteSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteSynonymRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSynonymRequestDescriptor<TDocument>, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymResponse DeleteSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteSynonymRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new DeleteSynonymRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSynonymRequestDescriptor<TDocument>, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymResponse DeleteSynonym(DeleteSynonymRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymResponse DeleteSynonym(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new DeleteSynonymRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymResponse DeleteSynonym(Elastic.Clients.Elasticsearch.Id id, Action<DeleteSynonymRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteSynonymRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync<TDocument>(DeleteSynonymRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRequestDescriptor<TDocument>, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteSynonymRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRequestDescriptor<TDocument>, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteSynonymRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteSynonymRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRequestDescriptor<TDocument>, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(DeleteSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteSynonymRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym set.
-	/// </para>
-	/// <para>
-	/// You can only delete a synonyms set that is not in use by any index analyzer.
-	/// </para>
-	/// <para>
-	/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-	/// These synonym filters can be used as part of search analyzers.
-	/// </para>
-	/// <para>
-	/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-	/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-	/// </para>
-	/// <para>
-	/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-	/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-	/// A delete request in this case will return a 400 response code.
-	/// </para>
-	/// <para>
-	/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-	/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-	/// Once finished, you can delete the index.
-	/// When the synonyms set is not used in analyzers, you will be able to delete it.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteSynonymRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym rule.
-	/// Delete a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(DeleteSynonymRuleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse DeleteSynonymRule(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteSynonymRuleRequest, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a synonym rule.
-	/// Delete a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(DeleteSynonymRuleRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRuleRequest, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a synonym rule.
-	/// Delete a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(DeleteSynonymRuleRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse DeleteSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor(setId, ruleId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a synonym rule.
-	/// Delete a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteSynonymRuleRequestDescriptor(setId, ruleId);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor(setId, ruleId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a synonym rule.
-	/// Delete a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, Action<DeleteSynonymRuleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteSynonymRuleRequestDescriptor(setId, ruleId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym rule.
-	/// Delete a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(DeleteSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym rule.
-	/// Delete a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteSynonymRuleRequestDescriptor(setId, ruleId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a synonym rule.
-	/// Delete a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, Action<DeleteSynonymRuleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteSynonymRuleRequestDescriptor(setId, ruleId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymResponse GetSynonym(GetSynonymRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse GetSynonym(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetSynonymRequest, GetSynonymResponse, GetSynonymRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymResponse> GetSynonymAsync(GetSynonymRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetSynonymRequest, GetSynonymResponse, GetSynonymRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymResponse GetSynonym<TDocument>(GetSynonymRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse GetSynonym(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymRequestDescriptor<TDocument>, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymResponse GetSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetSynonymRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymRequestDescriptor<TDocument>, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymResponse GetSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetSynonymRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GetSynonymRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymRequestDescriptor<TDocument>, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymResponse GetSynonym(GetSynonymRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymResponse GetSynonym(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new GetSynonymRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymResponse GetSynonym(Elastic.Clients.Elasticsearch.Id id, Action<GetSynonymRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetSynonymRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymResponse> GetSynonymAsync<TDocument>(GetSynonymRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymRequestDescriptor<TDocument>, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymResponse> GetSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSynonymRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymRequestDescriptor<TDocument>, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymResponse> GetSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetSynonymRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSynonymRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymRequestDescriptor<TDocument>, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymResponse> GetSynonymAsync(GetSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSynonymRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Id id, Action<GetSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSynonymRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym rule.
-	/// Get a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymRuleResponse GetSynonymRule(GetSynonymRuleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse GetSynonymRule(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetSynonymRuleRequest, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get a synonym rule.
-	/// Get a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(GetSynonymRuleRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetSynonymRuleRequest, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get a synonym rule.
-	/// Get a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymRuleResponse GetSynonymRule(GetSynonymRuleRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse GetSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor(setId, ruleId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get a synonym rule.
-	/// Get a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymRuleResponse GetSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetSynonymRuleRequestDescriptor(setId, ruleId);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor(setId, ruleId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get a synonym rule.
-	/// Get a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymRuleResponse GetSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, Action<GetSynonymRuleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetSynonymRuleRequestDescriptor(setId, ruleId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym rule.
-	/// Get a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(GetSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym rule.
-	/// Get a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSynonymRuleRequestDescriptor(setId, ruleId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a synonym rule.
-	/// Get a synonym rule from a synonym set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, Action<GetSynonymRuleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSynonymRuleRequestDescriptor(setId, ruleId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get all synonym sets.
-	/// Get a summary of all defined synonym sets.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymsSetsResponse GetSynonymsSets(GetSynonymsSetsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse GetSynonymsSets(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetSynonymsSetsRequest, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all synonym sets.
-	/// Get a summary of all defined synonym sets.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(GetSynonymsSetsRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse> GetSynonymsSetsAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetSynonymsSetsRequest, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all synonym sets.
-	/// Get a summary of all defined synonym sets.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymsSetsResponse GetSynonymsSets(GetSynonymsSetsRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse GetSynonymsSets()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all synonym sets.
-	/// Get a summary of all defined synonym sets.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymsSetsResponse GetSynonymsSets()
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse GetSynonymsSets(System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor> action)
 	{
-		var descriptor = new GetSynonymsSetsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all synonym sets.
-	/// Get a summary of all defined synonym sets.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymsSetsResponse GetSynonymsSets(Action<GetSynonymsSetsRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse> GetSynonymsSetsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetSynonymsSetsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all synonym sets.
-	/// Get a summary of all defined synonym sets.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(GetSynonymsSetsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse> GetSynonymsSetsAsync(System.Action<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse, Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get all synonym sets.
-	/// Get a summary of all defined synonym sets.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSynonymsSetsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get all synonym sets.
-	/// Get a summary of all defined synonym sets.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(Action<GetSynonymsSetsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSynonymsSetsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymResponse PutSynonym(PutSynonymRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse PutSynonym(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutSynonymRequest, PutSynonymResponse, PutSynonymRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymResponse> PutSynonymAsync(PutSynonymRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutSynonymRequest, PutSynonymResponse, PutSynonymRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymResponse PutSynonym<TDocument>(PutSynonymRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse PutSynonym(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutSynonymRequestDescriptor<TDocument>, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymResponse PutSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutSynonymRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<PutSynonymRequestDescriptor<TDocument>, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymResponse PutSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutSynonymRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new PutSynonymRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutSynonymRequestDescriptor<TDocument>, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymResponse PutSynonym(PutSynonymRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymResponse PutSynonym(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new PutSynonymRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymResponse PutSynonym(Elastic.Clients.Elasticsearch.Id id, Action<PutSynonymRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutSynonymRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(PutSynonymRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSynonymRequestDescriptor<TDocument>, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutSynonymRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSynonymRequestDescriptor<TDocument>, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutSynonymRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutSynonymRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSynonymRequestDescriptor<TDocument>, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymResponse> PutSynonymAsync(PutSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutSynonymRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym set.
-	/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-	/// If you need to manage more synonym rules, you can create multiple synonym sets.
-	/// </para>
-	/// <para>
-	/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-	/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutSynonymRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym rule.
-	/// Create or update a synonym rule in a synonym set.
-	/// </para>
-	/// <para>
-	/// If any of the synonym rules included is invalid, the API returns an error.
-	/// </para>
-	/// <para>
-	/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymRuleResponse PutSynonymRule(PutSynonymRuleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse PutSynonymRule(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutSynonymRuleRequest, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym rule.
-	/// Create or update a synonym rule in a synonym set.
-	/// </para>
-	/// <para>
-	/// If any of the synonym rules included is invalid, the API returns an error.
-	/// </para>
-	/// <para>
-	/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(PutSynonymRuleRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutSynonymRuleRequest, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym rule.
-	/// Create or update a synonym rule in a synonym set.
-	/// </para>
-	/// <para>
-	/// If any of the synonym rules included is invalid, the API returns an error.
-	/// </para>
-	/// <para>
-	/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymRuleResponse PutSynonymRule(PutSynonymRuleRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse PutSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutSynonymRuleRequestDescriptor, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor(setId, ruleId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym rule.
-	/// Create or update a synonym rule in a synonym set.
-	/// </para>
-	/// <para>
-	/// If any of the synonym rules included is invalid, the API returns an error.
-	/// </para>
-	/// <para>
-	/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymRuleResponse PutSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, System.Action<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutSynonymRuleRequestDescriptor(setId, ruleId);
-		descriptor.BeforeRequest();
-		return DoRequest<PutSynonymRuleRequestDescriptor, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym rule.
-	/// Create or update a synonym rule in a synonym set.
-	/// </para>
-	/// <para>
-	/// If any of the synonym rules included is invalid, the API returns an error.
-	/// </para>
-	/// <para>
-	/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSynonymRuleResponse PutSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, Action<PutSynonymRuleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutSynonymRuleRequestDescriptor(setId, ruleId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutSynonymRuleRequestDescriptor, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym rule.
-	/// Create or update a synonym rule in a synonym set.
-	/// </para>
-	/// <para>
-	/// If any of the synonym rules included is invalid, the API returns an error.
-	/// </para>
-	/// <para>
-	/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(PutSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSynonymRuleRequestDescriptor, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym rule.
-	/// Create or update a synonym rule in a synonym set.
-	/// </para>
-	/// <para>
-	/// If any of the synonym rules included is invalid, the API returns an error.
-	/// </para>
-	/// <para>
-	/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutSynonymRuleRequestDescriptor(setId, ruleId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSynonymRuleRequestDescriptor, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a synonym rule.
-	/// Create or update a synonym rule in a synonym set.
-	/// </para>
-	/// <para>
-	/// If any of the synonym rules included is invalid, the API returns an error.
-	/// </para>
-	/// <para>
-	/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, Action<PutSynonymRuleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutSynonymRuleRequestDescriptor(setId, ruleId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSynonymRuleRequestDescriptor, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor(setId, ruleId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>(request, cancellationToken);
 	}
 }

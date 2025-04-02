@@ -17,63 +17,179 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalyticsFieldSelectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureType = System.Text.Json.JsonEncodedText.Encode("feature_type");
+	private static readonly System.Text.Json.JsonEncodedText PropIsIncluded = System.Text.Json.JsonEncodedText.Encode("is_included");
+	private static readonly System.Text.Json.JsonEncodedText PropIsRequired = System.Text.Json.JsonEncodedText.Encode("is_required");
+	private static readonly System.Text.Json.JsonEncodedText PropMappingTypes = System.Text.Json.JsonEncodedText.Encode("mapping_types");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFeatureType = default;
+		LocalJsonValue<bool> propIsIncluded = default;
+		LocalJsonValue<bool> propIsRequired = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propMappingTypes = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<string?> propReason = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatureType.TryReadProperty(ref reader, options, PropFeatureType, null))
+			{
+				continue;
+			}
+
+			if (propIsIncluded.TryReadProperty(ref reader, options, PropIsIncluded, null))
+			{
+				continue;
+			}
+
+			if (propIsRequired.TryReadProperty(ref reader, options, PropIsRequired, null))
+			{
+				continue;
+			}
+
+			if (propMappingTypes.TryReadProperty(ref reader, options, PropMappingTypes, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FeatureType = propFeatureType.Value,
+			IsIncluded = propIsIncluded.Value,
+			IsRequired = propIsRequired.Value,
+			MappingTypes = propMappingTypes.Value,
+			Name = propName.Value,
+			Reason = propReason.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatureType, value.FeatureType, null, null);
+		writer.WriteProperty(options, PropIsIncluded, value.IsIncluded, null, null);
+		writer.WriteProperty(options, PropIsRequired, value.IsRequired, null, null);
+		writer.WriteProperty(options, PropMappingTypes, value.MappingTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropReason, value.Reason, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelectionConverter))]
 public sealed partial class DataframeAnalyticsFieldSelection
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalyticsFieldSelection(bool isIncluded, bool isRequired, System.Collections.Generic.IReadOnlyCollection<string> mappingTypes, string name)
+	{
+		IsIncluded = isIncluded;
+		IsRequired = isRequired;
+		MappingTypes = mappingTypes;
+		Name = name;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeAnalyticsFieldSelection()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeAnalyticsFieldSelection()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalyticsFieldSelection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The feature type of this field for the analysis. May be categorical or numerical.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("feature_type")]
-	public string? FeatureType { get; init; }
+	public string? FeatureType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Whether the field is selected to be included in the analysis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_included")]
-	public bool IsIncluded { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool IsIncluded { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Whether the field is required.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_required")]
-	public bool IsRequired { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool IsRequired { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The mapping types of the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mapping_types")]
-	public IReadOnlyCollection<string> MappingTypes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> MappingTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The field name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The reason a field is not selected to be included in the analysis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("reason")]
-	public string? Reason { get; init; }
+	public string? Reason { get; set; }
 }

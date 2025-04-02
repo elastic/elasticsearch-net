@@ -17,19 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetModelSnapshotUpgradeStatsResponse : ElasticsearchResponse
+internal sealed partial class GetModelSnapshotUpgradeStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse>
 {
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("model_snapshot_upgrades")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade> ModelSnapshotUpgrades { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotUpgrades = System.Text.Json.JsonEncodedText.Encode("model_snapshot_upgrades");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade>> propModelSnapshotUpgrades = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propModelSnapshotUpgrades.TryReadProperty(ref reader, options, PropModelSnapshotUpgrades, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			ModelSnapshotUpgrades = propModelSnapshotUpgrades.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropModelSnapshotUpgrades, value.ModelSnapshotUpgrades, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsResponseConverter))]
+public sealed partial class GetModelSnapshotUpgradeStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetModelSnapshotUpgradeStatsResponse(long count, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade> modelSnapshotUpgrades)
+	{
+		Count = count;
+		ModelSnapshotUpgrades = modelSnapshotUpgrades;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetModelSnapshotUpgradeStatsResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetModelSnapshotUpgradeStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		long Count { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade> ModelSnapshotUpgrades { get; set; }
 }

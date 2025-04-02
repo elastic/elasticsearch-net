@@ -17,50 +17,208 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.FieldCaps;
 
+internal sealed partial class FieldCapabilityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAggregatable = System.Text.Json.JsonEncodedText.Encode("aggregatable");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadataField = System.Text.Json.JsonEncodedText.Encode("metadata_field");
+	private static readonly System.Text.Json.JsonEncodedText PropMetricConflictsIndices = System.Text.Json.JsonEncodedText.Encode("metric_conflicts_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropNonAggregatableIndices = System.Text.Json.JsonEncodedText.Encode("non_aggregatable_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropNonDimensionIndices = System.Text.Json.JsonEncodedText.Encode("non_dimension_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropNonSearchableIndices = System.Text.Json.JsonEncodedText.Encode("non_searchable_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchable = System.Text.Json.JsonEncodedText.Encode("searchable");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimension = System.Text.Json.JsonEncodedText.Encode("time_series_dimension");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesMetric = System.Text.Json.JsonEncodedText.Encode("time_series_metric");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAggregatable = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIndices = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<bool?> propMetadataField = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propMetricConflictsIndices = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNonAggregatableIndices = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propNonDimensionIndices = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNonSearchableIndices = default;
+		LocalJsonValue<bool> propSearchable = default;
+		LocalJsonValue<bool?> propTimeSeriesDimension = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType?> propTimeSeriesMetric = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggregatable.TryReadProperty(ref reader, options, PropAggregatable, null))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMetadataField.TryReadProperty(ref reader, options, PropMetadataField, null))
+			{
+				continue;
+			}
+
+			if (propMetricConflictsIndices.TryReadProperty(ref reader, options, PropMetricConflictsIndices, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propNonAggregatableIndices.TryReadProperty(ref reader, options, PropNonAggregatableIndices, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propNonDimensionIndices.TryReadProperty(ref reader, options, PropNonDimensionIndices, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propNonSearchableIndices.TryReadProperty(ref reader, options, PropNonSearchableIndices, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSearchable.TryReadProperty(ref reader, options, PropSearchable, null))
+			{
+				continue;
+			}
+
+			if (propTimeSeriesDimension.TryReadProperty(ref reader, options, PropTimeSeriesDimension, null))
+			{
+				continue;
+			}
+
+			if (propTimeSeriesMetric.TryReadProperty(ref reader, options, PropTimeSeriesMetric, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregatable = propAggregatable.Value,
+			Indices = propIndices.Value,
+			Meta = propMeta.Value,
+			MetadataField = propMetadataField.Value,
+			MetricConflictsIndices = propMetricConflictsIndices.Value,
+			NonAggregatableIndices = propNonAggregatableIndices.Value,
+			NonDimensionIndices = propNonDimensionIndices.Value,
+			NonSearchableIndices = propNonSearchableIndices.Value,
+			Searchable = propSearchable.Value,
+			TimeSeriesDimension = propTimeSeriesDimension.Value,
+			TimeSeriesMetric = propTimeSeriesMetric.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAggregatable, value.Aggregatable, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMetadataField, value.MetadataField, null, null);
+		writer.WriteProperty(options, PropMetricConflictsIndices, value.MetricConflictsIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNonAggregatableIndices, value.NonAggregatableIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNonDimensionIndices, value.NonDimensionIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNonSearchableIndices, value.NonSearchableIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSearchable, value.Searchable, null, null);
+		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension, null, null);
+		writer.WriteProperty(options, PropTimeSeriesMetric, value.TimeSeriesMetric, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapabilityConverter))]
 public sealed partial class FieldCapability
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldCapability(bool aggregatable, bool searchable, string type)
+	{
+		Aggregatable = aggregatable;
+		Searchable = searchable;
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public FieldCapability()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FieldCapability()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldCapability(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Whether this field can be aggregated on all indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggregatable")]
-	public bool Aggregatable { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Aggregatable { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The list of indices where this field has the same type family, or null if all indices have the same type family for the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string>? Indices { get; init; }
+	public System.Collections.Generic.ICollection<string>? Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Merged metadata across all indices as a map of string keys to arrays of values. A value length of 1 indicates that all indices had the same value for this key, while a length of 2 or more indicates that not all indices had the same value for this key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Whether this field is registered as a metadata field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metadata_field")]
-	public bool? MetadataField { get; init; }
+	public bool? MetadataField { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -68,17 +226,14 @@ public sealed partial class FieldCapability
 	/// don’t have the same <c>time_series_metric</c> value for this field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metric_conflicts_indices")]
-	public IReadOnlyCollection<string>? MetricConflictsIndices { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? MetricConflictsIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The list of indices where this field is not aggregatable, or null if all indices have the same definition for the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("non_aggregatable_indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string>? NonAggregatableIndices { get; init; }
+	public System.Collections.Generic.ICollection<string>? NonAggregatableIndices { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -86,33 +241,32 @@ public sealed partial class FieldCapability
 	/// field marked as a dimension and other indices, the ones in this list, do not.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("non_dimension_indices")]
-	public IReadOnlyCollection<string>? NonDimensionIndices { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? NonDimensionIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The list of indices where this field is not searchable, or null if all indices have the same definition for the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("non_searchable_indices")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string>? NonSearchableIndices { get; init; }
+	public System.Collections.Generic.ICollection<string>? NonSearchableIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Whether this field is indexed for search on all indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("searchable")]
-	public bool Searchable { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Searchable { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Whether this field is used as a time series dimension.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_series_dimension")]
-	public bool? TimeSeriesDimension { get; init; }
+	public bool? TimeSeriesDimension { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -120,8 +274,10 @@ public sealed partial class FieldCapability
 	/// metrics, absent if the field is not used as metric.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_series_metric")]
-	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; init; }
+	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }

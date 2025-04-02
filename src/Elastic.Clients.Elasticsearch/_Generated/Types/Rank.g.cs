@@ -17,211 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(RankConverter))]
-public sealed partial class Rank
+internal sealed partial class RankConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rank>
 {
-	internal Rank(string variantName, object variant)
+	private static readonly System.Text.Json.JsonEncodedText VariantRrf = System.Text.Json.JsonEncodedText.Encode("rrf");
+
+	public override Elastic.Clients.Elasticsearch.Rank Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
-	}
-
-	internal object Variant { get; }
-	internal string VariantName { get; }
-
-	public static Rank Rrf(Elastic.Clients.Elasticsearch.RrfRank rrfRank) => new Rank("rrf", rrfRank);
-
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
-	{
-		result = default;
-		if (Variant is T variant)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			result = variant;
-			return true;
-		}
-
-		return false;
-	}
-}
-
-internal sealed partial class RankConverter : JsonConverter<Rank>
-{
-	public override Rank Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			if (reader.ValueTextEquals(VariantRrf))
 			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "rrf")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.RrfRank?>(ref reader, options);
-				variantNameValue = propertyName;
+				variantType = VariantRrf.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RrfRank>(options, null);
 				continue;
 			}
 
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Rank' from the response.");
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		var result = new Rank(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, Rank value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rank value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "rrf":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.RrfRank>(writer, (Elastic.Clients.Elasticsearch.RrfRank)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "rrf":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RrfRank)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Rank)}'.");
 		}
 
 		writer.WriteEndObject();
 	}
 }
 
-public sealed partial class RankDescriptor<TDocument> : SerializableDescriptor<RankDescriptor<TDocument>>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RankConverter))]
+public sealed partial class Rank
 {
-	internal RankDescriptor(Action<RankDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public RankDescriptor() : base()
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public Rank()
 	{
 	}
-
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private RankDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+#endif
+#if !NET7_0_OR_GREATER
+	public Rank()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Rank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	private RankDescriptor<TDocument> Set(object variant, string variantName)
-	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
-	}
+	/// <summary>
+	/// <para>
+	/// The reciprocal rank fusion parameters
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRank? Rrf { get => GetVariant<Elastic.Clients.Elasticsearch.RrfRank>("rrf"); set => SetVariant("rrf", value); }
 
-	public RankDescriptor<TDocument> Rrf(Elastic.Clients.Elasticsearch.RrfRank rrfRank) => Set(rrfRank, "rrf");
-	public RankDescriptor<TDocument> Rrf(Action<Elastic.Clients.Elasticsearch.RrfRankDescriptor> configure) => Set(configure, "rrf");
+	public static implicit operator Elastic.Clients.Elasticsearch.Rank(Elastic.Clients.Elasticsearch.RrfRank value) => new Elastic.Clients.Elasticsearch.Rank { Rrf = value };
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			return result;
 		}
 
-		writer.WriteEndObject();
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-public sealed partial class RankDescriptor : SerializableDescriptor<RankDescriptor>
+public readonly partial struct RankDescriptor
 {
-	internal RankDescriptor(Action<RankDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rank Instance { get; init; }
 
-	public RankDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankDescriptor(Elastic.Clients.Elasticsearch.Rank instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private RankDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Rank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private RankDescriptor Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.RankDescriptor(Elastic.Clients.Elasticsearch.Rank instance) => new Elastic.Clients.Elasticsearch.RankDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rank(Elastic.Clients.Elasticsearch.RankDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The reciprocal rank fusion parameters
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankDescriptor Rrf(Elastic.Clients.Elasticsearch.RrfRank? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Rrf = value;
+		return this;
 	}
 
-	public RankDescriptor Rrf(Elastic.Clients.Elasticsearch.RrfRank rrfRank) => Set(rrfRank, "rrf");
-	public RankDescriptor Rrf(Action<Elastic.Clients.Elasticsearch.RrfRankDescriptor> configure) => Set(configure, "rrf");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The reciprocal rank fusion parameters
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankDescriptor Rrf()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRankDescriptor.Build(null);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// The reciprocal rank fusion parameters
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankDescriptor Rrf(System.Action<Elastic.Clients.Elasticsearch.RrfRankDescriptor>? action)
+	{
+		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRankDescriptor.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rank Build(System.Action<Elastic.Clients.Elasticsearch.RankDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.RankDescriptor(new Elastic.Clients.Elasticsearch.Rank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

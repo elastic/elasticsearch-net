@@ -17,122 +17,142 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexRoutingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllocation = System.Text.Json.JsonEncodedText.Encode("allocation");
+	private static readonly System.Text.Json.JsonEncodedText PropRebalance = System.Text.Json.JsonEncodedText.Encode("rebalance");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation?> propAllocation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance?> propRebalance = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllocation.TryReadProperty(ref reader, options, PropAllocation, null))
+			{
+				continue;
+			}
+
+			if (propRebalance.TryReadProperty(ref reader, options, PropRebalance, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Allocation = propAllocation.Value,
+			Rebalance = propRebalance.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllocation, value.Allocation, null, null);
+		writer.WriteProperty(options, PropRebalance, value.Rebalance, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingConverter))]
 public sealed partial class IndexRouting
 {
-	[JsonInclude, JsonPropertyName("allocation")]
+#if NET7_0_OR_GREATER
+	public IndexRouting()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexRouting()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexRouting(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? Allocation { get; set; }
-	[JsonInclude, JsonPropertyName("rebalance")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? Rebalance { get; set; }
 }
 
-public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<IndexRoutingDescriptor>
+public readonly partial struct IndexRoutingDescriptor
 {
-	internal IndexRoutingDescriptor(Action<IndexRoutingDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting Instance { get; init; }
 
-	public IndexRoutingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexRoutingDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? AllocationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor AllocationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor> AllocationDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? RebalanceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceDescriptor RebalanceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceDescriptor> RebalanceDescriptorAction { get; set; }
-
-	public IndexRoutingDescriptor Allocation(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? allocation)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexRoutingDescriptor()
 	{
-		AllocationDescriptor = null;
-		AllocationDescriptorAction = null;
-		AllocationValue = allocation;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IndexRoutingDescriptor Allocation(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor Allocation(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? value)
 	{
-		AllocationValue = null;
-		AllocationDescriptorAction = null;
-		AllocationDescriptor = descriptor;
-		return Self;
+		Instance.Allocation = value;
+		return this;
 	}
 
-	public IndexRoutingDescriptor Allocation(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor Allocation()
 	{
-		AllocationValue = null;
-		AllocationDescriptor = null;
-		AllocationDescriptorAction = configure;
-		return Self;
+		Instance.Allocation = Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor.Build(null);
+		return this;
 	}
 
-	public IndexRoutingDescriptor Rebalance(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? rebalance)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor Allocation(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor>? action)
 	{
-		RebalanceDescriptor = null;
-		RebalanceDescriptorAction = null;
-		RebalanceValue = rebalance;
-		return Self;
+		Instance.Allocation = Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor.Build(action);
+		return this;
 	}
 
-	public IndexRoutingDescriptor Rebalance(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor Rebalance(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? value)
 	{
-		RebalanceValue = null;
-		RebalanceDescriptorAction = null;
-		RebalanceDescriptor = descriptor;
-		return Self;
+		Instance.Rebalance = value;
+		return this;
 	}
 
-	public IndexRoutingDescriptor Rebalance(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor Rebalance(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceDescriptor> action)
 	{
-		RebalanceValue = null;
-		RebalanceDescriptor = null;
-		RebalanceDescriptorAction = configure;
-		return Self;
+		Instance.Rebalance = Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (AllocationDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("allocation");
-			JsonSerializer.Serialize(writer, AllocationDescriptor, options);
-		}
-		else if (AllocationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("allocation");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor(AllocationDescriptorAction), options);
-		}
-		else if (AllocationValue is not null)
-		{
-			writer.WritePropertyName("allocation");
-			JsonSerializer.Serialize(writer, AllocationValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (RebalanceDescriptor is not null)
-		{
-			writer.WritePropertyName("rebalance");
-			JsonSerializer.Serialize(writer, RebalanceDescriptor, options);
-		}
-		else if (RebalanceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rebalance");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceDescriptor(RebalanceDescriptorAction), options);
-		}
-		else if (RebalanceValue is not null)
-		{
-			writer.WritePropertyName("rebalance");
-			JsonSerializer.Serialize(writer, RebalanceValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

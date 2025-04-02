@@ -4,7 +4,9 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
+
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
@@ -12,9 +14,22 @@ namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(StringAliasConverter<Name>))]
-public sealed class Name : IEquatable<Name>, IUrlParameter
+public sealed class Name :
+	IEquatable<Name>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Name>
+#endif
 {
-	public Name(string name) => Value = name?.Trim();
+	public Name(string name)
+	{
+		if (name is null)
+		{
+			throw new ArgumentNullException(nameof(name));
+		}
+
+		Value = name.Trim();
+	}
 
 	internal string Value { get; }
 
@@ -48,4 +63,24 @@ public sealed class Name : IEquatable<Name>, IUrlParameter
 			return result;
 		}
 	}
+
+	#region IParsable
+
+	public static Name Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Name? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new Name(s);
+		return true;
+	}
+
+	#endregion IParsable
 }

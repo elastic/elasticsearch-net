@@ -17,18 +17,85 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DelayedDataCheckConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCheckWindow = System.Text.Json.JsonEncodedText.Encode("check_window");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propCheckWindow = default;
+		LocalJsonValue<bool> propEnabled = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCheckWindow.TryReadProperty(ref reader, options, PropCheckWindow, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CheckWindow = propCheckWindow.Value,
+			Enabled = propEnabled.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCheckWindow, value.CheckWindow, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigConverter))]
 public sealed partial class DelayedDataCheckConfig
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DelayedDataCheckConfig(bool enabled)
+	{
+		Enabled = enabled;
+	}
+#if NET7_0_OR_GREATER
+	public DelayedDataCheckConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DelayedDataCheckConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The window of time that is searched for late data. This window of time ends with the latest finalized bucket.
@@ -36,7 +103,6 @@ public sealed partial class DelayedDataCheckConfig
 	/// In particular, the default <c>check_window</c> span calculation is based on the maximum of <c>2h</c> or <c>8 * bucket_span</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("check_window")]
 	public Elastic.Clients.Elasticsearch.Duration? CheckWindow { get; set; }
 
 	/// <summary>
@@ -44,20 +110,31 @@ public sealed partial class DelayedDataCheckConfig
 	/// Specifies whether the datafeed periodically checks for delayed data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
 }
 
-public sealed partial class DelayedDataCheckConfigDescriptor : SerializableDescriptor<DelayedDataCheckConfigDescriptor>
+public readonly partial struct DelayedDataCheckConfigDescriptor
 {
-	internal DelayedDataCheckConfigDescriptor(Action<DelayedDataCheckConfigDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig Instance { get; init; }
 
-	public DelayedDataCheckConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DelayedDataCheckConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? CheckWindowValue { get; set; }
-	private bool EnabledValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DelayedDataCheckConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -66,10 +143,10 @@ public sealed partial class DelayedDataCheckConfigDescriptor : SerializableDescr
 	/// In particular, the default <c>check_window</c> span calculation is based on the maximum of <c>2h</c> or <c>8 * bucket_span</c>.
 	/// </para>
 	/// </summary>
-	public DelayedDataCheckConfigDescriptor CheckWindow(Elastic.Clients.Elasticsearch.Duration? checkWindow)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor CheckWindow(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		CheckWindowValue = checkWindow;
-		return Self;
+		Instance.CheckWindow = value;
+		return this;
 	}
 
 	/// <summary>
@@ -77,23 +154,17 @@ public sealed partial class DelayedDataCheckConfigDescriptor : SerializableDescr
 	/// Specifies whether the datafeed periodically checks for delayed data.
 	/// </para>
 	/// </summary>
-	public DelayedDataCheckConfigDescriptor Enabled(bool enabled = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor Enabled(bool value = true)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (CheckWindowValue is not null)
-		{
-			writer.WritePropertyName("check_window");
-			JsonSerializer.Serialize(writer, CheckWindowValue, options);
-		}
-
-		writer.WritePropertyName("enabled");
-		writer.WriteBooleanValue(EnabledValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

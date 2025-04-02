@@ -17,26 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class RequestCacheStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RequestCacheStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions");
+	private static readonly System.Text.Json.JsonEncodedText PropHitCount = System.Text.Json.JsonEncodedText.Encode("hit_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMemorySize = System.Text.Json.JsonEncodedText.Encode("memory_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMemorySizeInBytes = System.Text.Json.JsonEncodedText.Encode("memory_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMissCount = System.Text.Json.JsonEncodedText.Encode("miss_count");
+
+	public override Elastic.Clients.Elasticsearch.RequestCacheStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propEvictions = default;
+		LocalJsonValue<long> propHitCount = default;
+		LocalJsonValue<string?> propMemorySize = default;
+		LocalJsonValue<long> propMemorySizeInBytes = default;
+		LocalJsonValue<long> propMissCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEvictions.TryReadProperty(ref reader, options, PropEvictions, null))
+			{
+				continue;
+			}
+
+			if (propHitCount.TryReadProperty(ref reader, options, PropHitCount, null))
+			{
+				continue;
+			}
+
+			if (propMemorySize.TryReadProperty(ref reader, options, PropMemorySize, null))
+			{
+				continue;
+			}
+
+			if (propMemorySizeInBytes.TryReadProperty(ref reader, options, PropMemorySizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propMissCount.TryReadProperty(ref reader, options, PropMissCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.RequestCacheStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Evictions = propEvictions.Value,
+			HitCount = propHitCount.Value,
+			MemorySize = propMemorySize.Value,
+			MemorySizeInBytes = propMemorySizeInBytes.Value,
+			MissCount = propMissCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.RequestCacheStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEvictions, value.Evictions, null, null);
+		writer.WriteProperty(options, PropHitCount, value.HitCount, null, null);
+		writer.WriteProperty(options, PropMemorySize, value.MemorySize, null, null);
+		writer.WriteProperty(options, PropMemorySizeInBytes, value.MemorySizeInBytes, null, null);
+		writer.WriteProperty(options, PropMissCount, value.MissCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RequestCacheStatsConverter))]
 public sealed partial class RequestCacheStats
 {
-	[JsonInclude, JsonPropertyName("evictions")]
-	public long Evictions { get; init; }
-	[JsonInclude, JsonPropertyName("hit_count")]
-	public long HitCount { get; init; }
-	[JsonInclude, JsonPropertyName("memory_size")]
-	public string? MemorySize { get; init; }
-	[JsonInclude, JsonPropertyName("memory_size_in_bytes")]
-	public long MemorySizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("miss_count")]
-	public long MissCount { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RequestCacheStats(long evictions, long hitCount, long memorySizeInBytes, long missCount)
+	{
+		Evictions = evictions;
+		HitCount = hitCount;
+		MemorySizeInBytes = memorySizeInBytes;
+		MissCount = missCount;
+	}
+#if NET7_0_OR_GREATER
+	public RequestCacheStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RequestCacheStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RequestCacheStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Evictions { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long HitCount { get; set; }
+	public string? MemorySize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MemorySizeInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MissCount { get; set; }
 }

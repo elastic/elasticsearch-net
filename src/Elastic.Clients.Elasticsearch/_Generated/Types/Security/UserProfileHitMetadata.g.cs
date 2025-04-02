@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class UserProfileHitMetadataConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no");
+
+	public override Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propPrimaryTerm = default;
+		LocalJsonValue<long> propSeqNo = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
+			{
+				continue;
+			}
+
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			PrimaryTerm = propPrimaryTerm.Value,
+			SeqNo = propSeqNo.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadataConverter))]
 public sealed partial class UserProfileHitMetadata
 {
-	[JsonInclude, JsonPropertyName("_primary_term")]
-	public long PrimaryTerm { get; init; }
-	[JsonInclude, JsonPropertyName("_seq_no")]
-	public long SeqNo { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserProfileHitMetadata(long primaryTerm, long seqNo)
+	{
+		PrimaryTerm = primaryTerm;
+		SeqNo = seqNo;
+	}
+#if NET7_0_OR_GREATER
+	public UserProfileHitMetadata()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UserProfileHitMetadata()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UserProfileHitMetadata(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long PrimaryTerm { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SeqNo { get; set; }
 }

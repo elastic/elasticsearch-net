@@ -17,55 +17,123 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-public sealed partial class LaplaceSmoothingModel
+internal sealed partial class LaplaceSmoothingModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel>
 {
-	/// <summary>
-	/// <para>
-	/// A constant that is added to all counts to balance weights.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("alpha")]
-	public double Alpha { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropAlpha = System.Text.Json.JsonEncodedText.Encode("alpha");
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(LaplaceSmoothingModel laplaceSmoothingModel) => Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel.Laplace(laplaceSmoothingModel);
-}
-
-public sealed partial class LaplaceSmoothingModelDescriptor : SerializableDescriptor<LaplaceSmoothingModelDescriptor>
-{
-	internal LaplaceSmoothingModelDescriptor(Action<LaplaceSmoothingModelDescriptor> configure) => configure.Invoke(this);
-
-	public LaplaceSmoothingModelDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double> propAlpha = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAlpha.TryReadProperty(ref reader, options, PropAlpha, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Alpha = propAlpha.Value
+		};
 	}
 
-	private double AlphaValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A constant that is added to all counts to balance weights.
-	/// </para>
-	/// </summary>
-	public LaplaceSmoothingModelDescriptor Alpha(double alpha)
-	{
-		AlphaValue = alpha;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("alpha");
-		writer.WriteNumberValue(AlphaValue);
+		writer.WriteProperty(options, PropAlpha, value.Alpha, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelConverter))]
+public sealed partial class LaplaceSmoothingModel
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LaplaceSmoothingModel(double alpha)
+	{
+		Alpha = alpha;
+	}
+#if NET7_0_OR_GREATER
+	public LaplaceSmoothingModel()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public LaplaceSmoothingModel()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal LaplaceSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A constant that is added to all counts to balance weights.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Alpha { get; set; }
+}
+
+public readonly partial struct LaplaceSmoothingModelDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LaplaceSmoothingModelDescriptor(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LaplaceSmoothingModelDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel instance) => new Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A constant that is added to all counts to balance weights.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor Alpha(double value)
+	{
+		Instance.Alpha = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

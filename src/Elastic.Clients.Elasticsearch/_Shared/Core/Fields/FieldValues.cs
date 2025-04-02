@@ -3,139 +3,131 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text.Json;
+
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(FieldValuesConverter))]
-public sealed class FieldValues : IsADictionary<string, LazyJson>
+public readonly struct FieldValues :
+	IEquatable<FieldValues>,
+	IEnumerable<FieldValue>
 {
 	public static readonly FieldValues Empty = new();
 
-	private static readonly HashSet<Type> NumericTypes = new()
+	public IReadOnlyCollection<FieldValue> Values { get; }
+
+	public FieldValues()
 	{
-		typeof(int), typeof(double), typeof(decimal),
-		typeof(long), typeof(short), typeof(sbyte),
-		typeof(byte), typeof(ulong), typeof(ushort),
-		typeof(uint), typeof(float)
-	};
-
-	private readonly Inferrer _inferrer;
-
-	private FieldValues() { }
-
-	internal FieldValues(Inferrer inferrer, IDictionary<string, LazyJson> container)
-		: base(container) => _inferrer = inferrer;
-
-	public TValue Value<TValue>(Field field)
-	{
-		var values = Values<TValue>(field);
-		return values != null
-			? values.FirstOrDefault()
-			: default;
+		Values = [];
 	}
 
-	public TValue ValueOf<T, TValue>(Expression<Func<T, TValue>> objectPath)
+	public FieldValues(IEnumerable<FieldValue> values)
 	{
-		var values = ValuesOf(objectPath);
-		return values != null
-			? values.FirstOrDefault()
-			: default;
-	}
-
-	public TValue[] Values<TValue>(Field field)
-	{
-		if (_inferrer == null)
-			return Array.Empty<TValue>();
-
-		var path = _inferrer.Field(field);
-		return FieldArray<TValue>(path);
-	}
-
-	public TValue[] ValuesOf<T, TValue>(Expression<Func<T, TValue>> objectPath)
-	{
-		if (_inferrer == null)
-			return Array.Empty<TValue>();
-
-		var field = _inferrer.Field(objectPath);
-		return FieldArray<TValue>(field);
-	}
-
-	public static bool IsNumeric(Type myType) => NumericTypes.Contains(Nullable.GetUnderlyingType(myType) ?? myType);
-
-	public static bool IsNullable(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
-
-	private TValue[] FieldArray<TValue>(string field)
-	{
-		//unknown field
-		if (BackingDictionary == null || !BackingDictionary.TryGetValue(field, out var o))
-			return null;
-
-		//numerics are always returned as doubles by Elasticsearch.
-		if (!IsNumeric(typeof(TValue)))
-			return o.As<TValue[]>();
-
-		//here we support casting to the desired numeric type whether its nullable or not.
-		if (!IsNullable(typeof(TValue)))
-			return o.As<double[]>().Select(d => (TValue)Convert.ChangeType(d, typeof(TValue))).ToArray();
-
-		var underlyingType = Nullable.GetUnderlyingType(typeof(TValue));
-		return o.As<double?[]>()
-			.Select(d =>
-			{
-				if (d == null)
-					return default;
-
-				return (TValue)Convert.ChangeType(d, underlyingType);
-			})
-			.ToArray();
-	}
-}
-
-internal sealed class FieldValuesConverter : JsonConverter<FieldValues>
-{
-	private IElasticsearchClientSettings _settings;
-
-	public override FieldValues? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		InitializeSettings(options);
-
-		if (reader.TokenType != JsonTokenType.StartObject)
+		if (values is null)
 		{
-			return null;
+			throw new ArgumentNullException(nameof(values));
 		}
 
-		var fields = new Dictionary<string, LazyJson>();
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Unexpected token. Expected {JsonTokenType.PropertyName}, but read {reader.TokenType}");
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			var lazyDocument = JsonSerializer.Deserialize<LazyJson>(ref reader, options);
-			fields[propertyName] = lazyDocument;
-		}
-
-		return new FieldValues(_settings.Inferrer, fields);
+		Values = [.. values];
 	}
 
-	public override void Write(Utf8JsonWriter writer, FieldValues value, JsonSerializerOptions options) => throw new NotImplementedException();
-
-	private void InitializeSettings(JsonSerializerOptions options)
+	public FieldValues(IEnumerable<object?> values)
 	{
-		if (_settings is null)
+		if (values is null)
 		{
-			if (!options.TryGetClientSettings(out var settings))
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-
-			_settings = settings;
+			throw new ArgumentNullException(nameof(values));
 		}
+
+		Values = [.. values.Select(FieldValue.FromValue)];
 	}
+
+	public FieldValues(IEnumerable<string> values)
+	{
+		if (values is null)
+		{
+			throw new ArgumentNullException(nameof(values));
+		}
+
+		Values = [.. values.Select(x => x)];
+	}
+
+	public FieldValues(IEnumerable<bool> values)
+	{
+		if (values is null)
+		{
+			throw new ArgumentNullException(nameof(values));
+		}
+
+		Values = [.. values.Select(x => x)];
+	}
+
+	public FieldValues(IEnumerable<int> values)
+	{
+		if (values is null)
+		{
+			throw new ArgumentNullException(nameof(values));
+		}
+
+		Values = [.. values.Select(x => x)];
+	}
+
+	public FieldValues(IEnumerable<long> values)
+	{
+		if (values is null)
+		{
+			throw new ArgumentNullException(nameof(values));
+		}
+
+		Values = [.. values.Select(x => x)];
+	}
+
+	public FieldValues(IEnumerable<double> values)
+	{
+		if (values is null)
+		{
+			throw new ArgumentNullException(nameof(values));
+		}
+
+		Values = [.. values.Select(x => x)];
+	}
+
+	public static implicit operator FieldValues(FieldValue[] values) => new(values);
+
+	public static implicit operator FieldValues(object?[] values) => new(values);
+
+	public static implicit operator FieldValues(string[] values) => new(values);
+
+	public static implicit operator FieldValues(bool[] values) => new(values);
+
+	public static implicit operator FieldValues(int[] values) => new(values);
+
+	public static implicit operator FieldValues(long[] values) => new(values);
+
+	public static implicit operator FieldValues(double[] values) => new(values);
+
+	public static bool operator ==(FieldValues left, FieldValues right) => left.Equals(right);
+
+	public static bool operator !=(FieldValues left, FieldValues right) => !(left == right);
+
+	public override bool Equals(object? obj) => (obj is FieldValues other) && Equals(other);
+
+	public override int GetHashCode() => Values.GetHashCode();
+
+	public bool Equals(FieldValues other)
+	{
+		if (ReferenceEquals(Values, other.Values))
+		{
+			return true;
+		}
+
+		return Values.SequenceEqual(other.Values);
+	}
+
+	public IEnumerator<FieldValue> GetEnumerator() => Values.GetEnumerator();
+
+	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

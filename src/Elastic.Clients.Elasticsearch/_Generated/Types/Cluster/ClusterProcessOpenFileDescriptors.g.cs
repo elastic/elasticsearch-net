@@ -17,26 +17,107 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterProcessOpenFileDescriptorsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propAvg = default;
+		LocalJsonValue<long> propMax = default;
+		LocalJsonValue<long> propMin = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvg.TryReadProperty(ref reader, options, PropAvg, null))
+			{
+				continue;
+			}
+
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
+			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Avg = propAvg.Value,
+			Max = propMax.Value,
+			Min = propMin.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvg, value.Avg, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptorsConverter))]
 public sealed partial class ClusterProcessOpenFileDescriptors
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterProcessOpenFileDescriptors(long avg, long max, long min)
+	{
+		Avg = avg;
+		Max = max;
+		Min = min;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterProcessOpenFileDescriptors()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterProcessOpenFileDescriptors()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterProcessOpenFileDescriptors(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Average number of concurrently open file descriptors.
 	/// Returns <c>-1</c> if not supported.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("avg")]
-	public long Avg { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Avg { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -44,8 +125,11 @@ public sealed partial class ClusterProcessOpenFileDescriptors
 	/// Returns <c>-1</c> if not supported.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max")]
-	public long Max { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Max { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -53,6 +137,9 @@ public sealed partial class ClusterProcessOpenFileDescriptors
 	/// Returns -1 if not supported.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min")]
-	public long Min { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Min { get; set; }
 }

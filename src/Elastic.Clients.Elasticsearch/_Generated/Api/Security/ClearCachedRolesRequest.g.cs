@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class ClearCachedRolesRequestParameters : RequestParameters
+public sealed partial class ClearCachedRolesRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ClearCachedRolesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -42,19 +64,44 @@ public sealed partial class ClearCachedRolesRequestParameters : RequestParameter
 /// Evict roles from the native role cache.
 /// </para>
 /// </summary>
-public sealed partial class ClearCachedRolesRequest : PlainRequest<ClearCachedRolesRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestConverter))]
+public sealed partial class ClearCachedRolesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClearCachedRolesRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ClearCachedRolesRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClearCachedRolesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedRoles;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityClearCachedRoles;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.clear_cached_roles";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of roles to evict from the role cache.
+	/// To evict all roles, use an asterisk (<c>*</c>).
+	/// It does not support other wildcard patterns.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 }
 
 /// <summary>
@@ -65,29 +112,90 @@ public sealed partial class ClearCachedRolesRequest : PlainRequest<ClearCachedRo
 /// Evict roles from the native role cache.
 /// </para>
 /// </summary>
-public sealed partial class ClearCachedRolesRequestDescriptor : RequestDescriptor<ClearCachedRolesRequestDescriptor, ClearCachedRolesRequestParameters>
+public readonly partial struct ClearCachedRolesRequestDescriptor
 {
-	internal ClearCachedRolesRequestDescriptor(Action<ClearCachedRolesRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest Instance { get; init; }
 
-	public ClearCachedRolesRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearCachedRolesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedRoles;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.clear_cached_roles";
-
-	public ClearCachedRolesRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
+	public ClearCachedRolesRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest(name);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClearCachedRolesRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest instance) => new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of roles to evict from the role cache.
+	/// To evict all roles, use an asterisk (<c>*</c>).
+	/// It does not support other wildcard patterns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

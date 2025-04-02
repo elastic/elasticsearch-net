@@ -17,18 +17,218 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class ApiKeyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKey>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAccess = System.Text.Json.JsonEncodedText.Encode("access");
+	private static readonly System.Text.Json.JsonEncodedText PropCreation = System.Text.Json.JsonEncodedText.Encode("creation");
+	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidated = System.Text.Json.JsonEncodedText.Encode("invalidated");
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidation = System.Text.Json.JsonEncodedText.Encode("invalidation");
+	private static readonly System.Text.Json.JsonEncodedText PropLimitedBy = System.Text.Json.JsonEncodedText.Encode("limited_by");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropProfileUid = System.Text.Json.JsonEncodedText.Encode("profile_uid");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+	private static readonly System.Text.Json.JsonEncodedText PropRealmType = System.Text.Json.JsonEncodedText.Encode("realm_type");
+	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptors = System.Text.Json.JsonEncodedText.Encode("role_descriptors");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("_sort");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override Elastic.Clients.Elasticsearch.Security.ApiKey Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.Access?> propAccess = default;
+		LocalJsonValue<System.DateTime> propCreation = default;
+		LocalJsonValue<System.DateTime?> propExpiration = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<bool> propInvalidated = default;
+		LocalJsonValue<System.DateTime?> propInvalidation = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>?> propLimitedBy = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propMetadata = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<string?> propProfileUid = default;
+		LocalJsonValue<string> propRealm = default;
+		LocalJsonValue<string?> propRealmType = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>?> propRoleDescriptors = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApiKeyType> propType = default;
+		LocalJsonValue<string> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccess.TryReadProperty(ref reader, options, PropAccess, null))
+			{
+				continue;
+			}
+
+			if (propCreation.TryReadProperty(ref reader, options, PropCreation, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propInvalidated.TryReadProperty(ref reader, options, PropInvalidated, null))
+			{
+				continue;
+			}
+
+			if (propInvalidation.TryReadProperty(ref reader, options, PropInvalidation, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propLimitedBy.TryReadProperty(ref reader, options, PropLimitedBy, static System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>(o, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, null, null)!)))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propProfileUid.TryReadProperty(ref reader, options, PropProfileUid, null))
+			{
+				continue;
+			}
+
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
+			{
+				continue;
+			}
+
+			if (propRealmType.TryReadProperty(ref reader, options, PropRealmType, null))
+			{
+				continue;
+			}
+
+			if (propRoleDescriptors.TryReadProperty(ref reader, options, PropRoleDescriptors, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Access = propAccess.Value,
+			Creation = propCreation.Value,
+			Expiration = propExpiration.Value,
+			Id = propId.Value,
+			Invalidated = propInvalidated.Value,
+			Invalidation = propInvalidation.Value,
+			LimitedBy = propLimitedBy.Value,
+			Metadata = propMetadata.Value,
+			Name = propName.Value,
+			ProfileUid = propProfileUid.Value,
+			Realm = propRealm.Value,
+			RealmType = propRealmType.Value,
+			RoleDescriptors = propRoleDescriptors.Value,
+			Sort = propSort.Value,
+			Type = propType.Value,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ApiKey value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccess, value.Access, null, null);
+		writer.WriteProperty(options, PropCreation, value.Creation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropInvalidated, value.Invalidated, null, null);
+		writer.WriteProperty(options, PropInvalidation, value.Invalidation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropLimitedBy, value.LimitedBy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? v) => w.WriteCollectionValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, v, null, null)));
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropProfileUid, value.ProfileUid, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteProperty(options, PropRealmType, value.RealmType, null, null);
+		writer.WriteProperty(options, PropRoleDescriptors, value.RoleDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, v, null, null));
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ApiKeyConverter))]
 public sealed partial class ApiKey
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApiKey(System.DateTime creation, string id, bool invalidated, System.Collections.Generic.IReadOnlyDictionary<string, object> metadata, string name, string realm, Elastic.Clients.Elasticsearch.Security.ApiKeyType type, string username)
+	{
+		Creation = creation;
+		Id = id;
+		Invalidated = invalidated;
+		Metadata = metadata;
+		Name = name;
+		Realm = realm;
+		Type = type;
+		Username = username;
+	}
+#if NET7_0_OR_GREATER
+	public ApiKey()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ApiKey()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The access granted to cross-cluster API keys.
@@ -37,32 +237,36 @@ public sealed partial class ApiKey
 	/// When specified, the new access assignment fully replaces the previously assigned access.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("access")]
-	public Elastic.Clients.Elasticsearch.Security.Access? Access { get; init; }
+	public Elastic.Clients.Elasticsearch.Security.Access? Access { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Creation time for the API key in milliseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("creation")]
-	public long Creation { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTime Creation { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Expiration time for the API key in milliseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expiration")]
-	public long? Expiration { get; init; }
+	public System.DateTime? Expiration { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Id for the API key
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -70,16 +274,18 @@ public sealed partial class ApiKey
 	/// If the key has been invalidated, it has a value of <c>true</c>. Otherwise, it is <c>false</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("invalidated")]
-	public bool Invalidated { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Invalidated { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If the key has been invalidated, invalidation time in milliseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("invalidation")]
-	public long? Invalidation { get; init; }
+	public System.DateTime? Invalidation { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -88,48 +294,54 @@ public sealed partial class ApiKey
 	/// An API key’s effective permissions are an intersection of its assigned privileges and the owner user’s permissions.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("limited_by")]
-	public IReadOnlyCollection<IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? LimitedBy { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? LimitedBy { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Metadata of the API key
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metadata")]
-	public IReadOnlyDictionary<string, object> Metadata { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the API key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The profile uid for the API key owner principal, if requested and if it exists
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("profile_uid")]
-	public string? ProfileUid { get; init; }
+	public string? ProfileUid { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Realm name of the principal for which this API key was created.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("realm")]
-	public string Realm { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Realm { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Realm type of the principal for which this API key was created
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("realm_type")]
-	public string? RealmType { get; init; }
+	public string? RealmType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -137,30 +349,34 @@ public sealed partial class ApiKey
 	/// An empty role descriptor means the API key inherits the owner user’s permissions.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("role_descriptors")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? RoleDescriptors { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>? RoleDescriptors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Sorting values when using the <c>sort</c> parameter with the <c>security.query_api_keys</c> API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_sort")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of the API key (e.g. <c>rest</c> or <c>cross_cluster</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyType Type { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.ApiKeyType Type { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Principal for which this API key was created
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("username")]
-	public string Username { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Username { get; set; }
 }

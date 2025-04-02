@@ -17,89 +17,150 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class SettingsSimilarityBm25 : ISettingsSimilarity
+internal sealed partial class SettingsSimilarityBm25Converter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25>
 {
-	[JsonInclude, JsonPropertyName("b")]
-	public double? b { get; set; }
-	[JsonInclude, JsonPropertyName("discount_overlaps")]
+	private static readonly System.Text.Json.JsonEncodedText PropB = System.Text.Json.JsonEncodedText.Encode("b");
+	private static readonly System.Text.Json.JsonEncodedText PropDiscountOverlaps = System.Text.Json.JsonEncodedText.Encode("discount_overlaps");
+	private static readonly System.Text.Json.JsonEncodedText PropK1 = System.Text.Json.JsonEncodedText.Encode("k1");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propB = default;
+		LocalJsonValue<bool?> propDiscountOverlaps = default;
+		LocalJsonValue<double?> propK1 = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propB.TryReadProperty(ref reader, options, PropB, null))
+			{
+				continue;
+			}
+
+			if (propDiscountOverlaps.TryReadProperty(ref reader, options, PropDiscountOverlaps, null))
+			{
+				continue;
+			}
+
+			if (propK1.TryReadProperty(ref reader, options, PropK1, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			B = propB.Value,
+			DiscountOverlaps = propDiscountOverlaps.Value,
+			K1 = propK1.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropB, value.B, null, null);
+		writer.WriteProperty(options, PropDiscountOverlaps, value.DiscountOverlaps, null, null);
+		writer.WriteProperty(options, PropK1, value.K1, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Converter))]
+public sealed partial class SettingsSimilarityBm25 : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
+{
+#if NET7_0_OR_GREATER
+	public SettingsSimilarityBm25()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SettingsSimilarityBm25()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SettingsSimilarityBm25(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public double? B { get; set; }
 	public bool? DiscountOverlaps { get; set; }
-	[JsonInclude, JsonPropertyName("k1")]
 	public double? K1 { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "BM25";
 }
 
-public sealed partial class SettingsSimilarityBm25Descriptor : SerializableDescriptor<SettingsSimilarityBm25Descriptor>, IBuildableDescriptor<SettingsSimilarityBm25>
+public readonly partial struct SettingsSimilarityBm25Descriptor
 {
-	internal SettingsSimilarityBm25Descriptor(Action<SettingsSimilarityBm25Descriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 Instance { get; init; }
 
-	public SettingsSimilarityBm25Descriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityBm25Descriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 instance)
 	{
+		Instance = instance;
 	}
 
-	private double? bValue { get; set; }
-	private bool? DiscountOverlapsValue { get; set; }
-	private double? K1Value { get; set; }
-
-	public SettingsSimilarityBm25Descriptor b(double? b)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityBm25Descriptor()
 	{
-		bValue = b;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SettingsSimilarityBm25Descriptor DiscountOverlaps(bool? discountOverlaps = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor B(double? value)
 	{
-		DiscountOverlapsValue = discountOverlaps;
-		return Self;
+		Instance.B = value;
+		return this;
 	}
 
-	public SettingsSimilarityBm25Descriptor K1(double? k1)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor DiscountOverlaps(bool? value = true)
 	{
-		K1Value = k1;
-		return Self;
+		Instance.DiscountOverlaps = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor K1(double? value)
 	{
-		writer.WriteStartObject();
-		if (bValue.HasValue)
+		Instance.K1 = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("b");
-			writer.WriteNumberValue(bValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DiscountOverlapsValue.HasValue)
-		{
-			writer.WritePropertyName("discount_overlaps");
-			writer.WriteBooleanValue(DiscountOverlapsValue.Value);
-		}
-
-		if (K1Value.HasValue)
-		{
-			writer.WritePropertyName("k1");
-			writer.WriteNumberValue(K1Value.Value);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("BM25");
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25Descriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	SettingsSimilarityBm25 IBuildableDescriptor<SettingsSimilarityBm25>.Build() => new()
-	{
-		b = bValue,
-		DiscountOverlaps = DiscountOverlapsValue,
-		K1 = K1Value
-	};
 }

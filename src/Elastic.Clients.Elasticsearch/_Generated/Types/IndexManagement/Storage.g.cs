@@ -17,74 +17,145 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class Storage
+internal sealed partial class StorageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Storage>
 {
-	/// <summary>
-	/// <para>
-	/// You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.
-	/// This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This
-	/// setting is useful, for example, if you are in an environment where you can not control the ability to create a lot
-	/// of memory maps so you need disable the ability to use memory-mapping.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_mmap")]
-	public bool? AllowMmap { get; set; }
-	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropAllowMmap = System.Text.Json.JsonEncodedText.Encode("allow_mmap");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
-public sealed partial class StorageDescriptor : SerializableDescriptor<StorageDescriptor>
-{
-	internal StorageDescriptor(Action<StorageDescriptor> configure) => configure.Invoke(this);
-
-	public StorageDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.Storage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	private bool? AllowMmapValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.StorageType TypeValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.
-	/// This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This
-	/// setting is useful, for example, if you are in an environment where you can not control the ability to create a lot
-	/// of memory maps so you need disable the ability to use memory-mapping.
-	/// </para>
-	/// </summary>
-	public StorageDescriptor AllowMmap(bool? allowMmap = true)
-	{
-		AllowMmapValue = allowMmap;
-		return Self;
-	}
-
-	public StorageDescriptor Type(Elastic.Clients.Elasticsearch.IndexManagement.StorageType type)
-	{
-		TypeValue = type;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AllowMmapValue.HasValue)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowMmap = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.StorageType> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			writer.WritePropertyName("allow_mmap");
-			writer.WriteBooleanValue(AllowMmapValue.Value);
+			if (propAllowMmap.TryReadProperty(ref reader, options, PropAllowMmap, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		writer.WritePropertyName("type");
-		JsonSerializer.Serialize(writer, TypeValue, options);
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.Storage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowMmap = propAllowMmap.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.Storage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowMmap, value.AllowMmap, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.StorageConverter))]
+public sealed partial class Storage
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Storage(Elastic.Clients.Elasticsearch.IndexManagement.StorageType type)
+	{
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public Storage()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Storage()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Storage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.
+	/// This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This
+	/// setting is useful, for example, if you are in an environment where you can not control the ability to create a lot
+	/// of memory maps so you need disable the ability to use memory-mapping.
+	/// </para>
+	/// </summary>
+	public bool? AllowMmap { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
+}
+
+public readonly partial struct StorageDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.Storage Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StorageDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.Storage instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StorageDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.Storage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.Storage instance) => new Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.Storage(Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.
+	/// This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This
+	/// setting is useful, for example, if you are in an environment where you can not control the ability to create a lot
+	/// of memory maps so you need disable the ability to use memory-mapping.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor AllowMmap(bool? value = true)
+	{
+		Instance.AllowMmap = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor Type(Elastic.Clients.Elasticsearch.IndexManagement.StorageType value)
+	{
+		Instance.Type = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.Storage Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.Storage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

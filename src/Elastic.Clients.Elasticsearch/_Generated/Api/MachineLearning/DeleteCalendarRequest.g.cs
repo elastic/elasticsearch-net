@@ -17,73 +17,181 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class DeleteCalendarRequestParameters : RequestParameters
+public sealed partial class DeleteCalendarRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DeleteCalendarRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Delete a calendar.
-/// Removes all scheduled events from a calendar, then deletes it.
+/// </para>
+/// <para>
+/// Remove all scheduled events from a calendar, then delete it.
 /// </para>
 /// </summary>
-public sealed partial class DeleteCalendarRequest : PlainRequest<DeleteCalendarRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestConverter))]
+public sealed partial class DeleteCalendarRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteCalendarRequest(Elastic.Clients.Elasticsearch.Id calendarId) : base(r => r.Required("calendar_id", calendarId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteCalendarRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteCalendarRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteCalendar;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningDeleteCalendar;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_calendar";
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 }
 
 /// <summary>
 /// <para>
 /// Delete a calendar.
-/// Removes all scheduled events from a calendar, then deletes it.
+/// </para>
+/// <para>
+/// Remove all scheduled events from a calendar, then delete it.
 /// </para>
 /// </summary>
-public sealed partial class DeleteCalendarRequestDescriptor : RequestDescriptor<DeleteCalendarRequestDescriptor, DeleteCalendarRequestParameters>
+public readonly partial struct DeleteCalendarRequestDescriptor
 {
-	internal DeleteCalendarRequestDescriptor(Action<DeleteCalendarRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest Instance { get; init; }
 
-	public DeleteCalendarRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId) : base(r => r.Required("calendar_id", calendarId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteCalendarRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteCalendar;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.delete_calendar";
-
-	public DeleteCalendarRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id calendarId)
+	public DeleteCalendarRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId)
 	{
-		RouteValues.Required("calendar_id", calendarId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest(calendarId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteCalendarRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.CalendarId = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

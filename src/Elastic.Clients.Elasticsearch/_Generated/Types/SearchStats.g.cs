@@ -17,52 +17,304 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class SearchStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFetchCurrent = System.Text.Json.JsonEncodedText.Encode("fetch_current");
+	private static readonly System.Text.Json.JsonEncodedText PropFetchTime = System.Text.Json.JsonEncodedText.Encode("fetch_time");
+	private static readonly System.Text.Json.JsonEncodedText PropFetchTimeInMillis = System.Text.Json.JsonEncodedText.Encode("fetch_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropFetchTotal = System.Text.Json.JsonEncodedText.Encode("fetch_total");
+	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
+	private static readonly System.Text.Json.JsonEncodedText PropOpenContexts = System.Text.Json.JsonEncodedText.Encode("open_contexts");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryCurrent = System.Text.Json.JsonEncodedText.Encode("query_current");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryTime = System.Text.Json.JsonEncodedText.Encode("query_time");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryTimeInMillis = System.Text.Json.JsonEncodedText.Encode("query_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryTotal = System.Text.Json.JsonEncodedText.Encode("query_total");
+	private static readonly System.Text.Json.JsonEncodedText PropScrollCurrent = System.Text.Json.JsonEncodedText.Encode("scroll_current");
+	private static readonly System.Text.Json.JsonEncodedText PropScrollTime = System.Text.Json.JsonEncodedText.Encode("scroll_time");
+	private static readonly System.Text.Json.JsonEncodedText PropScrollTimeInMillis = System.Text.Json.JsonEncodedText.Encode("scroll_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropScrollTotal = System.Text.Json.JsonEncodedText.Encode("scroll_total");
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestCurrent = System.Text.Json.JsonEncodedText.Encode("suggest_current");
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestTime = System.Text.Json.JsonEncodedText.Encode("suggest_time");
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestTimeInMillis = System.Text.Json.JsonEncodedText.Encode("suggest_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestTotal = System.Text.Json.JsonEncodedText.Encode("suggest_total");
+
+	public override Elastic.Clients.Elasticsearch.SearchStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propFetchCurrent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFetchTime = default;
+		LocalJsonValue<System.TimeSpan> propFetchTimeInMillis = default;
+		LocalJsonValue<long> propFetchTotal = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>?> propGroups = default;
+		LocalJsonValue<long?> propOpenContexts = default;
+		LocalJsonValue<long> propQueryCurrent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propQueryTime = default;
+		LocalJsonValue<System.TimeSpan> propQueryTimeInMillis = default;
+		LocalJsonValue<long> propQueryTotal = default;
+		LocalJsonValue<long> propScrollCurrent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propScrollTime = default;
+		LocalJsonValue<System.TimeSpan> propScrollTimeInMillis = default;
+		LocalJsonValue<long> propScrollTotal = default;
+		LocalJsonValue<long> propSuggestCurrent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propSuggestTime = default;
+		LocalJsonValue<System.TimeSpan> propSuggestTimeInMillis = default;
+		LocalJsonValue<long> propSuggestTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFetchCurrent.TryReadProperty(ref reader, options, PropFetchCurrent, null))
+			{
+				continue;
+			}
+
+			if (propFetchTime.TryReadProperty(ref reader, options, PropFetchTime, null))
+			{
+				continue;
+			}
+
+			if (propFetchTimeInMillis.TryReadProperty(ref reader, options, PropFetchTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propFetchTotal.TryReadProperty(ref reader, options, PropFetchTotal, null))
+			{
+				continue;
+			}
+
+			if (propGroups.TryReadProperty(ref reader, options, PropGroups, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.SearchStats>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propOpenContexts.TryReadProperty(ref reader, options, PropOpenContexts, null))
+			{
+				continue;
+			}
+
+			if (propQueryCurrent.TryReadProperty(ref reader, options, PropQueryCurrent, null))
+			{
+				continue;
+			}
+
+			if (propQueryTime.TryReadProperty(ref reader, options, PropQueryTime, null))
+			{
+				continue;
+			}
+
+			if (propQueryTimeInMillis.TryReadProperty(ref reader, options, PropQueryTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propQueryTotal.TryReadProperty(ref reader, options, PropQueryTotal, null))
+			{
+				continue;
+			}
+
+			if (propScrollCurrent.TryReadProperty(ref reader, options, PropScrollCurrent, null))
+			{
+				continue;
+			}
+
+			if (propScrollTime.TryReadProperty(ref reader, options, PropScrollTime, null))
+			{
+				continue;
+			}
+
+			if (propScrollTimeInMillis.TryReadProperty(ref reader, options, PropScrollTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propScrollTotal.TryReadProperty(ref reader, options, PropScrollTotal, null))
+			{
+				continue;
+			}
+
+			if (propSuggestCurrent.TryReadProperty(ref reader, options, PropSuggestCurrent, null))
+			{
+				continue;
+			}
+
+			if (propSuggestTime.TryReadProperty(ref reader, options, PropSuggestTime, null))
+			{
+				continue;
+			}
+
+			if (propSuggestTimeInMillis.TryReadProperty(ref reader, options, PropSuggestTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propSuggestTotal.TryReadProperty(ref reader, options, PropSuggestTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FetchCurrent = propFetchCurrent.Value,
+			FetchTime = propFetchTime.Value,
+			FetchTimeInMillis = propFetchTimeInMillis.Value,
+			FetchTotal = propFetchTotal.Value,
+			Groups = propGroups.Value,
+			OpenContexts = propOpenContexts.Value,
+			QueryCurrent = propQueryCurrent.Value,
+			QueryTime = propQueryTime.Value,
+			QueryTimeInMillis = propQueryTimeInMillis.Value,
+			QueryTotal = propQueryTotal.Value,
+			ScrollCurrent = propScrollCurrent.Value,
+			ScrollTime = propScrollTime.Value,
+			ScrollTimeInMillis = propScrollTimeInMillis.Value,
+			ScrollTotal = propScrollTotal.Value,
+			SuggestCurrent = propSuggestCurrent.Value,
+			SuggestTime = propSuggestTime.Value,
+			SuggestTimeInMillis = propSuggestTimeInMillis.Value,
+			SuggestTotal = propSuggestTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFetchCurrent, value.FetchCurrent, null, null);
+		writer.WriteProperty(options, PropFetchTime, value.FetchTime, null, null);
+		writer.WriteProperty(options, PropFetchTimeInMillis, value.FetchTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropFetchTotal, value.FetchTotal, null, null);
+		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.SearchStats>(o, v, null, null));
+		writer.WriteProperty(options, PropOpenContexts, value.OpenContexts, null, null);
+		writer.WriteProperty(options, PropQueryCurrent, value.QueryCurrent, null, null);
+		writer.WriteProperty(options, PropQueryTime, value.QueryTime, null, null);
+		writer.WriteProperty(options, PropQueryTimeInMillis, value.QueryTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropQueryTotal, value.QueryTotal, null, null);
+		writer.WriteProperty(options, PropScrollCurrent, value.ScrollCurrent, null, null);
+		writer.WriteProperty(options, PropScrollTime, value.ScrollTime, null, null);
+		writer.WriteProperty(options, PropScrollTimeInMillis, value.ScrollTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropScrollTotal, value.ScrollTotal, null, null);
+		writer.WriteProperty(options, PropSuggestCurrent, value.SuggestCurrent, null, null);
+		writer.WriteProperty(options, PropSuggestTime, value.SuggestTime, null, null);
+		writer.WriteProperty(options, PropSuggestTimeInMillis, value.SuggestTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropSuggestTotal, value.SuggestTotal, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchStatsConverter))]
 public sealed partial class SearchStats
 {
-	[JsonInclude, JsonPropertyName("fetch_current")]
-	public long FetchCurrent { get; init; }
-	[JsonInclude, JsonPropertyName("fetch_time")]
-	public Elastic.Clients.Elasticsearch.Duration? FetchTime { get; init; }
-	[JsonInclude, JsonPropertyName("fetch_time_in_millis")]
-	public long FetchTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("fetch_total")]
-	public long FetchTotal { get; init; }
-	[JsonInclude, JsonPropertyName("groups")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? Groups { get; init; }
-	[JsonInclude, JsonPropertyName("open_contexts")]
-	public long? OpenContexts { get; init; }
-	[JsonInclude, JsonPropertyName("query_current")]
-	public long QueryCurrent { get; init; }
-	[JsonInclude, JsonPropertyName("query_time")]
-	public Elastic.Clients.Elasticsearch.Duration? QueryTime { get; init; }
-	[JsonInclude, JsonPropertyName("query_time_in_millis")]
-	public long QueryTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("query_total")]
-	public long QueryTotal { get; init; }
-	[JsonInclude, JsonPropertyName("scroll_current")]
-	public long ScrollCurrent { get; init; }
-	[JsonInclude, JsonPropertyName("scroll_time")]
-	public Elastic.Clients.Elasticsearch.Duration? ScrollTime { get; init; }
-	[JsonInclude, JsonPropertyName("scroll_time_in_millis")]
-	public long ScrollTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("scroll_total")]
-	public long ScrollTotal { get; init; }
-	[JsonInclude, JsonPropertyName("suggest_current")]
-	public long SuggestCurrent { get; init; }
-	[JsonInclude, JsonPropertyName("suggest_time")]
-	public Elastic.Clients.Elasticsearch.Duration? SuggestTime { get; init; }
-	[JsonInclude, JsonPropertyName("suggest_time_in_millis")]
-	public long SuggestTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("suggest_total")]
-	public long SuggestTotal { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchStats(long fetchCurrent, System.TimeSpan fetchTimeInMillis, long fetchTotal, long queryCurrent, System.TimeSpan queryTimeInMillis, long queryTotal, long scrollCurrent, System.TimeSpan scrollTimeInMillis, long scrollTotal, long suggestCurrent, System.TimeSpan suggestTimeInMillis, long suggestTotal)
+	{
+		FetchCurrent = fetchCurrent;
+		FetchTimeInMillis = fetchTimeInMillis;
+		FetchTotal = fetchTotal;
+		QueryCurrent = queryCurrent;
+		QueryTimeInMillis = queryTimeInMillis;
+		QueryTotal = queryTotal;
+		ScrollCurrent = scrollCurrent;
+		ScrollTimeInMillis = scrollTimeInMillis;
+		ScrollTotal = scrollTotal;
+		SuggestCurrent = suggestCurrent;
+		SuggestTimeInMillis = suggestTimeInMillis;
+		SuggestTotal = suggestTotal;
+	}
+#if NET7_0_OR_GREATER
+	public SearchStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SearchStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SearchStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FetchCurrent { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? FetchTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan FetchTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FetchTotal { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? Groups { get; set; }
+	public long? OpenContexts { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long QueryCurrent { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? QueryTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan QueryTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long QueryTotal { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ScrollCurrent { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? ScrollTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan ScrollTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ScrollTotal { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SuggestCurrent { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? SuggestTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan SuggestTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SuggestTotal { get; set; }
 }

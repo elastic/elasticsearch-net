@@ -17,34 +17,194 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class NodeAllocationExplanationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDeciders = System.Text.Json.JsonEncodedText.Encode("deciders");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeAttributes = System.Text.Json.JsonEncodedText.Encode("node_attributes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeDecision = System.Text.Json.JsonEncodedText.Encode("node_decision");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeName = System.Text.Json.JsonEncodedText.Encode("node_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
+	private static readonly System.Text.Json.JsonEncodedText PropWeightRanking = System.Text.Json.JsonEncodedText.Encode("weight_ranking");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>> propDeciders = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>> propNodeAttributes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.Decision> propNodeDecision = default;
+		LocalJsonValue<string> propNodeId = default;
+		LocalJsonValue<string> propNodeName = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>> propRoles = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.AllocationStore?> propStore = default;
+		LocalJsonValue<string> propTransportAddress = default;
+		LocalJsonValue<int> propWeightRanking = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeciders.TryReadProperty(ref reader, options, PropDeciders, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propNodeAttributes.TryReadProperty(ref reader, options, PropNodeAttributes, static System.Collections.Generic.IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propNodeDecision.TryReadProperty(ref reader, options, PropNodeDecision, null))
+			{
+				continue;
+			}
+
+			if (propNodeId.TryReadProperty(ref reader, options, PropNodeId, null))
+			{
+				continue;
+			}
+
+			if (propNodeName.TryReadProperty(ref reader, options, PropNodeName, null))
+			{
+				continue;
+			}
+
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			{
+				continue;
+			}
+
+			if (propTransportAddress.TryReadProperty(ref reader, options, PropTransportAddress, null))
+			{
+				continue;
+			}
+
+			if (propWeightRanking.TryReadProperty(ref reader, options, PropWeightRanking, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Deciders = propDeciders.Value,
+			NodeAttributes = propNodeAttributes.Value,
+			NodeDecision = propNodeDecision.Value,
+			NodeId = propNodeId.Value,
+			NodeName = propNodeName.Value,
+			Roles = propRoles.Value,
+			Store = propStore.Value,
+			TransportAddress = propTransportAddress.Value,
+			WeightRanking = propWeightRanking.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeciders, value.Deciders, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, v, null));
+		writer.WriteProperty(options, PropNodeAttributes, value.NodeAttributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNodeDecision, value.NodeDecision, null, null);
+		writer.WriteProperty(options, PropNodeId, value.NodeId, null, null);
+		writer.WriteProperty(options, PropNodeName, value.NodeName, null, null);
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, v, null));
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);
+		writer.WriteProperty(options, PropWeightRanking, value.WeightRanking, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanationConverter))]
 public sealed partial class NodeAllocationExplanation
 {
-	[JsonInclude, JsonPropertyName("deciders")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> Deciders { get; init; }
-	[JsonInclude, JsonPropertyName("node_attributes")]
-	public IReadOnlyDictionary<string, string> NodeAttributes { get; init; }
-	[JsonInclude, JsonPropertyName("node_decision")]
-	public Elastic.Clients.Elasticsearch.Cluster.Decision NodeDecision { get; init; }
-	[JsonInclude, JsonPropertyName("node_id")]
-	public string NodeId { get; init; }
-	[JsonInclude, JsonPropertyName("node_name")]
-	public string NodeName { get; init; }
-	[JsonInclude, JsonPropertyName("roles")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; init; }
-	[JsonInclude, JsonPropertyName("store")]
-	public Elastic.Clients.Elasticsearch.Cluster.AllocationStore? Store { get; init; }
-	[JsonInclude, JsonPropertyName("transport_address")]
-	public string TransportAddress { get; init; }
-	[JsonInclude, JsonPropertyName("weight_ranking")]
-	public int WeightRanking { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeAllocationExplanation(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> deciders, System.Collections.Generic.IReadOnlyDictionary<string, string> nodeAttributes, Elastic.Clients.Elasticsearch.Cluster.Decision nodeDecision, string nodeId, string nodeName, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> roles, string transportAddress, int weightRanking)
+	{
+		Deciders = deciders;
+		NodeAttributes = nodeAttributes;
+		NodeDecision = nodeDecision;
+		NodeId = nodeId;
+		NodeName = nodeName;
+		Roles = roles;
+		TransportAddress = transportAddress;
+		WeightRanking = weightRanking;
+	}
+#if NET7_0_OR_GREATER
+	public NodeAllocationExplanation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeAllocationExplanation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeAllocationExplanation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> Deciders { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, string> NodeAttributes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.Decision NodeDecision { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string NodeId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string NodeName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; set; }
+	public Elastic.Clients.Elasticsearch.Cluster.AllocationStore? Store { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string TransportAddress { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int WeightRanking { get; set; }
 }

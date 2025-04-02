@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class IpFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.IpFilter>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.IpFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propHttp = default;
+		LocalJsonValue<bool> propTransport = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHttp.TryReadProperty(ref reader, options, PropHttp, null))
+			{
+				continue;
+			}
+
+			if (propTransport.TryReadProperty(ref reader, options, PropTransport, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.IpFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Http = propHttp.Value,
+			Transport = propTransport.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.IpFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHttp, value.Http, null, null);
+		writer.WriteProperty(options, PropTransport, value.Transport, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.IpFilterConverter))]
 public sealed partial class IpFilter
 {
-	[JsonInclude, JsonPropertyName("http")]
-	public bool Http { get; init; }
-	[JsonInclude, JsonPropertyName("transport")]
-	public bool Transport { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpFilter(bool http, bool transport)
+	{
+		Http = http;
+		Transport = transport;
+	}
+#if NET7_0_OR_GREATER
+	public IpFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IpFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IpFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Http { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Transport { get; set; }
 }

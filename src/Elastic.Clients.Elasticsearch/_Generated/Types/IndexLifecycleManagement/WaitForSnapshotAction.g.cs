@@ -17,43 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class WaitForSnapshotAction
+internal sealed partial class WaitForSnapshotActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction>
 {
-	[JsonInclude, JsonPropertyName("policy")]
-	public string Policy { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropPolicy = System.Text.Json.JsonEncodedText.Encode("policy");
 
-public sealed partial class WaitForSnapshotActionDescriptor : SerializableDescriptor<WaitForSnapshotActionDescriptor>
-{
-	internal WaitForSnapshotActionDescriptor(Action<WaitForSnapshotActionDescriptor> configure) => configure.Invoke(this);
-
-	public WaitForSnapshotActionDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propPolicy = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPolicy.TryReadProperty(ref reader, options, PropPolicy, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Policy = propPolicy.Value
+		};
 	}
 
-	private string PolicyValue { get; set; }
-
-	public WaitForSnapshotActionDescriptor Policy(string policy)
-	{
-		PolicyValue = policy;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("policy");
-		writer.WriteStringValue(PolicyValue);
+		writer.WriteProperty(options, PropPolicy, value.Policy, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionConverter))]
+public sealed partial class WaitForSnapshotAction
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WaitForSnapshotAction(string policy)
+	{
+		Policy = policy;
+	}
+#if NET7_0_OR_GREATER
+	public WaitForSnapshotAction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public WaitForSnapshotAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal WaitForSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Policy { get; set; }
+}
+
+public readonly partial struct WaitForSnapshotActionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WaitForSnapshotActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WaitForSnapshotActionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor Policy(string value)
+	{
+		Instance.Policy = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

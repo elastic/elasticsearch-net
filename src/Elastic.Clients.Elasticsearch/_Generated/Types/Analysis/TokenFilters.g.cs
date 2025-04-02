@@ -17,473 +17,840 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public partial class TokenFilters : IsADictionary<string, ITokenFilter>
+internal sealed partial class TokenFiltersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.TokenFilters>
+{
+	public override Elastic.Clients.Elasticsearch.Analysis.TokenFilters Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.Analysis.TokenFilters(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>(o, null, null)));
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.TokenFilters value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>(o, v, null, null));
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.TokenFiltersConverter))]
+public sealed partial class TokenFilters : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>
 {
 	public TokenFilters()
 	{
 	}
 
-	public TokenFilters(IDictionary<string, ITokenFilter> container) : base(container)
+	public TokenFilters(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter> backingDictionary) : base(backingDictionary)
 	{
 	}
 
-	public void Add(string name, ITokenFilter tokenFilter) => BackingDictionary.Add(Sanitize(name), tokenFilter);
-	public bool TryGetTokenFilter(string name, [NotNullWhen(returnValue: true)] out ITokenFilter tokenFilter) => BackingDictionary.TryGetValue(Sanitize(name), out tokenFilter);
+	public void Add(string key, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter value) => BackingDictionary.Add(Sanitize(key), value);
+	public bool TryGetTokenFilter(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out Elastic.Clients.Elasticsearch.Analysis.ITokenFilter value) => BackingDictionary.TryGetValue(Sanitize(key), out value);
 
-	public bool TryGetTokenFilter<T>(string name, [NotNullWhen(returnValue: true)] out T? tokenFilter) where T : class, ITokenFilter
+	public bool TryGetTokenFilter<T>(string key, [System.Diagnostics.CodeAnalysis.NotNullWhen(returnValue: true)] out T? value) where T : class, ITokenFilter
 	{
-		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(key), out var matchedValue) && matchedValue is T finalValue)
 		{
-			tokenFilter = finalValue;
+			value = finalValue;
 			return true;
 		}
 
-		tokenFilter = null;
+		value = null;
 		return false;
 	}
 }
 
-public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<TokenFiltersDescriptor, TokenFilters, string, ITokenFilter>
+public readonly partial struct TokenFiltersDescriptor
 {
-	public TokenFiltersDescriptor() : base(new TokenFilters())
+	private readonly Elastic.Clients.Elasticsearch.Analysis.TokenFilters _items = new();
+
+	private Elastic.Clients.Elasticsearch.Analysis.TokenFilters Value => _items;
+
+	public TokenFiltersDescriptor()
 	{
 	}
 
-	public TokenFiltersDescriptor(TokenFilters tokenFilters) : base(tokenFilters ?? new TokenFilters())
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor AsciiFolding(string key, Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter value)
 	{
+		_items.Add(key, value);
+		return this;
 	}
 
-	public TokenFiltersDescriptor AsciiFolding(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor, AsciiFoldingTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor AsciiFolding(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor, AsciiFoldingTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor AsciiFolding(string tokenFilterName, AsciiFoldingTokenFilter asciiFoldingTokenFilter) => AssignVariant(tokenFilterName, asciiFoldingTokenFilter);
-	public TokenFiltersDescriptor CommonGrams(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor, CommonGramsTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor CommonGrams(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor, CommonGramsTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor CommonGrams(string tokenFilterName, CommonGramsTokenFilter commonGramsTokenFilter) => AssignVariant(tokenFilterName, commonGramsTokenFilter);
-	public TokenFiltersDescriptor Condition(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor, ConditionTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Condition(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor, ConditionTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Condition(string tokenFilterName, ConditionTokenFilter conditionTokenFilter) => AssignVariant(tokenFilterName, conditionTokenFilter);
-	public TokenFiltersDescriptor DelimitedPayload(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor, DelimitedPayloadTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor DelimitedPayload(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor, DelimitedPayloadTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor DelimitedPayload(string tokenFilterName, DelimitedPayloadTokenFilter delimitedPayloadTokenFilter) => AssignVariant(tokenFilterName, delimitedPayloadTokenFilter);
-	public TokenFiltersDescriptor DictionaryDecompounder(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor, DictionaryDecompounderTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor DictionaryDecompounder(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor, DictionaryDecompounderTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor DictionaryDecompounder(string tokenFilterName, DictionaryDecompounderTokenFilter dictionaryDecompounderTokenFilter) => AssignVariant(tokenFilterName, dictionaryDecompounderTokenFilter);
-	public TokenFiltersDescriptor EdgeNGram(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor, EdgeNGramTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor EdgeNGram(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor, EdgeNGramTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor EdgeNGram(string tokenFilterName, EdgeNGramTokenFilter edgeNGramTokenFilter) => AssignVariant(tokenFilterName, edgeNGramTokenFilter);
-	public TokenFiltersDescriptor Elision(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor, ElisionTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Elision(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor, ElisionTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Elision(string tokenFilterName, ElisionTokenFilter elisionTokenFilter) => AssignVariant(tokenFilterName, elisionTokenFilter);
-	public TokenFiltersDescriptor Fingerprint(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor, FingerprintTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Fingerprint(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor, FingerprintTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Fingerprint(string tokenFilterName, FingerprintTokenFilter fingerprintTokenFilter) => AssignVariant(tokenFilterName, fingerprintTokenFilter);
-	public TokenFiltersDescriptor Hunspell(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor, HunspellTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Hunspell(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor, HunspellTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Hunspell(string tokenFilterName, HunspellTokenFilter hunspellTokenFilter) => AssignVariant(tokenFilterName, hunspellTokenFilter);
-	public TokenFiltersDescriptor HyphenationDecompounder(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor, HyphenationDecompounderTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor HyphenationDecompounder(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor, HyphenationDecompounderTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor HyphenationDecompounder(string tokenFilterName, HyphenationDecompounderTokenFilter hyphenationDecompounderTokenFilter) => AssignVariant(tokenFilterName, hyphenationDecompounderTokenFilter);
-	public TokenFiltersDescriptor IcuCollation(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilterDescriptor, IcuCollationTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor IcuCollation(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilterDescriptor, IcuCollationTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor IcuCollation(string tokenFilterName, IcuCollationTokenFilter icuCollationTokenFilter) => AssignVariant(tokenFilterName, icuCollationTokenFilter);
-	public TokenFiltersDescriptor IcuFolding(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor, IcuFoldingTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor IcuFolding(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor, IcuFoldingTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor IcuFolding(string tokenFilterName, IcuFoldingTokenFilter icuFoldingTokenFilter) => AssignVariant(tokenFilterName, icuFoldingTokenFilter);
-	public TokenFiltersDescriptor IcuNormalization(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilterDescriptor, IcuNormalizationTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor IcuNormalization(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilterDescriptor, IcuNormalizationTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor IcuNormalization(string tokenFilterName, IcuNormalizationTokenFilter icuNormalizationTokenFilter) => AssignVariant(tokenFilterName, icuNormalizationTokenFilter);
-	public TokenFiltersDescriptor IcuTransform(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor IcuTransform(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor IcuTransform(string tokenFilterName, IcuTransformTokenFilter icuTransformTokenFilter) => AssignVariant(tokenFilterName, icuTransformTokenFilter);
-	public TokenFiltersDescriptor KeepTypes(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor, KeepTypesTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor KeepTypes(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor, KeepTypesTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor KeepTypes(string tokenFilterName, KeepTypesTokenFilter keepTypesTokenFilter) => AssignVariant(tokenFilterName, keepTypesTokenFilter);
-	public TokenFiltersDescriptor KeepWords(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor, KeepWordsTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor KeepWords(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor, KeepWordsTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor KeepWords(string tokenFilterName, KeepWordsTokenFilter keepWordsTokenFilter) => AssignVariant(tokenFilterName, keepWordsTokenFilter);
-	public TokenFiltersDescriptor KeywordMarker(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor, KeywordMarkerTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor KeywordMarker(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor, KeywordMarkerTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor KeywordMarker(string tokenFilterName, KeywordMarkerTokenFilter keywordMarkerTokenFilter) => AssignVariant(tokenFilterName, keywordMarkerTokenFilter);
-	public TokenFiltersDescriptor KStem(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor, KStemTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor KStem(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor, KStemTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor KStem(string tokenFilterName, KStemTokenFilter kStemTokenFilter) => AssignVariant(tokenFilterName, kStemTokenFilter);
-	public TokenFiltersDescriptor KuromojiPartOfSpeech(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor, KuromojiPartOfSpeechTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor KuromojiPartOfSpeech(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor, KuromojiPartOfSpeechTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor KuromojiPartOfSpeech(string tokenFilterName, KuromojiPartOfSpeechTokenFilter kuromojiPartOfSpeechTokenFilter) => AssignVariant(tokenFilterName, kuromojiPartOfSpeechTokenFilter);
-	public TokenFiltersDescriptor KuromojiReadingForm(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor, KuromojiReadingFormTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor KuromojiReadingForm(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor, KuromojiReadingFormTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor KuromojiReadingForm(string tokenFilterName, KuromojiReadingFormTokenFilter kuromojiReadingFormTokenFilter) => AssignVariant(tokenFilterName, kuromojiReadingFormTokenFilter);
-	public TokenFiltersDescriptor KuromojiStemmer(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor, KuromojiStemmerTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor KuromojiStemmer(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor, KuromojiStemmerTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor KuromojiStemmer(string tokenFilterName, KuromojiStemmerTokenFilter kuromojiStemmerTokenFilter) => AssignVariant(tokenFilterName, kuromojiStemmerTokenFilter);
-	public TokenFiltersDescriptor Length(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor, LengthTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Length(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor, LengthTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Length(string tokenFilterName, LengthTokenFilter lengthTokenFilter) => AssignVariant(tokenFilterName, lengthTokenFilter);
-	public TokenFiltersDescriptor LimitTokenCount(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor, LimitTokenCountTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor LimitTokenCount(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor, LimitTokenCountTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor LimitTokenCount(string tokenFilterName, LimitTokenCountTokenFilter limitTokenCountTokenFilter) => AssignVariant(tokenFilterName, limitTokenCountTokenFilter);
-	public TokenFiltersDescriptor Lowercase(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor, LowercaseTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Lowercase(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor, LowercaseTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Lowercase(string tokenFilterName, LowercaseTokenFilter lowercaseTokenFilter) => AssignVariant(tokenFilterName, lowercaseTokenFilter);
-	public TokenFiltersDescriptor Multiplexer(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor, MultiplexerTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Multiplexer(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor, MultiplexerTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Multiplexer(string tokenFilterName, MultiplexerTokenFilter multiplexerTokenFilter) => AssignVariant(tokenFilterName, multiplexerTokenFilter);
-	public TokenFiltersDescriptor NGram(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor, NGramTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor NGram(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor, NGramTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor NGram(string tokenFilterName, NGramTokenFilter nGramTokenFilter) => AssignVariant(tokenFilterName, nGramTokenFilter);
-	public TokenFiltersDescriptor NoriPartOfSpeech(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor, NoriPartOfSpeechTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor NoriPartOfSpeech(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor, NoriPartOfSpeechTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor NoriPartOfSpeech(string tokenFilterName, NoriPartOfSpeechTokenFilter noriPartOfSpeechTokenFilter) => AssignVariant(tokenFilterName, noriPartOfSpeechTokenFilter);
-	public TokenFiltersDescriptor PatternCapture(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor, PatternCaptureTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor PatternCapture(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor, PatternCaptureTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor PatternCapture(string tokenFilterName, PatternCaptureTokenFilter patternCaptureTokenFilter) => AssignVariant(tokenFilterName, patternCaptureTokenFilter);
-	public TokenFiltersDescriptor PatternReplace(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor, PatternReplaceTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor PatternReplace(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor, PatternReplaceTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor PatternReplace(string tokenFilterName, PatternReplaceTokenFilter patternReplaceTokenFilter) => AssignVariant(tokenFilterName, patternReplaceTokenFilter);
-	public TokenFiltersDescriptor Phonetic(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor, PhoneticTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Phonetic(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor, PhoneticTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Phonetic(string tokenFilterName, PhoneticTokenFilter phoneticTokenFilter) => AssignVariant(tokenFilterName, phoneticTokenFilter);
-	public TokenFiltersDescriptor PorterStem(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilterDescriptor, PorterStemTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor PorterStem(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilterDescriptor, PorterStemTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor PorterStem(string tokenFilterName, PorterStemTokenFilter porterStemTokenFilter) => AssignVariant(tokenFilterName, porterStemTokenFilter);
-	public TokenFiltersDescriptor Predicate(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor, PredicateTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Predicate(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor, PredicateTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Predicate(string tokenFilterName, PredicateTokenFilter predicateTokenFilter) => AssignVariant(tokenFilterName, predicateTokenFilter);
-	public TokenFiltersDescriptor RemoveDuplicates(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilterDescriptor, RemoveDuplicatesTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor RemoveDuplicates(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilterDescriptor, RemoveDuplicatesTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor RemoveDuplicates(string tokenFilterName, RemoveDuplicatesTokenFilter removeDuplicatesTokenFilter) => AssignVariant(tokenFilterName, removeDuplicatesTokenFilter);
-	public TokenFiltersDescriptor Reverse(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor, ReverseTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Reverse(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor, ReverseTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Reverse(string tokenFilterName, ReverseTokenFilter reverseTokenFilter) => AssignVariant(tokenFilterName, reverseTokenFilter);
-	public TokenFiltersDescriptor Shingle(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor, ShingleTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Shingle(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor, ShingleTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Shingle(string tokenFilterName, ShingleTokenFilter shingleTokenFilter) => AssignVariant(tokenFilterName, shingleTokenFilter);
-	public TokenFiltersDescriptor Snowball(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor, SnowballTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Snowball(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor, SnowballTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Snowball(string tokenFilterName, SnowballTokenFilter snowballTokenFilter) => AssignVariant(tokenFilterName, snowballTokenFilter);
-	public TokenFiltersDescriptor StemmerOverride(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor, StemmerOverrideTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor StemmerOverride(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor, StemmerOverrideTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor StemmerOverride(string tokenFilterName, StemmerOverrideTokenFilter stemmerOverrideTokenFilter) => AssignVariant(tokenFilterName, stemmerOverrideTokenFilter);
-	public TokenFiltersDescriptor Stemmer(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor, StemmerTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Stemmer(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor, StemmerTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Stemmer(string tokenFilterName, StemmerTokenFilter stemmerTokenFilter) => AssignVariant(tokenFilterName, stemmerTokenFilter);
-	public TokenFiltersDescriptor Stop(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor, StopTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Stop(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor, StopTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Stop(string tokenFilterName, StopTokenFilter stopTokenFilter) => AssignVariant(tokenFilterName, stopTokenFilter);
-	public TokenFiltersDescriptor SynonymGraph(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor, SynonymGraphTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor SynonymGraph(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor, SynonymGraphTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor SynonymGraph(string tokenFilterName, SynonymGraphTokenFilter synonymGraphTokenFilter) => AssignVariant(tokenFilterName, synonymGraphTokenFilter);
-	public TokenFiltersDescriptor Synonym(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor, SynonymTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Synonym(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor, SynonymTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Synonym(string tokenFilterName, SynonymTokenFilter synonymTokenFilter) => AssignVariant(tokenFilterName, synonymTokenFilter);
-	public TokenFiltersDescriptor Trim(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilterDescriptor, TrimTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Trim(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilterDescriptor, TrimTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Trim(string tokenFilterName, TrimTokenFilter trimTokenFilter) => AssignVariant(tokenFilterName, trimTokenFilter);
-	public TokenFiltersDescriptor Truncate(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor, TruncateTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Truncate(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor, TruncateTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Truncate(string tokenFilterName, TruncateTokenFilter truncateTokenFilter) => AssignVariant(tokenFilterName, truncateTokenFilter);
-	public TokenFiltersDescriptor Unique(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor, UniqueTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Unique(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor, UniqueTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Unique(string tokenFilterName, UniqueTokenFilter uniqueTokenFilter) => AssignVariant(tokenFilterName, uniqueTokenFilter);
-	public TokenFiltersDescriptor Uppercase(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilterDescriptor, UppercaseTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor Uppercase(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilterDescriptor, UppercaseTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor Uppercase(string tokenFilterName, UppercaseTokenFilter uppercaseTokenFilter) => AssignVariant(tokenFilterName, uppercaseTokenFilter);
-	public TokenFiltersDescriptor WordDelimiterGraph(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor, WordDelimiterGraphTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor WordDelimiterGraph(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor, WordDelimiterGraphTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor WordDelimiterGraph(string tokenFilterName, WordDelimiterGraphTokenFilter wordDelimiterGraphTokenFilter) => AssignVariant(tokenFilterName, wordDelimiterGraphTokenFilter);
-	public TokenFiltersDescriptor WordDelimiter(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor, WordDelimiterTokenFilter>(tokenFilterName, null);
-	public TokenFiltersDescriptor WordDelimiter(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor, WordDelimiterTokenFilter>(tokenFilterName, configure);
-	public TokenFiltersDescriptor WordDelimiter(string tokenFilterName, WordDelimiterTokenFilter wordDelimiterTokenFilter) => AssignVariant(tokenFilterName, wordDelimiterTokenFilter);
-}
-
-internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITokenFilter>
-{
-	public override ITokenFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor AsciiFolding(string key)
 	{
-		var copiedReader = reader;
-		string? type = null;
-		using var jsonDoc = JsonDocument.ParseValue(ref copiedReader);
-		if (jsonDoc is not null && jsonDoc.RootElement.TryGetProperty("type", out var readType) && readType.ValueKind == JsonValueKind.String)
-		{
-			type = readType.ToString();
-		}
-
-		switch (type)
-		{
-			case "asciifolding":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter>(ref reader, options);
-			case "common_grams":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter>(ref reader, options);
-			case "condition":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter>(ref reader, options);
-			case "delimited_payload":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter>(ref reader, options);
-			case "dictionary_decompounder":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter>(ref reader, options);
-			case "edge_ngram":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter>(ref reader, options);
-			case "elision":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter>(ref reader, options);
-			case "fingerprint":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter>(ref reader, options);
-			case "hunspell":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter>(ref reader, options);
-			case "hyphenation_decompounder":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter>(ref reader, options);
-			case "icu_collation":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter>(ref reader, options);
-			case "icu_folding":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter>(ref reader, options);
-			case "icu_normalizer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter>(ref reader, options);
-			case "icu_transform":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter>(ref reader, options);
-			case "keep_types":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter>(ref reader, options);
-			case "keep":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter>(ref reader, options);
-			case "keyword_marker":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter>(ref reader, options);
-			case "kstem":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter>(ref reader, options);
-			case "kuromoji_part_of_speech":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter>(ref reader, options);
-			case "kuromoji_readingform":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter>(ref reader, options);
-			case "kuromoji_stemmer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter>(ref reader, options);
-			case "length":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter>(ref reader, options);
-			case "limit":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter>(ref reader, options);
-			case "lowercase":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter>(ref reader, options);
-			case "multiplexer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter>(ref reader, options);
-			case "ngram":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter>(ref reader, options);
-			case "nori_part_of_speech":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter>(ref reader, options);
-			case "pattern_capture":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter>(ref reader, options);
-			case "pattern_replace":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>(ref reader, options);
-			case "phonetic":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter>(ref reader, options);
-			case "porter_stem":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter>(ref reader, options);
-			case "predicate_token_filter":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter>(ref reader, options);
-			case "remove_duplicates":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter>(ref reader, options);
-			case "reverse":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter>(ref reader, options);
-			case "shingle":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter>(ref reader, options);
-			case "snowball":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter>(ref reader, options);
-			case "stemmer_override":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter>(ref reader, options);
-			case "stemmer":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter>(ref reader, options);
-			case "stop":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter>(ref reader, options);
-			case "synonym_graph":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter>(ref reader, options);
-			case "synonym":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter>(ref reader, options);
-			case "trim":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter>(ref reader, options);
-			case "truncate":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter>(ref reader, options);
-			case "unique":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter>(ref reader, options);
-			case "uppercase":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter>(ref reader, options);
-			case "word_delimiter_graph":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter>(ref reader, options);
-			case "word_delimiter":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter>(ref reader, options);
-			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ITokenFilter));
-				return null;
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor.Build(null));
+		return this;
 	}
 
-	public override void Write(Utf8JsonWriter writer, ITokenFilter value, JsonSerializerOptions options)
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor AsciiFolding(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor>? action)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		switch (value.Type)
-		{
-			case "asciifolding":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter), options);
-				return;
-			case "common_grams":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter), options);
-				return;
-			case "condition":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter), options);
-				return;
-			case "delimited_payload":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter), options);
-				return;
-			case "dictionary_decompounder":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter), options);
-				return;
-			case "edge_ngram":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter), options);
-				return;
-			case "elision":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter), options);
-				return;
-			case "fingerprint":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter), options);
-				return;
-			case "hunspell":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter), options);
-				return;
-			case "hyphenation_decompounder":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter), options);
-				return;
-			case "icu_collation":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter), options);
-				return;
-			case "icu_folding":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter), options);
-				return;
-			case "icu_normalizer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter), options);
-				return;
-			case "icu_transform":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter), options);
-				return;
-			case "keep_types":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter), options);
-				return;
-			case "keep":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter), options);
-				return;
-			case "keyword_marker":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter), options);
-				return;
-			case "kstem":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter), options);
-				return;
-			case "kuromoji_part_of_speech":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter), options);
-				return;
-			case "kuromoji_readingform":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter), options);
-				return;
-			case "kuromoji_stemmer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter), options);
-				return;
-			case "length":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter), options);
-				return;
-			case "limit":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter), options);
-				return;
-			case "lowercase":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter), options);
-				return;
-			case "multiplexer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter), options);
-				return;
-			case "ngram":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter), options);
-				return;
-			case "nori_part_of_speech":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter), options);
-				return;
-			case "pattern_capture":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter), options);
-				return;
-			case "pattern_replace":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter), options);
-				return;
-			case "phonetic":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter), options);
-				return;
-			case "porter_stem":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter), options);
-				return;
-			case "predicate_token_filter":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter), options);
-				return;
-			case "remove_duplicates":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter), options);
-				return;
-			case "reverse":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter), options);
-				return;
-			case "shingle":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter), options);
-				return;
-			case "snowball":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter), options);
-				return;
-			case "stemmer_override":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter), options);
-				return;
-			case "stemmer":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter), options);
-				return;
-			case "stop":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter), options);
-				return;
-			case "synonym_graph":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter), options);
-				return;
-			case "synonym":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter), options);
-				return;
-			case "trim":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter), options);
-				return;
-			case "truncate":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter), options);
-				return;
-			case "unique":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter), options);
-				return;
-			case "uppercase":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter), options);
-				return;
-			case "word_delimiter_graph":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter), options);
-				return;
-			case "word_delimiter":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter), options);
-				return;
-			default:
-				var type = value.GetType();
-				JsonSerializer.Serialize(writer, value, type, options);
-				return;
-		}
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor.Build(action));
+		return this;
 	}
-}
 
-[JsonConverter(typeof(TokenFilterInterfaceConverter))]
-public partial interface ITokenFilter
-{
-	public string? Type { get; }
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CommonGrams(string key, Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CommonGrams(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CommonGrams(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Condition(string key, Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Condition(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DelimitedPayload(string key, Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DelimitedPayload(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DelimitedPayload(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DictionaryDecompounder(string key, Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DictionaryDecompounder(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DictionaryDecompounder(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor EdgeNGram(string key, Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor EdgeNGram(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor EdgeNGram(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Elision(string key, Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Elision(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Elision(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Fingerprint(string key, Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Fingerprint(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Fingerprint(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Hunspell(string key, Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Hunspell(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor HyphenationDecompounder(string key, Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor HyphenationDecompounder(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor HyphenationDecompounder(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IcuCollation(string key, Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IcuCollation(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IcuCollation(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IcuFolding(string key, Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IcuFolding(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IcuNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IcuNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IcuTransform(string key, Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IcuTransform(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepWords(string key, Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepWords(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepWords(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepTypes(string key, Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepTypes(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepTypes(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeywordMarker(string key, Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeywordMarker(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeywordMarker(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KStem(string key, Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KuromojiPartOfSpeech(string key, Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KuromojiPartOfSpeech(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KuromojiReadingForm(string key, Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KuromojiReadingForm(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KuromojiStemmer(string key, Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KuromojiStemmer(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Length(string key, Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Length(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Length(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor LimitTokenCount(string key, Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor LimitTokenCount(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor LimitTokenCount(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Lowercase(string key, Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Lowercase(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Lowercase(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Multiplexer(string key, Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Multiplexer(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor NGram(string key, Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor NGram(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor NGram(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor NoriPartOfSpeech(string key, Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor NoriPartOfSpeech(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor NoriPartOfSpeech(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PatternCapture(string key, Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PatternCapture(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PatternReplace(string key, Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PatternReplace(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Phonetic(string key, Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Phonetic(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PorterStem(string key, Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PorterStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PorterStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Predicate(string key, Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Predicate(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor> action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor RemoveDuplicates(string key, Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor RemoveDuplicates(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor RemoveDuplicates(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Reverse(string key, Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Reverse(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Reverse(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Shingle(string key, Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Shingle(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Shingle(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Snowball(string key, Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Snowball(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Snowball(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Stemmer(string key, Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Stemmer(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Stemmer(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor StemmerOverride(string key, Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor StemmerOverride(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor StemmerOverride(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Stop(string key, Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Stop(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Stop(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Synonym(string key, Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Synonym(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Synonym(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor SynonymGraph(string key, Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor SynonymGraph(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor SynonymGraph(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Trim(string key, Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Trim(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Trim(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Truncate(string key, Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Truncate(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Truncate(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Unique(string key, Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Unique(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Unique(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Uppercase(string key, Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Uppercase(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Uppercase(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor WordDelimiter(string key, Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor WordDelimiter(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor WordDelimiter(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor WordDelimiterGraph(string key, Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor WordDelimiterGraph(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor WordDelimiterGraph(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.TokenFilters Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Analysis.TokenFilters();
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor();
+		action.Invoke(builder);
+		return builder.Value;
+	}
 }

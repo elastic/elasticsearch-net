@@ -17,24 +17,102 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class BucketSortAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropGapPolicy = System.Text.Json.JsonEncodedText.Encode("gap_policy");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?> propGapPolicy = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			From = propFrom.Value,
+			GapPolicy = propGapPolicy.Value,
+			Size = propSize.Value,
+			Sort = propSort.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationConverter))]
 public sealed partial class BucketSortAggregation
 {
+#if NET7_0_OR_GREATER
+	public BucketSortAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public BucketSortAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BucketSortAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Buckets in positions prior to <c>from</c> will be truncated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
@@ -42,7 +120,6 @@ public sealed partial class BucketSortAggregation
 	/// The policy to apply when gaps are found in the data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
@@ -51,7 +128,6 @@ public sealed partial class BucketSortAggregation
 	/// Defaults to all buckets of the parent aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -59,38 +135,37 @@ public sealed partial class BucketSortAggregation
 	/// The list of fields to sort on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(BucketSortAggregation bucketSortAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketSort(bucketSortAggregation);
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
-public sealed partial class BucketSortAggregationDescriptor<TDocument> : SerializableDescriptor<BucketSortAggregationDescriptor<TDocument>>
+public readonly partial struct BucketSortAggregationDescriptor<TDocument>
 {
-	internal BucketSortAggregationDescriptor(Action<BucketSortAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation Instance { get; init; }
 
-	public BucketSortAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketSortAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketSortAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Buckets in positions prior to <c>from</c> will be truncated.
 	/// </para>
 	/// </summary>
-	public BucketSortAggregationDescriptor<TDocument> From(int? from)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -98,10 +173,10 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	/// The policy to apply when gaps are found in the data.
 	/// </para>
 	/// </summary>
-	public BucketSortAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
-		GapPolicyValue = gapPolicy;
-		return Self;
+		Instance.GapPolicy = value;
+		return this;
 	}
 
 	/// <summary>
@@ -110,10 +185,10 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	/// Defaults to all buckets of the parent aggregation.
 	/// </para>
 	/// </summary>
-	public BucketSortAggregationDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -121,121 +196,104 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	/// The list of fields to sort on.
 	/// </para>
 	/// </summary>
-	public BucketSortAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public BucketSortAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Sort()
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
+		return this;
 	}
 
-	public BucketSortAggregationDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
+		return this;
 	}
 
-	public BucketSortAggregationDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
-		writer.WriteStartObject();
-		if (FromValue.HasValue)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
 		}
 
-		if (GapPolicyValue is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, GapPolicyValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class BucketSortAggregationDescriptor : SerializableDescriptor<BucketSortAggregationDescriptor>
+public readonly partial struct BucketSortAggregationDescriptor
 {
-	internal BucketSortAggregationDescriptor(Action<BucketSortAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation Instance { get; init; }
 
-	public BucketSortAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketSortAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BucketSortAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Buckets in positions prior to <c>from</c> will be truncated.
 	/// </para>
 	/// </summary>
-	public BucketSortAggregationDescriptor From(int? from)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -243,10 +301,10 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	/// The policy to apply when gaps are found in the data.
 	/// </para>
 	/// </summary>
-	public BucketSortAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
-		GapPolicyValue = gapPolicy;
-		return Self;
+		Instance.GapPolicy = value;
+		return this;
 	}
 
 	/// <summary>
@@ -255,10 +313,10 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	/// Defaults to all buckets of the parent aggregation.
 	/// </para>
 	/// </summary>
-	public BucketSortAggregationDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -266,92 +324,100 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	/// The list of fields to sort on.
 	/// </para>
 	/// </summary>
-	public BucketSortAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public BucketSortAggregationDescriptor Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort()
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
+		return this;
 	}
 
-	public BucketSortAggregationDescriptor Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
+		return this;
 	}
 
-	public BucketSortAggregationDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		writer.WriteStartObject();
-		if (FromValue.HasValue)
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
 		}
 
-		if (GapPolicyValue is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of fields to sort on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, GapPolicyValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
 		}
 
-		if (SizeValue.HasValue)
+		Instance.Sort = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

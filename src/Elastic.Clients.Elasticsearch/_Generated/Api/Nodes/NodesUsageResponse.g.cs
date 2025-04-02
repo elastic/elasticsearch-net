@@ -17,27 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-public sealed partial class NodesUsageResponse : ElasticsearchResponse
+internal sealed partial class NodesUsageResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse>
 {
-	[JsonInclude, JsonPropertyName("cluster_name")]
-	public string ClusterName { get; init; }
-	[JsonInclude, JsonPropertyName("nodes")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeUsage> Nodes { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeStats = System.Text.Json.JsonEncodedText.Encode("_nodes");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeUsage>> propNodes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics?> propNodeStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
+			{
+				continue;
+			}
+
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeUsage> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeUsage>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propNodeStats.TryReadProperty(ref reader, options, PropNodeStats, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ClusterName = propClusterName.Value,
+			Nodes = propNodes.Value,
+			NodeStats = propNodeStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeUsage> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeUsage>(o, v, null, null));
+		writer.WriteProperty(options, PropNodeStats, value.NodeStats, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponseConverter))]
+public sealed partial class NodesUsageResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodesUsageResponse(string clusterName, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeUsage> nodes)
+	{
+		ClusterName = clusterName;
+		Nodes = nodes;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodesUsageResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodesUsageResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		string ClusterName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeUsage> Nodes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the number of nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_nodes")]
-	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; init; }
+	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; set; }
 }

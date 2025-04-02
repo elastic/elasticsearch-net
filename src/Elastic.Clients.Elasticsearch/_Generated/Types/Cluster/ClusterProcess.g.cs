@@ -17,31 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterProcessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterProcess>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
+	private static readonly System.Text.Json.JsonEncodedText PropOpenFileDescriptors = System.Text.Json.JsonEncodedText.Encode("open_file_descriptors");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterProcess Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu> propCpu = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors> propOpenFileDescriptors = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCpu.TryReadProperty(ref reader, options, PropCpu, null))
+			{
+				continue;
+			}
+
+			if (propOpenFileDescriptors.TryReadProperty(ref reader, options, PropOpenFileDescriptors, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterProcess(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Cpu = propCpu.Value,
+			OpenFileDescriptors = propOpenFileDescriptors.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterProcess value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCpu, value.Cpu, null, null);
+		writer.WriteProperty(options, PropOpenFileDescriptors, value.OpenFileDescriptors, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterProcessConverter))]
 public sealed partial class ClusterProcess
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterProcess(Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu cpu, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors openFileDescriptors)
+	{
+		Cpu = cpu;
+		OpenFileDescriptors = openFileDescriptors;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterProcess()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterProcess()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterProcess(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Contains statistics about CPU used by selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cpu")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu Cpu { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu Cpu { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about open file descriptors in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("open_file_descriptors")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors OpenFileDescriptors { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors OpenFileDescriptors { get; set; }
 }

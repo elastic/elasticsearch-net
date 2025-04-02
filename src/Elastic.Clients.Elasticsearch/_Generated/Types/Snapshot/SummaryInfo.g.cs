@@ -17,31 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class SummaryInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRead = System.Text.Json.JsonEncodedText.Encode("read");
+	private static readonly System.Text.Json.JsonEncodedText PropWrite = System.Text.Json.JsonEncodedText.Encode("write");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo> propRead = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo> propWrite = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRead.TryReadProperty(ref reader, options, PropRead, null))
+			{
+				continue;
+			}
+
+			if (propWrite.TryReadProperty(ref reader, options, PropWrite, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Read = propRead.Value,
+			Write = propWrite.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRead, value.Read, null, null);
+		writer.WriteProperty(options, PropWrite, value.Write, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SummaryInfoConverter))]
 public sealed partial class SummaryInfo
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SummaryInfo(Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo read, Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo write)
+	{
+		Read = read;
+		Write = write;
+	}
+#if NET7_0_OR_GREATER
+	public SummaryInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SummaryInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SummaryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A collection of statistics that summarise the results of the read operations in the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("read")]
-	public Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo Read { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo Read { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A collection of statistics that summarise the results of the write operations in the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("write")]
-	public Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo Write { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo Write { get; set; }
 }

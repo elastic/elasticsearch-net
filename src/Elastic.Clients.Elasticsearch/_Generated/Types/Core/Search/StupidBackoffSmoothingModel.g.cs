@@ -17,55 +17,123 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-public sealed partial class StupidBackoffSmoothingModel
+internal sealed partial class StupidBackoffSmoothingModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel>
 {
-	/// <summary>
-	/// <para>
-	/// A constant factor that the lower order n-gram model is discounted by.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("discount")]
-	public double Discount { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropDiscount = System.Text.Json.JsonEncodedText.Encode("discount");
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel.StupidBackoff(stupidBackoffSmoothingModel);
-}
-
-public sealed partial class StupidBackoffSmoothingModelDescriptor : SerializableDescriptor<StupidBackoffSmoothingModelDescriptor>
-{
-	internal StupidBackoffSmoothingModelDescriptor(Action<StupidBackoffSmoothingModelDescriptor> configure) => configure.Invoke(this);
-
-	public StupidBackoffSmoothingModelDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double> propDiscount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDiscount.TryReadProperty(ref reader, options, PropDiscount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Discount = propDiscount.Value
+		};
 	}
 
-	private double DiscountValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A constant factor that the lower order n-gram model is discounted by.
-	/// </para>
-	/// </summary>
-	public StupidBackoffSmoothingModelDescriptor Discount(double discount)
-	{
-		DiscountValue = discount;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("discount");
-		writer.WriteNumberValue(DiscountValue);
+		writer.WriteProperty(options, PropDiscount, value.Discount, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelConverter))]
+public sealed partial class StupidBackoffSmoothingModel
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StupidBackoffSmoothingModel(double discount)
+	{
+		Discount = discount;
+	}
+#if NET7_0_OR_GREATER
+	public StupidBackoffSmoothingModel()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StupidBackoffSmoothingModel()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StupidBackoffSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A constant factor that the lower order n-gram model is discounted by.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Discount { get; set; }
+}
+
+public readonly partial struct StupidBackoffSmoothingModelDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StupidBackoffSmoothingModelDescriptor(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StupidBackoffSmoothingModelDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel instance) => new Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A constant factor that the lower order n-gram model is discounted by.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor Discount(double value)
+	{
+		Instance.Discount = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

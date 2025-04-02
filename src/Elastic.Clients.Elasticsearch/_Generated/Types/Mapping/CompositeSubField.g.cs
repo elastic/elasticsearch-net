@@ -17,43 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class CompositeSubField
+internal sealed partial class CompositeSubFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>
 {
-	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
-public sealed partial class CompositeSubFieldDescriptor : SerializableDescriptor<CompositeSubFieldDescriptor>
-{
-	internal CompositeSubFieldDescriptor(Action<CompositeSubFieldDescriptor> configure) => configure.Invoke(this);
-
-	public CompositeSubFieldDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Mapping.CompositeSubField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.CompositeSubField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Type = propType.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType TypeValue { get; set; }
-
-	public CompositeSubFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
-	{
-		TypeValue = type;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("type");
-		JsonSerializer.Serialize(writer, TypeValue, options);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldConverter))]
+public sealed partial class CompositeSubField
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeSubField(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
+	{
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public CompositeSubField()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CompositeSubField()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CompositeSubField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+}
+
+public readonly partial struct CompositeSubFieldDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Mapping.CompositeSubField Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeSubFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.CompositeSubField instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompositeSubFieldDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.CompositeSubField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.CompositeSubField instance) => new Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.CompositeSubField(Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType value)
+	{
+		Instance.Type = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.CompositeSubField Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.CompositeSubFieldDescriptor(new Elastic.Clients.Elasticsearch.Mapping.CompositeSubField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,89 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-internal sealed partial class DocumentSimulationConverter : JsonConverter<DocumentSimulation>
+internal sealed partial class DocumentSimulationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation>
 {
-	public override DocumentSimulation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("_ingest");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("_version_type");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		string id = default;
-		string index = default;
-		Elastic.Clients.Elasticsearch.Ingest.Ingest ingest = default;
-		string? routing = default;
-		IReadOnlyDictionary<string, object> source = default;
-		long? version = default;
-		Elastic.Clients.Elasticsearch.VersionType? versionType = default;
-		Dictionary<string, string> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.Ingest> propIngest = default;
+		System.Collections.Generic.Dictionary<string, string>? propMetadata = default;
+		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propSource = default;
+		LocalJsonValue<long?> propVersion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
-				var property = reader.GetString();
-				if (property == "_id")
-				{
-					id = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "_index")
-				{
-					index = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
 
-				if (property == "_ingest")
-				{
-					ingest = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.Ingest>(ref reader, options);
-					continue;
-				}
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, null))
+			{
+				continue;
+			}
 
-				if (property == "_routing")
-				{
-					routing = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
 
-				if (property == "_source")
-				{
-					source = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>>(ref reader, options);
-					continue;
-				}
+			if (propSource.TryReadProperty(ref reader, options, PropSource, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
 
-				if (property == "_version")
-				{
-					version = JsonSerializer.Deserialize<long?>(ref reader, options);
-					continue;
-				}
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
 
-				if (property == "_version_type")
-				{
-					versionType = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.VersionType?>(ref reader, options);
-					continue;
-				}
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
+			{
+				continue;
+			}
 
-				additionalProperties ??= new Dictionary<string, string>();
-				var additionalValue = JsonSerializer.Deserialize<string>(ref reader, options);
-				additionalProperties.Add(property, additionalValue);
+			propMetadata ??= new System.Collections.Generic.Dictionary<string, string>();
+			reader.ReadProperty(options, out string key, out string value, null, null);
+			propMetadata[key] = value;
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Index = propIndex.Value,
+			Ingest = propIngest.Value,
+			Metadata = propMetadata,
+			Routing = propRouting.Value,
+			Source = propSource.Value,
+			Version = propVersion.Value,
+			VersionType = propVersionType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
+		if (value.Metadata is not null)
+		{
+			foreach (var item in value.Metadata)
+			{
+				writer.WriteProperty(options, item.Key, item.Value, null, null);
 			}
 		}
 
-		return new DocumentSimulation { Id = id, Index = index, Ingest = ingest, Metadata = additionalProperties, Routing = routing, Source = source, Version = version, VersionType = versionType };
-	}
-
-	public override void Write(Utf8JsonWriter writer, DocumentSimulation value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'DocumentSimulation' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 
@@ -108,44 +127,85 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 /// The simulated document, with optional metadata.
 /// </para>
 /// </summary>
-[JsonConverter(typeof(DocumentSimulationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.DocumentSimulationConverter))]
 public sealed partial class DocumentSimulation
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DocumentSimulation(string id, string index, Elastic.Clients.Elasticsearch.Ingest.Ingest ingest, System.Collections.Generic.IReadOnlyDictionary<string, object> source)
+	{
+		Id = id;
+		Index = index;
+		Ingest = ingest;
+		Source = source;
+	}
+#if NET7_0_OR_GREATER
+	public DocumentSimulation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DocumentSimulation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DocumentSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Unique identifier for the document. This ID must be unique within the <c>_index</c>.
 	/// </para>
 	/// </summary>
-	public string Id { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the index containing the document.
 	/// </para>
 	/// </summary>
-	public string Index { get; init; }
-	public Elastic.Clients.Elasticsearch.Ingest.Ingest Ingest { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Ingest.Ingest Ingest { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Additional metadata
 	/// </para>
 	/// </summary>
-	public IReadOnlyDictionary<string, string> Metadata { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, string>? Metadata { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Value used to send the document to a specific primary shard.
 	/// </para>
 	/// </summary>
-	public string? Routing { get; init; }
+	public string? Routing { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// JSON body for the document.
 	/// </para>
 	/// </summary>
-	public IReadOnlyDictionary<string, object> Source { get; init; }
-	public long? Version { get; init; }
-	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, object> Source { get; set; }
+	public long? Version { get; set; }
+	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }

@@ -17,368 +17,300 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframePreviewConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzedFields = System.Text.Json.JsonEncodedText.Encode("analyzed_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads");
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis> propAnalysis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields?> propAnalyzedFields = default;
+		LocalJsonValue<int?> propMaxNumThreads = default;
+		LocalJsonValue<string?> propModelMemoryLimit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalysis.TryReadProperty(ref reader, options, PropAnalysis, null))
+			{
+				continue;
+			}
+
+			if (propAnalyzedFields.TryReadProperty(ref reader, options, PropAnalyzedFields, null))
+			{
+				continue;
+			}
+
+			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, null))
+			{
+				continue;
+			}
+
+			if (propModelMemoryLimit.TryReadProperty(ref reader, options, PropModelMemoryLimit, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analysis = propAnalysis.Value,
+			AnalyzedFields = propAnalyzedFields.Value,
+			MaxNumThreads = propMaxNumThreads.Value,
+			ModelMemoryLimit = propModelMemoryLimit.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
+		writer.WriteProperty(options, PropAnalyzedFields, value.AnalyzedFields, null, null);
+		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, null);
+		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigConverter))]
 public sealed partial class DataframePreviewConfig
 {
-	[JsonInclude, JsonPropertyName("analysis")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
-	[JsonInclude, JsonPropertyName("analyzed_fields")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframePreviewConfig(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis analysis, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource source)
+	{
+		Analysis = analysis;
+		Source = source;
+	}
+#if NET7_0_OR_GREATER
+	public DataframePreviewConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframePreviewConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframePreviewConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
-	[JsonInclude, JsonPropertyName("max_num_threads")]
 	public int? MaxNumThreads { get; set; }
-	[JsonInclude, JsonPropertyName("model_memory_limit")]
 	public string? ModelMemoryLimit { get; set; }
-	[JsonInclude, JsonPropertyName("source")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
 }
 
-public sealed partial class DataframePreviewConfigDescriptor<TDocument> : SerializableDescriptor<DataframePreviewConfigDescriptor<TDocument>>
+public readonly partial struct DataframePreviewConfigDescriptor<TDocument>
 {
-	internal DataframePreviewConfigDescriptor(Action<DataframePreviewConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig Instance { get; init; }
 
-	public DataframePreviewConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframePreviewConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis AnalysisValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> AnalysisDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> AnalysisDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor AnalyzedFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> AnalyzedFieldsDescriptorAction { get; set; }
-	private int? MaxNumThreadsValue { get; set; }
-	private string? ModelMemoryLimitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
-
-	public DataframePreviewConfigDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis analysis)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframePreviewConfigDescriptor()
 	{
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = null;
-		AnalysisValue = analysis;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis value)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptorAction = null;
-		AnalysisDescriptor = descriptor;
-		return Self;
+		Instance.Analysis = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> Analysis(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> Analysis(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> action)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = configure;
-		return Self;
+		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? analyzedFields)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsValue = analyzedFields;
-		return Self;
+		Instance.AnalyzedFields = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> AnalyzedFields()
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsDescriptor = descriptor;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> AnalyzedFields(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = configure;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> MaxNumThreads(int? maxNumThreads)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> MaxNumThreads(int? value)
 	{
-		MaxNumThreadsValue = maxNumThreads;
-		return Self;
+		Instance.MaxNumThreads = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> ModelMemoryLimit(string? modelMemoryLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> ModelMemoryLimit(string? value)
 	{
-		ModelMemoryLimitValue = modelMemoryLimit;
-		return Self;
+		Instance.ModelMemoryLimit = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource source)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor<TDocument> Source(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>> action)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AnalysisDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-		}
-		else if (AnalysisDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>(AnalysisDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisValue, options);
-		}
-
-		if (AnalyzedFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsDescriptor, options);
-		}
-		else if (AnalyzedFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor(AnalyzedFieldsDescriptorAction), options);
-		}
-		else if (AnalyzedFieldsValue is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsValue, options);
-		}
-
-		if (MaxNumThreadsValue.HasValue)
-		{
-			writer.WritePropertyName("max_num_threads");
-			writer.WriteNumberValue(MaxNumThreadsValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
-		{
-			writer.WritePropertyName("model_memory_limit");
-			writer.WriteStringValue(ModelMemoryLimitValue);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DataframePreviewConfigDescriptor : SerializableDescriptor<DataframePreviewConfigDescriptor>
+public readonly partial struct DataframePreviewConfigDescriptor
 {
-	internal DataframePreviewConfigDescriptor(Action<DataframePreviewConfigDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig Instance { get; init; }
 
-	public DataframePreviewConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframePreviewConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis AnalysisValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor AnalysisDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> AnalysisDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor AnalyzedFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> AnalyzedFieldsDescriptorAction { get; set; }
-	private int? MaxNumThreadsValue { get; set; }
-	private string? ModelMemoryLimitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> SourceDescriptorAction { get; set; }
-
-	public DataframePreviewConfigDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis analysis)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframePreviewConfigDescriptor()
 	{
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = null;
-		AnalysisValue = analysis;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public DataframePreviewConfigDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis value)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptorAction = null;
-		AnalysisDescriptor = descriptor;
-		return Self;
+		Instance.Analysis = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor Analysis(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor Analysis(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> action)
 	{
-		AnalysisValue = null;
-		AnalysisDescriptor = null;
-		AnalysisDescriptorAction = configure;
-		return Self;
+		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor.Build(action);
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? analyzedFields)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor Analysis<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<T>> action)
 	{
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsValue = analyzedFields;
-		return Self;
+		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptorAction = null;
-		AnalyzedFieldsDescriptor = descriptor;
-		return Self;
+		Instance.AnalyzedFields = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor AnalyzedFields(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor AnalyzedFields()
 	{
-		AnalyzedFieldsValue = null;
-		AnalyzedFieldsDescriptor = null;
-		AnalyzedFieldsDescriptorAction = configure;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor MaxNumThreads(int? maxNumThreads)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
 	{
-		MaxNumThreadsValue = maxNumThreads;
-		return Self;
+		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor ModelMemoryLimit(string? modelMemoryLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor MaxNumThreads(int? value)
 	{
-		ModelMemoryLimitValue = modelMemoryLimit;
-		return Self;
+		Instance.MaxNumThreads = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource source)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor ModelMemoryLimit(string? value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.ModelMemoryLimit = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource value)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public DataframePreviewConfigDescriptor Source(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> action)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<T>> action)
 	{
-		writer.WriteStartObject();
-		if (AnalysisDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-		}
-		else if (AnalysisDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor(AnalysisDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("analysis");
-			JsonSerializer.Serialize(writer, AnalysisValue, options);
-		}
+		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<T>.Build(action);
+		return this;
+	}
 
-		if (AnalyzedFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsDescriptor, options);
-		}
-		else if (AnalyzedFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor(AnalyzedFieldsDescriptorAction), options);
-		}
-		else if (AnalyzedFieldsValue is not null)
-		{
-			writer.WritePropertyName("analyzed_fields");
-			JsonSerializer.Serialize(writer, AnalyzedFieldsValue, options);
-		}
-
-		if (MaxNumThreadsValue.HasValue)
-		{
-			writer.WritePropertyName("max_num_threads");
-			writer.WriteNumberValue(MaxNumThreadsValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
-		{
-			writer.WritePropertyName("model_memory_limit");
-			writer.WriteStringValue(ModelMemoryLimitValue);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

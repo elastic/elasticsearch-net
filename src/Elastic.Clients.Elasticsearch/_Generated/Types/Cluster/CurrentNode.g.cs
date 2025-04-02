@@ -17,28 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class CurrentNodeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.CurrentNode>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
+	private static readonly System.Text.Json.JsonEncodedText PropWeightRanking = System.Text.Json.JsonEncodedText.Encode("weight_ranking");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.CurrentNode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>> propAttributes = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>> propRoles = default;
+		LocalJsonValue<string> propTransportAddress = default;
+		LocalJsonValue<int> propWeightRanking = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAttributes.TryReadProperty(ref reader, options, PropAttributes, static System.Collections.Generic.IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propTransportAddress.TryReadProperty(ref reader, options, PropTransportAddress, null))
+			{
+				continue;
+			}
+
+			if (propWeightRanking.TryReadProperty(ref reader, options, PropWeightRanking, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.CurrentNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Attributes = propAttributes.Value,
+			Id = propId.Value,
+			Name = propName.Value,
+			Roles = propRoles.Value,
+			TransportAddress = propTransportAddress.Value,
+			WeightRanking = propWeightRanking.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.CurrentNode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, v, null));
+		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);
+		writer.WriteProperty(options, PropWeightRanking, value.WeightRanking, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.CurrentNodeConverter))]
 public sealed partial class CurrentNode
 {
-	[JsonInclude, JsonPropertyName("attributes")]
-	public IReadOnlyDictionary<string, string> Attributes { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("roles")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; init; }
-	[JsonInclude, JsonPropertyName("transport_address")]
-	public string TransportAddress { get; init; }
-	[JsonInclude, JsonPropertyName("weight_ranking")]
-	public int WeightRanking { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CurrentNode(System.Collections.Generic.IReadOnlyDictionary<string, string> attributes, string id, string name, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> roles, string transportAddress, int weightRanking)
+	{
+		Attributes = attributes;
+		Id = id;
+		Name = name;
+		Roles = roles;
+		TransportAddress = transportAddress;
+		WeightRanking = weightRanking;
+	}
+#if NET7_0_OR_GREATER
+	public CurrentNode()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CurrentNode()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CurrentNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string TransportAddress { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int WeightRanking { get; set; }
 }

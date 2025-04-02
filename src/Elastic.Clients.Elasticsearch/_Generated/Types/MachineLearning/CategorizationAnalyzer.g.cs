@@ -17,26 +17,88 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class CategorizationAnalyzer : Union<string, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition>
+internal sealed partial class CategorizationAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer>
 {
-	public CategorizationAnalyzer(string Name) : base(Name)
+	public override Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(reader.ReadValue<string>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerConverter))]
+public sealed partial class CategorizationAnalyzer : Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition>
+{
+	public CategorizationAnalyzer(string value) : base(value)
 	{
 	}
 
-	public CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition Definition) : base(Definition)
+	public CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition value) : base(value)
 	{
+	}
+
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(string value) => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(value);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition value) => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(value);
+}
+
+public readonly partial struct CategorizationAnalyzerBuilder
+{
+	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer Name(string value)
+	{
+		return new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer Definition(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition value)
+	{
+		return new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer Definition()
+	{
+		return new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor.Build(null));
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer Definition(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor>? action)
+	{
+		return new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor.Build(action));
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer Build(System.Func<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder();
+		return action.Invoke(builder);
 	}
 }

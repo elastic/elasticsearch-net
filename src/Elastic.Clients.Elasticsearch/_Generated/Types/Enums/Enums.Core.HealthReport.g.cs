@@ -17,125 +17,204 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-[JsonConverter(typeof(ImpactAreaConverter))]
-public enum ImpactArea
+internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus>
 {
-	[EnumMember(Value = "search")]
-	Search,
-	[EnumMember(Value = "ingest")]
-	Ingest,
-	[EnumMember(Value = "deployment_management")]
-	DeploymentManagement,
-	[EnumMember(Value = "backup")]
-	Backup
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green");
+	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
+	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
+	private static readonly System.Text.Json.JsonEncodedText MemberUnknown = System.Text.Json.JsonEncodedText.Encode("unknown");
 
-internal sealed class ImpactAreaConverter : JsonConverter<ImpactArea>
-{
-	public override ImpactArea Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberGreen))
 		{
-			case "search":
-				return ImpactArea.Search;
-			case "ingest":
-				return ImpactArea.Ingest;
-			case "deployment_management":
-				return ImpactArea.DeploymentManagement;
-			case "backup":
-				return ImpactArea.Backup;
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Green;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberYellow))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow;
+		}
+
+		if (reader.ValueTextEquals(MemberRed))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Red;
+		}
+
+		if (reader.ValueTextEquals(MemberUnknown))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unknown;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberGreen.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Green;
+		}
+
+		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow;
+		}
+
+		if (string.Equals(value, MemberRed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Red;
+		}
+
+		if (string.Equals(value, MemberUnknown.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unknown;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ImpactArea value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case ImpactArea.Search:
-				writer.WriteStringValue("search");
-				return;
-			case ImpactArea.Ingest:
-				writer.WriteStringValue("ingest");
-				return;
-			case ImpactArea.DeploymentManagement:
-				writer.WriteStringValue("deployment_management");
-				return;
-			case ImpactArea.Backup:
-				writer.WriteStringValue("backup");
-				return;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Green:
+				writer.WriteStringValue(MemberGreen);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow:
+				writer.WriteStringValue(MemberYellow);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Red:
+				writer.WriteStringValue(MemberRed);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unknown:
+				writer.WriteStringValue(MemberUnknown);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus)}'.");
 		}
+	}
 
-		writer.WriteNullValue();
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }
 
-[JsonConverter(typeof(IndicatorHealthStatusConverter))]
+internal sealed partial class ImpactAreaConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
+	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText MemberBackup = System.Text.Json.JsonEncodedText.Encode("backup");
+	private static readonly System.Text.Json.JsonEncodedText MemberDeploymentManagement = System.Text.Json.JsonEncodedText.Encode("deployment_management");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberSearch))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search;
+		}
+
+		if (reader.ValueTextEquals(MemberIngest))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest;
+		}
+
+		if (reader.ValueTextEquals(MemberBackup))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Backup;
+		}
+
+		if (reader.ValueTextEquals(MemberDeploymentManagement))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.DeploymentManagement;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search;
+		}
+
+		if (string.Equals(value, MemberIngest.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest;
+		}
+
+		if (string.Equals(value, MemberBackup.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Backup;
+		}
+
+		if (string.Equals(value, MemberDeploymentManagement.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.DeploymentManagement;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search:
+				writer.WriteStringValue(MemberSearch);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest:
+				writer.WriteStringValue(MemberIngest);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Backup:
+				writer.WriteStringValue(MemberBackup);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.DeploymentManagement:
+				writer.WriteStringValue(MemberDeploymentManagement);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatusConverter))]
 public enum IndicatorHealthStatus
 {
-	[EnumMember(Value = "yellow")]
+	[System.Runtime.Serialization.EnumMember(Value = "green")]
+	Green,
+	[System.Runtime.Serialization.EnumMember(Value = "yellow")]
 	Yellow,
-	[EnumMember(Value = "unknown")]
-	Unknown,
-	[EnumMember(Value = "red")]
+	[System.Runtime.Serialization.EnumMember(Value = "red")]
 	Red,
-	[EnumMember(Value = "green")]
-	Green
+	[System.Runtime.Serialization.EnumMember(Value = "unknown")]
+	Unknown
 }
 
-internal sealed class IndicatorHealthStatusConverter : JsonConverter<IndicatorHealthStatus>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactAreaConverter))]
+public enum ImpactArea
 {
-	public override IndicatorHealthStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "yellow":
-				return IndicatorHealthStatus.Yellow;
-			case "unknown":
-				return IndicatorHealthStatus.Unknown;
-			case "red":
-				return IndicatorHealthStatus.Red;
-			case "green":
-				return IndicatorHealthStatus.Green;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, IndicatorHealthStatus value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case IndicatorHealthStatus.Yellow:
-				writer.WriteStringValue("yellow");
-				return;
-			case IndicatorHealthStatus.Unknown:
-				writer.WriteStringValue("unknown");
-				return;
-			case IndicatorHealthStatus.Red:
-				writer.WriteStringValue("red");
-				return;
-			case IndicatorHealthStatus.Green:
-				writer.WriteStringValue("green");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "search")]
+	Search,
+	[System.Runtime.Serialization.EnumMember(Value = "ingest")]
+	Ingest,
+	[System.Runtime.Serialization.EnumMember(Value = "backup")]
+	Backup,
+	[System.Runtime.Serialization.EnumMember(Value = "deployment_management")]
+	DeploymentManagement
 }

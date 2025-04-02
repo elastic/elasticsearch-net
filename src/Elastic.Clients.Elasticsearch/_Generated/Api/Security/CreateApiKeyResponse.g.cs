@@ -17,24 +17,121 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class CreateApiKeyResponse : ElasticsearchResponse
+internal sealed partial class CreateApiKeyResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
+	private static readonly System.Text.Json.JsonEncodedText PropEncoded = System.Text.Json.JsonEncodedText.Encode("encoded");
+	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+
+	public override Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propApiKey = default;
+		LocalJsonValue<string> propEncoded = default;
+		LocalJsonValue<long?> propExpiration = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
+			{
+				continue;
+			}
+
+			if (propEncoded.TryReadProperty(ref reader, options, PropEncoded, null))
+			{
+				continue;
+			}
+
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ApiKey = propApiKey.Value,
+			Encoded = propEncoded.Value,
+			Expiration = propExpiration.Value,
+			Id = propId.Value,
+			Name = propName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
+		writer.WriteProperty(options, PropEncoded, value.Encoded, null, null);
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponseConverter))]
+public sealed partial class CreateApiKeyResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateApiKeyResponse(string apiKey, string encoded, string id, string name)
+	{
+		ApiKey = apiKey;
+		Encoded = encoded;
+		Id = id;
+		Name = name;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateApiKeyResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CreateApiKeyResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Generated API key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("api_key")]
-	public string ApiKey { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,30 +140,38 @@ public sealed partial class CreateApiKeyResponse : ElasticsearchResponse
 	/// by a colon (<c>:</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("encoded")]
-	public string Encoded { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Encoded { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Expiration in milliseconds for the API key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expiration")]
-	public long? Expiration { get; init; }
+	public long? Expiration { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Unique ID for this API key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the name for this API key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
 }

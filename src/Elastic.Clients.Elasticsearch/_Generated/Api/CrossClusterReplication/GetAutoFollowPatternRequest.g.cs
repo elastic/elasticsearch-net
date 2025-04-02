@@ -17,81 +17,217 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-public sealed partial class GetAutoFollowPatternRequestParameters : RequestParameters
+public sealed partial class GetAutoFollowPatternRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class GetAutoFollowPatternRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest>
+{
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Get auto-follow patterns.
+/// </para>
+/// <para>
 /// Get cross-cluster replication auto-follow patterns.
 /// </para>
 /// </summary>
-public sealed partial class GetAutoFollowPatternRequest : PlainRequest<GetAutoFollowPatternRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestConverter))]
+public sealed partial class GetAutoFollowPatternRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>
 {
-	public GetAutoFollowPatternRequest()
-	{
-	}
-
 	public GetAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetAutoFollowPatternRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetAutoFollowPatternRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationGetAutoFollowPattern;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.CrossClusterReplicationGetAutoFollowPattern;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.get_auto_follow_pattern";
+
+	/// <summary>
+	/// <para>
+	/// The auto-follow pattern collection that you want to retrieve.
+	/// If you do not specify a name, the API returns information for all collections.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get auto-follow patterns.
+/// </para>
+/// <para>
 /// Get cross-cluster replication auto-follow patterns.
 /// </para>
 /// </summary>
-public sealed partial class GetAutoFollowPatternRequestDescriptor : RequestDescriptor<GetAutoFollowPatternRequestDescriptor, GetAutoFollowPatternRequestParameters>
+public readonly partial struct GetAutoFollowPatternRequestDescriptor
 {
-	internal GetAutoFollowPatternRequestDescriptor(Action<GetAutoFollowPatternRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest Instance { get; init; }
 
-	public GetAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest(name);
 	}
 
 	public GetAutoFollowPatternRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationGetAutoFollowPattern;
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ccr.get_auto_follow_pattern";
-
-	public GetAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	/// <summary>
+	/// <para>
+	/// The auto-follow pattern collection that you want to retrieve.
+	/// If you do not specify a name, the API returns information for all collections.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		RouteValues.Optional("name", name);
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor(new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,44 +17,259 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-[JsonConverter(typeof(ApiKeyAggregationConverter))]
+internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText VariantCardinality = System.Text.Json.JsonEncodedText.Encode("cardinality");
+	private static readonly System.Text.Json.JsonEncodedText VariantComposite = System.Text.Json.JsonEncodedText.Encode("composite");
+	private static readonly System.Text.Json.JsonEncodedText VariantDateRange = System.Text.Json.JsonEncodedText.Encode("date_range");
+	private static readonly System.Text.Json.JsonEncodedText VariantFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText VariantFilters = System.Text.Json.JsonEncodedText.Encode("filters");
+	private static readonly System.Text.Json.JsonEncodedText VariantMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText VariantRange = System.Text.Json.JsonEncodedText.Encode("range");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+	private static readonly System.Text.Json.JsonEncodedText VariantValueCount = System.Text.Json.JsonEncodedText.Encode("value_count");
+
+	public override Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>?> propAggregations = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>(o, null, null)) || propAggregations.TryReadProperty(ref reader, options, PropAggregations1, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantCardinality))
+			{
+				variantType = VariantCardinality.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantComposite))
+			{
+				variantType = VariantComposite.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDateRange))
+			{
+				variantType = VariantDateRange.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFilter))
+			{
+				variantType = VariantFilter.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFilters))
+			{
+				variantType = VariantFilters.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMissing))
+			{
+				variantType = VariantMissing.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRange))
+			{
+				variantType = VariantRange.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerms))
+			{
+				variantType = VariantTerms.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantValueCount))
+			{
+				variantType = VariantValueCount.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant,
+			Aggregations = propAggregations.Value,
+			Meta = propMeta.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "cardinality":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation)value.Variant, null, null);
+				break;
+			case "composite":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation)value.Variant, null, null);
+				break;
+			case "date_range":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation)value.Variant, null, null);
+				break;
+			case "filter":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.ApiKeyQuery)value.Variant, null, null);
+				break;
+			case "filters":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation)value.Variant, null, null);
+				break;
+			case "missing":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation)value.Variant, null, null);
+				break;
+			case "range":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation)value.Variant, null, null);
+				break;
+			case "terms":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, null, null);
+				break;
+			case "value_count":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation)}'.");
+		}
+
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationConverter))]
 public sealed partial class ApiKeyAggregation
 {
-	internal ApiKeyAggregation(string variantName, object variant)
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public ApiKeyAggregation()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ApiKeyAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ApiKeyAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? Cardinality { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation>("cardinality"); set => SetVariant("cardinality", value); }
 
-	public static ApiKeyAggregation Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation cardinalityAggregation) => new ApiKeyAggregation("cardinality", cardinalityAggregation);
-	public static ApiKeyAggregation Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation compositeAggregation) => new ApiKeyAggregation("composite", compositeAggregation);
-	public static ApiKeyAggregation DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation dateRangeAggregation) => new ApiKeyAggregation("date_range", dateRangeAggregation);
-	public static ApiKeyAggregation Filter(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery apiKeyQueryContainer) => new ApiKeyAggregation("filter", apiKeyQueryContainer);
-	public static ApiKeyAggregation Filters(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation apiKeyFiltersAggregation) => new ApiKeyAggregation("filters", apiKeyFiltersAggregation);
-	public static ApiKeyAggregation Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation missingAggregation) => new ApiKeyAggregation("missing", missingAggregation);
-	public static ApiKeyAggregation Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation rangeAggregation) => new ApiKeyAggregation("range", rangeAggregation);
-	public static ApiKeyAggregation Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new ApiKeyAggregation("terms", termsAggregation);
-	public static ApiKeyAggregation ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation valueCountAggregation) => new ApiKeyAggregation("value_count", valueCountAggregation);
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation that creates composite buckets from different sources.
+	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? Composite { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation>("composite"); set => SetVariant("composite", value); }
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? DateRange { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation>("date_range"); set => SetVariant("date_range", value); }
+
+	/// <summary>
+	/// <para>
+	/// A single bucket aggregation that narrows the set of documents to those that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? Filter { get => GetVariant<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>("filter"); set => SetVariant("filter", value); }
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation? Filters { get => GetVariant<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation>("filters"); set => SetVariant("filters", value); }
+	public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation? Missing { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation>("missing"); set => SetVariant("missing", value); }
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? Range { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation>("range"); set => SetVariant("range", value); }
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>("terms"); set => SetVariant("terms", value); }
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? ValueCount { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation>("value_count"); set => SetVariant("value_count", value); }
 
 	/// <summary>
 	/// <para>
@@ -62,222 +277,330 @@ public sealed partial class ApiKeyAggregation
 	/// Only applies to bucket aggregations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggregations")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? Aggregations { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? Aggregations { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation { Cardinality = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation { Composite = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation { DateRange = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation { Filter = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation { Filters = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation { Missing = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation { Terms = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation { ValueCount = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class ApiKeyAggregationConverter : JsonConverter<ApiKeyAggregation>
+public readonly partial struct ApiKeyAggregationDescriptor<TDocument>
 {
-	public override ApiKeyAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApiKeyAggregationDescriptor(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? aggregationsValue = default;
-		IDictionary<string, object>? metaValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "aggregations")
-			{
-				aggregationsValue = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "meta")
-			{
-				metaValue = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "cardinality")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "composite")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "date_range")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "filter")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "filters")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "missing")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "range")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "terms")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "value_count")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'ApiKeyAggregation' from the response.");
-		}
-
-		var result = new ApiKeyAggregation(variantNameValue, variantValue);
-		result.Aggregations = aggregationsValue;
-		result.Meta = metaValue;
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, ApiKeyAggregation value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApiKeyAggregationDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "cardinality":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation)value.Variant, options);
-					break;
-				case "composite":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation)value.Variant, options);
-					break;
-				case "date_range":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation)value.Variant, options);
-					break;
-				case "filter":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(writer, (Elastic.Clients.Elasticsearch.Security.ApiKeyQuery)value.Variant, options);
-					break;
-				case "filters":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation>(writer, (Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation)value.Variant, options);
-					break;
-				case "missing":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation)value.Variant, options);
-					break;
-				case "range":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation)value.Variant, options);
-					break;
-				case "terms":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, options);
-					break;
-				case "value_count":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation)value.Variant, options);
-					break;
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class ApiKeyAggregationDescriptor<TDocument> : SerializableDescriptor<ApiKeyAggregationDescriptor<TDocument>>
-{
-	internal ApiKeyAggregationDescriptor(Action<ApiKeyAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public ApiKeyAggregationDescriptor() : base()
-	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	private ApiKeyAggregationDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Cardinality = value;
+		return this;
 	}
 
-	private ApiKeyAggregationDescriptor<TDocument> Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Cardinality()
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>> AggregationsValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Cardinality(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation that creates composite buckets from different sources.
+	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? value)
+	{
+		Instance.Composite = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation that creates composite buckets from different sources.
+	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Composite()
+	{
+		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation that creates composite buckets from different sources.
+	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Composite(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? value)
+	{
+		Instance.DateRange = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> DateRange()
+	{
+		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> DateRange(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single bucket aggregation that narrows the set of documents to those that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single bucket aggregation that narrows the set of documents to those that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation? value)
+	{
+		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filters()
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filters(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation? value)
+	{
+		Instance.Missing = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Missing()
+	{
+		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Missing(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Range()
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Range(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? value)
+	{
+		Instance.Terms = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Terms()
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? value)
+	{
+		Instance.ValueCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> ValueCount()
+	{
+		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> ValueCount(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -285,102 +608,11 @@ public sealed partial class ApiKeyAggregationDescriptor<TDocument> : Serializabl
 	/// Only applies to bucket aggregations.
 	/// </para>
 	/// </summary>
-	public ApiKeyAggregationDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? value)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>>());
-		return Self;
+		Instance.Aggregations = value;
+		return this;
 	}
-
-	public ApiKeyAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public ApiKeyAggregationDescriptor<TDocument> Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation cardinalityAggregation) => Set(cardinalityAggregation, "cardinality");
-	public ApiKeyAggregationDescriptor<TDocument> Cardinality(Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>> configure) => Set(configure, "cardinality");
-	public ApiKeyAggregationDescriptor<TDocument> Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation compositeAggregation) => Set(compositeAggregation, "composite");
-	public ApiKeyAggregationDescriptor<TDocument> Composite(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>> configure) => Set(configure, "composite");
-	public ApiKeyAggregationDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation dateRangeAggregation) => Set(dateRangeAggregation, "date_range");
-	public ApiKeyAggregationDescriptor<TDocument> DateRange(Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>> configure) => Set(configure, "date_range");
-	public ApiKeyAggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery apiKeyQueryContainer) => Set(apiKeyQueryContainer, "filter");
-	public ApiKeyAggregationDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>> configure) => Set(configure, "filter");
-	public ApiKeyAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation apiKeyFiltersAggregation) => Set(apiKeyFiltersAggregation, "filters");
-	public ApiKeyAggregationDescriptor<TDocument> Filters(Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>> configure) => Set(configure, "filters");
-	public ApiKeyAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation missingAggregation) => Set(missingAggregation, "missing");
-	public ApiKeyAggregationDescriptor<TDocument> Missing(Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>> configure) => Set(configure, "missing");
-	public ApiKeyAggregationDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation rangeAggregation) => Set(rangeAggregation, "range");
-	public ApiKeyAggregationDescriptor<TDocument> Range(Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>> configure) => Set(configure, "range");
-	public ApiKeyAggregationDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
-	public ApiKeyAggregationDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
-	public ApiKeyAggregationDescriptor<TDocument> ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation valueCountAggregation) => Set(valueCountAggregation, "value_count");
-	public ApiKeyAggregationDescriptor<TDocument> ValueCount(Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>> configure) => Set(configure, "value_count");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class ApiKeyAggregationDescriptor : SerializableDescriptor<ApiKeyAggregationDescriptor>
-{
-	internal ApiKeyAggregationDescriptor(Action<ApiKeyAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public ApiKeyAggregationDescriptor() : base()
-	{
-	}
-
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private ApiKeyAggregationDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
-	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
-	}
-
-	private ApiKeyAggregationDescriptor Set(object variant, string variantName)
-	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
-	}
-
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor> AggregationsValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -388,65 +620,559 @@ public sealed partial class ApiKeyAggregationDescriptor : SerializableDescriptor
 	/// Only applies to bucket aggregations.
 	/// </para>
 	/// </summary>
-	public ApiKeyAggregationDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Aggregations()
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor>());
-		return Self;
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>.Build(null);
+		return this;
 	}
 
-	public ApiKeyAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	/// <summary>
+	/// <para>
+	/// Sub-aggregations for this aggregation.
+	/// Only applies to bucket aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>>? action)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>.Build(action);
+		return this;
 	}
 
-	public ApiKeyAggregationDescriptor Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation cardinalityAggregation) => Set(cardinalityAggregation, "cardinality");
-	public ApiKeyAggregationDescriptor Cardinality<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor> configure) => Set(configure, "cardinality");
-	public ApiKeyAggregationDescriptor Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation compositeAggregation) => Set(compositeAggregation, "composite");
-	public ApiKeyAggregationDescriptor Composite<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor> configure) => Set(configure, "composite");
-	public ApiKeyAggregationDescriptor DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation dateRangeAggregation) => Set(dateRangeAggregation, "date_range");
-	public ApiKeyAggregationDescriptor DateRange<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor> configure) => Set(configure, "date_range");
-	public ApiKeyAggregationDescriptor Filter(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery apiKeyQueryContainer) => Set(apiKeyQueryContainer, "filter");
-	public ApiKeyAggregationDescriptor Filter<TDocument>(Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor> configure) => Set(configure, "filter");
-	public ApiKeyAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation apiKeyFiltersAggregation) => Set(apiKeyFiltersAggregation, "filters");
-	public ApiKeyAggregationDescriptor Filters<TDocument>(Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor> configure) => Set(configure, "filters");
-	public ApiKeyAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation missingAggregation) => Set(missingAggregation, "missing");
-	public ApiKeyAggregationDescriptor Missing<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor> configure) => Set(configure, "missing");
-	public ApiKeyAggregationDescriptor Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation rangeAggregation) => Set(rangeAggregation, "range");
-	public ApiKeyAggregationDescriptor Range<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor> configure) => Set(configure, "range");
-	public ApiKeyAggregationDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
-	public ApiKeyAggregationDescriptor Terms<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
-	public ApiKeyAggregationDescriptor ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation valueCountAggregation) => Set(valueCountAggregation, "value_count");
-	public ApiKeyAggregationDescriptor ValueCount<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor> configure) => Set(configure, "value_count");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> AddAggregation(string key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation value)
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>.Build(action));
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Meta = value;
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct ApiKeyAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApiKeyAggregationDescriptor(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ApiKeyAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? value)
+	{
+		Instance.Cardinality = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Cardinality()
+	{
+		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Cardinality(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor>? action)
+	{
+		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Cardinality<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<T>>? action)
+	{
+		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation that creates composite buckets from different sources.
+	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? value)
+	{
+		Instance.Composite = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation that creates composite buckets from different sources.
+	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Composite()
+	{
+		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation that creates composite buckets from different sources.
+	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Composite(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor>? action)
+	{
+		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation that creates composite buckets from different sources.
+	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Composite<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<T>>? action)
+	{
+		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? value)
+	{
+		Instance.DateRange = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor DateRange()
+	{
+		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor DateRange(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor>? action)
+	{
+		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor DateRange<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<T>>? action)
+	{
+		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single bucket aggregation that narrows the set of documents to those that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filter(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single bucket aggregation that narrows the set of documents to those that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single bucket aggregation that narrows the set of documents to those that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<T>> action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation? value)
+	{
+		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filters()
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filters(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor>? action)
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filters<T>(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<T>>? action)
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation? value)
+	{
+		Instance.Missing = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Missing()
+	{
+		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Missing(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor>? action)
+	{
+		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Missing<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<T>>? action)
+	{
+		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Range()
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Range(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor>? action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Range<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<T>>? action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? value)
+	{
+		Instance.Terms = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Terms()
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor>? action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<T>>? action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? value)
+	{
+		Instance.ValueCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor ValueCount()
+	{
+		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor ValueCount(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor>? action)
+	{
+		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor ValueCount<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<T>>? action)
+	{
+		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sub-aggregations for this aggregation.
+	/// Only applies to bucket aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? value)
+	{
+		Instance.Aggregations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sub-aggregations for this aggregation.
+	/// Only applies to bucket aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations()
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sub-aggregations for this aggregation.
+	/// Only applies to bucket aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sub-aggregations for this aggregation.
+	/// Only applies to bucket aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<T>>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor AddAggregation(string key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor AddAggregation<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<T>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Meta = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor(new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,21 +17,62 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class UpdateTrainedModelDeploymentRequestParameters : RequestParameters
+public sealed partial class UpdateTrainedModelDeploymentRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class UpdateTrainedModelDeploymentRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("number_of_allocations");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings?> propAdaptiveAllocations = default;
+		LocalJsonValue<int?> propNumberOfAllocations = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAdaptiveAllocations.TryReadProperty(ref reader, options, PropAdaptiveAllocations, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfAllocations.TryReadProperty(ref reader, options, PropNumberOfAllocations, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AdaptiveAllocations = propAdaptiveAllocations.Value,
+			NumberOfAllocations = propNumberOfAllocations.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAdaptiveAllocations, value.AdaptiveAllocations, null, null);
+		writer.WriteProperty(options, PropNumberOfAllocations, value.NumberOfAllocations, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -39,19 +80,51 @@ public sealed partial class UpdateTrainedModelDeploymentRequestParameters : Requ
 /// Update a trained model deployment.
 /// </para>
 /// </summary>
-public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<UpdateTrainedModelDeploymentRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestConverter))]
+public sealed partial class UpdateTrainedModelDeploymentRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public UpdateTrainedModelDeploymentRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateTrainedModelDeployment;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningUpdateTrainedModelDeployment;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.update_trained_model_deployment";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model. Currently, only PyTorch models are supported.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Adaptive allocations configuration. When enabled, the number of allocations
+	/// is set based on the current load.
+	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -61,9 +134,9 @@ public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<U
 	/// Increasing this value generally increases the throughput.
 	/// If this setting is greater than the number of hardware threads
 	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_allocations")]
 	public int? NumberOfAllocations { get; set; }
 }
 
@@ -72,29 +145,66 @@ public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<U
 /// Update a trained model deployment.
 /// </para>
 /// </summary>
-public sealed partial class UpdateTrainedModelDeploymentRequestDescriptor : RequestDescriptor<UpdateTrainedModelDeploymentRequestDescriptor, UpdateTrainedModelDeploymentRequestParameters>
+public readonly partial struct UpdateTrainedModelDeploymentRequestDescriptor
 {
-	internal UpdateTrainedModelDeploymentRequestDescriptor(Action<UpdateTrainedModelDeploymentRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest Instance { get; init; }
 
-	public UpdateTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateTrainedModelDeployment;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.update_trained_model_deployment";
-
-	public UpdateTrainedModelDeploymentRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public UpdateTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest(modelId);
 	}
 
-	private int? NumberOfAllocationsValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UpdateTrainedModelDeploymentRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model. Currently, only PyTorch models are supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Adaptive allocations configuration. When enabled, the number of allocations
+	/// is set based on the current load.
+	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? value)
+	{
+		Instance.AdaptiveAllocations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Adaptive allocations configuration. When enabled, the number of allocations
+	/// is set based on the current load.
+	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor> action)
+	{
+		Instance.AdaptiveAllocations = Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -104,23 +214,62 @@ public sealed partial class UpdateTrainedModelDeploymentRequestDescriptor : Requ
 	/// Increasing this value generally increases the throughput.
 	/// If this setting is greater than the number of hardware threads
 	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
 	/// </para>
 	/// </summary>
-	public UpdateTrainedModelDeploymentRequestDescriptor NumberOfAllocations(int? numberOfAllocations)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor NumberOfAllocations(int? value)
 	{
-		NumberOfAllocationsValue = numberOfAllocations;
-		return Self;
+		Instance.NumberOfAllocations = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (NumberOfAllocationsValue.HasValue)
-		{
-			writer.WritePropertyName("number_of_allocations");
-			writer.WriteNumberValue(NumberOfAllocationsValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

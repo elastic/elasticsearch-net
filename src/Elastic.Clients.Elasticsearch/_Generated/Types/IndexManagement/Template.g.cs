@@ -17,23 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class TemplateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Template>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.Template Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> propAliases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping> propMappings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings> propSettings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propMappings.TryReadProperty(ref reader, options, PropMappings, null))
+			{
+				continue;
+			}
+
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.Template(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aliases = propAliases.Value,
+			Mappings = propMappings.Value,
+			Settings = propSettings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.Template value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, v, null, null));
+		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.TemplateConverter))]
 public sealed partial class Template
 {
-	[JsonInclude, JsonPropertyName("aliases")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Alias))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; init; }
-	[JsonInclude, JsonPropertyName("mappings")]
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
-	[JsonInclude, JsonPropertyName("settings")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Template(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias> aliases, Elastic.Clients.Elasticsearch.Mapping.TypeMapping mappings, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings)
+	{
+		Aliases = aliases;
+		Mappings = mappings;
+		Settings = settings;
+	}
+#if NET7_0_OR_GREATER
+	public Template()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Template()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Template(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 }

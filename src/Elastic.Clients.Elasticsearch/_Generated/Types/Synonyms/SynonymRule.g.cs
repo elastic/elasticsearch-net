@@ -17,25 +17,91 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+internal sealed partial class SynonymRuleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms");
+
+	public override Elastic.Clients.Elasticsearch.Synonyms.SynonymRule Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<string> propSynonyms = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propSynonyms.TryReadProperty(ref reader, options, PropSynonyms, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Synonyms.SynonymRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Synonyms = propSynonyms.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Synonyms.SynonymRule value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropSynonyms, value.Synonyms, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleConverter))]
 public sealed partial class SynonymRule
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SynonymRule(string synonyms)
+	{
+		Synonyms = synonyms;
+	}
+#if NET7_0_OR_GREATER
+	public SynonymRule()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SynonymRule()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SynonymRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The identifier for the synonym rule.
 	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -43,20 +109,31 @@ public sealed partial class SynonymRule
 	/// The synonyms that conform the synonym rule in Solr format.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("synonyms")]
-	public string Synonyms { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Synonyms { get; set; }
 }
 
-public sealed partial class SynonymRuleDescriptor : SerializableDescriptor<SynonymRuleDescriptor>
+public readonly partial struct SynonymRuleDescriptor
 {
-	internal SynonymRuleDescriptor(Action<SynonymRuleDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Synonyms.SynonymRule Instance { get; init; }
 
-	public SynonymRuleDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SynonymRuleDescriptor(Elastic.Clients.Elasticsearch.Synonyms.SynonymRule instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private string SynonymsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SynonymRuleDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Synonyms.SynonymRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor(Elastic.Clients.Elasticsearch.Synonyms.SynonymRule instance) => new Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.SynonymRule(Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -64,10 +141,10 @@ public sealed partial class SynonymRuleDescriptor : SerializableDescriptor<Synon
 	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
 	/// </para>
 	/// </summary>
-	public SynonymRuleDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -75,23 +152,17 @@ public sealed partial class SynonymRuleDescriptor : SerializableDescriptor<Synon
 	/// The synonyms that conform the synonym rule in Solr format.
 	/// </para>
 	/// </summary>
-	public SynonymRuleDescriptor Synonyms(string synonyms)
+	public Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor Synonyms(string value)
 	{
-		SynonymsValue = synonyms;
-		return Self;
+		Instance.Synonyms = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Synonyms.SynonymRule Build(System.Action<Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		writer.WritePropertyName("synonyms");
-		writer.WriteStringValue(SynonymsValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor(new Elastic.Clients.Elasticsearch.Synonyms.SynonymRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -8,20 +8,32 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class FunctionScore
 {
-	internal FunctionScore() { }
-
 	/// <summary>
 	/// The weight score allows you to multiply the score by the provided weight.
 	/// </summary>
 	public static FunctionScore WeightScore(double weight) => new() { Weight = weight };
 }
 
-public partial class FunctionScoreDescriptor<TDocument>
+public readonly partial struct FunctionScoreDescriptor<TDocument>
 {
-	public FunctionScoreDescriptor<TDocument> WeightScore(double weight) => Set(null, null).Weight(weight);
+	/// <summary>
+	/// The weight score allows you to multiply the score by the provided weight.
+	/// </summary>
+	public FunctionScoreDescriptor<TDocument> WeightScore(double weight)
+	{
+		Instance.Weight = weight;
+		return this;
+	}
 }
 
-public partial class FunctionScoreDescriptor
+public readonly partial struct FunctionScoreDescriptor
 {
-	public FunctionScoreDescriptor WeightScore(double weight) => Set(null, null).Weight(weight);
+	/// <summary>
+	/// The weight score allows you to multiply the score by the provided weight.
+	/// </summary>
+	public FunctionScoreDescriptor WeightScore(double weight)
+	{
+		Instance.Weight = weight;
+		return this;
+	}
 }

@@ -17,25 +17,145 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class UrlDecodeProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Field = propField.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			OnFailure = propOnFailure.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorConverter))]
 public sealed partial class UrlDecodeProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public UrlDecodeProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UrlDecodeProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -43,23 +163,24 @@ public sealed partial class UrlDecodeProcessor
 	/// The field to decode.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -67,7 +188,6 @@ public sealed partial class UrlDecodeProcessor
 	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -75,8 +195,7 @@ public sealed partial class UrlDecodeProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -84,7 +203,6 @@ public sealed partial class UrlDecodeProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -93,31 +211,27 @@ public sealed partial class UrlDecodeProcessor
 	/// By default, the field is updated in-place.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(UrlDecodeProcessor urlDecodeProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.UrlDecode(urlDecodeProcessor);
 }
 
-public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : SerializableDescriptor<UrlDecodeProcessorDescriptor<TDocument>>
+public readonly partial struct UrlDecodeProcessorDescriptor<TDocument>
 {
-	internal UrlDecodeProcessorDescriptor(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor Instance { get; init; }
 
-	public UrlDecodeProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UrlDecodeProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UrlDecodeProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -125,10 +239,10 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -136,10 +250,10 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// The field to decode.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -147,21 +261,10 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// The field to decode.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to decode.
-	/// </para>
-	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -169,10 +272,32 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -180,10 +305,10 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -191,10 +316,10 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -202,40 +327,60 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public UrlDecodeProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public UrlDecodeProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public UrlDecodeProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -244,10 +389,10 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -256,10 +401,10 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// By default, the field is updated in-place.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -268,119 +413,39 @@ public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : Serializab
 	/// By default, the field is updated in-place.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
-	public UrlDecodeProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument>> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescriptor<UrlDecodeProcessorDescriptor>
+public readonly partial struct UrlDecodeProcessorDescriptor
 {
-	internal UrlDecodeProcessorDescriptor(Action<UrlDecodeProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor Instance { get; init; }
 
-	public UrlDecodeProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UrlDecodeProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UrlDecodeProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -388,10 +453,10 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -399,10 +464,10 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// The field to decode.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -410,21 +475,10 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// The field to decode.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to decode.
-	/// </para>
-	/// </summary>
-	public UrlDecodeProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -432,10 +486,32 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -443,10 +519,10 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -454,10 +530,10 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -465,40 +541,88 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public UrlDecodeProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
 	}
 
-	public UrlDecodeProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
 	}
 
-	public UrlDecodeProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -507,10 +631,10 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -519,10 +643,10 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// By default, the field is updated in-place.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -531,96 +655,17 @@ public sealed partial class UrlDecodeProcessorDescriptor : SerializableDescripto
 	/// By default, the field is updated in-place.
 	/// </para>
 	/// </summary>
-	public UrlDecodeProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
-	public UrlDecodeProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

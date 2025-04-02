@@ -17,62 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-[JsonConverter(typeof(XPackCategoryConverter))]
-public enum XPackCategory
+internal sealed partial class XPackCategoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>
 {
-	[EnumMember(Value = "license")]
-	License,
-	[EnumMember(Value = "features")]
-	Features,
-	[EnumMember(Value = "build")]
-	Build
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberBuild = System.Text.Json.JsonEncodedText.Encode("build");
+	private static readonly System.Text.Json.JsonEncodedText MemberFeatures = System.Text.Json.JsonEncodedText.Encode("features");
+	private static readonly System.Text.Json.JsonEncodedText MemberLicense = System.Text.Json.JsonEncodedText.Encode("license");
 
-internal sealed class XPackCategoryConverter : JsonConverter<XPackCategory>
-{
-	public override XPackCategory Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Xpack.XPackCategory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberBuild))
 		{
-			case "license":
-				return XPackCategory.License;
-			case "features":
-				return XPackCategory.Features;
-			case "build":
-				return XPackCategory.Build;
+			return Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Build;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberFeatures))
+		{
+			return Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Features;
+		}
+
+		if (reader.ValueTextEquals(MemberLicense))
+		{
+			return Elastic.Clients.Elasticsearch.Xpack.XPackCategory.License;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberBuild.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Build;
+		}
+
+		if (string.Equals(value, MemberFeatures.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Features;
+		}
+
+		if (string.Equals(value, MemberLicense.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Xpack.XPackCategory.License;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Xpack.XPackCategory)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, XPackCategory value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.XPackCategory value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case XPackCategory.License:
-				writer.WriteStringValue("license");
-				return;
-			case XPackCategory.Features:
-				writer.WriteStringValue("features");
-				return;
-			case XPackCategory.Build:
-				writer.WriteStringValue("build");
-				return;
+			case Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Build:
+				writer.WriteStringValue(MemberBuild);
+				break;
+			case Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Features:
+				writer.WriteStringValue(MemberFeatures);
+				break;
+			case Elastic.Clients.Elasticsearch.Xpack.XPackCategory.License:
+				writer.WriteStringValue(MemberLicense);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Xpack.XPackCategory)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
+
+	public override Elastic.Clients.Elasticsearch.Xpack.XPackCategory ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.XPackCategory value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.XPackCategoryConverter))]
+public enum XPackCategory
+{
+	[System.Runtime.Serialization.EnumMember(Value = "build")]
+	Build,
+	[System.Runtime.Serialization.EnumMember(Value = "features")]
+	Features,
+	[System.Runtime.Serialization.EnumMember(Value = "license")]
+	License
 }

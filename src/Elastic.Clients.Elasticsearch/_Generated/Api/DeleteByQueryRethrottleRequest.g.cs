@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class DeleteByQueryRethrottleRequestParameters : RequestParameters
+public sealed partial class DeleteByQueryRethrottleRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -39,6 +32,35 @@ public sealed partial class DeleteByQueryRethrottleRequestParameters : RequestPa
 	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
+}
+
+internal sealed partial class DeleteByQueryRethrottleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest>
+{
+	public override Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -50,15 +72,27 @@ public sealed partial class DeleteByQueryRethrottleRequestParameters : RequestPa
 /// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 /// </para>
 /// </summary>
-public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<DeleteByQueryRethrottleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestConverter))]
+public sealed partial class DeleteByQueryRethrottleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.TaskId taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteByQueryRethrottleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQueryRethrottle;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceDeleteByQueryRethrottle;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -66,11 +100,21 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 
 	/// <summary>
 	/// <para>
+	/// The ID for the task.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.TaskId TaskId { get => P<Elastic.Clients.Elasticsearch.TaskId>("task_id"); set => PR("task_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The throttle for this request in sub-requests per second.
 	/// To disable throttling, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
@@ -83,31 +127,100 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 /// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 /// </para>
 /// </summary>
-public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDescriptor<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleRequestParameters>
+public readonly partial struct DeleteByQueryRethrottleRequestDescriptor
 {
-	internal DeleteByQueryRethrottleRequestDescriptor(Action<DeleteByQueryRethrottleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest Instance { get; init; }
 
-	public DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId taskId) : base(r => r.Required("task_id", taskId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQueryRethrottle;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "delete_by_query_rethrottle";
-
-	public DeleteByQueryRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-
-	public DeleteByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId taskId)
+	public DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId taskId)
 	{
-		RouteValues.Required("task_id", taskId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest(taskId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteByQueryRethrottleRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest instance) => new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The ID for the task.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId value)
+	{
+		Instance.TaskId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// To disable throttling, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor RequestsPerSecond(float? value)
+	{
+		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest Build(System.Action<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor(new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,28 +17,189 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class ShardsStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ShardsStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDone = System.Text.Json.JsonEncodedText.Encode("done");
+	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+	private static readonly System.Text.Json.JsonEncodedText PropFinalizing = System.Text.Json.JsonEncodedText.Encode("finalizing");
+	private static readonly System.Text.Json.JsonEncodedText PropInitializing = System.Text.Json.JsonEncodedText.Encode("initializing");
+	private static readonly System.Text.Json.JsonEncodedText PropStarted = System.Text.Json.JsonEncodedText.Encode("started");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.ShardsStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propDone = default;
+		LocalJsonValue<long> propFailed = default;
+		LocalJsonValue<long> propFinalizing = default;
+		LocalJsonValue<long> propInitializing = default;
+		LocalJsonValue<long> propStarted = default;
+		LocalJsonValue<long> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDone.TryReadProperty(ref reader, options, PropDone, null))
+			{
+				continue;
+			}
+
+			if (propFailed.TryReadProperty(ref reader, options, PropFailed, null))
+			{
+				continue;
+			}
+
+			if (propFinalizing.TryReadProperty(ref reader, options, PropFinalizing, null))
+			{
+				continue;
+			}
+
+			if (propInitializing.TryReadProperty(ref reader, options, PropInitializing, null))
+			{
+				continue;
+			}
+
+			if (propStarted.TryReadProperty(ref reader, options, PropStarted, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.ShardsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Done = propDone.Value,
+			Failed = propFailed.Value,
+			Finalizing = propFinalizing.Value,
+			Initializing = propInitializing.Value,
+			Started = propStarted.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.ShardsStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDone, value.Done, null, null);
+		writer.WriteProperty(options, PropFailed, value.Failed, null, null);
+		writer.WriteProperty(options, PropFinalizing, value.Finalizing, null, null);
+		writer.WriteProperty(options, PropInitializing, value.Initializing, null, null);
+		writer.WriteProperty(options, PropStarted, value.Started, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsConverter))]
 public sealed partial class ShardsStats
 {
-	[JsonInclude, JsonPropertyName("done")]
-	public long Done { get; init; }
-	[JsonInclude, JsonPropertyName("failed")]
-	public long Failed { get; init; }
-	[JsonInclude, JsonPropertyName("finalizing")]
-	public long Finalizing { get; init; }
-	[JsonInclude, JsonPropertyName("initializing")]
-	public long Initializing { get; init; }
-	[JsonInclude, JsonPropertyName("started")]
-	public long Started { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public long Total { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardsStats(long done, long failed, long finalizing, long initializing, long started, long total)
+	{
+		Done = done;
+		Failed = failed;
+		Finalizing = finalizing;
+		Initializing = initializing;
+		Started = started;
+		Total = total;
+	}
+#if NET7_0_OR_GREATER
+	public ShardsStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardsStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shards that initialized, started, and finalized successfully.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Done { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of shards that failed to be included in the snapshot.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Failed { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of shards that are finalizing but are not done.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Finalizing { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of shards that are still initializing.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Initializing { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of shards that have started but are not finalized.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Started { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The total number of shards included in the snapshot.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Total { get; set; }
 }

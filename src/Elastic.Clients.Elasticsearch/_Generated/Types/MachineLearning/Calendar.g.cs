@@ -17,39 +17,121 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class CalendarConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Calendar>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCalendarId = System.Text.Json.JsonEncodedText.Encode("calendar_id");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropJobIds = System.Text.Json.JsonEncodedText.Encode("job_ids");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Calendar Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propCalendarId = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propJobIds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCalendarId.TryReadProperty(ref reader, options, PropCalendarId, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propJobIds.TryReadProperty(ref reader, options, PropJobIds, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Calendar(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CalendarId = propCalendarId.Value,
+			Description = propDescription.Value,
+			JobIds = propJobIds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Calendar value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCalendarId, value.CalendarId, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropJobIds, value.JobIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.CalendarConverter))]
 public sealed partial class Calendar
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Calendar(string calendarId, System.Collections.Generic.IReadOnlyCollection<string> jobIds)
+	{
+		CalendarId = calendarId;
+		JobIds = jobIds;
+	}
+#if NET7_0_OR_GREATER
+	public Calendar()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Calendar()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Calendar(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A string that uniquely identifies a calendar.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("calendar_id")]
-	public string CalendarId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string CalendarId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A description of the calendar.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
-	public string? Description { get; init; }
+	public string? Description { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of anomaly detection job identifiers.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("job_ids")]
-	public IReadOnlyCollection<string> JobIds { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> JobIds { get; set; }
 }

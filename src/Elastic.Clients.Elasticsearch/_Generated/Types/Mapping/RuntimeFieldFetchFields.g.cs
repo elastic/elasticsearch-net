@@ -17,120 +17,190 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class RuntimeFieldFetchFieldsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options, null);
+			return new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+			{
+				Field = value
+			};
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<string?> propFormat = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			Format = propFormat.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsConverter))]
 public sealed partial class RuntimeFieldFetchFields
 {
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public RuntimeFieldFetchFields()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RuntimeFieldFetchFields()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? Format { get; set; }
 }
 
-public sealed partial class RuntimeFieldFetchFieldsDescriptor<TDocument> : SerializableDescriptor<RuntimeFieldFetchFieldsDescriptor<TDocument>>
+public readonly partial struct RuntimeFieldFetchFieldsDescriptor<TDocument>
 {
-	internal RuntimeFieldFetchFieldsDescriptor(Action<RuntimeFieldFetchFieldsDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields Instance { get; init; }
 
-	public RuntimeFieldFetchFieldsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldFetchFieldsDescriptor(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-
-	public RuntimeFieldFetchFieldsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldFetchFieldsDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public RuntimeFieldFetchFieldsDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields instance) => new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public RuntimeFieldFetchFieldsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public RuntimeFieldFetchFieldsDescriptor<TDocument> Format(string? format)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument> Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RuntimeFieldFetchFieldsDescriptor : SerializableDescriptor<RuntimeFieldFetchFieldsDescriptor>
+public readonly partial struct RuntimeFieldFetchFieldsDescriptor
 {
-	internal RuntimeFieldFetchFieldsDescriptor(Action<RuntimeFieldFetchFieldsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields Instance { get; init; }
 
-	public RuntimeFieldFetchFieldsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldFetchFieldsDescriptor(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-
-	public RuntimeFieldFetchFieldsDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuntimeFieldFetchFieldsDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public RuntimeFieldFetchFieldsDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields instance) => new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public RuntimeFieldFetchFieldsDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public RuntimeFieldFetchFieldsDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor(new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

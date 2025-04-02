@@ -17,18 +17,131 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class NestedQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
+	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<bool?> propIgnoreUnmapped = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.InnerHits?> propInnerHits = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propPath = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode?> propScoreMode = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			{
+				continue;
+			}
+
+			if (propInnerHits.TryReadProperty(ref reader, options, PropInnerHits, null))
+			{
+				continue;
+			}
+
+			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propScoreMode.TryReadProperty(ref reader, options, PropScoreMode, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			IgnoreUnmapped = propIgnoreUnmapped.Value,
+			InnerHits = propInnerHits.Value,
+			Path = propPath.Value,
+			Query = propQuery.Value,
+			QueryName = propQueryName.Value,
+			ScoreMode = propScoreMode.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, null);
+		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropScoreMode, value.ScoreMode, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryConverter))]
 public sealed partial class NestedQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedQuery(Elastic.Clients.Elasticsearch.Field path, Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	{
+		Path = path;
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public NestedQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NestedQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NestedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +150,6 @@ public sealed partial class NestedQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,7 +157,6 @@ public sealed partial class NestedQuery
 	/// Indicates whether to ignore an unmapped path and not return any documents instead of an error.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
 
 	/// <summary>
@@ -53,7 +164,6 @@ public sealed partial class NestedQuery
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
 	/// <summary>
@@ -61,17 +171,22 @@ public sealed partial class NestedQuery
 	/// Path to the nested object you wish to search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("path")]
-	public Elastic.Clients.Elasticsearch.Field Path { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Path { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Query you wish to run on nested objects in the path.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -79,31 +194,27 @@ public sealed partial class NestedQuery
 	/// How scores for matching child objects affect the root parent document’s relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(NestedQuery nestedQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Nested(nestedQuery);
 }
 
-public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescriptor<NestedQueryDescriptor<TDocument>>
+public readonly partial struct NestedQueryDescriptor<TDocument>
 {
-	internal NestedQueryDescriptor(Action<NestedQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery Instance { get; init; }
 
-	public NestedQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery(Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -113,10 +224,10 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -124,10 +235,10 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	/// Indicates whether to ignore an unmapped path and not return any documents instead of an error.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
 	/// <summary>
@@ -135,28 +246,32 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsValue = innerHits;
-		return Self;
+		Instance.InnerHits = value;
+		return this;
 	}
 
-	public NestedQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> InnerHits()
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsDescriptor = descriptor;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public NestedQueryDescriptor<TDocument> InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>>? action)
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = configure;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -164,10 +279,10 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	/// Path to the nested object you wish to search.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field path)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -175,21 +290,10 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	/// Path to the nested object you wish to search.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Path(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PathValue = path;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Path to the nested object you wish to search.
-	/// </para>
-	/// </summary>
-	public NestedQueryDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
-	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -197,34 +301,27 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	/// Query you wish to run on nested objects in the path.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public NestedQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Query you wish to run on nested objects in the path.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public NestedQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	public NestedQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -232,96 +329,39 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	/// How scores for matching child objects affect the root parent document’s relevance score.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? value)
 	{
-		ScoreModeValue = scoreMode;
-		return Self;
+		Instance.ScoreMode = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (InnerHitsDescriptor is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
-		}
-		else if (InnerHitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
-		}
-		else if (InnerHitsValue is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsValue, options);
-		}
-
-		writer.WritePropertyName("path");
-		JsonSerializer.Serialize(writer, PathValue, options);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ScoreModeValue is not null)
-		{
-			writer.WritePropertyName("score_mode");
-			JsonSerializer.Serialize(writer, ScoreModeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class NestedQueryDescriptor : SerializableDescriptor<NestedQueryDescriptor>
+public readonly partial struct NestedQueryDescriptor
 {
-	internal NestedQueryDescriptor(Action<NestedQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery Instance { get; init; }
 
-	public NestedQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NestedQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery(Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -331,10 +371,10 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -342,10 +382,10 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	/// Indicates whether to ignore an unmapped path and not return any documents instead of an error.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
 	/// <summary>
@@ -353,28 +393,43 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	/// If defined, each search hit will contain inner hits.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsValue = innerHits;
-		return Self;
+		Instance.InnerHits = value;
+		return this;
 	}
 
-	public NestedQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor InnerHits()
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptorAction = null;
-		InnerHitsDescriptor = descriptor;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(null);
+		return this;
 	}
 
-	public NestedQueryDescriptor InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor>? action)
 	{
-		InnerHitsValue = null;
-		InnerHitsDescriptor = null;
-		InnerHitsDescriptorAction = configure;
-		return Self;
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, each search hit will contain inner hits.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor InnerHits<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>>? action)
+	{
+		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -382,10 +437,10 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	/// Path to the nested object you wish to search.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor Path(Elastic.Clients.Elasticsearch.Field path)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Path(Elastic.Clients.Elasticsearch.Field value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -393,21 +448,10 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	/// Path to the nested object you wish to search.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Path<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		PathValue = path;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Path to the nested object you wish to search.
-	/// </para>
-	/// </summary>
-	public NestedQueryDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
-	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
 	/// <summary>
@@ -415,34 +459,38 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	/// Query you wish to run on nested objects in the path.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public NestedQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query you wish to run on nested objects in the path.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public NestedQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query you wish to run on nested objects in the path.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public NestedQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -450,73 +498,17 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	/// How scores for matching child objects affect the root parent document’s relevance score.
 	/// </para>
 	/// </summary>
-	public NestedQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? value)
 	{
-		ScoreModeValue = scoreMode;
-		return Self;
+		Instance.ScoreMode = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (InnerHitsDescriptor is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
-		}
-		else if (InnerHitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor(InnerHitsDescriptorAction), options);
-		}
-		else if (InnerHitsValue is not null)
-		{
-			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, InnerHitsValue, options);
-		}
-
-		writer.WritePropertyName("path");
-		JsonSerializer.Serialize(writer, PathValue, options);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ScoreModeValue is not null)
-		{
-			writer.WritePropertyName("score_mode");
-			JsonSerializer.Serialize(writer, ScoreModeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class UpdateByQueryRethrottleRequestParameters : RequestParameters
+public sealed partial class UpdateByQueryRethrottleRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -39,6 +32,35 @@ public sealed partial class UpdateByQueryRethrottleRequestParameters : RequestPa
 	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
+}
+
+internal sealed partial class UpdateByQueryRethrottleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest>
+{
+	public override Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -50,15 +72,27 @@ public sealed partial class UpdateByQueryRethrottleRequestParameters : RequestPa
 /// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 /// </para>
 /// </summary>
-public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<UpdateByQueryRethrottleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestConverter))]
+public sealed partial class UpdateByQueryRethrottleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Id taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public UpdateByQueryRethrottleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQueryRethrottle;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceUpdateByQueryRethrottle;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -66,11 +100,21 @@ public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<Update
 
 	/// <summary>
 	/// <para>
+	/// The ID for the task.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// The throttle for this request in sub-requests per second.
 	/// To turn off throttling, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
@@ -83,31 +127,100 @@ public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<Update
 /// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 /// </para>
 /// </summary>
-public sealed partial class UpdateByQueryRethrottleRequestDescriptor : RequestDescriptor<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleRequestParameters>
+public readonly partial struct UpdateByQueryRethrottleRequestDescriptor
 {
-	internal UpdateByQueryRethrottleRequestDescriptor(Action<UpdateByQueryRethrottleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest Instance { get; init; }
 
-	public UpdateByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.Id taskId) : base(r => r.Required("task_id", taskId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQueryRethrottle;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "update_by_query_rethrottle";
-
-	public UpdateByQueryRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-
-	public UpdateByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id taskId)
+	public UpdateByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.Id taskId)
 	{
-		RouteValues.Required("task_id", taskId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest(taskId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UpdateByQueryRethrottleRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest instance) => new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The ID for the task.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.TaskId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// To turn off throttling, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor RequestsPerSecond(float? value)
+	{
+		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest Build(System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor(new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

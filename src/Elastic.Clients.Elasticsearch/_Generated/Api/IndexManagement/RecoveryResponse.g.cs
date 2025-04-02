@@ -17,21 +17,49 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
+using System;
+using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class RecoveryResponse : DictionaryResponse<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus>
+internal sealed partial class RecoveryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse>
 {
-	public RecoveryResponse(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus> dictionary) : base(dictionary)
+	public override Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Statuses = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus>(o, null, null)!) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Statuses, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus>(o, v, null, null));
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponseConverter))]
+public sealed partial class RecoveryResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RecoveryResponse(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus> statuses)
+	{
+		Statuses = statuses;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RecoveryResponse()
 	{
 	}
 
-	public RecoveryResponse() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RecoveryResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
+		_ = sentinel;
 	}
+
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStatus> Statuses { get; set; }
 }

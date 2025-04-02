@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ValidateQueryRequestParameters : RequestParameters
+public sealed partial class ValidateQueryRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -85,7 +78,7 @@ public sealed partial class ValidateQueryRequestParameters : RequestParameters
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -123,25 +116,76 @@ public sealed partial class ValidateQueryRequestParameters : RequestParameters
 	public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 }
 
+internal sealed partial class ValidateQueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Query = propQuery.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Validate a query.
 /// Validates a query without running it.
 /// </para>
 /// </summary>
-public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestConverter))]
+public sealed partial class ValidateQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>
 {
-	public ValidateQueryRequest()
-	{
-	}
-
 	public ValidateQueryRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ValidateQueryRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ValidateQueryRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ValidateQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementValidateQuery;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementValidateQuery;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -149,11 +193,19 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 
 	/// <summary>
 	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to search.
+	/// Supports wildcards (<c>*</c>).
+	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
 	/// This behavior applies even if the request targets other open indices.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -161,7 +213,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 
 	/// <summary>
@@ -170,7 +221,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
@@ -178,7 +228,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// If <c>true</c>, wildcard and prefix queries are analyzed.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
@@ -186,7 +235,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
@@ -195,7 +243,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
@@ -206,15 +253,13 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the response returns detailed information if an error has occurred.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 
 	/// <summary>
@@ -222,7 +267,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -230,7 +274,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
@@ -238,7 +281,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// Query in the Lucene query string syntax.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
@@ -246,7 +288,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 
 	/// <summary>
@@ -254,7 +295,6 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 	/// Query in the Lucene query string syntax.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
@@ -264,98 +304,308 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 /// Validates a query without running it.
 /// </para>
 /// </summary>
-public sealed partial class ValidateQueryRequestDescriptor<TDocument> : RequestDescriptor<ValidateQueryRequestDescriptor<TDocument>, ValidateQueryRequestParameters>
+public readonly partial struct ValidateQueryRequestDescriptor
 {
-	internal ValidateQueryRequestDescriptor(Action<ValidateQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest Instance { get; init; }
 
-	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(indices);
 	}
 
 	public ValidateQueryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementValidateQuery;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.validate_query";
-
-	public ValidateQueryRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ValidateQueryRequestDescriptor<TDocument> AllShards(bool? allShards = true) => Qs("all_shards", allShards);
-	public ValidateQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-	public ValidateQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
-	public ValidateQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-	public ValidateQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
-	public ValidateQueryRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public ValidateQueryRequestDescriptor<TDocument> Explain(bool? explain = true) => Qs("explain", explain);
-	public ValidateQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public ValidateQueryRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
-	public ValidateQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
-	public ValidateQueryRequestDescriptor<TDocument> Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
-
-	public ValidateQueryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to search.
+	/// Supports wildcards (<c>*</c>).
+	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor AllShards(bool? value = true)
+	{
+		Instance.AllShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Analyzer to use for the query string.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Analyzer(string? value)
+	{
+		Instance.Analyzer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor AnalyzeWildcard(bool? value = true)
+	{
+		Instance.AnalyzeWildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
+	{
+		Instance.DefaultOperator = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field to use as default where no field prefix is given in the query string.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Df(string? value)
+	{
+		Instance.Df = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response returns detailed information if an error has occurred.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Explain(bool? value = true)
+	{
+		Instance.Explain = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Lenient(bool? value = true)
+	{
+		Instance.Lenient = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Query in the Lucene query string syntax.
 	/// </para>
 	/// </summary>
-	public ValidateQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor QueryLuceneSyntax(string? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.QueryLuceneSyntax = value;
+		return this;
 	}
 
-	public ValidateQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Rewrite(bool? value = true)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Rewrite = value;
+		return this;
 	}
 
-	public ValidateQueryRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (QueryDescriptor is not null)
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -365,97 +615,296 @@ public sealed partial class ValidateQueryRequestDescriptor<TDocument> : RequestD
 /// Validates a query without running it.
 /// </para>
 /// </summary>
-public sealed partial class ValidateQueryRequestDescriptor : RequestDescriptor<ValidateQueryRequestDescriptor, ValidateQueryRequestParameters>
+public readonly partial struct ValidateQueryRequestDescriptor<TDocument>
 {
-	internal ValidateQueryRequestDescriptor(Action<ValidateQueryRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest Instance { get; init; }
 
-	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(indices);
 	}
 
 	public ValidateQueryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementValidateQuery;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.validate_query";
-
-	public ValidateQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ValidateQueryRequestDescriptor AllShards(bool? allShards = true) => Qs("all_shards", allShards);
-	public ValidateQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-	public ValidateQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
-	public ValidateQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-	public ValidateQueryRequestDescriptor Df(string? df) => Qs("df", df);
-	public ValidateQueryRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public ValidateQueryRequestDescriptor Explain(bool? explain = true) => Qs("explain", explain);
-	public ValidateQueryRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public ValidateQueryRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
-	public ValidateQueryRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
-	public ValidateQueryRequestDescriptor Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
-
-	public ValidateQueryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases to search.
+	/// Supports wildcards (<c>*</c>).
+	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> AllShards(bool? value = true)
+	{
+		Instance.AllShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Analyzer to use for the query string.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Analyzer(string? value)
+	{
+		Instance.Analyzer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, wildcard and prefix queries are analyzed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
+	{
+		Instance.AnalyzeWildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
+	{
+		Instance.DefaultOperator = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Field to use as default where no field prefix is given in the query string.
+	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Df(string? value)
+	{
+		Instance.Df = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response returns detailed information if an error has occurred.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Explain(bool? value = true)
+	{
+		Instance.Explain = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Lenient(bool? value = true)
+	{
+		Instance.Lenient = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Query in the Lucene query string syntax.
 	/// </para>
 	/// </summary>
-	public ValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.QueryLuceneSyntax = value;
+		return this;
 	}
 
-	public ValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Rewrite(bool? value = true)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Rewrite = value;
+		return this;
 	}
 
-	public ValidateQueryRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Query in the Lucene query string syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (QueryDescriptor is not null)
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,47 +17,147 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterJvmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterJvm>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxUptimeInMillis = System.Text.Json.JsonEncodedText.Encode("max_uptime_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
+	private static readonly System.Text.Json.JsonEncodedText PropThreads = System.Text.Json.JsonEncodedText.Encode("threads");
+	private static readonly System.Text.Json.JsonEncodedText PropVersions = System.Text.Json.JsonEncodedText.Encode("versions");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterJvm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.TimeSpan> propMaxUptimeInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory> propMem = default;
+		LocalJsonValue<long> propThreads = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion>> propVersions = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxUptimeInMillis.TryReadProperty(ref reader, options, PropMaxUptimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propMem.TryReadProperty(ref reader, options, PropMem, null))
+			{
+				continue;
+			}
+
+			if (propThreads.TryReadProperty(ref reader, options, PropThreads, null))
+			{
+				continue;
+			}
+
+			if (propVersions.TryReadProperty(ref reader, options, PropVersions, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterJvm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxUptimeInMillis = propMaxUptimeInMillis.Value,
+			Mem = propMem.Value,
+			Threads = propThreads.Value,
+			Versions = propVersions.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterJvm value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxUptimeInMillis, value.MaxUptimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropMem, value.Mem, null, null);
+		writer.WriteProperty(options, PropThreads, value.Threads, null, null);
+		writer.WriteProperty(options, PropVersions, value.Versions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterJvmConverter))]
 public sealed partial class ClusterJvm
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterJvm(System.TimeSpan maxUptimeInMillis, Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory mem, long threads, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion> versions)
+	{
+		MaxUptimeInMillis = maxUptimeInMillis;
+		Mem = mem;
+		Threads = threads;
+		Versions = versions;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterJvm()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterJvm()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterJvm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Uptime duration, in milliseconds, since JVM last started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_uptime_in_millis")]
-	public long MaxUptimeInMillis { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan MaxUptimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about memory used by selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mem")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory Mem { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory Mem { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of active threads in use by JVM across all selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("threads")]
-	public long Threads { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Threads { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the JVM versions used by selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("versions")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion> Versions { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion> Versions { get; set; }
 }

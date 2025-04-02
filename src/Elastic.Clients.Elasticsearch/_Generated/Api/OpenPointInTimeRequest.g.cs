@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class OpenPointInTimeRequestParameters : RequestParameters
+public sealed partial class OpenPointInTimeRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -48,7 +41,7 @@ public sealed partial class OpenPointInTimeRequestParameters : RequestParameters
 	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -62,7 +55,7 @@ public sealed partial class OpenPointInTimeRequestParameters : RequestParameters
 	/// Extend the length of time that the point in time persists.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration>("keep_alive"); set => Q("keep_alive", value); }
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
 	/// <para>
@@ -78,6 +71,45 @@ public sealed partial class OpenPointInTimeRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+}
+
+internal sealed partial class OpenPointInTimeRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFilter = System.Text.Json.JsonEncodedText.Encode("index_filter");
+
+	public override Elastic.Clients.Elasticsearch.OpenPointInTimeRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propIndexFilter = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndexFilter.TryReadProperty(ref reader, options, PropIndexFilter, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IndexFilter = propIndexFilter.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.OpenPointInTimeRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndexFilter, value.IndexFilter, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -132,19 +164,42 @@ public sealed partial class OpenPointInTimeRequestParameters : RequestParameters
 /// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 /// </para>
 /// </summary>
-public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTimeRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.OpenPointInTimeRequestConverter))]
+public sealed partial class OpenPointInTimeRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public OpenPointInTimeRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceOpenPointInTime;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceOpenPointInTime;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "open_point_in_time";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names to open point in time; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -153,7 +208,6 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	/// If <c>true</c>, the point in time will contain all the shards that are available at the time of the request.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
 	/// <summary>
@@ -163,15 +217,13 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -179,8 +231,7 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	/// Extend the length of time that the point in time persists.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration>("keep_alive"); set => Q("keep_alive", value); }
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
 	/// <para>
@@ -188,7 +239,6 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	/// By default, it is random.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
@@ -196,7 +246,6 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -204,7 +253,6 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 }
 
@@ -260,92 +308,232 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 /// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 /// </para>
 /// </summary>
-public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : RequestDescriptor<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeRequestParameters>
+public readonly partial struct OpenPointInTimeRequestDescriptor
 {
-	internal OpenPointInTimeRequestDescriptor(Action<OpenPointInTimeRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.OpenPointInTimeRequest Instance { get; init; }
 
-	public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.OpenPointInTimeRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public OpenPointInTimeRequestDescriptor() : this(typeof(TDocument))
+	public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(indices);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceOpenPointInTime;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "open_point_in_time";
-
-	public OpenPointInTimeRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
-	public OpenPointInTimeRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public OpenPointInTimeRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public OpenPointInTimeRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);
-	public OpenPointInTimeRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public OpenPointInTimeRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-
-	public OpenPointInTimeRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public OpenPointInTimeRequestDescriptor()
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> IndexFilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.OpenPointInTimeRequest instance) => new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names to open point in time; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether the point in time tolerates unavailable shards or shard failures when initially creating the PIT.
+	/// If <c>false</c>, creating a point in time request when a shard is missing or unavailable will throw an exception.
+	/// If <c>true</c>, the point in time will contain all the shards that are available at the time of the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor AllowPartialSearchResults(bool? value = true)
+	{
+		Instance.AllowPartialSearchResults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Extend the length of time that the point in time persists.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// By default, it is random.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value that is used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
 	/// </para>
 	/// </summary>
-	public OpenPointInTimeRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterValue = indexFilter;
-		return Self;
+		Instance.IndexFilter = value;
+		return this;
 	}
 
-	public OpenPointInTimeRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterDescriptor = descriptor;
-		return Self;
+		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public OpenPointInTimeRequestDescriptor<TDocument> IndexFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor IndexFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = configure;
-		return Self;
+		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.OpenPointInTimeRequest Build(System.Action<Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (IndexFilterDescriptor is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterDescriptor, options);
-		}
-		else if (IndexFilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(IndexFilterDescriptorAction), options);
-		}
-		else if (IndexFilterValue is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor(new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -401,87 +589,220 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 /// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 /// </para>
 /// </summary>
-public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor<OpenPointInTimeRequestDescriptor, OpenPointInTimeRequestParameters>
+public readonly partial struct OpenPointInTimeRequestDescriptor<TDocument>
 {
-	internal OpenPointInTimeRequestDescriptor(Action<OpenPointInTimeRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.OpenPointInTimeRequest Instance { get; init; }
 
-	public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.OpenPointInTimeRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceOpenPointInTime;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "open_point_in_time";
-
-	public OpenPointInTimeRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
-	public OpenPointInTimeRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public OpenPointInTimeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);
-	public OpenPointInTimeRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public OpenPointInTimeRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-
-	public OpenPointInTimeRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(indices);
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor IndexFilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public OpenPointInTimeRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.OpenPointInTimeRequest instance) => new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names to open point in time; use <c>_all</c> or empty string to perform the operation on all indices
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether the point in time tolerates unavailable shards or shard failures when initially creating the PIT.
+	/// If <c>false</c>, creating a point in time request when a shard is missing or unavailable will throw an exception.
+	/// If <c>true</c>, the point in time will contain all the shards that are available at the time of the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> AllowPartialSearchResults(bool? value = true)
+	{
+		Instance.AllowPartialSearchResults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// It supports comma-separated values, such as <c>open,hidden</c>. Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Extend the length of time that the point in time persists.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// By default, it is random.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value that is used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
 	/// </para>
 	/// </summary>
-	public OpenPointInTimeRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterValue = indexFilter;
-		return Self;
+		Instance.IndexFilter = value;
+		return this;
 	}
 
-	public OpenPointInTimeRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterDescriptor = descriptor;
-		return Self;
+		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public OpenPointInTimeRequestDescriptor IndexFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.OpenPointInTimeRequest Build(System.Action<Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (IndexFilterDescriptor is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterDescriptor, options);
-		}
-		else if (IndexFilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(IndexFilterDescriptorAction), options);
-		}
-		else if (IndexFilterValue is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterValue, options);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

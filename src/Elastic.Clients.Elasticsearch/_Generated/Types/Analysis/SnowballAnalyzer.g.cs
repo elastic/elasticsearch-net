@@ -17,87 +17,157 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class SnowballAnalyzer : IAnalyzer
+internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer>
 {
-	[JsonInclude, JsonPropertyName("language")]
-	public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type => "snowball";
-
-	[JsonInclude, JsonPropertyName("version")]
-	public string? Version { get; set; }
-}
-
-public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptor<SnowballAnalyzerDescriptor>, IBuildableDescriptor<SnowballAnalyzer>
-{
-	internal SnowballAnalyzerDescriptor(Action<SnowballAnalyzerDescriptor> configure) => configure.Invoke(this);
-
-	public SnowballAnalyzerDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage> propLanguage = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStopwords = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, null))
+			{
+				continue;
+			}
+
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Language = propLanguage.Value,
+			Stopwords = propStopwords.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage LanguageValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public SnowballAnalyzerDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage language)
-	{
-		LanguageValue = language;
-		return Self;
-	}
-
-	public SnowballAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
-	{
-		StopwordsValue = stopwords;
-		return Self;
-	}
-
-	public SnowballAnalyzerDescriptor Version(string? version)
-	{
-		VersionValue = version;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("language");
-		JsonSerializer.Serialize(writer, LanguageValue, options);
-		if (StopwordsValue is not null)
-		{
-			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("snowball");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
+		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
+}
 
-	SnowballAnalyzer IBuildableDescriptor<SnowballAnalyzer>.Build() => new()
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerConverter))]
+public sealed partial class SnowballAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SnowballAnalyzer(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage language)
 	{
-		Language = LanguageValue,
-		Stopwords = StopwordsValue,
-		Version = VersionValue
-	};
+		Language = language;
+	}
+#if NET7_0_OR_GREATER
+	public SnowballAnalyzer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SnowballAnalyzer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SnowballAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
+	public System.Collections.Generic.ICollection<string>? Stopwords { get; set; }
+
+	public string Type => "snowball";
+}
+
+public readonly partial struct SnowballAnalyzerDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SnowballAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SnowballAnalyzerDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer(Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage value)
+	{
+		Instance.Language = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Stopwords(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Stopwords = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Stopwords()
+	{
+		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Stopwords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Stopwords(params string[] values)
+	{
+		Instance.Stopwords = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

@@ -17,24 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class IndicesVersionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardCount = System.Text.Json.JsonEncodedText.Encode("primary_shard_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalPrimaryBytes = System.Text.Json.JsonEncodedText.Encode("total_primary_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.IndicesVersions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propIndexCount = default;
+		LocalJsonValue<int> propPrimaryShardCount = default;
+		LocalJsonValue<long> propTotalPrimaryBytes = default;
+		LocalJsonValue<string> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndexCount.TryReadProperty(ref reader, options, PropIndexCount, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryShardCount.TryReadProperty(ref reader, options, PropPrimaryShardCount, null))
+			{
+				continue;
+			}
+
+			if (propTotalPrimaryBytes.TryReadProperty(ref reader, options, PropTotalPrimaryBytes, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.IndicesVersions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IndexCount = propIndexCount.Value,
+			PrimaryShardCount = propPrimaryShardCount.Value,
+			TotalPrimaryBytes = propTotalPrimaryBytes.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.IndicesVersions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndexCount, value.IndexCount, null, null);
+		writer.WriteProperty(options, PropPrimaryShardCount, value.PrimaryShardCount, null, null);
+		writer.WriteProperty(options, PropTotalPrimaryBytes, value.TotalPrimaryBytes, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.IndicesVersionsConverter))]
 public sealed partial class IndicesVersions
 {
-	[JsonInclude, JsonPropertyName("index_count")]
-	public int IndexCount { get; init; }
-	[JsonInclude, JsonPropertyName("primary_shard_count")]
-	public int PrimaryShardCount { get; init; }
-	[JsonInclude, JsonPropertyName("total_primary_bytes")]
-	public long TotalPrimaryBytes { get; init; }
-	[JsonInclude, JsonPropertyName("version")]
-	public string Version { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndicesVersions(int indexCount, int primaryShardCount, long totalPrimaryBytes, string version)
+	{
+		IndexCount = indexCount;
+		PrimaryShardCount = primaryShardCount;
+		TotalPrimaryBytes = totalPrimaryBytes;
+		Version = version;
+	}
+#if NET7_0_OR_GREATER
+	public IndicesVersions()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IndicesVersions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndicesVersions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int IndexCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int PrimaryShardCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalPrimaryBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Version { get; set; }
 }

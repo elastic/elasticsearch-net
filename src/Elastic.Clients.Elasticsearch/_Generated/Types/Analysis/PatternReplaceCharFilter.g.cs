@@ -17,102 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class PatternReplaceCharFilter : ICharFilter
+internal sealed partial class PatternReplaceCharFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter>
 {
-	[JsonInclude, JsonPropertyName("flags")]
+	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags");
+	private static readonly System.Text.Json.JsonEncodedText PropPattern = System.Text.Json.JsonEncodedText.Encode("pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropReplacement = System.Text.Json.JsonEncodedText.Encode("replacement");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFlags = default;
+		LocalJsonValue<string> propPattern = default;
+		LocalJsonValue<string?> propReplacement = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFlags.TryReadProperty(ref reader, options, PropFlags, null))
+			{
+				continue;
+			}
+
+			if (propPattern.TryReadProperty(ref reader, options, PropPattern, null))
+			{
+				continue;
+			}
+
+			if (propReplacement.TryReadProperty(ref reader, options, PropReplacement, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Flags = propFlags.Value,
+			Pattern = propPattern.Value,
+			Replacement = propReplacement.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFlags, value.Flags, null, null);
+		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
+		writer.WriteProperty(options, PropReplacement, value.Replacement, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterConverter))]
+public sealed partial class PatternReplaceCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternReplaceCharFilter(string pattern)
+	{
+		Pattern = pattern;
+	}
+#if NET7_0_OR_GREATER
+	public PatternReplaceCharFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PatternReplaceCharFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PatternReplaceCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? Flags { get; set; }
-	[JsonInclude, JsonPropertyName("pattern")]
-	public string Pattern { get; set; }
-	[JsonInclude, JsonPropertyName("replacement")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Pattern { get; set; }
 	public string? Replacement { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern_replace";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class PatternReplaceCharFilterDescriptor : SerializableDescriptor<PatternReplaceCharFilterDescriptor>, IBuildableDescriptor<PatternReplaceCharFilter>
+public readonly partial struct PatternReplaceCharFilterDescriptor
 {
-	internal PatternReplaceCharFilterDescriptor(Action<PatternReplaceCharFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter Instance { get; init; }
 
-	public PatternReplaceCharFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternReplaceCharFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private string? FlagsValue { get; set; }
-	private string PatternValue { get; set; }
-	private string? ReplacementValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public PatternReplaceCharFilterDescriptor Flags(string? flags)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternReplaceCharFilterDescriptor()
 	{
-		FlagsValue = flags;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PatternReplaceCharFilterDescriptor Pattern(string pattern)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor Flags(string? value)
 	{
-		PatternValue = pattern;
-		return Self;
+		Instance.Flags = value;
+		return this;
 	}
 
-	public PatternReplaceCharFilterDescriptor Replacement(string? replacement)
+	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor Pattern(string value)
 	{
-		ReplacementValue = replacement;
-		return Self;
+		Instance.Pattern = value;
+		return this;
 	}
 
-	public PatternReplaceCharFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor Replacement(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Replacement = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FlagsValue))
-		{
-			writer.WritePropertyName("flags");
-			writer.WriteStringValue(FlagsValue);
-		}
-
-		writer.WritePropertyName("pattern");
-		writer.WriteStringValue(PatternValue);
-		if (!string.IsNullOrEmpty(ReplacementValue))
-		{
-			writer.WritePropertyName("replacement");
-			writer.WriteStringValue(ReplacementValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("pattern_replace");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Version = value;
+		return this;
 	}
 
-	PatternReplaceCharFilter IBuildableDescriptor<PatternReplaceCharFilter>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor> action)
 	{
-		Flags = FlagsValue,
-		Pattern = PatternValue,
-		Replacement = ReplacementValue,
-		Version = VersionValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

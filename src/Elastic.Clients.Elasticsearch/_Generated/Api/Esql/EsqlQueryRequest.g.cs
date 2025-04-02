@@ -17,21 +17,21 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
-public sealed partial class EsqlQueryRequestParameters : RequestParameters
+public sealed partial class EsqlQueryRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// </para>
+	/// </summary>
+	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
+
 	/// <summary>
 	/// <para>
 	/// The character to use between values within a CSV row. Only valid for the CSV format.
@@ -55,17 +55,133 @@ public sealed partial class EsqlQueryRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 }
 
+internal sealed partial class EsqlQueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeCcsMetadata = System.Text.Json.JsonEncodedText.Encode("include_ccs_metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+
+	public override Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propColumnar = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<bool?> propIncludeCcsMetadata = default;
+		LocalJsonValue<string?> propLocale = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propParams = default;
+		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<string> propQuery = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, null))
+			{
+				continue;
+			}
+
+			if (propLocale.TryReadProperty(ref reader, options, PropLocale, null))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			{
+				continue;
+			}
+
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Columnar = propColumnar.Value,
+			Filter = propFilter.Value,
+			IncludeCcsMetadata = propIncludeCcsMetadata.Value,
+			Locale = propLocale.Value,
+			Params = propParams.Value,
+			Profile = propProfile.Value,
+			Query = propQuery.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropColumnar, value.Columnar, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, null);
+		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Run an ES|QL query.
 /// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
-public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestConverter))]
+public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EsqlQuery;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EsqlQueryRequest(string query)
+	{
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public EsqlQueryRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public EsqlQueryRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EsqlQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.EsqlQuery;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -73,10 +189,16 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// </para>
+	/// </summary>
+	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
+
+	/// <summary>
+	/// <para>
 	/// The character to use between values within a CSV row. Only valid for the CSV format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
@@ -85,7 +207,6 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// Defaults to <c>false</c>. If <c>true</c> then the response will include an extra section under the name <c>all_columns</c> which has the name of all columns.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
 	/// <summary>
@@ -93,7 +214,6 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// A short version of the Accept header, e.g. json, yaml.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 
 	/// <summary>
@@ -101,7 +221,6 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("columnar")]
 	public bool? Columnar { get; set; }
 
 	/// <summary>
@@ -109,7 +228,6 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
@@ -119,9 +237,7 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// count.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include_ccs_metadata")]
 	public bool? IncludeCcsMetadata { get; set; }
-	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 
 	/// <summary>
@@ -129,8 +245,7 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? Params { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -140,7 +255,6 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// of each part of the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
 	/// <summary>
@@ -148,8 +262,11 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public string Query { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Query { get; set; }
 }
 
 /// <summary>
@@ -158,45 +275,78 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 /// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
-public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescriptor<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryRequestParameters>
+public readonly partial struct EsqlQueryRequestDescriptor
 {
-	internal EsqlQueryRequestDescriptor(Action<EsqlQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EsqlQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public EsqlQueryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EsqlQuery;
+	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor AllowPartialResults(bool? value = true)
+	{
+		Instance.AllowPartialResults = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// The character to use between values within a CSV row. Only valid for the CSV format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Delimiter(string? value)
+	{
+		Instance.Delimiter = value;
+		return this;
+	}
 
-	internal override string OperationName => "esql.query";
+	/// <summary>
+	/// <para>
+	/// Should columns that are entirely <c>null</c> be removed from the <c>columns</c> and <c>values</c> portion of the results?
+	/// Defaults to <c>false</c>. If <c>true</c> then the response will include an extra section under the name <c>all_columns</c> which has the name of all columns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor DropNullColumns(bool? value = true)
+	{
+		Instance.DropNullColumns = value;
+		return this;
+	}
 
-	public EsqlQueryRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-	public EsqlQueryRequestDescriptor<TDocument> DropNullColumns(bool? dropNullColumns = true) => Qs("drop_null_columns", dropNullColumns);
-	public EsqlQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? format) => Qs("format", format);
-
-	private bool? ColumnarValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private bool? IncludeCcsMetadataValue { get; set; }
-	private string? LocaleValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
-	private bool? ProfileValue { get; set; }
-	private string QueryValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor<TDocument> Columnar(bool? columnar = true)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Columnar(bool? value = true)
 	{
-		ColumnarValue = columnar;
-		return Self;
+		Instance.Columnar = value;
+		return this;
 	}
 
 	/// <summary>
@@ -204,28 +354,32 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public EsqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public EsqlQueryRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -235,16 +389,16 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	/// count.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? includeCcsMetadata = true)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor IncludeCcsMetadata(bool? value = true)
 	{
-		IncludeCcsMetadataValue = includeCcsMetadata;
-		return Self;
+		Instance.IncludeCcsMetadata = value;
+		return this;
 	}
 
-	public EsqlQueryRequestDescriptor<TDocument> Locale(string? locale)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Locale(string? value)
 	{
-		LocaleValue = locale;
-		return Self;
+		Instance.Locale = value;
+		return this;
 	}
 
 	/// <summary>
@@ -252,10 +406,43 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor<TDocument> Params(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Params(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		ParamsValue = value;
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Params(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.Params = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -266,10 +453,10 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	/// of each part of the query.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor<TDocument> Profile(bool? profile = true)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Profile(bool? value = true)
 	{
-		ProfileValue = profile;
-		return Self;
+		Instance.Profile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -277,64 +464,60 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor<TDocument> Query(string query)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ColumnarValue.HasValue)
-		{
-			writer.WritePropertyName("columnar");
-			writer.WriteBooleanValue(ColumnarValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (IncludeCcsMetadataValue.HasValue)
-		{
-			writer.WritePropertyName("include_ccs_metadata");
-			writer.WriteBooleanValue(IncludeCcsMetadataValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(LocaleValue))
-		{
-			writer.WritePropertyName("locale");
-			writer.WriteStringValue(LocaleValue);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -344,45 +527,78 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 /// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
-public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQueryRequestDescriptor, EsqlQueryRequestParameters>
+public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 {
-	internal EsqlQueryRequestDescriptor(Action<EsqlQueryRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EsqlQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public EsqlQueryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EsqlQuery;
+	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> AllowPartialResults(bool? value = true)
+	{
+		Instance.AllowPartialResults = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// The character to use between values within a CSV row. Only valid for the CSV format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Delimiter(string? value)
+	{
+		Instance.Delimiter = value;
+		return this;
+	}
 
-	internal override string OperationName => "esql.query";
+	/// <summary>
+	/// <para>
+	/// Should columns that are entirely <c>null</c> be removed from the <c>columns</c> and <c>values</c> portion of the results?
+	/// Defaults to <c>false</c>. If <c>true</c> then the response will include an extra section under the name <c>all_columns</c> which has the name of all columns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> DropNullColumns(bool? value = true)
+	{
+		Instance.DropNullColumns = value;
+		return this;
+	}
 
-	public EsqlQueryRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-	public EsqlQueryRequestDescriptor DropNullColumns(bool? dropNullColumns = true) => Qs("drop_null_columns", dropNullColumns);
-	public EsqlQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? format) => Qs("format", format);
-
-	private bool? ColumnarValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private bool? IncludeCcsMetadataValue { get; set; }
-	private string? LocaleValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
-	private bool? ProfileValue { get; set; }
-	private string QueryValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor Columnar(bool? columnar = true)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Columnar(bool? value = true)
 	{
-		ColumnarValue = columnar;
-		return Self;
+		Instance.Columnar = value;
+		return this;
 	}
 
 	/// <summary>
@@ -390,28 +606,21 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public EsqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public EsqlQueryRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -421,16 +630,16 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	/// count.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor IncludeCcsMetadata(bool? includeCcsMetadata = true)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? value = true)
 	{
-		IncludeCcsMetadataValue = includeCcsMetadata;
-		return Self;
+		Instance.IncludeCcsMetadata = value;
+		return this;
 	}
 
-	public EsqlQueryRequestDescriptor Locale(string? locale)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Locale(string? value)
 	{
-		LocaleValue = locale;
-		return Self;
+		Instance.Locale = value;
+		return this;
 	}
 
 	/// <summary>
@@ -438,10 +647,43 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor Params(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Params(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		ParamsValue = value;
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Params(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.Params = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -452,10 +694,10 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	/// of each part of the query.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor Profile(bool? profile = true)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Profile(bool? value = true)
 	{
-		ProfileValue = profile;
-		return Self;
+		Instance.Profile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -463,63 +705,59 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor Query(string query)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (ColumnarValue.HasValue)
-		{
-			writer.WritePropertyName("columnar");
-			writer.WriteBooleanValue(ColumnarValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (IncludeCcsMetadataValue.HasValue)
-		{
-			writer.WritePropertyName("include_ccs_metadata");
-			writer.WriteBooleanValue(IncludeCcsMetadataValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(LocaleValue))
-		{
-			writer.WritePropertyName("locale");
-			writer.WriteStringValue(LocaleValue);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

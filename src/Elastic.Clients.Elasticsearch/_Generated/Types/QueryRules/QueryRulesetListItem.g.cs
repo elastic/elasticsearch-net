@@ -17,18 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+internal sealed partial class QueryRulesetListItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRuleCriteriaTypesCounts = System.Text.Json.JsonEncodedText.Encode("rule_criteria_types_counts");
+	private static readonly System.Text.Json.JsonEncodedText PropRulesetId = System.Text.Json.JsonEncodedText.Encode("ruleset_id");
+	private static readonly System.Text.Json.JsonEncodedText PropRuleTotalCount = System.Text.Json.JsonEncodedText.Encode("rule_total_count");
+	private static readonly System.Text.Json.JsonEncodedText PropRuleTypeCounts = System.Text.Json.JsonEncodedText.Encode("rule_type_counts");
+
+	public override Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propRuleCriteriaTypesCounts = default;
+		LocalJsonValue<string> propRulesetId = default;
+		LocalJsonValue<int> propRuleTotalCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propRuleTypeCounts = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRuleCriteriaTypesCounts.TryReadProperty(ref reader, options, PropRuleCriteriaTypesCounts, static System.Collections.Generic.IReadOnlyDictionary<string, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propRulesetId.TryReadProperty(ref reader, options, PropRulesetId, null))
+			{
+				continue;
+			}
+
+			if (propRuleTotalCount.TryReadProperty(ref reader, options, PropRuleTotalCount, null))
+			{
+				continue;
+			}
+
+			if (propRuleTypeCounts.TryReadProperty(ref reader, options, PropRuleTypeCounts, static System.Collections.Generic.IReadOnlyDictionary<string, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			RuleCriteriaTypesCounts = propRuleCriteriaTypesCounts.Value,
+			RulesetId = propRulesetId.Value,
+			RuleTotalCount = propRuleTotalCount.Value,
+			RuleTypeCounts = propRuleTypeCounts.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRuleCriteriaTypesCounts, value.RuleCriteriaTypesCounts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
+		writer.WriteProperty(options, PropRulesetId, value.RulesetId, null, null);
+		writer.WriteProperty(options, PropRuleTotalCount, value.RuleTotalCount, null, null);
+		writer.WriteProperty(options, PropRuleTypeCounts, value.RuleTypeCounts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItemConverter))]
 public sealed partial class QueryRulesetListItem
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryRulesetListItem(System.Collections.Generic.IReadOnlyDictionary<string, int> ruleCriteriaTypesCounts, string rulesetId, int ruleTotalCount, System.Collections.Generic.IReadOnlyDictionary<string, int> ruleTypeCounts)
+	{
+		RuleCriteriaTypesCounts = ruleCriteriaTypesCounts;
+		RulesetId = rulesetId;
+		RuleTotalCount = ruleTotalCount;
+		RuleTypeCounts = ruleTypeCounts;
+	}
+#if NET7_0_OR_GREATER
+	public QueryRulesetListItem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public QueryRulesetListItem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal QueryRulesetListItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A map of criteria type (for example, <c>exact</c>) to the number of rules of that type.
@@ -37,30 +125,42 @@ public sealed partial class QueryRulesetListItem
 	/// NOTE: The counts in <c>rule_criteria_types_counts</c> may be larger than the value of <c>rule_total_count</c> because a rule may have multiple criteria.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rule_criteria_types_counts")]
-	public IReadOnlyDictionary<string, int> RuleCriteriaTypesCounts { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, int> RuleCriteriaTypesCounts { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A unique identifier for the ruleset.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ruleset_id")]
-	public string RulesetId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RulesetId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of rules associated with the ruleset.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rule_total_count")]
-	public int RuleTotalCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int RuleTotalCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A map of rule type (for example, <c>pinned</c>) to the number of rules of that type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rule_type_counts")]
-	public IReadOnlyDictionary<string, int> RuleTypeCounts { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, int> RuleTypeCounts { get; set; }
 }

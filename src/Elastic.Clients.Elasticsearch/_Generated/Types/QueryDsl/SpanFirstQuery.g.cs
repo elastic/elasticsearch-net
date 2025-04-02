@@ -17,18 +17,104 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class SpanFirstQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
+	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<int> propEnd = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> propMatch = default;
+		LocalJsonValue<string?> propQueryName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, null))
+			{
+				continue;
+			}
+
+			if (propMatch.TryReadProperty(ref reader, options, PropMatch, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			End = propEnd.Value,
+			Match = propMatch.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropEnd, value.End, null, null);
+		writer.WriteProperty(options, PropMatch, value.Match, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryConverter))]
 public sealed partial class SpanFirstQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanFirstQuery(int end, Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)
+	{
+		End = end;
+		Match = match;
+	}
+#if NET7_0_OR_GREATER
+	public SpanFirstQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SpanFirstQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SpanFirstQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +123,6 @@ public sealed partial class SpanFirstQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,37 +130,43 @@ public sealed partial class SpanFirstQuery
 	/// Controls the maximum end position permitted in a match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("end")]
-	public int End { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int End { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Can be any other span type query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("match")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Match { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Match { get; set; }
 	public string? QueryName { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanFirstQuery spanFirstQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanFirst(spanFirstQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanFirstQuery spanFirstQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.SpanFirst(spanFirstQuery);
 }
 
-public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDescriptor<SpanFirstQueryDescriptor<TDocument>>
+public readonly partial struct SpanFirstQueryDescriptor<TDocument>
 {
-	internal SpanFirstQueryDescriptor(Action<SpanFirstQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery Instance { get; init; }
 
-	public SpanFirstQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanFirstQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private int EndValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery MatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> MatchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> MatchDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanFirstQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -85,10 +176,10 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanFirstQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -96,10 +187,10 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 	/// Controls the maximum end position permitted in a match.
 	/// </para>
 	/// </summary>
-	public SpanFirstQueryDescriptor<TDocument> End(int end)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> End(int value)
 	{
-		EndValue = end;
-		return Self;
+		Instance.End = value;
+		return this;
 	}
 
 	/// <summary>
@@ -107,87 +198,56 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 	/// Can be any other span type query.
 	/// </para>
 	/// </summary>
-	public SpanFirstQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		MatchDescriptor = null;
-		MatchDescriptorAction = null;
-		MatchValue = match;
-		return Self;
+		Instance.Match = value;
+		return this;
 	}
 
-	public SpanFirstQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Can be any other span type query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
-		MatchValue = null;
-		MatchDescriptorAction = null;
-		MatchDescriptor = descriptor;
-		return Self;
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public SpanFirstQueryDescriptor<TDocument> Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		MatchValue = null;
-		MatchDescriptor = null;
-		MatchDescriptorAction = configure;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public SpanFirstQueryDescriptor<TDocument> QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("end");
-		writer.WriteNumberValue(EndValue);
-		if (MatchDescriptor is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchDescriptor, options);
-		}
-		else if (MatchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(MatchDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<SpanFirstQueryDescriptor>
+public readonly partial struct SpanFirstQueryDescriptor
 {
-	internal SpanFirstQueryDescriptor(Action<SpanFirstQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery Instance { get; init; }
 
-	public SpanFirstQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanFirstQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private int EndValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery MatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor MatchDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> MatchDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanFirstQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -197,10 +257,10 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanFirstQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -208,10 +268,10 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 	/// Controls the maximum end position permitted in a match.
 	/// </para>
 	/// </summary>
-	public SpanFirstQueryDescriptor End(int end)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor End(int value)
 	{
-		EndValue = end;
-		return Self;
+		Instance.End = value;
+		return this;
 	}
 
 	/// <summary>
@@ -219,69 +279,45 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 	/// Can be any other span type query.
 	/// </para>
 	/// </summary>
-	public SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		MatchDescriptor = null;
-		MatchDescriptorAction = null;
-		MatchValue = match;
-		return Self;
+		Instance.Match = value;
+		return this;
 	}
 
-	public SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Can be any other span type query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
-		MatchValue = null;
-		MatchDescriptorAction = null;
-		MatchDescriptor = descriptor;
-		return Self;
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SpanFirstQueryDescriptor Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Can be any other span type query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
-		MatchValue = null;
-		MatchDescriptor = null;
-		MatchDescriptorAction = configure;
-		return Self;
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public SpanFirstQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("end");
-		writer.WriteNumberValue(EndValue);
-		if (MatchDescriptor is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchDescriptor, options);
-		}
-		else if (MatchDescriptorAction is not null)
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(MatchDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, MatchValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

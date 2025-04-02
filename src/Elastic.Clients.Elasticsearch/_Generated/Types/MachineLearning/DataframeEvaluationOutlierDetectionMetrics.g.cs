@@ -17,24 +17,102 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeEvaluationOutlierDetectionMetricsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAucRoc = System.Text.Json.JsonEncodedText.Encode("auc_roc");
+	private static readonly System.Text.Json.JsonEncodedText PropConfusionMatrix = System.Text.Json.JsonEncodedText.Encode("confusion_matrix");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropRecall = System.Text.Json.JsonEncodedText.Encode("recall");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc?> propAucRoc = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propConfusionMatrix = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propPrecision = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propRecall = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAucRoc.TryReadProperty(ref reader, options, PropAucRoc, null))
+			{
+				continue;
+			}
+
+			if (propConfusionMatrix.TryReadProperty(ref reader, options, PropConfusionMatrix, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRecall.TryReadProperty(ref reader, options, PropRecall, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AucRoc = propAucRoc.Value,
+			ConfusionMatrix = propConfusionMatrix.Value,
+			Precision = propPrecision.Value,
+			Recall = propRecall.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAucRoc, value.AucRoc, null, null);
+		writer.WriteProperty(options, PropConfusionMatrix, value.ConfusionMatrix, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRecall, value.Recall, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsConverter))]
 public sealed partial class DataframeEvaluationOutlierDetectionMetrics
 {
+#if NET7_0_OR_GREATER
+	public DataframeEvaluationOutlierDetectionMetrics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataframeEvaluationOutlierDetectionMetrics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeEvaluationOutlierDetectionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("auc_roc")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
 
 	/// <summary>
@@ -42,68 +120,73 @@ public sealed partial class DataframeEvaluationOutlierDetectionMetrics
 	/// Accuracy of predictions (per-class and overall).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("confusion_matrix")]
-	public IDictionary<string, object>? ConfusionMatrix { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? ConfusionMatrix { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Precision of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision")]
-	public IDictionary<string, object>? Precision { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Precision { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Recall of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("recall")]
-	public IDictionary<string, object>? Recall { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Recall { get; set; }
 }
 
-public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor : SerializableDescriptor<DataframeEvaluationOutlierDetectionMetricsDescriptor>
+public readonly partial struct DataframeEvaluationOutlierDetectionMetricsDescriptor
 {
-	internal DataframeEvaluationOutlierDetectionMetricsDescriptor(Action<DataframeEvaluationOutlierDetectionMetricsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics Instance { get; init; }
 
-	public DataframeEvaluationOutlierDetectionMetricsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationOutlierDetectionMetricsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? AucRocValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor AucRocDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor> AucRocDescriptorAction { get; set; }
-	private IDictionary<string, object>? ConfusionMatrixValue { get; set; }
-	private IDictionary<string, object>? PrecisionValue { get; set; }
-	private IDictionary<string, object>? RecallValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationOutlierDetectionMetricsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? aucRoc)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? value)
 	{
-		AucRocDescriptor = null;
-		AucRocDescriptorAction = null;
-		AucRocValue = aucRoc;
-		return Self;
+		Instance.AucRoc = value;
+		return this;
 	}
 
-	public DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc()
 	{
-		AucRocValue = null;
-		AucRocDescriptorAction = null;
-		AucRocDescriptor = descriptor;
-		return Self;
+		Instance.AucRoc = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor.Build(null);
+		return this;
 	}
 
-	public DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor>? action)
 	{
-		AucRocValue = null;
-		AucRocDescriptor = null;
-		AucRocDescriptorAction = configure;
-		return Self;
+		Instance.AucRoc = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -111,10 +194,39 @@ public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor
 	/// Accuracy of predictions (per-class and overall).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionMetricsDescriptor ConfusionMatrix(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor ConfusionMatrix(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ConfusionMatrixValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.ConfusionMatrix = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accuracy of predictions (per-class and overall).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor ConfusionMatrix()
+	{
+		Instance.ConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Accuracy of predictions (per-class and overall).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor ConfusionMatrix(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.ConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor AddConfusionMatrix(string key, object value)
+	{
+		Instance.ConfusionMatrix ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.ConfusionMatrix.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -122,10 +234,39 @@ public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor
 	/// Precision of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionMetricsDescriptor Precision(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Precision(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		PrecisionValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Precision = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Precision of predictions (per-class and average).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Precision()
+	{
+		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Precision of predictions (per-class and average).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Precision(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor AddPrecision(string key, object value)
+	{
+		Instance.Precision ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Precision.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -133,49 +274,51 @@ public sealed partial class DataframeEvaluationOutlierDetectionMetricsDescriptor
 	/// Recall of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationOutlierDetectionMetricsDescriptor Recall(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Recall(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		RecallValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Recall = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Recall of predictions (per-class and average).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Recall()
 	{
-		writer.WriteStartObject();
-		if (AucRocDescriptor is not null)
+		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Recall of predictions (per-class and average).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Recall(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor AddRecall(string key, object value)
+	{
+		Instance.Recall ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Recall.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("auc_roc");
-			JsonSerializer.Serialize(writer, AucRocDescriptor, options);
-		}
-		else if (AucRocDescriptorAction is not null)
-		{
-			writer.WritePropertyName("auc_roc");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor(AucRocDescriptorAction), options);
-		}
-		else if (AucRocValue is not null)
-		{
-			writer.WritePropertyName("auc_roc");
-			JsonSerializer.Serialize(writer, AucRocValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ConfusionMatrixValue is not null)
-		{
-			writer.WritePropertyName("confusion_matrix");
-			JsonSerializer.Serialize(writer, ConfusionMatrixValue, options);
-		}
-
-		if (PrecisionValue is not null)
-		{
-			writer.WritePropertyName("precision");
-			JsonSerializer.Serialize(writer, PrecisionValue, options);
-		}
-
-		if (RecallValue is not null)
-		{
-			writer.WritePropertyName("recall");
-			JsonSerializer.Serialize(writer, RecallValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

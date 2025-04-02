@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public sealed partial class PutSearchApplicationRequestParameters : RequestParameters
+public sealed partial class PutSearchApplicationRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -40,20 +33,52 @@ public sealed partial class PutSearchApplicationRequestParameters : RequestParam
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 }
 
+internal sealed partial class PutSearchApplicationRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest>
+{
+	public override Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { SearchApplication = reader.ReadValue<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.SearchApplication, null);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update a search application.
 /// </para>
 /// </summary>
-public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearchApplicationRequestParameters>, ISelfSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestConverter))]
+public sealed partial class PutSearchApplicationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationPut;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Name name, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication) : base(r => r.Required("name", name))
+	{
+		SearchApplication = searchApplication;
+	}
+#if NET7_0_OR_GREATER
+	public PutSearchApplicationRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SearchApplicationPut;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -61,18 +86,26 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 
 	/// <summary>
 	/// <para>
+	/// The name of the search application to be created or updated.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, this request cannot replace or update existing Search Applications.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication SearchApplication { get; set; }
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, SearchApplication, options);
-	}
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters SearchApplication { get; set; }
 }
 
 /// <summary>
@@ -80,57 +113,113 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 /// Create or update a search application.
 /// </para>
 /// </summary>
-public sealed partial class PutSearchApplicationRequestDescriptor : RequestDescriptor<PutSearchApplicationRequestDescriptor, PutSearchApplicationRequestParameters>
+public readonly partial struct PutSearchApplicationRequestDescriptor
 {
-	internal PutSearchApplicationRequestDescriptor(Action<PutSearchApplicationRequestDescriptor> configure) => configure.Invoke(this);
-	public PutSearchApplicationRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name)) => SearchApplicationValue = searchApplication;
+	internal Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest Instance { get; init; }
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchApplicationPut;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "search_application.put";
-
-	public PutSearchApplicationRequestDescriptor Create(bool? create = true) => Qs("create", create);
-
-	public PutSearchApplicationRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutSearchApplicationRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest instance)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication SearchApplicationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationDescriptor SearchApplicationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationDescriptor> SearchApplicationDescriptorAction { get; set; }
-
-	public PutSearchApplicationRequestDescriptor SearchApplication(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication searchApplication)
+	public PutSearchApplicationRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		SearchApplicationDescriptor = null;
-		SearchApplicationDescriptorAction = null;
-		SearchApplicationValue = searchApplication;
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest(name);
+#pragma warning restore CS0618
 	}
 
-	public PutSearchApplicationRequestDescriptor SearchApplication(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationDescriptor descriptor)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutSearchApplicationRequestDescriptor()
 	{
-		SearchApplicationValue = null;
-		SearchApplicationDescriptorAction = null;
-		SearchApplicationDescriptor = descriptor;
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public PutSearchApplicationRequestDescriptor SearchApplication(Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationDescriptor> configure)
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the search application to be created or updated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
-		SearchApplicationValue = null;
-		SearchApplicationDescriptor = null;
-		SearchApplicationDescriptorAction = configure;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing Search Applications.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor Create(bool? value = true)
 	{
-		JsonSerializer.Serialize(writer, SearchApplicationValue, options);
+		Instance.Create = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor SearchApplication(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters value)
+	{
+		Instance.SearchApplication = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor SearchApplication(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor> action)
+	{
+		Instance.SearchApplication = Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

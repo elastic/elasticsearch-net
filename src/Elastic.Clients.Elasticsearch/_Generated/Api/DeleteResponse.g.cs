@@ -17,51 +17,180 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class DeleteResponse : ElasticsearchResponse
+internal sealed partial class DeleteResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DeleteResponse>
 {
-	[JsonInclude, JsonPropertyName("forced_refresh")]
-	public bool? ForcedRefresh { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropForcedRefresh = System.Text.Json.JsonEncodedText.Encode("forced_refresh");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+
+	public override Elastic.Clients.Elasticsearch.DeleteResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propForcedRefresh = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<long?> propPrimaryTerm = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Result> propResult = default;
+		LocalJsonValue<long?> propSeqNo = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
+		LocalJsonValue<long> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propForcedRefresh.TryReadProperty(ref reader, options, PropForcedRefresh, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
+			{
+				continue;
+			}
+
+			if (propResult.TryReadProperty(ref reader, options, PropResult, null))
+			{
+				continue;
+			}
+
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
+			{
+				continue;
+			}
+
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.DeleteResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ForcedRefresh = propForcedRefresh.Value,
+			Id = propId.Value,
+			Index = propIndex.Value,
+			PrimaryTerm = propPrimaryTerm.Value,
+			Result = propResult.Value,
+			SeqNo = propSeqNo.Value,
+			Shards = propShards.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DeleteResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
+		writer.WriteProperty(options, PropResult, value.Result, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DeleteResponseConverter))]
+public sealed partial class DeleteResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteResponse(string id, string index, Elastic.Clients.Elasticsearch.Result result, Elastic.Clients.Elasticsearch.ShardStatistics shards, long version)
+	{
+		Id = id;
+		Index = index;
+		Result = result;
+		Shards = shards;
+		Version = version;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public bool? ForcedRefresh { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unique identifier for the added document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_id")]
-	public string Id { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the index the document was added to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_index")]
-	public string Index { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The primary term assigned to the document for the indexing operation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_primary_term")]
-	public long? PrimaryTerm { get; init; }
+	public long? PrimaryTerm { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The result of the indexing operation: <c>created</c> or <c>updated</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("result")]
-	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Result Result { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -69,22 +198,27 @@ public sealed partial class DeleteResponse : ElasticsearchResponse
 	/// Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_seq_no")]
-	public long? SeqNo { get; init; }
+	public long? SeqNo { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Information about the replication process of the operation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_shards")]
-	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The document version, which is incremented each time the document is updated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_version")]
-	public long Version { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Version { get; set; }
 }

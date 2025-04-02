@@ -17,19 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class RemovePolicyResponse : ElasticsearchResponse
+internal sealed partial class RemovePolicyResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse>
 {
-	[JsonInclude, JsonPropertyName("failed_indexes")]
-	public IReadOnlyCollection<string> FailedIndexes { get; init; }
-	[JsonInclude, JsonPropertyName("has_failures")]
-	public bool HasFailures { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropFailedIndexes = System.Text.Json.JsonEncodedText.Encode("failed_indexes");
+	private static readonly System.Text.Json.JsonEncodedText PropHasFailures = System.Text.Json.JsonEncodedText.Encode("has_failures");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propFailedIndexes = default;
+		LocalJsonValue<bool> propHasFailures = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFailedIndexes.TryReadProperty(ref reader, options, PropFailedIndexes, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propHasFailures.TryReadProperty(ref reader, options, PropHasFailures, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FailedIndexes = propFailedIndexes.Value,
+			HasFailures = propHasFailures.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFailedIndexes, value.FailedIndexes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropHasFailures, value.HasFailures, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponseConverter))]
+public sealed partial class RemovePolicyResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RemovePolicyResponse(System.Collections.Generic.IReadOnlyCollection<string> failedIndexes, bool hasFailures)
+	{
+		FailedIndexes = failedIndexes;
+		HasFailures = hasFailures;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RemovePolicyResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RemovePolicyResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		System.Collections.Generic.IReadOnlyCollection<string> FailedIndexes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool HasFailures { get; set; }
 }

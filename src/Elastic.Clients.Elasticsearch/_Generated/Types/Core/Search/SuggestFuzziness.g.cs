@@ -17,24 +17,111 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class SuggestFuzzinessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness");
+	private static readonly System.Text.Json.JsonEncodedText PropMinLength = System.Text.Json.JsonEncodedText.Encode("min_length");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropTranspositions = System.Text.Json.JsonEncodedText.Encode("transpositions");
+	private static readonly System.Text.Json.JsonEncodedText PropUnicodeAware = System.Text.Json.JsonEncodedText.Encode("unicode_aware");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fuzziness?> propFuzziness = default;
+		LocalJsonValue<int?> propMinLength = default;
+		LocalJsonValue<int?> propPrefixLength = default;
+		LocalJsonValue<bool?> propTranspositions = default;
+		LocalJsonValue<bool?> propUnicodeAware = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFuzziness.TryReadProperty(ref reader, options, PropFuzziness, null))
+			{
+				continue;
+			}
+
+			if (propMinLength.TryReadProperty(ref reader, options, PropMinLength, null))
+			{
+				continue;
+			}
+
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			{
+				continue;
+			}
+
+			if (propTranspositions.TryReadProperty(ref reader, options, PropTranspositions, null))
+			{
+				continue;
+			}
+
+			if (propUnicodeAware.TryReadProperty(ref reader, options, PropUnicodeAware, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Fuzziness = propFuzziness.Value,
+			MinLength = propMinLength.Value,
+			PrefixLength = propPrefixLength.Value,
+			Transpositions = propTranspositions.Value,
+			UnicodeAware = propUnicodeAware.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
+		writer.WriteProperty(options, PropMinLength, value.MinLength, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteProperty(options, PropTranspositions, value.Transpositions, null, null);
+		writer.WriteProperty(options, PropUnicodeAware, value.UnicodeAware, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessConverter))]
 public sealed partial class SuggestFuzziness
 {
+#if NET7_0_OR_GREATER
+	public SuggestFuzziness()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SuggestFuzziness()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SuggestFuzziness(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The fuzziness factor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
 	/// <summary>
@@ -42,7 +129,6 @@ public sealed partial class SuggestFuzziness
 	/// Minimum length of the input before fuzzy suggestions are returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_length")]
 	public int? MinLength { get; set; }
 
 	/// <summary>
@@ -50,7 +136,6 @@ public sealed partial class SuggestFuzziness
 	/// Minimum length of the input, which is not checked for fuzzy alternatives.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
 	/// <summary>
@@ -58,7 +143,6 @@ public sealed partial class SuggestFuzziness
 	/// If set to <c>true</c>, transpositions are counted as one change instead of two.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("transpositions")]
 	public bool? Transpositions { get; set; }
 
 	/// <summary>
@@ -67,33 +151,48 @@ public sealed partial class SuggestFuzziness
 	/// This is slightly slower than raw bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unicode_aware")]
 	public bool? UnicodeAware { get; set; }
 }
 
-public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<SuggestFuzzinessDescriptor>
+public readonly partial struct SuggestFuzzinessDescriptor
 {
-	internal SuggestFuzzinessDescriptor(Action<SuggestFuzzinessDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness Instance { get; init; }
 
-	public SuggestFuzzinessDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SuggestFuzzinessDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-	private int? MinLengthValue { get; set; }
-	private int? PrefixLengthValue { get; set; }
-	private bool? TranspositionsValue { get; set; }
-	private bool? UnicodeAwareValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SuggestFuzzinessDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness instance) => new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The fuzziness factor.
 	/// </para>
 	/// </summary>
-	public SuggestFuzzinessDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
-		FuzzinessValue = fuzziness;
-		return Self;
+		Instance.Fuzziness = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The fuzziness factor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessBuilder, Elastic.Clients.Elasticsearch.Fuzziness> action)
+	{
+		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessBuilder.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -101,10 +200,10 @@ public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<
 	/// Minimum length of the input before fuzzy suggestions are returned.
 	/// </para>
 	/// </summary>
-	public SuggestFuzzinessDescriptor MinLength(int? minLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor MinLength(int? value)
 	{
-		MinLengthValue = minLength;
-		return Self;
+		Instance.MinLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -112,10 +211,10 @@ public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<
 	/// Minimum length of the input, which is not checked for fuzzy alternatives.
 	/// </para>
 	/// </summary>
-	public SuggestFuzzinessDescriptor PrefixLength(int? prefixLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor PrefixLength(int? value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -123,10 +222,10 @@ public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<
 	/// If set to <c>true</c>, transpositions are counted as one change instead of two.
 	/// </para>
 	/// </summary>
-	public SuggestFuzzinessDescriptor Transpositions(bool? transpositions = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor Transpositions(bool? value = true)
 	{
-		TranspositionsValue = transpositions;
-		return Self;
+		Instance.Transpositions = value;
+		return this;
 	}
 
 	/// <summary>
@@ -135,45 +234,22 @@ public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<
 	/// This is slightly slower than raw bytes.
 	/// </para>
 	/// </summary>
-	public SuggestFuzzinessDescriptor UnicodeAware(bool? unicodeAware = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor UnicodeAware(bool? value = true)
 	{
-		UnicodeAwareValue = unicodeAware;
-		return Self;
+		Instance.UnicodeAware = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (FuzzinessValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("fuzziness");
-			JsonSerializer.Serialize(writer, FuzzinessValue, options);
+			return new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MinLengthValue.HasValue)
-		{
-			writer.WritePropertyName("min_length");
-			writer.WriteNumberValue(MinLengthValue.Value);
-		}
-
-		if (PrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(PrefixLengthValue.Value);
-		}
-
-		if (TranspositionsValue.HasValue)
-		{
-			writer.WritePropertyName("transpositions");
-			writer.WriteBooleanValue(TranspositionsValue.Value);
-		}
-
-		if (UnicodeAwareValue.HasValue)
-		{
-			writer.WritePropertyName("unicode_aware");
-			writer.WriteBooleanValue(UnicodeAwareValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

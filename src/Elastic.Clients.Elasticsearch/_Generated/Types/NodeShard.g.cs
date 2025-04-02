@@ -17,36 +17,184 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class NodeShardConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.NodeShard>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllocationId = System.Text.Json.JsonEncodedText.Encode("allocation_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
+	private static readonly System.Text.Json.JsonEncodedText PropRecoverySource = System.Text.Json.JsonEncodedText.Encode("recovery_source");
+	private static readonly System.Text.Json.JsonEncodedText PropRelocatingNode = System.Text.Json.JsonEncodedText.Encode("relocating_node");
+	private static readonly System.Text.Json.JsonEncodedText PropRelocationFailureInfo = System.Text.Json.JsonEncodedText.Encode("relocation_failure_info");
+	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard");
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedInfo = System.Text.Json.JsonEncodedText.Encode("unassigned_info");
+
+	public override Elastic.Clients.Elasticsearch.NodeShard Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propAllocationId = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<string?> propNode = default;
+		LocalJsonValue<bool> propPrimary = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propRecoverySource = default;
+		LocalJsonValue<string?> propRelocatingNode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.RelocationFailureInfo?> propRelocationFailureInfo = default;
+		LocalJsonValue<int> propShard = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState> propState = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation?> propUnassignedInfo = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllocationId.TryReadProperty(ref reader, options, PropAllocationId, static System.Collections.Generic.IReadOnlyDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (propPrimary.TryReadProperty(ref reader, options, PropPrimary, null))
+			{
+				continue;
+			}
+
+			if (propRecoverySource.TryReadProperty(ref reader, options, PropRecoverySource, static System.Collections.Generic.IReadOnlyDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRelocatingNode.TryReadProperty(ref reader, options, PropRelocatingNode, null))
+			{
+				continue;
+			}
+
+			if (propRelocationFailureInfo.TryReadProperty(ref reader, options, PropRelocationFailureInfo, null))
+			{
+				continue;
+			}
+
+			if (propShard.TryReadProperty(ref reader, options, PropShard, null))
+			{
+				continue;
+			}
+
+			if (propState.TryReadProperty(ref reader, options, PropState, null))
+			{
+				continue;
+			}
+
+			if (propUnassignedInfo.TryReadProperty(ref reader, options, PropUnassignedInfo, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.NodeShard(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllocationId = propAllocationId.Value,
+			Index = propIndex.Value,
+			Node = propNode.Value,
+			Primary = propPrimary.Value,
+			RecoverySource = propRecoverySource.Value,
+			RelocatingNode = propRelocatingNode.Value,
+			RelocationFailureInfo = propRelocationFailureInfo.Value,
+			Shard = propShard.Value,
+			State = propState.Value,
+			UnassignedInfo = propUnassignedInfo.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.NodeShard value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllocationId, value.AllocationId, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
+		writer.WriteProperty(options, PropRecoverySource, value.RecoverySource, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropRelocatingNode, value.RelocatingNode, null, null);
+		writer.WriteProperty(options, PropRelocationFailureInfo, value.RelocationFailureInfo, null, null);
+		writer.WriteProperty(options, PropShard, value.Shard, null, null);
+		writer.WriteProperty(options, PropState, value.State, null, null);
+		writer.WriteProperty(options, PropUnassignedInfo, value.UnassignedInfo, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.NodeShardConverter))]
 public sealed partial class NodeShard
 {
-	[JsonInclude, JsonPropertyName("allocation_id")]
-	public IReadOnlyDictionary<string, string>? AllocationId { get; init; }
-	[JsonInclude, JsonPropertyName("index")]
-	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
-	public string? Node { get; init; }
-	[JsonInclude, JsonPropertyName("primary")]
-	public bool Primary { get; init; }
-	[JsonInclude, JsonPropertyName("recovery_source")]
-	public IReadOnlyDictionary<string, string>? RecoverySource { get; init; }
-	[JsonInclude, JsonPropertyName("relocating_node")]
-	public string? RelocatingNode { get; init; }
-	[JsonInclude, JsonPropertyName("relocation_failure_info")]
-	public Elastic.Clients.Elasticsearch.RelocationFailureInfo? RelocationFailureInfo { get; init; }
-	[JsonInclude, JsonPropertyName("shard")]
-	public int Shard { get; init; }
-	[JsonInclude, JsonPropertyName("state")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; init; }
-	[JsonInclude, JsonPropertyName("unassigned_info")]
-	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation? UnassignedInfo { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeShard(string index, bool primary, int shard, Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState state)
+	{
+		Index = index;
+		Primary = primary;
+		Shard = shard;
+		State = state;
+	}
+#if NET7_0_OR_GREATER
+	public NodeShard()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeShard()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeShard(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.IReadOnlyDictionary<string, string>? AllocationId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Index { get; set; }
+	public string? Node { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Primary { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, string>? RecoverySource { get; set; }
+	public string? RelocatingNode { get; set; }
+	public Elastic.Clients.Elasticsearch.RelocationFailureInfo? RelocationFailureInfo { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Shard { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; set; }
+	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation? UnassignedInfo { get; set; }
 }

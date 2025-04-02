@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class MultiTermVectorsRequestParameters : RequestParameters
+public sealed partial class MultiTermVectorsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -112,305 +105,50 @@ public sealed partial class MultiTermVectorsRequestParameters : RequestParameter
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get multiple term vectors.
-/// </para>
-/// <para>
-/// Get multiple term vectors with a single request.
-/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
-/// You can specify the index in the request body or request URI.
-/// The response contains a <c>docs</c> array with all the fetched termvectors.
-/// Each element has the structure provided by the termvectors API.
-/// </para>
-/// <para>
-/// <strong>Artificial documents</strong>
-/// </para>
-/// <para>
-/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
-/// The mapping used is determined by the specified <c>_index</c>.
-/// </para>
-/// </summary>
-public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVectorsRequestParameters>
+internal sealed partial class MultiTermVectorsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest>
 {
-	public MultiTermVectorsRequest()
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+	private static readonly System.Text.Json.JsonEncodedText PropIds = System.Text.Json.JsonEncodedText.Encode("ids");
+
+	public override Elastic.Clients.Elasticsearch.MultiTermVectorsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	public MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMtermvectors;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "mtermvectors";
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term offsets.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term payloads.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term positions.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
-
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-	/// <summary>
-	/// <para>
-	/// If true, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-	/// <summary>
-	/// <para>
-	/// If true, the response includes term frequency and document frequency.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
-
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("docs")]
-	public ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? Docs { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("ids")]
-	public ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get; set; }
-}
-
-/// <summary>
-/// <para>
-/// Get multiple term vectors.
-/// </para>
-/// <para>
-/// Get multiple term vectors with a single request.
-/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
-/// You can specify the index in the request body or request URI.
-/// The response contains a <c>docs</c> array with all the fetched termvectors.
-/// Each element has the structure provided by the termvectors API.
-/// </para>
-/// <para>
-/// <strong>Artificial documents</strong>
-/// </para>
-/// <para>
-/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
-/// The mapping used is determined by the specified <c>_index</c>.
-/// </para>
-/// </summary>
-public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : RequestDescriptor<MultiTermVectorsRequestDescriptor<TDocument>, MultiTermVectorsRequestParameters>
-{
-	internal MultiTermVectorsRequestDescriptor(Action<MultiTermVectorsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
-	{
-	}
-
-	public MultiTermVectorsRequestDescriptor() : this(typeof(TDocument))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMtermvectors;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "mtermvectors";
-
-	public MultiTermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
-	public MultiTermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
-	public MultiTermVectorsRequestDescriptor<TDocument> Offsets(bool? offsets = true) => Qs("offsets", offsets);
-	public MultiTermVectorsRequestDescriptor<TDocument> Payloads(bool? payloads = true) => Qs("payloads", payloads);
-	public MultiTermVectorsRequestDescriptor<TDocument> Positions(bool? positions = true) => Qs("positions", positions);
-	public MultiTermVectorsRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public MultiTermVectorsRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
-	public MultiTermVectorsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public MultiTermVectorsRequestDescriptor<TDocument> TermStatistics(bool? termStatistics = true) => Qs("term_statistics", termStatistics);
-	public MultiTermVectorsRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
-	public MultiTermVectorsRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-
-	public MultiTermVectorsRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
-	{
-		RouteValues.Optional("index", index);
-		return Self;
-	}
-
-	private ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? DocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> DocsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>> DocsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>[] DocsDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Id>? IdsValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
-	public MultiTermVectorsRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? docs)
-	{
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsValue = docs;
-		return Self;
-	}
-
-	public MultiTermVectorsRequestDescriptor<TDocument> Docs(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> descriptor)
-	{
-		DocsValue = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsDescriptor = descriptor;
-		return Self;
-	}
-
-	public MultiTermVectorsRequestDescriptor<TDocument> Docs(Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>> configure)
-	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorActions = null;
-		DocsDescriptorAction = configure;
-		return Self;
-	}
-
-	public MultiTermVectorsRequestDescriptor<TDocument> Docs(params Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>[] configure)
-	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
-	public MultiTermVectorsRequestDescriptor<TDocument> Ids(ICollection<Elastic.Clients.Elasticsearch.Id>? ids)
-	{
-		IdsValue = ids;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (DocsDescriptor is not null)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>?> propDocs = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>?> propIds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>(DocsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			foreach (var action in DocsDescriptorActions)
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>(o, null)))
 			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>(action), options);
+				continue;
 			}
 
-			writer.WriteEndArray();
-		}
-		else if (DocsValue is not null)
-		{
-			writer.WritePropertyName("docs");
-			JsonSerializer.Serialize(writer, DocsValue, options);
+			if (propIds.TryReadProperty(ref reader, options, PropIds, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		if (IdsValue is not null)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			writer.WritePropertyName("ids");
-			JsonSerializer.Serialize(writer, IdsValue, options);
-		}
+			Docs = propDocs.Value,
+			Ids = propIds.Value
+		};
+	}
 
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MultiTermVectorsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>(o, v, null));
+		writer.WriteProperty(options, PropIds, value.Ids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
 		writer.WriteEndObject();
 	}
 }
@@ -434,89 +172,412 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 /// The mapping used is determined by the specified <c>_index</c>.
 /// </para>
 /// </summary>
-public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescriptor<MultiTermVectorsRequestDescriptor, MultiTermVectorsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MultiTermVectorsRequestConverter))]
+public sealed partial class MultiTermVectorsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>
 {
-	internal MultiTermVectorsRequestDescriptor(Action<MultiTermVectorsRequestDescriptor> configure) => configure.Invoke(this);
-
-	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
+	public MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
 	{
+	}
+#if NET7_0_OR_GREATER
+	public MultiTermVectorsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MultiTermVectorsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceMtermvectors;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
+
+	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "mtermvectors";
+
+	/// <summary>
+	/// <para>
+	/// The name of the index that contains the documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
+	/// </para>
+	/// </summary>
+	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term offsets.
+	/// </para>
+	/// </summary>
+	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term payloads.
+	/// </para>
+	/// </summary>
+	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term positions.
+	/// </para>
+	/// </summary>
+	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
+	/// </para>
+	/// </summary>
+	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	/// <summary>
+	/// <para>
+	/// If true, the request is real-time as opposed to near-real-time.
+	/// </para>
+	/// </summary>
+	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <summary>
+	/// <para>
+	/// If true, the response includes term frequency and document frequency.
+	/// </para>
+	/// </summary>
+	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns the document version as part of a hit.
+	/// </para>
+	/// </summary>
+	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+
+	/// <summary>
+	/// <para>
+	/// The version type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
+
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? Docs { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// Get multiple term vectors.
+/// </para>
+/// <para>
+/// Get multiple term vectors with a single request.
+/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+/// You can specify the index in the request body or request URI.
+/// The response contains a <c>docs</c> array with all the fetched termvectors.
+/// Each element has the structure provided by the termvectors API.
+/// </para>
+/// <para>
+/// <strong>Artificial documents</strong>
+/// </para>
+/// <para>
+/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
+/// The mapping used is determined by the specified <c>_index</c>.
+/// </para>
+/// </summary>
+public readonly partial struct MultiTermVectorsRequestDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MultiTermVectorsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(index);
 	}
 
 	public MultiTermVectorsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMtermvectors;
+	public static explicit operator Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest instance) => new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "mtermvectors";
-
-	public MultiTermVectorsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
-	public MultiTermVectorsRequestDescriptor FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
-	public MultiTermVectorsRequestDescriptor Offsets(bool? offsets = true) => Qs("offsets", offsets);
-	public MultiTermVectorsRequestDescriptor Payloads(bool? payloads = true) => Qs("payloads", payloads);
-	public MultiTermVectorsRequestDescriptor Positions(bool? positions = true) => Qs("positions", positions);
-	public MultiTermVectorsRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public MultiTermVectorsRequestDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
-	public MultiTermVectorsRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public MultiTermVectorsRequestDescriptor TermStatistics(bool? termStatistics = true) => Qs("term_statistics", termStatistics);
-	public MultiTermVectorsRequestDescriptor Version(long? version) => Qs("version", version);
-	public MultiTermVectorsRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-
-	public MultiTermVectorsRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	/// <summary>
+	/// <para>
+	/// The name of the index that contains the documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		RouteValues.Optional("index", index);
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? DocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor DocsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor> DocsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor>[] DocsDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Id>? IdsValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor FieldStatistics(bool? value = true)
+	{
+		Instance.FieldStatistics = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term offsets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Offsets(bool? value = true)
+	{
+		Instance.Offsets = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term payloads.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Payloads(bool? value = true)
+	{
+		Instance.Payloads = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term positions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Positions(bool? value = true)
+	{
+		Instance.Positions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the request is real-time as opposed to near-real-time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Realtime(bool? value = true)
+	{
+		Instance.Realtime = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the response includes term frequency and document frequency.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor TermStatistics(bool? value = true)
+	{
+		Instance.TermStatistics = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns the document version as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The version type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// An array of existing or artificial documents.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? docs)
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? value)
 	{
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsValue = docs;
-		return Self;
+		Instance.Docs = value;
+		return this;
 	}
 
-	public MultiTermVectorsRequestDescriptor Docs(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs()
 	{
-		DocsValue = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsDescriptor = descriptor;
-		return Self;
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation.Build(null);
+		return this;
 	}
 
-	public MultiTermVectorsRequestDescriptor Docs(Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation>? action)
 	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorActions = null;
-		DocsDescriptorAction = configure;
-		return Self;
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation.Build(action);
+		return this;
 	}
 
-	public MultiTermVectorsRequestDescriptor Docs(params Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<T>>? action)
 	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = configure;
-		return Self;
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs(params Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation[] values)
+	{
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<T>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<T>.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
 	}
 
 	/// <summary>
@@ -524,52 +585,446 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 	/// A simplified syntax to specify documents by their ID if they're in the same index.
 	/// </para>
 	/// </summary>
-	public MultiTermVectorsRequestDescriptor Ids(ICollection<Elastic.Clients.Elasticsearch.Id>? ids)
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
-		IdsValue = ids;
-		return Self;
+		Instance.Ids = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Ids()
 	{
-		writer.WriteStartObject();
-		if (DocsDescriptor is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor(DocsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			foreach (var action in DocsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor(action), options);
-			}
+		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (DocsValue is not null)
-		{
-			writer.WritePropertyName("docs");
-			JsonSerializer.Serialize(writer, DocsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
+		return this;
+	}
 
-		if (IdsValue is not null)
+	/// <summary>
+	/// <para>
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Ids(params Elastic.Clients.Elasticsearch.Id[] values)
+	{
+		Instance.Ids = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MultiTermVectorsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("ids");
-			JsonSerializer.Serialize(writer, IdsValue, options);
+			return new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}
+
+/// <summary>
+/// <para>
+/// Get multiple term vectors.
+/// </para>
+/// <para>
+/// Get multiple term vectors with a single request.
+/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+/// You can specify the index in the request body or request URI.
+/// The response contains a <c>docs</c> array with all the fetched termvectors.
+/// Each element has the structure provided by the termvectors API.
+/// </para>
+/// <para>
+/// <strong>Artificial documents</strong>
+/// </para>
+/// <para>
+/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
+/// The mapping used is determined by the specified <c>_index</c>.
+/// </para>
+/// </summary>
+public readonly partial struct MultiTermVectorsRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.MultiTermVectorsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(index);
+	}
+
+	public MultiTermVectorsRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest instance) => new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the index that contains the documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? value = true)
+	{
+		Instance.FieldStatistics = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term offsets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Offsets(bool? value = true)
+	{
+		Instance.Offsets = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term payloads.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Payloads(bool? value = true)
+	{
+		Instance.Payloads = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term positions.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Positions(bool? value = true)
+	{
+		Instance.Positions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the request is real-time as opposed to near-real-time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Realtime(bool? value = true)
+	{
+		Instance.Realtime = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the response includes term frequency and document frequency.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> TermStatistics(bool? value = true)
+	{
+		Instance.TermStatistics = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns the document version as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The version type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? value)
+	{
+		Instance.Docs = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs()
+	{
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<TDocument>>? action)
+	{
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation[] values)
+	{
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of existing or artificial documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
+	{
+		Instance.Ids = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Ids()
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A simplified syntax to specify documents by their ID if they're in the same index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Ids(params Elastic.Clients.Elasticsearch.Id[] values)
+	{
+		Instance.Ids = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MultiTermVectorsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,18 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class BoolQuery
+internal sealed partial class BoolQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
+	private static readonly System.Text.Json.JsonEncodedText PropMust = System.Text.Json.JsonEncodedText.Encode("must");
+	private static readonly System.Text.Json.JsonEncodedText PropMustNot = System.Text.Json.JsonEncodedText.Encode("must_not");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropShould = System.Text.Json.JsonEncodedText.Encode("should");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MinimumShouldMatch?> propMinimumShouldMatch = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propMust = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propMustNot = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propShould = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMinimumShouldMatch.TryReadProperty(ref reader, options, PropMinimumShouldMatch, null))
+			{
+				continue;
+			}
+
+			if (propMust.TryReadProperty(ref reader, options, PropMust, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMustNot.TryReadProperty(ref reader, options, PropMustNot, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propShould.TryReadProperty(ref reader, options, PropShould, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Filter = propFilter.Value,
+			MinimumShouldMatch = propMinimumShouldMatch.Value,
+			Must = propMust.Value,
+			MustNot = propMustNot.Value,
+			QueryName = propQueryName.Value,
+			Should = propShould.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
+		writer.WriteProperty(options, PropMust, value.Must, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropMustNot, value.MustNot, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropShould, value.Should, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryConverter))]
+public partial class BoolQuery
+{
+#if NET7_0_OR_GREATER
+	public BoolQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public BoolQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BoolQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +143,6 @@ public sealed partial class BoolQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -46,16 +151,13 @@ public sealed partial class BoolQuery
 	/// However, unlike <c>must</c>, the score of the query will be ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the number or percentage of <c>should</c> clauses returned documents must match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 	/// <summary>
@@ -63,9 +165,7 @@ public sealed partial class BoolQuery
 	/// The clause (query) must appear in matching documents and will contribute to the score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("must")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Must { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Must { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -73,10 +173,7 @@ public sealed partial class BoolQuery
 	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("must_not")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNot { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNot { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -84,43 +181,27 @@ public sealed partial class BoolQuery
 	/// The clause (query) should appear in the matching document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("should")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Should { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Bool(boolQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Bool(boolQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Bool(boolQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(BoolQuery boolQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Bool(boolQuery);
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Should { get; set; }
 }
 
-public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescriptor<BoolQueryDescriptor<TDocument>>
+public readonly partial struct BoolQueryDescriptor<TDocument>
 {
-	internal BoolQueryDescriptor(Action<BoolQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery Instance { get; init; }
 
-	public BoolQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoolQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MustDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> MustDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] MustDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNotValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MustNotDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> MustNotDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] MustNotDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? ShouldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> ShouldDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> ShouldDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] ShouldDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoolQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -130,10 +211,10 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -142,40 +223,64 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	/// However, unlike <c>must</c>, the score of the query will be ignored.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter()
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -183,10 +288,10 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	/// Specifies the number or percentage of <c>should</c> clauses returned documents must match.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
+		Instance.MinimumShouldMatch = value;
+		return this;
 	}
 
 	/// <summary>
@@ -194,40 +299,60 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	/// The clause (query) must appear in matching documents and will contribute to the score.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor<TDocument> Must(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? must)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		MustDescriptor = null;
-		MustDescriptorAction = null;
-		MustDescriptorActions = null;
-		MustValue = must;
-		return Self;
+		Instance.Must = value;
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> Must(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must()
 	{
-		MustValue = null;
-		MustDescriptorAction = null;
-		MustDescriptorActions = null;
-		MustDescriptor = descriptor;
-		return Self;
+		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> Must(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
 	{
-		MustValue = null;
-		MustDescriptor = null;
-		MustDescriptorActions = null;
-		MustDescriptorAction = configure;
-		return Self;
+		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> Must(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		MustValue = null;
-		MustDescriptor = null;
-		MustDescriptorAction = null;
-		MustDescriptorActions = configure;
-		return Self;
+		Instance.Must = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Must = items;
+		return this;
 	}
 
 	/// <summary>
@@ -236,46 +361,70 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor<TDocument> MustNot(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? mustNot)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		MustNotDescriptor = null;
-		MustNotDescriptorAction = null;
-		MustNotDescriptorActions = null;
-		MustNotValue = mustNot;
-		return Self;
+		Instance.MustNot = value;
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> MustNot(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot()
 	{
-		MustNotValue = null;
-		MustNotDescriptorAction = null;
-		MustNotDescriptorActions = null;
-		MustNotDescriptor = descriptor;
-		return Self;
+		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> MustNot(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
 	{
-		MustNotValue = null;
-		MustNotDescriptor = null;
-		MustNotDescriptorActions = null;
-		MustNotDescriptorAction = configure;
-		return Self;
+		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> MustNot(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		MustNotValue = null;
-		MustNotDescriptor = null;
-		MustNotDescriptorAction = null;
-		MustNotDescriptorActions = configure;
-		return Self;
+		Instance.MustNot = [.. values];
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> QueryName(string? queryName)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.MustNot = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> QueryName(string? value)
+	{
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -283,210 +432,94 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	/// The clause (query) should appear in the matching document.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor<TDocument> Should(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? should)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		ShouldDescriptor = null;
-		ShouldDescriptorAction = null;
-		ShouldDescriptorActions = null;
-		ShouldValue = should;
-		return Self;
+		Instance.Should = value;
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> Should(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should()
 	{
-		ShouldValue = null;
-		ShouldDescriptorAction = null;
-		ShouldDescriptorActions = null;
-		ShouldDescriptor = descriptor;
-		return Self;
+		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> Should(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
 	{
-		ShouldValue = null;
-		ShouldDescriptor = null;
-		ShouldDescriptorActions = null;
-		ShouldDescriptorAction = configure;
-		return Self;
+		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
+		return this;
 	}
 
-	public BoolQueryDescriptor<TDocument> Should(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		ShouldValue = null;
-		ShouldDescriptor = null;
-		ShouldDescriptorAction = null;
-		ShouldDescriptorActions = configure;
-		return Self;
+		Instance.Should = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
 		}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
+		Instance.Should = items;
+		return this;
+	}
 
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MinimumShouldMatchValue is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-		}
-
-		if (MustDescriptor is not null)
-		{
-			writer.WritePropertyName("must");
-			JsonSerializer.Serialize(writer, MustDescriptor, options);
-		}
-		else if (MustDescriptorAction is not null)
-		{
-			writer.WritePropertyName("must");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(MustDescriptorAction), options);
-		}
-		else if (MustDescriptorActions is not null)
-		{
-			writer.WritePropertyName("must");
-			if (MustDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in MustDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
-
-			if (MustDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (MustValue is not null)
-		{
-			writer.WritePropertyName("must");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(MustValue, writer, options);
-		}
-
-		if (MustNotDescriptor is not null)
-		{
-			writer.WritePropertyName("must_not");
-			JsonSerializer.Serialize(writer, MustNotDescriptor, options);
-		}
-		else if (MustNotDescriptorAction is not null)
-		{
-			writer.WritePropertyName("must_not");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(MustNotDescriptorAction), options);
-		}
-		else if (MustNotDescriptorActions is not null)
-		{
-			writer.WritePropertyName("must_not");
-			if (MustNotDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in MustNotDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
-
-			if (MustNotDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (MustNotValue is not null)
-		{
-			writer.WritePropertyName("must_not");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(MustNotValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ShouldDescriptor is not null)
-		{
-			writer.WritePropertyName("should");
-			JsonSerializer.Serialize(writer, ShouldDescriptor, options);
-		}
-		else if (ShouldDescriptorAction is not null)
-		{
-			writer.WritePropertyName("should");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(ShouldDescriptorAction), options);
-		}
-		else if (ShouldDescriptorActions is not null)
-		{
-			writer.WritePropertyName("should");
-			if (ShouldDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in ShouldDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
-
-			if (ShouldDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (ShouldValue is not null)
-		{
-			writer.WritePropertyName("should");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(ShouldValue, writer, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQueryDescriptor>
+public readonly partial struct BoolQueryDescriptor
 {
-	internal BoolQueryDescriptor(Action<BoolQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery Instance { get; init; }
 
-	public BoolQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoolQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MustDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> MustDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] MustDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNotValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MustNotDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> MustNotDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] MustNotDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? ShouldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ShouldDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> ShouldDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] ShouldDescriptorActions { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoolQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -496,10 +529,10 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -508,40 +541,94 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	/// However, unlike <c>must</c>, the score of the query will be ignored.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public BoolQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter()
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
+		return this;
 	}
 
-	public BoolQueryDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
+		return this;
 	}
 
-	public BoolQueryDescriptor Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
+	{
+		Instance.Filter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents.
+	/// However, unlike <c>must</c>, the score of the query will be ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -549,10 +636,10 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	/// Specifies the number or percentage of <c>should</c> clauses returned documents must match.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
+		Instance.MinimumShouldMatch = value;
+		return this;
 	}
 
 	/// <summary>
@@ -560,40 +647,88 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	/// The clause (query) must appear in matching documents and will contribute to the score.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor Must(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? must)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		MustDescriptor = null;
-		MustDescriptorAction = null;
-		MustDescriptorActions = null;
-		MustValue = must;
-		return Self;
+		Instance.Must = value;
+		return this;
 	}
 
-	public BoolQueryDescriptor Must(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must()
 	{
-		MustValue = null;
-		MustDescriptorAction = null;
-		MustDescriptorActions = null;
-		MustDescriptor = descriptor;
-		return Self;
+		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
+		return this;
 	}
 
-	public BoolQueryDescriptor Must(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
 	{
-		MustValue = null;
-		MustDescriptor = null;
-		MustDescriptorActions = null;
-		MustDescriptorAction = configure;
-		return Self;
+		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
+		return this;
 	}
 
-	public BoolQueryDescriptor Must(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
 	{
-		MustValue = null;
-		MustDescriptor = null;
-		MustDescriptorAction = null;
-		MustDescriptorActions = configure;
-		return Self;
+		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
+	{
+		Instance.Must = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
+		}
+
+		Instance.Must = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must appear in matching documents and will contribute to the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
+		}
+
+		Instance.Must = items;
+		return this;
 	}
 
 	/// <summary>
@@ -602,46 +737,100 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor MustNot(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? mustNot)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		MustNotDescriptor = null;
-		MustNotDescriptorAction = null;
-		MustNotDescriptorActions = null;
-		MustNotValue = mustNot;
-		return Self;
+		Instance.MustNot = value;
+		return this;
 	}
 
-	public BoolQueryDescriptor MustNot(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot()
 	{
-		MustNotValue = null;
-		MustNotDescriptorAction = null;
-		MustNotDescriptorActions = null;
-		MustNotDescriptor = descriptor;
-		return Self;
+		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
+		return this;
 	}
 
-	public BoolQueryDescriptor MustNot(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
 	{
-		MustNotValue = null;
-		MustNotDescriptor = null;
-		MustNotDescriptorActions = null;
-		MustNotDescriptorAction = configure;
-		return Self;
+		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
+		return this;
 	}
 
-	public BoolQueryDescriptor MustNot(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
 	{
-		MustNotValue = null;
-		MustNotDescriptor = null;
-		MustNotDescriptorAction = null;
-		MustNotDescriptorActions = configure;
-		return Self;
+		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
+		return this;
 	}
 
-	public BoolQueryDescriptor QueryName(string? queryName)
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.MustNot = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
+		}
+
+		Instance.MustNot = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) must not appear in the matching documents.
+	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
+		}
+
+		Instance.MustNot = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor QueryName(string? value)
+	{
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -649,179 +838,100 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	/// The clause (query) should appear in the matching document.
 	/// </para>
 	/// </summary>
-	public BoolQueryDescriptor Should(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? should)
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		ShouldDescriptor = null;
-		ShouldDescriptorAction = null;
-		ShouldDescriptorActions = null;
-		ShouldValue = should;
-		return Self;
+		Instance.Should = value;
+		return this;
 	}
 
-	public BoolQueryDescriptor Should(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should()
 	{
-		ShouldValue = null;
-		ShouldDescriptorAction = null;
-		ShouldDescriptorActions = null;
-		ShouldDescriptor = descriptor;
-		return Self;
+		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
+		return this;
 	}
 
-	public BoolQueryDescriptor Should(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
 	{
-		ShouldValue = null;
-		ShouldDescriptor = null;
-		ShouldDescriptorActions = null;
-		ShouldDescriptorAction = configure;
-		return Self;
+		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
+		return this;
 	}
 
-	public BoolQueryDescriptor Should(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
 	{
-		ShouldValue = null;
-		ShouldDescriptor = null;
-		ShouldDescriptorAction = null;
-		ShouldDescriptorActions = configure;
-		return Self;
+		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
+		Instance.Should = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
 		}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
+		Instance.Should = items;
+		return this;
+	}
 
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
+	/// <summary>
+	/// <para>
+	/// The clause (query) should appear in the matching document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
 		}
 
-		if (MinimumShouldMatchValue is not null)
+		Instance.Should = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MustDescriptor is not null)
-		{
-			writer.WritePropertyName("must");
-			JsonSerializer.Serialize(writer, MustDescriptor, options);
-		}
-		else if (MustDescriptorAction is not null)
-		{
-			writer.WritePropertyName("must");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(MustDescriptorAction), options);
-		}
-		else if (MustDescriptorActions is not null)
-		{
-			writer.WritePropertyName("must");
-			if (MustDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in MustDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
-
-			if (MustDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (MustValue is not null)
-		{
-			writer.WritePropertyName("must");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(MustValue, writer, options);
-		}
-
-		if (MustNotDescriptor is not null)
-		{
-			writer.WritePropertyName("must_not");
-			JsonSerializer.Serialize(writer, MustNotDescriptor, options);
-		}
-		else if (MustNotDescriptorAction is not null)
-		{
-			writer.WritePropertyName("must_not");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(MustNotDescriptorAction), options);
-		}
-		else if (MustNotDescriptorActions is not null)
-		{
-			writer.WritePropertyName("must_not");
-			if (MustNotDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in MustNotDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
-
-			if (MustNotDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (MustNotValue is not null)
-		{
-			writer.WritePropertyName("must_not");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(MustNotValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (ShouldDescriptor is not null)
-		{
-			writer.WritePropertyName("should");
-			JsonSerializer.Serialize(writer, ShouldDescriptor, options);
-		}
-		else if (ShouldDescriptorAction is not null)
-		{
-			writer.WritePropertyName("should");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(ShouldDescriptorAction), options);
-		}
-		else if (ShouldDescriptorActions is not null)
-		{
-			writer.WritePropertyName("should");
-			if (ShouldDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in ShouldDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
-
-			if (ShouldDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (ShouldValue is not null)
-		{
-			writer.WritePropertyName("should");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(ShouldValue, writer, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,32 +17,217 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class TopHitsAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDocvalueFields = System.Text.Json.JsonEncodedText.Encode("docvalue_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlight = System.Text.Json.JsonEncodedText.Encode("highlight");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptFields = System.Text.Json.JsonEncodedText.Encode("script_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNoPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("seq_no_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackScores = System.Text.Json.JsonEncodedText.Encode("track_scores");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propDocvalueFields = default;
+		LocalJsonValue<bool?> propExplain = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propFields = default;
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Highlight?> propHighlight = default;
+		LocalJsonValue<object?> propMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?> propScriptFields = default;
+		LocalJsonValue<bool?> propSeqNoPrimaryTerm = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propStoredFields = default;
+		LocalJsonValue<bool?> propTrackScores = default;
+		LocalJsonValue<bool?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocvalueFields.TryReadProperty(ref reader, options, PropDocvalueFields, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, null)))
+			{
+				continue;
+			}
+
+			if (propExplain.TryReadProperty(ref reader, options, PropExplain, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, null)))
+			{
+				continue;
+			}
+
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propHighlight.TryReadProperty(ref reader, options, PropHighlight, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propScriptFields.TryReadProperty(ref reader, options, PropScriptFields, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSeqNoPrimaryTerm.TryReadProperty(ref reader, options, PropSeqNoPrimaryTerm, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (propStoredFields.TryReadProperty(ref reader, options, PropStoredFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propTrackScores.TryReadProperty(ref reader, options, PropTrackScores, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DocvalueFields = propDocvalueFields.Value,
+			Explain = propExplain.Value,
+			Field = propField.Value,
+			Fields = propFields.Value,
+			From = propFrom.Value,
+			Highlight = propHighlight.Value,
+			Missing = propMissing.Value,
+			Script = propScript.Value,
+			ScriptFields = propScriptFields.Value,
+			SeqNoPrimaryTerm = propSeqNoPrimaryTerm.Value,
+			Size = propSize.Value,
+			Sort = propSort.Value,
+			Source = propSource.Value,
+			StoredFields = propStoredFields.Value,
+			TrackScores = propTrackScores.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocvalueFields, value.DocvalueFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
+		writer.WriteProperty(options, PropExplain, value.Explain, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropHighlight, value.Highlight, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropScriptFields, value.ScriptFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, v, null, null));
+		writer.WriteProperty(options, PropSeqNoPrimaryTerm, value.SeqNoPrimaryTerm, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropTrackScores, value.TrackScores, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationConverter))]
 public sealed partial class TopHitsAggregation
 {
+#if NET7_0_OR_GREATER
+	public TopHitsAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TopHitsAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TopHitsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Fields for which to return doc values.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docvalue_fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
 	/// <summary>
@@ -50,7 +235,6 @@ public sealed partial class TopHitsAggregation
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -59,15 +243,13 @@ public sealed partial class TopHitsAggregation
 	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Starting document offset.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
@@ -75,7 +257,6 @@ public sealed partial class TopHitsAggregation
 	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
 	/// <summary>
@@ -84,9 +265,7 @@ public sealed partial class TopHitsAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
-	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
+	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
@@ -94,15 +273,13 @@ public sealed partial class TopHitsAggregation
 	/// Returns the result of one or more script evaluations for each hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script_fields")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	/// <summary>
@@ -110,7 +287,6 @@ public sealed partial class TopHitsAggregation
 	/// The maximum number of top matching hits to return per bucket.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -119,16 +295,13 @@ public sealed partial class TopHitsAggregation
 	/// By default, the hits are sorted by the score of the main query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Selects the fields of the source that are returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
@@ -136,8 +309,6 @@ public sealed partial class TopHitsAggregation
 	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("stored_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
 	/// <summary>
@@ -145,7 +316,6 @@ public sealed partial class TopHitsAggregation
 	/// If <c>true</c>, calculates and returns document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
 
 	/// <summary>
@@ -153,89 +323,87 @@ public sealed partial class TopHitsAggregation
 	/// If <c>true</c>, returns document version as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(TopHitsAggregation topHitsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TopHits(topHitsAggregation);
 }
 
-public sealed partial class TopHitsAggregationDescriptor<TDocument> : SerializableDescriptor<TopHitsAggregationDescriptor<TDocument>>
+public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 {
-	internal TopHitsAggregationDescriptor(Action<TopHitsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation Instance { get; init; }
 
-	public TopHitsAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TopHitsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
-	private bool? ExplainValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
-	private bool? SeqNoPrimaryTermValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
-	private bool? TrackScoresValue { get; set; }
-	private bool? VersionValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TopHitsAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Fields for which to return doc values.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsValue = docvalueFields;
-		return Self;
+		Instance.DocvalueFields = value;
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields()
 	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsDescriptor = descriptor;
-		return Self;
+		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(null);
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>>? action)
 	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsDescriptorAction = configure;
-		return Self;
+		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(action);
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = configure;
-		return Self;
+		Instance.DocvalueFields = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.DocvalueFields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -243,10 +411,10 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	/// If <c>true</c>, returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Explain(bool? explain = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Explain(bool? value = true)
 	{
-		ExplainValue = explain;
-		return Self;
+		Instance.Explain = value;
+		return this;
 	}
 
 	/// <summary>
@@ -254,10 +422,10 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -265,21 +433,10 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -288,554 +445,10 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsValue = fields;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
-	{
-		FieldsValue = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptor = descriptor;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
-	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptorAction = configure;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
-	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Starting document offset.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> From(int? from)
-	{
-		FromValue = from;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
-	{
-		HighlightDescriptor = null;
-		HighlightDescriptorAction = null;
-		HighlightValue = highlight;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> descriptor)
-	{
-		HighlightValue = null;
-		HighlightDescriptorAction = null;
-		HighlightDescriptor = descriptor;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Highlight(Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> configure)
-	{
-		HighlightValue = null;
-		HighlightDescriptor = null;
-		HighlightDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
-	{
-		MissingValue = missing;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the result of one or more script evaluations for each hit.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
-	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
-	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The maximum number of top matching hits to return per bucket.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Selects the fields of the source that are returned.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
-	{
-		SourceValue = source;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
-	{
-		StoredFieldsValue = storedFields;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculates and returns document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> TrackScores(bool? trackScores = true)
-	{
-		TrackScoresValue = trackScores;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns document version as part of a hit.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> Version(bool? version = true)
-	{
-		VersionValue = version;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (DocvalueFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(DocvalueFieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			foreach (var action in DocvalueFieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsValue is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
-		}
-
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
-
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (FieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			foreach (var action in FieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (HighlightDescriptor is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, HighlightDescriptor, options);
-		}
-		else if (HighlightDescriptorAction is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
-		}
-		else if (HighlightValue is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, HighlightValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		if (SourceValue is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (StoredFieldsValue is not null)
-		{
-			writer.WritePropertyName("stored_fields");
-			JsonSerializer.Serialize(writer, StoredFieldsValue, options);
-		}
-
-		if (TrackScoresValue.HasValue)
-		{
-			writer.WritePropertyName("track_scores");
-			writer.WriteBooleanValue(TrackScoresValue.Value);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteBooleanValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class TopHitsAggregationDescriptor : SerializableDescriptor<TopHitsAggregationDescriptor>
-{
-	internal TopHitsAggregationDescriptor(Action<TopHitsAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public TopHitsAggregationDescriptor() : base()
-	{
-	}
-
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
-	private bool? ExplainValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
-	private bool? SeqNoPrimaryTermValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
-	private bool? TrackScoresValue { get; set; }
-	private bool? VersionValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
-	{
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsValue = docvalueFields;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
-	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsDescriptor = descriptor;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor DocvalueFields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
-	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorActions = null;
-		DocvalueFieldsDescriptorAction = configure;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor DocvalueFields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
-	{
-		DocvalueFieldsValue = null;
-		DocvalueFieldsDescriptor = null;
-		DocvalueFieldsDescriptorAction = null;
-		DocvalueFieldsDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor Explain(bool? explain = true)
-	{
-		ExplainValue = explain;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public TopHitsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -844,40 +457,52 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields()
 	{
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(null);
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>>? action)
 	{
-		FieldsValue = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptor = descriptor;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(action);
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptorAction = configure;
-		return Self;
+		Instance.Fields = [.. values];
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Fields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -885,10 +510,10 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// Starting document offset.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor From(int? from)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -896,28 +521,21 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
-		HighlightDescriptor = null;
-		HighlightDescriptorAction = null;
-		HighlightValue = highlight;
-		return Self;
+		Instance.Highlight = value;
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> action)
 	{
-		HighlightValue = null;
-		HighlightDescriptorAction = null;
-		HighlightDescriptor = descriptor;
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor Highlight(Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> configure)
-	{
-		HighlightValue = null;
-		HighlightDescriptor = null;
-		HighlightDescriptorAction = configure;
-		return Self;
+		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -926,34 +544,28 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -961,10 +573,46 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// Returns the result of one or more script evaluations for each hit.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>());
-		return Self;
+		Instance.ScriptFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns the result of one or more script evaluations for each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> ScriptFields()
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns the result of one or more script evaluations for each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> AddScriptField(string key, Elastic.Clients.Elasticsearch.ScriptField value)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> AddScriptField(string key, System.Action<Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> action)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -972,10 +620,10 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> SeqNoPrimaryTerm(bool? value = true)
 	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
+		Instance.SeqNoPrimaryTerm = value;
+		return this;
 	}
 
 	/// <summary>
@@ -983,10 +631,10 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// The maximum number of top matching hits to return per bucket.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -995,40 +643,64 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// By default, the hits are sorted by the score of the main query.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort()
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
+		return this;
 	}
 
-	public TopHitsAggregationDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Sort = items;
+		return this;
 	}
 
 	/// <summary>
@@ -1036,10 +708,21 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// Selects the fields of the source that are returned.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Selects the fields of the source that are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1047,10 +730,21 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		StoredFieldsValue = storedFields;
-		return Self;
+		Instance.StoredFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.StoredFields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1058,10 +752,10 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// If <c>true</c>, calculates and returns document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor TrackScores(bool? trackScores = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> TrackScores(bool? value = true)
 	{
-		TrackScoresValue = trackScores;
-		return Self;
+		Instance.TrackScores = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1069,204 +763,589 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// If <c>true</c>, returns document version as part of a hit.
 	/// </para>
 	/// </summary>
-	public TopHitsAggregationDescriptor Version(bool? version = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Version(bool? value = true)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (DocvalueFieldsDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(DocvalueFieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			writer.WriteStartArray();
-			foreach (var action in DocvalueFieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (DocvalueFieldsValue is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ExplainValue.HasValue)
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct TopHitsAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TopHitsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TopHitsAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
+	{
+		Instance.DocvalueFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields()
+	{
+		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat>? action)
+	{
+		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>>? action)
+	{
+		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
+	{
+		Instance.DocvalueFields = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.Build(action));
 		}
 
-		if (FieldValue is not null)
+		Instance.DocvalueFields = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fields for which to return doc values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>.Build(action));
 		}
 
-		if (FieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (FieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fields");
-			writer.WriteStartArray();
-			foreach (var action in FieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
-			}
+		Instance.DocvalueFields = items;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns detailed information about score computation as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Explain(bool? value = true)
+	{
+		Instance.Explain = value;
+		return this;
+	}
 
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.Field = value;
+		return this;
+	}
 
-		if (HighlightDescriptor is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, HighlightDescriptor, options);
-		}
-		else if (HighlightDescriptorAction is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor(HighlightDescriptorAction), options);
-		}
-		else if (HighlightValue is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, HighlightValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.Field = value;
+		return this;
+	}
 
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
 
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields()
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(null);
+		return this;
+	}
 
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat>? action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(action);
+		return this;
+	}
 
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>>? action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>.Build(action);
+		return this;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
+	{
+		Instance.Fields = [.. values];
+		return this;
+	}
 
-		if (SortDescriptor is not null)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.Build(action));
 		}
 
-		if (SourceValue is not null)
+		Instance.Fields = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>.Build(action));
 		}
 
-		if (StoredFieldsValue is not null)
+		Instance.Fields = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Starting document offset.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
+	{
+		Instance.Highlight = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> action)
+	{
+		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Highlight<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>> action)
+	{
+		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Missing(object? value)
+	{
+		Instance.Missing = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns the result of one or more script evaluations for each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
+	{
+		Instance.ScriptFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns the result of one or more script evaluations for each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor ScriptFields()
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns the result of one or more script evaluations for each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor AddScriptField(string key, Elastic.Clients.Elasticsearch.ScriptField value)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor AddScriptField(string key, System.Action<Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> action)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor SeqNoPrimaryTerm(bool? value = true)
+	{
+		Instance.SeqNoPrimaryTerm = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of top matching hits to return per bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
+	{
+		Instance.Sort = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort()
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("stored_fields");
-			JsonSerializer.Serialize(writer, StoredFieldsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
 		}
 
-		if (TrackScoresValue.HasValue)
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort order of the top matching hits.
+	/// By default, the hits are sorted by the score of the main query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("track_scores");
-			writer.WriteBooleanValue(TrackScoresValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
 		}
 
-		if (VersionValue.HasValue)
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Selects the fields of the source that are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
+	{
+		Instance.Source = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Selects the fields of the source that are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Selects the fields of the source that are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.StoredFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.StoredFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, calculates and returns document scores, even if the scores are not used for sorting.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor TrackScores(bool? value = true)
+	{
+		Instance.TrackScores = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns document version as part of a hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Version(bool? value = true)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("version");
-			writer.WriteBooleanValue(VersionValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

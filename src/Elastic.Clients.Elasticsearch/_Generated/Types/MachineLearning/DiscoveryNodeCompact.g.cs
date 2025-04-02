@@ -17,31 +17,144 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
+
+internal sealed partial class DiscoveryNodeCompactConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes");
+	private static readonly System.Text.Json.JsonEncodedText PropEphemeralId = System.Text.Json.JsonEncodedText.Encode("ephemeral_id");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>> propAttributes = default;
+		LocalJsonValue<string> propEphemeralId = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<string> propTransportAddress = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAttributes.TryReadProperty(ref reader, options, PropAttributes, static System.Collections.Generic.IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propEphemeralId.TryReadProperty(ref reader, options, PropEphemeralId, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propTransportAddress.TryReadProperty(ref reader, options, PropTransportAddress, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Attributes = propAttributes.Value,
+			EphemeralId = propEphemeralId.Value,
+			Id = propId.Value,
+			Name = propName.Value,
+			TransportAddress = propTransportAddress.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropEphemeralId, value.EphemeralId, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Alternative representation of DiscoveryNode used in ml.get_job_stats and ml.get_datafeed_stats
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompactConverter))]
 public sealed partial class DiscoveryNodeCompact
 {
-	[JsonInclude, JsonPropertyName("attributes")]
-	public IReadOnlyDictionary<string, string> Attributes { get; init; }
-	[JsonInclude, JsonPropertyName("ephemeral_id")]
-	public string EphemeralId { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("transport_address")]
-	public string TransportAddress { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DiscoveryNodeCompact(System.Collections.Generic.IReadOnlyDictionary<string, string> attributes, string ephemeralId, string id, string name, string transportAddress)
+	{
+		Attributes = attributes;
+		EphemeralId = ephemeralId;
+		Id = id;
+		Name = name;
+		TransportAddress = transportAddress;
+	}
+#if NET7_0_OR_GREATER
+	public DiscoveryNodeCompact()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DiscoveryNodeCompact()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DiscoveryNodeCompact(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string EphemeralId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string TransportAddress { get; set; }
 }

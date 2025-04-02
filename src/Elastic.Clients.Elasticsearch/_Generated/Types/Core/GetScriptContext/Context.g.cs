@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.GetScriptContext;
 
+internal sealed partial class ContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMethods = System.Text.Json.JsonEncodedText.Encode("methods");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+
+	public override Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod>> propMethods = default;
+		LocalJsonValue<string> propName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMethods.TryReadProperty(ref reader, options, PropMethods, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Methods = propMethods.Value,
+			Name = propName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMethods, value.Methods, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod>(o, v, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextConverter))]
 public sealed partial class Context
 {
-	[JsonInclude, JsonPropertyName("methods")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod> Methods { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Context(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod> methods, string name)
+	{
+		Methods = methods;
+		Name = name;
+	}
+#if NET7_0_OR_GREATER
+	public Context()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Context()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Context(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod> Methods { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
 }

@@ -17,25 +17,156 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class ReadBlobDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBeforeWriteComplete = System.Text.Json.JsonEncodedText.Encode("before_write_complete");
+	private static readonly System.Text.Json.JsonEncodedText PropElapsed = System.Text.Json.JsonEncodedText.Encode("elapsed");
+	private static readonly System.Text.Json.JsonEncodedText PropElapsedNanos = System.Text.Json.JsonEncodedText.Encode("elapsed_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropFirstByteTime = System.Text.Json.JsonEncodedText.Encode("first_byte_time");
+	private static readonly System.Text.Json.JsonEncodedText PropFirstByteTimeNanos = System.Text.Json.JsonEncodedText.Encode("first_byte_time_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropThrottled = System.Text.Json.JsonEncodedText.Encode("throttled");
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledNanos = System.Text.Json.JsonEncodedText.Encode("throttled_nanos");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propBeforeWriteComplete = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propElapsed = default;
+		LocalJsonValue<System.TimeSpan?> propElapsedNanos = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFirstByteTime = default;
+		LocalJsonValue<System.TimeSpan> propFirstByteTimeNanos = default;
+		LocalJsonValue<bool> propFound = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo> propNode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propThrottled = default;
+		LocalJsonValue<System.TimeSpan?> propThrottledNanos = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBeforeWriteComplete.TryReadProperty(ref reader, options, PropBeforeWriteComplete, null))
+			{
+				continue;
+			}
+
+			if (propElapsed.TryReadProperty(ref reader, options, PropElapsed, null))
+			{
+				continue;
+			}
+
+			if (propElapsedNanos.TryReadProperty(ref reader, options, PropElapsedNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (propFirstByteTime.TryReadProperty(ref reader, options, PropFirstByteTime, null))
+			{
+				continue;
+			}
+
+			if (propFirstByteTimeNanos.TryReadProperty(ref reader, options, PropFirstByteTimeNanos, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (propFound.TryReadProperty(ref reader, options, PropFound, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (propThrottled.TryReadProperty(ref reader, options, PropThrottled, null))
+			{
+				continue;
+			}
+
+			if (propThrottledNanos.TryReadProperty(ref reader, options, PropThrottledNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BeforeWriteComplete = propBeforeWriteComplete.Value,
+			Elapsed = propElapsed.Value,
+			ElapsedNanos = propElapsedNanos.Value,
+			FirstByteTime = propFirstByteTime.Value,
+			FirstByteTimeNanos = propFirstByteTimeNanos.Value,
+			Found = propFound.Value,
+			Node = propNode.Value,
+			Throttled = propThrottled.Value,
+			ThrottledNanos = propThrottledNanos.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBeforeWriteComplete, value.BeforeWriteComplete, null, null);
+		writer.WriteProperty(options, PropElapsed, value.Elapsed, null, null);
+		writer.WriteProperty(options, PropElapsedNanos, value.ElapsedNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropFirstByteTime, value.FirstByteTime, null, null);
+		writer.WriteProperty(options, PropFirstByteTimeNanos, value.FirstByteTimeNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropFound, value.Found, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropThrottled, value.Throttled, null, null);
+		writer.WriteProperty(options, PropThrottledNanos, value.ThrottledNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetailsConverter))]
 public sealed partial class ReadBlobDetails
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReadBlobDetails(System.TimeSpan firstByteTimeNanos, bool found, Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo node)
+	{
+		FirstByteTimeNanos = firstByteTimeNanos;
+		Found = found;
+		Node = node;
+	}
+#if NET7_0_OR_GREATER
+	public ReadBlobDetails()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ReadBlobDetails()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ReadBlobDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Indicates whether the read operation may have started before the write operation was complete.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("before_write_complete")]
-	public bool? BeforeWriteComplete { get; init; }
+	public bool? BeforeWriteComplete { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,8 +174,7 @@ public sealed partial class ReadBlobDetails
 	/// If the blob was not found, this detail is omitted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("elapsed")]
-	public Elastic.Clients.Elasticsearch.Duration? Elapsed { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? Elapsed { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -52,8 +182,7 @@ public sealed partial class ReadBlobDetails
 	/// If the blob was not found, this detail is omitted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("elapsed_nanos")]
-	public long? ElapsedNanos { get; init; }
+	public System.TimeSpan? ElapsedNanos { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -61,8 +190,7 @@ public sealed partial class ReadBlobDetails
 	/// If the blob was not found, this detail is omitted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("first_byte_time")]
-	public Elastic.Clients.Elasticsearch.Duration? FirstByteTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? FirstByteTime { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -70,8 +198,11 @@ public sealed partial class ReadBlobDetails
 	/// If the blob was not found, this detail is omitted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("first_byte_time_nanos")]
-	public long FirstByteTimeNanos { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan FirstByteTimeNanos { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,16 +210,22 @@ public sealed partial class ReadBlobDetails
 	/// If the read was started before the write completed or the write was ended before completion, it might be false.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("found")]
-	public bool Found { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Found { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The node that performed the read operation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("node")]
-	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo Node { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo Node { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -96,8 +233,7 @@ public sealed partial class ReadBlobDetails
 	/// If the blob was not found, this detail is omitted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("throttled")]
-	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -105,6 +241,5 @@ public sealed partial class ReadBlobDetails
 	/// If the blob was not found, this detail is omitted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("throttled_nanos")]
-	public long? ThrottledNanos { get; init; }
+	public System.TimeSpan? ThrottledNanos { get; set; }
 }

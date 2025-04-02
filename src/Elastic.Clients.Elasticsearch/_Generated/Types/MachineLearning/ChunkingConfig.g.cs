@@ -17,18 +17,85 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class ChunkingConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSpan = System.Text.Json.JsonEncodedText.Encode("time_span");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode> propMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeSpan = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (propTimeSpan.TryReadProperty(ref reader, options, PropTimeSpan, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Mode = propMode.Value,
+			TimeSpan = propTimeSpan.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropTimeSpan, value.TimeSpan, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigConverter))]
 public sealed partial class ChunkingConfig
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode mode)
+	{
+		Mode = mode;
+	}
+#if NET7_0_OR_GREATER
+	public ChunkingConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ChunkingConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ChunkingConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If the mode is <c>auto</c>, the chunk size is dynamically calculated;
@@ -37,28 +104,38 @@ public sealed partial class ChunkingConfig
 	/// use this mode when the datafeed uses aggregations. If the mode is <c>off</c>, no chunking is applied.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mode")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode Mode { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode Mode { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time span that each search will be querying. This setting is applicable only when the <c>mode</c> is set to <c>manual</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_span")]
 	public Elastic.Clients.Elasticsearch.Duration? TimeSpan { get; set; }
 }
 
-public sealed partial class ChunkingConfigDescriptor : SerializableDescriptor<ChunkingConfigDescriptor>
+public readonly partial struct ChunkingConfigDescriptor
 {
-	internal ChunkingConfigDescriptor(Action<ChunkingConfigDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig Instance { get; init; }
 
-	public ChunkingConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ChunkingConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode ModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeSpanValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ChunkingConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -68,10 +145,10 @@ public sealed partial class ChunkingConfigDescriptor : SerializableDescriptor<Ch
 	/// use this mode when the datafeed uses aggregations. If the mode is <c>off</c>, no chunking is applied.
 	/// </para>
 	/// </summary>
-	public ChunkingConfigDescriptor Mode(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode mode)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor Mode(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode value)
 	{
-		ModeValue = mode;
-		return Self;
+		Instance.Mode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -79,23 +156,17 @@ public sealed partial class ChunkingConfigDescriptor : SerializableDescriptor<Ch
 	/// The time span that each search will be querying. This setting is applicable only when the <c>mode</c> is set to <c>manual</c>.
 	/// </para>
 	/// </summary>
-	public ChunkingConfigDescriptor TimeSpan(Elastic.Clients.Elasticsearch.Duration? timeSpan)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor TimeSpan(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeSpanValue = timeSpan;
-		return Self;
+		Instance.TimeSpan = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("mode");
-		JsonSerializer.Serialize(writer, ModeValue, options);
-		if (TimeSpanValue is not null)
-		{
-			writer.WritePropertyName("time_span");
-			JsonSerializer.Serialize(writer, TimeSpanValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

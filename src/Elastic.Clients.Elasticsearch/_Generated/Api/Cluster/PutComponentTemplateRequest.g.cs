@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed partial class PutComponentTemplateRequestParameters : RequestParameters
+public sealed partial class PutComponentTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -46,6 +39,72 @@ public sealed partial class PutComponentTemplateRequestParameters : RequestParam
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class PutComponentTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDeprecated = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexState> propTemplate = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeprecated.TryReadProperty(ref reader, options, PropDeprecated, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Deprecated = propDeprecated.Value,
+			Meta = propMeta.Value,
+			Template = propTemplate.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -78,15 +137,34 @@ public sealed partial class PutComponentTemplateRequestParameters : RequestParam
 /// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 /// </para>
 /// </summary>
-public sealed partial class PutComponentTemplateRequest : PlainRequest<PutComponentTemplateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestConverter))]
+public sealed partial class PutComponentTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterPutComponentTemplate;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name name, Elastic.Clients.Elasticsearch.IndexManagement.IndexState template) : base(r => r.Required("name", name))
+	{
+		Template = template;
+	}
+#if NET7_0_OR_GREATER
+	public PutComponentTemplateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.ClusterPutComponentTemplate;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -94,10 +172,24 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 
 	/// <summary>
 	/// <para>
+	/// Name of the component template to create.
+	/// Elasticsearch includes the following built-in component templates: <c>logs-mappings</c>; <c>logs-settings</c>; <c>metrics-mappings</c>; <c>metrics-settings</c>;<c>synthetics-mapping</c>; <c>synthetics-settings</c>.
+	/// Elastic Agent uses these templates to configure backing indices for its data streams.
+	/// If you use Elastic Agent and want to overwrite one of these templates, set the <c>version</c> for your replacement template higher than the current version.
+	/// If you don’t use Elastic Agent and want to disable all built-in component and index templates, set <c>stack.templates.enabled</c> to <c>false</c> using the cluster update settings API.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, this request cannot replace or update existing component templates.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
@@ -106,7 +198,6 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -115,7 +206,6 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("deprecated")]
 	public bool? Deprecated { get; set; }
 
 	/// <summary>
@@ -126,16 +216,18 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 	/// To unset <c>_meta</c>, replace the template without specifying this information.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IDictionary<string, object>? Meta { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The template to be applied which includes mappings, settings, or aliases configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("template")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexState Template { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.IndexState Template { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -144,7 +236,6 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 	/// To unset a version, replace the template without specifying a version.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
 
@@ -178,37 +269,69 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 /// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 /// </para>
 /// </summary>
-public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : RequestDescriptor<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateRequestParameters>
+public readonly partial struct PutComponentTemplateRequestDescriptor
 {
-	internal PutComponentTemplateRequestDescriptor(Action<PutComponentTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest Instance { get; init; }
 
-	public PutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterPutComponentTemplate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "cluster.put_component_template";
-
-	public PutComponentTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
-	public PutComponentTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public PutComponentTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
+	public PutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest(name);
+#pragma warning restore CS0618
 	}
 
-	private bool? DeprecatedValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexState TemplateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument> TemplateDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
-	private long? VersionValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutComponentTemplateRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the component template to create.
+	/// Elasticsearch includes the following built-in component templates: <c>logs-mappings</c>; <c>logs-settings</c>; <c>metrics-mappings</c>; <c>metrics-settings</c>;<c>synthetics-mapping</c>; <c>synthetics-settings</c>.
+	/// Elastic Agent uses these templates to configure backing indices for its data streams.
+	/// If you use Elastic Agent and want to overwrite one of these templates, set the <c>version</c> for your replacement template higher than the current version.
+	/// If you don’t use Elastic Agent and want to disable all built-in component and index templates, set <c>stack.templates.enabled</c> to <c>false</c> using the cluster update settings API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing component templates.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Create(bool? value = true)
+	{
+		Instance.Create = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -216,10 +339,10 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
 	/// </para>
 	/// </summary>
-	public PutComponentTemplateRequestDescriptor<TDocument> Deprecated(bool? deprecated = true)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Deprecated(bool? value = true)
 	{
-		DeprecatedValue = deprecated;
-		return Self;
+		Instance.Deprecated = value;
+		return this;
 	}
 
 	/// <summary>
@@ -230,10 +353,45 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 	/// To unset <c>_meta</c>, replace the template without specifying this information.
 	/// </para>
 	/// </summary>
-	public PutComponentTemplateRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the component template.
+	/// It may have any contents. This map is not automatically generated by Elasticsearch.
+	/// This information is stored in the cluster state, so keeping it short is preferable.
+	/// To unset <c>_meta</c>, replace the template without specifying this information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the component template.
+	/// It may have any contents. This map is not automatically generated by Elasticsearch.
+	/// This information is stored in the cluster state, so keeping it short is preferable.
+	/// To unset <c>_meta</c>, replace the template without specifying this information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -241,28 +399,43 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 	/// The template to be applied which includes mappings, settings, or aliases configuration.
 	/// </para>
 	/// </summary>
-	public PutComponentTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState value)
 	{
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = null;
-		TemplateValue = template;
-		return Self;
+		Instance.Template = value;
+		return this;
 	}
 
-	public PutComponentTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The template to be applied which includes mappings, settings, or aliases configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template()
 	{
-		TemplateValue = null;
-		TemplateDescriptorAction = null;
-		TemplateDescriptor = descriptor;
-		return Self;
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor.Build(null);
+		return this;
 	}
 
-	public PutComponentTemplateRequestDescriptor<TDocument> Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The template to be applied which includes mappings, settings, or aliases configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor>? action)
 	{
-		TemplateValue = null;
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = configure;
-		return Self;
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The template to be applied which includes mappings, settings, or aliases configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<T>>? action)
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -272,50 +445,60 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 	/// To unset a version, replace the template without specifying a version.
 	/// </para>
 	/// </summary>
-	public PutComponentTemplateRequestDescriptor<TDocument> Version(long? version)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (DeprecatedValue.HasValue)
-		{
-			writer.WritePropertyName("deprecated");
-			writer.WriteBooleanValue(DeprecatedValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor(new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (TemplateDescriptor is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateDescriptor, options);
-		}
-		else if (TemplateDescriptorAction is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument>(TemplateDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -349,37 +532,69 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 /// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 /// </para>
 /// </summary>
-public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescriptor<PutComponentTemplateRequestDescriptor, PutComponentTemplateRequestParameters>
+public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 {
-	internal PutComponentTemplateRequestDescriptor(Action<PutComponentTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest Instance { get; init; }
 
-	public PutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterPutComponentTemplate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "cluster.put_component_template";
-
-	public PutComponentTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
-	public PutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public PutComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public PutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest(name);
+#pragma warning restore CS0618
 	}
 
-	private bool? DeprecatedValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexState TemplateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor TemplateDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor> TemplateDescriptorAction { get; set; }
-	private long? VersionValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutComponentTemplateRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the component template to create.
+	/// Elasticsearch includes the following built-in component templates: <c>logs-mappings</c>; <c>logs-settings</c>; <c>metrics-mappings</c>; <c>metrics-settings</c>;<c>synthetics-mapping</c>; <c>synthetics-settings</c>.
+	/// Elastic Agent uses these templates to configure backing indices for its data streams.
+	/// If you use Elastic Agent and want to overwrite one of these templates, set the <c>version</c> for your replacement template higher than the current version.
+	/// If you don’t use Elastic Agent and want to disable all built-in component and index templates, set <c>stack.templates.enabled</c> to <c>false</c> using the cluster update settings API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing component templates.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Create(bool? value = true)
+	{
+		Instance.Create = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -387,10 +602,10 @@ public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescr
 	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
 	/// </para>
 	/// </summary>
-	public PutComponentTemplateRequestDescriptor Deprecated(bool? deprecated = true)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Deprecated(bool? value = true)
 	{
-		DeprecatedValue = deprecated;
-		return Self;
+		Instance.Deprecated = value;
+		return this;
 	}
 
 	/// <summary>
@@ -401,10 +616,45 @@ public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescr
 	/// To unset <c>_meta</c>, replace the template without specifying this information.
 	/// </para>
 	/// </summary>
-	public PutComponentTemplateRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the component template.
+	/// It may have any contents. This map is not automatically generated by Elasticsearch.
+	/// This information is stored in the cluster state, so keeping it short is preferable.
+	/// To unset <c>_meta</c>, replace the template without specifying this information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the component template.
+	/// It may have any contents. This map is not automatically generated by Elasticsearch.
+	/// This information is stored in the cluster state, so keeping it short is preferable.
+	/// To unset <c>_meta</c>, replace the template without specifying this information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -412,28 +662,32 @@ public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescr
 	/// The template to be applied which includes mappings, settings, or aliases configuration.
 	/// </para>
 	/// </summary>
-	public PutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState value)
 	{
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = null;
-		TemplateValue = template;
-		return Self;
+		Instance.Template = value;
+		return this;
 	}
 
-	public PutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The template to be applied which includes mappings, settings, or aliases configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template()
 	{
-		TemplateValue = null;
-		TemplateDescriptorAction = null;
-		TemplateDescriptor = descriptor;
-		return Self;
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public PutComponentTemplateRequestDescriptor Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The template to be applied which includes mappings, settings, or aliases configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument>>? action)
 	{
-		TemplateValue = null;
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = configure;
-		return Self;
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -443,49 +697,59 @@ public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescr
 	/// To unset a version, replace the template without specifying a version.
 	/// </para>
 	/// </summary>
-	public PutComponentTemplateRequestDescriptor Version(long? version)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (DeprecatedValue.HasValue)
-		{
-			writer.WritePropertyName("deprecated");
-			writer.WriteBooleanValue(DeprecatedValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (TemplateDescriptor is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateDescriptor, options);
-		}
-		else if (TemplateDescriptorAction is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor(TemplateDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

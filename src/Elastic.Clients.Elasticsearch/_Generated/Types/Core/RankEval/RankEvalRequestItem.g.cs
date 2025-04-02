@@ -17,48 +17,147 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+internal sealed partial class RankEvalRequestItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropRatings = System.Text.Json.JsonEncodedText.Encode("ratings");
+	private static readonly System.Text.Json.JsonEncodedText PropRequest = System.Text.Json.JsonEncodedText.Encode("request");
+	private static readonly System.Text.Json.JsonEncodedText PropTemplateId = System.Text.Json.JsonEncodedText.Encode("template_id");
+
+	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propId = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>> propRatings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery?> propRequest = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propTemplateId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRatings.TryReadProperty(ref reader, options, PropRatings, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propRequest.TryReadProperty(ref reader, options, PropRequest, null))
+			{
+				continue;
+			}
+
+			if (propTemplateId.TryReadProperty(ref reader, options, PropTemplateId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Params = propParams.Value,
+			Ratings = propRatings.Value,
+			Request = propRequest.Value,
+			TemplateId = propTemplateId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRatings, value.Ratings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>(o, v, null));
+		writer.WriteProperty(options, PropRequest, value.Request, null, null);
+		writer.WriteProperty(options, PropTemplateId, value.TemplateId, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemConverter))]
 public sealed partial class RankEvalRequestItem
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalRequestItem(Elastic.Clients.Elasticsearch.Id id, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> ratings)
+	{
+		Id = id;
+		Ratings = ratings;
+	}
+#if NET7_0_OR_GREATER
+	public RankEvalRequestItem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RankEvalRequestItem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankEvalRequestItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The search request’s ID, used to group result details later.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
-	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The search template parameters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// List of document ratings
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ratings")]
-	public ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> Ratings { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> Ratings { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The query being evaluated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("request")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? Request { get; set; }
 
 	/// <summary>
@@ -66,38 +165,37 @@ public sealed partial class RankEvalRequestItem
 	/// The search template Id
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("template_id")]
 	public Elastic.Clients.Elasticsearch.Id? TemplateId { get; set; }
 }
 
-public sealed partial class RankEvalRequestItemDescriptor<TDocument> : SerializableDescriptor<RankEvalRequestItemDescriptor<TDocument>>
+public readonly partial struct RankEvalRequestItemDescriptor<TDocument>
 {
-	internal RankEvalRequestItemDescriptor(Action<RankEvalRequestItemDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem Instance { get; init; }
 
-	public RankEvalRequestItemDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalRequestItemDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor RatingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor> RatingsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor>[] RatingsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? RequestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument> RequestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>> RequestDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? TemplateIdValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalRequestItemDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The search request’s ID, used to group result details later.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -105,10 +203,39 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	/// The search template parameters.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search template parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search template parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -116,40 +243,60 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	/// List of document ratings
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor<TDocument> Ratings(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> ratings)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> value)
 	{
-		RatingsDescriptor = null;
-		RatingsDescriptorAction = null;
-		RatingsDescriptorActions = null;
-		RatingsValue = ratings;
-		return Self;
+		Instance.Ratings = value;
+		return this;
 	}
 
-	public RankEvalRequestItemDescriptor<TDocument> Ratings(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// List of document ratings
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings()
 	{
-		RatingsValue = null;
-		RatingsDescriptorAction = null;
-		RatingsDescriptorActions = null;
-		RatingsDescriptor = descriptor;
-		return Self;
+		Instance.Ratings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating.Build(null);
+		return this;
 	}
 
-	public RankEvalRequestItemDescriptor<TDocument> Ratings(Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// List of document ratings
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating>? action)
 	{
-		RatingsValue = null;
-		RatingsDescriptor = null;
-		RatingsDescriptorActions = null;
-		RatingsDescriptorAction = configure;
-		return Self;
+		Instance.Ratings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating.Build(action);
+		return this;
 	}
 
-	public RankEvalRequestItemDescriptor<TDocument> Ratings(params Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// List of document ratings
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings(params Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating[] values)
 	{
-		RatingsValue = null;
-		RatingsDescriptor = null;
-		RatingsDescriptorAction = null;
-		RatingsDescriptorActions = configure;
-		return Self;
+		Instance.Ratings = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of document ratings
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor.Build(action));
+		}
+
+		Instance.Ratings = items;
+		return this;
 	}
 
 	/// <summary>
@@ -157,28 +304,21 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	/// The query being evaluated.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor<TDocument> Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? request)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? value)
 	{
-		RequestDescriptor = null;
-		RequestDescriptorAction = null;
-		RequestValue = request;
-		return Self;
+		Instance.Request = value;
+		return this;
 	}
 
-	public RankEvalRequestItemDescriptor<TDocument> Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The query being evaluated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Request(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>> action)
 	{
-		RequestValue = null;
-		RequestDescriptorAction = null;
-		RequestDescriptor = descriptor;
-		return Self;
-	}
-
-	public RankEvalRequestItemDescriptor<TDocument> Request(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>> configure)
-	{
-		RequestValue = null;
-		RequestDescriptor = null;
-		RequestDescriptorAction = configure;
-		return Self;
+		Instance.Request = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -186,108 +326,49 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	/// The search template Id
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor<TDocument> TemplateId(Elastic.Clients.Elasticsearch.Id? templateId)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> TemplateId(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		TemplateIdValue = templateId;
-		return Self;
+		Instance.TemplateId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem Build(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("id");
-		JsonSerializer.Serialize(writer, IdValue, options);
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (RatingsDescriptor is not null)
-		{
-			writer.WritePropertyName("ratings");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RatingsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RatingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("ratings");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor(RatingsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RatingsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("ratings");
-			writer.WriteStartArray();
-			foreach (var action in RatingsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("ratings");
-			JsonSerializer.Serialize(writer, RatingsValue, options);
-		}
-
-		if (RequestDescriptor is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, RequestDescriptor, options);
-		}
-		else if (RequestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>(RequestDescriptorAction), options);
-		}
-		else if (RequestValue is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, RequestValue, options);
-		}
-
-		if (TemplateIdValue is not null)
-		{
-			writer.WritePropertyName("template_id");
-			JsonSerializer.Serialize(writer, TemplateIdValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RankEvalRequestItemDescriptor : SerializableDescriptor<RankEvalRequestItemDescriptor>
+public readonly partial struct RankEvalRequestItemDescriptor
 {
-	internal RankEvalRequestItemDescriptor(Action<RankEvalRequestItemDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem Instance { get; init; }
 
-	public RankEvalRequestItemDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalRequestItemDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor RatingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor> RatingsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor>[] RatingsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? RequestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor RequestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor> RequestDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? TemplateIdValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalRequestItemDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The search request’s ID, used to group result details later.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -295,10 +376,39 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	/// The search template parameters.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search template parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search template parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -306,40 +416,60 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	/// List of document ratings
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor Ratings(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> ratings)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> value)
 	{
-		RatingsDescriptor = null;
-		RatingsDescriptorAction = null;
-		RatingsDescriptorActions = null;
-		RatingsValue = ratings;
-		return Self;
+		Instance.Ratings = value;
+		return this;
 	}
 
-	public RankEvalRequestItemDescriptor Ratings(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// List of document ratings
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings()
 	{
-		RatingsValue = null;
-		RatingsDescriptorAction = null;
-		RatingsDescriptorActions = null;
-		RatingsDescriptor = descriptor;
-		return Self;
+		Instance.Ratings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating.Build(null);
+		return this;
 	}
 
-	public RankEvalRequestItemDescriptor Ratings(Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// List of document ratings
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating>? action)
 	{
-		RatingsValue = null;
-		RatingsDescriptor = null;
-		RatingsDescriptorActions = null;
-		RatingsDescriptorAction = configure;
-		return Self;
+		Instance.Ratings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating.Build(action);
+		return this;
 	}
 
-	public RankEvalRequestItemDescriptor Ratings(params Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// List of document ratings
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings(params Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating[] values)
 	{
-		RatingsValue = null;
-		RatingsDescriptor = null;
-		RatingsDescriptorAction = null;
-		RatingsDescriptorActions = configure;
-		return Self;
+		Instance.Ratings = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of document ratings
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor.Build(action));
+		}
+
+		Instance.Ratings = items;
+		return this;
 	}
 
 	/// <summary>
@@ -347,28 +477,32 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	/// The query being evaluated.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? request)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? value)
 	{
-		RequestDescriptor = null;
-		RequestDescriptorAction = null;
-		RequestValue = request;
-		return Self;
+		Instance.Request = value;
+		return this;
 	}
 
-	public RankEvalRequestItemDescriptor Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The query being evaluated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Request(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor> action)
 	{
-		RequestValue = null;
-		RequestDescriptorAction = null;
-		RequestDescriptor = descriptor;
-		return Self;
+		Instance.Request = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor.Build(action);
+		return this;
 	}
 
-	public RankEvalRequestItemDescriptor Request(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The query being evaluated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Request<T>(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<T>> action)
 	{
-		RequestValue = null;
-		RequestDescriptor = null;
-		RequestDescriptorAction = configure;
-		return Self;
+		Instance.Request = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -376,76 +510,17 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	/// The search template Id
 	/// </para>
 	/// </summary>
-	public RankEvalRequestItemDescriptor TemplateId(Elastic.Clients.Elasticsearch.Id? templateId)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor TemplateId(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		TemplateIdValue = templateId;
-		return Self;
+		Instance.TemplateId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem Build(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("id");
-		JsonSerializer.Serialize(writer, IdValue, options);
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (RatingsDescriptor is not null)
-		{
-			writer.WritePropertyName("ratings");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RatingsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RatingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("ratings");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor(RatingsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RatingsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("ratings");
-			writer.WriteStartArray();
-			foreach (var action in RatingsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("ratings");
-			JsonSerializer.Serialize(writer, RatingsValue, options);
-		}
-
-		if (RequestDescriptor is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, RequestDescriptor, options);
-		}
-		else if (RequestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor(RequestDescriptorAction), options);
-		}
-		else if (RequestValue is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, RequestValue, options);
-		}
-
-		if (TemplateIdValue is not null)
-		{
-			writer.WritePropertyName("template_id");
-			JsonSerializer.Serialize(writer, TemplateIdValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor(new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,22 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
+internal sealed partial class FieldStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropSumDocFreq = System.Text.Json.JsonEncodedText.Encode("sum_doc_freq");
+	private static readonly System.Text.Json.JsonEncodedText PropSumTtf = System.Text.Json.JsonEncodedText.Encode("sum_ttf");
+
+	public override Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propDocCount = default;
+		LocalJsonValue<long> propSumDocFreq = default;
+		LocalJsonValue<long> propSumTtf = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
+			{
+				continue;
+			}
+
+			if (propSumDocFreq.TryReadProperty(ref reader, options, PropSumDocFreq, null))
+			{
+				continue;
+			}
+
+			if (propSumTtf.TryReadProperty(ref reader, options, PropSumTtf, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DocCount = propDocCount.Value,
+			SumDocFreq = propSumDocFreq.Value,
+			SumTtf = propSumTtf.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropSumDocFreq, value.SumDocFreq, null, null);
+		writer.WriteProperty(options, PropSumTtf, value.SumTtf, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatisticsConverter))]
 public sealed partial class FieldStatistics
 {
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public int DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("sum_doc_freq")]
-	public long SumDocFreq { get; init; }
-	[JsonInclude, JsonPropertyName("sum_ttf")]
-	public long SumTtf { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldStatistics(int docCount, long sumDocFreq, long sumTtf)
+	{
+		DocCount = docCount;
+		SumDocFreq = sumDocFreq;
+		SumTtf = sumTtf;
+	}
+#if NET7_0_OR_GREATER
+	public FieldStatistics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FieldStatistics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int DocCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SumDocFreq { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SumTtf { get; set; }
 }

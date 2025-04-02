@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class TotalHitsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.TotalHits>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.TotalHits Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation> propRelation = default;
+		LocalJsonValue<long> propValue = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRelation.TryReadProperty(ref reader, options, PropRelation, null))
+			{
+				continue;
+			}
+
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.TotalHits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Relation = propRelation.Value,
+			Value = propValue.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.TotalHits value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRelation, value.Relation, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.TotalHitsConverter))]
 public sealed partial class TotalHits
 {
-	[JsonInclude, JsonPropertyName("relation")]
-	public Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation Relation { get; init; }
-	[JsonInclude, JsonPropertyName("value")]
-	public long Value { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TotalHits(Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation relation, long value)
+	{
+		Relation = relation;
+		Value = value;
+	}
+#if NET7_0_OR_GREATER
+	public TotalHits()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TotalHits()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TotalHits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation Relation { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Value { get; set; }
 }

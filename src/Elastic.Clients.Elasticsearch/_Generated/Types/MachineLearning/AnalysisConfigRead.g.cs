@@ -17,25 +17,178 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class AnalysisConfigReadConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationAnalyzer = System.Text.Json.JsonEncodedText.Encode("categorization_analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFieldName = System.Text.Json.JsonEncodedText.Encode("categorization_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors");
+	private static readonly System.Text.Json.JsonEncodedText PropInfluencers = System.Text.Json.JsonEncodedText.Encode("influencers");
+	private static readonly System.Text.Json.JsonEncodedText PropLatency = System.Text.Json.JsonEncodedText.Encode("latency");
+	private static readonly System.Text.Json.JsonEncodedText PropModelPruneWindow = System.Text.Json.JsonEncodedText.Encode("model_prune_window");
+	private static readonly System.Text.Json.JsonEncodedText PropMultivariateByFields = System.Text.Json.JsonEncodedText.Encode("multivariate_by_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropPerPartitionCategorization = System.Text.Json.JsonEncodedText.Encode("per_partition_categorization");
+	private static readonly System.Text.Json.JsonEncodedText PropSummaryCountFieldName = System.Text.Json.JsonEncodedText.Encode("summary_count_field_name");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propBucketSpan = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer?> propCategorizationAnalyzer = default;
+		LocalJsonValue<string?> propCategorizationFieldName = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propCategorizationFilters = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead>> propDetectors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propInfluencers = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propLatency = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propModelPruneWindow = default;
+		LocalJsonValue<bool?> propMultivariateByFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization?> propPerPartitionCategorization = default;
+		LocalJsonValue<string?> propSummaryCountFieldName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBucketSpan.TryReadProperty(ref reader, options, PropBucketSpan, null))
+			{
+				continue;
+			}
+
+			if (propCategorizationAnalyzer.TryReadProperty(ref reader, options, PropCategorizationAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propCategorizationFieldName.TryReadProperty(ref reader, options, PropCategorizationFieldName, null))
+			{
+				continue;
+			}
+
+			if (propCategorizationFilters.TryReadProperty(ref reader, options, PropCategorizationFilters, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDetectors.TryReadProperty(ref reader, options, PropDetectors, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propInfluencers.TryReadProperty(ref reader, options, PropInfluencers, null))
+			{
+				continue;
+			}
+
+			if (propLatency.TryReadProperty(ref reader, options, PropLatency, null))
+			{
+				continue;
+			}
+
+			if (propModelPruneWindow.TryReadProperty(ref reader, options, PropModelPruneWindow, null))
+			{
+				continue;
+			}
+
+			if (propMultivariateByFields.TryReadProperty(ref reader, options, PropMultivariateByFields, null))
+			{
+				continue;
+			}
+
+			if (propPerPartitionCategorization.TryReadProperty(ref reader, options, PropPerPartitionCategorization, null))
+			{
+				continue;
+			}
+
+			if (propSummaryCountFieldName.TryReadProperty(ref reader, options, PropSummaryCountFieldName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BucketSpan = propBucketSpan.Value,
+			CategorizationAnalyzer = propCategorizationAnalyzer.Value,
+			CategorizationFieldName = propCategorizationFieldName.Value,
+			CategorizationFilters = propCategorizationFilters.Value,
+			Detectors = propDetectors.Value,
+			Influencers = propInfluencers.Value,
+			Latency = propLatency.Value,
+			ModelPruneWindow = propModelPruneWindow.Value,
+			MultivariateByFields = propMultivariateByFields.Value,
+			PerPartitionCategorization = propPerPartitionCategorization.Value,
+			SummaryCountFieldName = propSummaryCountFieldName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBucketSpan, value.BucketSpan, null, null);
+		writer.WriteProperty(options, PropCategorizationAnalyzer, value.CategorizationAnalyzer, null, null);
+		writer.WriteProperty(options, PropCategorizationFieldName, value.CategorizationFieldName, null, null);
+		writer.WriteProperty(options, PropCategorizationFilters, value.CategorizationFilters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDetectors, value.Detectors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead>(o, v, null));
+		writer.WriteProperty(options, PropInfluencers, value.Influencers, null, null);
+		writer.WriteProperty(options, PropLatency, value.Latency, null, null);
+		writer.WriteProperty(options, PropModelPruneWindow, value.ModelPruneWindow, null, null);
+		writer.WriteProperty(options, PropMultivariateByFields, value.MultivariateByFields, null, null);
+		writer.WriteProperty(options, PropPerPartitionCategorization, value.PerPartitionCategorization, null, null);
+		writer.WriteProperty(options, PropSummaryCountFieldName, value.SummaryCountFieldName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigReadConverter))]
 public sealed partial class AnalysisConfigRead
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalysisConfigRead(Elastic.Clients.Elasticsearch.Duration bucketSpan, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead> detectors, Elastic.Clients.Elasticsearch.Fields influencers)
+	{
+		BucketSpan = bucketSpan;
+		Detectors = detectors;
+		Influencers = influencers;
+	}
+#if NET7_0_OR_GREATER
+	public AnalysisConfigRead()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AnalysisConfigRead()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AnalysisConfigRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The size of the interval that the analysis is aggregated into, typically between <c>5m</c> and <c>1h</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("bucket_span")]
-	public Elastic.Clients.Elasticsearch.Duration BucketSpan { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration BucketSpan { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -44,8 +197,7 @@ public sealed partial class AnalysisConfigRead
 	/// The categorization analyzer specifies how the <c>categorization_field</c> is interpreted by the categorization process.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("categorization_analyzer")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? CategorizationAnalyzer { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? CategorizationAnalyzer { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -53,8 +205,7 @@ public sealed partial class AnalysisConfigRead
 	/// The resulting categories must be used in a detector by setting <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c> to the keyword <c>mlcategory</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("categorization_field_name")]
-	public string? CategorizationFieldName { get; init; }
+	public string? CategorizationFieldName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -63,8 +214,7 @@ public sealed partial class AnalysisConfigRead
 	/// The expressions are used to filter out matching sequences from the categorization field values.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("categorization_filters")]
-	public IReadOnlyCollection<string>? CategorizationFilters { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? CategorizationFilters { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -74,8 +224,11 @@ public sealed partial class AnalysisConfigRead
 	/// You can specify multiple detectors for a job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("detectors")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead> Detectors { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead> Detectors { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -85,8 +238,11 @@ public sealed partial class AnalysisConfigRead
 	/// When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("influencers")]
-	public IReadOnlyCollection<string> Influencers { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Fields Influencers { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -95,8 +251,7 @@ public sealed partial class AnalysisConfigRead
 	/// If you specify a non-zero value, it must be greater than or equal to one second.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("latency")]
-	public Elastic.Clients.Elasticsearch.Duration? Latency { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? Latency { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -109,8 +264,7 @@ public sealed partial class AnalysisConfigRead
 	/// For jobs created in 8.1 and later, the default value is the greater of <c>30d</c> or 20 times <c>bucket_span</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_prune_window")]
-	public Elastic.Clients.Elasticsearch.Duration? ModelPruneWindow { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? ModelPruneWindow { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -119,16 +273,14 @@ public sealed partial class AnalysisConfigRead
 	/// If set to <c>true</c>, the analysis will automatically find correlations between metrics for a given by field value and report anomalies when those correlations cease to hold.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("multivariate_by_fields")]
-	public bool? MultivariateByFields { get; init; }
+	public bool? MultivariateByFields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Settings related to how categorization interacts with partition fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("per_partition_categorization")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorization { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -137,6 +289,5 @@ public sealed partial class AnalysisConfigRead
 	/// The same <c>summary_count_field_name</c> applies to all detectors in the job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("summary_count_field_name")]
-	public string? SummaryCountFieldName { get; init; }
+	public string? SummaryCountFieldName { get; set; }
 }

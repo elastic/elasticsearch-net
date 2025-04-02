@@ -17,21 +17,53 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
-public sealed partial class PutRulesetRequestParameters : RequestParameters
+public sealed partial class PutRulesetRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class PutRulesetRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules");
+
+	public override Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>> propRules = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRules.TryReadProperty(ref reader, options, PropRules, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Rules = propRules.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRules, value.Rules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -47,23 +79,54 @@ public sealed partial class PutRulesetRequestParameters : RequestParameters
 /// If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
 /// </para>
 /// </summary>
-public sealed partial class PutRulesetRequest : PlainRequest<PutRulesetRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestConverter))]
+public sealed partial class PutRulesetRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestParameters>
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutRulesetRequest(Elastic.Clients.Elasticsearch.Id rulesetId) : base(r => r.Required("ruleset_id", rulesetId))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesPutRuleset;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutRulesetRequest(Elastic.Clients.Elasticsearch.Id rulesetId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> rules) : base(r => r.Required("ruleset_id", rulesetId))
+	{
+		Rules = rules;
+	}
+#if NET7_0_OR_GREATER
+	public PutRulesetRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutRulesetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.QueryRulesPutRuleset;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "query_rules.put_ruleset";
 
-	[JsonInclude, JsonPropertyName("rules")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRule))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; set; }
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset to be created or updated.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; set; }
 }
 
 /// <summary>
@@ -79,101 +142,126 @@ public sealed partial class PutRulesetRequest : PlainRequest<PutRulesetRequestPa
 /// If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
 /// </para>
 /// </summary>
-public sealed partial class PutRulesetRequestDescriptor : RequestDescriptor<PutRulesetRequestDescriptor, PutRulesetRequestParameters>
+public readonly partial struct PutRulesetRequestDescriptor
 {
-	internal PutRulesetRequestDescriptor(Action<PutRulesetRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest Instance { get; init; }
 
-	public PutRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.Id rulesetId) : base(r => r.Required("ruleset_id", rulesetId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesPutRuleset;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "query_rules.put_ruleset";
-
-	public PutRulesetRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id rulesetId)
+	public PutRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.Id rulesetId)
 	{
-		RouteValues.Required("ruleset_id", rulesetId);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest(rulesetId);
+#pragma warning restore CS0618
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> RulesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor RulesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor> RulesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor>[] RulesDescriptorActions { get; set; }
-
-	public PutRulesetRequestDescriptor Rules(ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> rules)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutRulesetRequestDescriptor()
 	{
-		RulesDescriptor = null;
-		RulesDescriptorAction = null;
-		RulesDescriptorActions = null;
-		RulesValue = rules;
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public PutRulesetRequestDescriptor Rules(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset to be created or updated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
 	{
-		RulesValue = null;
-		RulesDescriptorAction = null;
-		RulesDescriptorActions = null;
-		RulesDescriptor = descriptor;
-		return Self;
+		Instance.RulesetId = value;
+		return this;
 	}
 
-	public PutRulesetRequestDescriptor Rules(Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Rules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> value)
 	{
-		RulesValue = null;
-		RulesDescriptor = null;
-		RulesDescriptorActions = null;
-		RulesDescriptorAction = configure;
-		return Self;
+		Instance.Rules = value;
+		return this;
 	}
 
-	public PutRulesetRequestDescriptor Rules(params Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor>[] configure)
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Rules()
 	{
-		RulesValue = null;
-		RulesDescriptor = null;
-		RulesDescriptorAction = null;
-		RulesDescriptorActions = configure;
-		return Self;
+		Instance.Rules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRule.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Rules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRule>? action)
 	{
-		writer.WriteStartObject();
-		if (RulesDescriptor is not null)
+		Instance.Rules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRule.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Rules(params Elastic.Clients.Elasticsearch.QueryRules.QueryRule[] values)
+	{
+		Instance.Rules = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Rules(params System.Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("rules");
-			JsonSerializer.Serialize(writer, RulesDescriptor, options);
-		}
-		else if (RulesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rules");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor(RulesDescriptorAction), options);
-		}
-		else if (RulesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("rules");
-			if (RulesDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in RulesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor(action), options);
-			}
-
-			if (RulesDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("rules");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>(RulesValue, writer, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.Rules = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest Build(System.Action<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor(new Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

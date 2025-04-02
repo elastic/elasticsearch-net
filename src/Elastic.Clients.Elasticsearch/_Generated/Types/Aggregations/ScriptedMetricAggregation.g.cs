@@ -17,25 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class ScriptedMetricAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCombineScript = System.Text.Json.JsonEncodedText.Encode("combine_script");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropInitScript = System.Text.Json.JsonEncodedText.Encode("init_script");
+	private static readonly System.Text.Json.JsonEncodedText PropMapScript = System.Text.Json.JsonEncodedText.Encode("map_script");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropReduceScript = System.Text.Json.JsonEncodedText.Encode("reduce_script");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propCombineScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propInitScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propMapScript = default;
+		LocalJsonValue<object?> propMissing = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propReduceScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCombineScript.TryReadProperty(ref reader, options, PropCombineScript, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propInitScript.TryReadProperty(ref reader, options, PropInitScript, null))
+			{
+				continue;
+			}
+
+			if (propMapScript.TryReadProperty(ref reader, options, PropMapScript, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propReduceScript.TryReadProperty(ref reader, options, PropReduceScript, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CombineScript = propCombineScript.Value,
+			Field = propField.Value,
+			InitScript = propInitScript.Value,
+			MapScript = propMapScript.Value,
+			Missing = propMissing.Value,
+			Params = propParams.Value,
+			ReduceScript = propReduceScript.Value,
+			Script = propScript.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCombineScript, value.CombineScript, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropInitScript, value.InitScript, null, null);
+		writer.WriteProperty(options, PropMapScript, value.MapScript, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropReduceScript, value.ReduceScript, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationConverter))]
 public sealed partial class ScriptedMetricAggregation
 {
+#if NET7_0_OR_GREATER
+	public ScriptedMetricAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ScriptedMetricAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Runs once on each shard after document collection is complete.
 	/// Allows the aggregation to consolidate the state returned from each shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("combine_script")]
 	public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
 
 	/// <summary>
@@ -43,7 +157,6 @@ public sealed partial class ScriptedMetricAggregation
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
@@ -52,7 +165,6 @@ public sealed partial class ScriptedMetricAggregation
 	/// Allows the aggregation to set up any initial state.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("init_script")]
 	public Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
 
 	/// <summary>
@@ -61,7 +173,6 @@ public sealed partial class ScriptedMetricAggregation
 	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("map_script")]
 	public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
 
 	/// <summary>
@@ -70,8 +181,7 @@ public sealed partial class ScriptedMetricAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
-	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
+	public object? Missing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,8 +189,7 @@ public sealed partial class ScriptedMetricAggregation
 	/// It is shared between the scripts.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -88,40 +197,28 @@ public sealed partial class ScriptedMetricAggregation
 	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("reduce_script")]
 	public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(ScriptedMetricAggregation scriptedMetricAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ScriptedMetric(scriptedMetricAggregation);
 }
 
-public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : SerializableDescriptor<ScriptedMetricAggregationDescriptor<TDocument>>
+public readonly partial struct ScriptedMetricAggregationDescriptor<TDocument>
 {
-	internal ScriptedMetricAggregationDescriptor(Action<ScriptedMetricAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation Instance { get; init; }
 
-	public ScriptedMetricAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptedMetricAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Script? CombineScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor CombineScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> CombineScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? InitScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor InitScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> InitScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor MapScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> MapScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ReduceScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ReduceScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptedMetricAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -129,28 +226,34 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	/// Allows the aggregation to consolidate the state returned from each shard.
 	/// </para>
 	/// </summary>
-	public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		CombineScriptDescriptor = null;
-		CombineScriptDescriptorAction = null;
-		CombineScriptValue = combineScript;
-		return Self;
+		Instance.CombineScript = value;
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Runs once on each shard after document collection is complete.
+	/// Allows the aggregation to consolidate the state returned from each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> CombineScript()
 	{
-		CombineScriptValue = null;
-		CombineScriptDescriptorAction = null;
-		CombineScriptDescriptor = descriptor;
-		return Self;
+		Instance.CombineScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Runs once on each shard after document collection is complete.
+	/// Allows the aggregation to consolidate the state returned from each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> CombineScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		CombineScriptValue = null;
-		CombineScriptDescriptor = null;
-		CombineScriptDescriptorAction = configure;
-		return Self;
+		Instance.CombineScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -158,10 +261,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public ScriptedMetricAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -169,21 +272,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public ScriptedMetricAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public ScriptedMetricAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -192,331 +284,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	/// Allows the aggregation to set up any initial state.
 	/// </para>
 	/// </summary>
-	public ScriptedMetricAggregationDescriptor<TDocument> InitScript(Elastic.Clients.Elasticsearch.Script? initScript)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> InitScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		InitScriptDescriptor = null;
-		InitScriptDescriptorAction = null;
-		InitScriptValue = initScript;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> InitScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		InitScriptValue = null;
-		InitScriptDescriptorAction = null;
-		InitScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> InitScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		InitScriptValue = null;
-		InitScriptDescriptor = null;
-		InitScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run once per document collected.
-	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
-	/// </para>
-	/// </summary>
-	public ScriptedMetricAggregationDescriptor<TDocument> MapScript(Elastic.Clients.Elasticsearch.Script? mapScript)
-	{
-		MapScriptDescriptor = null;
-		MapScriptDescriptorAction = null;
-		MapScriptValue = mapScript;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> MapScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		MapScriptValue = null;
-		MapScriptDescriptorAction = null;
-		MapScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> MapScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		MapScriptValue = null;
-		MapScriptDescriptor = null;
-		MapScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
-	public ScriptedMetricAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
-	{
-		MissingValue = missing;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
-	/// It is shared between the scripts.
-	/// </para>
-	/// </summary>
-	public ScriptedMetricAggregationDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Runs once on the coordinating node after all shards have returned their results.
-	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
-	/// </para>
-	/// </summary>
-	public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Elastic.Clients.Elasticsearch.Script? reduceScript)
-	{
-		ReduceScriptDescriptor = null;
-		ReduceScriptDescriptorAction = null;
-		ReduceScriptValue = reduceScript;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		ReduceScriptValue = null;
-		ReduceScriptDescriptorAction = null;
-		ReduceScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		ReduceScriptValue = null;
-		ReduceScriptDescriptor = null;
-		ReduceScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (CombineScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("combine_script");
-			JsonSerializer.Serialize(writer, CombineScriptDescriptor, options);
-		}
-		else if (CombineScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("combine_script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(CombineScriptDescriptorAction), options);
-		}
-		else if (CombineScriptValue is not null)
-		{
-			writer.WritePropertyName("combine_script");
-			JsonSerializer.Serialize(writer, CombineScriptValue, options);
-		}
-
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (InitScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("init_script");
-			JsonSerializer.Serialize(writer, InitScriptDescriptor, options);
-		}
-		else if (InitScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("init_script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(InitScriptDescriptorAction), options);
-		}
-		else if (InitScriptValue is not null)
-		{
-			writer.WritePropertyName("init_script");
-			JsonSerializer.Serialize(writer, InitScriptValue, options);
-		}
-
-		if (MapScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("map_script");
-			JsonSerializer.Serialize(writer, MapScriptDescriptor, options);
-		}
-		else if (MapScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("map_script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(MapScriptDescriptorAction), options);
-		}
-		else if (MapScriptValue is not null)
-		{
-			writer.WritePropertyName("map_script");
-			JsonSerializer.Serialize(writer, MapScriptValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (ReduceScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("reduce_script");
-			JsonSerializer.Serialize(writer, ReduceScriptDescriptor, options);
-		}
-		else if (ReduceScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("reduce_script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ReduceScriptDescriptorAction), options);
-		}
-		else if (ReduceScriptValue is not null)
-		{
-			writer.WritePropertyName("reduce_script");
-			JsonSerializer.Serialize(writer, ReduceScriptValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDescriptor<ScriptedMetricAggregationDescriptor>
-{
-	internal ScriptedMetricAggregationDescriptor(Action<ScriptedMetricAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public ScriptedMetricAggregationDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.Script? CombineScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor CombineScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> CombineScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? InitScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor InitScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> InitScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor MapScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> MapScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ReduceScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ReduceScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Runs once on each shard after document collection is complete.
-	/// Allows the aggregation to consolidate the state returned from each shard.
-	/// </para>
-	/// </summary>
-	public ScriptedMetricAggregationDescriptor CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript)
-	{
-		CombineScriptDescriptor = null;
-		CombineScriptDescriptorAction = null;
-		CombineScriptValue = combineScript;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor CombineScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		CombineScriptValue = null;
-		CombineScriptDescriptorAction = null;
-		CombineScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor CombineScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		CombineScriptValue = null;
-		CombineScriptDescriptor = null;
-		CombineScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public ScriptedMetricAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public ScriptedMetricAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public ScriptedMetricAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.InitScript = value;
+		return this;
 	}
 
 	/// <summary>
@@ -525,28 +296,22 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	/// Allows the aggregation to set up any initial state.
 	/// </para>
 	/// </summary>
-	public ScriptedMetricAggregationDescriptor InitScript(Elastic.Clients.Elasticsearch.Script? initScript)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> InitScript()
 	{
-		InitScriptDescriptor = null;
-		InitScriptDescriptorAction = null;
-		InitScriptValue = initScript;
-		return Self;
+		Instance.InitScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor InitScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Runs prior to any collection of documents.
+	/// Allows the aggregation to set up any initial state.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> InitScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		InitScriptValue = null;
-		InitScriptDescriptorAction = null;
-		InitScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor InitScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		InitScriptValue = null;
-		InitScriptDescriptor = null;
-		InitScriptDescriptorAction = configure;
-		return Self;
+		Instance.InitScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -555,28 +320,34 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
 	/// </para>
 	/// </summary>
-	public ScriptedMetricAggregationDescriptor MapScript(Elastic.Clients.Elasticsearch.Script? mapScript)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> MapScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		MapScriptDescriptor = null;
-		MapScriptDescriptorAction = null;
-		MapScriptValue = mapScript;
-		return Self;
+		Instance.MapScript = value;
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor MapScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Run once per document collected.
+	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> MapScript()
 	{
-		MapScriptValue = null;
-		MapScriptDescriptorAction = null;
-		MapScriptDescriptor = descriptor;
-		return Self;
+		Instance.MapScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor MapScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Run once per document collected.
+	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> MapScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		MapScriptValue = null;
-		MapScriptDescriptor = null;
-		MapScriptDescriptorAction = configure;
-		return Self;
+		Instance.MapScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -585,10 +356,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public ScriptedMetricAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -597,10 +368,41 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	/// It is shared between the scripts.
 	/// </para>
 	/// </summary>
-	public ScriptedMetricAggregationDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
+	/// It is shared between the scripts.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
+	/// It is shared between the scripts.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -609,155 +411,336 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
 	/// </para>
 	/// </summary>
-	public ScriptedMetricAggregationDescriptor ReduceScript(Elastic.Clients.Elasticsearch.Script? reduceScript)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ReduceScriptDescriptor = null;
-		ReduceScriptDescriptorAction = null;
-		ReduceScriptValue = reduceScript;
-		return Self;
+		Instance.ReduceScript = value;
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor ReduceScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Runs once on the coordinating node after all shards have returned their results.
+	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> ReduceScript()
 	{
-		ReduceScriptValue = null;
-		ReduceScriptDescriptorAction = null;
-		ReduceScriptDescriptor = descriptor;
-		return Self;
+		Instance.ReduceScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor ReduceScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Runs once on the coordinating node after all shards have returned their results.
+	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ReduceScriptValue = null;
-		ReduceScriptDescriptor = null;
-		ReduceScriptDescriptorAction = configure;
-		return Self;
+		Instance.ReduceScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ScriptedMetricAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (CombineScriptDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("combine_script");
-			JsonSerializer.Serialize(writer, CombineScriptDescriptor, options);
-		}
-		else if (CombineScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("combine_script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(CombineScriptDescriptorAction), options);
-		}
-		else if (CombineScriptValue is not null)
-		{
-			writer.WritePropertyName("combine_script");
-			JsonSerializer.Serialize(writer, CombineScriptValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct ScriptedMetricAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptedMetricAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptedMetricAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Runs once on each shard after document collection is complete.
+	/// Allows the aggregation to consolidate the state returned from each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor CombineScript(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.CombineScript = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Runs once on each shard after document collection is complete.
+	/// Allows the aggregation to consolidate the state returned from each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor CombineScript()
+	{
+		Instance.CombineScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Runs once on each shard after document collection is complete.
+	/// Allows the aggregation to consolidate the state returned from each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor CombineScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.CombineScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field on which to run the aggregation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Runs prior to any collection of documents.
+	/// Allows the aggregation to set up any initial state.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor InitScript(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.InitScript = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Runs prior to any collection of documents.
+	/// Allows the aggregation to set up any initial state.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor InitScript()
+	{
+		Instance.InitScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Runs prior to any collection of documents.
+	/// Allows the aggregation to set up any initial state.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor InitScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.InitScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Run once per document collected.
+	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor MapScript(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.MapScript = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Run once per document collected.
+	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor MapScript()
+	{
+		Instance.MapScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Run once per document collected.
+	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor MapScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.MapScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The value to apply to documents that do not have a value.
+	/// By default, documents without a value are ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Missing(object? value)
+	{
+		Instance.Missing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
+	/// It is shared between the scripts.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
+	/// It is shared between the scripts.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
+	/// It is shared between the scripts.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Runs once on the coordinating node after all shards have returned their results.
+	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor ReduceScript(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.ReduceScript = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Runs once on the coordinating node after all shards have returned their results.
+	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor ReduceScript()
+	{
+		Instance.ReduceScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Runs once on the coordinating node after all shards have returned their results.
+	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor ReduceScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.ReduceScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (InitScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("init_script");
-			JsonSerializer.Serialize(writer, InitScriptDescriptor, options);
-		}
-		else if (InitScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("init_script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(InitScriptDescriptorAction), options);
-		}
-		else if (InitScriptValue is not null)
-		{
-			writer.WritePropertyName("init_script");
-			JsonSerializer.Serialize(writer, InitScriptValue, options);
-		}
-
-		if (MapScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("map_script");
-			JsonSerializer.Serialize(writer, MapScriptDescriptor, options);
-		}
-		else if (MapScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("map_script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(MapScriptDescriptorAction), options);
-		}
-		else if (MapScriptValue is not null)
-		{
-			writer.WritePropertyName("map_script");
-			JsonSerializer.Serialize(writer, MapScriptValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (ReduceScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("reduce_script");
-			JsonSerializer.Serialize(writer, ReduceScriptDescriptor, options);
-		}
-		else if (ReduceScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("reduce_script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ReduceScriptDescriptorAction), options);
-		}
-		else if (ReduceScriptValue is not null)
-		{
-			writer.WritePropertyName("reduce_script");
-			JsonSerializer.Serialize(writer, ReduceScriptValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

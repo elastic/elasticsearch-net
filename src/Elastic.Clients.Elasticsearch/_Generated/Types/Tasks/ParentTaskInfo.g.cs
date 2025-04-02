@@ -17,26 +17,212 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
+internal sealed partial class ParentTaskInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
+	private static readonly System.Text.Json.JsonEncodedText PropCancellable = System.Text.Json.JsonEncodedText.Encode("cancellable");
+	private static readonly System.Text.Json.JsonEncodedText PropCancelled = System.Text.Json.JsonEncodedText.Encode("cancelled");
+	private static readonly System.Text.Json.JsonEncodedText PropChildren = System.Text.Json.JsonEncodedText.Encode("children");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropParentTaskId = System.Text.Json.JsonEncodedText.Encode("parent_task_id");
+	private static readonly System.Text.Json.JsonEncodedText PropRunningTime = System.Text.Json.JsonEncodedText.Encode("running_time");
+	private static readonly System.Text.Json.JsonEncodedText PropRunningTimeInNanos = System.Text.Json.JsonEncodedText.Encode("running_time_in_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propAction = default;
+		LocalJsonValue<bool> propCancellable = default;
+		LocalJsonValue<bool?> propCancelled = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>?> propChildren = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>> propHeaders = default;
+		LocalJsonValue<long> propId = default;
+		LocalJsonValue<string> propNode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propParentTaskId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propRunningTime = default;
+		LocalJsonValue<System.TimeSpan> propRunningTimeInNanos = default;
+		LocalJsonValue<System.DateTime> propStartTimeInMillis = default;
+		LocalJsonValue<object?> propStatus = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAction.TryReadProperty(ref reader, options, PropAction, null))
+			{
+				continue;
+			}
+
+			if (propCancellable.TryReadProperty(ref reader, options, PropCancellable, null))
+			{
+				continue;
+			}
+
+			if (propCancelled.TryReadProperty(ref reader, options, PropCancelled, null))
+			{
+				continue;
+			}
+
+			if (propChildren.TryReadProperty(ref reader, options, PropChildren, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static System.Collections.Generic.IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (propParentTaskId.TryReadProperty(ref reader, options, PropParentTaskId, null))
+			{
+				continue;
+			}
+
+			if (propRunningTime.TryReadProperty(ref reader, options, PropRunningTime, null))
+			{
+				continue;
+			}
+
+			if (propRunningTimeInNanos.TryReadProperty(ref reader, options, PropRunningTimeInNanos, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Action = propAction.Value,
+			Cancellable = propCancellable.Value,
+			Cancelled = propCancelled.Value,
+			Children = propChildren.Value,
+			Description = propDescription.Value,
+			Headers = propHeaders.Value,
+			Id = propId.Value,
+			Node = propNode.Value,
+			ParentTaskId = propParentTaskId.Value,
+			RunningTime = propRunningTime.Value,
+			RunningTimeInNanos = propRunningTimeInNanos.Value,
+			StartTimeInMillis = propStartTimeInMillis.Value,
+			Status = propStatus.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAction, value.Action, null, null);
+		writer.WriteProperty(options, PropCancellable, value.Cancellable, null, null);
+		writer.WriteProperty(options, PropCancelled, value.Cancelled, null, null);
+		writer.WriteProperty(options, PropChildren, value.Children, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>(o, v, null));
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropParentTaskId, value.ParentTaskId, null, null);
+		writer.WriteProperty(options, PropRunningTime, value.RunningTime, null, null);
+		writer.WriteProperty(options, PropRunningTimeInNanos, value.RunningTimeInNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfoConverter))]
 public sealed partial class ParentTaskInfo
 {
-	[JsonInclude, JsonPropertyName("action")]
-	public string Action { get; init; }
-	[JsonInclude, JsonPropertyName("cancellable")]
-	public bool Cancellable { get; init; }
-	[JsonInclude, JsonPropertyName("cancelled")]
-	public bool? Cancelled { get; init; }
-	[JsonInclude, JsonPropertyName("children")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>? Children { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ParentTaskInfo(string action, bool cancellable, System.Collections.Generic.IReadOnlyDictionary<string, string> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTime startTimeInMillis, string type)
+	{
+		Action = action;
+		Cancellable = cancellable;
+		Headers = headers;
+		Id = id;
+		Node = node;
+		RunningTimeInNanos = runningTimeInNanos;
+		StartTimeInMillis = startTimeInMillis;
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public ParentTaskInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ParentTaskInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ParentTaskInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Action { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Cancellable { get; set; }
+	public bool? Cancelled { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>? Children { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -46,22 +232,34 @@ public sealed partial class ParentTaskInfo
 	/// Many requests will have only an empty description because more detailed information about the request is not easily available or particularly helpful in identifying the request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
-	public string? Description { get; init; }
-	[JsonInclude, JsonPropertyName("headers")]
-	public IReadOnlyDictionary<string, string> Headers { get; init; }
-	[JsonInclude, JsonPropertyName("id")]
-	public long Id { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
-	public string Node { get; init; }
-	[JsonInclude, JsonPropertyName("parent_task_id")]
-	public Elastic.Clients.Elasticsearch.TaskId? ParentTaskId { get; init; }
-	[JsonInclude, JsonPropertyName("running_time")]
-	public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; init; }
-	[JsonInclude, JsonPropertyName("running_time_in_nanos")]
-	public long RunningTimeInNanos { get; init; }
-	[JsonInclude, JsonPropertyName("start_time_in_millis")]
-	public long StartTimeInMillis { get; init; }
+	public string? Description { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, string> Headers { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Id { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Node { get; set; }
+	public Elastic.Clients.Elasticsearch.TaskId? ParentTaskId { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan RunningTimeInNanos { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTime StartTimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -71,8 +269,10 @@ public sealed partial class ParentTaskInfo
 	/// Fields might be removed from the status for a particular request so any parsing you do of the status might break in minor releases.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("status")]
-	public object? Status { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; init; }
+	public object? Status { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }

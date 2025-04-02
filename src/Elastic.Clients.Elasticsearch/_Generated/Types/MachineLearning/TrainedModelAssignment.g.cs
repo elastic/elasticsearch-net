@@ -17,48 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class TrainedModelAssignmentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations");
+	private static readonly System.Text.Json.JsonEncodedText PropAssignmentState = System.Text.Json.JsonEncodedText.Encode("assignment_state");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAssignedAllocations = System.Text.Json.JsonEncodedText.Encode("max_assigned_allocations");
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+	private static readonly System.Text.Json.JsonEncodedText PropRoutingTable = System.Text.Json.JsonEncodedText.Encode("routing_table");
+	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTaskParameters = System.Text.Json.JsonEncodedText.Encode("task_parameters");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings?> propAdaptiveAllocations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState> propAssignmentState = default;
+		LocalJsonValue<int?> propMaxAssignedAllocations = default;
+		LocalJsonValue<string?> propReason = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable>> propRoutingTable = default;
+		LocalJsonValue<System.DateTime> propStartTime = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters> propTaskParameters = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAdaptiveAllocations.TryReadProperty(ref reader, options, PropAdaptiveAllocations, null))
+			{
+				continue;
+			}
+
+			if (propAssignmentState.TryReadProperty(ref reader, options, PropAssignmentState, null))
+			{
+				continue;
+			}
+
+			if (propMaxAssignedAllocations.TryReadProperty(ref reader, options, PropMaxAssignedAllocations, null))
+			{
+				continue;
+			}
+
+			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
+			{
+				continue;
+			}
+
+			if (propRoutingTable.TryReadProperty(ref reader, options, PropRoutingTable, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propTaskParameters.TryReadProperty(ref reader, options, PropTaskParameters, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AdaptiveAllocations = propAdaptiveAllocations.Value,
+			AssignmentState = propAssignmentState.Value,
+			MaxAssignedAllocations = propMaxAssignedAllocations.Value,
+			Reason = propReason.Value,
+			RoutingTable = propRoutingTable.Value,
+			StartTime = propStartTime.Value,
+			TaskParameters = propTaskParameters.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAdaptiveAllocations, value.AdaptiveAllocations, null, null);
+		writer.WriteProperty(options, PropAssignmentState, value.AssignmentState, null, null);
+		writer.WriteProperty(options, PropMaxAssignedAllocations, value.MaxAssignedAllocations, null, null);
+		writer.WriteProperty(options, PropReason, value.Reason, null, null);
+		writer.WriteProperty(options, PropRoutingTable, value.RoutingTable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable>(o, v, null, null));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropTaskParameters, value.TaskParameters, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentConverter))]
 public sealed partial class TrainedModelAssignment
 {
-	[JsonInclude, JsonPropertyName("adaptive_allocations")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TrainedModelAssignment(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState assignmentState, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> routingTable, System.DateTime startTime, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters taskParameters)
+	{
+		AssignmentState = assignmentState;
+		RoutingTable = routingTable;
+		StartTime = startTime;
+		TaskParameters = taskParameters;
+	}
+#if NET7_0_OR_GREATER
+	public TrainedModelAssignment()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TrainedModelAssignment()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TrainedModelAssignment(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The overall assignment state.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("assignment_state")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState AssignmentState { get; init; }
-	[JsonInclude, JsonPropertyName("max_assigned_allocations")]
-	public int? MaxAssignedAllocations { get; init; }
-	[JsonInclude, JsonPropertyName("reason")]
-	public string? Reason { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState AssignmentState { get; set; }
+	public int? MaxAssignedAllocations { get; set; }
+	public string? Reason { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The allocation state for each node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("routing_table")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> RoutingTable { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> RoutingTable { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The timestamp when the deployment started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("start_time")]
-	public DateTimeOffset StartTime { get; init; }
-	[JsonInclude, JsonPropertyName("task_parameters")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters TaskParameters { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTime StartTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters TaskParameters { get; set; }
 }

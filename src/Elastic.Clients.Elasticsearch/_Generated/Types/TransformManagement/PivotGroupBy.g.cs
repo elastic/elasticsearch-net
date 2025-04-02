@@ -17,256 +17,372 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-[JsonConverter(typeof(PivotGroupByConverter))]
+internal sealed partial class PivotGroupByConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantDateHistogram = System.Text.Json.JsonEncodedText.Encode("date_histogram");
+	private static readonly System.Text.Json.JsonEncodedText VariantGeotileGrid = System.Text.Json.JsonEncodedText.Encode("geotile_grid");
+	private static readonly System.Text.Json.JsonEncodedText VariantHistogram = System.Text.Json.JsonEncodedText.Encode("histogram");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantDateHistogram))
+			{
+				variantType = VariantDateHistogram.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGeotileGrid))
+			{
+				variantType = VariantGeotileGrid.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantHistogram))
+			{
+				variantType = VariantHistogram.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerms))
+			{
+				variantType = VariantTerms.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "date_histogram":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation)value.Variant, null, null);
+				break;
+			case "geotile_grid":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation)value.Variant, null, null);
+				break;
+			case "histogram":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation)value.Variant, null, null);
+				break;
+			case "terms":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByConverter))]
 public sealed partial class PivotGroupBy
 {
-	internal PivotGroupBy(string variantName, object variant)
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public PivotGroupBy()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PivotGroupBy()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PivotGroupBy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>("date_histogram"); set => SetVariant("date_histogram", value); }
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? GeotileGrid { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation>("geotile_grid"); set => SetVariant("geotile_grid", value); }
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>("histogram"); set => SetVariant("histogram", value); }
+	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>("terms"); set => SetVariant("terms", value); }
 
-	public static PivotGroupBy DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupBy("date_histogram", dateHistogramAggregation);
-	public static PivotGroupBy GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => new PivotGroupBy("geotile_grid", geotileGridAggregation);
-	public static PivotGroupBy Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new PivotGroupBy("histogram", histogramAggregation);
-	public static PivotGroupBy Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupBy("terms", termsAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation value) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy { DateHistogram = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation value) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy { GeotileGrid = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation value) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy { Histogram = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation value) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy { Terms = value };
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class PivotGroupByConverter : JsonConverter<PivotGroupBy>
+public readonly partial struct PivotGroupByDescriptor<TDocument>
 {
-	public override PivotGroupBy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PivotGroupByDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "date_histogram")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "geotile_grid")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "histogram")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "terms")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PivotGroupBy' from the response.");
-		}
-
-		var result = new PivotGroupBy(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, PivotGroupBy value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PivotGroupByDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "date_histogram":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation)value.Variant, options);
-					break;
-				case "geotile_grid":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation)value.Variant, options);
-					break;
-				case "histogram":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation)value.Variant, options);
-					break;
-				case "terms":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? value)
+	{
+		Instance.DateHistogram = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> DateHistogram()
+	{
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? value)
+	{
+		Instance.GeotileGrid = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> GeotileGrid()
+	{
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> GeotileGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? value)
+	{
+		Instance.Histogram = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> Histogram()
+	{
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> Histogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? value)
+	{
+		Instance.Terms = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> Terms()
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class PivotGroupByDescriptor<TDocument> : SerializableDescriptor<PivotGroupByDescriptor<TDocument>>
+public readonly partial struct PivotGroupByDescriptor
 {
-	internal PivotGroupByDescriptor(Action<PivotGroupByDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy Instance { get; init; }
 
-	public PivotGroupByDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PivotGroupByDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private PivotGroupByDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PivotGroupByDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private PivotGroupByDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.DateHistogram = value;
+		return this;
 	}
 
-	public PivotGroupByDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
-	public PivotGroupByDescriptor<TDocument> DateHistogram(Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-	public PivotGroupByDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
-	public PivotGroupByDescriptor<TDocument> GeotileGrid(Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geotile_grid");
-	public PivotGroupByDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
-	public PivotGroupByDescriptor<TDocument> Histogram(Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-	public PivotGroupByDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
-	public PivotGroupByDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor DateHistogram()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class PivotGroupByDescriptor : SerializableDescriptor<PivotGroupByDescriptor>
-{
-	internal PivotGroupByDescriptor(Action<PivotGroupByDescriptor> configure) => configure.Invoke(this);
-
-	public PivotGroupByDescriptor() : base()
-	{
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor.Build(null);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private PivotGroupByDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor>? action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor.Build(action);
+		return this;
 	}
 
-	private PivotGroupByDescriptor Set(object variant, string variantName)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor DateHistogram<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<T>>? action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public PivotGroupByDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
-	public PivotGroupByDescriptor DateHistogram<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
-	public PivotGroupByDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
-	public PivotGroupByDescriptor GeotileGrid<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor> configure) => Set(configure, "geotile_grid");
-	public PivotGroupByDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
-	public PivotGroupByDescriptor Histogram<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
-	public PivotGroupByDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
-	public PivotGroupByDescriptor Terms<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.GeotileGrid = value;
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor GeotileGrid()
+	{
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor.Build(null);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor GeotileGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor>? action)
+	{
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor GeotileGrid<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<T>>? action)
+	{
+		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? value)
+	{
+		Instance.Histogram = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor Histogram()
+	{
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor Histogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor>? action)
+	{
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor Histogram<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<T>>? action)
+	{
+		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? value)
+	{
+		Instance.Terms = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor Terms()
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor>? action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<T>>? action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

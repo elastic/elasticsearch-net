@@ -17,21 +17,62 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class OidcLogoutRequestParameters : RequestParameters
+public sealed partial class OidcLogoutRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class OidcLogoutRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
+	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
+
+	public override Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propRefreshToken = default;
+		LocalJsonValue<string> propToken = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
+			{
+				continue;
+			}
+
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			RefreshToken = propRefreshToken.Value,
+			Token = propToken.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -49,11 +90,34 @@ public sealed partial class OidcLogoutRequestParameters : RequestParameters
 /// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 /// </para>
 /// </summary>
-public sealed partial class OidcLogoutRequest : PlainRequest<OidcLogoutRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestConverter))]
+public sealed partial class OidcLogoutRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityOidcLogout;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public OidcLogoutRequest(string token)
+	{
+		Token = token;
+	}
+#if NET7_0_OR_GREATER
+	public OidcLogoutRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public OidcLogoutRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal OidcLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityOidcLogout;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -61,19 +125,21 @@ public sealed partial class OidcLogoutRequest : PlainRequest<OidcLogoutRequestPa
 
 	/// <summary>
 	/// <para>
-	/// The access token to be invalidated.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("access_token")]
-	public string AccessToken { get; set; }
-
-	/// <summary>
-	/// <para>
 	/// The refresh token to be invalidated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("refresh_token")]
 	public string? RefreshToken { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The access token to be invalidated.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Token { get; set; }
 }
 
 /// <summary>
@@ -91,58 +157,93 @@ public sealed partial class OidcLogoutRequest : PlainRequest<OidcLogoutRequestPa
 /// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 /// </para>
 /// </summary>
-public sealed partial class OidcLogoutRequestDescriptor : RequestDescriptor<OidcLogoutRequestDescriptor, OidcLogoutRequestParameters>
+public readonly partial struct OidcLogoutRequestDescriptor
 {
-	internal OidcLogoutRequestDescriptor(Action<OidcLogoutRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public OidcLogoutRequestDescriptor(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public OidcLogoutRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityOidcLogout;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.oidc_logout";
-
-	private string AccessTokenValue { get; set; }
-	private string? RefreshTokenValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The access token to be invalidated.
-	/// </para>
-	/// </summary>
-	public OidcLogoutRequestDescriptor AccessToken(string accessToken)
-	{
-		AccessTokenValue = accessToken;
-		return Self;
-	}
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest instance) => new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The refresh token to be invalidated.
 	/// </para>
 	/// </summary>
-	public OidcLogoutRequestDescriptor RefreshToken(string? refreshToken)
+	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor RefreshToken(string? value)
 	{
-		RefreshTokenValue = refreshToken;
-		return Self;
+		Instance.RefreshToken = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The access token to be invalidated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor Token(string value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("access_token");
-		writer.WriteStringValue(AccessTokenValue);
-		if (!string.IsNullOrEmpty(RefreshTokenValue))
-		{
-			writer.WritePropertyName("refresh_token");
-			writer.WriteStringValue(RefreshTokenValue);
-		}
+		Instance.Token = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

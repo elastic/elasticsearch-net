@@ -17,39 +17,126 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeProcessInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropMlockall = System.Text.Json.JsonEncodedText.Encode("mlockall");
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshIntervalInMillis = System.Text.Json.JsonEncodedText.Encode("refresh_interval_in_millis");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propId = default;
+		LocalJsonValue<bool> propMlockall = default;
+		LocalJsonValue<System.TimeSpan> propRefreshIntervalInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propMlockall.TryReadProperty(ref reader, options, PropMlockall, null))
+			{
+				continue;
+			}
+
+			if (propRefreshIntervalInMillis.TryReadProperty(ref reader, options, PropRefreshIntervalInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Mlockall = propMlockall.Value,
+			RefreshIntervalInMillis = propRefreshIntervalInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropMlockall, value.Mlockall, null, null);
+		writer.WriteProperty(options, PropRefreshIntervalInMillis, value.RefreshIntervalInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfoConverter))]
 public sealed partial class NodeProcessInfo
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeProcessInfo(long id, bool mlockall, System.TimeSpan refreshIntervalInMillis)
+	{
+		Id = id;
+		Mlockall = mlockall;
+		RefreshIntervalInMillis = refreshIntervalInMillis;
+	}
+#if NET7_0_OR_GREATER
+	public NodeProcessInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeProcessInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeProcessInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Process identifier (PID)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
-	public long Id { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Indicates if the process address space has been successfully locked in memory
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mlockall")]
-	public bool Mlockall { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Mlockall { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refresh interval for the process statistics
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("refresh_interval_in_millis")]
-	public long RefreshIntervalInMillis { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan RefreshIntervalInMillis { get; set; }
 }

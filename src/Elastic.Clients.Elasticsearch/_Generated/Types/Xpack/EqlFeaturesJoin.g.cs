@@ -17,26 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class EqlFeaturesJoinConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoin>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesFiveOrMore = System.Text.Json.JsonEncodedText.Encode("join_queries_five_or_more");
+	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesFour = System.Text.Json.JsonEncodedText.Encode("join_queries_four");
+	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesThree = System.Text.Json.JsonEncodedText.Encode("join_queries_three");
+	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesTwo = System.Text.Json.JsonEncodedText.Encode("join_queries_two");
+	private static readonly System.Text.Json.JsonEncodedText PropJoinUntil = System.Text.Json.JsonEncodedText.Encode("join_until");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoin Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propJoinQueriesFiveOrMore = default;
+		LocalJsonValue<int> propJoinQueriesFour = default;
+		LocalJsonValue<int> propJoinQueriesThree = default;
+		LocalJsonValue<int> propJoinQueriesTwo = default;
+		LocalJsonValue<int> propJoinUntil = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propJoinQueriesFiveOrMore.TryReadProperty(ref reader, options, PropJoinQueriesFiveOrMore, null))
+			{
+				continue;
+			}
+
+			if (propJoinQueriesFour.TryReadProperty(ref reader, options, PropJoinQueriesFour, null))
+			{
+				continue;
+			}
+
+			if (propJoinQueriesThree.TryReadProperty(ref reader, options, PropJoinQueriesThree, null))
+			{
+				continue;
+			}
+
+			if (propJoinQueriesTwo.TryReadProperty(ref reader, options, PropJoinQueriesTwo, null))
+			{
+				continue;
+			}
+
+			if (propJoinUntil.TryReadProperty(ref reader, options, PropJoinUntil, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoin(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			JoinQueriesFiveOrMore = propJoinQueriesFiveOrMore.Value,
+			JoinQueriesFour = propJoinQueriesFour.Value,
+			JoinQueriesThree = propJoinQueriesThree.Value,
+			JoinQueriesTwo = propJoinQueriesTwo.Value,
+			JoinUntil = propJoinUntil.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoin value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropJoinQueriesFiveOrMore, value.JoinQueriesFiveOrMore, null, null);
+		writer.WriteProperty(options, PropJoinQueriesFour, value.JoinQueriesFour, null, null);
+		writer.WriteProperty(options, PropJoinQueriesThree, value.JoinQueriesThree, null, null);
+		writer.WriteProperty(options, PropJoinQueriesTwo, value.JoinQueriesTwo, null, null);
+		writer.WriteProperty(options, PropJoinUntil, value.JoinUntil, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoinConverter))]
 public sealed partial class EqlFeaturesJoin
 {
-	[JsonInclude, JsonPropertyName("join_queries_five_or_more")]
-	public int JoinQueriesFiveOrMore { get; init; }
-	[JsonInclude, JsonPropertyName("join_queries_four")]
-	public int JoinQueriesFour { get; init; }
-	[JsonInclude, JsonPropertyName("join_queries_three")]
-	public int JoinQueriesThree { get; init; }
-	[JsonInclude, JsonPropertyName("join_queries_two")]
-	public int JoinQueriesTwo { get; init; }
-	[JsonInclude, JsonPropertyName("join_until")]
-	public int JoinUntil { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EqlFeaturesJoin(int joinQueriesFiveOrMore, int joinQueriesFour, int joinQueriesThree, int joinQueriesTwo, int joinUntil)
+	{
+		JoinQueriesFiveOrMore = joinQueriesFiveOrMore;
+		JoinQueriesFour = joinQueriesFour;
+		JoinQueriesThree = joinQueriesThree;
+		JoinQueriesTwo = joinQueriesTwo;
+		JoinUntil = joinUntil;
+	}
+#if NET7_0_OR_GREATER
+	public EqlFeaturesJoin()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public EqlFeaturesJoin()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EqlFeaturesJoin(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int JoinQueriesFiveOrMore { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int JoinQueriesFour { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int JoinQueriesThree { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int JoinQueriesTwo { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int JoinUntil { get; set; }
 }

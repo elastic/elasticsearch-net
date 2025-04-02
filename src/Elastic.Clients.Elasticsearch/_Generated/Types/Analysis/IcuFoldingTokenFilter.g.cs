@@ -17,69 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class IcuFoldingTokenFilter : ITokenFilter
+internal sealed partial class IcuFoldingTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("type")]
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUnicodeSetFilter = System.Text.Json.JsonEncodedText.Encode("unicode_set_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propUnicodeSetFilter = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propUnicodeSetFilter.TryReadProperty(ref reader, options, PropUnicodeSetFilter, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			UnicodeSetFilter = propUnicodeSetFilter.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUnicodeSetFilter, value.UnicodeSetFilter, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterConverter))]
+public sealed partial class IcuFoldingTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuFoldingTokenFilter(string unicodeSetFilter)
+	{
+		UnicodeSetFilter = unicodeSetFilter;
+	}
+#if NET7_0_OR_GREATER
+	public IcuFoldingTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IcuFoldingTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IcuFoldingTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string Type => "icu_folding";
 
-	[JsonInclude, JsonPropertyName("unicode_set_filter")]
-	public string UnicodeSetFilter { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string UnicodeSetFilter { get; set; }
 	public string? Version { get; set; }
 }
 
-public sealed partial class IcuFoldingTokenFilterDescriptor : SerializableDescriptor<IcuFoldingTokenFilterDescriptor>, IBuildableDescriptor<IcuFoldingTokenFilter>
+public readonly partial struct IcuFoldingTokenFilterDescriptor
 {
-	internal IcuFoldingTokenFilterDescriptor(Action<IcuFoldingTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter Instance { get; init; }
 
-	public IcuFoldingTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuFoldingTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private string UnicodeSetFilterValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public IcuFoldingTokenFilterDescriptor UnicodeSetFilter(string unicodeSetFilter)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuFoldingTokenFilterDescriptor()
 	{
-		UnicodeSetFilterValue = unicodeSetFilter;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IcuFoldingTokenFilterDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter(Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor UnicodeSetFilter(string value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.UnicodeSetFilter = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("icu_folding");
-		writer.WritePropertyName("unicode_set_filter");
-		writer.WriteStringValue(UnicodeSetFilterValue);
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Version = value;
+		return this;
 	}
 
-	IcuFoldingTokenFilter IBuildableDescriptor<IcuFoldingTokenFilter>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor> action)
 	{
-		UnicodeSetFilter = UnicodeSetFilterValue,
-		Version = VersionValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

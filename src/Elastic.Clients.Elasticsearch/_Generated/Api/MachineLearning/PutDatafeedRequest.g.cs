@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutDatafeedRequestParameters : RequestParameters
+public sealed partial class PutDatafeedRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -46,7 +39,7 @@ public sealed partial class PutDatafeedRequestParameters : RequestParameters
 	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -56,194 +49,160 @@ public sealed partial class PutDatafeedRequestParameters : RequestParameters
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-internal sealed partial class PutDatafeedRequestConverter : JsonConverter<PutDatafeedRequest>
+internal sealed partial class PutDatafeedRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest>
 {
-	public override PutDatafeedRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropChunkingConfig = System.Text.Json.JsonEncodedText.Encode("chunking_config");
+	private static readonly System.Text.Json.JsonEncodedText PropDelayedDataCheckConfig = System.Text.Json.JsonEncodedText.Encode("delayed_data_check_config");
+	private static readonly System.Text.Json.JsonEncodedText PropFrequency = System.Text.Json.JsonEncodedText.Encode("frequency");
+	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices1 = System.Text.Json.JsonEncodedText.Encode("indexes");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesOptions = System.Text.Json.JsonEncodedText.Encode("indices_options");
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxEmptySearches = System.Text.Json.JsonEncodedText.Encode("max_empty_searches");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryDelay = System.Text.Json.JsonEncodedText.Encode("query_delay");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropScriptFields = System.Text.Json.JsonEncodedText.Encode("script_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropScrollSize = System.Text.Json.JsonEncodedText.Encode("scroll_size");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new PutDatafeedRequest();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggregations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig?> propChunkingConfig = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig?> propDelayedDataCheckConfig = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>?> propHeaders = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndicesOptions?> propIndicesOptions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propJobId = default;
+		LocalJsonValue<int?> propMaxEmptySearches = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propQueryDelay = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?> propScriptFields = default;
+		LocalJsonValue<int?> propScrollSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)) || propAggregations.TryReadProperty(ref reader, options, PropAggregations1, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)))
 			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "chunking_config")
-				{
-					variant.ChunkingConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "delayed_data_check_config")
-				{
-					variant.DelayedDataCheckConfig = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "frequency")
-				{
-					variant.Frequency = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "headers")
-				{
-					variant.Headers = JsonSerializer.Deserialize<IDictionary<string, Union<string, ICollection<string>>>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices" || property == "indexes")
-				{
-					variant.Indices = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Indices?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "indices_options")
-				{
-					variant.IndicesOptions = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndicesOptions?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "job_id")
-				{
-					variant.JobId = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Id?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "max_empty_searches")
-				{
-					variant.MaxEmptySearches = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query_delay")
-				{
-					variant.QueryDelay = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Duration?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "runtime_mappings")
-				{
-					variant.RuntimeMappings = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "script_fields")
-				{
-					variant.ScriptFields = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "scroll_size")
-				{
-					variant.ScrollSize = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propChunkingConfig.TryReadProperty(ref reader, options, PropChunkingConfig, null))
+			{
+				continue;
+			}
+
+			if (propDelayedDataCheckConfig.TryReadProperty(ref reader, options, PropDelayedDataCheckConfig, null))
+			{
+				continue;
+			}
+
+			if (propFrequency.TryReadProperty(ref reader, options, PropFrequency, null))
+			{
+				continue;
+			}
+
+			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null) || propIndices.TryReadProperty(ref reader, options, PropIndices1, null))
+			{
+				continue;
+			}
+
+			if (propIndicesOptions.TryReadProperty(ref reader, options, PropIndicesOptions, null))
+			{
+				continue;
+			}
+
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
+			{
+				continue;
+			}
+
+			if (propMaxEmptySearches.TryReadProperty(ref reader, options, PropMaxEmptySearches, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propQueryDelay.TryReadProperty(ref reader, options, PropQueryDelay, null))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propScriptFields.TryReadProperty(ref reader, options, PropScriptFields, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propScrollSize.TryReadProperty(ref reader, options, PropScrollSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregations = propAggregations.Value,
+			ChunkingConfig = propChunkingConfig.Value,
+			DelayedDataCheckConfig = propDelayedDataCheckConfig.Value,
+			Frequency = propFrequency.Value,
+			Headers = propHeaders.Value,
+			Indices = propIndices.Value,
+			IndicesOptions = propIndicesOptions.Value,
+			JobId = propJobId.Value,
+			MaxEmptySearches = propMaxEmptySearches.Value,
+			Query = propQuery.Value,
+			QueryDelay = propQueryDelay.Value,
+			RuntimeMappings = propRuntimeMappings.Value,
+			ScriptFields = propScriptFields.Value,
+			ScrollSize = propScrollSize.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, PutDatafeedRequest value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.ChunkingConfig is not null)
-		{
-			writer.WritePropertyName("chunking_config");
-			JsonSerializer.Serialize(writer, value.ChunkingConfig, options);
-		}
-
-		if (value.DelayedDataCheckConfig is not null)
-		{
-			writer.WritePropertyName("delayed_data_check_config");
-			JsonSerializer.Serialize(writer, value.DelayedDataCheckConfig, options);
-		}
-
-		if (value.Frequency is not null)
-		{
-			writer.WritePropertyName("frequency");
-			JsonSerializer.Serialize(writer, value.Frequency, options);
-		}
-
-		if (value.Headers is not null)
-		{
-			writer.WritePropertyName("headers");
-			JsonSerializer.Serialize(writer, value.Headers, options);
-		}
-
-		if (value.Indices is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, value.Indices, options);
-		}
-
-		if (value.IndicesOptions is not null)
-		{
-			writer.WritePropertyName("indices_options");
-			JsonSerializer.Serialize(writer, value.IndicesOptions, options);
-		}
-
-		if (value.JobId is not null)
-		{
-			writer.WritePropertyName("job_id");
-			JsonSerializer.Serialize(writer, value.JobId, options);
-		}
-
-		if (value.MaxEmptySearches.HasValue)
-		{
-			writer.WritePropertyName("max_empty_searches");
-			writer.WriteNumberValue(value.MaxEmptySearches.Value);
-		}
-
-		if (value.Query is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value.Query, options);
-		}
-
-		if (value.QueryDelay is not null)
-		{
-			writer.WritePropertyName("query_delay");
-			JsonSerializer.Serialize(writer, value.QueryDelay, options);
-		}
-
-		if (value.RuntimeMappings is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
-		}
-
-		if (value.ScriptFields is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, value.ScriptFields, options);
-		}
-
-		if (value.ScrollSize.HasValue)
-		{
-			writer.WritePropertyName("scroll_size");
-			writer.WriteNumberValue(value.ScrollSize.Value);
-		}
-
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropChunkingConfig, value.ChunkingConfig, null, null);
+		writer.WriteProperty(options, PropDelayedDataCheckConfig, value.DelayedDataCheckConfig, null, null);
+		writer.WriteProperty(options, PropFrequency, value.Frequency, null, null);
+		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null)));
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropIndicesOptions, value.IndicesOptions, null, null);
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropMaxEmptySearches, value.MaxEmptySearches, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQueryDelay, value.QueryDelay, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropScriptFields, value.ScriptFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, v, null, null));
+		writer.WriteProperty(options, PropScrollSize, value.ScrollSize, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -264,20 +223,27 @@ internal sealed partial class PutDatafeedRequestConverter : JsonConverter<PutDat
 /// directly to the <c>.ml-config</c> index. Do not give users <c>write</c> privileges on the <c>.ml-config</c> index.
 /// </para>
 /// </summary>
-[JsonConverter(typeof(PutDatafeedRequestConverter))]
-public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestConverter))]
+public sealed partial class PutDatafeedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
 	{
 	}
-
+#if NET7_0_OR_GREATER
 	public PutDatafeedRequest()
 	{
 	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutDatafeed;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPutDatafeed;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -285,11 +251,23 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 
 	/// <summary>
 	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed.
+	/// This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
+	/// It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// If true, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the <c>_all</c>
 	/// string or when no indices are specified.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -298,15 +276,13 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// If true, unavailable indices (missing or closed) are ignored.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -315,8 +291,7 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// Support for aggregations is limited and should be used only with low cardinality data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggregations")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -326,7 +301,6 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// it is an advanced configuration option.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("chunking_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? ChunkingConfig { get; set; }
 
 	/// <summary>
@@ -338,7 +312,6 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// This check runs only on real-time datafeeds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("delayed_data_check_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
 	/// <summary>
@@ -350,10 +323,8 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// aggregations, this value must be divisible by the interval of the date histogram aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("frequency")]
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
-	[JsonInclude, JsonPropertyName("headers")]
-	public IDictionary<string, Union<string, ICollection<string>>>? Headers { get; set; }
+	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Headers { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -361,7 +332,6 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// nodes and the machine learning nodes must have the <c>remote_cluster_client</c> role.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
 	/// <summary>
@@ -369,7 +339,6 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// Specifies index expansion options that are used during search
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices_options")]
 	public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
 
 	/// <summary>
@@ -377,7 +346,6 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("job_id")]
 	public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
 	/// <summary>
@@ -388,7 +356,6 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_empty_searches")]
 	public int? MaxEmptySearches { get; set; }
 
 	/// <summary>
@@ -398,7 +365,6 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// object is passed verbatim to Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
@@ -409,7 +375,6 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// when there are multiple jobs running on the same node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_delay")]
 	public Elastic.Clients.Elasticsearch.Duration? QueryDelay { get; set; }
 
 	/// <summary>
@@ -417,8 +382,7 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// Specifies runtime fields for the datafeed search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -426,8 +390,7 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// The detector configuration objects in a job can contain functions that use these script fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script_fields")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -435,7 +398,6 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 	/// The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scroll_size")]
 	public int? ScrollSize { get; set; }
 }
 
@@ -455,54 +417,113 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 /// directly to the <c>.ml-config</c> index. Do not give users <c>write</c> privileges on the <c>.ml-config</c> index.
 /// </para>
 /// </summary>
-public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDescriptor<PutDatafeedRequestDescriptor<TDocument>, PutDatafeedRequestParameters>
+public readonly partial struct PutDatafeedRequestDescriptor
 {
-	internal PutDatafeedRequestDescriptor(Action<PutDatafeedRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest Instance { get; init; }
 
-	public PutDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutDatafeed;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_datafeed";
-
-	public PutDatafeedRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public PutDatafeedRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public PutDatafeedRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-
-	public PutDatafeedRequestDescriptor<TDocument> DatafeedId(Elastic.Clients.Elasticsearch.Id datafeedId)
+	public PutDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
-		RouteValues.Required("datafeed_id", datafeedId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest(datafeedId);
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? ChunkingConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor ChunkingConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor> ChunkingConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? DelayedDataCheckConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor DelayedDataCheckConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
-	private IDictionary<string, Union<string, ICollection<string>>>? HeadersValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor IndicesOptionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor> IndicesOptionsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? JobIdValue { get; set; }
-	private int? MaxEmptySearchesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? QueryDelayValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
-	private int? ScrollSizeValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutDatafeedRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed.
+	/// This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
+	/// It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.DatafeedId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the <c>_all</c>
+	/// string or when no indices are specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, unavailable indices (missing or closed) are ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -510,10 +531,67 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// Support for aggregations is limited and should be used only with low cardinality data.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>());
-		return Self;
+		Instance.Aggregations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches.
+	/// Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Aggregations()
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches.
+	/// Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches.
+	/// Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddAggregation(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddAggregation<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -524,28 +602,24 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// it is an advanced configuration option.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? chunkingConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? value)
 	{
-		ChunkingConfigDescriptor = null;
-		ChunkingConfigDescriptorAction = null;
-		ChunkingConfigValue = chunkingConfig;
-		return Self;
+		Instance.ChunkingConfig = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor<TDocument> ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Datafeeds might be required to search over long time periods, for several months or years.
+	/// This search is split into time chunks in order to ensure the load on Elasticsearch is managed.
+	/// Chunking configuration controls how the size of these time chunks are calculated;
+	/// it is an advanced configuration option.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ChunkingConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor> action)
 	{
-		ChunkingConfigValue = null;
-		ChunkingConfigDescriptorAction = null;
-		ChunkingConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutDatafeedRequestDescriptor<TDocument> ChunkingConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor> configure)
-	{
-		ChunkingConfigValue = null;
-		ChunkingConfigDescriptor = null;
-		ChunkingConfigDescriptorAction = configure;
-		return Self;
+		Instance.ChunkingConfig = Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -557,28 +631,25 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// This check runs only on real-time datafeeds.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? delayedDataCheckConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? value)
 	{
-		DelayedDataCheckConfigDescriptor = null;
-		DelayedDataCheckConfigDescriptorAction = null;
-		DelayedDataCheckConfigValue = delayedDataCheckConfig;
-		return Self;
+		Instance.DelayedDataCheckConfig = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window.
+	/// The datafeed can optionally search over indices that have already been read in an effort to determine whether
+	/// any data has subsequently been added to the index. If missing data is found, it is a good indication that the
+	/// <c>query_delay</c> is set too low and the data is being indexed after the datafeed has passed that moment in time.
+	/// This check runs only on real-time datafeeds.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor DelayedDataCheckConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> action)
 	{
-		DelayedDataCheckConfigValue = null;
-		DelayedDataCheckConfigDescriptorAction = null;
-		DelayedDataCheckConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> configure)
-	{
-		DelayedDataCheckConfigValue = null;
-		DelayedDataCheckConfigDescriptor = null;
-		DelayedDataCheckConfigDescriptorAction = configure;
-		return Self;
+		Instance.DelayedDataCheckConfig = Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -590,16 +661,56 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// aggregations, this value must be divisible by the interval of the date histogram aggregation.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		FrequencyValue = frequency;
-		return Self;
+		Instance.Frequency = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor<TDocument> Headers(Func<FluentDictionary<string, Union<string, ICollection<string>>>, FluentDictionary<string, Union<string, ICollection<string>>>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Headers(System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? value)
 	{
-		HeadersValue = selector?.Invoke(new FluentDictionary<string, Union<string, ICollection<string>>>());
-		return Self;
+		Instance.Headers = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Headers()
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddHeader(string key, System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddHeader(string key)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddHeader(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddHeader(string key, params string[] values)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, [.. values]);
+		return this;
 	}
 
 	/// <summary>
@@ -608,10 +719,10 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// nodes and the machine learning nodes must have the <c>remote_cluster_client</c> role.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -619,28 +730,32 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// Specifies index expansion options that are used during search
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? indicesOptions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? value)
 	{
-		IndicesOptionsDescriptor = null;
-		IndicesOptionsDescriptorAction = null;
-		IndicesOptionsValue = indicesOptions;
-		return Self;
+		Instance.IndicesOptions = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor<TDocument> IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies index expansion options that are used during search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor IndicesOptions()
 	{
-		IndicesOptionsValue = null;
-		IndicesOptionsDescriptorAction = null;
-		IndicesOptionsDescriptor = descriptor;
-		return Self;
+		Instance.IndicesOptions = Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.Build(null);
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor<TDocument> IndicesOptions(Action<Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Specifies index expansion options that are used during search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor IndicesOptions(System.Action<Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor>? action)
 	{
-		IndicesOptionsValue = null;
-		IndicesOptionsDescriptor = null;
-		IndicesOptionsDescriptorAction = configure;
-		return Self;
+		Instance.IndicesOptions = Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -648,10 +763,10 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id? jobId)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		JobIdValue = jobId;
-		return Self;
+		Instance.JobId = value;
+		return this;
 	}
 
 	/// <summary>
@@ -662,10 +777,10 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> MaxEmptySearches(int? maxEmptySearches)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor MaxEmptySearches(int? value)
 	{
-		MaxEmptySearchesValue = maxEmptySearches;
-		return Self;
+		Instance.MaxEmptySearches = value;
+		return this;
 	}
 
 	/// <summary>
@@ -675,28 +790,36 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// object is passed verbatim to Elasticsearch.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+	/// object is passed verbatim to Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+	/// object is passed verbatim to Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -707,10 +830,10 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// when there are multiple jobs running on the same node.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		QueryDelayValue = queryDelay;
-		return Self;
+		Instance.QueryDelay = value;
+		return this;
 	}
 
 	/// <summary>
@@ -718,10 +841,85 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// Specifies runtime fields for the datafeed search.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor RuntimeMappings()
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddRuntimeMapping<T>(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -730,10 +928,48 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// The detector configuration objects in a job can contain functions that use these script fields.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>());
-		return Self;
+		Instance.ScriptFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ScriptFields()
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddScriptField(string key, Elastic.Clients.Elasticsearch.ScriptField value)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor AddScriptField(string key, System.Action<Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> action)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -742,140 +978,60 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 	/// The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor<TDocument> ScrollSize(int? scrollSize)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ScrollSize(int? value)
 	{
-		ScrollSizeValue = scrollSize;
-		return Self;
+		Instance.ScrollSize = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ChunkingConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("chunking_config");
-			JsonSerializer.Serialize(writer, ChunkingConfigDescriptor, options);
-		}
-		else if (ChunkingConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("chunking_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor(ChunkingConfigDescriptorAction), options);
-		}
-		else if (ChunkingConfigValue is not null)
-		{
-			writer.WritePropertyName("chunking_config");
-			JsonSerializer.Serialize(writer, ChunkingConfigValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (DelayedDataCheckConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("delayed_data_check_config");
-			JsonSerializer.Serialize(writer, DelayedDataCheckConfigDescriptor, options);
-		}
-		else if (DelayedDataCheckConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("delayed_data_check_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor(DelayedDataCheckConfigDescriptorAction), options);
-		}
-		else if (DelayedDataCheckConfigValue is not null)
-		{
-			writer.WritePropertyName("delayed_data_check_config");
-			JsonSerializer.Serialize(writer, DelayedDataCheckConfigValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (FrequencyValue is not null)
-		{
-			writer.WritePropertyName("frequency");
-			JsonSerializer.Serialize(writer, FrequencyValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (HeadersValue is not null)
-		{
-			writer.WritePropertyName("headers");
-			JsonSerializer.Serialize(writer, HeadersValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (IndicesValue is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (IndicesOptionsDescriptor is not null)
-		{
-			writer.WritePropertyName("indices_options");
-			JsonSerializer.Serialize(writer, IndicesOptionsDescriptor, options);
-		}
-		else if (IndicesOptionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("indices_options");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor(IndicesOptionsDescriptorAction), options);
-		}
-		else if (IndicesOptionsValue is not null)
-		{
-			writer.WritePropertyName("indices_options");
-			JsonSerializer.Serialize(writer, IndicesOptionsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (JobIdValue is not null)
-		{
-			writer.WritePropertyName("job_id");
-			JsonSerializer.Serialize(writer, JobIdValue, options);
-		}
-
-		if (MaxEmptySearchesValue.HasValue)
-		{
-			writer.WritePropertyName("max_empty_searches");
-			writer.WriteNumberValue(MaxEmptySearchesValue.Value);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (QueryDelayValue is not null)
-		{
-			writer.WritePropertyName("query_delay");
-			JsonSerializer.Serialize(writer, QueryDelayValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (ScrollSizeValue.HasValue)
-		{
-			writer.WritePropertyName("scroll_size");
-			writer.WriteNumberValue(ScrollSizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -895,54 +1051,113 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 /// directly to the <c>.ml-config</c> index. Do not give users <c>write</c> privileges on the <c>.ml-config</c> index.
 /// </para>
 /// </summary>
-public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<PutDatafeedRequestDescriptor, PutDatafeedRequestParameters>
+public readonly partial struct PutDatafeedRequestDescriptor<TDocument>
 {
-	internal PutDatafeedRequestDescriptor(Action<PutDatafeedRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest Instance { get; init; }
 
-	public PutDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutDatafeed;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_datafeed";
-
-	public PutDatafeedRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public PutDatafeedRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public PutDatafeedRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-
-	public PutDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id datafeedId)
+	public PutDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
-		RouteValues.Required("datafeed_id", datafeedId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest(datafeedId);
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? ChunkingConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor ChunkingConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor> ChunkingConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? DelayedDataCheckConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor DelayedDataCheckConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
-	private IDictionary<string, Union<string, ICollection<string>>>? HeadersValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor IndicesOptionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor> IndicesOptionsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? JobIdValue { get; set; }
-	private int? MaxEmptySearchesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? QueryDelayValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
-	private int? ScrollSizeValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutDatafeedRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed.
+	/// This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
+	/// It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> DatafeedId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.DatafeedId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the <c>_all</c>
+	/// string or when no indices are specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, unavailable indices (missing or closed) are ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -950,10 +1165,48 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// Support for aggregations is limited and should be used only with low cardinality data.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>());
-		return Self;
+		Instance.Aggregations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches.
+	/// Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Aggregations()
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If set, the datafeed performs aggregation searches.
+	/// Support for aggregations is limited and should be used only with low cardinality data.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddAggregation(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -964,28 +1217,24 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// it is an advanced configuration option.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? chunkingConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? value)
 	{
-		ChunkingConfigDescriptor = null;
-		ChunkingConfigDescriptorAction = null;
-		ChunkingConfigValue = chunkingConfig;
-		return Self;
+		Instance.ChunkingConfig = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Datafeeds might be required to search over long time periods, for several months or years.
+	/// This search is split into time chunks in order to ensure the load on Elasticsearch is managed.
+	/// Chunking configuration controls how the size of these time chunks are calculated;
+	/// it is an advanced configuration option.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ChunkingConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor> action)
 	{
-		ChunkingConfigValue = null;
-		ChunkingConfigDescriptorAction = null;
-		ChunkingConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutDatafeedRequestDescriptor ChunkingConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor> configure)
-	{
-		ChunkingConfigValue = null;
-		ChunkingConfigDescriptor = null;
-		ChunkingConfigDescriptorAction = configure;
-		return Self;
+		Instance.ChunkingConfig = Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -997,28 +1246,25 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// This check runs only on real-time datafeeds.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? delayedDataCheckConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? value)
 	{
-		DelayedDataCheckConfigDescriptor = null;
-		DelayedDataCheckConfigDescriptorAction = null;
-		DelayedDataCheckConfigValue = delayedDataCheckConfig;
-		return Self;
+		Instance.DelayedDataCheckConfig = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies whether the datafeed checks for missing data and the size of the window.
+	/// The datafeed can optionally search over indices that have already been read in an effort to determine whether
+	/// any data has subsequently been added to the index. If missing data is found, it is a good indication that the
+	/// <c>query_delay</c> is set too low and the data is being indexed after the datafeed has passed that moment in time.
+	/// This check runs only on real-time datafeeds.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> action)
 	{
-		DelayedDataCheckConfigValue = null;
-		DelayedDataCheckConfigDescriptorAction = null;
-		DelayedDataCheckConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutDatafeedRequestDescriptor DelayedDataCheckConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> configure)
-	{
-		DelayedDataCheckConfigValue = null;
-		DelayedDataCheckConfigDescriptor = null;
-		DelayedDataCheckConfigDescriptorAction = configure;
-		return Self;
+		Instance.DelayedDataCheckConfig = Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1030,16 +1276,56 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// aggregations, this value must be divisible by the interval of the date histogram aggregation.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		FrequencyValue = frequency;
-		return Self;
+		Instance.Frequency = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor Headers(Func<FluentDictionary<string, Union<string, ICollection<string>>>, FluentDictionary<string, Union<string, ICollection<string>>>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Headers(System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? value)
 	{
-		HeadersValue = selector?.Invoke(new FluentDictionary<string, Union<string, ICollection<string>>>());
-		return Self;
+		Instance.Headers = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Headers()
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddHeader(string key, System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddHeader(string key)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddHeader(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddHeader(string key, params string[] values)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Headers.Add(key, [.. values]);
+		return this;
 	}
 
 	/// <summary>
@@ -1048,10 +1334,10 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// nodes and the machine learning nodes must have the <c>remote_cluster_client</c> role.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1059,28 +1345,32 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// Specifies index expansion options that are used during search
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? indicesOptions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? value)
 	{
-		IndicesOptionsDescriptor = null;
-		IndicesOptionsDescriptorAction = null;
-		IndicesOptionsValue = indicesOptions;
-		return Self;
+		Instance.IndicesOptions = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies index expansion options that are used during search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> IndicesOptions()
 	{
-		IndicesOptionsValue = null;
-		IndicesOptionsDescriptorAction = null;
-		IndicesOptionsDescriptor = descriptor;
-		return Self;
+		Instance.IndicesOptions = Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.Build(null);
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor IndicesOptions(Action<Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Specifies index expansion options that are used during search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> IndicesOptions(System.Action<Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor>? action)
 	{
-		IndicesOptionsValue = null;
-		IndicesOptionsDescriptor = null;
-		IndicesOptionsDescriptorAction = configure;
-		return Self;
+		Instance.IndicesOptions = Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1088,10 +1378,10 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? jobId)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		JobIdValue = jobId;
-		return Self;
+		Instance.JobId = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1102,10 +1392,10 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor MaxEmptySearches(int? maxEmptySearches)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> MaxEmptySearches(int? value)
 	{
-		MaxEmptySearchesValue = maxEmptySearches;
-		return Self;
+		Instance.MaxEmptySearches = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1115,28 +1405,23 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// object is passed verbatim to Elasticsearch.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public PutDatafeedRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+	/// object is passed verbatim to Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutDatafeedRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -1147,10 +1432,10 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// when there are multiple jobs running on the same node.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Duration? queryDelay)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		QueryDelayValue = queryDelay;
-		return Self;
+		Instance.QueryDelay = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1158,10 +1443,60 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// Specifies runtime fields for the datafeed search.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> RuntimeMappings()
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies runtime fields for the datafeed search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -1170,10 +1505,48 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// The detector configuration objects in a job can contain functions that use these script fields.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor>());
-		return Self;
+		Instance.ScriptFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ScriptFields()
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+	/// The detector configuration objects in a job can contain functions that use these script fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	{
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddScriptField(string key, Elastic.Clients.Elasticsearch.ScriptField value)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> AddScriptField(string key, System.Action<Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> action)
+	{
+		Instance.ScriptFields ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>();
+		Instance.ScriptFields.Add(key, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -1182,139 +1555,59 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 	/// The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
 	/// </para>
 	/// </summary>
-	public PutDatafeedRequestDescriptor ScrollSize(int? scrollSize)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ScrollSize(int? value)
 	{
-		ScrollSizeValue = scrollSize;
-		return Self;
+		Instance.ScrollSize = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ChunkingConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("chunking_config");
-			JsonSerializer.Serialize(writer, ChunkingConfigDescriptor, options);
-		}
-		else if (ChunkingConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("chunking_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor(ChunkingConfigDescriptorAction), options);
-		}
-		else if (ChunkingConfigValue is not null)
-		{
-			writer.WritePropertyName("chunking_config");
-			JsonSerializer.Serialize(writer, ChunkingConfigValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (DelayedDataCheckConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("delayed_data_check_config");
-			JsonSerializer.Serialize(writer, DelayedDataCheckConfigDescriptor, options);
-		}
-		else if (DelayedDataCheckConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("delayed_data_check_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor(DelayedDataCheckConfigDescriptorAction), options);
-		}
-		else if (DelayedDataCheckConfigValue is not null)
-		{
-			writer.WritePropertyName("delayed_data_check_config");
-			JsonSerializer.Serialize(writer, DelayedDataCheckConfigValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (FrequencyValue is not null)
-		{
-			writer.WritePropertyName("frequency");
-			JsonSerializer.Serialize(writer, FrequencyValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (HeadersValue is not null)
-		{
-			writer.WritePropertyName("headers");
-			JsonSerializer.Serialize(writer, HeadersValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (IndicesValue is not null)
-		{
-			writer.WritePropertyName("indices");
-			JsonSerializer.Serialize(writer, IndicesValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (IndicesOptionsDescriptor is not null)
-		{
-			writer.WritePropertyName("indices_options");
-			JsonSerializer.Serialize(writer, IndicesOptionsDescriptor, options);
-		}
-		else if (IndicesOptionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("indices_options");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor(IndicesOptionsDescriptorAction), options);
-		}
-		else if (IndicesOptionsValue is not null)
-		{
-			writer.WritePropertyName("indices_options");
-			JsonSerializer.Serialize(writer, IndicesOptionsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (JobIdValue is not null)
-		{
-			writer.WritePropertyName("job_id");
-			JsonSerializer.Serialize(writer, JobIdValue, options);
-		}
-
-		if (MaxEmptySearchesValue.HasValue)
-		{
-			writer.WritePropertyName("max_empty_searches");
-			writer.WriteNumberValue(MaxEmptySearchesValue.Value);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (QueryDelayValue is not null)
-		{
-			writer.WritePropertyName("query_delay");
-			JsonSerializer.Serialize(writer, QueryDelayValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (ScrollSizeValue.HasValue)
-		{
-			writer.WritePropertyName("scroll_size");
-			writer.WriteNumberValue(ScrollSizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

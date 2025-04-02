@@ -17,75 +17,155 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-public sealed partial class PhraseSuggestHighlight
+internal sealed partial class PhraseSuggestHighlightConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight>
 {
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tag</c> to define the HTML tags to use for the highlighted text.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("post_tag")]
-	public string PostTag { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropPostTag = System.Text.Json.JsonEncodedText.Encode("post_tag");
+	private static readonly System.Text.Json.JsonEncodedText PropPreTag = System.Text.Json.JsonEncodedText.Encode("pre_tag");
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tag</c> to define the HTML tags to use for the highlighted text.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("pre_tag")]
-	public string PreTag { get; set; }
-}
-
-public sealed partial class PhraseSuggestHighlightDescriptor : SerializableDescriptor<PhraseSuggestHighlightDescriptor>
-{
-	internal PhraseSuggestHighlightDescriptor(Action<PhraseSuggestHighlightDescriptor> configure) => configure.Invoke(this);
-
-	public PhraseSuggestHighlightDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propPostTag = default;
+		LocalJsonValue<string> propPreTag = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPostTag.TryReadProperty(ref reader, options, PropPostTag, null))
+			{
+				continue;
+			}
+
+			if (propPreTag.TryReadProperty(ref reader, options, PropPreTag, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			PostTag = propPostTag.Value,
+			PreTag = propPreTag.Value
+		};
 	}
 
-	private string PostTagValue { get; set; }
-	private string PreTagValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tag</c> to define the HTML tags to use for the highlighted text.
-	/// </para>
-	/// </summary>
-	public PhraseSuggestHighlightDescriptor PostTag(string postTag)
-	{
-		PostTagValue = postTag;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tag</c> to define the HTML tags to use for the highlighted text.
-	/// </para>
-	/// </summary>
-	public PhraseSuggestHighlightDescriptor PreTag(string preTag)
-	{
-		PreTagValue = preTag;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("post_tag");
-		writer.WriteStringValue(PostTagValue);
-		writer.WritePropertyName("pre_tag");
-		writer.WriteStringValue(PreTagValue);
+		writer.WriteProperty(options, PropPostTag, value.PostTag, null, null);
+		writer.WriteProperty(options, PropPreTag, value.PreTag, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightConverter))]
+public sealed partial class PhraseSuggestHighlight
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhraseSuggestHighlight(string postTag, string preTag)
+	{
+		PostTag = postTag;
+		PreTag = preTag;
+	}
+#if NET7_0_OR_GREATER
+	public PhraseSuggestHighlight()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PhraseSuggestHighlight()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PhraseSuggestHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>pre_tag</c> to define the HTML tags to use for the highlighted text.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string PostTag { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>post_tag</c> to define the HTML tags to use for the highlighted text.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string PreTag { get; set; }
+}
+
+public readonly partial struct PhraseSuggestHighlightDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhraseSuggestHighlightDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PhraseSuggestHighlightDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight instance) => new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>pre_tag</c> to define the HTML tags to use for the highlighted text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor PostTag(string value)
+	{
+		Instance.PostTag = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>post_tag</c> to define the HTML tags to use for the highlighted text.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor PreTag(string value)
+	{
+		Instance.PreTag = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

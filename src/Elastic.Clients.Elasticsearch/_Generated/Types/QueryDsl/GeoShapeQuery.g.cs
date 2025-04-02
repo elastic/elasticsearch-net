@@ -17,95 +17,95 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class GeoShapeQueryConverter : JsonConverter<GeoShapeQuery>
+internal sealed partial class GeoShapeQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery>
 {
-	public override GeoShapeQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new GeoShapeQuery();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<bool?> propIgnoreUnmapped = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery> propShape = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
-				var property = reader.GetString();
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "ignore_unmapped")
-				{
-					variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				variant.Field = property;
-				reader.Read();
-				variant.Shape = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery>(ref reader, options);
+				continue;
 			}
+
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			propField.Initialized = propShape.Initialized = true;
+			reader.ReadProperty(options, out propField.Value, out propShape.Value, null, null);
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			IgnoreUnmapped = propIgnoreUnmapped.Value,
+			QueryName = propQueryName.Value,
+			Shape = propShape.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, GeoShapeQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Shape is not null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-			{
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-			}
-
-			var propertyName = settings.Inferrer.Field(value.Field);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Shape, options);
-		}
-
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.IgnoreUnmapped.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, value.Field, value.Shape, null, null);
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(GeoShapeQueryConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryConverter))]
 public sealed partial class GeoShapeQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoShapeQuery(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery shape)
+	{
+		Field = field;
+		Shape = shape;
+	}
+#if NET7_0_OR_GREATER
+	public GeoShapeQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeoShapeQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -115,7 +115,11 @@ public sealed partial class GeoShapeQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -125,26 +129,31 @@ public sealed partial class GeoShapeQuery
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery Shape { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(GeoShapeQuery geoShapeQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoShape(geoShapeQuery);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery Shape { get; set; }
 }
 
-public sealed partial class GeoShapeQueryDescriptor<TDocument> : SerializableDescriptor<GeoShapeQueryDescriptor<TDocument>>
+public readonly partial struct GeoShapeQueryDescriptor<TDocument>
 {
-	internal GeoShapeQueryDescriptor(Action<GeoShapeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery Instance { get; init; }
 
-	public GeoShapeQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoShapeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery ShapeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument> ShapeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument>> ShapeDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoShapeQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -154,28 +163,22 @@ public sealed partial class GeoShapeQueryDescriptor<TDocument> : SerializableDes
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public GeoShapeQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public GeoShapeQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -184,89 +187,63 @@ public sealed partial class GeoShapeQueryDescriptor<TDocument> : SerializableDes
 	/// Set to <c>false</c> to throw an exception if the field is not mapped.
 	/// </para>
 	/// </summary>
-	public GeoShapeQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery shape)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery value)
 	{
-		ShapeDescriptor = null;
-		ShapeDescriptorAction = null;
-		ShapeValue = shape;
-		return Self;
+		Instance.Shape = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> Shape()
 	{
-		ShapeValue = null;
-		ShapeDescriptorAction = null;
-		ShapeDescriptor = descriptor;
-		return Self;
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor<TDocument> Shape(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> Shape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument>>? action)
 	{
-		ShapeValue = null;
-		ShapeDescriptor = null;
-		ShapeDescriptorAction = configure;
-		return Self;
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && ShapeValue is not null)
-		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, ShapeValue, options);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeoShapeQueryDescriptor : SerializableDescriptor<GeoShapeQueryDescriptor>
+public readonly partial struct GeoShapeQueryDescriptor
 {
-	internal GeoShapeQueryDescriptor(Action<GeoShapeQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery Instance { get; init; }
 
-	public GeoShapeQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoShapeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery ShapeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor ShapeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor> ShapeDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoShapeQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -276,28 +253,22 @@ public sealed partial class GeoShapeQueryDescriptor : SerializableDescriptor<Geo
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public GeoShapeQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public GeoShapeQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -306,70 +277,47 @@ public sealed partial class GeoShapeQueryDescriptor : SerializableDescriptor<Geo
 	/// Set to <c>false</c> to throw an exception if the field is not mapped.
 	/// </para>
 	/// </summary>
-	public GeoShapeQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
+		Instance.IgnoreUnmapped = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery shape)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery value)
 	{
-		ShapeDescriptor = null;
-		ShapeDescriptorAction = null;
-		ShapeValue = shape;
-		return Self;
+		Instance.Shape = value;
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor Shape()
 	{
-		ShapeValue = null;
-		ShapeDescriptorAction = null;
-		ShapeDescriptor = descriptor;
-		return Self;
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor.Build(null);
+		return this;
 	}
 
-	public GeoShapeQueryDescriptor Shape(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor Shape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor>? action)
 	{
-		ShapeValue = null;
-		ShapeDescriptor = null;
-		ShapeDescriptorAction = configure;
-		return Self;
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor Shape<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<T>>? action)
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && ShapeValue is not null)
-		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, ShapeValue, options);
-		}
+		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<T>.Build(action);
+		return this;
+	}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

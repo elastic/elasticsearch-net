@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-public sealed partial class NodesInfoRequestParameters : RequestParameters
+public sealed partial class NodesInfoRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -41,31 +34,52 @@ public sealed partial class NodesInfoRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>
 	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class NodesInfoRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get node information.
+/// </para>
+/// <para>
 /// By default, the API returns all attributes and core settings for cluster nodes.
 /// </para>
 /// </summary>
-public sealed partial class NodesInfoRequest : PlainRequest<NodesInfoRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestConverter))]
+public sealed partial class NodesInfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>
 {
-	public NodesInfoRequest()
-	{
-	}
-
 	public NodesInfoRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId) : base(r => r.Optional("node_id", nodeId))
 	{
 	}
@@ -77,83 +91,196 @@ public sealed partial class NodesInfoRequest : PlainRequest<NodesInfoRequestPara
 	public NodesInfoRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public NodesInfoRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public NodesInfoRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodesInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NodesInfo;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NodesInfo;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "nodes.info";
+
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
 	/// <summary>
 	/// <para>
 	/// If true, returns settings in flat format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
 	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get node information.
+/// </para>
+/// <para>
 /// By default, the API returns all attributes and core settings for cluster nodes.
 /// </para>
 /// </summary>
-public sealed partial class NodesInfoRequestDescriptor : RequestDescriptor<NodesInfoRequestDescriptor, NodesInfoRequestParameters>
+public readonly partial struct NodesInfoRequestDescriptor
 {
-	internal NodesInfoRequestDescriptor(Action<NodesInfoRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest Instance { get; init; }
 
-	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(nodeId);
+	}
+
+	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics metric)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(metric);
+	}
+
+	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId, Elastic.Clients.Elasticsearch.Metrics metric)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(nodeId, metric);
 	}
 
 	public NodesInfoRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NodesInfo;
+	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "nodes.info";
-
-	public NodesInfoRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-	public NodesInfoRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public NodesInfoRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public NodesInfoRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? metric)
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
 	{
-		RouteValues.Optional("metric", metric);
-		return Self;
+		Instance.Metric = value;
+		return this;
 	}
 
-	public NodesInfoRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of node IDs or names used to limit returned information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
-		RouteValues.Optional("node_id", nodeId);
-		return Self;
+		Instance.NodeId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If true, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor FlatSettings(bool? value = true)
 	{
+		Instance.FlatSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest Build(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

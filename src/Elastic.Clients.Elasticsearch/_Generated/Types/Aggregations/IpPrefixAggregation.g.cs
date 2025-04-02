@@ -17,24 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class IpPrefixAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAppendPrefixLength = System.Text.Json.JsonEncodedText.Encode("append_prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIsIpv6 = System.Text.Json.JsonEncodedText.Encode("is_ipv6");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAppendPrefixLength = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<bool?> propIsIpv6 = default;
+		LocalJsonValue<long?> propMinDocCount = default;
+		LocalJsonValue<int> propPrefixLength = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAppendPrefixLength.TryReadProperty(ref reader, options, PropAppendPrefixLength, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIsIpv6.TryReadProperty(ref reader, options, PropIsIpv6, null))
+			{
+				continue;
+			}
+
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			{
+				continue;
+			}
+
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AppendPrefixLength = propAppendPrefixLength.Value,
+			Field = propField.Value,
+			IsIpv6 = propIsIpv6.Value,
+			MinDocCount = propMinDocCount.Value,
+			PrefixLength = propPrefixLength.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAppendPrefixLength, value.AppendPrefixLength, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIsIpv6, value.IsIpv6, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationConverter))]
 public sealed partial class IpPrefixAggregation
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpPrefixAggregation(Elastic.Clients.Elasticsearch.Field field, int prefixLength)
+	{
+		Field = field;
+		PrefixLength = prefixLength;
+	}
+#if NET7_0_OR_GREATER
+	public IpPrefixAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IpPrefixAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IpPrefixAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Defines whether the prefix length is appended to IP address keys in the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("append_prefix_length")]
 	public bool? AppendPrefixLength { get; set; }
 
 	/// <summary>
@@ -42,15 +136,17 @@ public sealed partial class IpPrefixAggregation
 	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Defines whether the prefix applies to IPv6 addresses.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_ipv6")]
 	public bool? IsIpv6 { get; set; }
 
 	/// <summary>
@@ -58,7 +154,6 @@ public sealed partial class IpPrefixAggregation
 	/// Minimum number of documents in a bucket for it to be included in the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
 
 	/// <summary>
@@ -67,35 +162,41 @@ public sealed partial class IpPrefixAggregation
 	/// For IPv6 addresses the accepted range is [0, 128].
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix_length")]
-	public int PrefixLength { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(IpPrefixAggregation ipPrefixAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.IpPrefix(ipPrefixAggregation);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int PrefixLength { get; set; }
 }
 
-public sealed partial class IpPrefixAggregationDescriptor<TDocument> : SerializableDescriptor<IpPrefixAggregationDescriptor<TDocument>>
+public readonly partial struct IpPrefixAggregationDescriptor<TDocument>
 {
-	internal IpPrefixAggregationDescriptor(Action<IpPrefixAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation Instance { get; init; }
 
-	public IpPrefixAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpPrefixAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AppendPrefixLengthValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? IsIpv6Value { get; set; }
-	private long? MinDocCountValue { get; set; }
-	private int PrefixLengthValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpPrefixAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Defines whether the prefix length is appended to IP address keys in the response.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor<TDocument> AppendPrefixLength(bool? appendPrefixLength = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> AppendPrefixLength(bool? value = true)
 	{
-		AppendPrefixLengthValue = appendPrefixLength;
-		return Self;
+		Instance.AppendPrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -103,10 +204,10 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -114,21 +215,10 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
-	/// </para>
-	/// </summary>
-	public IpPrefixAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -136,10 +226,10 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	/// Defines whether the prefix applies to IPv6 addresses.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor<TDocument> IsIpv6(bool? isIpv6 = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> IsIpv6(bool? value = true)
 	{
-		IsIpv6Value = isIpv6;
-		return Self;
+		Instance.IsIpv6 = value;
+		return this;
 	}
 
 	/// <summary>
@@ -147,10 +237,10 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	/// Minimum number of documents in a bucket for it to be included in the response.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor<TDocument> MinDocCount(long? minDocCount)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> MinDocCount(long? value)
 	{
-		MinDocCountValue = minDocCount;
-		return Self;
+		Instance.MinDocCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -159,64 +249,49 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	/// For IPv6 addresses the accepted range is [0, 128].
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor<TDocument> PrefixLength(int prefixLength)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> PrefixLength(int value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AppendPrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("append_prefix_length");
-			writer.WriteBooleanValue(AppendPrefixLengthValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IsIpv6Value.HasValue)
-		{
-			writer.WritePropertyName("is_ipv6");
-			writer.WriteBooleanValue(IsIpv6Value.Value);
-		}
-
-		if (MinDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		writer.WritePropertyName("prefix_length");
-		writer.WriteNumberValue(PrefixLengthValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class IpPrefixAggregationDescriptor : SerializableDescriptor<IpPrefixAggregationDescriptor>
+public readonly partial struct IpPrefixAggregationDescriptor
 {
-	internal IpPrefixAggregationDescriptor(Action<IpPrefixAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation Instance { get; init; }
 
-	public IpPrefixAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpPrefixAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AppendPrefixLengthValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? IsIpv6Value { get; set; }
-	private long? MinDocCountValue { get; set; }
-	private int PrefixLengthValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpPrefixAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Defines whether the prefix length is appended to IP address keys in the response.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor AppendPrefixLength(bool? appendPrefixLength = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor AppendPrefixLength(bool? value = true)
 	{
-		AppendPrefixLengthValue = appendPrefixLength;
-		return Self;
+		Instance.AppendPrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -224,10 +299,10 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -235,21 +310,10 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
-	/// </para>
-	/// </summary>
-	public IpPrefixAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -257,10 +321,10 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	/// Defines whether the prefix applies to IPv6 addresses.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor IsIpv6(bool? isIpv6 = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor IsIpv6(bool? value = true)
 	{
-		IsIpv6Value = isIpv6;
-		return Self;
+		Instance.IsIpv6 = value;
+		return this;
 	}
 
 	/// <summary>
@@ -268,10 +332,10 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	/// Minimum number of documents in a bucket for it to be included in the response.
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor MinDocCount(long? minDocCount)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor MinDocCount(long? value)
 	{
-		MinDocCountValue = minDocCount;
-		return Self;
+		Instance.MinDocCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -280,37 +344,17 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	/// For IPv6 addresses the accepted range is [0, 128].
 	/// </para>
 	/// </summary>
-	public IpPrefixAggregationDescriptor PrefixLength(int prefixLength)
+	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor PrefixLength(int value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AppendPrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("append_prefix_length");
-			writer.WriteBooleanValue(AppendPrefixLengthValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IsIpv6Value.HasValue)
-		{
-			writer.WritePropertyName("is_ipv6");
-			writer.WriteBooleanValue(IsIpv6Value.Value);
-		}
-
-		if (MinDocCountValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		writer.WritePropertyName("prefix_length");
-		writer.WriteNumberValue(PrefixLengthValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

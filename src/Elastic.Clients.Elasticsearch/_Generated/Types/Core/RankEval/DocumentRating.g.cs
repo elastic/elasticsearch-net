@@ -17,97 +17,187 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-public sealed partial class DocumentRating
+internal sealed partial class DocumentRatingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>
 {
-	/// <summary>
-	/// <para>
-	/// The document ID.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("_id")]
-	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropRating = System.Text.Json.JsonEncodedText.Encode("rating");
 
-	/// <summary>
-	/// <para>
-	/// The document’s index. For data streams, this should be the document’s backing index.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("_index")]
-	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The document’s relevance with regard to this search request.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("rating")]
-	public int Rating { get; set; }
-}
-
-public sealed partial class DocumentRatingDescriptor : SerializableDescriptor<DocumentRatingDescriptor>
-{
-	internal DocumentRatingDescriptor(Action<DocumentRatingDescriptor> configure) => configure.Invoke(this);
-
-	public DocumentRatingDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
+		LocalJsonValue<int> propRating = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propRating.TryReadProperty(ref reader, options, PropRating, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Index = propIndex.Value,
+			Rating = propRating.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private int RatingValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The document ID.
-	/// </para>
-	/// </summary>
-	public DocumentRatingDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-	{
-		IdValue = id;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The document’s index. For data streams, this should be the document’s backing index.
-	/// </para>
-	/// </summary>
-	public DocumentRatingDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
-	{
-		IndexValue = index;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The document’s relevance with regard to this search request.
-	/// </para>
-	/// </summary>
-	public DocumentRatingDescriptor Rating(int rating)
-	{
-		RatingValue = rating;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("_id");
-		JsonSerializer.Serialize(writer, IdValue, options);
-		writer.WritePropertyName("_index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		writer.WritePropertyName("rating");
-		writer.WriteNumberValue(RatingValue);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropRating, value.Rating, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingConverter))]
+public sealed partial class DocumentRating
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DocumentRating(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.IndexName index, int rating)
+	{
+		Id = id;
+		Index = index;
+		Rating = rating;
+	}
+#if NET7_0_OR_GREATER
+	public DocumentRating()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DocumentRating()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DocumentRating(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The document ID.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The document’s index. For data streams, this should be the document’s backing index.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The document’s relevance with regard to this search request.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Rating { get; set; }
+}
+
+public readonly partial struct DocumentRatingDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DocumentRatingDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DocumentRatingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The document ID.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The document’s index. For data streams, this should be the document’s backing index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The document’s relevance with regard to this search request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor Rating(int value)
+	{
+		Instance.Rating = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating Build(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor(new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

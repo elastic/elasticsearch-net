@@ -17,23 +17,110 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-public sealed partial class GetTasksResponse : ElasticsearchResponse
+internal sealed partial class GetTasksResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse>
 {
-	[JsonInclude, JsonPropertyName("completed")]
-	public bool Completed { get; init; }
-	[JsonInclude, JsonPropertyName("error")]
-	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
-	[JsonInclude, JsonPropertyName("response")]
-	public object? Response { get; init; }
-	[JsonInclude, JsonPropertyName("task")]
-	public Elastic.Clients.Elasticsearch.Tasks.TaskInfo Task { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropCompleted = System.Text.Json.JsonEncodedText.Encode("completed");
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
+	private static readonly System.Text.Json.JsonEncodedText PropResponse = System.Text.Json.JsonEncodedText.Encode("response");
+	private static readonly System.Text.Json.JsonEncodedText PropTask = System.Text.Json.JsonEncodedText.Encode("task");
+
+	public override Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propCompleted = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propError = default;
+		LocalJsonValue<object?> propResponse = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> propTask = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCompleted.TryReadProperty(ref reader, options, PropCompleted, null))
+			{
+				continue;
+			}
+
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
+			{
+				continue;
+			}
+
+			if (propResponse.TryReadProperty(ref reader, options, PropResponse, null))
+			{
+				continue;
+			}
+
+			if (propTask.TryReadProperty(ref reader, options, PropTask, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Completed = propCompleted.Value,
+			Error = propError.Value,
+			Response = propResponse.Value,
+			Task = propTask.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCompleted, value.Completed, null, null);
+		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropResponse, value.Response, null, null);
+		writer.WriteProperty(options, PropTask, value.Task, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.GetTasksResponseConverter))]
+public sealed partial class GetTasksResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetTasksResponse(bool completed, Elastic.Clients.Elasticsearch.Tasks.TaskInfo task)
+	{
+		Completed = completed;
+		Task = task;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetTasksResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetTasksResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool Completed { get; set; }
+	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
+	public object? Response { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Tasks.TaskInfo Task { get; set; }
 }

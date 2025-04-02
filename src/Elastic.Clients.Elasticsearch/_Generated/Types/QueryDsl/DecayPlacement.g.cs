@@ -17,24 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class DecayPlacementConverter<TOrigin, TScale> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<TOrigin, TScale>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDecay = System.Text.Json.JsonEncodedText.Encode("decay");
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
+	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin");
+	private static readonly System.Text.Json.JsonEncodedText PropScale = System.Text.Json.JsonEncodedText.Encode("scale");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<TOrigin, TScale> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propDecay = default;
+		LocalJsonValue<TScale?> propOffset = default;
+		LocalJsonValue<TOrigin?> propOrigin = default;
+		LocalJsonValue<TScale?> propScale = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDecay.TryReadProperty(ref reader, options, PropDecay, null))
+			{
+				continue;
+			}
+
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
+			{
+				continue;
+			}
+
+			if (propOrigin.TryReadProperty(ref reader, options, PropOrigin, null))
+			{
+				continue;
+			}
+
+			if (propScale.TryReadProperty(ref reader, options, PropScale, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<TOrigin, TScale>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Decay = propDecay.Value,
+			Offset = propOffset.Value,
+			Origin = propOrigin.Value,
+			Scale = propScale.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<TOrigin, TScale> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDecay, value.Decay, null, null);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropOrigin, value.Origin, null, null);
+		writer.WriteProperty(options, PropScale, value.Scale, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class DecayPlacementConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(DecayPlacement<,>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(DecayPlacementConverter<,>).MakeGenericType(args[0], args[1]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementConverterFactory))]
 public sealed partial class DecayPlacement<TOrigin, TScale>
 {
+#if NET7_0_OR_GREATER
+	public DecayPlacement()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DecayPlacement()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DecayPlacement(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Defines how documents are scored at the distance given at scale.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("decay")]
 	public double? Decay { get; set; }
 
 	/// <summary>
@@ -42,8 +137,6 @@ public sealed partial class DecayPlacement<TOrigin, TScale>
 	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("offset")]
-	[SourceConverter]
 	public TScale? Offset { get; set; }
 
 	/// <summary>
@@ -51,8 +144,6 @@ public sealed partial class DecayPlacement<TOrigin, TScale>
 	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("origin")]
-	[SourceConverter]
 	public TOrigin? Origin { get; set; }
 
 	/// <summary>
@@ -60,7 +151,335 @@ public sealed partial class DecayPlacement<TOrigin, TScale>
 	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scale")]
-	[SourceConverter]
 	public TScale? Scale { get; set; }
+}
+
+public readonly partial struct DecayPlacementOfDateMathDurationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration> Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DecayPlacementOfDateMathDurationDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration> instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DecayPlacementOfDateMathDurationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration> instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration>(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Defines how documents are scored at the distance given at scale.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor Decay(double? value)
+	{
+		Instance.Decay = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor Offset(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Offset = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor Origin(Elastic.Clients.Elasticsearch.DateMath? value)
+	{
+		Instance.Origin = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor Scale(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Scale = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration> Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct DecayPlacementOfGeoLocationStringDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DecayPlacementOfGeoLocationStringDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DecayPlacementOfGeoLocationStringDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string>(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Defines how documents are scored at the distance given at scale.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Decay(double? value)
+	{
+		Instance.Decay = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Offset(string? value)
+	{
+		Instance.Offset = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Origin(Elastic.Clients.Elasticsearch.GeoLocation? value)
+	{
+		Instance.Origin = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Origin()
+	{
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation>? action)
+	{
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Scale(string? value)
+	{
+		Instance.Scale = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct DecayPlacementOfDoubleDoubleDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DecayPlacementOfDoubleDoubleDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DecayPlacementOfDoubleDoubleDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?>(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Defines how documents are scored at the distance given at scale.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor Decay(double? value)
+	{
+		Instance.Decay = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor Offset(double? value)
+	{
+		Instance.Offset = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor Origin(double? value)
+	{
+		Instance.Origin = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor Scale(double? value)
+	{
+		Instance.Scale = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct DecayPlacementOfObjectObjectDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object> Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DecayPlacementOfObjectObjectDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object> instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DecayPlacementOfObjectObjectDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object> instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object>(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Defines how documents are scored at the distance given at scale.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor Decay(double? value)
+	{
+		Instance.Decay = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor Offset(object? value)
+	{
+		Instance.Offset = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor Origin(object? value)
+	{
+		Instance.Origin = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor Scale(object? value)
+	{
+		Instance.Scale = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object> Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

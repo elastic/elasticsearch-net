@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class GetRoleMappingRequestParameters : RequestParameters
+public sealed partial class GetRoleMappingRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetRoleMappingRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -44,23 +66,42 @@ public sealed partial class GetRoleMappingRequestParameters : RequestParameters
 /// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 /// </para>
 /// </summary>
-public sealed partial class GetRoleMappingRequest : PlainRequest<GetRoleMappingRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestConverter))]
+public sealed partial class GetRoleMappingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>
 {
-	public GetRoleMappingRequest()
-	{
-	}
-
 	public GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetRoleMappingRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetRoleMappingRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetRoleMapping;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityGetRoleMapping;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_role_mapping";
+
+	/// <summary>
+	/// <para>
+	/// The distinct name that identifies the role mapping. The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way. You can specify multiple mapping names as a comma-separated list. If you do not specify this parameter, the API returns information about all role mappings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 }
 
 /// <summary>
@@ -73,33 +114,92 @@ public sealed partial class GetRoleMappingRequest : PlainRequest<GetRoleMappingR
 /// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 /// </para>
 /// </summary>
-public sealed partial class GetRoleMappingRequestDescriptor : RequestDescriptor<GetRoleMappingRequestDescriptor, GetRoleMappingRequestParameters>
+public readonly partial struct GetRoleMappingRequestDescriptor
 {
-	internal GetRoleMappingRequestDescriptor(Action<GetRoleMappingRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest Instance { get; init; }
 
-	public GetRoleMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRoleMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetRoleMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest(name);
 	}
 
 	public GetRoleMappingRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetRoleMapping;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.get_role_mapping";
-
-	public GetRoleMappingRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
+	/// <summary>
+	/// <para>
+	/// The distinct name that identifies the role mapping. The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way. You can specify multiple mapping names as a comma-separated list. If you do not specify this parameter, the API returns information about all role mappings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
-		RouteValues.Optional("name", name);
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

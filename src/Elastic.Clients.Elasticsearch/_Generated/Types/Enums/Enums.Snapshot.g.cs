@@ -17,178 +17,293 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-[JsonConverter(typeof(ShardsStatsStageConverter))]
+internal sealed partial class SnapshotSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
+	private static readonly System.Text.Json.JsonEncodedText MemberDuration = System.Text.Json.JsonEncodedText.Encode("duration");
+	private static readonly System.Text.Json.JsonEncodedText MemberName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
+	private static readonly System.Text.Json.JsonEncodedText MemberRepository = System.Text.Json.JsonEncodedText.Encode("repository");
+	private static readonly System.Text.Json.JsonEncodedText MemberShardCount = System.Text.Json.JsonEncodedText.Encode("shard_count");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailedShardCount = System.Text.Json.JsonEncodedText.Encode("failed_shard_count");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberStartTime))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.StartTime;
+		}
+
+		if (reader.ValueTextEquals(MemberDuration))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Duration;
+		}
+
+		if (reader.ValueTextEquals(MemberName))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Name;
+		}
+
+		if (reader.ValueTextEquals(MemberIndexCount))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.IndexCount;
+		}
+
+		if (reader.ValueTextEquals(MemberRepository))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Repository;
+		}
+
+		if (reader.ValueTextEquals(MemberShardCount))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.ShardCount;
+		}
+
+		if (reader.ValueTextEquals(MemberFailedShardCount))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.FailedShardCount;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStartTime.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.StartTime;
+		}
+
+		if (string.Equals(value, MemberDuration.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Duration;
+		}
+
+		if (string.Equals(value, MemberName.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Name;
+		}
+
+		if (string.Equals(value, MemberIndexCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.IndexCount;
+		}
+
+		if (string.Equals(value, MemberRepository.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Repository;
+		}
+
+		if (string.Equals(value, MemberShardCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.ShardCount;
+		}
+
+		if (string.Equals(value, MemberFailedShardCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.FailedShardCount;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.StartTime:
+				writer.WriteStringValue(MemberStartTime);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Duration:
+				writer.WriteStringValue(MemberDuration);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Name:
+				writer.WriteStringValue(MemberName);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.IndexCount:
+				writer.WriteStringValue(MemberIndexCount);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Repository:
+				writer.WriteStringValue(MemberRepository);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.ShardCount:
+				writer.WriteStringValue(MemberShardCount);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.FailedShardCount:
+				writer.WriteStringValue(MemberFailedShardCount);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ShardsStatsStageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberDone = System.Text.Json.JsonEncodedText.Encode("DONE");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailure = System.Text.Json.JsonEncodedText.Encode("FAILURE");
+	private static readonly System.Text.Json.JsonEncodedText MemberFinalize = System.Text.Json.JsonEncodedText.Encode("FINALIZE");
+	private static readonly System.Text.Json.JsonEncodedText MemberInit = System.Text.Json.JsonEncodedText.Encode("INIT");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("STARTED");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberDone))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Done;
+		}
+
+		if (reader.ValueTextEquals(MemberFailure))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Failure;
+		}
+
+		if (reader.ValueTextEquals(MemberFinalize))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Finalize;
+		}
+
+		if (reader.ValueTextEquals(MemberInit))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Init;
+		}
+
+		if (reader.ValueTextEquals(MemberStarted))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Started;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Done;
+		}
+
+		if (string.Equals(value, MemberFailure.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Failure;
+		}
+
+		if (string.Equals(value, MemberFinalize.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Finalize;
+		}
+
+		if (string.Equals(value, MemberInit.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Init;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Started;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Done:
+				writer.WriteStringValue(MemberDone);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Failure:
+				writer.WriteStringValue(MemberFailure);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Finalize:
+				writer.WriteStringValue(MemberFinalize);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Init:
+				writer.WriteStringValue(MemberInit);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Started:
+				writer.WriteStringValue(MemberStarted);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotSortConverter))]
+public enum SnapshotSort
+{
+	[System.Runtime.Serialization.EnumMember(Value = "start_time")]
+	StartTime,
+	[System.Runtime.Serialization.EnumMember(Value = "duration")]
+	Duration,
+	[System.Runtime.Serialization.EnumMember(Value = "name")]
+	Name,
+	[System.Runtime.Serialization.EnumMember(Value = "index_count")]
+	IndexCount,
+	[System.Runtime.Serialization.EnumMember(Value = "repository")]
+	Repository,
+	[System.Runtime.Serialization.EnumMember(Value = "shard_count")]
+	ShardCount,
+	[System.Runtime.Serialization.EnumMember(Value = "failed_shard_count")]
+	FailedShardCount
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStageConverter))]
 public enum ShardsStatsStage
 {
 	/// <summary>
 	/// <para>
-	/// Number of shards in the snapshot that are in the started stage of being stored in the repository.
+	/// The number of shards in the snapshot that were successfully stored in the repository.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "STARTED")]
-	Started,
+	[System.Runtime.Serialization.EnumMember(Value = "DONE")]
+	Done,
 	/// <summary>
 	/// <para>
-	/// Number of shards in the snapshot that are in the initializing stage of being stored in the repository.
+	/// The number of shards in the snapshot that were not successfully stored in the repository.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "INIT")]
-	Init,
-	/// <summary>
-	/// <para>
-	/// Number of shards in the snapshot that are in the finalizing stage of being stored in the repository.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "FINALIZE")]
-	Finalize,
-	/// <summary>
-	/// <para>
-	/// Number of shards in the snapshot that were not successfully stored in the repository.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "FAILURE")]
+	[System.Runtime.Serialization.EnumMember(Value = "FAILURE")]
 	Failure,
 	/// <summary>
 	/// <para>
-	/// Number of shards in the snapshot that were successfully stored in the repository.
+	/// The number of shards in the snapshot that are in the finalizing stage of being stored in the repository.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "DONE")]
-	Done
-}
-
-internal sealed class ShardsStatsStageConverter : JsonConverter<ShardsStatsStage>
-{
-	public override ShardsStatsStage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "STARTED":
-				return ShardsStatsStage.Started;
-			case "INIT":
-				return ShardsStatsStage.Init;
-			case "FINALIZE":
-				return ShardsStatsStage.Finalize;
-			case "FAILURE":
-				return ShardsStatsStage.Failure;
-			case "DONE":
-				return ShardsStatsStage.Done;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ShardsStatsStage value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case ShardsStatsStage.Started:
-				writer.WriteStringValue("STARTED");
-				return;
-			case ShardsStatsStage.Init:
-				writer.WriteStringValue("INIT");
-				return;
-			case ShardsStatsStage.Finalize:
-				writer.WriteStringValue("FINALIZE");
-				return;
-			case ShardsStatsStage.Failure:
-				writer.WriteStringValue("FAILURE");
-				return;
-			case ShardsStatsStage.Done:
-				writer.WriteStringValue("DONE");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(SnapshotSortConverter))]
-public enum SnapshotSort
-{
-	[EnumMember(Value = "start_time")]
-	StartTime,
-	[EnumMember(Value = "shard_count")]
-	ShardCount,
-	[EnumMember(Value = "repository")]
-	Repository,
-	[EnumMember(Value = "name")]
-	Name,
-	[EnumMember(Value = "index_count")]
-	IndexCount,
-	[EnumMember(Value = "failed_shard_count")]
-	FailedShardCount,
-	[EnumMember(Value = "duration")]
-	Duration
-}
-
-internal sealed class SnapshotSortConverter : JsonConverter<SnapshotSort>
-{
-	public override SnapshotSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "start_time":
-				return SnapshotSort.StartTime;
-			case "shard_count":
-				return SnapshotSort.ShardCount;
-			case "repository":
-				return SnapshotSort.Repository;
-			case "name":
-				return SnapshotSort.Name;
-			case "index_count":
-				return SnapshotSort.IndexCount;
-			case "failed_shard_count":
-				return SnapshotSort.FailedShardCount;
-			case "duration":
-				return SnapshotSort.Duration;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SnapshotSort value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case SnapshotSort.StartTime:
-				writer.WriteStringValue("start_time");
-				return;
-			case SnapshotSort.ShardCount:
-				writer.WriteStringValue("shard_count");
-				return;
-			case SnapshotSort.Repository:
-				writer.WriteStringValue("repository");
-				return;
-			case SnapshotSort.Name:
-				writer.WriteStringValue("name");
-				return;
-			case SnapshotSort.IndexCount:
-				writer.WriteStringValue("index_count");
-				return;
-			case SnapshotSort.FailedShardCount:
-				writer.WriteStringValue("failed_shard_count");
-				return;
-			case SnapshotSort.Duration:
-				writer.WriteStringValue("duration");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "FINALIZE")]
+	Finalize,
+	/// <summary>
+	/// <para>
+	/// The number of shards in the snapshot that are in the initializing stage of being stored in the repository.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "INIT")]
+	Init,
+	/// <summary>
+	/// <para>
+	/// The number of shards in the snapshot that are in the started stage of being stored in the repository.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "STARTED")]
+	Started
 }

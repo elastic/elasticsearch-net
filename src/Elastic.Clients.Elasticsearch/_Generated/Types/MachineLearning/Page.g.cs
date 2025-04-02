@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class PageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Page>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Page Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<int?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Page(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			From = propFrom.Value,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Page value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PageConverter))]
 public sealed partial class Page
 {
+#if NET7_0_OR_GREATER
+	public Page()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Page()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Page(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Skips the specified number of items.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
@@ -42,30 +102,37 @@ public sealed partial class Page
 	/// Specifies the maximum number of items to obtain.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 }
 
-public sealed partial class PageDescriptor : SerializableDescriptor<PageDescriptor>
+public readonly partial struct PageDescriptor
 {
-	internal PageDescriptor(Action<PageDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.Page Instance { get; init; }
 
-	public PageDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PageDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Page instance)
 	{
+		Instance = instance;
 	}
 
-	private int? FromValue { get; set; }
-	private int? SizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PageDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.Page(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Page instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Page(Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Skips the specified number of items.
 	/// </para>
 	/// </summary>
-	public PageDescriptor From(int? from)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,22 @@ public sealed partial class PageDescriptor : SerializableDescriptor<PageDescript
 	/// Specifies the maximum number of items to obtain.
 	/// </para>
 	/// </summary>
-	public PageDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.Page Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (FromValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.Page(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.Page(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

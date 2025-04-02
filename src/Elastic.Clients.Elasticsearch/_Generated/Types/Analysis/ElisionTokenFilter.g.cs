@@ -17,106 +17,185 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class ElisionTokenFilter : ITokenFilter
+internal sealed partial class ElisionTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("articles")]
-	public ICollection<string>? Articles { get; set; }
-	[JsonInclude, JsonPropertyName("articles_case")]
+	private static readonly System.Text.Json.JsonEncodedText PropArticles = System.Text.Json.JsonEncodedText.Encode("articles");
+	private static readonly System.Text.Json.JsonEncodedText PropArticlesCase = System.Text.Json.JsonEncodedText.Encode("articles_case");
+	private static readonly System.Text.Json.JsonEncodedText PropArticlesPath = System.Text.Json.JsonEncodedText.Encode("articles_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propArticles = default;
+		LocalJsonValue<bool?> propArticlesCase = default;
+		LocalJsonValue<string?> propArticlesPath = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propArticles.TryReadProperty(ref reader, options, PropArticles, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propArticlesCase.TryReadProperty(ref reader, options, PropArticlesCase, null))
+			{
+				continue;
+			}
+
+			if (propArticlesPath.TryReadProperty(ref reader, options, PropArticlesPath, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Articles = propArticles.Value,
+			ArticlesCase = propArticlesCase.Value,
+			ArticlesPath = propArticlesPath.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropArticles, value.Articles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropArticlesCase, value.ArticlesCase, null, null);
+		writer.WriteProperty(options, PropArticlesPath, value.ArticlesPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterConverter))]
+public sealed partial class ElisionTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public ElisionTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ElisionTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ElisionTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.ICollection<string>? Articles { get; set; }
 	public bool? ArticlesCase { get; set; }
-	[JsonInclude, JsonPropertyName("articles_path")]
 	public string? ArticlesPath { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "elision";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class ElisionTokenFilterDescriptor : SerializableDescriptor<ElisionTokenFilterDescriptor>, IBuildableDescriptor<ElisionTokenFilter>
+public readonly partial struct ElisionTokenFilterDescriptor
 {
-	internal ElisionTokenFilterDescriptor(Action<ElisionTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter Instance { get; init; }
 
-	public ElisionTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ElisionTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? ArticlesValue { get; set; }
-	private bool? ArticlesCaseValue { get; set; }
-	private string? ArticlesPathValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public ElisionTokenFilterDescriptor Articles(ICollection<string>? articles)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ElisionTokenFilterDescriptor()
 	{
-		ArticlesValue = articles;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ElisionTokenFilterDescriptor ArticlesCase(bool? articlesCase = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter(Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor Articles(System.Collections.Generic.ICollection<string>? value)
 	{
-		ArticlesCaseValue = articlesCase;
-		return Self;
+		Instance.Articles = value;
+		return this;
 	}
 
-	public ElisionTokenFilterDescriptor ArticlesPath(string? articlesPath)
+	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor Articles()
 	{
-		ArticlesPathValue = articlesPath;
-		return Self;
+		Instance.Articles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public ElisionTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor Articles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Articles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor Articles(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (ArticlesValue is not null)
+		Instance.Articles = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor ArticlesCase(bool? value = true)
+	{
+		Instance.ArticlesCase = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor ArticlesPath(string? value)
+	{
+		Instance.ArticlesPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("articles");
-			JsonSerializer.Serialize(writer, ArticlesValue, options);
+			return new Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ArticlesCaseValue.HasValue)
-		{
-			writer.WritePropertyName("articles_case");
-			writer.WriteBooleanValue(ArticlesCaseValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(ArticlesPathValue))
-		{
-			writer.WritePropertyName("articles_path");
-			writer.WriteStringValue(ArticlesPathValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("elision");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	ElisionTokenFilter IBuildableDescriptor<ElisionTokenFilter>.Build() => new()
-	{
-		Articles = ArticlesValue,
-		ArticlesCase = ArticlesCaseValue,
-		ArticlesPath = ArticlesPathValue,
-		Version = VersionValue
-	};
 }

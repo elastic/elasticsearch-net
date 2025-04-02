@@ -17,69 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KuromojiReadingFormTokenFilter : ITokenFilter
+internal sealed partial class KuromojiReadingFormTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("type")]
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUseRomaji = System.Text.Json.JsonEncodedText.Encode("use_romaji");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propUseRomaji = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propUseRomaji.TryReadProperty(ref reader, options, PropUseRomaji, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			UseRomaji = propUseRomaji.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUseRomaji, value.UseRomaji, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterConverter))]
+public sealed partial class KuromojiReadingFormTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiReadingFormTokenFilter(bool useRomaji)
+	{
+		UseRomaji = useRomaji;
+	}
+#if NET7_0_OR_GREATER
+	public KuromojiReadingFormTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public KuromojiReadingFormTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KuromojiReadingFormTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string Type => "kuromoji_readingform";
 
-	[JsonInclude, JsonPropertyName("use_romaji")]
-	public bool UseRomaji { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool UseRomaji { get; set; }
 	public string? Version { get; set; }
 }
 
-public sealed partial class KuromojiReadingFormTokenFilterDescriptor : SerializableDescriptor<KuromojiReadingFormTokenFilterDescriptor>, IBuildableDescriptor<KuromojiReadingFormTokenFilter>
+public readonly partial struct KuromojiReadingFormTokenFilterDescriptor
 {
-	internal KuromojiReadingFormTokenFilterDescriptor(Action<KuromojiReadingFormTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter Instance { get; init; }
 
-	public KuromojiReadingFormTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiReadingFormTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private bool UseRomajiValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public KuromojiReadingFormTokenFilterDescriptor UseRomaji(bool useRomaji = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KuromojiReadingFormTokenFilterDescriptor()
 	{
-		UseRomajiValue = useRomaji;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KuromojiReadingFormTokenFilterDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor UseRomaji(bool value = true)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.UseRomaji = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("kuromoji_readingform");
-		writer.WritePropertyName("use_romaji");
-		writer.WriteBooleanValue(UseRomajiValue);
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Version = value;
+		return this;
 	}
 
-	KuromojiReadingFormTokenFilter IBuildableDescriptor<KuromojiReadingFormTokenFilter>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor> action)
 	{
-		UseRomaji = UseRomajiValue,
-		Version = VersionValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

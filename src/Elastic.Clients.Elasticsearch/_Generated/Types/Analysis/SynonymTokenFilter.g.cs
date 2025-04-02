@@ -17,186 +17,265 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class SynonymTokenFilter : ITokenFilter
+internal sealed partial class SynonymTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("expand")]
+	private static readonly System.Text.Json.JsonEncodedText PropExpand = System.Text.Json.JsonEncodedText.Encode("expand");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient");
+	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms");
+	private static readonly System.Text.Json.JsonEncodedText PropSynonymsPath = System.Text.Json.JsonEncodedText.Encode("synonyms_path");
+	private static readonly System.Text.Json.JsonEncodedText PropSynonymsSet = System.Text.Json.JsonEncodedText.Encode("synonyms_set");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUpdateable = System.Text.Json.JsonEncodedText.Encode("updateable");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propExpand = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.SynonymFormat?> propFormat = default;
+		LocalJsonValue<bool?> propLenient = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propSynonyms = default;
+		LocalJsonValue<string?> propSynonymsPath = default;
+		LocalJsonValue<string?> propSynonymsSet = default;
+		LocalJsonValue<string?> propTokenizer = default;
+		LocalJsonValue<bool?> propUpdateable = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExpand.TryReadProperty(ref reader, options, PropExpand, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propLenient.TryReadProperty(ref reader, options, PropLenient, null))
+			{
+				continue;
+			}
+
+			if (propSynonyms.TryReadProperty(ref reader, options, PropSynonyms, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSynonymsPath.TryReadProperty(ref reader, options, PropSynonymsPath, null))
+			{
+				continue;
+			}
+
+			if (propSynonymsSet.TryReadProperty(ref reader, options, PropSynonymsSet, null))
+			{
+				continue;
+			}
+
+			if (propTokenizer.TryReadProperty(ref reader, options, PropTokenizer, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propUpdateable.TryReadProperty(ref reader, options, PropUpdateable, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Expand = propExpand.Value,
+			Format = propFormat.Value,
+			Lenient = propLenient.Value,
+			Synonyms = propSynonyms.Value,
+			SynonymsPath = propSynonymsPath.Value,
+			SynonymsSet = propSynonymsSet.Value,
+			Tokenizer = propTokenizer.Value,
+			Updateable = propUpdateable.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExpand, value.Expand, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropLenient, value.Lenient, null, null);
+		writer.WriteProperty(options, PropSynonyms, value.Synonyms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSynonymsPath, value.SynonymsPath, null, null);
+		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet, null, null);
+		writer.WriteProperty(options, PropTokenizer, value.Tokenizer, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUpdateable, value.Updateable, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterConverter))]
+public sealed partial class SynonymTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public SynonymTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SynonymTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SynonymTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? Expand { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? Format { get; set; }
-	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
-	[JsonInclude, JsonPropertyName("synonyms")]
-	public ICollection<string>? Synonyms { get; set; }
-	[JsonInclude, JsonPropertyName("synonyms_path")]
+	public System.Collections.Generic.ICollection<string>? Synonyms { get; set; }
 	public string? SynonymsPath { get; set; }
-	[JsonInclude, JsonPropertyName("synonyms_set")]
 	public string? SynonymsSet { get; set; }
-	[JsonInclude, JsonPropertyName("tokenizer")]
 	public string? Tokenizer { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "synonym";
 
-	[JsonInclude, JsonPropertyName("updateable")]
 	public bool? Updateable { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class SynonymTokenFilterDescriptor : SerializableDescriptor<SynonymTokenFilterDescriptor>, IBuildableDescriptor<SynonymTokenFilter>
+public readonly partial struct SynonymTokenFilterDescriptor
 {
-	internal SynonymTokenFilterDescriptor(Action<SynonymTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter Instance { get; init; }
 
-	public SynonymTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SynonymTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? ExpandValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? FormatValue { get; set; }
-	private bool? LenientValue { get; set; }
-	private ICollection<string>? SynonymsValue { get; set; }
-	private string? SynonymsPathValue { get; set; }
-	private string? SynonymsSetValue { get; set; }
-	private string? TokenizerValue { get; set; }
-	private bool? UpdateableValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public SynonymTokenFilterDescriptor Expand(bool? expand = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SynonymTokenFilterDescriptor()
 	{
-		ExpandValue = expand;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SynonymTokenFilterDescriptor Format(Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? format)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter(Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Expand(bool? value = true)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Expand = value;
+		return this;
 	}
 
-	public SynonymTokenFilterDescriptor Lenient(bool? lenient = true)
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Format(Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? value)
 	{
-		LenientValue = lenient;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public SynonymTokenFilterDescriptor Synonyms(ICollection<string>? synonyms)
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Lenient(bool? value = true)
 	{
-		SynonymsValue = synonyms;
-		return Self;
+		Instance.Lenient = value;
+		return this;
 	}
 
-	public SynonymTokenFilterDescriptor SynonymsPath(string? synonymsPath)
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Synonyms(System.Collections.Generic.ICollection<string>? value)
 	{
-		SynonymsPathValue = synonymsPath;
-		return Self;
+		Instance.Synonyms = value;
+		return this;
 	}
 
-	public SynonymTokenFilterDescriptor SynonymsSet(string? synonymsSet)
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Synonyms()
 	{
-		SynonymsSetValue = synonymsSet;
-		return Self;
+		Instance.Synonyms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public SynonymTokenFilterDescriptor Tokenizer(string? tokenizer)
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Synonyms(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		TokenizerValue = tokenizer;
-		return Self;
+		Instance.Synonyms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	public SynonymTokenFilterDescriptor Updateable(bool? updateable = true)
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Synonyms(params string[] values)
 	{
-		UpdateableValue = updateable;
-		return Self;
+		Instance.Synonyms = [.. values];
+		return this;
 	}
 
-	public SynonymTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor SynonymsPath(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.SynonymsPath = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor SynonymsSet(string? value)
 	{
-		writer.WriteStartObject();
-		if (ExpandValue.HasValue)
+		Instance.SynonymsSet = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Tokenizer(string? value)
+	{
+		Instance.Tokenizer = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Updateable(bool? value = true)
+	{
+		Instance.Updateable = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("expand");
-			writer.WriteBooleanValue(ExpandValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FormatValue is not null)
-		{
-			writer.WritePropertyName("format");
-			JsonSerializer.Serialize(writer, FormatValue, options);
-		}
-
-		if (LenientValue.HasValue)
-		{
-			writer.WritePropertyName("lenient");
-			writer.WriteBooleanValue(LenientValue.Value);
-		}
-
-		if (SynonymsValue is not null)
-		{
-			writer.WritePropertyName("synonyms");
-			JsonSerializer.Serialize(writer, SynonymsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(SynonymsPathValue))
-		{
-			writer.WritePropertyName("synonyms_path");
-			writer.WriteStringValue(SynonymsPathValue);
-		}
-
-		if (!string.IsNullOrEmpty(SynonymsSetValue))
-		{
-			writer.WritePropertyName("synonyms_set");
-			writer.WriteStringValue(SynonymsSetValue);
-		}
-
-		if (!string.IsNullOrEmpty(TokenizerValue))
-		{
-			writer.WritePropertyName("tokenizer");
-			writer.WriteStringValue(TokenizerValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("synonym");
-		if (UpdateableValue.HasValue)
-		{
-			writer.WritePropertyName("updateable");
-			writer.WriteBooleanValue(UpdateableValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	SynonymTokenFilter IBuildableDescriptor<SynonymTokenFilter>.Build() => new()
-	{
-		Expand = ExpandValue,
-		Format = FormatValue,
-		Lenient = LenientValue,
-		Synonyms = SynonymsValue,
-		SynonymsPath = SynonymsPathValue,
-		SynonymsSet = SynonymsSetValue,
-		Tokenizer = TokenizerValue,
-		Updateable = UpdateableValue,
-		Version = VersionValue
-	};
 }

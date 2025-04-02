@@ -17,97 +17,187 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class RuleCondition
+internal sealed partial class RuleConditionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("applies_to")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo AppliesTo { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropAppliesTo = System.Text.Json.JsonEncodedText.Encode("applies_to");
+	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator");
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
 
-	/// <summary>
-	/// <para>
-	/// Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("operator")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator Operator { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The value that is compared against the <c>applies_to</c> field using the operator.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("value")]
-	public double Value { get; set; }
-}
-
-public sealed partial class RuleConditionDescriptor : SerializableDescriptor<RuleConditionDescriptor>
-{
-	internal RuleConditionDescriptor(Action<RuleConditionDescriptor> configure) => configure.Invoke(this);
-
-	public RuleConditionDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo> propAppliesTo = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator> propOperator = default;
+		LocalJsonValue<double> propValue = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAppliesTo.TryReadProperty(ref reader, options, PropAppliesTo, null))
+			{
+				continue;
+			}
+
+			if (propOperator.TryReadProperty(ref reader, options, PropOperator, null))
+			{
+				continue;
+			}
+
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AppliesTo = propAppliesTo.Value,
+			Operator = propOperator.Value,
+			Value = propValue.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo AppliesToValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator OperatorValue { get; set; }
-	private double ValueValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
-	/// </para>
-	/// </summary>
-	public RuleConditionDescriptor AppliesTo(Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo appliesTo)
-	{
-		AppliesToValue = appliesTo;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
-	/// </para>
-	/// </summary>
-	public RuleConditionDescriptor Operator(Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator value)
-	{
-		OperatorValue = value;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The value that is compared against the <c>applies_to</c> field using the operator.
-	/// </para>
-	/// </summary>
-	public RuleConditionDescriptor Value(double value)
-	{
-		ValueValue = value;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("applies_to");
-		JsonSerializer.Serialize(writer, AppliesToValue, options);
-		writer.WritePropertyName("operator");
-		JsonSerializer.Serialize(writer, OperatorValue, options);
-		writer.WritePropertyName("value");
-		writer.WriteNumberValue(ValueValue);
+		writer.WriteProperty(options, PropAppliesTo, value.AppliesTo, null, null);
+		writer.WriteProperty(options, PropOperator, value.Operator, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionConverter))]
+public sealed partial class RuleCondition
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuleCondition(Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo appliesTo, Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator @operator, double value)
+	{
+		AppliesTo = appliesTo;
+		Operator = @operator;
+		Value = value;
+	}
+#if NET7_0_OR_GREATER
+	public RuleCondition()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RuleCondition()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RuleCondition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo AppliesTo { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator Operator { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The value that is compared against the <c>applies_to</c> field using the operator.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Value { get; set; }
+}
+
+public readonly partial struct RuleConditionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuleConditionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RuleConditionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition instance) => new Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition(Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor AppliesTo(Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo value)
+	{
+		Instance.AppliesTo = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor Operator(Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator value)
+	{
+		Instance.Operator = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The value that is compared against the <c>applies_to</c> field using the operator.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor Value(double value)
+	{
+		Instance.Value = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

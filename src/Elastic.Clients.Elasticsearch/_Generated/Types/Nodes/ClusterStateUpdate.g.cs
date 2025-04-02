@@ -17,65 +17,243 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class ClusterStateUpdateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCommitTime = System.Text.Json.JsonEncodedText.Encode("commit_time");
+	private static readonly System.Text.Json.JsonEncodedText PropCommitTimeMillis = System.Text.Json.JsonEncodedText.Encode("commit_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCompletionTime = System.Text.Json.JsonEncodedText.Encode("completion_time");
+	private static readonly System.Text.Json.JsonEncodedText PropCompletionTimeMillis = System.Text.Json.JsonEncodedText.Encode("completion_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropComputationTime = System.Text.Json.JsonEncodedText.Encode("computation_time");
+	private static readonly System.Text.Json.JsonEncodedText PropComputationTimeMillis = System.Text.Json.JsonEncodedText.Encode("computation_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropContextConstructionTime = System.Text.Json.JsonEncodedText.Encode("context_construction_time");
+	private static readonly System.Text.Json.JsonEncodedText PropContextConstructionTimeMillis = System.Text.Json.JsonEncodedText.Encode("context_construction_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropMasterApplyTime = System.Text.Json.JsonEncodedText.Encode("master_apply_time");
+	private static readonly System.Text.Json.JsonEncodedText PropMasterApplyTimeMillis = System.Text.Json.JsonEncodedText.Encode("master_apply_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropNotificationTime = System.Text.Json.JsonEncodedText.Encode("notification_time");
+	private static readonly System.Text.Json.JsonEncodedText PropNotificationTimeMillis = System.Text.Json.JsonEncodedText.Encode("notification_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropPublicationTime = System.Text.Json.JsonEncodedText.Encode("publication_time");
+	private static readonly System.Text.Json.JsonEncodedText PropPublicationTimeMillis = System.Text.Json.JsonEncodedText.Encode("publication_time_millis");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propCommitTime = default;
+		LocalJsonValue<System.TimeSpan?> propCommitTimeMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propCompletionTime = default;
+		LocalJsonValue<System.TimeSpan?> propCompletionTimeMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propComputationTime = default;
+		LocalJsonValue<System.TimeSpan?> propComputationTimeMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propContextConstructionTime = default;
+		LocalJsonValue<System.TimeSpan?> propContextConstructionTimeMillis = default;
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propMasterApplyTime = default;
+		LocalJsonValue<System.TimeSpan?> propMasterApplyTimeMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propNotificationTime = default;
+		LocalJsonValue<System.TimeSpan?> propNotificationTimeMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propPublicationTime = default;
+		LocalJsonValue<System.TimeSpan?> propPublicationTimeMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCommitTime.TryReadProperty(ref reader, options, PropCommitTime, null))
+			{
+				continue;
+			}
+
+			if (propCommitTimeMillis.TryReadProperty(ref reader, options, PropCommitTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propCompletionTime.TryReadProperty(ref reader, options, PropCompletionTime, null))
+			{
+				continue;
+			}
+
+			if (propCompletionTimeMillis.TryReadProperty(ref reader, options, PropCompletionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propComputationTime.TryReadProperty(ref reader, options, PropComputationTime, null))
+			{
+				continue;
+			}
+
+			if (propComputationTimeMillis.TryReadProperty(ref reader, options, PropComputationTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propContextConstructionTime.TryReadProperty(ref reader, options, PropContextConstructionTime, null))
+			{
+				continue;
+			}
+
+			if (propContextConstructionTimeMillis.TryReadProperty(ref reader, options, PropContextConstructionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propMasterApplyTime.TryReadProperty(ref reader, options, PropMasterApplyTime, null))
+			{
+				continue;
+			}
+
+			if (propMasterApplyTimeMillis.TryReadProperty(ref reader, options, PropMasterApplyTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propNotificationTime.TryReadProperty(ref reader, options, PropNotificationTime, null))
+			{
+				continue;
+			}
+
+			if (propNotificationTimeMillis.TryReadProperty(ref reader, options, PropNotificationTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propPublicationTime.TryReadProperty(ref reader, options, PropPublicationTime, null))
+			{
+				continue;
+			}
+
+			if (propPublicationTimeMillis.TryReadProperty(ref reader, options, PropPublicationTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CommitTime = propCommitTime.Value,
+			CommitTimeMillis = propCommitTimeMillis.Value,
+			CompletionTime = propCompletionTime.Value,
+			CompletionTimeMillis = propCompletionTimeMillis.Value,
+			ComputationTime = propComputationTime.Value,
+			ComputationTimeMillis = propComputationTimeMillis.Value,
+			ContextConstructionTime = propContextConstructionTime.Value,
+			ContextConstructionTimeMillis = propContextConstructionTimeMillis.Value,
+			Count = propCount.Value,
+			MasterApplyTime = propMasterApplyTime.Value,
+			MasterApplyTimeMillis = propMasterApplyTimeMillis.Value,
+			NotificationTime = propNotificationTime.Value,
+			NotificationTimeMillis = propNotificationTimeMillis.Value,
+			PublicationTime = propPublicationTime.Value,
+			PublicationTimeMillis = propPublicationTimeMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCommitTime, value.CommitTime, null, null);
+		writer.WriteProperty(options, PropCommitTimeMillis, value.CommitTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropCompletionTime, value.CompletionTime, null, null);
+		writer.WriteProperty(options, PropCompletionTimeMillis, value.CompletionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropComputationTime, value.ComputationTime, null, null);
+		writer.WriteProperty(options, PropComputationTimeMillis, value.ComputationTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropContextConstructionTime, value.ContextConstructionTime, null, null);
+		writer.WriteProperty(options, PropContextConstructionTimeMillis, value.ContextConstructionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropMasterApplyTime, value.MasterApplyTime, null, null);
+		writer.WriteProperty(options, PropMasterApplyTimeMillis, value.MasterApplyTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropNotificationTime, value.NotificationTime, null, null);
+		writer.WriteProperty(options, PropNotificationTimeMillis, value.NotificationTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropPublicationTime, value.PublicationTime, null, null);
+		writer.WriteProperty(options, PropPublicationTimeMillis, value.PublicationTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdateConverter))]
 public sealed partial class ClusterStateUpdate
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterStateUpdate(long count)
+	{
+		Count = count;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterStateUpdate()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterStateUpdate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterStateUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time spent waiting for a successful cluster state update to commit, which measures the time from the start of each publication until a majority of the master-eligible nodes have written the state to disk and confirmed the write to the elected master.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("commit_time")]
-	public Elastic.Clients.Elasticsearch.Duration? CommitTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? CommitTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time, in milliseconds, spent waiting for a successful cluster state update to commit, which measures the time from the start of each publication until a majority of the master-eligible nodes have written the state to disk and confirmed the write to the elected master.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("commit_time_millis")]
-	public long? CommitTimeMillis { get; init; }
+	public System.TimeSpan? CommitTimeMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time spent waiting for a successful cluster state update to complete, which measures the time from the start of each publication until all the other nodes have notified the elected master that they have applied the cluster state.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("completion_time")]
-	public Elastic.Clients.Elasticsearch.Duration? CompletionTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? CompletionTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time, in milliseconds,  spent waiting for a successful cluster state update to complete, which measures the time from the start of each publication until all the other nodes have notified the elected master that they have applied the cluster state.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("completion_time_millis")]
-	public long? CompletionTimeMillis { get; init; }
+	public System.TimeSpan? CompletionTimeMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time spent computing no-op cluster state updates since the node started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("computation_time")]
-	public Elastic.Clients.Elasticsearch.Duration? ComputationTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? ComputationTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time, in milliseconds, spent computing no-op cluster state updates since the node started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("computation_time_millis")]
-	public long? ComputationTimeMillis { get; init; }
+	public System.TimeSpan? ComputationTimeMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -83,8 +261,7 @@ public sealed partial class ClusterStateUpdate
 	/// This statistic includes the time spent computing the difference between the current and new cluster state preparing a serialized representation of this difference.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("context_construction_time")]
-	public Elastic.Clients.Elasticsearch.Duration? ContextConstructionTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? ContextConstructionTime { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -92,48 +269,46 @@ public sealed partial class ClusterStateUpdate
 	/// This statistic includes the time spent computing the difference between the current and new cluster state preparing a serialized representation of this difference.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("context_construction_time_millis")]
-	public long? ContextConstructionTimeMillis { get; init; }
+	public System.TimeSpan? ContextConstructionTimeMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of cluster state update attempts that did not change the cluster state since the node started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time spent successfully applying cluster state updates on the elected master since the node started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("master_apply_time")]
-	public Elastic.Clients.Elasticsearch.Duration? MasterApplyTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? MasterApplyTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time, in milliseconds, spent successfully applying cluster state updates on the elected master since the node started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("master_apply_time_millis")]
-	public long? MasterApplyTimeMillis { get; init; }
+	public System.TimeSpan? MasterApplyTimeMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time spent notifying listeners of a no-op cluster state update since the node started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("notification_time")]
-	public Elastic.Clients.Elasticsearch.Duration? NotificationTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? NotificationTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cumulative amount of time, in milliseconds, spent notifying listeners of a no-op cluster state update since the node started.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("notification_time_millis")]
-	public long? NotificationTimeMillis { get; init; }
+	public System.TimeSpan? NotificationTimeMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -141,8 +316,7 @@ public sealed partial class ClusterStateUpdate
 	/// This includes the time measured by <c>context_construction_time</c>, <c>commit_time</c>, <c>completion_time</c> and <c>master_apply_time</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("publication_time")]
-	public Elastic.Clients.Elasticsearch.Duration? PublicationTime { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? PublicationTime { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -150,6 +324,5 @@ public sealed partial class ClusterStateUpdate
 	/// This includes the time measured by <c>context_construction_time</c>, <c>commit_time</c>, <c>completion_time</c> and <c>master_apply_time</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("publication_time_millis")]
-	public long? PublicationTimeMillis { get; init; }
+	public System.TimeSpan? PublicationTimeMillis { get; set; }
 }

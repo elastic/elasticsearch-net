@@ -17,38 +17,58 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-/// <summary>
-/// <para>
-/// The subset of cluster level privileges that can be defined for remote clusters.
-/// </para>
-/// </summary>
-public sealed partial class RemoteClusterPrivileges
+internal sealed partial class RemoteClusterPrivilegesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>
 {
-	/// <summary>
-	/// <para>
-	/// A list of cluster aliases to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("clusters")]
-	public Elastic.Clients.Elasticsearch.Names Clusters { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropClusters = System.Text.Json.JsonEncodedText.Encode("clusters");
+	private static readonly System.Text.Json.JsonEncodedText PropPrivileges = System.Text.Json.JsonEncodedText.Encode("privileges");
 
-	/// <summary>
-	/// <para>
-	/// The cluster level privileges that owners of the role have on the remote cluster.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("privileges")]
-	public ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> Privileges { get; set; }
+	public override Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Names> propClusters = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege>> propPrivileges = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusters.TryReadProperty(ref reader, options, PropClusters, null))
+			{
+				continue;
+			}
+
+			if (propPrivileges.TryReadProperty(ref reader, options, PropPrivileges, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Clusters = propClusters.Value,
+			Privileges = propPrivileges.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusters, value.Clusters, null, null);
+		writer.WriteProperty(options, PropPrivileges, value.Privileges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -56,26 +76,88 @@ public sealed partial class RemoteClusterPrivileges
 /// The subset of cluster level privileges that can be defined for remote clusters.
 /// </para>
 /// </summary>
-public sealed partial class RemoteClusterPrivilegesDescriptor : SerializableDescriptor<RemoteClusterPrivilegesDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesConverter))]
+public sealed partial class RemoteClusterPrivileges
 {
-	internal RemoteClusterPrivilegesDescriptor(Action<RemoteClusterPrivilegesDescriptor> configure) => configure.Invoke(this);
-
-	public RemoteClusterPrivilegesDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RemoteClusterPrivileges(Elastic.Clients.Elasticsearch.Names clusters, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> privileges)
+	{
+		Clusters = clusters;
+		Privileges = privileges;
+	}
+#if NET7_0_OR_GREATER
+	public RemoteClusterPrivileges()
 	{
 	}
-
-	private Elastic.Clients.Elasticsearch.Names ClustersValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> PrivilegesValue { get; set; }
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RemoteClusterPrivileges()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RemoteClusterPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
 	/// A list of cluster aliases to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public RemoteClusterPrivilegesDescriptor Clusters(Elastic.Clients.Elasticsearch.Names clusters)
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Names Clusters { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The cluster level privileges that owners of the role have on the remote cluster.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> Privileges { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// The subset of cluster level privileges that can be defined for remote clusters.
+/// </para>
+/// </summary>
+public readonly partial struct RemoteClusterPrivilegesDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RemoteClusterPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges instance)
 	{
-		ClustersValue = clusters;
-		return Self;
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RemoteClusterPrivilegesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges instance) => new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A list of cluster aliases to which the permissions in this entry apply.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Clusters(Elastic.Clients.Elasticsearch.Names value)
+	{
+		Instance.Clusters = value;
+		return this;
 	}
 
 	/// <summary>
@@ -83,19 +165,50 @@ public sealed partial class RemoteClusterPrivilegesDescriptor : SerializableDesc
 	/// The cluster level privileges that owners of the role have on the remote cluster.
 	/// </para>
 	/// </summary>
-	public RemoteClusterPrivilegesDescriptor Privileges(ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> privileges)
+	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Privileges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> value)
 	{
-		PrivilegesValue = privileges;
-		return Self;
+		Instance.Privileges = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The cluster level privileges that owners of the role have on the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Privileges()
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("clusters");
-		JsonSerializer.Serialize(writer, ClustersValue, options);
-		writer.WritePropertyName("privileges");
-		JsonSerializer.Serialize(writer, PrivilegesValue, options);
-		writer.WriteEndObject();
+		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRemoteClusterPrivilege.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The cluster level privileges that owners of the role have on the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRemoteClusterPrivilege>? action)
+	{
+		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRemoteClusterPrivilege.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The cluster level privileges that owners of the role have on the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Privileges(params Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege[] values)
+	{
+		Instance.Privileges = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges Build(System.Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

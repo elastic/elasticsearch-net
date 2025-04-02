@@ -17,75 +17,155 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class RankFeatureFunctionSigmoid
+internal sealed partial class RankFeatureFunctionSigmoidConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid>
 {
-	/// <summary>
-	/// <para>
-	/// Configurable Exponent.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("exponent")]
-	public float Exponent { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropExponent = System.Text.Json.JsonEncodedText.Encode("exponent");
+	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot");
 
-	/// <summary>
-	/// <para>
-	/// Configurable pivot value so that the result will be less than 0.5.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("pivot")]
-	public float Pivot { get; set; }
-}
-
-public sealed partial class RankFeatureFunctionSigmoidDescriptor : SerializableDescriptor<RankFeatureFunctionSigmoidDescriptor>
-{
-	internal RankFeatureFunctionSigmoidDescriptor(Action<RankFeatureFunctionSigmoidDescriptor> configure) => configure.Invoke(this);
-
-	public RankFeatureFunctionSigmoidDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float> propExponent = default;
+		LocalJsonValue<float> propPivot = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExponent.TryReadProperty(ref reader, options, PropExponent, null))
+			{
+				continue;
+			}
+
+			if (propPivot.TryReadProperty(ref reader, options, PropPivot, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Exponent = propExponent.Value,
+			Pivot = propPivot.Value
+		};
 	}
 
-	private float ExponentValue { get; set; }
-	private float PivotValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Configurable Exponent.
-	/// </para>
-	/// </summary>
-	public RankFeatureFunctionSigmoidDescriptor Exponent(float exponent)
-	{
-		ExponentValue = exponent;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Configurable pivot value so that the result will be less than 0.5.
-	/// </para>
-	/// </summary>
-	public RankFeatureFunctionSigmoidDescriptor Pivot(float pivot)
-	{
-		PivotValue = pivot;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("exponent");
-		writer.WriteNumberValue(ExponentValue);
-		writer.WritePropertyName("pivot");
-		writer.WriteNumberValue(PivotValue);
+		writer.WriteProperty(options, PropExponent, value.Exponent, null, null);
+		writer.WriteProperty(options, PropPivot, value.Pivot, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidConverter))]
+public sealed partial class RankFeatureFunctionSigmoid
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionSigmoid(float exponent, float pivot)
+	{
+		Exponent = exponent;
+		Pivot = pivot;
+	}
+#if NET7_0_OR_GREATER
+	public RankFeatureFunctionSigmoid()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RankFeatureFunctionSigmoid()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankFeatureFunctionSigmoid(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configurable Exponent.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	float Exponent { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Configurable pivot value so that the result will be less than 0.5.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	float Pivot { get; set; }
+}
+
+public readonly partial struct RankFeatureFunctionSigmoidDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionSigmoidDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionSigmoidDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Configurable Exponent.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor Exponent(float value)
+	{
+		Instance.Exponent = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configurable pivot value so that the result will be less than 0.5.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor Pivot(float value)
+	{
+		Instance.Pivot = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

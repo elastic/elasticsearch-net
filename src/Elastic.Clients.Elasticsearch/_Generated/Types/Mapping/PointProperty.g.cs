@@ -17,32 +17,183 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class PointProperty : IProperty
+internal sealed partial class PointPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.PointProperty>
 {
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreZValue = System.Text.Json.JsonEncodedText.Encode("ignore_z_value");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.PointProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIgnoreMalformed = default;
+		LocalJsonValue<bool?> propIgnoreZValue = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<string?> propNullValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMalformed.TryReadProperty(ref reader, options, PropIgnoreMalformed, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreZValue.TryReadProperty(ref reader, options, PropIgnoreZValue, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, null))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			{
+				continue;
+			}
+
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.PointProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CopyTo = propCopyTo.Value,
+			DocValues = propDocValues.Value,
+			Dynamic = propDynamic.Value,
+			Fields = propFields.Value,
+			IgnoreAbove = propIgnoreAbove.Value,
+			IgnoreMalformed = propIgnoreMalformed.Value,
+			IgnoreZValue = propIgnoreZValue.Value,
+			Meta = propMeta.Value,
+			NullValue = propNullValue.Value,
+			Properties = propProperties.Value,
+			Store = propStore.Value,
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.PointProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed, null, null);
+		writer.WriteProperty(options, PropIgnoreZValue, value.IgnoreZValue, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.PointPropertyConverter))]
+public sealed partial class PointProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
+{
+#if NET7_0_OR_GREATER
+	public PointProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PointProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PointProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_z_value")]
 	public bool? IgnoreZValue { get; set; }
 
 	/// <summary>
@@ -50,96 +201,86 @@ public sealed partial class PointProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("null_value")]
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public string? NullValue { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "point";
 }
 
-public sealed partial class PointPropertyDescriptor<TDocument> : SerializableDescriptor<PointPropertyDescriptor<TDocument>>, IBuildableDescriptor<PointProperty>
+public readonly partial struct PointPropertyDescriptor<TDocument>
 {
-	internal PointPropertyDescriptor(Action<PointPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.PointProperty Instance { get; init; }
 
-	public PointPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PointPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.PointProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
-	private bool? IgnoreZValueValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private string? NullValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-
-	public PointPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PointPropertyDescriptor()
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.PointProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PointPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PointProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.PointProperty(Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> CopyTo(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> DocValues(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
-		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> IgnoreZValue(bool? ignoreZValue = true)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> IgnoreMalformed(bool? value = true)
 	{
-		IgnoreZValueValue = ignoreZValue;
-		return Self;
+		Instance.IgnoreMalformed = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> IgnoreZValue(bool? value = true)
+	{
+		Instance.IgnoreZValue = value;
+		return this;
 	}
 
 	/// <summary>
@@ -147,222 +288,162 @@ public sealed partial class PointPropertyDescriptor<TDocument> : SerializableDes
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public PointPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> NullValue(string? nullValue)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Meta()
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> AddMeta(string key, string value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> NullValue(string? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		StoreValue = store;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Store(bool? value = true)
 	{
-		writer.WriteStartObject();
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IgnoreMalformedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-		}
-
-		if (IgnoreZValueValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_z_value");
-			writer.WriteBooleanValue(IgnoreZValueValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NullValueValue))
-		{
-			writer.WritePropertyName("null_value");
-			writer.WriteStringValue(NullValueValue);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("point");
-		writer.WriteEndObject();
+		Instance.Store = value;
+		return this;
 	}
 
-	PointProperty IBuildableDescriptor<PointProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		CopyTo = CopyToValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		IgnoreMalformed = IgnoreMalformedValue,
-		IgnoreZValue = IgnoreZValueValue,
-		Meta = MetaValue,
-		NullValue = NullValueValue,
-		Properties = PropertiesValue,
-		Store = StoreValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
+		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.PointProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.PointProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.PointProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }
 
-public sealed partial class PointPropertyDescriptor : SerializableDescriptor<PointPropertyDescriptor>, IBuildableDescriptor<PointProperty>
+public readonly partial struct PointPropertyDescriptor
 {
-	internal PointPropertyDescriptor(Action<PointPropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.PointProperty Instance { get; init; }
 
-	public PointPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PointPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.PointProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
-	private bool? IgnoreZValueValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private string? NullValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-
-	public PointPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PointPropertyDescriptor()
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.PointProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PointPropertyDescriptor DocValues(bool? docValues = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.PointProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.PointProperty(Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor CopyTo<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor DocValues(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public PointPropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public PointPropertyDescriptor IgnoreZValue(bool? ignoreZValue = true)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor IgnoreAbove(int? value)
 	{
-		IgnoreZValueValue = ignoreZValue;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor IgnoreMalformed(bool? value = true)
+	{
+		Instance.IgnoreMalformed = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor IgnoreZValue(bool? value = true)
+	{
+		Instance.IgnoreZValue = value;
+		return this;
 	}
 
 	/// <summary>
@@ -370,143 +451,87 @@ public sealed partial class PointPropertyDescriptor : SerializableDescriptor<Poi
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public PointPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor NullValue(string? nullValue)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Meta()
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public PointPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public PointPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor AddMeta(string key, string value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public PointPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor NullValue(string? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		StoreValue = store;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public PointPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		writer.WriteStartObject();
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IgnoreMalformedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-		}
-
-		if (IgnoreZValueValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_z_value");
-			writer.WriteBooleanValue(IgnoreZValueValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NullValueValue))
-		{
-			writer.WritePropertyName("null_value");
-			writer.WriteStringValue(NullValueValue);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("point");
-		writer.WriteEndObject();
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	PointProperty IBuildableDescriptor<PointProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Store(bool? value = true)
 	{
-		CopyTo = CopyToValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		IgnoreMalformed = IgnoreMalformedValue,
-		IgnoreZValue = IgnoreZValueValue,
-		Meta = MetaValue,
-		NullValue = NullValueValue,
-		Properties = PropertiesValue,
-		Store = StoreValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
+		Instance.Store = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
+	{
+		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.PointProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.PointProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.PointProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

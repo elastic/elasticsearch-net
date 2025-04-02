@@ -17,73 +17,170 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class CustomNormalizer : INormalizer
+internal sealed partial class CustomNormalizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>
 {
-	[JsonInclude, JsonPropertyName("char_filter")]
-	public ICollection<string>? CharFilter { get; set; }
-	[JsonInclude, JsonPropertyName("filter")]
-	public ICollection<string>? Filter { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropCharFilter = System.Text.Json.JsonEncodedText.Encode("char_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propCharFilter = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propFilter = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCharFilter.TryReadProperty(ref reader, options, PropCharFilter, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CharFilter = propCharFilter.Value,
+			Filter = propFilter.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCharFilter, value.CharFilter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerConverter))]
+public sealed partial class CustomNormalizer : Elastic.Clients.Elasticsearch.Analysis.INormalizer
+{
+#if NET7_0_OR_GREATER
+	public CustomNormalizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CustomNormalizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CustomNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.ICollection<string>? CharFilter { get; set; }
+	public System.Collections.Generic.ICollection<string>? Filter { get; set; }
+
 	public string Type => "custom";
 }
 
-public sealed partial class CustomNormalizerDescriptor : SerializableDescriptor<CustomNormalizerDescriptor>, IBuildableDescriptor<CustomNormalizer>
+public readonly partial struct CustomNormalizerDescriptor
 {
-	internal CustomNormalizerDescriptor(Action<CustomNormalizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer Instance { get; init; }
 
-	public CustomNormalizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CustomNormalizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? CharFilterValue { get; set; }
-	private ICollection<string>? FilterValue { get; set; }
-
-	public CustomNormalizerDescriptor CharFilter(ICollection<string>? charFilter)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CustomNormalizerDescriptor()
 	{
-		CharFilterValue = charFilter;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public CustomNormalizerDescriptor Filter(ICollection<string>? filter)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer instance) => new Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer(Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor CharFilter(System.Collections.Generic.ICollection<string>? value)
 	{
-		FilterValue = filter;
-		return Self;
+		Instance.CharFilter = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor CharFilter()
 	{
-		writer.WriteStartObject();
-		if (CharFilterValue is not null)
+		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor CharFilter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor CharFilter(params string[] values)
+	{
+		Instance.CharFilter = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor Filter(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor Filter()
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor Filter(params string[] values)
+	{
+		Instance.Filter = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("char_filter");
-			JsonSerializer.Serialize(writer, CharFilterValue, options);
+			return new Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("custom");
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	CustomNormalizer IBuildableDescriptor<CustomNormalizer>.Build() => new()
-	{
-		CharFilter = CharFilterValue,
-		Filter = FilterValue
-	};
 }

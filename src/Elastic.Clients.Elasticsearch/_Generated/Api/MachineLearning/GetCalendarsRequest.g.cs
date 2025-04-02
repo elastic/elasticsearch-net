@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetCalendarsRequestParameters : RequestParameters
+public sealed partial class GetCalendarsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -47,24 +40,75 @@ public sealed partial class GetCalendarsRequestParameters : RequestParameters
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
+internal sealed partial class GetCalendarsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPage = System.Text.Json.JsonEncodedText.Encode("page");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Page?> propPage = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPage.TryReadProperty(ref reader, options, PropPage, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Page = propPage.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPage, value.Page, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get calendar configuration info.
 /// </para>
 /// </summary>
-public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestConverter))]
+public sealed partial class GetCalendarsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>
 {
-	public GetCalendarsRequest()
-	{
-	}
-
 	public GetCalendarsRequest(Elastic.Clients.Elasticsearch.Id? calendarId) : base(r => r.Optional("calendar_id", calendarId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetCalendarsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetCalendarsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetCalendarsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetCalendars;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetCalendars;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -72,10 +116,16 @@ public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsReque
 
 	/// <summary>
 	/// <para>
+	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? CalendarId { get => P<Elastic.Clients.Elasticsearch.Id?>("calendar_id"); set => PO("calendar_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Skips the specified number of calendars. This parameter is supported only when you omit the calendar identifier.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -83,7 +133,6 @@ public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsReque
 	/// Specifies the maximum number of calendars to obtain. This parameter is supported only when you omit the calendar identifier.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
@@ -91,7 +140,6 @@ public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsReque
 	/// This object is supported only when you omit the calendar identifier.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("page")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 }
 
@@ -100,87 +148,147 @@ public sealed partial class GetCalendarsRequest : PlainRequest<GetCalendarsReque
 /// Get calendar configuration info.
 /// </para>
 /// </summary>
-public sealed partial class GetCalendarsRequestDescriptor : RequestDescriptor<GetCalendarsRequestDescriptor, GetCalendarsRequestParameters>
+public readonly partial struct GetCalendarsRequestDescriptor
 {
-	internal GetCalendarsRequestDescriptor(Action<GetCalendarsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest Instance { get; init; }
 
-	public GetCalendarsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? calendarId) : base(r => r.Optional("calendar_id", calendarId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetCalendarsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetCalendarsRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest(calendarId);
 	}
 
 	public GetCalendarsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetCalendars;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.get_calendars";
-
-	public GetCalendarsRequestDescriptor From(int? from) => Qs("from", from);
-	public GetCalendarsRequestDescriptor Size(int? size) => Qs("size", size);
-
-	public GetCalendarsRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id? calendarId)
+	/// <summary>
+	/// <para>
+	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("calendar_id", calendarId);
-		return Self;
+		Instance.CalendarId = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.Page? PageValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor PageDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of calendars. This parameter is supported only when you omit the calendar identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of calendars to obtain. This parameter is supported only when you omit the calendar identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// This object is supported only when you omit the calendar identifier.
 	/// </para>
 	/// </summary>
-	public GetCalendarsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? page)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
-		PageDescriptor = null;
-		PageDescriptorAction = null;
-		PageValue = page;
-		return Self;
+		Instance.Page = value;
+		return this;
 	}
 
-	public GetCalendarsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// This object is supported only when you omit the calendar identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Page()
 	{
-		PageValue = null;
-		PageDescriptorAction = null;
-		PageDescriptor = descriptor;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
+		return this;
 	}
 
-	public GetCalendarsRequestDescriptor Page(Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// This object is supported only when you omit the calendar identifier.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
-		PageValue = null;
-		PageDescriptor = null;
-		PageDescriptorAction = configure;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (PageDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageDescriptor, options);
-		}
-		else if (PageDescriptorAction is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(PageDescriptorAction), options);
-		}
-		else if (PageValue is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

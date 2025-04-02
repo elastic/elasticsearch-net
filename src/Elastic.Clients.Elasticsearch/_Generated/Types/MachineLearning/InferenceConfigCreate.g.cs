@@ -17,351 +17,974 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Inference configuration provided when storing the model config
-/// </para>
-/// </summary>
-[JsonConverter(typeof(InferenceConfigCreateConverter))]
+internal sealed partial class InferenceConfigCreateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText VariantFillMask = System.Text.Json.JsonEncodedText.Encode("fill_mask");
+	private static readonly System.Text.Json.JsonEncodedText VariantLearningToRank = System.Text.Json.JsonEncodedText.Encode("learning_to_rank");
+	private static readonly System.Text.Json.JsonEncodedText VariantNer = System.Text.Json.JsonEncodedText.Encode("ner");
+	private static readonly System.Text.Json.JsonEncodedText VariantPassThrough = System.Text.Json.JsonEncodedText.Encode("pass_through");
+	private static readonly System.Text.Json.JsonEncodedText VariantQuestionAnswering = System.Text.Json.JsonEncodedText.Encode("question_answering");
+	private static readonly System.Text.Json.JsonEncodedText VariantRegression = System.Text.Json.JsonEncodedText.Encode("regression");
+	private static readonly System.Text.Json.JsonEncodedText VariantTextClassification = System.Text.Json.JsonEncodedText.Encode("text_classification");
+	private static readonly System.Text.Json.JsonEncodedText VariantTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+	private static readonly System.Text.Json.JsonEncodedText VariantTextExpansion = System.Text.Json.JsonEncodedText.Encode("text_expansion");
+	private static readonly System.Text.Json.JsonEncodedText VariantZeroShotClassification = System.Text.Json.JsonEncodedText.Encode("zero_shot_classification");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantClassification))
+			{
+				variantType = VariantClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantFillMask))
+			{
+				variantType = VariantFillMask.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLearningToRank))
+			{
+				variantType = VariantLearningToRank.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantNer))
+			{
+				variantType = VariantNer.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPassThrough))
+			{
+				variantType = VariantPassThrough.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantQuestionAnswering))
+			{
+				variantType = VariantQuestionAnswering.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRegression))
+			{
+				variantType = VariantRegression.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTextClassification))
+			{
+				variantType = VariantTextClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTextEmbedding))
+			{
+				variantType = VariantTextEmbedding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTextExpansion))
+			{
+				variantType = VariantTextExpansion.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantZeroShotClassification))
+			{
+				variantType = VariantZeroShotClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions)value.Variant, null, null);
+				break;
+			case "fill_mask":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions)value.Variant, null, null);
+				break;
+			case "learning_to_rank":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig)value.Variant, null, null);
+				break;
+			case "ner":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions)value.Variant, null, null);
+				break;
+			case "pass_through":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions)value.Variant, null, null);
+				break;
+			case "question_answering":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions)value.Variant, null, null);
+				break;
+			case "regression":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions)value.Variant, null, null);
+				break;
+			case "text_classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions)value.Variant, null, null);
+				break;
+			case "text_embedding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions)value.Variant, null, null);
+				break;
+			case "text_expansion":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions)value.Variant, null, null);
+				break;
+			case "zero_shot_classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateConverter))]
 public sealed partial class InferenceConfigCreate
 {
-	internal InferenceConfigCreate(string variantName, object variant)
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public InferenceConfigCreate()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public InferenceConfigCreate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InferenceConfigCreate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions? Classification { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions>("classification"); set => SetVariant("classification", value); }
 
-	public static InferenceConfigCreate Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfigCreate("classification", classificationInferenceOptions);
-	public static InferenceConfigCreate FillMask(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions fillMaskInferenceOptions) => new InferenceConfigCreate("fill_mask", fillMaskInferenceOptions);
-	public static InferenceConfigCreate Ner(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions nerInferenceOptions) => new InferenceConfigCreate("ner", nerInferenceOptions);
-	public static InferenceConfigCreate PassThrough(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions passThroughInferenceOptions) => new InferenceConfigCreate("pass_through", passThroughInferenceOptions);
-	public static InferenceConfigCreate QuestionAnswering(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions questionAnsweringInferenceOptions) => new InferenceConfigCreate("question_answering", questionAnsweringInferenceOptions);
-	public static InferenceConfigCreate Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions regressionInferenceOptions) => new InferenceConfigCreate("regression", regressionInferenceOptions);
-	public static InferenceConfigCreate TextClassification(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions textClassificationInferenceOptions) => new InferenceConfigCreate("text_classification", textClassificationInferenceOptions);
-	public static InferenceConfigCreate TextEmbedding(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => new InferenceConfigCreate("text_embedding", textEmbeddingInferenceOptions);
-	public static InferenceConfigCreate TextExpansion(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions textExpansionInferenceOptions) => new InferenceConfigCreate("text_expansion", textExpansionInferenceOptions);
-	public static InferenceConfigCreate ZeroShotClassification(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => new InferenceConfigCreate("zero_shot_classification", zeroShotClassificationInferenceOptions);
+	/// <summary>
+	/// <para>
+	/// Fill mask configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions? FillMask { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions>("fill_mask"); set => SetVariant("fill_mask", value); }
+	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig? LearningToRank { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig>("learning_to_rank"); set => SetVariant("learning_to_rank", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// Named entity recognition configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions? Ner { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions>("ner"); set => SetVariant("ner", value); }
+
+	/// <summary>
+	/// <para>
+	/// Pass through configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions? PassThrough { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions>("pass_through"); set => SetVariant("pass_through", value); }
+
+	/// <summary>
+	/// <para>
+	/// Question answering configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions? QuestionAnswering { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions>("question_answering"); set => SetVariant("question_answering", value); }
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions? Regression { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions>("regression"); set => SetVariant("regression", value); }
+
+	/// <summary>
+	/// <para>
+	/// Text classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions? TextClassification { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions>("text_classification"); set => SetVariant("text_classification", value); }
+
+	/// <summary>
+	/// <para>
+	/// Text embedding configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions? TextEmbedding { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions>("text_embedding"); set => SetVariant("text_embedding", value); }
+
+	/// <summary>
+	/// <para>
+	/// Text expansion configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions? TextExpansion { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions>("text_expansion"); set => SetVariant("text_expansion", value); }
+
+	/// <summary>
+	/// <para>
+	/// Zeroshot classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions? ZeroShotClassification { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions>("zero_shot_classification"); set => SetVariant("zero_shot_classification", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { Classification = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { FillMask = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { LearningToRank = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { Ner = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { PassThrough = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { QuestionAnswering = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { Regression = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { TextClassification = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { TextEmbedding = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { TextExpansion = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions value) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate { ZeroShotClassification = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class InferenceConfigCreateConverter : JsonConverter<InferenceConfigCreate>
+public readonly partial struct InferenceConfigCreateDescriptor<TDocument>
 {
-	public override InferenceConfigCreate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigCreateDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "fill_mask")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "ner")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "pass_through")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "question_answering")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "regression")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "text_classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "text_embedding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "text_expansion")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "zero_shot_classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'InferenceConfigCreate' from the response.");
-		}
-
-		var result = new InferenceConfigCreate(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, InferenceConfigCreate value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigCreateDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions)value.Variant, options);
-					break;
-				case "fill_mask":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions)value.Variant, options);
-					break;
-				case "ner":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions)value.Variant, options);
-					break;
-				case "pass_through":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions)value.Variant, options);
-					break;
-				case "question_answering":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions)value.Variant, options);
-					break;
-				case "regression":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions)value.Variant, options);
-					break;
-				case "text_classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions)value.Variant, options);
-					break;
-				case "text_embedding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions)value.Variant, options);
-					break;
-				case "text_expansion":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions)value.Variant, options);
-					break;
-				case "zero_shot_classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate instance) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions? value)
+	{
+		Instance.Classification = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> Classification()
+	{
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor>? action)
+	{
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fill mask configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> FillMask(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions? value)
+	{
+		Instance.FillMask = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fill mask configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> FillMask(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor> action)
+	{
+		Instance.FillMask = Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> LearningToRank(Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig? value)
+	{
+		Instance.LearningToRank = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> LearningToRank(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument>> action)
+	{
+		Instance.LearningToRank = Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Named entity recognition configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> Ner(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions? value)
+	{
+		Instance.Ner = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Named entity recognition configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> Ner()
+	{
+		Instance.Ner = Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Named entity recognition configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> Ner(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor>? action)
+	{
+		Instance.Ner = Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pass through configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> PassThrough(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions? value)
+	{
+		Instance.PassThrough = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pass through configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> PassThrough()
+	{
+		Instance.PassThrough = Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pass through configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> PassThrough(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor>? action)
+	{
+		Instance.PassThrough = Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Question answering configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> QuestionAnswering(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions? value)
+	{
+		Instance.QuestionAnswering = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Question answering configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> QuestionAnswering()
+	{
+		Instance.QuestionAnswering = Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Question answering configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> QuestionAnswering(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor>? action)
+	{
+		Instance.QuestionAnswering = Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions? value)
+	{
+		Instance.Regression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> Regression()
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>>? action)
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextClassification(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions? value)
+	{
+		Instance.TextClassification = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextClassification()
+	{
+		Instance.TextClassification = Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextClassification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor>? action)
+	{
+		Instance.TextClassification = Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text embedding configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextEmbedding(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions? value)
+	{
+		Instance.TextEmbedding = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text embedding configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextEmbedding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor> action)
+	{
+		Instance.TextEmbedding = Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text expansion configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextExpansion(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions? value)
+	{
+		Instance.TextExpansion = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text expansion configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextExpansion(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor> action)
+	{
+		Instance.TextExpansion = Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Zeroshot classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> ZeroShotClassification(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions? value)
+	{
+		Instance.ZeroShotClassification = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Zeroshot classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> ZeroShotClassification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor> action)
+	{
+		Instance.ZeroShotClassification = Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class InferenceConfigCreateDescriptor<TDocument> : SerializableDescriptor<InferenceConfigCreateDescriptor<TDocument>>
+public readonly partial struct InferenceConfigCreateDescriptor
 {
-	internal InferenceConfigCreateDescriptor(Action<InferenceConfigCreateDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate Instance { get; init; }
 
-	public InferenceConfigCreateDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigCreateDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private InferenceConfigCreateDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigCreateDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private InferenceConfigCreateDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate instance) => new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Classification = value;
+		return this;
 	}
 
-	public InferenceConfigCreateDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions classificationInferenceOptions) => Set(classificationInferenceOptions, "classification");
-	public InferenceConfigCreateDescriptor<TDocument> Classification(Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-	public InferenceConfigCreateDescriptor<TDocument> FillMask(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions fillMaskInferenceOptions) => Set(fillMaskInferenceOptions, "fill_mask");
-	public InferenceConfigCreateDescriptor<TDocument> FillMask(Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor> configure) => Set(configure, "fill_mask");
-	public InferenceConfigCreateDescriptor<TDocument> Ner(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions nerInferenceOptions) => Set(nerInferenceOptions, "ner");
-	public InferenceConfigCreateDescriptor<TDocument> Ner(Action<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor> configure) => Set(configure, "ner");
-	public InferenceConfigCreateDescriptor<TDocument> PassThrough(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions passThroughInferenceOptions) => Set(passThroughInferenceOptions, "pass_through");
-	public InferenceConfigCreateDescriptor<TDocument> PassThrough(Action<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor> configure) => Set(configure, "pass_through");
-	public InferenceConfigCreateDescriptor<TDocument> QuestionAnswering(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions questionAnsweringInferenceOptions) => Set(questionAnsweringInferenceOptions, "question_answering");
-	public InferenceConfigCreateDescriptor<TDocument> QuestionAnswering(Action<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor> configure) => Set(configure, "question_answering");
-	public InferenceConfigCreateDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
-	public InferenceConfigCreateDescriptor<TDocument> Regression(Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
-	public InferenceConfigCreateDescriptor<TDocument> TextClassification(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions textClassificationInferenceOptions) => Set(textClassificationInferenceOptions, "text_classification");
-	public InferenceConfigCreateDescriptor<TDocument> TextClassification(Action<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor> configure) => Set(configure, "text_classification");
-	public InferenceConfigCreateDescriptor<TDocument> TextEmbedding(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => Set(textEmbeddingInferenceOptions, "text_embedding");
-	public InferenceConfigCreateDescriptor<TDocument> TextEmbedding(Action<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor> configure) => Set(configure, "text_embedding");
-	public InferenceConfigCreateDescriptor<TDocument> TextExpansion(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions textExpansionInferenceOptions) => Set(textExpansionInferenceOptions, "text_expansion");
-	public InferenceConfigCreateDescriptor<TDocument> TextExpansion(Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor> configure) => Set(configure, "text_expansion");
-	public InferenceConfigCreateDescriptor<TDocument> ZeroShotClassification(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Set(zeroShotClassificationInferenceOptions, "zero_shot_classification");
-	public InferenceConfigCreateDescriptor<TDocument> ZeroShotClassification(Action<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Classification()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class InferenceConfigCreateDescriptor : SerializableDescriptor<InferenceConfigCreateDescriptor>
-{
-	internal InferenceConfigCreateDescriptor(Action<InferenceConfigCreateDescriptor> configure) => configure.Invoke(this);
-
-	public InferenceConfigCreateDescriptor() : base()
-	{
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(null);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private InferenceConfigCreateDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor>? action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(action);
+		return this;
 	}
 
-	private InferenceConfigCreateDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Fill mask configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor FillMask(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.FillMask = value;
+		return this;
 	}
 
-	public InferenceConfigCreateDescriptor Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions classificationInferenceOptions) => Set(classificationInferenceOptions, "classification");
-	public InferenceConfigCreateDescriptor Classification(Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-	public InferenceConfigCreateDescriptor FillMask(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions fillMaskInferenceOptions) => Set(fillMaskInferenceOptions, "fill_mask");
-	public InferenceConfigCreateDescriptor FillMask(Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor> configure) => Set(configure, "fill_mask");
-	public InferenceConfigCreateDescriptor Ner(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions nerInferenceOptions) => Set(nerInferenceOptions, "ner");
-	public InferenceConfigCreateDescriptor Ner(Action<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor> configure) => Set(configure, "ner");
-	public InferenceConfigCreateDescriptor PassThrough(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions passThroughInferenceOptions) => Set(passThroughInferenceOptions, "pass_through");
-	public InferenceConfigCreateDescriptor PassThrough(Action<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor> configure) => Set(configure, "pass_through");
-	public InferenceConfigCreateDescriptor QuestionAnswering(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions questionAnsweringInferenceOptions) => Set(questionAnsweringInferenceOptions, "question_answering");
-	public InferenceConfigCreateDescriptor QuestionAnswering(Action<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor> configure) => Set(configure, "question_answering");
-	public InferenceConfigCreateDescriptor Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
-	public InferenceConfigCreateDescriptor Regression<TDocument>(Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
-	public InferenceConfigCreateDescriptor TextClassification(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions textClassificationInferenceOptions) => Set(textClassificationInferenceOptions, "text_classification");
-	public InferenceConfigCreateDescriptor TextClassification(Action<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor> configure) => Set(configure, "text_classification");
-	public InferenceConfigCreateDescriptor TextEmbedding(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => Set(textEmbeddingInferenceOptions, "text_embedding");
-	public InferenceConfigCreateDescriptor TextEmbedding(Action<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor> configure) => Set(configure, "text_embedding");
-	public InferenceConfigCreateDescriptor TextExpansion(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions textExpansionInferenceOptions) => Set(textExpansionInferenceOptions, "text_expansion");
-	public InferenceConfigCreateDescriptor TextExpansion(Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor> configure) => Set(configure, "text_expansion");
-	public InferenceConfigCreateDescriptor ZeroShotClassification(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Set(zeroShotClassificationInferenceOptions, "zero_shot_classification");
-	public InferenceConfigCreateDescriptor ZeroShotClassification(Action<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Fill mask configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor FillMask(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.FillMask = Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor LearningToRank(Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig? value)
+	{
+		Instance.LearningToRank = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor LearningToRank(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor> action)
+	{
+		Instance.LearningToRank = Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor LearningToRank<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<T>> action)
+	{
+		Instance.LearningToRank = Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Named entity recognition configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Ner(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions? value)
+	{
+		Instance.Ner = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Named entity recognition configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Ner()
+	{
+		Instance.Ner = Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Named entity recognition configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Ner(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor>? action)
+	{
+		Instance.Ner = Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pass through configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor PassThrough(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions? value)
+	{
+		Instance.PassThrough = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pass through configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor PassThrough()
+	{
+		Instance.PassThrough = Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pass through configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor PassThrough(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor>? action)
+	{
+		Instance.PassThrough = Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Question answering configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor QuestionAnswering(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions? value)
+	{
+		Instance.QuestionAnswering = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Question answering configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor QuestionAnswering()
+	{
+		Instance.QuestionAnswering = Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Question answering configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor QuestionAnswering(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor>? action)
+	{
+		Instance.QuestionAnswering = Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions? value)
+	{
+		Instance.Regression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Regression()
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor>? action)
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor Regression<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<T>>? action)
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextClassification(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions? value)
+	{
+		Instance.TextClassification = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextClassification()
+	{
+		Instance.TextClassification = Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextClassification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor>? action)
+	{
+		Instance.TextClassification = Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text embedding configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextEmbedding(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions? value)
+	{
+		Instance.TextEmbedding = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text embedding configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextEmbedding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor> action)
+	{
+		Instance.TextEmbedding = Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text expansion configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextExpansion(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions? value)
+	{
+		Instance.TextExpansion = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text expansion configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextExpansion(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor> action)
+	{
+		Instance.TextExpansion = Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Zeroshot classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor ZeroShotClassification(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions? value)
+	{
+		Instance.ZeroShotClassification = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Zeroshot classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor ZeroShotClassification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor> action)
+	{
+		Instance.ZeroShotClassification = Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

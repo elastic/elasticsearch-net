@@ -17,25 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class AnalysisConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationAnalyzer = System.Text.Json.JsonEncodedText.Encode("categorization_analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFieldName = System.Text.Json.JsonEncodedText.Encode("categorization_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors");
+	private static readonly System.Text.Json.JsonEncodedText PropInfluencers = System.Text.Json.JsonEncodedText.Encode("influencers");
+	private static readonly System.Text.Json.JsonEncodedText PropLatency = System.Text.Json.JsonEncodedText.Encode("latency");
+	private static readonly System.Text.Json.JsonEncodedText PropModelPruneWindow = System.Text.Json.JsonEncodedText.Encode("model_prune_window");
+	private static readonly System.Text.Json.JsonEncodedText PropMultivariateByFields = System.Text.Json.JsonEncodedText.Encode("multivariate_by_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropPerPartitionCategorization = System.Text.Json.JsonEncodedText.Encode("per_partition_categorization");
+	private static readonly System.Text.Json.JsonEncodedText PropSummaryCountFieldName = System.Text.Json.JsonEncodedText.Encode("summary_count_field_name");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propBucketSpan = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer?> propCategorizationAnalyzer = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propCategorizationFieldName = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propCategorizationFilters = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>> propDetectors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propInfluencers = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propLatency = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propModelPruneWindow = default;
+		LocalJsonValue<bool?> propMultivariateByFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization?> propPerPartitionCategorization = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propSummaryCountFieldName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBucketSpan.TryReadProperty(ref reader, options, PropBucketSpan, null))
+			{
+				continue;
+			}
+
+			if (propCategorizationAnalyzer.TryReadProperty(ref reader, options, PropCategorizationAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propCategorizationFieldName.TryReadProperty(ref reader, options, PropCategorizationFieldName, null))
+			{
+				continue;
+			}
+
+			if (propCategorizationFilters.TryReadProperty(ref reader, options, PropCategorizationFilters, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDetectors.TryReadProperty(ref reader, options, PropDetectors, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Detector>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propInfluencers.TryReadProperty(ref reader, options, PropInfluencers, null))
+			{
+				continue;
+			}
+
+			if (propLatency.TryReadProperty(ref reader, options, PropLatency, null))
+			{
+				continue;
+			}
+
+			if (propModelPruneWindow.TryReadProperty(ref reader, options, PropModelPruneWindow, null))
+			{
+				continue;
+			}
+
+			if (propMultivariateByFields.TryReadProperty(ref reader, options, PropMultivariateByFields, null))
+			{
+				continue;
+			}
+
+			if (propPerPartitionCategorization.TryReadProperty(ref reader, options, PropPerPartitionCategorization, null))
+			{
+				continue;
+			}
+
+			if (propSummaryCountFieldName.TryReadProperty(ref reader, options, PropSummaryCountFieldName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BucketSpan = propBucketSpan.Value,
+			CategorizationAnalyzer = propCategorizationAnalyzer.Value,
+			CategorizationFieldName = propCategorizationFieldName.Value,
+			CategorizationFilters = propCategorizationFilters.Value,
+			Detectors = propDetectors.Value,
+			Influencers = propInfluencers.Value,
+			Latency = propLatency.Value,
+			ModelPruneWindow = propModelPruneWindow.Value,
+			MultivariateByFields = propMultivariateByFields.Value,
+			PerPartitionCategorization = propPerPartitionCategorization.Value,
+			SummaryCountFieldName = propSummaryCountFieldName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBucketSpan, value.BucketSpan, null, null);
+		writer.WriteProperty(options, PropCategorizationAnalyzer, value.CategorizationAnalyzer, null, null);
+		writer.WriteProperty(options, PropCategorizationFieldName, value.CategorizationFieldName, null, null);
+		writer.WriteProperty(options, PropCategorizationFilters, value.CategorizationFilters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDetectors, value.Detectors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Detector>(o, v, null));
+		writer.WriteProperty(options, PropInfluencers, value.Influencers, null, null);
+		writer.WriteProperty(options, PropLatency, value.Latency, null, null);
+		writer.WriteProperty(options, PropModelPruneWindow, value.ModelPruneWindow, null, null);
+		writer.WriteProperty(options, PropMultivariateByFields, value.MultivariateByFields, null, null);
+		writer.WriteProperty(options, PropPerPartitionCategorization, value.PerPartitionCategorization, null, null);
+		writer.WriteProperty(options, PropSummaryCountFieldName, value.SummaryCountFieldName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigConverter))]
 public sealed partial class AnalysisConfig
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalysisConfig(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> detectors)
+	{
+		Detectors = detectors;
+	}
+#if NET7_0_OR_GREATER
+	public AnalysisConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AnalysisConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AnalysisConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The size of the interval that the analysis is aggregated into, typically between <c>5m</c> and <c>1h</c>. This value should be either a whole number of days or equate to a
 	/// whole number of buckets in one day. If the anomaly detection job uses a datafeed with aggregations, this value must also be divisible by the interval of the date histogram aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("bucket_span")]
 	public Elastic.Clients.Elasticsearch.Duration? BucketSpan { get; set; }
 
 	/// <summary>
@@ -43,7 +190,6 @@ public sealed partial class AnalysisConfig
 	/// If <c>categorization_field_name</c> is specified, you can also define the analyzer that is used to interpret the categorization field. This property cannot be used at the same time as <c>categorization_filters</c>. The categorization analyzer specifies how the <c>categorization_field</c> is interpreted by the categorization process. The <c>categorization_analyzer</c> field can be specified either as a string or as an object. If it is a string, it must refer to a built-in analyzer or one added by another plugin.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("categorization_analyzer")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? CategorizationAnalyzer { get; set; }
 
 	/// <summary>
@@ -51,7 +197,6 @@ public sealed partial class AnalysisConfig
 	/// If this property is specified, the values of the specified field will be categorized. The resulting categories must be used in a detector by setting <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c> to the keyword <c>mlcategory</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("categorization_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? CategorizationFieldName { get; set; }
 
 	/// <summary>
@@ -59,24 +204,24 @@ public sealed partial class AnalysisConfig
 	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("categorization_filters")]
-	public ICollection<string>? CategorizationFilters { get; set; }
+	public System.Collections.Generic.ICollection<string>? CategorizationFilters { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("detectors")]
-	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> Detectors { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> Detectors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A comma separated list of influencer field names. Typically these can be the by, over, or partition fields that are used in the detector configuration. You might also want to use a field name that is not specifically named in a detector, but is available as part of the input data. When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("influencers")]
-	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Influencers { get; set; }
 
 	/// <summary>
@@ -84,7 +229,6 @@ public sealed partial class AnalysisConfig
 	/// The size of the window in which to expect data that is out of time order. If you specify a non-zero value, it must be greater than or equal to one second. NOTE: Latency is applicable only when you send data by using the post data API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("latency")]
 	public Elastic.Clients.Elasticsearch.Duration? Latency { get; set; }
 
 	/// <summary>
@@ -92,7 +236,6 @@ public sealed partial class AnalysisConfig
 	/// Advanced configuration option. Affects the pruning of models that have not been updated for the given time duration. The value must be set to a multiple of the <c>bucket_span</c>. If set too low, important information may be removed from the model. For jobs created in 8.1 and later, the default value is the greater of <c>30d</c> or 20 times <c>bucket_span</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_prune_window")]
 	public Elastic.Clients.Elasticsearch.Duration? ModelPruneWindow { get; set; }
 
 	/// <summary>
@@ -100,7 +243,6 @@ public sealed partial class AnalysisConfig
 	/// This functionality is reserved for internal use. It is not supported for use in customer environments and is not subject to the support SLA of official GA features. If set to <c>true</c>, the analysis will automatically find correlations between metrics for a given by field value and report anomalies when those correlations cease to hold. For example, suppose CPU and memory usage on host A is usually highly correlated with the same metrics on host B. Perhaps this correlation occurs because they are running a load-balanced application. If you enable this property, anomalies will be reported when, for example, CPU usage on host A is high and the value of CPU usage on host B is low. That is to say, you’ll see an anomaly when the CPU of host A is unusual given the CPU of host B. To use the <c>multivariate_by_fields</c> property, you must also specify <c>by_field_name</c> in your detector.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("multivariate_by_fields")]
 	public bool? MultivariateByFields { get; set; }
 
 	/// <summary>
@@ -108,7 +250,6 @@ public sealed partial class AnalysisConfig
 	/// Settings related to how categorization interacts with partition fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("per_partition_categorization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 
 	/// <summary>
@@ -116,34 +257,27 @@ public sealed partial class AnalysisConfig
 	/// If this property is specified, the data that is fed to the job is expected to be pre-summarized. This property value is the name of the field that contains the count of raw data points that have been summarized. The same <c>summary_count_field_name</c> applies to all detectors in the job. NOTE: The <c>summary_count_field_name</c> property cannot be used with the <c>metric</c> function.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("summary_count_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? SummaryCountFieldName { get; set; }
 }
 
-public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDescriptor<AnalysisConfigDescriptor<TDocument>>
+public readonly partial struct AnalysisConfigDescriptor<TDocument>
 {
-	internal AnalysisConfigDescriptor(Action<AnalysisConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig Instance { get; init; }
 
-	public AnalysisConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalysisConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? BucketSpanValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? CategorizationAnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? CategorizationFieldNameValue { get; set; }
-	private ICollection<string>? CategorizationFiltersValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> DetectorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> DetectorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>> DetectorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>[] DetectorsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? InfluencersValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? LatencyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? ModelPruneWindowValue { get; set; }
-	private bool? MultivariateByFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor PerPartitionCategorizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor> PerPartitionCategorizationDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SummaryCountFieldNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalysisConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -151,10 +285,10 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// whole number of buckets in one day. If the anomaly detection job uses a datafeed with aggregations, this value must also be divisible by the interval of the date histogram aggregation.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> BucketSpan(Elastic.Clients.Elasticsearch.Duration? bucketSpan)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> BucketSpan(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		BucketSpanValue = bucketSpan;
-		return Self;
+		Instance.BucketSpan = value;
+		return this;
 	}
 
 	/// <summary>
@@ -162,10 +296,21 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// If <c>categorization_field_name</c> is specified, you can also define the analyzer that is used to interpret the categorization field. This property cannot be used at the same time as <c>categorization_filters</c>. The categorization analyzer specifies how the <c>categorization_field</c> is interpreted by the categorization process. The <c>categorization_analyzer</c> field can be specified either as a string or as an object. If it is a string, it must refer to a built-in analyzer or one added by another plugin.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? categorizationAnalyzer)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? value)
 	{
-		CategorizationAnalyzerValue = categorizationAnalyzer;
-		return Self;
+		Instance.CategorizationAnalyzer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>categorization_field_name</c> is specified, you can also define the analyzer that is used to interpret the categorization field. This property cannot be used at the same time as <c>categorization_filters</c>. The categorization analyzer specifies how the <c>categorization_field</c> is interpreted by the categorization process. The <c>categorization_analyzer</c> field can be specified either as a string or as an object. If it is a string, it must refer to a built-in analyzer or one added by another plugin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> action)
+	{
+		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -173,10 +318,10 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// If this property is specified, the values of the specified field will be categorized. The resulting categories must be used in a detector by setting <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c> to the keyword <c>mlcategory</c>.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> CategorizationFieldName(Elastic.Clients.Elasticsearch.Field? categorizationFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		CategorizationFieldNameValue = categorizationFieldName;
-		return Self;
+		Instance.CategorizationFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -184,21 +329,10 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// If this property is specified, the values of the specified field will be categorized. The resulting categories must be used in a detector by setting <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c> to the keyword <c>mlcategory</c>.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> CategorizationFieldName<TValue>(Expression<Func<TDocument, TValue>> categorizationFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		CategorizationFieldNameValue = categorizationFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If this property is specified, the values of the specified field will be categorized. The resulting categories must be used in a detector by setting <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c> to the keyword <c>mlcategory</c>.
-	/// </para>
-	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> CategorizationFieldName(Expression<Func<TDocument, object>> categorizationFieldName)
-	{
-		CategorizationFieldNameValue = categorizationFieldName;
-		return Self;
+		Instance.CategorizationFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -206,10 +340,43 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> CategorizationFilters(ICollection<string>? categorizationFilters)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationFilters(System.Collections.Generic.ICollection<string>? value)
 	{
-		CategorizationFiltersValue = categorizationFilters;
-		return Self;
+		Instance.CategorizationFilters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationFilters()
+	{
+		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationFilters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationFilters(params string[] values)
+	{
+		Instance.CategorizationFilters = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -217,40 +384,60 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> Detectors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> detectors)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Detectors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> value)
 	{
-		DetectorsDescriptor = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = null;
-		DetectorsValue = detectors;
-		return Self;
+		Instance.Detectors = value;
+		return this;
 	}
 
-	public AnalysisConfigDescriptor<TDocument> Detectors(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Detectors()
 	{
-		DetectorsValue = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = null;
-		DetectorsDescriptor = descriptor;
-		return Self;
+		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<TDocument>.Build(null);
+		return this;
 	}
 
-	public AnalysisConfigDescriptor<TDocument> Detectors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Detectors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<TDocument>>? action)
 	{
-		DetectorsValue = null;
-		DetectorsDescriptor = null;
-		DetectorsDescriptorActions = null;
-		DetectorsDescriptorAction = configure;
-		return Self;
+		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<TDocument>.Build(action);
+		return this;
 	}
 
-	public AnalysisConfigDescriptor<TDocument> Detectors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Detectors(params Elastic.Clients.Elasticsearch.MachineLearning.Detector[] values)
 	{
-		DetectorsValue = null;
-		DetectorsDescriptor = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = configure;
-		return Self;
+		Instance.Detectors = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Detectors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.Detector>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Detectors = items;
+		return this;
 	}
 
 	/// <summary>
@@ -258,10 +445,21 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// A comma separated list of influencer field names. Typically these can be the by, over, or partition fields that are used in the detector configuration. You might also want to use a field name that is not specifically named in a detector, but is available as part of the input data. When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> Influencers(Elastic.Clients.Elasticsearch.Fields? influencers)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Influencers(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		InfluencersValue = influencers;
-		return Self;
+		Instance.Influencers = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma separated list of influencer field names. Typically these can be the by, over, or partition fields that are used in the detector configuration. You might also want to use a field name that is not specifically named in a detector, but is available as part of the input data. When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Influencers(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Influencers = value;
+		return this;
 	}
 
 	/// <summary>
@@ -269,10 +467,10 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// The size of the window in which to expect data that is out of time order. If you specify a non-zero value, it must be greater than or equal to one second. NOTE: Latency is applicable only when you send data by using the post data API.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> Latency(Elastic.Clients.Elasticsearch.Duration? latency)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Latency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		LatencyValue = latency;
-		return Self;
+		Instance.Latency = value;
+		return this;
 	}
 
 	/// <summary>
@@ -280,10 +478,10 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// Advanced configuration option. Affects the pruning of models that have not been updated for the given time duration. The value must be set to a multiple of the <c>bucket_span</c>. If set too low, important information may be removed from the model. For jobs created in 8.1 and later, the default value is the greater of <c>30d</c> or 20 times <c>bucket_span</c>.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? modelPruneWindow)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		ModelPruneWindowValue = modelPruneWindow;
-		return Self;
+		Instance.ModelPruneWindow = value;
+		return this;
 	}
 
 	/// <summary>
@@ -291,10 +489,10 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// This functionality is reserved for internal use. It is not supported for use in customer environments and is not subject to the support SLA of official GA features. If set to <c>true</c>, the analysis will automatically find correlations between metrics for a given by field value and report anomalies when those correlations cease to hold. For example, suppose CPU and memory usage on host A is usually highly correlated with the same metrics on host B. Perhaps this correlation occurs because they are running a load-balanced application. If you enable this property, anomalies will be reported when, for example, CPU usage on host A is high and the value of CPU usage on host B is low. That is to say, you’ll see an anomaly when the CPU of host A is unusual given the CPU of host B. To use the <c>multivariate_by_fields</c> property, you must also specify <c>by_field_name</c> in your detector.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> MultivariateByFields(bool? multivariateByFields = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> MultivariateByFields(bool? value = true)
 	{
-		MultivariateByFieldsValue = multivariateByFields;
-		return Self;
+		Instance.MultivariateByFields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -302,28 +500,32 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// Settings related to how categorization interacts with partition fields.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? perPartitionCategorization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? value)
 	{
-		PerPartitionCategorizationDescriptor = null;
-		PerPartitionCategorizationDescriptorAction = null;
-		PerPartitionCategorizationValue = perPartitionCategorization;
-		return Self;
+		Instance.PerPartitionCategorization = value;
+		return this;
 	}
 
-	public AnalysisConfigDescriptor<TDocument> PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> PerPartitionCategorization()
 	{
-		PerPartitionCategorizationValue = null;
-		PerPartitionCategorizationDescriptorAction = null;
-		PerPartitionCategorizationDescriptor = descriptor;
-		return Self;
+		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(null);
+		return this;
 	}
 
-	public AnalysisConfigDescriptor<TDocument> PerPartitionCategorization(Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> PerPartitionCategorization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor>? action)
 	{
-		PerPartitionCategorizationValue = null;
-		PerPartitionCategorizationDescriptor = null;
-		PerPartitionCategorizationDescriptorAction = configure;
-		return Self;
+		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -331,10 +533,10 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// If this property is specified, the data that is fed to the job is expected to be pre-summarized. This property value is the name of the field that contains the count of raw data points that have been summarized. The same <c>summary_count_field_name</c> applies to all detectors in the job. NOTE: The <c>summary_count_field_name</c> property cannot be used with the <c>metric</c> function.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> SummaryCountFieldName(Elastic.Clients.Elasticsearch.Field? summaryCountFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> SummaryCountFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SummaryCountFieldNameValue = summaryCountFieldName;
-		return Self;
+		Instance.SummaryCountFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -342,155 +544,39 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// If this property is specified, the data that is fed to the job is expected to be pre-summarized. This property value is the name of the field that contains the count of raw data points that have been summarized. The same <c>summary_count_field_name</c> applies to all detectors in the job. NOTE: The <c>summary_count_field_name</c> property cannot be used with the <c>metric</c> function.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> SummaryCountFieldName<TValue>(Expression<Func<TDocument, TValue>> summaryCountFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> SummaryCountFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		SummaryCountFieldNameValue = summaryCountFieldName;
-		return Self;
+		Instance.SummaryCountFieldName = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this property is specified, the data that is fed to the job is expected to be pre-summarized. This property value is the name of the field that contains the count of raw data points that have been summarized. The same <c>summary_count_field_name</c> applies to all detectors in the job. NOTE: The <c>summary_count_field_name</c> property cannot be used with the <c>metric</c> function.
-	/// </para>
-	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> SummaryCountFieldName(Expression<Func<TDocument, object>> summaryCountFieldName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>> action)
 	{
-		SummaryCountFieldNameValue = summaryCountFieldName;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BucketSpanValue is not null)
-		{
-			writer.WritePropertyName("bucket_span");
-			JsonSerializer.Serialize(writer, BucketSpanValue, options);
-		}
-
-		if (CategorizationAnalyzerValue is not null)
-		{
-			writer.WritePropertyName("categorization_analyzer");
-			JsonSerializer.Serialize(writer, CategorizationAnalyzerValue, options);
-		}
-
-		if (CategorizationFieldNameValue is not null)
-		{
-			writer.WritePropertyName("categorization_field_name");
-			JsonSerializer.Serialize(writer, CategorizationFieldNameValue, options);
-		}
-
-		if (CategorizationFiltersValue is not null)
-		{
-			writer.WritePropertyName("categorization_filters");
-			JsonSerializer.Serialize(writer, CategorizationFiltersValue, options);
-		}
-
-		if (DetectorsDescriptor is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DetectorsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(DetectorsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DetectorsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			foreach (var action in DetectorsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("detectors");
-			JsonSerializer.Serialize(writer, DetectorsValue, options);
-		}
-
-		if (InfluencersValue is not null)
-		{
-			writer.WritePropertyName("influencers");
-			JsonSerializer.Serialize(writer, InfluencersValue, options);
-		}
-
-		if (LatencyValue is not null)
-		{
-			writer.WritePropertyName("latency");
-			JsonSerializer.Serialize(writer, LatencyValue, options);
-		}
-
-		if (ModelPruneWindowValue is not null)
-		{
-			writer.WritePropertyName("model_prune_window");
-			JsonSerializer.Serialize(writer, ModelPruneWindowValue, options);
-		}
-
-		if (MultivariateByFieldsValue.HasValue)
-		{
-			writer.WritePropertyName("multivariate_by_fields");
-			writer.WriteBooleanValue(MultivariateByFieldsValue.Value);
-		}
-
-		if (PerPartitionCategorizationDescriptor is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, PerPartitionCategorizationDescriptor, options);
-		}
-		else if (PerPartitionCategorizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor(PerPartitionCategorizationDescriptorAction), options);
-		}
-		else if (PerPartitionCategorizationValue is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, PerPartitionCategorizationValue, options);
-		}
-
-		if (SummaryCountFieldNameValue is not null)
-		{
-			writer.WritePropertyName("summary_count_field_name");
-			JsonSerializer.Serialize(writer, SummaryCountFieldNameValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<AnalysisConfigDescriptor>
+public readonly partial struct AnalysisConfigDescriptor
 {
-	internal AnalysisConfigDescriptor(Action<AnalysisConfigDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig Instance { get; init; }
 
-	public AnalysisConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalysisConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration? BucketSpanValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? CategorizationAnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? CategorizationFieldNameValue { get; set; }
-	private ICollection<string>? CategorizationFiltersValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> DetectorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor DetectorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor> DetectorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>[] DetectorsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? InfluencersValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? LatencyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? ModelPruneWindowValue { get; set; }
-	private bool? MultivariateByFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor PerPartitionCategorizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor> PerPartitionCategorizationDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SummaryCountFieldNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalysisConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -498,10 +584,10 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// whole number of buckets in one day. If the anomaly detection job uses a datafeed with aggregations, this value must also be divisible by the interval of the date histogram aggregation.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor BucketSpan(Elastic.Clients.Elasticsearch.Duration? bucketSpan)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor BucketSpan(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		BucketSpanValue = bucketSpan;
-		return Self;
+		Instance.BucketSpan = value;
+		return this;
 	}
 
 	/// <summary>
@@ -509,10 +595,21 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// If <c>categorization_field_name</c> is specified, you can also define the analyzer that is used to interpret the categorization field. This property cannot be used at the same time as <c>categorization_filters</c>. The categorization analyzer specifies how the <c>categorization_field</c> is interpreted by the categorization process. The <c>categorization_analyzer</c> field can be specified either as a string or as an object. If it is a string, it must refer to a built-in analyzer or one added by another plugin.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? categorizationAnalyzer)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer? value)
 	{
-		CategorizationAnalyzerValue = categorizationAnalyzer;
-		return Self;
+		Instance.CategorizationAnalyzer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>categorization_field_name</c> is specified, you can also define the analyzer that is used to interpret the categorization field. This property cannot be used at the same time as <c>categorization_filters</c>. The categorization analyzer specifies how the <c>categorization_field</c> is interpreted by the categorization process. The <c>categorization_analyzer</c> field can be specified either as a string or as an object. If it is a string, it must refer to a built-in analyzer or one added by another plugin.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> action)
+	{
+		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -520,10 +617,10 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// If this property is specified, the values of the specified field will be categorized. The resulting categories must be used in a detector by setting <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c> to the keyword <c>mlcategory</c>.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor CategorizationFieldName(Elastic.Clients.Elasticsearch.Field? categorizationFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		CategorizationFieldNameValue = categorizationFieldName;
-		return Self;
+		Instance.CategorizationFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -531,21 +628,10 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// If this property is specified, the values of the specified field will be categorized. The resulting categories must be used in a detector by setting <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c> to the keyword <c>mlcategory</c>.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor CategorizationFieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> categorizationFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		CategorizationFieldNameValue = categorizationFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If this property is specified, the values of the specified field will be categorized. The resulting categories must be used in a detector by setting <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c> to the keyword <c>mlcategory</c>.
-	/// </para>
-	/// </summary>
-	public AnalysisConfigDescriptor CategorizationFieldName<TDocument>(Expression<Func<TDocument, object>> categorizationFieldName)
-	{
-		CategorizationFieldNameValue = categorizationFieldName;
-		return Self;
+		Instance.CategorizationFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -553,10 +639,43 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor CategorizationFilters(ICollection<string>? categorizationFilters)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationFilters(System.Collections.Generic.ICollection<string>? value)
 	{
-		CategorizationFiltersValue = categorizationFilters;
-		return Self;
+		Instance.CategorizationFilters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationFilters()
+	{
+		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationFilters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationFilters(params string[] values)
+	{
+		Instance.CategorizationFilters = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -564,40 +683,88 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor Detectors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> detectors)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> value)
 	{
-		DetectorsDescriptor = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = null;
-		DetectorsValue = detectors;
-		return Self;
+		Instance.Detectors = value;
+		return this;
 	}
 
-	public AnalysisConfigDescriptor Detectors(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors()
 	{
-		DetectorsValue = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = null;
-		DetectorsDescriptor = descriptor;
-		return Self;
+		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector.Build(null);
+		return this;
 	}
 
-	public AnalysisConfigDescriptor Detectors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector>? action)
 	{
-		DetectorsValue = null;
-		DetectorsDescriptor = null;
-		DetectorsDescriptorActions = null;
-		DetectorsDescriptorAction = configure;
-		return Self;
+		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector.Build(action);
+		return this;
 	}
 
-	public AnalysisConfigDescriptor Detectors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<T>>? action)
 	{
-		DetectorsValue = null;
-		DetectorsDescriptor = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = configure;
-		return Self;
+		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors(params Elastic.Clients.Elasticsearch.MachineLearning.Detector[] values)
+	{
+		Instance.Detectors = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.Detector>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor.Build(action));
+		}
+
+		Instance.Detectors = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors<T>(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<T>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.Detector>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<T>.Build(action));
+		}
+
+		Instance.Detectors = items;
+		return this;
 	}
 
 	/// <summary>
@@ -605,10 +772,21 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// A comma separated list of influencer field names. Typically these can be the by, over, or partition fields that are used in the detector configuration. You might also want to use a field name that is not specifically named in a detector, but is available as part of the input data. When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor Influencers(Elastic.Clients.Elasticsearch.Fields? influencers)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Influencers(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		InfluencersValue = influencers;
-		return Self;
+		Instance.Influencers = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma separated list of influencer field names. Typically these can be the by, over, or partition fields that are used in the detector configuration. You might also want to use a field name that is not specifically named in a detector, but is available as part of the input data. When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Influencers<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Influencers = value;
+		return this;
 	}
 
 	/// <summary>
@@ -616,10 +794,10 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// The size of the window in which to expect data that is out of time order. If you specify a non-zero value, it must be greater than or equal to one second. NOTE: Latency is applicable only when you send data by using the post data API.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor Latency(Elastic.Clients.Elasticsearch.Duration? latency)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Latency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		LatencyValue = latency;
-		return Self;
+		Instance.Latency = value;
+		return this;
 	}
 
 	/// <summary>
@@ -627,10 +805,10 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// Advanced configuration option. Affects the pruning of models that have not been updated for the given time duration. The value must be set to a multiple of the <c>bucket_span</c>. If set too low, important information may be removed from the model. For jobs created in 8.1 and later, the default value is the greater of <c>30d</c> or 20 times <c>bucket_span</c>.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? modelPruneWindow)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		ModelPruneWindowValue = modelPruneWindow;
-		return Self;
+		Instance.ModelPruneWindow = value;
+		return this;
 	}
 
 	/// <summary>
@@ -638,10 +816,10 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// This functionality is reserved for internal use. It is not supported for use in customer environments and is not subject to the support SLA of official GA features. If set to <c>true</c>, the analysis will automatically find correlations between metrics for a given by field value and report anomalies when those correlations cease to hold. For example, suppose CPU and memory usage on host A is usually highly correlated with the same metrics on host B. Perhaps this correlation occurs because they are running a load-balanced application. If you enable this property, anomalies will be reported when, for example, CPU usage on host A is high and the value of CPU usage on host B is low. That is to say, you’ll see an anomaly when the CPU of host A is unusual given the CPU of host B. To use the <c>multivariate_by_fields</c> property, you must also specify <c>by_field_name</c> in your detector.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor MultivariateByFields(bool? multivariateByFields = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor MultivariateByFields(bool? value = true)
 	{
-		MultivariateByFieldsValue = multivariateByFields;
-		return Self;
+		Instance.MultivariateByFields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -649,28 +827,32 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// Settings related to how categorization interacts with partition fields.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? perPartitionCategorization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? value)
 	{
-		PerPartitionCategorizationDescriptor = null;
-		PerPartitionCategorizationDescriptorAction = null;
-		PerPartitionCategorizationValue = perPartitionCategorization;
-		return Self;
+		Instance.PerPartitionCategorization = value;
+		return this;
 	}
 
-	public AnalysisConfigDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor PerPartitionCategorization()
 	{
-		PerPartitionCategorizationValue = null;
-		PerPartitionCategorizationDescriptorAction = null;
-		PerPartitionCategorizationDescriptor = descriptor;
-		return Self;
+		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(null);
+		return this;
 	}
 
-	public AnalysisConfigDescriptor PerPartitionCategorization(Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor PerPartitionCategorization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor>? action)
 	{
-		PerPartitionCategorizationValue = null;
-		PerPartitionCategorizationDescriptor = null;
-		PerPartitionCategorizationDescriptorAction = configure;
-		return Self;
+		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -678,10 +860,10 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// If this property is specified, the data that is fed to the job is expected to be pre-summarized. This property value is the name of the field that contains the count of raw data points that have been summarized. The same <c>summary_count_field_name</c> applies to all detectors in the job. NOTE: The <c>summary_count_field_name</c> property cannot be used with the <c>metric</c> function.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor SummaryCountFieldName(Elastic.Clients.Elasticsearch.Field? summaryCountFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor SummaryCountFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SummaryCountFieldNameValue = summaryCountFieldName;
-		return Self;
+		Instance.SummaryCountFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -689,127 +871,17 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// If this property is specified, the data that is fed to the job is expected to be pre-summarized. This property value is the name of the field that contains the count of raw data points that have been summarized. The same <c>summary_count_field_name</c> applies to all detectors in the job. NOTE: The <c>summary_count_field_name</c> property cannot be used with the <c>metric</c> function.
 	/// </para>
 	/// </summary>
-	public AnalysisConfigDescriptor SummaryCountFieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> summaryCountFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor SummaryCountFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		SummaryCountFieldNameValue = summaryCountFieldName;
-		return Self;
+		Instance.SummaryCountFieldName = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this property is specified, the data that is fed to the job is expected to be pre-summarized. This property value is the name of the field that contains the count of raw data points that have been summarized. The same <c>summary_count_field_name</c> applies to all detectors in the job. NOTE: The <c>summary_count_field_name</c> property cannot be used with the <c>metric</c> function.
-	/// </para>
-	/// </summary>
-	public AnalysisConfigDescriptor SummaryCountFieldName<TDocument>(Expression<Func<TDocument, object>> summaryCountFieldName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor> action)
 	{
-		SummaryCountFieldNameValue = summaryCountFieldName;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BucketSpanValue is not null)
-		{
-			writer.WritePropertyName("bucket_span");
-			JsonSerializer.Serialize(writer, BucketSpanValue, options);
-		}
-
-		if (CategorizationAnalyzerValue is not null)
-		{
-			writer.WritePropertyName("categorization_analyzer");
-			JsonSerializer.Serialize(writer, CategorizationAnalyzerValue, options);
-		}
-
-		if (CategorizationFieldNameValue is not null)
-		{
-			writer.WritePropertyName("categorization_field_name");
-			JsonSerializer.Serialize(writer, CategorizationFieldNameValue, options);
-		}
-
-		if (CategorizationFiltersValue is not null)
-		{
-			writer.WritePropertyName("categorization_filters");
-			JsonSerializer.Serialize(writer, CategorizationFiltersValue, options);
-		}
-
-		if (DetectorsDescriptor is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DetectorsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(DetectorsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DetectorsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			foreach (var action in DetectorsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("detectors");
-			JsonSerializer.Serialize(writer, DetectorsValue, options);
-		}
-
-		if (InfluencersValue is not null)
-		{
-			writer.WritePropertyName("influencers");
-			JsonSerializer.Serialize(writer, InfluencersValue, options);
-		}
-
-		if (LatencyValue is not null)
-		{
-			writer.WritePropertyName("latency");
-			JsonSerializer.Serialize(writer, LatencyValue, options);
-		}
-
-		if (ModelPruneWindowValue is not null)
-		{
-			writer.WritePropertyName("model_prune_window");
-			JsonSerializer.Serialize(writer, ModelPruneWindowValue, options);
-		}
-
-		if (MultivariateByFieldsValue.HasValue)
-		{
-			writer.WritePropertyName("multivariate_by_fields");
-			writer.WriteBooleanValue(MultivariateByFieldsValue.Value);
-		}
-
-		if (PerPartitionCategorizationDescriptor is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, PerPartitionCategorizationDescriptor, options);
-		}
-		else if (PerPartitionCategorizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor(PerPartitionCategorizationDescriptorAction), options);
-		}
-		else if (PerPartitionCategorizationValue is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, PerPartitionCategorizationValue, options);
-		}
-
-		if (SummaryCountFieldNameValue is not null)
-		{
-			writer.WritePropertyName("summary_count_field_name");
-			JsonSerializer.Serialize(writer, SummaryCountFieldNameValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

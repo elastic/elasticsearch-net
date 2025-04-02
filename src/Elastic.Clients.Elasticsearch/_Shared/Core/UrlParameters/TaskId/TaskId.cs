@@ -4,9 +4,11 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
@@ -14,7 +16,12 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(TaskIdConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class TaskId : IUrlParameter, IEquatable<TaskId>
+public sealed class TaskId :
+	IUrlParameter,
+	IEquatable<TaskId>
+#if NET7_0_OR_GREATER
+	, IParsable<TaskId>
+#endif
 {
 	/// <summary>
 	/// A task id exists in the form [node_id]:[task_id].
@@ -68,6 +75,35 @@ public sealed class TaskId : IUrlParameter, IEquatable<TaskId>
 			return (NodeId.GetHashCode() * 397) ^ TaskNumber.GetHashCode();
 		}
 	}
+
+	#region IParsable
+
+	public static TaskId Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out TaskId? result)
+	{
+		if (string.IsNullOrEmpty(s))
+		{
+			result = null;
+			return false;
+		}
+
+		try
+		{
+			result = new TaskId(s);
+			return true;
+		}
+		catch
+		{
+			result = null;
+		}
+
+		return false;
+	}
+
+	#endregion IParsable
 }
 
 internal sealed class TaskIdConverter : JsonConverter<TaskId>

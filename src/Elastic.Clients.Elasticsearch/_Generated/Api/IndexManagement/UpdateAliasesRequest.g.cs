@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class UpdateAliasesRequestParameters : RequestParameters
+public sealed partial class UpdateAliasesRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -49,17 +42,73 @@ public sealed partial class UpdateAliasesRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class UpdateAliasesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>?> propActions = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActions.TryReadProperty(ref reader, options, PropActions, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Actions = propActions.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActions, value.Actions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update an alias.
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>
-public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestConverter))]
+public sealed partial class UpdateAliasesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
+#if NET7_0_OR_GREATER
+	public UpdateAliasesRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public UpdateAliasesRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateAliasesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementUpdateAliases;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -71,7 +120,6 @@ public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesReq
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -80,7 +128,6 @@ public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesReq
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -88,8 +135,7 @@ public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesReq
 	/// Actions to perform.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("actions")]
-	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? Actions { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? Actions { get; set; }
 }
 
 /// <summary>
@@ -98,106 +144,190 @@ public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesReq
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>
-public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestDescriptor<UpdateAliasesRequestDescriptor<TDocument>, UpdateAliasesRequestParameters>
+public readonly partial struct UpdateAliasesRequestDescriptor
 {
-	internal UpdateAliasesRequestDescriptor(Action<UpdateAliasesRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateAliasesRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public UpdateAliasesRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.update_aliases";
-
-	public UpdateAliasesRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public UpdateAliasesRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? ActionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> ActionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>> ActionsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>>[] ActionsDescriptorActions { get; set; }
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Actions to perform.
 	/// </para>
 	/// </summary>
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? actions)
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? value)
 	{
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptorActions = null;
-		ActionsValue = actions;
-		return Self;
+		Instance.Actions = value;
+		return this;
 	}
 
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions()
 	{
-		ActionsValue = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptorActions = null;
-		ActionsDescriptor = descriptor;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction.Build(null);
+		return this;
 	}
 
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction>? action)
 	{
-		ActionsValue = null;
-		ActionsDescriptor = null;
-		ActionsDescriptorActions = null;
-		ActionsDescriptorAction = configure;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction.Build(action);
+		return this;
 	}
 
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(params Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<T>>? action)
 	{
-		ActionsValue = null;
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptorActions = configure;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions(params Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction[] values)
 	{
-		writer.WriteStartObject();
-		if (ActionsDescriptor is not null)
-		{
-			writer.WritePropertyName("actions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ActionsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ActionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("actions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>(ActionsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ActionsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("actions");
-			writer.WriteStartArray();
-			foreach (var action in ActionsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>(action), options);
-			}
+		Instance.Actions = [.. values];
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (ActionsValue is not null)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, ActionsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.Actions = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions<T>(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<T>.Build(action));
+		}
+
+		Instance.Actions = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -207,105 +337,161 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>
-public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<UpdateAliasesRequestDescriptor, UpdateAliasesRequestParameters>
+public readonly partial struct UpdateAliasesRequestDescriptor<TDocument>
 {
-	internal UpdateAliasesRequestDescriptor(Action<UpdateAliasesRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateAliasesRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public UpdateAliasesRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.update_aliases";
-
-	public UpdateAliasesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public UpdateAliasesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? ActionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor ActionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor> ActionsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor>[] ActionsDescriptorActions { get; set; }
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Actions to perform.
 	/// </para>
 	/// </summary>
-	public UpdateAliasesRequestDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? actions)
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? value)
 	{
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptorActions = null;
-		ActionsValue = actions;
-		return Self;
+		Instance.Actions = value;
+		return this;
 	}
 
-	public UpdateAliasesRequestDescriptor Actions(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions()
 	{
-		ActionsValue = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptorActions = null;
-		ActionsDescriptor = descriptor;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<TDocument>.Build(null);
+		return this;
 	}
 
-	public UpdateAliasesRequestDescriptor Actions(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<TDocument>>? action)
 	{
-		ActionsValue = null;
-		ActionsDescriptor = null;
-		ActionsDescriptorActions = null;
-		ActionsDescriptorAction = configure;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<TDocument>.Build(action);
+		return this;
 	}
 
-	public UpdateAliasesRequestDescriptor Actions(params Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions(params Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction[] values)
 	{
-		ActionsValue = null;
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptorActions = configure;
-		return Self;
+		Instance.Actions = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>>[] actions)
 	{
-		writer.WriteStartObject();
-		if (ActionsDescriptor is not null)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("actions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ActionsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ActionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("actions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor(ActionsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ActionsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("actions");
-			writer.WriteStartArray();
-			foreach (var action in ActionsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (ActionsValue is not null)
-		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, ActionsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.Actions = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

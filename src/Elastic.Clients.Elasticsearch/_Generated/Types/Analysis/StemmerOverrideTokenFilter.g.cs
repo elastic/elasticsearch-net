@@ -17,90 +17,169 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class StemmerOverrideTokenFilter : ITokenFilter
+internal sealed partial class StemmerOverrideTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("rules")]
-	public ICollection<string>? Rules { get; set; }
-	[JsonInclude, JsonPropertyName("rules_path")]
+	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules");
+	private static readonly System.Text.Json.JsonEncodedText PropRulesPath = System.Text.Json.JsonEncodedText.Encode("rules_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRules = default;
+		LocalJsonValue<string?> propRulesPath = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRules.TryReadProperty(ref reader, options, PropRules, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRulesPath.TryReadProperty(ref reader, options, PropRulesPath, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Rules = propRules.Value,
+			RulesPath = propRulesPath.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRules, value.Rules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRulesPath, value.RulesPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterConverter))]
+public sealed partial class StemmerOverrideTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public StemmerOverrideTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public StemmerOverrideTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StemmerOverrideTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.ICollection<string>? Rules { get; set; }
 	public string? RulesPath { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "stemmer_override";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class StemmerOverrideTokenFilterDescriptor : SerializableDescriptor<StemmerOverrideTokenFilterDescriptor>, IBuildableDescriptor<StemmerOverrideTokenFilter>
+public readonly partial struct StemmerOverrideTokenFilterDescriptor
 {
-	internal StemmerOverrideTokenFilterDescriptor(Action<StemmerOverrideTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter Instance { get; init; }
 
-	public StemmerOverrideTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StemmerOverrideTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? RulesValue { get; set; }
-	private string? RulesPathValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public StemmerOverrideTokenFilterDescriptor Rules(ICollection<string>? rules)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StemmerOverrideTokenFilterDescriptor()
 	{
-		RulesValue = rules;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public StemmerOverrideTokenFilterDescriptor RulesPath(string? rulesPath)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter(Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Rules(System.Collections.Generic.ICollection<string>? value)
 	{
-		RulesPathValue = rulesPath;
-		return Self;
+		Instance.Rules = value;
+		return this;
 	}
 
-	public StemmerOverrideTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Rules()
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Rules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Rules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		writer.WriteStartObject();
-		if (RulesValue is not null)
+		Instance.Rules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Rules(params string[] values)
+	{
+		Instance.Rules = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor RulesPath(string? value)
+	{
+		Instance.RulesPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("rules");
-			JsonSerializer.Serialize(writer, RulesValue, options);
+			return new Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(RulesPathValue))
-		{
-			writer.WritePropertyName("rules_path");
-			writer.WriteStringValue(RulesPathValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("stemmer_override");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	StemmerOverrideTokenFilter IBuildableDescriptor<StemmerOverrideTokenFilter>.Build() => new()
-	{
-		Rules = RulesValue,
-		RulesPath = RulesPathValue,
-		Version = VersionValue
-	};
 }

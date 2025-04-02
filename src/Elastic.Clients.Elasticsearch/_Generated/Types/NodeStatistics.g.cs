@@ -17,46 +17,141 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
+
+internal sealed partial class NodeStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.NodeStatistics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures");
+	private static readonly System.Text.Json.JsonEncodedText PropSuccessful = System.Text.Json.JsonEncodedText.Encode("successful");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.NodeStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propFailed = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?> propFailures = default;
+		LocalJsonValue<int> propSuccessful = default;
+		LocalJsonValue<int> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFailed.TryReadProperty(ref reader, options, PropFailed, null))
+			{
+				continue;
+			}
+
+			if (propFailures.TryReadProperty(ref reader, options, PropFailures, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSuccessful.TryReadProperty(ref reader, options, PropSuccessful, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.NodeStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Failed = propFailed.Value,
+			Failures = propFailures.Value,
+			Successful = propSuccessful.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.NodeStatistics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFailed, value.Failed, null, null);
+		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropSuccessful, value.Successful, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Contains statistics about the number of nodes selected by the request.
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.NodeStatisticsConverter))]
 public sealed partial class NodeStatistics
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeStatistics(int failed, int successful, int total)
+	{
+		Failed = failed;
+		Successful = successful;
+		Total = total;
+	}
+#if NET7_0_OR_GREATER
+	public NodeStatistics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeStatistics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Number of nodes that rejected the request or failed to respond. If this value is not 0, a reason for the rejection or failure is included in the response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("failed")]
-	public int Failed { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Failures { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Failed { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Failures { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of nodes that responded successfully to the request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("successful")]
-	public int Successful { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Successful { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of nodes selected by the request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Total { get; set; }
 }

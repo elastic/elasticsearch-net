@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetDataFrameAnalyticsStatsRequestParameters : RequestParameters
+public sealed partial class GetDataFrameAnalyticsStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -85,28 +78,78 @@ public sealed partial class GetDataFrameAnalyticsStatsRequestParameters : Reques
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
+internal sealed partial class GetDataFrameAnalyticsStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get data frame analytics jobs usage info.
 /// </para>
 /// </summary>
-public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<GetDataFrameAnalyticsStatsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestConverter))]
+public sealed partial class GetDataFrameAnalyticsStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>
 {
-	public GetDataFrameAnalyticsStatsRequest()
-	{
-	}
-
 	public GetDataFrameAnalyticsStatsRequest(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetDataFrameAnalyticsStatsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetDataFrameAnalyticsStatsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetDataFrameAnalyticsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetDataFrameAnalyticsStats;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetDataFrameAnalyticsStats;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_data_frame_analytics_stats";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. If you do not specify this
+	/// option, the API returns information for the first hundred data frame
+	/// analytics jobs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -137,7 +180,6 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<Get
 	/// there are no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
@@ -145,7 +187,6 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<Get
 	/// Skips the specified number of data frame analytics jobs.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -153,7 +194,6 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<Get
 	/// Specifies the maximum number of data frame analytics jobs to obtain.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
@@ -161,7 +201,6 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<Get
 	/// Defines whether the stats response should be verbose.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
@@ -170,79 +209,162 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<Get
 /// Get data frame analytics jobs usage info.
 /// </para>
 /// </summary>
-public sealed partial class GetDataFrameAnalyticsStatsRequestDescriptor<TDocument> : RequestDescriptor<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, GetDataFrameAnalyticsStatsRequestParameters>
+public readonly partial struct GetDataFrameAnalyticsStatsRequestDescriptor
 {
-	internal GetDataFrameAnalyticsStatsRequestDescriptor(Action<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest Instance { get; init; }
 
-	public GetDataFrameAnalyticsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetDataFrameAnalyticsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetDataFrameAnalyticsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest(id);
 	}
 
 	public GetDataFrameAnalyticsStatsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetDataFrameAnalyticsStats;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.get_data_frame_analytics_stats";
-
-	public GetDataFrameAnalyticsStatsRequestDescriptor<TDocument> AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-	public GetDataFrameAnalyticsStatsRequestDescriptor<TDocument> From(int? from) => Qs("from", from);
-	public GetDataFrameAnalyticsStatsRequestDescriptor<TDocument> Size(int? size) => Qs("size", size);
-	public GetDataFrameAnalyticsStatsRequestDescriptor<TDocument> Verbose(bool? verbose = true) => Qs("verbose", verbose);
-
-	public GetDataFrameAnalyticsStatsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. If you do not specify this
+	/// option, the API returns information for the first hundred data frame
+	/// analytics jobs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no data frame analytics
+	/// jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value returns an empty data_frame_analytics array when there
+	/// are no matches and the subset of results when there are partial matches.
+	/// If this parameter is <c>false</c>, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
-	}
-}
-
-/// <summary>
-/// <para>
-/// Get data frame analytics jobs usage info.
-/// </para>
-/// </summary>
-public sealed partial class GetDataFrameAnalyticsStatsRequestDescriptor : RequestDescriptor<GetDataFrameAnalyticsStatsRequestDescriptor, GetDataFrameAnalyticsStatsRequestParameters>
-{
-	internal GetDataFrameAnalyticsStatsRequestDescriptor(Action<GetDataFrameAnalyticsStatsRequestDescriptor> configure) => configure.Invoke(this);
-
-	public GetDataFrameAnalyticsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
-	{
-	}
-
-	public GetDataFrameAnalyticsStatsRequestDescriptor()
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetDataFrameAnalyticsStats;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.get_data_frame_analytics_stats";
-
-	public GetDataFrameAnalyticsStatsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-	public GetDataFrameAnalyticsStatsRequestDescriptor From(int? from) => Qs("from", from);
-	public GetDataFrameAnalyticsStatsRequestDescriptor Size(int? size) => Qs("size", size);
-	public GetDataFrameAnalyticsStatsRequestDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-
-	public GetDataFrameAnalyticsStatsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
-	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.AllowNoMatch = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of data frame analytics jobs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor From(int? value)
 	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of data frame analytics jobs to obtain.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines whether the stats response should be verbose.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor Verbose(bool? value = true)
+	{
+		Instance.Verbose = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

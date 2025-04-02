@@ -17,57 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class ThaiTokenizer : ITokenizer
+internal sealed partial class ThaiTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer>
 {
-	[JsonInclude, JsonPropertyName("type")]
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerConverter))]
+public sealed partial class ThaiTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+#if NET7_0_OR_GREATER
+	public ThaiTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ThaiTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ThaiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string Type => "thai";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class ThaiTokenizerDescriptor : SerializableDescriptor<ThaiTokenizerDescriptor>, IBuildableDescriptor<ThaiTokenizer>
+public readonly partial struct ThaiTokenizerDescriptor
 {
-	internal ThaiTokenizerDescriptor(Action<ThaiTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer Instance { get; init; }
 
-	public ThaiTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ThaiTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private string? VersionValue { get; set; }
-
-	public ThaiTokenizerDescriptor Version(string? version)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ThaiTokenizerDescriptor()
 	{
-		VersionValue = version;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer(Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("thai");
-		if (!string.IsNullOrEmpty(VersionValue))
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
+			return new Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	ThaiTokenizer IBuildableDescriptor<ThaiTokenizer>.Build() => new()
-	{
-		Version = VersionValue
-	};
 }

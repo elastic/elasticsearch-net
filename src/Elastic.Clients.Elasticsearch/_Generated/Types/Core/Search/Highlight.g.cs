@@ -17,24 +17,270 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class HighlightConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.Highlight>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryChars = System.Text.Json.JsonEncodedText.Encode("boundary_chars");
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryMaxScan = System.Text.Json.JsonEncodedText.Encode("boundary_max_scan");
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScanner = System.Text.Json.JsonEncodedText.Encode("boundary_scanner");
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScannerLocale = System.Text.Json.JsonEncodedText.Encode("boundary_scanner_locale");
+	private static readonly System.Text.Json.JsonEncodedText PropEncoder = System.Text.Json.JsonEncodedText.Encode("encoder");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFragmenter = System.Text.Json.JsonEncodedText.Encode("fragmenter");
+	private static readonly System.Text.Json.JsonEncodedText PropFragmentSize = System.Text.Json.JsonEncodedText.Encode("fragment_size");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlightFilter = System.Text.Json.JsonEncodedText.Encode("highlight_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropHighlightQuery = System.Text.Json.JsonEncodedText.Encode("highlight_query");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAnalyzedOffset = System.Text.Json.JsonEncodedText.Encode("max_analyzed_offset");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxFragmentLength = System.Text.Json.JsonEncodedText.Encode("max_fragment_length");
+	private static readonly System.Text.Json.JsonEncodedText PropNoMatchSize = System.Text.Json.JsonEncodedText.Encode("no_match_size");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFragments = System.Text.Json.JsonEncodedText.Encode("number_of_fragments");
+	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropPhraseLimit = System.Text.Json.JsonEncodedText.Encode("phrase_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropPostTags = System.Text.Json.JsonEncodedText.Encode("post_tags");
+	private static readonly System.Text.Json.JsonEncodedText PropPreTags = System.Text.Json.JsonEncodedText.Encode("pre_tags");
+	private static readonly System.Text.Json.JsonEncodedText PropRequireFieldMatch = System.Text.Json.JsonEncodedText.Encode("require_field_match");
+	private static readonly System.Text.Json.JsonEncodedText PropTagsSchema = System.Text.Json.JsonEncodedText.Encode("tags_schema");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.Highlight Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propBoundaryChars = default;
+		LocalJsonValue<int?> propBoundaryMaxScan = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner?> propBoundaryScanner = default;
+		LocalJsonValue<string?> propBoundaryScannerLocale = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder?> propEncoder = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter?> propFragmenter = default;
+		LocalJsonValue<int?> propFragmentSize = default;
+		LocalJsonValue<bool?> propHighlightFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propHighlightQuery = default;
+		LocalJsonValue<int?> propMaxAnalyzedOffset = default;
+		LocalJsonValue<int?> propMaxFragmentLength = default;
+		LocalJsonValue<int?> propNoMatchSize = default;
+		LocalJsonValue<int?> propNumberOfFragments = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propOptions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder?> propOrder = default;
+		LocalJsonValue<int?> propPhraseLimit = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propPostTags = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propPreTags = default;
+		LocalJsonValue<bool?> propRequireFieldMatch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema?> propTagsSchema = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterType?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoundaryChars.TryReadProperty(ref reader, options, PropBoundaryChars, null))
+			{
+				continue;
+			}
+
+			if (propBoundaryMaxScan.TryReadProperty(ref reader, options, PropBoundaryMaxScan, null))
+			{
+				continue;
+			}
+
+			if (propBoundaryScanner.TryReadProperty(ref reader, options, PropBoundaryScanner, null))
+			{
+				continue;
+			}
+
+			if (propBoundaryScannerLocale.TryReadProperty(ref reader, options, PropBoundaryScannerLocale, null))
+			{
+				continue;
+			}
+
+			if (propEncoder.TryReadProperty(ref reader, options, PropEncoder, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propFragmenter.TryReadProperty(ref reader, options, PropFragmenter, null))
+			{
+				continue;
+			}
+
+			if (propFragmentSize.TryReadProperty(ref reader, options, PropFragmentSize, null))
+			{
+				continue;
+			}
+
+			if (propHighlightFilter.TryReadProperty(ref reader, options, PropHighlightFilter, null))
+			{
+				continue;
+			}
+
+			if (propHighlightQuery.TryReadProperty(ref reader, options, PropHighlightQuery, null))
+			{
+				continue;
+			}
+
+			if (propMaxAnalyzedOffset.TryReadProperty(ref reader, options, PropMaxAnalyzedOffset, null))
+			{
+				continue;
+			}
+
+			if (propMaxFragmentLength.TryReadProperty(ref reader, options, PropMaxFragmentLength, null))
+			{
+				continue;
+			}
+
+			if (propNoMatchSize.TryReadProperty(ref reader, options, PropNoMatchSize, null))
+			{
+				continue;
+			}
+
+			if (propNumberOfFragments.TryReadProperty(ref reader, options, PropNumberOfFragments, null))
+			{
+				continue;
+			}
+
+			if (propOptions.TryReadProperty(ref reader, options, PropOptions, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			{
+				continue;
+			}
+
+			if (propPhraseLimit.TryReadProperty(ref reader, options, PropPhraseLimit, null))
+			{
+				continue;
+			}
+
+			if (propPostTags.TryReadProperty(ref reader, options, PropPostTags, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propPreTags.TryReadProperty(ref reader, options, PropPreTags, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRequireFieldMatch.TryReadProperty(ref reader, options, PropRequireFieldMatch, null))
+			{
+				continue;
+			}
+
+			if (propTagsSchema.TryReadProperty(ref reader, options, PropTagsSchema, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.Highlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BoundaryChars = propBoundaryChars.Value,
+			BoundaryMaxScan = propBoundaryMaxScan.Value,
+			BoundaryScanner = propBoundaryScanner.Value,
+			BoundaryScannerLocale = propBoundaryScannerLocale.Value,
+			Encoder = propEncoder.Value,
+			Fields = propFields.Value,
+			Fragmenter = propFragmenter.Value,
+			FragmentSize = propFragmentSize.Value,
+			HighlightFilter = propHighlightFilter.Value,
+			HighlightQuery = propHighlightQuery.Value,
+			MaxAnalyzedOffset = propMaxAnalyzedOffset.Value,
+			MaxFragmentLength = propMaxFragmentLength.Value,
+			NoMatchSize = propNoMatchSize.Value,
+			NumberOfFragments = propNumberOfFragments.Value,
+			Options = propOptions.Value,
+			Order = propOrder.Value,
+			PhraseLimit = propPhraseLimit.Value,
+			PostTags = propPostTags.Value,
+			PreTags = propPreTags.Value,
+			RequireFieldMatch = propRequireFieldMatch.Value,
+			TagsSchema = propTagsSchema.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.Highlight value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoundaryChars, value.BoundaryChars, null, null);
+		writer.WriteProperty(options, PropBoundaryMaxScan, value.BoundaryMaxScan, null, null);
+		writer.WriteProperty(options, PropBoundaryScanner, value.BoundaryScanner, null, null);
+		writer.WriteProperty(options, PropBoundaryScannerLocale, value.BoundaryScannerLocale, null, null);
+		writer.WriteProperty(options, PropEncoder, value.Encoder, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>(o, v, null, null));
+		writer.WriteProperty(options, PropFragmenter, value.Fragmenter, null, null);
+		writer.WriteProperty(options, PropFragmentSize, value.FragmentSize, null, null);
+		writer.WriteProperty(options, PropHighlightFilter, value.HighlightFilter, null, null);
+		writer.WriteProperty(options, PropHighlightQuery, value.HighlightQuery, null, null);
+		writer.WriteProperty(options, PropMaxAnalyzedOffset, value.MaxAnalyzedOffset, null, null);
+		writer.WriteProperty(options, PropMaxFragmentLength, value.MaxFragmentLength, null, null);
+		writer.WriteProperty(options, PropNoMatchSize, value.NoMatchSize, null, null);
+		writer.WriteProperty(options, PropNumberOfFragments, value.NumberOfFragments, null, null);
+		writer.WriteProperty(options, PropOptions, value.Options, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropPhraseLimit, value.PhraseLimit, null, null);
+		writer.WriteProperty(options, PropPostTags, value.PostTags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPreTags, value.PreTags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRequireFieldMatch, value.RequireFieldMatch, null, null);
+		writer.WriteProperty(options, PropTagsSchema, value.TagsSchema, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.HighlightConverter))]
 public sealed partial class Highlight
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Highlight(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> fields)
+	{
+		Fields = fields;
+	}
+#if NET7_0_OR_GREATER
+	public Highlight()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Highlight()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Highlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A string that contains each boundary character.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boundary_chars")]
 	public string? BoundaryChars { get; set; }
 
 	/// <summary>
@@ -42,7 +288,6 @@ public sealed partial class Highlight
 	/// How far to scan for boundary characters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boundary_max_scan")]
 	public int? BoundaryMaxScan { get; set; }
 
 	/// <summary>
@@ -52,7 +297,6 @@ public sealed partial class Highlight
 	/// Defaults to <c>sentence</c> for the <c>unified</c> highlighter. Defaults to <c>chars</c> for the <c>fvh</c> highlighter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boundary_scanner")]
 	public Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScanner { get; set; }
 
 	/// <summary>
@@ -61,12 +305,13 @@ public sealed partial class Highlight
 	/// This parameter takes a form of a language tag, for example: <c>"en-US"</c>, <c>"fr-FR"</c>, <c>"ja-JP"</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boundary_scanner_locale")]
 	public string? BoundaryScannerLocale { get; set; }
-	[JsonInclude, JsonPropertyName("encoder")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? Encoder { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> Fields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> Fields { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -74,7 +319,6 @@ public sealed partial class Highlight
 	/// Only valid for the <c>plain</c> highlighter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fragmenter")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? Fragmenter { get; set; }
 
 	/// <summary>
@@ -82,9 +326,7 @@ public sealed partial class Highlight
 	/// The size of the highlighted fragment in characters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fragment_size")]
 	public int? FragmentSize { get; set; }
-	[JsonInclude, JsonPropertyName("highlight_filter")]
 	public bool? HighlightFilter { get; set; }
 
 	/// <summary>
@@ -93,7 +335,6 @@ public sealed partial class Highlight
 	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("highlight_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQuery { get; set; }
 
 	/// <summary>
@@ -103,9 +344,7 @@ public sealed partial class Highlight
 	/// The <c>max_analyzed_offset</c> query setting does not override the <c>index.highlight.max_analyzed_offset</c> setting, which prevails when it’s set to lower value than the query setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_analyzed_offset")]
 	public int? MaxAnalyzedOffset { get; set; }
-	[JsonInclude, JsonPropertyName("max_fragment_length")]
 	public int? MaxFragmentLength { get; set; }
 
 	/// <summary>
@@ -113,7 +352,6 @@ public sealed partial class Highlight
 	/// The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("no_match_size")]
 	public int? NoMatchSize { get; set; }
 
 	/// <summary>
@@ -125,10 +363,8 @@ public sealed partial class Highlight
 	/// If <c>number_of_fragments</c> is <c>0</c>, <c>fragment_size</c> is ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("number_of_fragments")]
 	public int? NumberOfFragments { get; set; }
-	[JsonInclude, JsonPropertyName("options")]
-	public IDictionary<string, object>? Options { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Options { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -138,7 +374,6 @@ public sealed partial class Highlight
 	/// Each highlighter applies its own logic to compute relevancy scores.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? Order { get; set; }
 
 	/// <summary>
@@ -149,7 +384,6 @@ public sealed partial class Highlight
 	/// Only supported by the <c>fvh</c> highlighter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("phrase_limit")]
 	public int? PhraseLimit { get; set; }
 
 	/// <summary>
@@ -158,8 +392,7 @@ public sealed partial class Highlight
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("post_tags")]
-	public ICollection<string>? PostTags { get; set; }
+	public System.Collections.Generic.ICollection<string>? PostTags { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -167,8 +400,7 @@ public sealed partial class Highlight
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pre_tags")]
-	public ICollection<string>? PreTags { get; set; }
+	public System.Collections.Generic.ICollection<string>? PreTags { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -176,7 +408,6 @@ public sealed partial class Highlight
 	/// Set to <c>false</c> to highlight all fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("require_field_match")]
 	public bool? RequireFieldMatch { get; set; }
 
 	/// <summary>
@@ -184,54 +415,38 @@ public sealed partial class Highlight
 	/// Set to <c>styled</c> to use the built-in tag schema.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tags_schema")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchema { get; set; }
-	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? Type { get; set; }
 }
 
-public sealed partial class HighlightDescriptor<TDocument> : SerializableDescriptor<HighlightDescriptor<TDocument>>
+public readonly partial struct HighlightDescriptor<TDocument>
 {
-	internal HighlightDescriptor(Action<HighlightDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.Highlight Instance { get; init; }
 
-	public HighlightDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HighlightDescriptor(Elastic.Clients.Elasticsearch.Core.Search.Highlight instance)
 	{
+		Instance = instance;
 	}
 
-	private string? BoundaryCharsValue { get; set; }
-	private int? BoundaryMaxScanValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
-	private string? BoundaryScannerLocaleValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? EncoderValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>> FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
-	private int? FragmentSizeValue { get; set; }
-	private bool? HighlightFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> HighlightQueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> HighlightQueryDescriptorAction { get; set; }
-	private int? MaxAnalyzedOffsetValue { get; set; }
-	private int? MaxFragmentLengthValue { get; set; }
-	private int? NoMatchSizeValue { get; set; }
-	private int? NumberOfFragmentsValue { get; set; }
-	private IDictionary<string, object>? OptionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? OrderValue { get; set; }
-	private int? PhraseLimitValue { get; set; }
-	private ICollection<string>? PostTagsValue { get; set; }
-	private ICollection<string>? PreTagsValue { get; set; }
-	private bool? RequireFieldMatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? TypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HighlightDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.Highlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.Highlight instance) => new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A string that contains each boundary character.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> BoundaryChars(string? boundaryChars)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> BoundaryChars(string? value)
 	{
-		BoundaryCharsValue = boundaryChars;
-		return Self;
+		Instance.BoundaryChars = value;
+		return this;
 	}
 
 	/// <summary>
@@ -239,10 +454,10 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// How far to scan for boundary characters.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> BoundaryMaxScan(int? boundaryMaxScan)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> BoundaryMaxScan(int? value)
 	{
-		BoundaryMaxScanValue = boundaryMaxScan;
-		return Self;
+		Instance.BoundaryMaxScan = value;
+		return this;
 	}
 
 	/// <summary>
@@ -252,10 +467,10 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// Defaults to <c>sentence</c> for the <c>unified</c> highlighter. Defaults to <c>chars</c> for the <c>fvh</c> highlighter.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> BoundaryScanner(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? boundaryScanner)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> BoundaryScanner(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? value)
 	{
-		BoundaryScannerValue = boundaryScanner;
-		return Self;
+		Instance.BoundaryScanner = value;
+		return this;
 	}
 
 	/// <summary>
@@ -264,22 +479,100 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// This parameter takes a form of a language tag, for example: <c>"en-US"</c>, <c>"fr-FR"</c>, <c>"ja-JP"</c>.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> BoundaryScannerLocale(string? boundaryScannerLocale)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> BoundaryScannerLocale(string? value)
 	{
-		BoundaryScannerLocaleValue = boundaryScannerLocale;
-		return Self;
+		Instance.BoundaryScannerLocale = value;
+		return this;
 	}
 
-	public HighlightDescriptor<TDocument> Encoder(Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? encoder)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Encoder(Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? value)
 	{
-		EncoderValue = encoder;
-		return Self;
+		Instance.Encoder = value;
+		return this;
 	}
 
-	public HighlightDescriptor<TDocument> Fields(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fields(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> value)
 	{
-		FieldsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>>());
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fields()
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<TDocument>>? action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> AddField(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Core.Search.HighlightField value)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> AddField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Core.Search.HighlightField value)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Field key)
+	{
+		Instance.Fields = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> { { key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>.Build(null) } };
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fields(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		Instance.Fields = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> { { key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>.Build(null) } };
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.Field[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		foreach (var key in keys)
+		{
+			items.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>.Build(null));
+		}
+
+		Instance.Fields = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> AddField(Elastic.Clients.Elasticsearch.Field key)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> AddField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> AddField(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>>? action)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> AddField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>>? action)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<TDocument>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -288,10 +581,10 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// Only valid for the <c>plain</c> highlighter.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> Fragmenter(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? fragmenter)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fragmenter(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? value)
 	{
-		FragmenterValue = fragmenter;
-		return Self;
+		Instance.Fragmenter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -299,16 +592,16 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// The size of the highlighted fragment in characters.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> FragmentSize(int? fragmentSize)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> FragmentSize(int? value)
 	{
-		FragmentSizeValue = fragmentSize;
-		return Self;
+		Instance.FragmentSize = value;
+		return this;
 	}
 
-	public HighlightDescriptor<TDocument> HighlightFilter(bool? highlightFilter = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightFilter(bool? value = true)
 	{
-		HighlightFilterValue = highlightFilter;
-		return Self;
+		Instance.HighlightFilter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -317,28 +610,22 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? highlightQuery)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		HighlightQueryDescriptor = null;
-		HighlightQueryDescriptorAction = null;
-		HighlightQueryValue = highlightQuery;
-		return Self;
+		Instance.HighlightQuery = value;
+		return this;
 	}
 
-	public HighlightDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Highlight matches for a query other than the search query.
+	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightQuery(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		HighlightQueryValue = null;
-		HighlightQueryDescriptorAction = null;
-		HighlightQueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public HighlightDescriptor<TDocument> HighlightQuery(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		HighlightQueryValue = null;
-		HighlightQueryDescriptor = null;
-		HighlightQueryDescriptorAction = configure;
-		return Self;
+		Instance.HighlightQuery = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -348,16 +635,16 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// The <c>max_analyzed_offset</c> query setting does not override the <c>index.highlight.max_analyzed_offset</c> setting, which prevails when it’s set to lower value than the query setting.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> MaxAnalyzedOffset(int? maxAnalyzedOffset)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> MaxAnalyzedOffset(int? value)
 	{
-		MaxAnalyzedOffsetValue = maxAnalyzedOffset;
-		return Self;
+		Instance.MaxAnalyzedOffset = value;
+		return this;
 	}
 
-	public HighlightDescriptor<TDocument> MaxFragmentLength(int? maxFragmentLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> MaxFragmentLength(int? value)
 	{
-		MaxFragmentLengthValue = maxFragmentLength;
-		return Self;
+		Instance.MaxFragmentLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -365,10 +652,10 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> NoMatchSize(int? noMatchSize)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> NoMatchSize(int? value)
 	{
-		NoMatchSizeValue = noMatchSize;
-		return Self;
+		Instance.NoMatchSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -380,16 +667,35 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// If <c>number_of_fragments</c> is <c>0</c>, <c>fragment_size</c> is ignored.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> NumberOfFragments(int? numberOfFragments)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> NumberOfFragments(int? value)
 	{
-		NumberOfFragmentsValue = numberOfFragments;
-		return Self;
+		Instance.NumberOfFragments = value;
+		return this;
 	}
 
-	public HighlightDescriptor<TDocument> Options(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Options(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		OptionsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Options = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Options()
+	{
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Options(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> AddOption(string key, object value)
+	{
+		Instance.Options ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Options.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -400,10 +706,10 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// Each highlighter applies its own logic to compute relevancy scores.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? order)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? value)
 	{
-		OrderValue = order;
-		return Self;
+		Instance.Order = value;
+		return this;
 	}
 
 	/// <summary>
@@ -414,10 +720,10 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// Only supported by the <c>fvh</c> highlighter.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> PhraseLimit(int? phraseLimit)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PhraseLimit(int? value)
 	{
-		PhraseLimitValue = phraseLimit;
-		return Self;
+		Instance.PhraseLimit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -426,10 +732,46 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> PostTags(ICollection<string>? postTags)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PostTags(System.Collections.Generic.ICollection<string>? value)
 	{
-		PostTagsValue = postTags;
-		return Self;
+		Instance.PostTags = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PostTags()
+	{
+		Instance.PostTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PostTags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.PostTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PostTags(params string[] values)
+	{
+		Instance.PostTags = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -438,10 +780,46 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> PreTags(ICollection<string>? preTags)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PreTags(System.Collections.Generic.ICollection<string>? value)
 	{
-		PreTagsValue = preTags;
-		return Self;
+		Instance.PreTags = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PreTags()
+	{
+		Instance.PreTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PreTags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.PreTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PreTags(params string[] values)
+	{
+		Instance.PreTags = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -450,10 +828,10 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// Set to <c>false</c> to highlight all fields.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> RequireFieldMatch(bool? requireFieldMatch = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> RequireFieldMatch(bool? value = true)
 	{
-		RequireFieldMatchValue = requireFieldMatch;
-		return Self;
+		Instance.RequireFieldMatch = value;
+		return this;
 	}
 
 	/// <summary>
@@ -461,205 +839,55 @@ public sealed partial class HighlightDescriptor<TDocument> : SerializableDescrip
 	/// Set to <c>styled</c> to use the built-in tag schema.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor<TDocument> TagsSchema(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? tagsSchema)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> TagsSchema(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? value)
 	{
-		TagsSchemaValue = tagsSchema;
-		return Self;
+		Instance.TagsSchema = value;
+		return this;
 	}
 
-	public HighlightDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? type)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.Highlight Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(BoundaryCharsValue))
-		{
-			writer.WritePropertyName("boundary_chars");
-			writer.WriteStringValue(BoundaryCharsValue);
-		}
-
-		if (BoundaryMaxScanValue.HasValue)
-		{
-			writer.WritePropertyName("boundary_max_scan");
-			writer.WriteNumberValue(BoundaryMaxScanValue.Value);
-		}
-
-		if (BoundaryScannerValue is not null)
-		{
-			writer.WritePropertyName("boundary_scanner");
-			JsonSerializer.Serialize(writer, BoundaryScannerValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(BoundaryScannerLocaleValue))
-		{
-			writer.WritePropertyName("boundary_scanner_locale");
-			writer.WriteStringValue(BoundaryScannerLocaleValue);
-		}
-
-		if (EncoderValue is not null)
-		{
-			writer.WritePropertyName("encoder");
-			JsonSerializer.Serialize(writer, EncoderValue, options);
-		}
-
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		if (FragmenterValue is not null)
-		{
-			writer.WritePropertyName("fragmenter");
-			JsonSerializer.Serialize(writer, FragmenterValue, options);
-		}
-
-		if (FragmentSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fragment_size");
-			writer.WriteNumberValue(FragmentSizeValue.Value);
-		}
-
-		if (HighlightFilterValue.HasValue)
-		{
-			writer.WritePropertyName("highlight_filter");
-			writer.WriteBooleanValue(HighlightFilterValue.Value);
-		}
-
-		if (HighlightQueryDescriptor is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, HighlightQueryDescriptor, options);
-		}
-		else if (HighlightQueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(HighlightQueryDescriptorAction), options);
-		}
-		else if (HighlightQueryValue is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, HighlightQueryValue, options);
-		}
-
-		if (MaxAnalyzedOffsetValue.HasValue)
-		{
-			writer.WritePropertyName("max_analyzed_offset");
-			writer.WriteNumberValue(MaxAnalyzedOffsetValue.Value);
-		}
-
-		if (MaxFragmentLengthValue.HasValue)
-		{
-			writer.WritePropertyName("max_fragment_length");
-			writer.WriteNumberValue(MaxFragmentLengthValue.Value);
-		}
-
-		if (NoMatchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("no_match_size");
-			writer.WriteNumberValue(NoMatchSizeValue.Value);
-		}
-
-		if (NumberOfFragmentsValue.HasValue)
-		{
-			writer.WritePropertyName("number_of_fragments");
-			writer.WriteNumberValue(NumberOfFragmentsValue.Value);
-		}
-
-		if (OptionsValue is not null)
-		{
-			writer.WritePropertyName("options");
-			JsonSerializer.Serialize(writer, OptionsValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (PhraseLimitValue.HasValue)
-		{
-			writer.WritePropertyName("phrase_limit");
-			writer.WriteNumberValue(PhraseLimitValue.Value);
-		}
-
-		if (PostTagsValue is not null)
-		{
-			writer.WritePropertyName("post_tags");
-			JsonSerializer.Serialize(writer, PostTagsValue, options);
-		}
-
-		if (PreTagsValue is not null)
-		{
-			writer.WritePropertyName("pre_tags");
-			JsonSerializer.Serialize(writer, PreTagsValue, options);
-		}
-
-		if (RequireFieldMatchValue.HasValue)
-		{
-			writer.WritePropertyName("require_field_match");
-			writer.WriteBooleanValue(RequireFieldMatchValue.Value);
-		}
-
-		if (TagsSchemaValue is not null)
-		{
-			writer.WritePropertyName("tags_schema");
-			JsonSerializer.Serialize(writer, TagsSchemaValue, options);
-		}
-
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.Search.Highlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class HighlightDescriptor : SerializableDescriptor<HighlightDescriptor>
+public readonly partial struct HighlightDescriptor
 {
-	internal HighlightDescriptor(Action<HighlightDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.Highlight Instance { get; init; }
 
-	public HighlightDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HighlightDescriptor(Elastic.Clients.Elasticsearch.Core.Search.Highlight instance)
 	{
+		Instance = instance;
 	}
 
-	private string? BoundaryCharsValue { get; set; }
-	private int? BoundaryMaxScanValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
-	private string? BoundaryScannerLocaleValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? EncoderValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor> FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
-	private int? FragmentSizeValue { get; set; }
-	private bool? HighlightFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor HighlightQueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> HighlightQueryDescriptorAction { get; set; }
-	private int? MaxAnalyzedOffsetValue { get; set; }
-	private int? MaxFragmentLengthValue { get; set; }
-	private int? NoMatchSizeValue { get; set; }
-	private int? NumberOfFragmentsValue { get; set; }
-	private IDictionary<string, object>? OptionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? OrderValue { get; set; }
-	private int? PhraseLimitValue { get; set; }
-	private ICollection<string>? PostTagsValue { get; set; }
-	private ICollection<string>? PreTagsValue { get; set; }
-	private bool? RequireFieldMatchValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? TypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HighlightDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.Highlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor(Elastic.Clients.Elasticsearch.Core.Search.Highlight instance) => new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A string that contains each boundary character.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor BoundaryChars(string? boundaryChars)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor BoundaryChars(string? value)
 	{
-		BoundaryCharsValue = boundaryChars;
-		return Self;
+		Instance.BoundaryChars = value;
+		return this;
 	}
 
 	/// <summary>
@@ -667,10 +895,10 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// How far to scan for boundary characters.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor BoundaryMaxScan(int? boundaryMaxScan)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor BoundaryMaxScan(int? value)
 	{
-		BoundaryMaxScanValue = boundaryMaxScan;
-		return Self;
+		Instance.BoundaryMaxScan = value;
+		return this;
 	}
 
 	/// <summary>
@@ -680,10 +908,10 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// Defaults to <c>sentence</c> for the <c>unified</c> highlighter. Defaults to <c>chars</c> for the <c>fvh</c> highlighter.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor BoundaryScanner(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? boundaryScanner)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor BoundaryScanner(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? value)
 	{
-		BoundaryScannerValue = boundaryScanner;
-		return Self;
+		Instance.BoundaryScanner = value;
+		return this;
 	}
 
 	/// <summary>
@@ -692,22 +920,120 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// This parameter takes a form of a language tag, for example: <c>"en-US"</c>, <c>"fr-FR"</c>, <c>"ja-JP"</c>.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor BoundaryScannerLocale(string? boundaryScannerLocale)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor BoundaryScannerLocale(string? value)
 	{
-		BoundaryScannerLocaleValue = boundaryScannerLocale;
-		return Self;
+		Instance.BoundaryScannerLocale = value;
+		return this;
 	}
 
-	public HighlightDescriptor Encoder(Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? encoder)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Encoder(Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? value)
 	{
-		EncoderValue = encoder;
-		return Self;
+		Instance.Encoder = value;
+		return this;
 	}
 
-	public HighlightDescriptor Fields(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> value)
 	{
-		FieldsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor>());
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields()
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField>? action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<T>>? action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor AddField(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Core.Search.HighlightField value)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor AddField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Core.Search.HighlightField value)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields(Elastic.Clients.Elasticsearch.Field key)
+	{
+		Instance.Fields = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> { { key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor.Build(null) } };
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		Instance.Fields = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> { { key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor.Build(null) } };
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields(params Elastic.Clients.Elasticsearch.Field[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		foreach (var key in keys)
+		{
+			items.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor.Build(null));
+		}
+
+		Instance.Fields = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor AddField(Elastic.Clients.Elasticsearch.Field key)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor AddField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor AddField(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor>? action)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor AddField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor>? action)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor AddField<T>(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<T>>? action)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor AddField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<T>>? action)
+	{
+		Instance.Fields ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>();
+		Instance.Fields.Add(key, Elastic.Clients.Elasticsearch.Core.Search.HighlightFieldDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -716,10 +1042,10 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// Only valid for the <c>plain</c> highlighter.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor Fragmenter(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? fragmenter)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fragmenter(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? value)
 	{
-		FragmenterValue = fragmenter;
-		return Self;
+		Instance.Fragmenter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -727,16 +1053,16 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// The size of the highlighted fragment in characters.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor FragmentSize(int? fragmentSize)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor FragmentSize(int? value)
 	{
-		FragmentSizeValue = fragmentSize;
-		return Self;
+		Instance.FragmentSize = value;
+		return this;
 	}
 
-	public HighlightDescriptor HighlightFilter(bool? highlightFilter = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightFilter(bool? value = true)
 	{
-		HighlightFilterValue = highlightFilter;
-		return Self;
+		Instance.HighlightFilter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -745,28 +1071,34 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? highlightQuery)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		HighlightQueryDescriptor = null;
-		HighlightQueryDescriptorAction = null;
-		HighlightQueryValue = highlightQuery;
-		return Self;
+		Instance.HighlightQuery = value;
+		return this;
 	}
 
-	public HighlightDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Highlight matches for a query other than the search query.
+	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightQuery(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		HighlightQueryValue = null;
-		HighlightQueryDescriptorAction = null;
-		HighlightQueryDescriptor = descriptor;
-		return Self;
+		Instance.HighlightQuery = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public HighlightDescriptor HighlightQuery(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Highlight matches for a query other than the search query.
+	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightQuery<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		HighlightQueryValue = null;
-		HighlightQueryDescriptor = null;
-		HighlightQueryDescriptorAction = configure;
-		return Self;
+		Instance.HighlightQuery = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -776,16 +1108,16 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// The <c>max_analyzed_offset</c> query setting does not override the <c>index.highlight.max_analyzed_offset</c> setting, which prevails when it’s set to lower value than the query setting.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor MaxAnalyzedOffset(int? maxAnalyzedOffset)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor MaxAnalyzedOffset(int? value)
 	{
-		MaxAnalyzedOffsetValue = maxAnalyzedOffset;
-		return Self;
+		Instance.MaxAnalyzedOffset = value;
+		return this;
 	}
 
-	public HighlightDescriptor MaxFragmentLength(int? maxFragmentLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor MaxFragmentLength(int? value)
 	{
-		MaxFragmentLengthValue = maxFragmentLength;
-		return Self;
+		Instance.MaxFragmentLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -793,10 +1125,10 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor NoMatchSize(int? noMatchSize)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor NoMatchSize(int? value)
 	{
-		NoMatchSizeValue = noMatchSize;
-		return Self;
+		Instance.NoMatchSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -808,16 +1140,35 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// If <c>number_of_fragments</c> is <c>0</c>, <c>fragment_size</c> is ignored.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor NumberOfFragments(int? numberOfFragments)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor NumberOfFragments(int? value)
 	{
-		NumberOfFragmentsValue = numberOfFragments;
-		return Self;
+		Instance.NumberOfFragments = value;
+		return this;
 	}
 
-	public HighlightDescriptor Options(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Options(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		OptionsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Options = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Options()
+	{
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Options(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor AddOption(string key, object value)
+	{
+		Instance.Options ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Options.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -828,10 +1179,10 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// Each highlighter applies its own logic to compute relevancy scores.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor Order(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? order)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Order(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? value)
 	{
-		OrderValue = order;
-		return Self;
+		Instance.Order = value;
+		return this;
 	}
 
 	/// <summary>
@@ -842,10 +1193,10 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// Only supported by the <c>fvh</c> highlighter.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor PhraseLimit(int? phraseLimit)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PhraseLimit(int? value)
 	{
-		PhraseLimitValue = phraseLimit;
-		return Self;
+		Instance.PhraseLimit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -854,10 +1205,46 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor PostTags(ICollection<string>? postTags)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PostTags(System.Collections.Generic.ICollection<string>? value)
 	{
-		PostTagsValue = postTags;
-		return Self;
+		Instance.PostTags = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PostTags()
+	{
+		Instance.PostTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PostTags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.PostTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PostTags(params string[] values)
+	{
+		Instance.PostTags = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -866,10 +1253,46 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor PreTags(ICollection<string>? preTags)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PreTags(System.Collections.Generic.ICollection<string>? value)
 	{
-		PreTagsValue = preTags;
-		return Self;
+		Instance.PreTags = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PreTags()
+	{
+		Instance.PreTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PreTags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.PreTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
+	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PreTags(params string[] values)
+	{
+		Instance.PreTags = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -878,10 +1301,10 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// Set to <c>false</c> to highlight all fields.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor RequireFieldMatch(bool? requireFieldMatch = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor RequireFieldMatch(bool? value = true)
 	{
-		RequireFieldMatchValue = requireFieldMatch;
-		return Self;
+		Instance.RequireFieldMatch = value;
+		return this;
 	}
 
 	/// <summary>
@@ -889,159 +1312,23 @@ public sealed partial class HighlightDescriptor : SerializableDescriptor<Highlig
 	/// Set to <c>styled</c> to use the built-in tag schema.
 	/// </para>
 	/// </summary>
-	public HighlightDescriptor TagsSchema(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? tagsSchema)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor TagsSchema(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? value)
 	{
-		TagsSchemaValue = tagsSchema;
-		return Self;
+		Instance.TagsSchema = value;
+		return this;
 	}
 
-	public HighlightDescriptor Type(Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? type)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Type(Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.Highlight Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(BoundaryCharsValue))
-		{
-			writer.WritePropertyName("boundary_chars");
-			writer.WriteStringValue(BoundaryCharsValue);
-		}
-
-		if (BoundaryMaxScanValue.HasValue)
-		{
-			writer.WritePropertyName("boundary_max_scan");
-			writer.WriteNumberValue(BoundaryMaxScanValue.Value);
-		}
-
-		if (BoundaryScannerValue is not null)
-		{
-			writer.WritePropertyName("boundary_scanner");
-			JsonSerializer.Serialize(writer, BoundaryScannerValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(BoundaryScannerLocaleValue))
-		{
-			writer.WritePropertyName("boundary_scanner_locale");
-			writer.WriteStringValue(BoundaryScannerLocaleValue);
-		}
-
-		if (EncoderValue is not null)
-		{
-			writer.WritePropertyName("encoder");
-			JsonSerializer.Serialize(writer, EncoderValue, options);
-		}
-
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		if (FragmenterValue is not null)
-		{
-			writer.WritePropertyName("fragmenter");
-			JsonSerializer.Serialize(writer, FragmenterValue, options);
-		}
-
-		if (FragmentSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fragment_size");
-			writer.WriteNumberValue(FragmentSizeValue.Value);
-		}
-
-		if (HighlightFilterValue.HasValue)
-		{
-			writer.WritePropertyName("highlight_filter");
-			writer.WriteBooleanValue(HighlightFilterValue.Value);
-		}
-
-		if (HighlightQueryDescriptor is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, HighlightQueryDescriptor, options);
-		}
-		else if (HighlightQueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(HighlightQueryDescriptorAction), options);
-		}
-		else if (HighlightQueryValue is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, HighlightQueryValue, options);
-		}
-
-		if (MaxAnalyzedOffsetValue.HasValue)
-		{
-			writer.WritePropertyName("max_analyzed_offset");
-			writer.WriteNumberValue(MaxAnalyzedOffsetValue.Value);
-		}
-
-		if (MaxFragmentLengthValue.HasValue)
-		{
-			writer.WritePropertyName("max_fragment_length");
-			writer.WriteNumberValue(MaxFragmentLengthValue.Value);
-		}
-
-		if (NoMatchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("no_match_size");
-			writer.WriteNumberValue(NoMatchSizeValue.Value);
-		}
-
-		if (NumberOfFragmentsValue.HasValue)
-		{
-			writer.WritePropertyName("number_of_fragments");
-			writer.WriteNumberValue(NumberOfFragmentsValue.Value);
-		}
-
-		if (OptionsValue is not null)
-		{
-			writer.WritePropertyName("options");
-			JsonSerializer.Serialize(writer, OptionsValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (PhraseLimitValue.HasValue)
-		{
-			writer.WritePropertyName("phrase_limit");
-			writer.WriteNumberValue(PhraseLimitValue.Value);
-		}
-
-		if (PostTagsValue is not null)
-		{
-			writer.WritePropertyName("post_tags");
-			JsonSerializer.Serialize(writer, PostTagsValue, options);
-		}
-
-		if (PreTagsValue is not null)
-		{
-			writer.WritePropertyName("pre_tags");
-			JsonSerializer.Serialize(writer, PreTagsValue, options);
-		}
-
-		if (RequireFieldMatchValue.HasValue)
-		{
-			writer.WritePropertyName("require_field_match");
-			writer.WriteBooleanValue(RequireFieldMatchValue.Value);
-		}
-
-		if (TagsSchemaValue is not null)
-		{
-			writer.WritePropertyName("tags_schema");
-			JsonSerializer.Serialize(writer, TagsSchemaValue, options);
-		}
-
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.Highlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

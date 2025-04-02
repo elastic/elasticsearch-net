@@ -17,24 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class WatcherWatchTriggerScheduleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerSchedule>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActive = System.Text.Json.JsonEncodedText.Encode("active");
+	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all");
+	private static readonly System.Text.Json.JsonEncodedText PropCron = System.Text.Json.JsonEncodedText.Encode("cron");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerSchedule Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propActive = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Counter> propAll = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Counter> propCron = default;
+		LocalJsonValue<long> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActive.TryReadProperty(ref reader, options, PropActive, null))
+			{
+				continue;
+			}
+
+			if (propAll.TryReadProperty(ref reader, options, PropAll, null))
+			{
+				continue;
+			}
+
+			if (propCron.TryReadProperty(ref reader, options, PropCron, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerSchedule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Active = propActive.Value,
+			All = propAll.Value,
+			Cron = propCron.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerSchedule value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActive, value.Active, null, null);
+		writer.WriteProperty(options, PropAll, value.All, null, null);
+		writer.WriteProperty(options, PropCron, value.Cron, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerScheduleConverter))]
 public sealed partial class WatcherWatchTriggerSchedule
 {
-	[JsonInclude, JsonPropertyName("active")]
-	public long Active { get; init; }
-	[JsonInclude, JsonPropertyName("_all")]
-	public Elastic.Clients.Elasticsearch.Xpack.Counter All { get; init; }
-	[JsonInclude, JsonPropertyName("cron")]
-	public Elastic.Clients.Elasticsearch.Xpack.Counter Cron { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public long Total { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WatcherWatchTriggerSchedule(long active, Elastic.Clients.Elasticsearch.Xpack.Counter all, Elastic.Clients.Elasticsearch.Xpack.Counter cron, long total)
+	{
+		Active = active;
+		All = all;
+		Cron = cron;
+		Total = total;
+	}
+#if NET7_0_OR_GREATER
+	public WatcherWatchTriggerSchedule()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public WatcherWatchTriggerSchedule()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal WatcherWatchTriggerSchedule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Active { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.Counter All { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.Counter Cron { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Total { get; set; }
 }

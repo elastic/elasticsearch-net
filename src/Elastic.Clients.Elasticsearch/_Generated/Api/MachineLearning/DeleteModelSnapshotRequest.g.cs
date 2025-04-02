@@ -17,83 +17,207 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class DeleteModelSnapshotRequestParameters : RequestParameters
+public sealed partial class DeleteModelSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DeleteModelSnapshotRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Delete a model snapshot.
+/// </para>
+/// <para>
 /// You cannot delete the active model snapshot. To delete that snapshot, first
 /// revert to a different one. To identify the active model snapshot, refer to
 /// the <c>model_snapshot_id</c> in the results from the get jobs API.
 /// </para>
 /// </summary>
-public sealed partial class DeleteModelSnapshotRequest : PlainRequest<DeleteModelSnapshotRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestConverter))]
+public sealed partial class DeleteModelSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteModelSnapshotRequest(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId) : base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteModelSnapshotRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteModelSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteModelSnapshot;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningDeleteModelSnapshot;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.delete_model_snapshot";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the model snapshot.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 }
 
 /// <summary>
 /// <para>
 /// Delete a model snapshot.
+/// </para>
+/// <para>
 /// You cannot delete the active model snapshot. To delete that snapshot, first
 /// revert to a different one. To identify the active model snapshot, refer to
 /// the <c>model_snapshot_id</c> in the results from the get jobs API.
 /// </para>
 /// </summary>
-public sealed partial class DeleteModelSnapshotRequestDescriptor : RequestDescriptor<DeleteModelSnapshotRequestDescriptor, DeleteModelSnapshotRequestParameters>
+public readonly partial struct DeleteModelSnapshotRequestDescriptor
 {
-	internal DeleteModelSnapshotRequestDescriptor(Action<DeleteModelSnapshotRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest Instance { get; init; }
 
-	public DeleteModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId) : base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteModelSnapshot;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.delete_model_snapshot";
-
-	public DeleteModelSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public DeleteModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest(jobId, snapshotId);
 	}
 
-	public DeleteModelSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id snapshotId)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteModelSnapshotRequestDescriptor()
 	{
-		RouteValues.Required("snapshot_id", snapshotId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the model snapshot.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.SnapshotId = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

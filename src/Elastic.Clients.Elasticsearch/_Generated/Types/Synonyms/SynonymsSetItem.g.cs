@@ -17,31 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+internal sealed partial class SynonymsSetItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.SynonymsSetItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropSynonymsSet = System.Text.Json.JsonEncodedText.Encode("synonyms_set");
+
+	public override Elastic.Clients.Elasticsearch.Synonyms.SynonymsSetItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<string> propSynonymsSet = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propSynonymsSet.TryReadProperty(ref reader, options, PropSynonymsSet, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Synonyms.SynonymsSetItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			SynonymsSet = propSynonymsSet.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Synonyms.SynonymsSetItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.SynonymsSetItemConverter))]
 public sealed partial class SynonymsSetItem
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SynonymsSetItem(int count, string synonymsSet)
+	{
+		Count = count;
+		SynonymsSet = synonymsSet;
+	}
+#if NET7_0_OR_GREATER
+	public SynonymsSetItem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SynonymsSetItem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SynonymsSetItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Number of synonym rules that the synonym set contains
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public int Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Synonyms set identifier
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("synonyms_set")]
-	public string SynonymsSet { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string SynonymsSet { get; set; }
 }

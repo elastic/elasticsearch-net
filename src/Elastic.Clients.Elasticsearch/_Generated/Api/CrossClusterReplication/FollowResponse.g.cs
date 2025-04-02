@@ -17,21 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-public sealed partial class FollowResponse : ElasticsearchResponse
+internal sealed partial class FollowResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse>
 {
-	[JsonInclude, JsonPropertyName("follow_index_created")]
-	public bool FollowIndexCreated { get; init; }
-	[JsonInclude, JsonPropertyName("follow_index_shards_acked")]
-	public bool FollowIndexShardsAcked { get; init; }
-	[JsonInclude, JsonPropertyName("index_following_started")]
-	public bool IndexFollowingStarted { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexCreated = System.Text.Json.JsonEncodedText.Encode("follow_index_created");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexShardsAcked = System.Text.Json.JsonEncodedText.Encode("follow_index_shards_acked");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFollowingStarted = System.Text.Json.JsonEncodedText.Encode("index_following_started");
+
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propFollowIndexCreated = default;
+		LocalJsonValue<bool> propFollowIndexShardsAcked = default;
+		LocalJsonValue<bool> propIndexFollowingStarted = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFollowIndexCreated.TryReadProperty(ref reader, options, PropFollowIndexCreated, null))
+			{
+				continue;
+			}
+
+			if (propFollowIndexShardsAcked.TryReadProperty(ref reader, options, PropFollowIndexShardsAcked, null))
+			{
+				continue;
+			}
+
+			if (propIndexFollowingStarted.TryReadProperty(ref reader, options, PropIndexFollowingStarted, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FollowIndexCreated = propFollowIndexCreated.Value,
+			FollowIndexShardsAcked = propFollowIndexShardsAcked.Value,
+			IndexFollowingStarted = propIndexFollowingStarted.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFollowIndexCreated, value.FollowIndexCreated, null, null);
+		writer.WriteProperty(options, PropFollowIndexShardsAcked, value.FollowIndexShardsAcked, null, null);
+		writer.WriteProperty(options, PropIndexFollowingStarted, value.IndexFollowingStarted, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponseConverter))]
+public sealed partial class FollowResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FollowResponse(bool followIndexCreated, bool followIndexShardsAcked, bool indexFollowingStarted)
+	{
+		FollowIndexCreated = followIndexCreated;
+		FollowIndexShardsAcked = followIndexShardsAcked;
+		IndexFollowingStarted = indexFollowingStarted;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FollowResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FollowResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool FollowIndexCreated { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool FollowIndexShardsAcked { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		bool IndexFollowingStarted { get; set; }
 }

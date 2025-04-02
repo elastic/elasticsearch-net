@@ -17,25 +17,112 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class MovingPercentilesAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropGapPolicy = System.Text.Json.JsonEncodedText.Encode("gap_policy");
+	private static readonly System.Text.Json.JsonEncodedText PropShift = System.Text.Json.JsonEncodedText.Encode("shift");
+	private static readonly System.Text.Json.JsonEncodedText PropWindow = System.Text.Json.JsonEncodedText.Encode("window");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<object?> propBucketsPath = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?> propGapPolicy = default;
+		LocalJsonValue<int?> propShift = default;
+		LocalJsonValue<int?> propWindow = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBucketsPath.TryReadProperty(ref reader, options, PropBucketsPath, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, null))
+			{
+				continue;
+			}
+
+			if (propShift.TryReadProperty(ref reader, options, PropShift, null))
+			{
+				continue;
+			}
+
+			if (propWindow.TryReadProperty(ref reader, options, PropWindow, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BucketsPath = propBucketsPath.Value,
+			Format = propFormat.Value,
+			GapPolicy = propGapPolicy.Value,
+			Shift = propShift.Value,
+			Window = propWindow.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBucketsPath, value.BucketsPath, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, null);
+		writer.WriteProperty(options, PropShift, value.Shift, null, null);
+		writer.WriteProperty(options, PropWindow, value.Window, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationConverter))]
 public sealed partial class MovingPercentilesAggregation
 {
+#if NET7_0_OR_GREATER
+	public MovingPercentilesAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MovingPercentilesAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MovingPercentilesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("buckets_path")]
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
+	public object? BucketsPath { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,7 +130,6 @@ public sealed partial class MovingPercentilesAggregation
 	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
@@ -51,7 +137,6 @@ public sealed partial class MovingPercentilesAggregation
 	/// Policy to apply when gaps are found in the data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	/// <summary>
@@ -60,7 +145,6 @@ public sealed partial class MovingPercentilesAggregation
 	/// Increasing <c>shift</c> by 1, moves the starting window position by 1 to the right.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shift")]
 	public int? Shift { get; set; }
 
 	/// <summary>
@@ -68,35 +152,37 @@ public sealed partial class MovingPercentilesAggregation
 	/// The size of window to "slide" across the histogram.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("window")]
 	public int? Window { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(MovingPercentilesAggregation movingPercentilesAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MovingPercentiles(movingPercentilesAggregation);
 }
 
-public sealed partial class MovingPercentilesAggregationDescriptor : SerializableDescriptor<MovingPercentilesAggregationDescriptor>
+public readonly partial struct MovingPercentilesAggregationDescriptor
 {
-	internal MovingPercentilesAggregationDescriptor(Action<MovingPercentilesAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation Instance { get; init; }
 
-	public MovingPercentilesAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MovingPercentilesAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-	private int? ShiftValue { get; set; }
-	private int? WindowValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MovingPercentilesAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	public MovingPercentilesAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
+	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor BucketsPath(object? value)
 	{
-		BucketsPathValue = bucketsPath;
-		return Self;
+		Instance.BucketsPath = value;
+		return this;
 	}
 
 	/// <summary>
@@ -105,10 +191,10 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
 	/// </para>
 	/// </summary>
-	public MovingPercentilesAggregationDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
@@ -116,10 +202,10 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	/// Policy to apply when gaps are found in the data.
 	/// </para>
 	/// </summary>
-	public MovingPercentilesAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
+	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
-		GapPolicyValue = gapPolicy;
-		return Self;
+		Instance.GapPolicy = value;
+		return this;
 	}
 
 	/// <summary>
@@ -128,10 +214,10 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	/// Increasing <c>shift</c> by 1, moves the starting window position by 1 to the right.
 	/// </para>
 	/// </summary>
-	public MovingPercentilesAggregationDescriptor Shift(int? shift)
+	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor Shift(int? value)
 	{
-		ShiftValue = shift;
-		return Self;
+		Instance.Shift = value;
+		return this;
 	}
 
 	/// <summary>
@@ -139,45 +225,22 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	/// The size of window to "slide" across the histogram.
 	/// </para>
 	/// </summary>
-	public MovingPercentilesAggregationDescriptor Window(int? window)
+	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor Window(int? value)
 	{
-		WindowValue = window;
-		return Self;
+		Instance.Window = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (BucketsPathValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("buckets_path");
-			JsonSerializer.Serialize(writer, BucketsPathValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (GapPolicyValue is not null)
-		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, GapPolicyValue, options);
-		}
-
-		if (ShiftValue.HasValue)
-		{
-			writer.WritePropertyName("shift");
-			writer.WriteNumberValue(ShiftValue.Value);
-		}
-
-		if (WindowValue.HasValue)
-		{
-			writer.WritePropertyName("window");
-			writer.WriteNumberValue(WindowValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

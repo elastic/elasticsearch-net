@@ -17,26 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class AnomalyDetectorsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationAnalyzer = System.Text.Json.JsonEncodedText.Encode("categorization_analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationExamplesLimit = System.Text.Json.JsonEncodedText.Encode("categorization_examples_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropDailyModelSnapshotRetentionAfterDays = System.Text.Json.JsonEncodedText.Encode("daily_model_snapshot_retention_after_days");
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotRetentionDays = System.Text.Json.JsonEncodedText.Encode("model_snapshot_retention_days");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> propCategorizationAnalyzer = default;
+		LocalJsonValue<int> propCategorizationExamplesLimit = default;
+		LocalJsonValue<int> propDailyModelSnapshotRetentionAfterDays = default;
+		LocalJsonValue<string> propModelMemoryLimit = default;
+		LocalJsonValue<int> propModelSnapshotRetentionDays = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCategorizationAnalyzer.TryReadProperty(ref reader, options, PropCategorizationAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propCategorizationExamplesLimit.TryReadProperty(ref reader, options, PropCategorizationExamplesLimit, null))
+			{
+				continue;
+			}
+
+			if (propDailyModelSnapshotRetentionAfterDays.TryReadProperty(ref reader, options, PropDailyModelSnapshotRetentionAfterDays, null))
+			{
+				continue;
+			}
+
+			if (propModelMemoryLimit.TryReadProperty(ref reader, options, PropModelMemoryLimit, null))
+			{
+				continue;
+			}
+
+			if (propModelSnapshotRetentionDays.TryReadProperty(ref reader, options, PropModelSnapshotRetentionDays, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CategorizationAnalyzer = propCategorizationAnalyzer.Value,
+			CategorizationExamplesLimit = propCategorizationExamplesLimit.Value,
+			DailyModelSnapshotRetentionAfterDays = propDailyModelSnapshotRetentionAfterDays.Value,
+			ModelMemoryLimit = propModelMemoryLimit.Value,
+			ModelSnapshotRetentionDays = propModelSnapshotRetentionDays.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCategorizationAnalyzer, value.CategorizationAnalyzer, null, null);
+		writer.WriteProperty(options, PropCategorizationExamplesLimit, value.CategorizationExamplesLimit, null, null);
+		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, null);
+		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
+		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectorsConverter))]
 public sealed partial class AnomalyDetectors
 {
-	[JsonInclude, JsonPropertyName("categorization_analyzer")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer CategorizationAnalyzer { get; init; }
-	[JsonInclude, JsonPropertyName("categorization_examples_limit")]
-	public int CategorizationExamplesLimit { get; init; }
-	[JsonInclude, JsonPropertyName("daily_model_snapshot_retention_after_days")]
-	public int DailyModelSnapshotRetentionAfterDays { get; init; }
-	[JsonInclude, JsonPropertyName("model_memory_limit")]
-	public string ModelMemoryLimit { get; init; }
-	[JsonInclude, JsonPropertyName("model_snapshot_retention_days")]
-	public int ModelSnapshotRetentionDays { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnomalyDetectors(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer categorizationAnalyzer, int categorizationExamplesLimit, int dailyModelSnapshotRetentionAfterDays, string modelMemoryLimit, int modelSnapshotRetentionDays)
+	{
+		CategorizationAnalyzer = categorizationAnalyzer;
+		CategorizationExamplesLimit = categorizationExamplesLimit;
+		DailyModelSnapshotRetentionAfterDays = dailyModelSnapshotRetentionAfterDays;
+		ModelMemoryLimit = modelMemoryLimit;
+		ModelSnapshotRetentionDays = modelSnapshotRetentionDays;
+	}
+#if NET7_0_OR_GREATER
+	public AnomalyDetectors()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AnomalyDetectors()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AnomalyDetectors(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer CategorizationAnalyzer { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int CategorizationExamplesLimit { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int DailyModelSnapshotRetentionAfterDays { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ModelMemoryLimit { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int ModelSnapshotRetentionDays { get; set; }
 }

@@ -17,62 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexVersioningConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCreated = System.Text.Json.JsonEncodedText.Encode("created");
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedString = System.Text.Json.JsonEncodedText.Encode("created_string");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propCreated = default;
+		LocalJsonValue<string?> propCreatedString = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCreated.TryReadProperty(ref reader, options, PropCreated, null))
+			{
+				continue;
+			}
+
+			if (propCreatedString.TryReadProperty(ref reader, options, PropCreatedString, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Created = propCreated.Value,
+			CreatedString = propCreatedString.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCreated, value.Created, null, null);
+		writer.WriteProperty(options, PropCreatedString, value.CreatedString, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningConverter))]
 public sealed partial class IndexVersioning
 {
-	[JsonInclude, JsonPropertyName("created")]
+#if NET7_0_OR_GREATER
+	public IndexVersioning()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexVersioning()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexVersioning(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? Created { get; set; }
-	[JsonInclude, JsonPropertyName("created_string")]
 	public string? CreatedString { get; set; }
 }
 
-public sealed partial class IndexVersioningDescriptor : SerializableDescriptor<IndexVersioningDescriptor>
+public readonly partial struct IndexVersioningDescriptor
 {
-	internal IndexVersioningDescriptor(Action<IndexVersioningDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning Instance { get; init; }
 
-	public IndexVersioningDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexVersioningDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning instance)
 	{
+		Instance = instance;
 	}
 
-	private string? CreatedValue { get; set; }
-	private string? CreatedStringValue { get; set; }
-
-	public IndexVersioningDescriptor Created(string? created)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexVersioningDescriptor()
 	{
-		CreatedValue = created;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IndexVersioningDescriptor CreatedString(string? createdString)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor Created(string? value)
 	{
-		CreatedStringValue = createdString;
-		return Self;
+		Instance.Created = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor CreatedString(string? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(CreatedValue))
+		Instance.CreatedString = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("created");
-			writer.WriteStringValue(CreatedValue);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(CreatedStringValue))
-		{
-			writer.WritePropertyName("created_string");
-			writer.WriteStringValue(CreatedStringValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

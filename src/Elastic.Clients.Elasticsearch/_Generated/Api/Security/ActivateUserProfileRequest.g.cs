@@ -17,21 +17,80 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class ActivateUserProfileRequestParameters : RequestParameters
+public sealed partial class ActivateUserProfileRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ActivateUserProfileRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
+	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type");
+	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAccessToken = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.GrantType> propGrantType = default;
+		LocalJsonValue<string?> propPassword = default;
+		LocalJsonValue<string?> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccessToken.TryReadProperty(ref reader, options, PropAccessToken, null))
+			{
+				continue;
+			}
+
+			if (propGrantType.TryReadProperty(ref reader, options, PropGrantType, null))
+			{
+				continue;
+			}
+
+			if (propPassword.TryReadProperty(ref reader, options, PropPassword, null))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AccessToken = propAccessToken.Value,
+			GrantType = propGrantType.Value,
+			Password = propPassword.Value,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
+		writer.WriteProperty(options, PropGrantType, value.GrantType, null, null);
+		writer.WriteProperty(options, PropPassword, value.Password, null, null);
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -56,11 +115,34 @@ public sealed partial class ActivateUserProfileRequestParameters : RequestParame
 /// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 /// </para>
 /// </summary>
-public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUserProfileRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestConverter))]
+public sealed partial class ActivateUserProfileRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityActivateUserProfile;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ActivateUserProfileRequest(Elastic.Clients.Elasticsearch.Security.GrantType grantType)
+	{
+		GrantType = grantType;
+	}
+#if NET7_0_OR_GREATER
+	public ActivateUserProfileRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ActivateUserProfileRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ActivateUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityActivateUserProfile;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -74,7 +156,6 @@ public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUs
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("access_token")]
 	public string? AccessToken { get; set; }
 
 	/// <summary>
@@ -82,8 +163,11 @@ public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUs
 	/// The type of grant.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grant_type")]
-	public Elastic.Clients.Elasticsearch.Security.GrantType GrantType { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.GrantType GrantType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -92,7 +176,6 @@ public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUs
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
 
 	/// <summary>
@@ -102,7 +185,6 @@ public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUs
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("username")]
 	public string? Username { get; set; }
 }
 
@@ -128,26 +210,23 @@ public sealed partial class ActivateUserProfileRequest : PlainRequest<ActivateUs
 /// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 /// </para>
 /// </summary>
-public sealed partial class ActivateUserProfileRequestDescriptor : RequestDescriptor<ActivateUserProfileRequestDescriptor, ActivateUserProfileRequestParameters>
+public readonly partial struct ActivateUserProfileRequestDescriptor
 {
-	internal ActivateUserProfileRequestDescriptor(Action<ActivateUserProfileRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ActivateUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ActivateUserProfileRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityActivateUserProfile;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.activate_user_profile";
-
-	private string? AccessTokenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.GrantType GrantTypeValue { get; set; }
-	private string? PasswordValue { get; set; }
-	private string? UsernameValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest instance) => new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -157,10 +236,10 @@ public sealed partial class ActivateUserProfileRequestDescriptor : RequestDescri
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	public ActivateUserProfileRequestDescriptor AccessToken(string? accessToken)
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor AccessToken(string? value)
 	{
-		AccessTokenValue = accessToken;
-		return Self;
+		Instance.AccessToken = value;
+		return this;
 	}
 
 	/// <summary>
@@ -168,10 +247,10 @@ public sealed partial class ActivateUserProfileRequestDescriptor : RequestDescri
 	/// The type of grant.
 	/// </para>
 	/// </summary>
-	public ActivateUserProfileRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.GrantType grantType)
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.GrantType value)
 	{
-		GrantTypeValue = grantType;
-		return Self;
+		Instance.GrantType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -181,10 +260,10 @@ public sealed partial class ActivateUserProfileRequestDescriptor : RequestDescri
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	public ActivateUserProfileRequestDescriptor Password(string? password)
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor Password(string? value)
 	{
-		PasswordValue = password;
-		return Self;
+		Instance.Password = value;
+		return this;
 	}
 
 	/// <summary>
@@ -194,35 +273,59 @@ public sealed partial class ActivateUserProfileRequestDescriptor : RequestDescri
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	public ActivateUserProfileRequestDescriptor Username(string? username)
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor Username(string? value)
 	{
-		UsernameValue = username;
-		return Self;
+		Instance.Username = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AccessTokenValue))
-		{
-			writer.WritePropertyName("access_token");
-			writer.WriteStringValue(AccessTokenValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("grant_type");
-		JsonSerializer.Serialize(writer, GrantTypeValue, options);
-		if (!string.IsNullOrEmpty(PasswordValue))
-		{
-			writer.WritePropertyName("password");
-			writer.WriteStringValue(PasswordValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(UsernameValue))
-		{
-			writer.WritePropertyName("username");
-			writer.WriteStringValue(UsernameValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

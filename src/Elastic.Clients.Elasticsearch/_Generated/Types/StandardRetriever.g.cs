@@ -17,24 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class StandardRetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.StandardRetriever>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropTerminateAfter = System.Text.Json.JsonEncodedText.Encode("terminate_after");
+
+	public override Elastic.Clients.Elasticsearch.StandardRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?> propCollapse = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		LocalJsonValue<int?> propTerminateAfter = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollapse.TryReadProperty(ref reader, options, PropCollapse, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryReadProperty(ref reader, options, PropSearchAfter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTerminateAfter.TryReadProperty(ref reader, options, PropTerminateAfter, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Collapse = propCollapse.Value,
+			Filter = propFilter.Value,
+			MinScore = propMinScore.Value,
+			Query = propQuery.Value,
+			SearchAfter = propSearchAfter.Value,
+			Sort = propSort.Value,
+			TerminateAfter = propTerminateAfter.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.StandardRetriever value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollapse, value.Collapse, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
+		writer.WriteProperty(options, PropTerminateAfter, value.TerminateAfter, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.StandardRetrieverConverter))]
 public sealed partial class StandardRetriever
 {
+#if NET7_0_OR_GREATER
+	public StandardRetriever()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public StandardRetriever()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StandardRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Collapses the top documents by a specified key into a single top document per key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
@@ -42,16 +147,13 @@ public sealed partial class StandardRetriever
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
 
 	/// <summary>
@@ -59,7 +161,6 @@ public sealed partial class StandardRetriever
 	/// Defines a query to retrieve a set of top documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
@@ -67,82 +168,62 @@ public sealed partial class StandardRetriever
 	/// Defines a search after object parameter used for pagination.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_after")]
-	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A sort object that that specifies the order of matching documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of documents to collect for each shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terminate_after")]
 	public int? TerminateAfter { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(StandardRetriever standardRetriever) => Elastic.Clients.Elasticsearch.Retriever.Standard(standardRetriever);
 }
 
-public sealed partial class StandardRetrieverDescriptor<TDocument> : SerializableDescriptor<StandardRetrieverDescriptor<TDocument>>
+public readonly partial struct StandardRetrieverDescriptor<TDocument>
 {
-	internal StandardRetrieverDescriptor(Action<StandardRetrieverDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.StandardRetriever Instance { get; init; }
 
-	public StandardRetrieverDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StandardRetrieverDescriptor(Elastic.Clients.Elasticsearch.StandardRetriever instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private float? MinScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-	private int? TerminateAfterValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StandardRetrieverDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.StandardRetriever instance) => new Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Collapses the top documents by a specified key into a single top document per key.
 	/// </para>
 	/// </summary>
-	public StandardRetrieverDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
 	{
-		CollapseDescriptor = null;
-		CollapseDescriptorAction = null;
-		CollapseValue = collapse;
-		return Self;
+		Instance.Collapse = value;
+		return this;
 	}
 
-	public StandardRetrieverDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Collapses the top documents by a specified key into a single top document per key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> action)
 	{
-		CollapseValue = null;
-		CollapseDescriptorAction = null;
-		CollapseDescriptor = descriptor;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor<TDocument> Collapse(Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> configure)
-	{
-		CollapseValue = null;
-		CollapseDescriptor = null;
-		CollapseDescriptorAction = configure;
-		return Self;
+		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -150,313 +231,10 @@ public sealed partial class StandardRetrieverDescriptor<TDocument> : Serializabl
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public StandardRetrieverDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor<TDocument> Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
-	public StandardRetrieverDescriptor<TDocument> MinScore(float? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines a query to retrieve a set of top documents.
-	/// </para>
-	/// </summary>
-	public StandardRetrieverDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
-	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
-	public StandardRetrieverDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
-	{
-		SearchAfterValue = searchAfter;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
-	public StandardRetrieverDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Maximum number of documents to collect for each shard.
-	/// </para>
-	/// </summary>
-	public StandardRetrieverDescriptor<TDocument> TerminateAfter(int? terminateAfter)
-	{
-		TerminateAfterValue = terminateAfter;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (CollapseDescriptor is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, CollapseDescriptor, options);
-		}
-		else if (CollapseDescriptorAction is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>(CollapseDescriptorAction), options);
-		}
-		else if (CollapseValue is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, CollapseValue, options);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
-
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		if (TerminateAfterValue.HasValue)
-		{
-			writer.WritePropertyName("terminate_after");
-			writer.WriteNumberValue(TerminateAfterValue.Value);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor<StandardRetrieverDescriptor>
-{
-	internal StandardRetrieverDescriptor(Action<StandardRetrieverDescriptor> configure) => configure.Invoke(this);
-
-	public StandardRetrieverDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor CollapseDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private float? MinScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-	private int? TerminateAfterValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Collapses the top documents by a specified key into a single top document per key.
-	/// </para>
-	/// </summary>
-	public StandardRetrieverDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
-	{
-		CollapseDescriptor = null;
-		CollapseDescriptorAction = null;
-		CollapseValue = collapse;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor descriptor)
-	{
-		CollapseValue = null;
-		CollapseDescriptorAction = null;
-		CollapseDescriptor = descriptor;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor Collapse(Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> configure)
-	{
-		CollapseValue = null;
-		CollapseDescriptor = null;
-		CollapseDescriptorAction = configure;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -464,40 +242,49 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public StandardRetrieverDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter()
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
+		return this;
 	}
 
-	public StandardRetrieverDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
+		return this;
 	}
 
-	public StandardRetrieverDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
 	}
 
-	public StandardRetrieverDescriptor Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
 	/// <summary>
@@ -505,10 +292,10 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
 	/// </para>
 	/// </summary>
-	public StandardRetrieverDescriptor MinScore(float? minScore)
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
-		MinScoreValue = minScore;
-		return Self;
+		Instance.MinScore = value;
+		return this;
 	}
 
 	/// <summary>
@@ -516,28 +303,21 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	/// Defines a query to retrieve a set of top documents.
 	/// </para>
 	/// </summary>
-	public StandardRetrieverDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public StandardRetrieverDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines a query to retrieve a set of top documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public StandardRetrieverDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -545,10 +325,43 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	/// Defines a search after object parameter used for pagination.
 	/// </para>
 	/// </summary>
-	public StandardRetrieverDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> SearchAfter()
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -556,40 +369,60 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	/// A sort object that that specifies the order of matching documents.
 	/// </para>
 	/// </summary>
-	public StandardRetrieverDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public StandardRetrieverDescriptor Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort()
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
+		return this;
 	}
 
-	public StandardRetrieverDescriptor Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
+		return this;
 	}
 
-	public StandardRetrieverDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Sort = items;
+		return this;
 	}
 
 	/// <summary>
@@ -597,123 +430,365 @@ public sealed partial class StandardRetrieverDescriptor : SerializableDescriptor
 	/// Maximum number of documents to collect for each shard.
 	/// </para>
 	/// </summary>
-	public StandardRetrieverDescriptor TerminateAfter(int? terminateAfter)
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> TerminateAfter(int? value)
 	{
-		TerminateAfterValue = terminateAfter;
-		return Self;
+		Instance.TerminateAfter = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.StandardRetriever Build(System.Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (CollapseDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, CollapseDescriptor, options);
-		}
-		else if (CollapseDescriptorAction is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor(CollapseDescriptorAction), options);
-		}
-		else if (CollapseValue is not null)
-		{
-			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, CollapseValue, options);
+			return new Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
+		var builder = new Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
 
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
+public readonly partial struct StandardRetrieverDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.StandardRetriever Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StandardRetrieverDescriptor(Elastic.Clients.Elasticsearch.StandardRetriever instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StandardRetrieverDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor(Elastic.Clients.Elasticsearch.StandardRetriever instance) => new Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Collapses the top documents by a specified key into a single top document per key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
+	{
+		Instance.Collapse = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collapses the top documents by a specified key into a single top document per key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> action)
+	{
+		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collapses the top documents by a specified key into a single top document per key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Collapse<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>> action)
+	{
+		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter()
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
+	{
+		Instance.Filter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
 		}
 
-		if (MinScoreValue.HasValue)
+		Instance.Filter = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Query to filter the documents that can match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
 		}
 
-		if (QueryDescriptor is not null)
+		Instance.Filter = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor MinScore(float? value)
+	{
+		Instance.MinScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a query to retrieve a set of top documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
+	{
+		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a query to retrieve a set of top documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a query to retrieve a set of top documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	{
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor SearchAfter()
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a search after object parameter used for pagination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
+	{
+		Instance.Sort = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort()
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
 		}
 
-		if (SearchAfterValue is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that that specifies the order of matching documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
 		}
 
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
-			}
+		Instance.Sort = items;
+		return this;
+	}
 
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
+	/// <summary>
+	/// <para>
+	/// Maximum number of documents to collect for each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor TerminateAfter(int? value)
+	{
+		Instance.TerminateAfter = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.StandardRetriever Build(System.Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
+			return new Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (TerminateAfterValue.HasValue)
-		{
-			writer.WritePropertyName("terminate_after");
-			writer.WriteNumberValue(TerminateAfterValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor(new Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

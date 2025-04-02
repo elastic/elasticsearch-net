@@ -17,24 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeInfoXpackSecurityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAuthc = System.Text.Json.JsonEncodedText.Encode("authc");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthc?> propAuthc = default;
+		LocalJsonValue<string> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl?> propHttp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl?> propTransport = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAuthc.TryReadProperty(ref reader, options, PropAuthc, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propHttp.TryReadProperty(ref reader, options, PropHttp, null))
+			{
+				continue;
+			}
+
+			if (propTransport.TryReadProperty(ref reader, options, PropTransport, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Authc = propAuthc.Value,
+			Enabled = propEnabled.Value,
+			Http = propHttp.Value,
+			Transport = propTransport.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAuthc, value.Authc, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropHttp, value.Http, null, null);
+		writer.WriteProperty(options, PropTransport, value.Transport, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityConverter))]
 public sealed partial class NodeInfoXpackSecurity
 {
-	[JsonInclude, JsonPropertyName("authc")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthc? Authc { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public string Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("http")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl? Http { get; init; }
-	[JsonInclude, JsonPropertyName("transport")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl? Transport { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeInfoXpackSecurity(string enabled)
+	{
+		Enabled = enabled;
+	}
+#if NET7_0_OR_GREATER
+	public NodeInfoXpackSecurity()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeInfoXpackSecurity()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeInfoXpackSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthc? Authc { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Enabled { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl? Http { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl? Transport { get; set; }
 }

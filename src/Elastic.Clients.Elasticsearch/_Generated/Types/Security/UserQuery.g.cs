@@ -17,368 +17,1044 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-[JsonConverter(typeof(UserQueryConverter))]
+internal sealed partial class UserQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UserQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantBool = System.Text.Json.JsonEncodedText.Encode("bool");
+	private static readonly System.Text.Json.JsonEncodedText VariantExists = System.Text.Json.JsonEncodedText.Encode("exists");
+	private static readonly System.Text.Json.JsonEncodedText VariantIds = System.Text.Json.JsonEncodedText.Encode("ids");
+	private static readonly System.Text.Json.JsonEncodedText VariantMatch = System.Text.Json.JsonEncodedText.Encode("match");
+	private static readonly System.Text.Json.JsonEncodedText VariantMatchAll = System.Text.Json.JsonEncodedText.Encode("match_all");
+	private static readonly System.Text.Json.JsonEncodedText VariantPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText VariantRange = System.Text.Json.JsonEncodedText.Encode("range");
+	private static readonly System.Text.Json.JsonEncodedText VariantSimpleQueryString = System.Text.Json.JsonEncodedText.Encode("simple_query_string");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerm = System.Text.Json.JsonEncodedText.Encode("term");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+	private static readonly System.Text.Json.JsonEncodedText VariantWildcard = System.Text.Json.JsonEncodedText.Encode("wildcard");
+
+	public override Elastic.Clients.Elasticsearch.Security.UserQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantBool))
+			{
+				variantType = VariantBool.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantExists))
+			{
+				variantType = VariantExists.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantIds))
+			{
+				variantType = VariantIds.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMatch))
+			{
+				variantType = VariantMatch.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantMatchAll))
+			{
+				variantType = VariantMatchAll.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPrefix))
+			{
+				variantType = VariantPrefix.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRange))
+			{
+				variantType = VariantRange.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantSimpleQueryString))
+			{
+				variantType = VariantSimpleQueryString.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerm))
+			{
+				variantType = VariantTerm.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerms))
+			{
+				variantType = VariantTerms.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantWildcard))
+			{
+				variantType = VariantWildcard.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.UserQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "bool":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery)value.Variant, null, null);
+				break;
+			case "exists":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery)value.Variant, null, null);
+				break;
+			case "ids":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery)value.Variant, null, null);
+				break;
+			case "match":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)value.Variant, null, null);
+				break;
+			case "match_all":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery)value.Variant, null, null);
+				break;
+			case "prefix":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)value.Variant, null, null);
+				break;
+			case "range":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery)value.Variant, null, null);
+				break;
+			case "simple_query_string":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)value.Variant, null, null);
+				break;
+			case "term":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TermQuery)value.Variant, null, null);
+				break;
+			case "terms":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery)value.Variant, null, null);
+				break;
+			case "wildcard":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Security.UserQuery)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.UserQueryConverter))]
 public sealed partial class UserQuery
 {
-	internal UserQuery(string variantName, object variant)
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public UserQuery()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public UserQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UserQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// matches users matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? Bool { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery>("bool"); set => SetVariant("bool", value); }
 
-	public static UserQuery Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery boolQuery) => new UserQuery("bool", boolQuery);
-	public static UserQuery Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery existsQuery) => new UserQuery("exists", existsQuery);
-	public static UserQuery Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => new UserQuery("ids", idsQuery);
-	public static UserQuery Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery matchQuery) => new UserQuery("match", matchQuery);
-	public static UserQuery MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery matchAllQuery) => new UserQuery("match_all", matchAllQuery);
-	public static UserQuery Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => new UserQuery("prefix", prefixQuery);
-	public static UserQuery Range(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery rangeQuery) => new UserQuery("range", rangeQuery);
-	public static UserQuery Range(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery rangeQuery) => new UserQuery("range", rangeQuery);
-	public static UserQuery Range(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery rangeQuery) => new UserQuery("range", rangeQuery);
-	public static UserQuery Range(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery rangeQuery) => new UserQuery("range", rangeQuery);
-	public static UserQuery SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => new UserQuery("simple_query_string", simpleQueryStringQuery);
-	public static UserQuery Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => new UserQuery("term", termQuery);
-	public static UserQuery Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => new UserQuery("terms", termsQuery);
-	public static UserQuery Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery wildcardQuery) => new UserQuery("wildcard", wildcardQuery);
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? Exists { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>("exists"); set => SetVariant("exists", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// Returns users based on their IDs.
+	/// This query uses the user document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? Ids { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>("ids"); set => SetVariant("ids", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns users that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? Match { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>("match"); set => SetVariant("match", value); }
+
+	/// <summary>
+	/// <para>
+	/// Matches all users, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? MatchAll { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery>("match_all"); set => SetVariant("match_all", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? Prefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>("prefix"); set => SetVariant("prefix", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? Range { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery>("range"); set => SetVariant("range", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? SimpleQueryString { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>("simple_query_string"); set => SetVariant("simple_query_string", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? Term { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>("term"); set => SetVariant("term", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? Terms { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery>("terms"); set => SetVariant("terms", value); }
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? Wildcard { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>("wildcard"); set => SetVariant("wildcard", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Bool = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Exists = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Ids = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Match = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { MatchAll = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Prefix = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { SimpleQueryString = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Term = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Terms = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery value) => new Elastic.Clients.Elasticsearch.Security.UserQuery { Wildcard = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class UserQueryConverter : JsonConverter<UserQuery>
+public readonly partial struct UserQueryDescriptor<TDocument>
 {
-	public override UserQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.Security.UserQuery Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserQueryDescriptor(Elastic.Clients.Elasticsearch.Security.UserQuery instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "bool")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "exists")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "ids")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "match")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "match_all")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "prefix")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "range")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "simple_query_string")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "term")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "terms")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "wildcard")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'UserQuery' from the response.");
-		}
-
-		var result = new UserQuery(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, UserQuery value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserQueryDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "bool":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery)value.Variant, options);
-					break;
-				case "exists":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery)value.Variant, options);
-					break;
-				case "ids":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery)value.Variant, options);
-					break;
-				case "match":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)value.Variant, options);
-					break;
-				case "match_all":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery)value.Variant, options);
-					break;
-				case "prefix":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)value.Variant, options);
-					break;
-				case "range":
-					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
-					break;
-				case "simple_query_string":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)value.Variant, options);
-					break;
-				case "term":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.TermQuery)value.Variant, options);
-					break;
-				case "terms":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery)value.Variant, options);
-					break;
-				case "wildcard":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.UserQuery instance) => new Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// matches users matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? value)
+	{
+		Instance.Bool = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// matches users matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Bool()
+	{
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// matches users matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Bool(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>>? action)
+	{
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? value)
+	{
+		Instance.Exists = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Exists(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>> action)
+	{
+		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on their IDs.
+	/// This query uses the user document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? value)
+	{
+		Instance.Ids = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on their IDs.
+	/// This query uses the user document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Ids()
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on their IDs.
+	/// This query uses the user document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Ids(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor>? action)
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? value)
+	{
+		Instance.Match = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>> action)
+	{
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all users, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? value)
+	{
+		Instance.MatchAll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all users, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> MatchAll()
+	{
+		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all users, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> MatchAll(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor>? action)
+	{
+		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? value)
+	{
+		Instance.Prefix = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>> action)
+	{
+		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? value)
+	{
+		Instance.SimpleQueryString = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> SimpleQueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> action)
+	{
+		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? value)
+	{
+		Instance.Term = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Term(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>> action)
+	{
+		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? value)
+	{
+		Instance.Terms = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>> action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? value)
+	{
+		Instance.Wildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>> action)
+	{
+		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.UserQuery Build(System.Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class UserQueryDescriptor<TDocument> : SerializableDescriptor<UserQueryDescriptor<TDocument>>
+public readonly partial struct UserQueryDescriptor
 {
-	internal UserQueryDescriptor(Action<UserQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.UserQuery Instance { get; init; }
 
-	public UserQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserQueryDescriptor(Elastic.Clients.Elasticsearch.Security.UserQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private UserQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserQueryDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private UserQueryDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor(Elastic.Clients.Elasticsearch.Security.UserQuery instance) => new Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// matches users matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Bool = value;
+		return this;
 	}
 
-	public UserQueryDescriptor<TDocument> Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery boolQuery) => Set(boolQuery, "bool");
-	public UserQueryDescriptor<TDocument> Bool(Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>> configure) => Set(configure, "bool");
-	public UserQueryDescriptor<TDocument> Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
-	public UserQueryDescriptor<TDocument> Exists(Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
-	public UserQueryDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => Set(idsQuery, "ids");
-	public UserQueryDescriptor<TDocument> Ids(Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor> configure) => Set(configure, "ids");
-	public UserQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery matchQuery) => Set(matchQuery, "match");
-	public UserQueryDescriptor<TDocument> Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
-	public UserQueryDescriptor<TDocument> MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery matchAllQuery) => Set(matchAllQuery, "match_all");
-	public UserQueryDescriptor<TDocument> MatchAll(Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor> configure) => Set(configure, "match_all");
-	public UserQueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
-	public UserQueryDescriptor<TDocument> Prefix(Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
-	public UserQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public UserQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public UserQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public UserQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public UserQueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
-	public UserQueryDescriptor<TDocument> SimpleQueryString(Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
-	public UserQueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
-	public UserQueryDescriptor<TDocument> Term(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>> configure) => Set(configure, "term");
-	public UserQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");
-	public UserQueryDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>> configure) => Set(configure, "terms");
-	public UserQueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
-	public UserQueryDescriptor<TDocument> Wildcard(Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// matches users matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Bool()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class UserQueryDescriptor : SerializableDescriptor<UserQueryDescriptor>
-{
-	internal UserQueryDescriptor(Action<UserQueryDescriptor> configure) => configure.Invoke(this);
-
-	public UserQueryDescriptor() : base()
-	{
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.Build(null);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private UserQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// matches users matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Bool(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor>? action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.Build(action);
+		return this;
 	}
 
-	private UserQueryDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// matches users matching boolean combinations of other queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Bool<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<T>>? action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public UserQueryDescriptor Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery boolQuery) => Set(boolQuery, "bool");
-	public UserQueryDescriptor Bool<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor> configure) => Set(configure, "bool");
-	public UserQueryDescriptor Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
-	public UserQueryDescriptor Exists<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor> configure) => Set(configure, "exists");
-	public UserQueryDescriptor Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => Set(idsQuery, "ids");
-	public UserQueryDescriptor Ids(Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor> configure) => Set(configure, "ids");
-	public UserQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery matchQuery) => Set(matchQuery, "match");
-	public UserQueryDescriptor Match<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor> configure) => Set(configure, "match");
-	public UserQueryDescriptor MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery matchAllQuery) => Set(matchAllQuery, "match_all");
-	public UserQueryDescriptor MatchAll(Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor> configure) => Set(configure, "match_all");
-	public UserQueryDescriptor Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
-	public UserQueryDescriptor Prefix<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor> configure) => Set(configure, "prefix");
-	public UserQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public UserQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public UserQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public UserQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public UserQueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
-	public UserQueryDescriptor SimpleQueryString<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor> configure) => Set(configure, "simple_query_string");
-	public UserQueryDescriptor Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
-	public UserQueryDescriptor Term<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor> configure) => Set(configure, "term");
-	public UserQueryDescriptor Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");
-	public UserQueryDescriptor Terms<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor> configure) => Set(configure, "terms");
-	public UserQueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
-	public UserQueryDescriptor Wildcard<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor> configure) => Set(configure, "wildcard");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.Exists = value;
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Exists(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor> action)
+	{
+		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an indexed value for a field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Exists<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<T>> action)
+	{
+		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on their IDs.
+	/// This query uses the user document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? value)
+	{
+		Instance.Ids = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on their IDs.
+	/// This query uses the user document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Ids()
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on their IDs.
+	/// This query uses the user document IDs stored in the <c>_id</c> field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor>? action)
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? value)
+	{
+		Instance.Match = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor> action)
+	{
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that match a provided text, number, date or boolean value.
+	/// The provided text is analyzed before matching.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<T>> action)
+	{
+		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all users, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? value)
+	{
+		Instance.MatchAll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all users, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor MatchAll()
+	{
+		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Matches all users, giving them all a <c>_score</c> of 1.0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor MatchAll(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor>? action)
+	{
+		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? value)
+	{
+		Instance.Prefix = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor> action)
+	{
+		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain a specific prefix in a provided field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Prefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<T>> action)
+	{
+		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms within a provided range.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Range<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? value)
+	{
+		Instance.SimpleQueryString = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor SimpleQueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor> action)
+	{
+		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor SimpleQueryString<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<T>> action)
+	{
+		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? value)
+	{
+		Instance.Term = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Term(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor> action)
+	{
+		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain an exact term in a provided field.
+	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Term<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<T>> action)
+	{
+		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? value)
+	{
+		Instance.Terms = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor> action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain one or more exact terms in a provided field.
+	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<T>> action)
+	{
+		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? value)
+	{
+		Instance.Wildcard = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor> action)
+	{
+		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Returns users that contain terms matching a wildcard pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor Wildcard<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<T>> action)
+	{
+		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.UserQuery Build(System.Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor(new Elastic.Clients.Elasticsearch.Security.UserQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

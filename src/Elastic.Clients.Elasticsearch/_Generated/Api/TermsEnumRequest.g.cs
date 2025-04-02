@@ -17,21 +17,107 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class TermsEnumRequestParameters : RequestParameters
+public sealed partial class TermsEnumRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class TermsEnumRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TermsEnumRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCaseInsensitive = System.Text.Json.JsonEncodedText.Encode("case_insensitive");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFilter = System.Text.Json.JsonEncodedText.Encode("index_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropString = System.Text.Json.JsonEncodedText.Encode("string");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+
+	public override Elastic.Clients.Elasticsearch.TermsEnumRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCaseInsensitive = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propIndexFilter = default;
+		LocalJsonValue<string?> propSearchAfter = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<string?> propString = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCaseInsensitive.TryReadProperty(ref reader, options, PropCaseInsensitive, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIndexFilter.TryReadProperty(ref reader, options, PropIndexFilter, null))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryReadProperty(ref reader, options, PropSearchAfter, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propString.TryReadProperty(ref reader, options, PropString, null))
+			{
+				continue;
+			}
+
+			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TermsEnumRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CaseInsensitive = propCaseInsensitive.Value,
+			Field = propField.Value,
+			IndexFilter = propIndexFilter.Value,
+			SearchAfter = propSearchAfter.Value,
+			Size = propSize.Value,
+			String = propString.Value,
+			Timeout = propTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TermsEnumRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCaseInsensitive, value.CaseInsensitive, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIndexFilter, value.IndexFilter, null, null);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropString, value.String, null, null);
+		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -47,15 +133,34 @@ public sealed partial class TermsEnumRequestParameters : RequestParameters
 /// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 /// </para>
 /// </summary>
-public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TermsEnumRequestConverter))]
+public sealed partial class TermsEnumRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public TermsEnumRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceTermsEnum;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermsEnumRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Field field) : base(r => r.Required("index", index))
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public TermsEnumRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TermsEnumRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceTermsEnum;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -63,10 +168,22 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 
 	/// <summary>
 	/// <para>
+	/// A comma-separated list of data streams, indices, and index aliases to search.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To search all data streams or indices, omit this parameter or use <c>*</c>  or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// When <c>true</c>, the provided search string is matched against index terms without case sensitivity.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("case_insensitive")]
 	public bool? CaseInsensitive { get; set; }
 
 	/// <summary>
@@ -74,15 +191,17 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
 	/// <summary>
@@ -91,7 +210,6 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	/// It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_after")]
 	public string? SearchAfter { get; set; }
 
 	/// <summary>
@@ -99,7 +217,6 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	/// The number of matching terms to return.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -112,7 +229,6 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	/// The prefix string cannot be larger than the largest possible keyword value, which is Lucene's term byte-length limit of 32766.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("string")]
 	public string? String { get; set; }
 
 	/// <summary>
@@ -121,7 +237,6 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	/// If the timeout is exceeded the <c>complete</c> flag set to <c>false</c> in the response and the results may be partial or empty.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
@@ -138,51 +253,54 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 /// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 /// </para>
 /// </summary>
-public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescriptor<TermsEnumRequestDescriptor<TDocument>, TermsEnumRequestParameters>
+public readonly partial struct TermsEnumRequestDescriptor
 {
-	internal TermsEnumRequestDescriptor(Action<TermsEnumRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TermsEnumRequest Instance { get; init; }
 
-	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.TermsEnumRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public TermsEnumRequestDescriptor() : this(typeof(TDocument))
+	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.TermsEnumRequest(index);
+#pragma warning restore CS0618
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceTermsEnum;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "terms_enum";
-
-	public TermsEnumRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TermsEnumRequestDescriptor()
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private bool? CaseInsensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> IndexFilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
-	private string? SearchAfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private string? StringValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.TermsEnumRequest instance) => new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TermsEnumRequest(Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and index aliases to search.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To search all data streams or indices, omit this parameter or use <c>*</c>  or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// When <c>true</c>, the provided search string is matched against index terms without case sensitivity.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor CaseInsensitive(bool? value = true)
 	{
-		CaseInsensitiveValue = caseInsensitive;
-		return Self;
+		Instance.CaseInsensitive = value;
+		return this;
 	}
 
 	/// <summary>
@@ -190,10 +308,10 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -201,21 +319,10 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
-	/// </para>
-	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -223,28 +330,32 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterValue = indexFilter;
-		return Self;
+		Instance.IndexFilter = value;
+		return this;
 	}
 
-	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterDescriptor = descriptor;
-		return Self;
+		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor IndexFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = configure;
-		return Self;
+		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -253,10 +364,10 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	/// It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> SearchAfter(string? searchAfter)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor SearchAfter(string? value)
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.SearchAfter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -264,10 +375,10 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	/// The number of matching terms to return.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -280,10 +391,10 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	/// The prefix string cannot be larger than the largest possible keyword value, which is Lucene's term byte-length limit of 32766.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> String(string? value)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor String(string? value)
 	{
-		StringValue = value;
-		return Self;
+		Instance.String = value;
+		return this;
 	}
 
 	/// <summary>
@@ -292,64 +403,60 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	/// If the timeout is exceeded the <c>complete</c> flag set to <c>false</c> in the response and the results may be partial or empty.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TermsEnumRequest Build(System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (CaseInsensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_insensitive");
-			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(new Elastic.Clients.Elasticsearch.TermsEnumRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IndexFilterDescriptor is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterDescriptor, options);
-		}
-		else if (IndexFilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(IndexFilterDescriptorAction), options);
-		}
-		else if (IndexFilterValue is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(SearchAfterValue))
-		{
-			writer.WritePropertyName("search_after");
-			writer.WriteStringValue(SearchAfterValue);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(StringValue))
-		{
-			writer.WritePropertyName("string");
-			writer.WriteStringValue(StringValue);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -366,47 +473,54 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 /// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 /// </para>
 /// </summary>
-public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<TermsEnumRequestDescriptor, TermsEnumRequestParameters>
+public readonly partial struct TermsEnumRequestDescriptor<TDocument>
 {
-	internal TermsEnumRequestDescriptor(Action<TermsEnumRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TermsEnumRequest Instance { get; init; }
 
-	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.TermsEnumRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceTermsEnum;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "terms_enum";
-
-	public TermsEnumRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.TermsEnumRequest(index);
+#pragma warning restore CS0618
 	}
 
-	private bool? CaseInsensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor IndexFilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
-	private string? SearchAfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private string? StringValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TermsEnumRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TermsEnumRequest instance) => new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TermsEnumRequest(Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and index aliases to search.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To search all data streams or indices, omit this parameter or use <c>*</c>  or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// When <c>true</c>, the provided search string is matched against index terms without case sensitivity.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor CaseInsensitive(bool? caseInsensitive = true)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> CaseInsensitive(bool? value = true)
 	{
-		CaseInsensitiveValue = caseInsensitive;
-		return Self;
+		Instance.CaseInsensitive = value;
+		return this;
 	}
 
 	/// <summary>
@@ -414,10 +528,10 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -425,21 +539,10 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
-	/// </para>
-	/// </summary>
-	public TermsEnumRequestDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -447,28 +550,21 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterValue = indexFilter;
-		return Self;
+		Instance.IndexFilter = value;
+		return this;
 	}
 
-	public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		IndexFilterValue = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public TermsEnumRequestDescriptor IndexFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		IndexFilterValue = null;
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = configure;
-		return Self;
+		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -477,10 +573,10 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	/// It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor SearchAfter(string? searchAfter)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> SearchAfter(string? value)
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.SearchAfter = value;
+		return this;
 	}
 
 	/// <summary>
@@ -488,10 +584,10 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	/// The number of matching terms to return.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -504,10 +600,10 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	/// The prefix string cannot be larger than the largest possible keyword value, which is Lucene's term byte-length limit of 32766.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor String(string? value)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> String(string? value)
 	{
-		StringValue = value;
-		return Self;
+		Instance.String = value;
+		return this;
 	}
 
 	/// <summary>
@@ -516,63 +612,59 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	/// If the timeout is exceeded the <c>complete</c> flag set to <c>false</c> in the response and the results may be partial or empty.
 	/// </para>
 	/// </summary>
-	public TermsEnumRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TermsEnumRequest Build(System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (CaseInsensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_insensitive");
-			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TermsEnumRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IndexFilterDescriptor is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterDescriptor, options);
-		}
-		else if (IndexFilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(IndexFilterDescriptorAction), options);
-		}
-		else if (IndexFilterValue is not null)
-		{
-			writer.WritePropertyName("index_filter");
-			JsonSerializer.Serialize(writer, IndexFilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(SearchAfterValue))
-		{
-			writer.WritePropertyName("search_after");
-			writer.WriteStringValue(SearchAfterValue);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(StringValue))
-		{
-			writer.WritePropertyName("string");
-			writer.WriteStringValue(StringValue);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,21 +17,80 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class SamlCompleteLogoutRequestParameters : RequestParameters
+public sealed partial class SamlCompleteLogoutRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class SamlCompleteLogoutRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropContent = System.Text.Json.JsonEncodedText.Encode("content");
+	private static readonly System.Text.Json.JsonEncodedText PropIds = System.Text.Json.JsonEncodedText.Encode("ids");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryString = System.Text.Json.JsonEncodedText.Encode("query_string");
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+
+	public override Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propContent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ids> propIds = default;
+		LocalJsonValue<string?> propQueryString = default;
+		LocalJsonValue<string> propRealm = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propContent.TryReadProperty(ref reader, options, PropContent, null))
+			{
+				continue;
+			}
+
+			if (propIds.TryReadProperty(ref reader, options, PropIds, null))
+			{
+				continue;
+			}
+
+			if (propQueryString.TryReadProperty(ref reader, options, PropQueryString, null))
+			{
+				continue;
+			}
+
+			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Content = propContent.Value,
+			Ids = propIds.Value,
+			QueryString = propQueryString.Value,
+			Realm = propRealm.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropContent, value.Content, null, null);
+		writer.WriteProperty(options, PropIds, value.Ids, null, null);
+		writer.WriteProperty(options, PropQueryString, value.QueryString, null, null);
+		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -53,11 +112,35 @@ public sealed partial class SamlCompleteLogoutRequestParameters : RequestParamet
 /// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 /// </para>
 /// </summary>
-public sealed partial class SamlCompleteLogoutRequest : PlainRequest<SamlCompleteLogoutRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestConverter))]
+public sealed partial class SamlCompleteLogoutRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlCompleteLogout;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlCompleteLogoutRequest(Elastic.Clients.Elasticsearch.Ids ids, string realm)
+	{
+		Ids = ids;
+		Realm = realm;
+	}
+#if NET7_0_OR_GREATER
+	public SamlCompleteLogoutRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SamlCompleteLogoutRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SamlCompleteLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecuritySamlCompleteLogout;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -68,7 +151,6 @@ public sealed partial class SamlCompleteLogoutRequest : PlainRequest<SamlComplet
 	/// If the SAML IdP sends the logout response with the HTTP-Post binding, this field must be set to the value of the SAMLResponse form parameter from the logout response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("content")]
 	public string? Content { get; set; }
 
 	/// <summary>
@@ -76,15 +158,17 @@ public sealed partial class SamlCompleteLogoutRequest : PlainRequest<SamlComplet
 	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ids")]
-	public Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If the SAML IdP sends the logout response with the HTTP-Redirect binding, this field must be set to the query string of the redirect URI.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_string")]
 	public string? QueryString { get; set; }
 
 	/// <summary>
@@ -92,8 +176,11 @@ public sealed partial class SamlCompleteLogoutRequest : PlainRequest<SamlComplet
 	/// The name of the SAML realm in Elasticsearch for which the configuration is used to verify the logout response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("realm")]
-	public string Realm { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Realm { get; set; }
 }
 
 /// <summary>
@@ -115,36 +202,33 @@ public sealed partial class SamlCompleteLogoutRequest : PlainRequest<SamlComplet
 /// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 /// </para>
 /// </summary>
-public sealed partial class SamlCompleteLogoutRequestDescriptor : RequestDescriptor<SamlCompleteLogoutRequestDescriptor, SamlCompleteLogoutRequestParameters>
+public readonly partial struct SamlCompleteLogoutRequestDescriptor
 {
-	internal SamlCompleteLogoutRequestDescriptor(Action<SamlCompleteLogoutRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlCompleteLogoutRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public SamlCompleteLogoutRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlCompleteLogout;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.saml_complete_logout";
-
-	private string? ContentValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ids IdsValue { get; set; }
-	private string? QueryStringValue { get; set; }
-	private string RealmValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// If the SAML IdP sends the logout response with the HTTP-Post binding, this field must be set to the value of the SAMLResponse form parameter from the logout response.
 	/// </para>
 	/// </summary>
-	public SamlCompleteLogoutRequestDescriptor Content(string? content)
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor Content(string? value)
 	{
-		ContentValue = content;
-		return Self;
+		Instance.Content = value;
+		return this;
 	}
 
 	/// <summary>
@@ -152,10 +236,10 @@ public sealed partial class SamlCompleteLogoutRequestDescriptor : RequestDescrip
 	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
-	public SamlCompleteLogoutRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids ids)
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids value)
 	{
-		IdsValue = ids;
-		return Self;
+		Instance.Ids = value;
+		return this;
 	}
 
 	/// <summary>
@@ -163,10 +247,10 @@ public sealed partial class SamlCompleteLogoutRequestDescriptor : RequestDescrip
 	/// If the SAML IdP sends the logout response with the HTTP-Redirect binding, this field must be set to the query string of the redirect URI.
 	/// </para>
 	/// </summary>
-	public SamlCompleteLogoutRequestDescriptor QueryString(string? queryString)
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor QueryString(string? value)
 	{
-		QueryStringValue = queryString;
-		return Self;
+		Instance.QueryString = value;
+		return this;
 	}
 
 	/// <summary>
@@ -174,31 +258,59 @@ public sealed partial class SamlCompleteLogoutRequestDescriptor : RequestDescrip
 	/// The name of the SAML realm in Elasticsearch for which the configuration is used to verify the logout response.
 	/// </para>
 	/// </summary>
-	public SamlCompleteLogoutRequestDescriptor Realm(string realm)
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor Realm(string value)
 	{
-		RealmValue = realm;
-		return Self;
+		Instance.Realm = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContentValue))
-		{
-			writer.WritePropertyName("content");
-			writer.WriteStringValue(ContentValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("ids");
-		JsonSerializer.Serialize(writer, IdsValue, options);
-		if (!string.IsNullOrEmpty(QueryStringValue))
-		{
-			writer.WritePropertyName("query_string");
-			writer.WriteStringValue(QueryStringValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WritePropertyName("realm");
-		writer.WriteStringValue(RealmValue);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

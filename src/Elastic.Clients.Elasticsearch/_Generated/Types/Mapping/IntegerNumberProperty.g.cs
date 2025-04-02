@@ -17,36 +17,239 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class IntegerNumberProperty : IProperty
+internal sealed partial class IntegerNumberPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty>
 {
-	[JsonInclude, JsonPropertyName("boost")]
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value");
+	private static readonly System.Text.Json.JsonEncodedText PropOnScriptError = System.Text.Json.JsonEncodedText.Encode("on_script_error");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimension = System.Text.Json.JsonEncodedText.Encode("time_series_dimension");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesMetric = System.Text.Json.JsonEncodedText.Encode("time_series_metric");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propBoost = default;
+		LocalJsonValue<bool?> propCoerce = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIgnoreMalformed = default;
+		LocalJsonValue<bool?> propIndex = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<int?> propNullValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.OnScriptError?> propOnScriptError = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		LocalJsonValue<bool?> propTimeSeriesDimension = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType?> propTimeSeriesMetric = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propCoerce.TryReadProperty(ref reader, options, PropCoerce, null))
+			{
+				continue;
+			}
+
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMalformed.TryReadProperty(ref reader, options, PropIgnoreMalformed, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, null))
+			{
+				continue;
+			}
+
+			if (propOnScriptError.TryReadProperty(ref reader, options, PropOnScriptError, null))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			{
+				continue;
+			}
+
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (propTimeSeriesDimension.TryReadProperty(ref reader, options, PropTimeSeriesDimension, null))
+			{
+				continue;
+			}
+
+			if (propTimeSeriesMetric.TryReadProperty(ref reader, options, PropTimeSeriesMetric, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Coerce = propCoerce.Value,
+			CopyTo = propCopyTo.Value,
+			DocValues = propDocValues.Value,
+			Dynamic = propDynamic.Value,
+			Fields = propFields.Value,
+			IgnoreAbove = propIgnoreAbove.Value,
+			IgnoreMalformed = propIgnoreMalformed.Value,
+			Index = propIndex.Value,
+			Meta = propMeta.Value,
+			NullValue = propNullValue.Value,
+			OnScriptError = propOnScriptError.Value,
+			Properties = propProperties.Value,
+			Script = propScript.Value,
+			Store = propStore.Value,
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value,
+			TimeSeriesDimension = propTimeSeriesDimension.Value,
+			TimeSeriesMetric = propTimeSeriesMetric.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropCoerce, value.Coerce, null, null);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
+		writer.WriteProperty(options, PropOnScriptError, value.OnScriptError, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension, null, null);
+		writer.WriteProperty(options, PropTimeSeriesMetric, value.TimeSeriesMetric, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyConverter))]
+public sealed partial class IntegerNumberProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
+{
+#if NET7_0_OR_GREATER
+	public IntegerNumberProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IntegerNumberProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IntegerNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public double? Boost { get; set; }
-	[JsonInclude, JsonPropertyName("coerce")]
 	public bool? Coerce { get; set; }
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
-	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
 
 	/// <summary>
@@ -54,19 +257,12 @@ public sealed partial class IntegerNumberProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("null_value")]
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public int? NullValue { get; set; }
-	[JsonInclude, JsonPropertyName("on_script_error")]
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
 	/// <summary>
@@ -74,7 +270,6 @@ public sealed partial class IntegerNumberProperty : IProperty
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
 
 	/// <summary>
@@ -82,108 +277,94 @@ public sealed partial class IntegerNumberProperty : IProperty
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "integer";
 }
 
-public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : SerializableDescriptor<IntegerNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<IntegerNumberProperty>
+public readonly partial struct IntegerNumberPropertyDescriptor<TDocument>
 {
-	internal IntegerNumberPropertyDescriptor(Action<IntegerNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty Instance { get; init; }
 
-	public IntegerNumberPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntegerNumberPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private double? BoostValue { get; set; }
-	private bool? CoerceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private int? NullValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-	public IntegerNumberPropertyDescriptor<TDocument> Boost(double? boost)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntegerNumberPropertyDescriptor()
 	{
-		BoostValue = boost;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Boost(double? value)
 	{
-		CoerceValue = coerce;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Coerce(bool? value = true)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.Coerce = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> CopyTo(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> DocValues(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
-		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> IgnoreMalformed(bool? value = true)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.IgnoreMalformed = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Index(bool? value = true)
+	{
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -191,78 +372,93 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public IntegerNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> NullValue(int? nullValue)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Meta()
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		OnScriptErrorValue = onScriptError;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> AddMeta(string key, string value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> NullValue(int? value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.OnScriptError = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Script()
 	{
-		StoreValue = store;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Store(bool? value = true)
+	{
+		Instance.Store = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
+	{
+		Instance.SyntheticSourceKeep = value;
+		return this;
 	}
 
 	/// <summary>
@@ -270,10 +466,10 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
 	/// </para>
 	/// </summary>
-	public IntegerNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? value = true)
 	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
-		return Self;
+		Instance.TimeSeriesDimension = value;
+		return this;
 	}
 
 	/// <summary>
@@ -281,280 +477,115 @@ public sealed partial class IntegerNumberPropertyDescriptor<TDocument> : Seriali
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
 	/// </para>
 	/// </summary>
-	public IntegerNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
-		TimeSeriesMetricValue = timeSeriesMetric;
-		return Self;
+		Instance.TimeSeriesMetric = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
+			return new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (CoerceValue.HasValue)
-		{
-			writer.WritePropertyName("coerce");
-			writer.WriteBooleanValue(CoerceValue.Value);
-		}
-
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IgnoreMalformedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (NullValueValue.HasValue)
-		{
-			writer.WritePropertyName("null_value");
-			writer.WriteNumberValue(NullValueValue.Value);
-		}
-
-		if (OnScriptErrorValue is not null)
-		{
-			writer.WritePropertyName("on_script_error");
-			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("integer");
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	private Elastic.Clients.Elasticsearch.Script? BuildScript()
-	{
-		if (ScriptValue is not null)
-		{
-			return ScriptValue;
-		}
-
-		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (ScriptDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
-	}
-
-	IntegerNumberProperty IBuildableDescriptor<IntegerNumberProperty>.Build() => new()
-	{
-		Boost = BoostValue,
-		Coerce = CoerceValue,
-		CopyTo = CopyToValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		IgnoreMalformed = IgnoreMalformedValue,
-		Index = IndexValue,
-		Meta = MetaValue,
-		NullValue = NullValueValue,
-		OnScriptError = OnScriptErrorValue,
-		Properties = PropertiesValue,
-		Script = BuildScript(),
-		Store = StoreValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
-	};
 }
 
-public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescriptor<IntegerNumberPropertyDescriptor>, IBuildableDescriptor<IntegerNumberProperty>
+public readonly partial struct IntegerNumberPropertyDescriptor
 {
-	internal IntegerNumberPropertyDescriptor(Action<IntegerNumberPropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty Instance { get; init; }
 
-	public IntegerNumberPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntegerNumberPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private double? BoostValue { get; set; }
-	private bool? CoerceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private int? NullValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-	public IntegerNumberPropertyDescriptor Boost(double? boost)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IntegerNumberPropertyDescriptor()
 	{
-		BoostValue = boost;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IntegerNumberPropertyDescriptor Coerce(bool? coerce = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Boost(double? value)
 	{
-		CoerceValue = coerce;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Coerce(bool? value = true)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.Coerce = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor CopyTo<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor DocValues(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor IgnoreAbove(int? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor IgnoreMalformed(bool? value = true)
+	{
+		Instance.IgnoreMalformed = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Index(bool? value = true)
+	{
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -562,78 +593,99 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public IntegerNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor NullValue(int? nullValue)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Meta()
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		OnScriptErrorValue = onScriptError;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor AddMeta(string key, string value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor NullValue(int? value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.OnScriptError = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		StoreValue = store;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public IntegerNumberPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Script()
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Store(bool? value = true)
+	{
+		Instance.Store = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
+	{
+		Instance.SyntheticSourceKeep = value;
+		return this;
 	}
 
 	/// <summary>
@@ -641,10 +693,10 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
 	/// </para>
 	/// </summary>
-	public IntegerNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor TimeSeriesDimension(bool? value = true)
 	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
-		return Self;
+		Instance.TimeSeriesDimension = value;
+		return this;
 	}
 
 	/// <summary>
@@ -652,181 +704,22 @@ public sealed partial class IntegerNumberPropertyDescriptor : SerializableDescri
 	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
 	/// </para>
 	/// </summary>
-	public IntegerNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
+	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
-		TimeSeriesMetricValue = timeSeriesMetric;
-		return Self;
+		Instance.TimeSeriesMetric = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
+			return new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (CoerceValue.HasValue)
-		{
-			writer.WritePropertyName("coerce");
-			writer.WriteBooleanValue(CoerceValue.Value);
-		}
-
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IgnoreMalformedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (NullValueValue.HasValue)
-		{
-			writer.WritePropertyName("null_value");
-			writer.WriteNumberValue(NullValueValue.Value);
-		}
-
-		if (OnScriptErrorValue is not null)
-		{
-			writer.WritePropertyName("on_script_error");
-			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("integer");
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	private Elastic.Clients.Elasticsearch.Script? BuildScript()
-	{
-		if (ScriptValue is not null)
-		{
-			return ScriptValue;
-		}
-
-		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (ScriptDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
-	}
-
-	IntegerNumberProperty IBuildableDescriptor<IntegerNumberProperty>.Build() => new()
-	{
-		Boost = BoostValue,
-		Coerce = CoerceValue,
-		CopyTo = CopyToValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		IgnoreMalformed = IgnoreMalformedValue,
-		Index = IndexValue,
-		Meta = MetaValue,
-		NullValue = NullValueValue,
-		OnScriptError = OnScriptErrorValue,
-		Properties = PropertiesValue,
-		Script = BuildScript(),
-		Store = StoreValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
-	};
 }

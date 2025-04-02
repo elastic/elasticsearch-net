@@ -17,304 +17,138 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class FieldSort
+internal sealed partial class FieldSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.FieldSort>
 {
-	[JsonInclude, JsonPropertyName("format")]
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested");
+	private static readonly System.Text.Json.JsonEncodedText PropNumericType = System.Text.Json.JsonEncodedText.Encode("numeric_type");
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
+	private static readonly System.Text.Json.JsonEncodedText PropUnmappedType = System.Text.Json.JsonEncodedText.Encode("unmapped_type");
+
+	public override Elastic.Clients.Elasticsearch.FieldSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.SortOrder?>(options, null);
+			return new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+			{
+				Order = value
+			};
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<object?> propMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortMode?> propMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NestedSortValue?> propNested = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldSortNumericType?> propNumericType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propOrder = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.FieldType?> propUnmappedType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (propNested.TryReadProperty(ref reader, options, PropNested, null))
+			{
+				continue;
+			}
+
+			if (propNumericType.TryReadProperty(ref reader, options, PropNumericType, null))
+			{
+				continue;
+			}
+
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			{
+				continue;
+			}
+
+			if (propUnmappedType.TryReadProperty(ref reader, options, PropUnmappedType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Format = propFormat.Value,
+			Missing = propMissing.Value,
+			Mode = propMode.Value,
+			Nested = propNested.Value,
+			NumericType = propNumericType.Value,
+			Order = propOrder.Value,
+			UnmappedType = propUnmappedType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.FieldSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropNested, value.Nested, null, null);
+		writer.WriteProperty(options, PropNumericType, value.NumericType, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, null);
+		writer.WriteProperty(options, PropUnmappedType, value.UnmappedType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.FieldSortConverter))]
+public partial class FieldSort
+{
+#if NET7_0_OR_GREATER
+	public FieldSort()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FieldSort()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("missing")]
-	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("mode")]
+	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
-	[JsonInclude, JsonPropertyName("nested")]
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
-	[JsonInclude, JsonPropertyName("numeric_type")]
 	public Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericType { get; set; }
-	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
-	[JsonInclude, JsonPropertyName("unmapped_type")]
 	public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; set; }
-}
-
-public sealed partial class FieldSortDescriptor<TDocument> : SerializableDescriptor<FieldSortDescriptor<TDocument>>
-{
-	internal FieldSortDescriptor(Action<FieldSortDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public FieldSortDescriptor() : base()
-	{
-	}
-
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedTypeValue { get; set; }
-
-	public FieldSortDescriptor<TDocument> Format(string? format)
-	{
-		FormatValue = format;
-		return Self;
-	}
-
-	public FieldSortDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
-	{
-		MissingValue = missing;
-		return Self;
-	}
-
-	public FieldSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
-	{
-		ModeValue = mode;
-		return Self;
-	}
-
-	public FieldSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
-	{
-		NestedDescriptor = null;
-		NestedDescriptorAction = null;
-		NestedValue = nested;
-		return Self;
-	}
-
-	public FieldSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> descriptor)
-	{
-		NestedValue = null;
-		NestedDescriptorAction = null;
-		NestedDescriptor = descriptor;
-		return Self;
-	}
-
-	public FieldSortDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> configure)
-	{
-		NestedValue = null;
-		NestedDescriptor = null;
-		NestedDescriptorAction = configure;
-		return Self;
-	}
-
-	public FieldSortDescriptor<TDocument> NumericType(Elastic.Clients.Elasticsearch.FieldSortNumericType? numericType)
-	{
-		NumericTypeValue = numericType;
-		return Self;
-	}
-
-	public FieldSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
-	{
-		OrderValue = order;
-		return Self;
-	}
-
-	public FieldSortDescriptor<TDocument> UnmappedType(Elastic.Clients.Elasticsearch.Mapping.FieldType? unmappedType)
-	{
-		UnmappedTypeValue = unmappedType;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
-		}
-
-		if (NestedDescriptor is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedDescriptor, options);
-		}
-		else if (NestedDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
-		}
-		else if (NestedValue is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		if (NumericTypeValue is not null)
-		{
-			writer.WritePropertyName("numeric_type");
-			JsonSerializer.Serialize(writer, NumericTypeValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (UnmappedTypeValue is not null)
-		{
-			writer.WritePropertyName("unmapped_type");
-			JsonSerializer.Serialize(writer, UnmappedTypeValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class FieldSortDescriptor : SerializableDescriptor<FieldSortDescriptor>
-{
-	internal FieldSortDescriptor(Action<FieldSortDescriptor> configure) => configure.Invoke(this);
-
-	public FieldSortDescriptor() : base()
-	{
-	}
-
-	private string? FormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor NestedDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedTypeValue { get; set; }
-
-	public FieldSortDescriptor Format(string? format)
-	{
-		FormatValue = format;
-		return Self;
-	}
-
-	public FieldSortDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
-	{
-		MissingValue = missing;
-		return Self;
-	}
-
-	public FieldSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
-	{
-		ModeValue = mode;
-		return Self;
-	}
-
-	public FieldSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
-	{
-		NestedDescriptor = null;
-		NestedDescriptorAction = null;
-		NestedValue = nested;
-		return Self;
-	}
-
-	public FieldSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor descriptor)
-	{
-		NestedValue = null;
-		NestedDescriptorAction = null;
-		NestedDescriptor = descriptor;
-		return Self;
-	}
-
-	public FieldSortDescriptor Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> configure)
-	{
-		NestedValue = null;
-		NestedDescriptor = null;
-		NestedDescriptorAction = configure;
-		return Self;
-	}
-
-	public FieldSortDescriptor NumericType(Elastic.Clients.Elasticsearch.FieldSortNumericType? numericType)
-	{
-		NumericTypeValue = numericType;
-		return Self;
-	}
-
-	public FieldSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
-	{
-		OrderValue = order;
-		return Self;
-	}
-
-	public FieldSortDescriptor UnmappedType(Elastic.Clients.Elasticsearch.Mapping.FieldType? unmappedType)
-	{
-		UnmappedTypeValue = unmappedType;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
-		}
-
-		if (NestedDescriptor is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedDescriptor, options);
-		}
-		else if (NestedDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(NestedDescriptorAction), options);
-		}
-		else if (NestedValue is not null)
-		{
-			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		if (NumericTypeValue is not null)
-		{
-			writer.WritePropertyName("numeric_type");
-			JsonSerializer.Serialize(writer, NumericTypeValue, options);
-		}
-
-		if (OrderValue is not null)
-		{
-			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, OrderValue, options);
-		}
-
-		if (UnmappedTypeValue is not null)
-		{
-			writer.WritePropertyName("unmapped_type");
-			JsonSerializer.Serialize(writer, UnmappedTypeValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
 }

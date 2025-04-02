@@ -17,15 +17,49 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class PromoteDataStreamResponse : ElasticsearchResponse
+internal sealed partial class PromoteDataStreamResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse>
 {
+	public override Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Result = reader.ReadValue<object>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Result, null);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponseConverter))]
+public sealed partial class PromoteDataStreamResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PromoteDataStreamResponse(object result)
+	{
+		Result = result;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PromoteDataStreamResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PromoteDataStreamResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+object Result { get; set; }
 }

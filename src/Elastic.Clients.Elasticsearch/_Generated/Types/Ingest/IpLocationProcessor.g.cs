@@ -17,24 +17,180 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class IpLocationProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDatabaseFile = System.Text.Json.JsonEncodedText.Encode("database_file");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDownloadDatabaseOnPipelineCreation = System.Text.Json.JsonEncodedText.Encode("download_database_on_pipeline_creation");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFirstOnly = System.Text.Json.JsonEncodedText.Encode("first_only");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDatabaseFile = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<bool?> propDownloadDatabaseOnPipelineCreation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<bool?> propFirstOnly = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propProperties = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDatabaseFile.TryReadProperty(ref reader, options, PropDatabaseFile, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDownloadDatabaseOnPipelineCreation.TryReadProperty(ref reader, options, PropDownloadDatabaseOnPipelineCreation, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFirstOnly.TryReadProperty(ref reader, options, PropFirstOnly, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DatabaseFile = propDatabaseFile.Value,
+			Description = propDescription.Value,
+			DownloadDatabaseOnPipelineCreation = propDownloadDatabaseOnPipelineCreation.Value,
+			Field = propField.Value,
+			FirstOnly = propFirstOnly.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			OnFailure = propOnFailure.Value,
+			Properties = propProperties.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDatabaseFile, value.DatabaseFile, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDownloadDatabaseOnPipelineCreation, value.DownloadDatabaseOnPipelineCreation, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFirstOnly, value.FirstOnly, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropProperties, value.Properties, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorConverter))]
 public sealed partial class IpLocationProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpLocationProcessor(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public IpLocationProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IpLocationProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IpLocationProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("database_file")]
 	public string? DatabaseFile { get; set; }
 
 	/// <summary>
@@ -43,7 +199,6 @@ public sealed partial class IpLocationProcessor
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -52,7 +207,6 @@ public sealed partial class IpLocationProcessor
 	/// Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("download_database_on_pipeline_creation")]
 	public bool? DownloadDatabaseOnPipelineCreation { get; set; }
 
 	/// <summary>
@@ -60,15 +214,17 @@ public sealed partial class IpLocationProcessor
 	/// The field to get the ip address from for the geographical lookup.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, only the first found IP location data will be returned, even if the field contains an array.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("first_only")]
 	public bool? FirstOnly { get; set; }
 
 	/// <summary>
@@ -76,15 +232,13 @@ public sealed partial class IpLocationProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -92,7 +246,6 @@ public sealed partial class IpLocationProcessor
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -100,16 +253,14 @@ public sealed partial class IpLocationProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("properties")]
-	public ICollection<string>? Properties { get; set; }
+	public System.Collections.Generic.ICollection<string>? Properties { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -117,7 +268,6 @@ public sealed partial class IpLocationProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -125,45 +275,37 @@ public sealed partial class IpLocationProcessor
 	/// The field that will hold the geographical information looked up from the MaxMind database.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(IpLocationProcessor ipLocationProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.IpLocation(ipLocationProcessor);
 }
 
-public sealed partial class IpLocationProcessorDescriptor<TDocument> : SerializableDescriptor<IpLocationProcessorDescriptor<TDocument>>
+public readonly partial struct IpLocationProcessorDescriptor<TDocument>
 {
-	internal IpLocationProcessorDescriptor(Action<IpLocationProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor Instance { get; init; }
 
-	public IpLocationProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpLocationProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DatabaseFileValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private bool? DownloadDatabaseOnPipelineCreationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? FirstOnlyValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<string>? PropertiesValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpLocationProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> DatabaseFile(string? databaseFile)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> DatabaseFile(string? value)
 	{
-		DatabaseFileValue = databaseFile;
-		return Self;
+		Instance.DatabaseFile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -172,10 +314,10 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -184,10 +326,10 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> DownloadDatabaseOnPipelineCreation(bool? downloadDatabaseOnPipelineCreation = true)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> DownloadDatabaseOnPipelineCreation(bool? value = true)
 	{
-		DownloadDatabaseOnPipelineCreationValue = downloadDatabaseOnPipelineCreation;
-		return Self;
+		Instance.DownloadDatabaseOnPipelineCreation = value;
+		return this;
 	}
 
 	/// <summary>
@@ -195,10 +337,10 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// The field to get the ip address from for the geographical lookup.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -206,21 +348,10 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// The field to get the ip address from for the geographical lookup.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to get the ip address from for the geographical lookup.
-	/// </para>
-	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -228,10 +359,10 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// If <c>true</c>, only the first found IP location data will be returned, even if the field contains an array.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> FirstOnly(bool? firstOnly = true)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> FirstOnly(bool? value = true)
 	{
-		FirstOnlyValue = firstOnly;
-		return Self;
+		Instance.FirstOnly = value;
+		return this;
 	}
 
 	/// <summary>
@@ -239,10 +370,32 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -250,10 +403,10 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -261,10 +414,10 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -272,40 +425,60 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public IpLocationProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public IpLocationProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public IpLocationProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -313,10 +486,43 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> Properties(ICollection<string>? properties)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<string>? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Properties()
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Properties(params string[] values)
+	{
+		Instance.Properties = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -325,10 +531,10 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -336,10 +542,10 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// The field that will hold the geographical information looked up from the MaxMind database.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -347,156 +553,49 @@ public sealed partial class IpLocationProcessorDescriptor<TDocument> : Serializa
 	/// The field that will hold the geographical information looked up from the MaxMind database.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the geographical information looked up from the MaxMind database.
-	/// </para>
-	/// </summary>
-	public IpLocationProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument>> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DatabaseFileValue))
-		{
-			writer.WritePropertyName("database_file");
-			writer.WriteStringValue(DatabaseFileValue);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (DownloadDatabaseOnPipelineCreationValue.HasValue)
-		{
-			writer.WritePropertyName("download_database_on_pipeline_creation");
-			writer.WriteBooleanValue(DownloadDatabaseOnPipelineCreationValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (FirstOnlyValue.HasValue)
-		{
-			writer.WritePropertyName("first_only");
-			writer.WriteBooleanValue(FirstOnlyValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class IpLocationProcessorDescriptor : SerializableDescriptor<IpLocationProcessorDescriptor>
+public readonly partial struct IpLocationProcessorDescriptor
 {
-	internal IpLocationProcessorDescriptor(Action<IpLocationProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor Instance { get; init; }
 
-	public IpLocationProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpLocationProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DatabaseFileValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private bool? DownloadDatabaseOnPipelineCreationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? FirstOnlyValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<string>? PropertiesValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IpLocationProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor DatabaseFile(string? databaseFile)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor DatabaseFile(string? value)
 	{
-		DatabaseFileValue = databaseFile;
-		return Self;
+		Instance.DatabaseFile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -505,10 +604,10 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -517,10 +616,10 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor DownloadDatabaseOnPipelineCreation(bool? downloadDatabaseOnPipelineCreation = true)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor DownloadDatabaseOnPipelineCreation(bool? value = true)
 	{
-		DownloadDatabaseOnPipelineCreationValue = downloadDatabaseOnPipelineCreation;
-		return Self;
+		Instance.DownloadDatabaseOnPipelineCreation = value;
+		return this;
 	}
 
 	/// <summary>
@@ -528,10 +627,10 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// The field to get the ip address from for the geographical lookup.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -539,21 +638,10 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// The field to get the ip address from for the geographical lookup.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to get the ip address from for the geographical lookup.
-	/// </para>
-	/// </summary>
-	public IpLocationProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -561,10 +649,10 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// If <c>true</c>, only the first found IP location data will be returned, even if the field contains an array.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor FirstOnly(bool? firstOnly = true)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor FirstOnly(bool? value = true)
 	{
-		FirstOnlyValue = firstOnly;
-		return Self;
+		Instance.FirstOnly = value;
+		return this;
 	}
 
 	/// <summary>
@@ -572,10 +660,32 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -583,10 +693,10 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -594,10 +704,10 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -605,40 +715,88 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public IpLocationProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
 	}
 
-	public IpLocationProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
 	}
 
-	public IpLocationProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -646,10 +804,43 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor Properties(ICollection<string>? properties)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Properties(System.Collections.Generic.ICollection<string>? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Properties = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Properties()
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Properties(params string[] values)
+	{
+		Instance.Properties = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -658,10 +849,10 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -669,10 +860,10 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// The field that will hold the geographical information looked up from the MaxMind database.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -680,119 +871,17 @@ public sealed partial class IpLocationProcessorDescriptor : SerializableDescript
 	/// The field that will hold the geographical information looked up from the MaxMind database.
 	/// </para>
 	/// </summary>
-	public IpLocationProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the geographical information looked up from the MaxMind database.
-	/// </para>
-	/// </summary>
-	public IpLocationProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor> action)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DatabaseFileValue))
-		{
-			writer.WritePropertyName("database_file");
-			writer.WriteStringValue(DatabaseFileValue);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (DownloadDatabaseOnPipelineCreationValue.HasValue)
-		{
-			writer.WritePropertyName("download_database_on_pipeline_creation");
-			writer.WriteBooleanValue(DownloadDatabaseOnPipelineCreationValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (FirstOnlyValue.HasValue)
-		{
-			writer.WritePropertyName("first_only");
-			writer.WriteBooleanValue(FirstOnlyValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

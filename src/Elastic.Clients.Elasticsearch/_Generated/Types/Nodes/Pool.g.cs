@@ -17,47 +17,122 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class PoolConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Pool>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxInBytes = System.Text.Json.JsonEncodedText.Encode("max_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPeakMaxInBytes = System.Text.Json.JsonEncodedText.Encode("peak_max_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPeakUsedInBytes = System.Text.Json.JsonEncodedText.Encode("peak_used_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.Pool Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propMaxInBytes = default;
+		LocalJsonValue<long?> propPeakMaxInBytes = default;
+		LocalJsonValue<long?> propPeakUsedInBytes = default;
+		LocalJsonValue<long?> propUsedInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxInBytes.TryReadProperty(ref reader, options, PropMaxInBytes, null))
+			{
+				continue;
+			}
+
+			if (propPeakMaxInBytes.TryReadProperty(ref reader, options, PropPeakMaxInBytes, null))
+			{
+				continue;
+			}
+
+			if (propPeakUsedInBytes.TryReadProperty(ref reader, options, PropPeakUsedInBytes, null))
+			{
+				continue;
+			}
+
+			if (propUsedInBytes.TryReadProperty(ref reader, options, PropUsedInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.Pool(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxInBytes = propMaxInBytes.Value,
+			PeakMaxInBytes = propPeakMaxInBytes.Value,
+			PeakUsedInBytes = propPeakUsedInBytes.Value,
+			UsedInBytes = propUsedInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Pool value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxInBytes, value.MaxInBytes, null, null);
+		writer.WriteProperty(options, PropPeakMaxInBytes, value.PeakMaxInBytes, null, null);
+		writer.WriteProperty(options, PropPeakUsedInBytes, value.PeakUsedInBytes, null, null);
+		writer.WriteProperty(options, PropUsedInBytes, value.UsedInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.PoolConverter))]
 public sealed partial class Pool
 {
+#if NET7_0_OR_GREATER
+	public Pool()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Pool()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Pool(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Maximum amount of memory, in bytes, available for use by the heap.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_in_bytes")]
-	public long? MaxInBytes { get; init; }
+	public long? MaxInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Largest amount of memory, in bytes, historically used by the heap.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("peak_max_in_bytes")]
-	public long? PeakMaxInBytes { get; init; }
+	public long? PeakMaxInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Largest amount of memory, in bytes, historically used by the heap.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("peak_used_in_bytes")]
-	public long? PeakUsedInBytes { get; init; }
+	public long? PeakUsedInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Memory, in bytes, used by the heap.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("used_in_bytes")]
-	public long? UsedInBytes { get; init; }
+	public long? UsedInBytes { get; set; }
 }

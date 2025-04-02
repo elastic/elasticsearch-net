@@ -17,25 +17,211 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class CommunityIDProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDestinationIp = System.Text.Json.JsonEncodedText.Encode("destination_ip");
+	private static readonly System.Text.Json.JsonEncodedText PropDestinationPort = System.Text.Json.JsonEncodedText.Encode("destination_port");
+	private static readonly System.Text.Json.JsonEncodedText PropIanaNumber = System.Text.Json.JsonEncodedText.Encode("iana_number");
+	private static readonly System.Text.Json.JsonEncodedText PropIcmpCode = System.Text.Json.JsonEncodedText.Encode("icmp_code");
+	private static readonly System.Text.Json.JsonEncodedText PropIcmpType = System.Text.Json.JsonEncodedText.Encode("icmp_type");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed");
+	private static readonly System.Text.Json.JsonEncodedText PropSourceIp = System.Text.Json.JsonEncodedText.Encode("source_ip");
+	private static readonly System.Text.Json.JsonEncodedText PropSourcePort = System.Text.Json.JsonEncodedText.Encode("source_port");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propDestinationIp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propDestinationPort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propIanaNumber = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propIcmpCode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propIcmpType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<int?> propSeed = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propSourceIp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propSourcePort = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTransport = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDestinationIp.TryReadProperty(ref reader, options, PropDestinationIp, null))
+			{
+				continue;
+			}
+
+			if (propDestinationPort.TryReadProperty(ref reader, options, PropDestinationPort, null))
+			{
+				continue;
+			}
+
+			if (propIanaNumber.TryReadProperty(ref reader, options, PropIanaNumber, null))
+			{
+				continue;
+			}
+
+			if (propIcmpCode.TryReadProperty(ref reader, options, PropIcmpCode, null))
+			{
+				continue;
+			}
+
+			if (propIcmpType.TryReadProperty(ref reader, options, PropIcmpType, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSeed.TryReadProperty(ref reader, options, PropSeed, null))
+			{
+				continue;
+			}
+
+			if (propSourceIp.TryReadProperty(ref reader, options, PropSourceIp, null))
+			{
+				continue;
+			}
+
+			if (propSourcePort.TryReadProperty(ref reader, options, PropSourcePort, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (propTransport.TryReadProperty(ref reader, options, PropTransport, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			DestinationIp = propDestinationIp.Value,
+			DestinationPort = propDestinationPort.Value,
+			IanaNumber = propIanaNumber.Value,
+			IcmpCode = propIcmpCode.Value,
+			IcmpType = propIcmpType.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			OnFailure = propOnFailure.Value,
+			Seed = propSeed.Value,
+			SourceIp = propSourceIp.Value,
+			SourcePort = propSourcePort.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value,
+			Transport = propTransport.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDestinationIp, value.DestinationIp, null, null);
+		writer.WriteProperty(options, PropDestinationPort, value.DestinationPort, null, null);
+		writer.WriteProperty(options, PropIanaNumber, value.IanaNumber, null, null);
+		writer.WriteProperty(options, PropIcmpCode, value.IcmpCode, null, null);
+		writer.WriteProperty(options, PropIcmpType, value.IcmpType, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropSeed, value.Seed, null, null);
+		writer.WriteProperty(options, PropSourceIp, value.SourceIp, null, null);
+		writer.WriteProperty(options, PropSourcePort, value.SourcePort, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteProperty(options, PropTransport, value.Transport, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorConverter))]
 public sealed partial class CommunityIDProcessor
 {
+#if NET7_0_OR_GREATER
+	public CommunityIDProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CommunityIDProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CommunityIDProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -43,7 +229,6 @@ public sealed partial class CommunityIDProcessor
 	/// Field containing the destination IP address.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("destination_ip")]
 	public Elastic.Clients.Elasticsearch.Field? DestinationIp { get; set; }
 
 	/// <summary>
@@ -51,7 +236,6 @@ public sealed partial class CommunityIDProcessor
 	/// Field containing the destination port.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("destination_port")]
 	public Elastic.Clients.Elasticsearch.Field? DestinationPort { get; set; }
 
 	/// <summary>
@@ -59,7 +243,6 @@ public sealed partial class CommunityIDProcessor
 	/// Field containing the IANA number.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("iana_number")]
 	public Elastic.Clients.Elasticsearch.Field? IanaNumber { get; set; }
 
 	/// <summary>
@@ -67,7 +250,6 @@ public sealed partial class CommunityIDProcessor
 	/// Field containing the ICMP code.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("icmp_code")]
 	public Elastic.Clients.Elasticsearch.Field? IcmpCode { get; set; }
 
 	/// <summary>
@@ -75,7 +257,6 @@ public sealed partial class CommunityIDProcessor
 	/// Field containing the ICMP type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("icmp_type")]
 	public Elastic.Clients.Elasticsearch.Field? IcmpType { get; set; }
 
 	/// <summary>
@@ -83,15 +264,13 @@ public sealed partial class CommunityIDProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -100,7 +279,6 @@ public sealed partial class CommunityIDProcessor
 	/// without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -108,8 +286,7 @@ public sealed partial class CommunityIDProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -118,7 +295,6 @@ public sealed partial class CommunityIDProcessor
 	/// and production network that use the same addressing scheme.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("seed")]
 	public int? Seed { get; set; }
 
 	/// <summary>
@@ -126,7 +302,6 @@ public sealed partial class CommunityIDProcessor
 	/// Field containing the source IP address.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source_ip")]
 	public Elastic.Clients.Elasticsearch.Field? SourceIp { get; set; }
 
 	/// <summary>
@@ -134,7 +309,6 @@ public sealed partial class CommunityIDProcessor
 	/// Field containing the source port.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source_port")]
 	public Elastic.Clients.Elasticsearch.Field? SourcePort { get; set; }
 
 	/// <summary>
@@ -143,7 +317,6 @@ public sealed partial class CommunityIDProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -151,7 +324,6 @@ public sealed partial class CommunityIDProcessor
 	/// Output field for the community ID.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
 	/// <summary>
@@ -161,39 +333,27 @@ public sealed partial class CommunityIDProcessor
 	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("transport")]
 	public Elastic.Clients.Elasticsearch.Field? Transport { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(CommunityIDProcessor communityIDProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.CommunityId(communityIDProcessor);
 }
 
-public sealed partial class CommunityIDProcessorDescriptor<TDocument> : SerializableDescriptor<CommunityIDProcessorDescriptor<TDocument>>
+public readonly partial struct CommunityIdProcessorDescriptor<TDocument>
 {
-	internal CommunityIDProcessorDescriptor(Action<CommunityIDProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor Instance { get; init; }
 
-	public CommunityIDProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CommunityIdProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? DestinationIpValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? DestinationPortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? IanaNumberValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? IcmpCodeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? IcmpTypeValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private int? SeedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SourceIpValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SourcePortValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TransportValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CommunityIdProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -201,10 +361,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -212,10 +372,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the destination IP address.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> DestinationIp(Elastic.Clients.Elasticsearch.Field? destinationIp)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> DestinationIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		DestinationIpValue = destinationIp;
-		return Self;
+		Instance.DestinationIp = value;
+		return this;
 	}
 
 	/// <summary>
@@ -223,21 +383,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the destination IP address.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> DestinationIp<TValue>(Expression<Func<TDocument, TValue>> destinationIp)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> DestinationIp(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		DestinationIpValue = destinationIp;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> DestinationIp(Expression<Func<TDocument, object>> destinationIp)
-	{
-		DestinationIpValue = destinationIp;
-		return Self;
+		Instance.DestinationIp = value;
+		return this;
 	}
 
 	/// <summary>
@@ -245,10 +394,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the destination port.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> DestinationPort(Elastic.Clients.Elasticsearch.Field? destinationPort)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> DestinationPort(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		DestinationPortValue = destinationPort;
-		return Self;
+		Instance.DestinationPort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -256,21 +405,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the destination port.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> DestinationPort<TValue>(Expression<Func<TDocument, TValue>> destinationPort)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> DestinationPort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		DestinationPortValue = destinationPort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the destination port.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> DestinationPort(Expression<Func<TDocument, object>> destinationPort)
-	{
-		DestinationPortValue = destinationPort;
-		return Self;
+		Instance.DestinationPort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -278,10 +416,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the IANA number.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IanaNumber(Elastic.Clients.Elasticsearch.Field? ianaNumber)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IanaNumber(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		IanaNumberValue = ianaNumber;
-		return Self;
+		Instance.IanaNumber = value;
+		return this;
 	}
 
 	/// <summary>
@@ -289,21 +427,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the IANA number.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IanaNumber<TValue>(Expression<Func<TDocument, TValue>> ianaNumber)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IanaNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		IanaNumberValue = ianaNumber;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the IANA number.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IanaNumber(Expression<Func<TDocument, object>> ianaNumber)
-	{
-		IanaNumberValue = ianaNumber;
-		return Self;
+		Instance.IanaNumber = value;
+		return this;
 	}
 
 	/// <summary>
@@ -311,10 +438,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the ICMP code.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IcmpCode(Elastic.Clients.Elasticsearch.Field? icmpCode)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IcmpCode(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		IcmpCodeValue = icmpCode;
-		return Self;
+		Instance.IcmpCode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -322,21 +449,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the ICMP code.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IcmpCode<TValue>(Expression<Func<TDocument, TValue>> icmpCode)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IcmpCode(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		IcmpCodeValue = icmpCode;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP code.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IcmpCode(Expression<Func<TDocument, object>> icmpCode)
-	{
-		IcmpCodeValue = icmpCode;
-		return Self;
+		Instance.IcmpCode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -344,10 +460,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the ICMP type.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IcmpType(Elastic.Clients.Elasticsearch.Field? icmpType)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IcmpType(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		IcmpTypeValue = icmpType;
-		return Self;
+		Instance.IcmpType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -355,21 +471,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the ICMP type.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IcmpType<TValue>(Expression<Func<TDocument, TValue>> icmpType)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IcmpType(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		IcmpTypeValue = icmpType;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP type.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IcmpType(Expression<Func<TDocument, object>> icmpType)
-	{
-		IcmpTypeValue = icmpType;
-		return Self;
+		Instance.IcmpType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -377,10 +482,32 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -388,10 +515,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -400,10 +527,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// without modifying the document.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -411,40 +538,60 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public CommunityIDProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public CommunityIDProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public CommunityIDProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -454,10 +601,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// and production network that use the same addressing scheme.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> Seed(int? seed)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Seed(int? value)
 	{
-		SeedValue = seed;
-		return Self;
+		Instance.Seed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -465,10 +612,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the source IP address.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> SourceIp(Elastic.Clients.Elasticsearch.Field? sourceIp)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> SourceIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SourceIpValue = sourceIp;
-		return Self;
+		Instance.SourceIp = value;
+		return this;
 	}
 
 	/// <summary>
@@ -476,21 +623,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the source IP address.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> SourceIp<TValue>(Expression<Func<TDocument, TValue>> sourceIp)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> SourceIp(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		SourceIpValue = sourceIp;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> SourceIp(Expression<Func<TDocument, object>> sourceIp)
-	{
-		SourceIpValue = sourceIp;
-		return Self;
+		Instance.SourceIp = value;
+		return this;
 	}
 
 	/// <summary>
@@ -498,10 +634,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the source port.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> SourcePort(Elastic.Clients.Elasticsearch.Field? sourcePort)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> SourcePort(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SourcePortValue = sourcePort;
-		return Self;
+		Instance.SourcePort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -509,21 +645,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Field containing the source port.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> SourcePort<TValue>(Expression<Func<TDocument, TValue>> sourcePort)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> SourcePort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		SourcePortValue = sourcePort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the source port.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> SourcePort(Expression<Func<TDocument, object>> sourcePort)
-	{
-		SourcePortValue = sourcePort;
-		return Self;
+		Instance.SourcePort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -532,10 +657,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -543,10 +668,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Output field for the community ID.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -554,21 +679,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// Output field for the community ID.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Output field for the community ID.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -578,10 +692,10 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> Transport(Elastic.Clients.Elasticsearch.Field? transport)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Transport(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TransportValue = transport;
-		return Self;
+		Instance.Transport = value;
+		return this;
 	}
 
 	/// <summary>
@@ -591,180 +705,44 @@ public sealed partial class CommunityIDProcessorDescriptor<TDocument> : Serializ
 	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> Transport<TValue>(Expression<Func<TDocument, TValue>> transport)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Transport(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TransportValue = transport;
-		return Self;
+		Instance.Transport = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the transport protocol name or number. Used only when the
-	/// iana_number field is not present. The following protocol names are currently
-	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor<TDocument> Transport(Expression<Func<TDocument, object>> transport)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument>>? action)
 	{
-		TransportValue = transport;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
+			return new Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DestinationIpValue is not null)
-		{
-			writer.WritePropertyName("destination_ip");
-			JsonSerializer.Serialize(writer, DestinationIpValue, options);
-		}
-
-		if (DestinationPortValue is not null)
-		{
-			writer.WritePropertyName("destination_port");
-			JsonSerializer.Serialize(writer, DestinationPortValue, options);
-		}
-
-		if (IanaNumberValue is not null)
-		{
-			writer.WritePropertyName("iana_number");
-			JsonSerializer.Serialize(writer, IanaNumberValue, options);
-		}
-
-		if (IcmpCodeValue is not null)
-		{
-			writer.WritePropertyName("icmp_code");
-			JsonSerializer.Serialize(writer, IcmpCodeValue, options);
-		}
-
-		if (IcmpTypeValue is not null)
-		{
-			writer.WritePropertyName("icmp_type");
-			JsonSerializer.Serialize(writer, IcmpTypeValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (SeedValue.HasValue)
-		{
-			writer.WritePropertyName("seed");
-			writer.WriteNumberValue(SeedValue.Value);
-		}
-
-		if (SourceIpValue is not null)
-		{
-			writer.WritePropertyName("source_ip");
-			JsonSerializer.Serialize(writer, SourceIpValue, options);
-		}
-
-		if (SourcePortValue is not null)
-		{
-			writer.WritePropertyName("source_port");
-			JsonSerializer.Serialize(writer, SourcePortValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		if (TransportValue is not null)
-		{
-			writer.WritePropertyName("transport");
-			JsonSerializer.Serialize(writer, TransportValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class CommunityIDProcessorDescriptor : SerializableDescriptor<CommunityIDProcessorDescriptor>
+public readonly partial struct CommunityIdProcessorDescriptor
 {
-	internal CommunityIDProcessorDescriptor(Action<CommunityIDProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor Instance { get; init; }
 
-	public CommunityIDProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CommunityIdProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? DestinationIpValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? DestinationPortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? IanaNumberValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? IcmpCodeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? IcmpTypeValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private int? SeedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SourceIpValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SourcePortValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TransportValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CommunityIdProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -772,10 +750,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -783,10 +761,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the destination IP address.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor DestinationIp(Elastic.Clients.Elasticsearch.Field? destinationIp)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor DestinationIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		DestinationIpValue = destinationIp;
-		return Self;
+		Instance.DestinationIp = value;
+		return this;
 	}
 
 	/// <summary>
@@ -794,21 +772,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the destination IP address.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor DestinationIp<TDocument, TValue>(Expression<Func<TDocument, TValue>> destinationIp)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor DestinationIp<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		DestinationIpValue = destinationIp;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor DestinationIp<TDocument>(Expression<Func<TDocument, object>> destinationIp)
-	{
-		DestinationIpValue = destinationIp;
-		return Self;
+		Instance.DestinationIp = value;
+		return this;
 	}
 
 	/// <summary>
@@ -816,10 +783,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the destination port.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor DestinationPort(Elastic.Clients.Elasticsearch.Field? destinationPort)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor DestinationPort(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		DestinationPortValue = destinationPort;
-		return Self;
+		Instance.DestinationPort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -827,21 +794,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the destination port.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor DestinationPort<TDocument, TValue>(Expression<Func<TDocument, TValue>> destinationPort)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor DestinationPort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		DestinationPortValue = destinationPort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the destination port.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor DestinationPort<TDocument>(Expression<Func<TDocument, object>> destinationPort)
-	{
-		DestinationPortValue = destinationPort;
-		return Self;
+		Instance.DestinationPort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -849,10 +805,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the IANA number.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor IanaNumber(Elastic.Clients.Elasticsearch.Field? ianaNumber)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IanaNumber(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		IanaNumberValue = ianaNumber;
-		return Self;
+		Instance.IanaNumber = value;
+		return this;
 	}
 
 	/// <summary>
@@ -860,21 +816,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the IANA number.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor IanaNumber<TDocument, TValue>(Expression<Func<TDocument, TValue>> ianaNumber)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IanaNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		IanaNumberValue = ianaNumber;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the IANA number.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor IanaNumber<TDocument>(Expression<Func<TDocument, object>> ianaNumber)
-	{
-		IanaNumberValue = ianaNumber;
-		return Self;
+		Instance.IanaNumber = value;
+		return this;
 	}
 
 	/// <summary>
@@ -882,10 +827,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the ICMP code.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor IcmpCode(Elastic.Clients.Elasticsearch.Field? icmpCode)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IcmpCode(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		IcmpCodeValue = icmpCode;
-		return Self;
+		Instance.IcmpCode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -893,21 +838,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the ICMP code.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor IcmpCode<TDocument, TValue>(Expression<Func<TDocument, TValue>> icmpCode)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IcmpCode<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		IcmpCodeValue = icmpCode;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP code.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor IcmpCode<TDocument>(Expression<Func<TDocument, object>> icmpCode)
-	{
-		IcmpCodeValue = icmpCode;
-		return Self;
+		Instance.IcmpCode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -915,10 +849,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the ICMP type.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor IcmpType(Elastic.Clients.Elasticsearch.Field? icmpType)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IcmpType(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		IcmpTypeValue = icmpType;
-		return Self;
+		Instance.IcmpType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -926,21 +860,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the ICMP type.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor IcmpType<TDocument, TValue>(Expression<Func<TDocument, TValue>> icmpType)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IcmpType<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		IcmpTypeValue = icmpType;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP type.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor IcmpType<TDocument>(Expression<Func<TDocument, object>> icmpType)
-	{
-		IcmpTypeValue = icmpType;
-		return Self;
+		Instance.IcmpType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -948,10 +871,32 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -959,10 +904,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -971,10 +916,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// without modifying the document.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -982,40 +927,88 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public CommunityIDProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
 	}
 
-	public CommunityIDProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
 	}
 
-	public CommunityIDProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -1025,10 +1018,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// and production network that use the same addressing scheme.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor Seed(int? seed)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Seed(int? value)
 	{
-		SeedValue = seed;
-		return Self;
+		Instance.Seed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1036,10 +1029,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the source IP address.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor SourceIp(Elastic.Clients.Elasticsearch.Field? sourceIp)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor SourceIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SourceIpValue = sourceIp;
-		return Self;
+		Instance.SourceIp = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1047,21 +1040,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the source IP address.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor SourceIp<TDocument, TValue>(Expression<Func<TDocument, TValue>> sourceIp)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor SourceIp<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		SourceIpValue = sourceIp;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor SourceIp<TDocument>(Expression<Func<TDocument, object>> sourceIp)
-	{
-		SourceIpValue = sourceIp;
-		return Self;
+		Instance.SourceIp = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1069,10 +1051,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the source port.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor SourcePort(Elastic.Clients.Elasticsearch.Field? sourcePort)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor SourcePort(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SourcePortValue = sourcePort;
-		return Self;
+		Instance.SourcePort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1080,21 +1062,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Field containing the source port.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor SourcePort<TDocument, TValue>(Expression<Func<TDocument, TValue>> sourcePort)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor SourcePort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		SourcePortValue = sourcePort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the source port.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor SourcePort<TDocument>(Expression<Func<TDocument, object>> sourcePort)
-	{
-		SourcePortValue = sourcePort;
-		return Self;
+		Instance.SourcePort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1103,10 +1074,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1114,10 +1085,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Output field for the community ID.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1125,21 +1096,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// Output field for the community ID.
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Output field for the community ID.
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1149,10 +1109,10 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor Transport(Elastic.Clients.Elasticsearch.Field? transport)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Transport(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TransportValue = transport;
-		return Self;
+		Instance.Transport = value;
+		return this;
 	}
 
 	/// <summary>
@@ -1162,149 +1122,22 @@ public sealed partial class CommunityIDProcessorDescriptor : SerializableDescrip
 	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
 	/// </para>
 	/// </summary>
-	public CommunityIDProcessorDescriptor Transport<TDocument, TValue>(Expression<Func<TDocument, TValue>> transport)
+	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Transport<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TransportValue = transport;
-		return Self;
+		Instance.Transport = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the transport protocol name or number. Used only when the
-	/// iana_number field is not present. The following protocol names are currently
-	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
-	/// </para>
-	/// </summary>
-	public CommunityIDProcessorDescriptor Transport<TDocument>(Expression<Func<TDocument, object>> transport)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor>? action)
 	{
-		TransportValue = transport;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
+			return new Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DestinationIpValue is not null)
-		{
-			writer.WritePropertyName("destination_ip");
-			JsonSerializer.Serialize(writer, DestinationIpValue, options);
-		}
-
-		if (DestinationPortValue is not null)
-		{
-			writer.WritePropertyName("destination_port");
-			JsonSerializer.Serialize(writer, DestinationPortValue, options);
-		}
-
-		if (IanaNumberValue is not null)
-		{
-			writer.WritePropertyName("iana_number");
-			JsonSerializer.Serialize(writer, IanaNumberValue, options);
-		}
-
-		if (IcmpCodeValue is not null)
-		{
-			writer.WritePropertyName("icmp_code");
-			JsonSerializer.Serialize(writer, IcmpCodeValue, options);
-		}
-
-		if (IcmpTypeValue is not null)
-		{
-			writer.WritePropertyName("icmp_type");
-			JsonSerializer.Serialize(writer, IcmpTypeValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (SeedValue.HasValue)
-		{
-			writer.WritePropertyName("seed");
-			writer.WriteNumberValue(SeedValue.Value);
-		}
-
-		if (SourceIpValue is not null)
-		{
-			writer.WritePropertyName("source_ip");
-			JsonSerializer.Serialize(writer, SourceIpValue, options);
-		}
-
-		if (SourcePortValue is not null)
-		{
-			writer.WritePropertyName("source_port");
-			JsonSerializer.Serialize(writer, SourcePortValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		if (TransportValue is not null)
-		{
-			writer.WritePropertyName("transport");
-			JsonSerializer.Serialize(writer, TransportValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

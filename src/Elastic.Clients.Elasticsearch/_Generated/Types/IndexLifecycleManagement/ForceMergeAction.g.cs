@@ -17,58 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class ForceMergeAction
+internal sealed partial class ForceMergeActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction>
 {
-	[JsonInclude, JsonPropertyName("index_codec")]
-	public string? IndexCodec { get; set; }
-	[JsonInclude, JsonPropertyName("max_num_segments")]
-	public int MaxNumSegments { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCodec = System.Text.Json.JsonEncodedText.Encode("index_codec");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumSegments = System.Text.Json.JsonEncodedText.Encode("max_num_segments");
 
-public sealed partial class ForceMergeActionDescriptor : SerializableDescriptor<ForceMergeActionDescriptor>
-{
-	internal ForceMergeActionDescriptor(Action<ForceMergeActionDescriptor> configure) => configure.Invoke(this);
-
-	public ForceMergeActionDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	private string? IndexCodecValue { get; set; }
-	private int MaxNumSegmentsValue { get; set; }
-
-	public ForceMergeActionDescriptor IndexCodec(string? indexCodec)
-	{
-		IndexCodecValue = indexCodec;
-		return Self;
-	}
-
-	public ForceMergeActionDescriptor MaxNumSegments(int maxNumSegments)
-	{
-		MaxNumSegmentsValue = maxNumSegments;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(IndexCodecValue))
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propIndexCodec = default;
+		LocalJsonValue<int> propMaxNumSegments = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			writer.WritePropertyName("index_codec");
-			writer.WriteStringValue(IndexCodecValue);
+			if (propIndexCodec.TryReadProperty(ref reader, options, PropIndexCodec, null))
+			{
+				continue;
+			}
+
+			if (propMaxNumSegments.TryReadProperty(ref reader, options, PropMaxNumSegments, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		writer.WritePropertyName("max_num_segments");
-		writer.WriteNumberValue(MaxNumSegmentsValue);
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IndexCodec = propIndexCodec.Value,
+			MaxNumSegments = propMaxNumSegments.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndexCodec, value.IndexCodec, null, null);
+		writer.WriteProperty(options, PropMaxNumSegments, value.MaxNumSegments, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionConverter))]
+public sealed partial class ForceMergeAction
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ForceMergeAction(int maxNumSegments)
+	{
+		MaxNumSegments = maxNumSegments;
+	}
+#if NET7_0_OR_GREATER
+	public ForceMergeAction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ForceMergeAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ForceMergeAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public string? IndexCodec { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MaxNumSegments { get; set; }
+}
+
+public readonly partial struct ForceMergeActionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ForceMergeActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ForceMergeActionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor IndexCodec(string? value)
+	{
+		Instance.IndexCodec = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor MaxNumSegments(int value)
+	{
+		Instance.MaxNumSegments = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

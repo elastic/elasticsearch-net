@@ -17,55 +17,122 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class RegexOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.RegexOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDeterminizedStates = System.Text.Json.JsonEncodedText.Encode("max_determinized_states");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.RegexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<int, string>?> propFlags = default;
+		LocalJsonValue<int?> propMaxDeterminizedStates = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFlags.TryReadProperty(ref reader, options, PropFlags, static Elastic.Clients.Elasticsearch.Union<int, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<int, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), null, null)))
+			{
+				continue;
+			}
+
+			if (propMaxDeterminizedStates.TryReadProperty(ref reader, options, PropMaxDeterminizedStates, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.RegexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Flags = propFlags.Value,
+			MaxDeterminizedStates = propMaxDeterminizedStates.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.RegexOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFlags, value.Flags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<int, string>? v) => w.WriteUnionValue<int, string>(o, v, null, null));
+		writer.WriteProperty(options, PropMaxDeterminizedStates, value.MaxDeterminizedStates, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsConverter))]
 public sealed partial class RegexOptions
 {
+#if NET7_0_OR_GREATER
+	public RegexOptions()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RegexOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RegexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Optional operators for the regular expression.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("flags")]
-	public object? Flags { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<int, string>? Flags { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of automaton states required for the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_determinized_states")]
 	public int? MaxDeterminizedStates { get; set; }
 }
 
-public sealed partial class RegexOptionsDescriptor : SerializableDescriptor<RegexOptionsDescriptor>
+public readonly partial struct RegexOptionsDescriptor
 {
-	internal RegexOptionsDescriptor(Action<RegexOptionsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.RegexOptions Instance { get; init; }
 
-	public RegexOptionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RegexOptionsDescriptor(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions instance)
 	{
+		Instance = instance;
 	}
 
-	private object? FlagsValue { get; set; }
-	private int? MaxDeterminizedStatesValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RegexOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.RegexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions instance) => new Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.RegexOptions(Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Optional operators for the regular expression.
 	/// </para>
 	/// </summary>
-	public RegexOptionsDescriptor Flags(object? flags)
+	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor Flags(Elastic.Clients.Elasticsearch.Union<int, string>? value)
 	{
-		FlagsValue = flags;
-		return Self;
+		Instance.Flags = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,22 @@ public sealed partial class RegexOptionsDescriptor : SerializableDescriptor<Rege
 	/// Maximum number of automaton states required for the query.
 	/// </para>
 	/// </summary>
-	public RegexOptionsDescriptor MaxDeterminizedStates(int? maxDeterminizedStates)
+	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor MaxDeterminizedStates(int? value)
 	{
-		MaxDeterminizedStatesValue = maxDeterminizedStates;
-		return Self;
+		Instance.MaxDeterminizedStates = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.RegexOptions Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (FlagsValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("flags");
-			JsonSerializer.Serialize(writer, FlagsValue, options);
+			return new Elastic.Clients.Elasticsearch.Core.Search.RegexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MaxDeterminizedStatesValue.HasValue)
-		{
-			writer.WritePropertyName("max_determinized_states");
-			writer.WriteNumberValue(MaxDeterminizedStatesValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.RegexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

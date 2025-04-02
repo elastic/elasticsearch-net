@@ -17,30 +17,169 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ShardHealthStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActiveShards = System.Text.Json.JsonEncodedText.Encode("active_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropInitializingShards = System.Text.Json.JsonEncodedText.Encode("initializing_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryActive = System.Text.Json.JsonEncodedText.Encode("primary_active");
+	private static readonly System.Text.Json.JsonEncodedText PropRelocatingShards = System.Text.Json.JsonEncodedText.Encode("relocating_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedPrimaryShards = System.Text.Json.JsonEncodedText.Encode("unassigned_primary_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedShards = System.Text.Json.JsonEncodedText.Encode("unassigned_shards");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propActiveShards = default;
+		LocalJsonValue<int> propInitializingShards = default;
+		LocalJsonValue<bool> propPrimaryActive = default;
+		LocalJsonValue<int> propRelocatingShards = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus> propStatus = default;
+		LocalJsonValue<int> propUnassignedPrimaryShards = default;
+		LocalJsonValue<int> propUnassignedShards = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActiveShards.TryReadProperty(ref reader, options, PropActiveShards, null))
+			{
+				continue;
+			}
+
+			if (propInitializingShards.TryReadProperty(ref reader, options, PropInitializingShards, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryActive.TryReadProperty(ref reader, options, PropPrimaryActive, null))
+			{
+				continue;
+			}
+
+			if (propRelocatingShards.TryReadProperty(ref reader, options, PropRelocatingShards, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propUnassignedPrimaryShards.TryReadProperty(ref reader, options, PropUnassignedPrimaryShards, null))
+			{
+				continue;
+			}
+
+			if (propUnassignedShards.TryReadProperty(ref reader, options, PropUnassignedShards, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ActiveShards = propActiveShards.Value,
+			InitializingShards = propInitializingShards.Value,
+			PrimaryActive = propPrimaryActive.Value,
+			RelocatingShards = propRelocatingShards.Value,
+			Status = propStatus.Value,
+			UnassignedPrimaryShards = propUnassignedPrimaryShards.Value,
+			UnassignedShards = propUnassignedShards.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActiveShards, value.ActiveShards, null, null);
+		writer.WriteProperty(options, PropInitializingShards, value.InitializingShards, null, null);
+		writer.WriteProperty(options, PropPrimaryActive, value.PrimaryActive, null, null);
+		writer.WriteProperty(options, PropRelocatingShards, value.RelocatingShards, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropUnassignedPrimaryShards, value.UnassignedPrimaryShards, null, null);
+		writer.WriteProperty(options, PropUnassignedShards, value.UnassignedShards, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ShardHealthStatsConverter))]
 public sealed partial class ShardHealthStats
 {
-	[JsonInclude, JsonPropertyName("active_shards")]
-	public int ActiveShards { get; init; }
-	[JsonInclude, JsonPropertyName("initializing_shards")]
-	public int InitializingShards { get; init; }
-	[JsonInclude, JsonPropertyName("primary_active")]
-	public bool PrimaryActive { get; init; }
-	[JsonInclude, JsonPropertyName("relocating_shards")]
-	public int RelocatingShards { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
-	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
-	[JsonInclude, JsonPropertyName("unassigned_primary_shards")]
-	public int UnassignedPrimaryShards { get; init; }
-	[JsonInclude, JsonPropertyName("unassigned_shards")]
-	public int UnassignedShards { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardHealthStats(int activeShards, int initializingShards, bool primaryActive, int relocatingShards, Elastic.Clients.Elasticsearch.HealthStatus status, int unassignedPrimaryShards, int unassignedShards)
+	{
+		ActiveShards = activeShards;
+		InitializingShards = initializingShards;
+		PrimaryActive = primaryActive;
+		RelocatingShards = relocatingShards;
+		Status = status;
+		UnassignedPrimaryShards = unassignedPrimaryShards;
+		UnassignedShards = unassignedShards;
+	}
+#if NET7_0_OR_GREATER
+	public ShardHealthStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardHealthStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardHealthStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int ActiveShards { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int InitializingShards { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool PrimaryActive { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int RelocatingShards { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int UnassignedPrimaryShards { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int UnassignedShards { get; set; }
 }

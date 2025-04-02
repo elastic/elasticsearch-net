@@ -17,18 +17,131 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class SpanNotQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropDist = System.Text.Json.JsonEncodedText.Encode("dist");
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText PropPost = System.Text.Json.JsonEncodedText.Encode("post");
+	private static readonly System.Text.Json.JsonEncodedText PropPre = System.Text.Json.JsonEncodedText.Encode("pre");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<int?> propDist = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> propExclude = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> propInclude = default;
+		LocalJsonValue<int?> propPost = default;
+		LocalJsonValue<int?> propPre = default;
+		LocalJsonValue<string?> propQueryName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propDist.TryReadProperty(ref reader, options, PropDist, null))
+			{
+				continue;
+			}
+
+			if (propExclude.TryReadProperty(ref reader, options, PropExclude, null))
+			{
+				continue;
+			}
+
+			if (propInclude.TryReadProperty(ref reader, options, PropInclude, null))
+			{
+				continue;
+			}
+
+			if (propPost.TryReadProperty(ref reader, options, PropPost, null))
+			{
+				continue;
+			}
+
+			if (propPre.TryReadProperty(ref reader, options, PropPre, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Dist = propDist.Value,
+			Exclude = propExclude.Value,
+			Include = propInclude.Value,
+			Post = propPost.Value,
+			Pre = propPre.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropDist, value.Dist, null, null);
+		writer.WriteProperty(options, PropExclude, value.Exclude, null, null);
+		writer.WriteProperty(options, PropInclude, value.Include, null, null);
+		writer.WriteProperty(options, PropPost, value.Post, null, null);
+		writer.WriteProperty(options, PropPre, value.Pre, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryConverter))]
 public sealed partial class SpanNotQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNotQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude, Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
+	{
+		Exclude = exclude;
+		Include = include;
+	}
+#if NET7_0_OR_GREATER
+	public SpanNotQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SpanNotQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SpanNotQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +150,6 @@ public sealed partial class SpanNotQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -46,7 +158,6 @@ public sealed partial class SpanNotQuery
 	/// Equivalent to setting both <c>pre</c> and <c>post</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dist")]
 	public int? Dist { get; set; }
 
 	/// <summary>
@@ -54,23 +165,28 @@ public sealed partial class SpanNotQuery
 	/// Span query whose matches must not overlap those returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Exclude { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Exclude { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Span query whose matches are filtered.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Include { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Include { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of tokens after the include span that can’t have overlap with the exclude span.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("post")]
 	public int? Post { get; set; }
 
 	/// <summary>
@@ -78,34 +194,28 @@ public sealed partial class SpanNotQuery
 	/// The number of tokens before the include span that can’t have overlap with the exclude span.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pre")]
 	public int? Pre { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanNotQuery spanNotQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanNot(spanNotQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanNotQuery spanNotQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.SpanNot(spanNotQuery);
 }
 
-public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDescriptor<SpanNotQueryDescriptor<TDocument>>
+public readonly partial struct SpanNotQueryDescriptor<TDocument>
 {
-	internal SpanNotQueryDescriptor(Action<SpanNotQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery Instance { get; init; }
 
-	public SpanNotQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNotQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private int? DistValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery ExcludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> ExcludeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> ExcludeDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery IncludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> IncludeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> IncludeDescriptorAction { get; set; }
-	private int? PostValue { get; set; }
-	private int? PreValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNotQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -115,10 +225,10 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -127,10 +237,10 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	/// Equivalent to setting both <c>pre</c> and <c>post</c>.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor<TDocument> Dist(int? dist)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Dist(int? value)
 	{
-		DistValue = dist;
-		return Self;
+		Instance.Dist = value;
+		return this;
 	}
 
 	/// <summary>
@@ -138,28 +248,21 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	/// Span query whose matches must not overlap those returned.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		ExcludeDescriptor = null;
-		ExcludeDescriptorAction = null;
-		ExcludeValue = exclude;
-		return Self;
+		Instance.Exclude = value;
+		return this;
 	}
 
-	public SpanNotQueryDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Span query whose matches must not overlap those returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Exclude(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
-		ExcludeValue = null;
-		ExcludeDescriptorAction = null;
-		ExcludeDescriptor = descriptor;
-		return Self;
-	}
-
-	public SpanNotQueryDescriptor<TDocument> Exclude(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> configure)
-	{
-		ExcludeValue = null;
-		ExcludeDescriptor = null;
-		ExcludeDescriptorAction = configure;
-		return Self;
+		Instance.Exclude = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -167,28 +270,21 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	/// Span query whose matches are filtered.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		IncludeDescriptor = null;
-		IncludeDescriptorAction = null;
-		IncludeValue = include;
-		return Self;
+		Instance.Include = value;
+		return this;
 	}
 
-	public SpanNotQueryDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Span query whose matches are filtered.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Include(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
-		IncludeValue = null;
-		IncludeDescriptorAction = null;
-		IncludeDescriptor = descriptor;
-		return Self;
-	}
-
-	public SpanNotQueryDescriptor<TDocument> Include(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> configure)
-	{
-		IncludeValue = null;
-		IncludeDescriptor = null;
-		IncludeDescriptorAction = configure;
-		return Self;
+		Instance.Include = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -196,10 +292,10 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	/// The number of tokens after the include span that can’t have overlap with the exclude span.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor<TDocument> Post(int? post)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Post(int? value)
 	{
-		PostValue = post;
-		return Self;
+		Instance.Post = value;
+		return this;
 	}
 
 	/// <summary>
@@ -207,106 +303,45 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	/// The number of tokens before the include span that can’t have overlap with the exclude span.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor<TDocument> Pre(int? pre)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Pre(int? value)
 	{
-		PreValue = pre;
-		return Self;
+		Instance.Pre = value;
+		return this;
 	}
 
-	public SpanNotQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DistValue.HasValue)
-		{
-			writer.WritePropertyName("dist");
-			writer.WriteNumberValue(DistValue.Value);
-		}
-
-		if (ExcludeDescriptor is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeDescriptor, options);
-		}
-		else if (ExcludeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(ExcludeDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeValue, options);
-		}
-
-		if (IncludeDescriptor is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeDescriptor, options);
-		}
-		else if (IncludeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(IncludeDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeValue, options);
-		}
-
-		if (PostValue.HasValue)
-		{
-			writer.WritePropertyName("post");
-			writer.WriteNumberValue(PostValue.Value);
-		}
-
-		if (PreValue.HasValue)
-		{
-			writer.WritePropertyName("pre");
-			writer.WriteNumberValue(PreValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<SpanNotQueryDescriptor>
+public readonly partial struct SpanNotQueryDescriptor
 {
-	internal SpanNotQueryDescriptor(Action<SpanNotQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery Instance { get; init; }
 
-	public SpanNotQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNotQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private int? DistValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery ExcludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor ExcludeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> ExcludeDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery IncludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor IncludeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> IncludeDescriptorAction { get; set; }
-	private int? PostValue { get; set; }
-	private int? PreValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanNotQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -316,10 +351,10 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -328,10 +363,10 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	/// Equivalent to setting both <c>pre</c> and <c>post</c>.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor Dist(int? dist)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Dist(int? value)
 	{
-		DistValue = dist;
-		return Self;
+		Instance.Dist = value;
+		return this;
 	}
 
 	/// <summary>
@@ -339,28 +374,32 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	/// Span query whose matches must not overlap those returned.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		ExcludeDescriptor = null;
-		ExcludeDescriptorAction = null;
-		ExcludeValue = exclude;
-		return Self;
+		Instance.Exclude = value;
+		return this;
 	}
 
-	public SpanNotQueryDescriptor Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Span query whose matches must not overlap those returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Exclude(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
-		ExcludeValue = null;
-		ExcludeDescriptorAction = null;
-		ExcludeDescriptor = descriptor;
-		return Self;
+		Instance.Exclude = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SpanNotQueryDescriptor Exclude(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Span query whose matches must not overlap those returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Exclude<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
-		ExcludeValue = null;
-		ExcludeDescriptor = null;
-		ExcludeDescriptorAction = configure;
-		return Self;
+		Instance.Exclude = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -368,28 +407,32 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	/// Span query whose matches are filtered.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		IncludeDescriptor = null;
-		IncludeDescriptorAction = null;
-		IncludeValue = include;
-		return Self;
+		Instance.Include = value;
+		return this;
 	}
 
-	public SpanNotQueryDescriptor Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Span query whose matches are filtered.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Include(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
-		IncludeValue = null;
-		IncludeDescriptorAction = null;
-		IncludeDescriptor = descriptor;
-		return Self;
+		Instance.Include = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SpanNotQueryDescriptor Include(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Span query whose matches are filtered.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Include<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
-		IncludeValue = null;
-		IncludeDescriptor = null;
-		IncludeDescriptorAction = configure;
-		return Self;
+		Instance.Include = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -397,10 +440,10 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	/// The number of tokens after the include span that can’t have overlap with the exclude span.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor Post(int? post)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Post(int? value)
 	{
-		PostValue = post;
-		return Self;
+		Instance.Post = value;
+		return this;
 	}
 
 	/// <summary>
@@ -408,83 +451,23 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	/// The number of tokens before the include span that can’t have overlap with the exclude span.
 	/// </para>
 	/// </summary>
-	public SpanNotQueryDescriptor Pre(int? pre)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Pre(int? value)
 	{
-		PreValue = pre;
-		return Self;
+		Instance.Pre = value;
+		return this;
 	}
 
-	public SpanNotQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DistValue.HasValue)
-		{
-			writer.WritePropertyName("dist");
-			writer.WriteNumberValue(DistValue.Value);
-		}
-
-		if (ExcludeDescriptor is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeDescriptor, options);
-		}
-		else if (ExcludeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(ExcludeDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeValue, options);
-		}
-
-		if (IncludeDescriptor is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeDescriptor, options);
-		}
-		else if (IncludeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(IncludeDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeValue, options);
-		}
-
-		if (PostValue.HasValue)
-		{
-			writer.WritePropertyName("post");
-			writer.WriteNumberValue(PostValue.Value);
-		}
-
-		if (PreValue.HasValue)
-		{
-			writer.WritePropertyName("pre");
-			writer.WriteNumberValue(PreValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

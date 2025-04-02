@@ -17,16 +17,9 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -57,8 +50,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// </item>
 /// </list>
 /// </summary>
-[JsonConverter(typeof(GeoBoundsConverter))]
-public sealed partial class GeoBounds : IComplexUnion<GeoBounds.Kind>
+public sealed partial class GeoBounds : Elastic.Clients.Elasticsearch.Core.IComplexUnion<Elastic.Clients.Elasticsearch.GeoBounds.Kind>
 {
 	public enum Kind
 	{
@@ -71,9 +63,9 @@ public sealed partial class GeoBounds : IComplexUnion<GeoBounds.Kind>
 	private readonly Kind _kind;
 	private readonly object _value;
 
-	Kind IComplexUnion<Kind>.ValueKind => _kind;
+	Kind Elastic.Clients.Elasticsearch.Core.IComplexUnion<Kind>.ValueKind => _kind;
 
-	object IComplexUnion<Kind>.Value => _value;
+	object Elastic.Clients.Elasticsearch.Core.IComplexUnion<Kind>.Value => _value;
 
 	private GeoBounds(Kind kind, object value)
 	{
@@ -81,11 +73,15 @@ public sealed partial class GeoBounds : IComplexUnion<GeoBounds.Kind>
 		_value = value;
 	}
 
-	public static GeoBounds Coordinates(Elastic.Clients.Elasticsearch.CoordsGeoBounds coordinates) => new(Kind.Coordinates, coordinates);
+	internal GeoBounds(Elastic.Clients.Elasticsearch.CoordsGeoBounds variant) : this(Kind.Coordinates, variant)
+	{
+	}
 
-	public bool IsCoordinates => _kind == Kind.Coordinates;
+	public static Elastic.Clients.Elasticsearch.GeoBounds Coordinates(Elastic.Clients.Elasticsearch.CoordsGeoBounds coordinates) => new(Kind.Coordinates, coordinates);
 
-	public bool TryGetCoordinates([NotNullWhen(true)] out Elastic.Clients.Elasticsearch.CoordsGeoBounds? coordinates)
+	public bool IsCoordinates => _kind is Kind.Coordinates;
+
+	public bool TryGetCoordinates([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out Elastic.Clients.Elasticsearch.CoordsGeoBounds? coordinates)
 	{
 		coordinates = null;
 		if (_kind == Kind.Coordinates)
@@ -97,13 +93,17 @@ public sealed partial class GeoBounds : IComplexUnion<GeoBounds.Kind>
 		return false;
 	}
 
-	public static implicit operator GeoBounds(Elastic.Clients.Elasticsearch.CoordsGeoBounds coordinates) => GeoBounds.Coordinates(coordinates);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoBounds(Elastic.Clients.Elasticsearch.CoordsGeoBounds coordinates) => GeoBounds.Coordinates(coordinates);
 
-	public static GeoBounds TopLeftBottomRight(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds topLeftBottomRight) => new(Kind.TopLeftBottomRight, topLeftBottomRight);
+	internal GeoBounds(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds variant) : this(Kind.TopLeftBottomRight, variant)
+	{
+	}
 
-	public bool IsTopLeftBottomRight => _kind == Kind.TopLeftBottomRight;
+	public static Elastic.Clients.Elasticsearch.GeoBounds TopLeftBottomRight(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds topLeftBottomRight) => new(Kind.TopLeftBottomRight, topLeftBottomRight);
 
-	public bool TryGetTopLeftBottomRight([NotNullWhen(true)] out Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds? topLeftBottomRight)
+	public bool IsTopLeftBottomRight => _kind is Kind.TopLeftBottomRight;
+
+	public bool TryGetTopLeftBottomRight([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds? topLeftBottomRight)
 	{
 		topLeftBottomRight = null;
 		if (_kind == Kind.TopLeftBottomRight)
@@ -115,13 +115,17 @@ public sealed partial class GeoBounds : IComplexUnion<GeoBounds.Kind>
 		return false;
 	}
 
-	public static implicit operator GeoBounds(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds topLeftBottomRight) => GeoBounds.TopLeftBottomRight(topLeftBottomRight);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoBounds(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds topLeftBottomRight) => GeoBounds.TopLeftBottomRight(topLeftBottomRight);
 
-	public static GeoBounds TopRightBottomLeft(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds topRightBottomLeft) => new(Kind.TopRightBottomLeft, topRightBottomLeft);
+	internal GeoBounds(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds variant) : this(Kind.TopRightBottomLeft, variant)
+	{
+	}
 
-	public bool IsTopRightBottomLeft => _kind == Kind.TopRightBottomLeft;
+	public static Elastic.Clients.Elasticsearch.GeoBounds TopRightBottomLeft(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds topRightBottomLeft) => new(Kind.TopRightBottomLeft, topRightBottomLeft);
 
-	public bool TryGetTopRightBottomLeft([NotNullWhen(true)] out Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds? topRightBottomLeft)
+	public bool IsTopRightBottomLeft => _kind is Kind.TopRightBottomLeft;
+
+	public bool TryGetTopRightBottomLeft([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds? topRightBottomLeft)
 	{
 		topRightBottomLeft = null;
 		if (_kind == Kind.TopRightBottomLeft)
@@ -133,13 +137,17 @@ public sealed partial class GeoBounds : IComplexUnion<GeoBounds.Kind>
 		return false;
 	}
 
-	public static implicit operator GeoBounds(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds topRightBottomLeft) => GeoBounds.TopRightBottomLeft(topRightBottomLeft);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoBounds(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds topRightBottomLeft) => GeoBounds.TopRightBottomLeft(topRightBottomLeft);
 
-	public static GeoBounds Wkt(Elastic.Clients.Elasticsearch.WktGeoBounds wkt) => new(Kind.Wkt, wkt);
+	internal GeoBounds(Elastic.Clients.Elasticsearch.WktGeoBounds variant) : this(Kind.Wkt, variant)
+	{
+	}
 
-	public bool IsWkt => _kind == Kind.Wkt;
+	public static Elastic.Clients.Elasticsearch.GeoBounds Wkt(Elastic.Clients.Elasticsearch.WktGeoBounds wkt) => new(Kind.Wkt, wkt);
 
-	public bool TryGetWkt([NotNullWhen(true)] out Elastic.Clients.Elasticsearch.WktGeoBounds? wkt)
+	public bool IsWkt => _kind is Kind.Wkt;
+
+	public bool TryGetWkt([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out Elastic.Clients.Elasticsearch.WktGeoBounds? wkt)
 	{
 		wkt = null;
 		if (_kind == Kind.Wkt)
@@ -151,15 +159,55 @@ public sealed partial class GeoBounds : IComplexUnion<GeoBounds.Kind>
 		return false;
 	}
 
-	public static implicit operator GeoBounds(Elastic.Clients.Elasticsearch.WktGeoBounds wkt) => GeoBounds.Wkt(wkt);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeoBounds(Elastic.Clients.Elasticsearch.WktGeoBounds wkt) => GeoBounds.Wkt(wkt);
 }
 
-internal sealed class GeoBoundsConverter : MultiItemUnionConverter<GeoBounds, GeoBounds.Kind>
+public readonly partial struct GeoBoundsBuilder
 {
-	public GeoBoundsConverter()
+	public Elastic.Clients.Elasticsearch.GeoBounds Coordinates(Elastic.Clients.Elasticsearch.CoordsGeoBounds value)
 	{
-		_types = new Dictionary<GeoBounds.Kind, Type> { { GeoBounds.Kind.Coordinates, typeof(Elastic.Clients.Elasticsearch.CoordsGeoBounds) }, { GeoBounds.Kind.TopLeftBottomRight, typeof(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds) }, { GeoBounds.Kind.TopRightBottomLeft, typeof(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds) }, { GeoBounds.Kind.Wkt, typeof(Elastic.Clients.Elasticsearch.WktGeoBounds) } };
-		_factories = new Dictionary<Type, Func<object, GeoBounds>> { { typeof(Elastic.Clients.Elasticsearch.CoordsGeoBounds), o => GeoBounds.Coordinates((Elastic.Clients.Elasticsearch.CoordsGeoBounds)o) }, { typeof(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds), o => GeoBounds.TopLeftBottomRight((Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds)o) }, { typeof(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds), o => GeoBounds.TopRightBottomLeft((Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds)o) }, { typeof(Elastic.Clients.Elasticsearch.WktGeoBounds), o => GeoBounds.Wkt((Elastic.Clients.Elasticsearch.WktGeoBounds)o) } };
-		_uniquePropertyToType = new Dictionary<string, Type> { { "bottom", typeof(Elastic.Clients.Elasticsearch.CoordsGeoBounds) }, { "bottom_right", typeof(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds) }, { "bottom_left", typeof(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds) }, { "wkt", typeof(Elastic.Clients.Elasticsearch.WktGeoBounds) } };
+		return new Elastic.Clients.Elasticsearch.GeoBounds(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoBounds Coordinates(System.Action<Elastic.Clients.Elasticsearch.CoordsGeoBoundsDescriptor> action)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoBounds(Elastic.Clients.Elasticsearch.CoordsGeoBoundsDescriptor.Build(action));
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoBounds TopLeftBottomRight(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds value)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoBounds(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoBounds TopLeftBottomRight(System.Action<Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBoundsDescriptor> action)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoBounds(Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBoundsDescriptor.Build(action));
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoBounds TopRightBottomLeft(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds value)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoBounds(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoBounds TopRightBottomLeft(System.Action<Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor> action)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoBounds(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsDescriptor.Build(action));
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoBounds Wkt(Elastic.Clients.Elasticsearch.WktGeoBounds value)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoBounds(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.GeoBounds Wkt(System.Action<Elastic.Clients.Elasticsearch.WktGeoBoundsDescriptor> action)
+	{
+		return new Elastic.Clients.Elasticsearch.GeoBounds(Elastic.Clients.Elasticsearch.WktGeoBoundsDescriptor.Build(action));
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.GeoBounds Build(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GeoBoundsBuilder();
+		return action.Invoke(builder);
 	}
 }

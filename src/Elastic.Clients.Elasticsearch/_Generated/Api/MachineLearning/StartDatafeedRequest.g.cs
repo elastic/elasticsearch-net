@@ -17,21 +17,71 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class StartDatafeedRequestParameters : RequestParameters
+public sealed partial class StartDatafeedRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class StartDatafeedRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.DateTime?> propEnd = default;
+		LocalJsonValue<System.DateTime?> propStart = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			End = propEnd.Value,
+			Start = propStart.Value,
+			Timeout = propTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -55,15 +105,27 @@ public sealed partial class StartDatafeedRequestParameters : RequestParameters
 /// authorization headers when you created or updated the datafeed, those credentials are used instead.
 /// </para>
 /// </summary>
-public sealed partial class StartDatafeedRequest : PlainRequest<StartDatafeedRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestConverter))]
+public sealed partial class StartDatafeedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StartDatafeedRequest(Elastic.Clients.Elasticsearch.Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public StartDatafeedRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StartDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStartDatafeed;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningStartDatafeed;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -71,26 +133,36 @@ public sealed partial class StartDatafeedRequest : PlainRequest<StartDatafeedReq
 
 	/// <summary>
 	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase
+	/// alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric
+	/// characters.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("end")]
-	public DateTimeOffset? End { get; set; }
+	public System.DateTime? End { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("start")]
-	public DateTimeOffset? Start { get; set; }
+	public System.DateTime? Start { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>timeout</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
@@ -115,41 +187,52 @@ public sealed partial class StartDatafeedRequest : PlainRequest<StartDatafeedReq
 /// authorization headers when you created or updated the datafeed, those credentials are used instead.
 /// </para>
 /// </summary>
-public sealed partial class StartDatafeedRequestDescriptor : RequestDescriptor<StartDatafeedRequestDescriptor, StartDatafeedRequestParameters>
+public readonly partial struct StartDatafeedRequestDescriptor
 {
-	internal StartDatafeedRequestDescriptor(Action<StartDatafeedRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest Instance { get; init; }
 
-	public StartDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StartDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStartDatafeed;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.start_datafeed";
-
-	public StartDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id datafeedId)
+	public StartDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.Id datafeedId)
 	{
-		RouteValues.Required("datafeed_id", datafeedId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest(datafeedId);
 	}
 
-	private DateTimeOffset? EndValue { get; set; }
-	private DateTimeOffset? StartValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StartDatafeedRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase
+	/// alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric
+	/// characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.DatafeedId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public StartDatafeedRequestDescriptor End(DateTimeOffset? end)
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor End(System.DateTime? value)
 	{
-		EndValue = end;
-		return Self;
+		Instance.End = value;
+		return this;
 	}
 
 	/// <summary>
@@ -157,10 +240,10 @@ public sealed partial class StartDatafeedRequestDescriptor : RequestDescriptor<S
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public StartDatafeedRequestDescriptor Start(DateTimeOffset? start)
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor Start(System.DateTime? value)
 	{
-		StartValue = start;
-		return Self;
+		Instance.Start = value;
+		return this;
 	}
 
 	/// <summary>
@@ -168,33 +251,59 @@ public sealed partial class StartDatafeedRequestDescriptor : RequestDescriptor<S
 	/// Refer to the description for the <c>timeout</c> query parameter.
 	/// </para>
 	/// </summary>
-	public StartDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (EndValue is not null)
-		{
-			writer.WritePropertyName("end");
-			JsonSerializer.Serialize(writer, EndValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (StartValue is not null)
-		{
-			writer.WritePropertyName("start");
-			JsonSerializer.Serialize(writer, StartValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

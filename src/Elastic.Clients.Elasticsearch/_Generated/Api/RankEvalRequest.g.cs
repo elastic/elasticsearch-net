@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class RankEvalRequestParameters : RequestParameters
+public sealed partial class RankEvalRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -44,7 +37,7 @@ public sealed partial class RankEvalRequestParameters : RequestParameters
 	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -61,6 +54,54 @@ public sealed partial class RankEvalRequestParameters : RequestParameters
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 }
 
+internal sealed partial class RankEvalRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RankEvalRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMetric = System.Text.Json.JsonEncodedText.Encode("metric");
+	private static readonly System.Text.Json.JsonEncodedText PropRequests = System.Text.Json.JsonEncodedText.Encode("requests");
+
+	public override Elastic.Clients.Elasticsearch.RankEvalRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric?> propMetric = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>> propRequests = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMetric.TryReadProperty(ref reader, options, PropMetric, null))
+			{
+				continue;
+			}
+
+			if (propRequests.TryReadProperty(ref reader, options, PropRequests, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Metric = propMetric.Value,
+			Requests = propRequests.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.RankEvalRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMetric, value.Metric, null, null);
+		writer.WriteProperty(options, PropRequests, value.Requests, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Evaluate ranked search results.
@@ -69,19 +110,46 @@ public sealed partial class RankEvalRequestParameters : RequestParameters
 /// Evaluate the quality of ranked search results over a set of typical search queries.
 /// </para>
 /// </summary>
-public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RankEvalRequestConverter))]
+public sealed partial class RankEvalRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.RankEvalRequestParameters>
 {
-	public RankEvalRequest()
-	{
-	}
-
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RankEvalRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRankEval;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalRequest(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests) : base(r => r.Optional("index", indices))
+	{
+		Requests = requests;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
+	{
+		Requests = requests;
+	}
+#if NET7_0_OR_GREATER
+	public RankEvalRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RankEvalRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankEvalRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceRankEval;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -89,10 +157,18 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 
 	/// <summary>
 	/// <para>
+	/// A  comma-separated list of data streams, indices, and index aliases used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To target all data streams and indices in a cluster, omit this parameter or use <c>_all</c> or <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -100,15 +176,13 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, missing or closed indices are not included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -116,7 +190,6 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	/// Search operation type
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
@@ -124,7 +197,6 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	/// Definition of the evaluation metric to calculate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metric")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? Metric { get; set; }
 
 	/// <summary>
@@ -132,8 +204,11 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	/// A set of typical search requests, together with their provided ratings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("requests")]
-	public ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
 }
 
 /// <summary>
@@ -144,72 +219,152 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 /// Evaluate the quality of ranked search results over a set of typical search queries.
 /// </para>
 /// </summary>
-public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescriptor<RankEvalRequestDescriptor<TDocument>, RankEvalRequestParameters>
+public readonly partial struct RankEvalRequestDescriptor
 {
-	internal RankEvalRequestDescriptor(Action<RankEvalRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.RankEvalRequest Instance { get; init; }
 
-	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.RankEvalRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.RankEvalRequest(indices);
+#pragma warning restore CS0618
 	}
 
 	public RankEvalRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRankEval;
+	public static explicit operator Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.RankEvalRequest instance) => new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "rank_eval";
-
-	public RankEvalRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public RankEvalRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public RankEvalRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public RankEvalRequestDescriptor<TDocument> SearchType(string? searchType) => Qs("search_type", searchType);
-
-	public RankEvalRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A  comma-separated list of data streams, indices, and index aliases used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To target all data streams and indices in a cluster, omit this parameter or use <c>_all</c> or <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? MetricValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> RequestsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>> RequestsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>>[] RequestsDescriptorActions { get; set; }
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Search operation type
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor SearchType(string? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Definition of the evaluation metric to calculate.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? metric)
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? value)
 	{
-		MetricDescriptor = null;
-		MetricDescriptorAction = null;
-		MetricValue = metric;
-		return Self;
+		Instance.Metric = value;
+		return this;
 	}
 
-	public RankEvalRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Definition of the evaluation metric to calculate.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Metric()
 	{
-		MetricValue = null;
-		MetricDescriptorAction = null;
-		MetricDescriptor = descriptor;
-		return Self;
+		Instance.Metric = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor.Build(null);
+		return this;
 	}
 
-	public RankEvalRequestDescriptor<TDocument> Metric(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Definition of the evaluation metric to calculate.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Metric(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor>? action)
 	{
-		MetricValue = null;
-		MetricDescriptor = null;
-		MetricDescriptorAction = configure;
-		return Self;
+		Instance.Metric = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -217,93 +372,138 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	/// A set of typical search requests, together with their provided ratings.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestDescriptor<TDocument> Requests(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> value)
 	{
-		RequestsDescriptor = null;
-		RequestsDescriptorAction = null;
-		RequestsDescriptorActions = null;
-		RequestsValue = requests;
-		return Self;
+		Instance.Requests = value;
+		return this;
 	}
 
-	public RankEvalRequestDescriptor<TDocument> Requests(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests()
 	{
-		RequestsValue = null;
-		RequestsDescriptorAction = null;
-		RequestsDescriptorActions = null;
-		RequestsDescriptor = descriptor;
-		return Self;
+		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem.Build(null);
+		return this;
 	}
 
-	public RankEvalRequestDescriptor<TDocument> Requests(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem>? action)
 	{
-		RequestsValue = null;
-		RequestsDescriptor = null;
-		RequestsDescriptorActions = null;
-		RequestsDescriptorAction = configure;
-		return Self;
+		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem.Build(action);
+		return this;
 	}
 
-	public RankEvalRequestDescriptor<TDocument> Requests(params Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<T>>? action)
 	{
-		RequestsValue = null;
-		RequestsDescriptor = null;
-		RequestsDescriptorAction = null;
-		RequestsDescriptorActions = configure;
-		return Self;
+		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests(params Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem[] values)
 	{
-		writer.WriteStartObject();
-		if (MetricDescriptor is not null)
+		Instance.Requests = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, MetricDescriptor, options);
-		}
-		else if (MetricDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor(MetricDescriptorAction), options);
-		}
-		else if (MetricValue is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, MetricValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor.Build(action));
 		}
 
-		if (RequestsDescriptor is not null)
-		{
-			writer.WritePropertyName("requests");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RequestsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RequestsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("requests");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>(RequestsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RequestsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("requests");
-			writer.WriteStartArray();
-			foreach (var action in RequestsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>(action), options);
-			}
+		Instance.Requests = items;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("requests");
-			JsonSerializer.Serialize(writer, RequestsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<T>.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.Requests = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.RankEvalRequest Build(System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor(new Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -315,72 +515,152 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 /// Evaluate the quality of ranked search results over a set of typical search queries.
 /// </para>
 /// </summary>
-public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEvalRequestDescriptor, RankEvalRequestParameters>
+public readonly partial struct RankEvalRequestDescriptor<TDocument>
 {
-	internal RankEvalRequestDescriptor(Action<RankEvalRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.RankEvalRequest Instance { get; init; }
 
-	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.RankEvalRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.RankEvalRequest(indices);
+#pragma warning restore CS0618
 	}
 
 	public RankEvalRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRankEval;
+	public static explicit operator Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.RankEvalRequest instance) => new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "rank_eval";
-
-	public RankEvalRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public RankEvalRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public RankEvalRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public RankEvalRequestDescriptor SearchType(string? searchType) => Qs("search_type", searchType);
-
-	public RankEvalRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A  comma-separated list of data streams, indices, and index aliases used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To target all data streams and indices in a cluster, omit this parameter or use <c>_all</c> or <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? MetricValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor RequestsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor> RequestsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor>[] RequestsDescriptorActions { get; set; }
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Search operation type
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> SearchType(string? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Definition of the evaluation metric to calculate.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? metric)
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? value)
 	{
-		MetricDescriptor = null;
-		MetricDescriptorAction = null;
-		MetricValue = metric;
-		return Self;
+		Instance.Metric = value;
+		return this;
 	}
 
-	public RankEvalRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Definition of the evaluation metric to calculate.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Metric()
 	{
-		MetricValue = null;
-		MetricDescriptorAction = null;
-		MetricDescriptor = descriptor;
-		return Self;
+		Instance.Metric = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor.Build(null);
+		return this;
 	}
 
-	public RankEvalRequestDescriptor Metric(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Definition of the evaluation metric to calculate.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Metric(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor>? action)
 	{
-		MetricValue = null;
-		MetricDescriptor = null;
-		MetricDescriptorAction = configure;
-		return Self;
+		Instance.Metric = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -388,92 +668,109 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 	/// A set of typical search requests, together with their provided ratings.
 	/// </para>
 	/// </summary>
-	public RankEvalRequestDescriptor Requests(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> value)
 	{
-		RequestsDescriptor = null;
-		RequestsDescriptorAction = null;
-		RequestsDescriptorActions = null;
-		RequestsValue = requests;
-		return Self;
+		Instance.Requests = value;
+		return this;
 	}
 
-	public RankEvalRequestDescriptor Requests(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests()
 	{
-		RequestsValue = null;
-		RequestsDescriptorAction = null;
-		RequestsDescriptorActions = null;
-		RequestsDescriptor = descriptor;
-		return Self;
+		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<TDocument>.Build(null);
+		return this;
 	}
 
-	public RankEvalRequestDescriptor Requests(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<TDocument>>? action)
 	{
-		RequestsValue = null;
-		RequestsDescriptor = null;
-		RequestsDescriptorActions = null;
-		RequestsDescriptorAction = configure;
-		return Self;
+		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<TDocument>.Build(action);
+		return this;
 	}
 
-	public RankEvalRequestDescriptor Requests(params Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests(params Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem[] values)
 	{
-		RequestsValue = null;
-		RequestsDescriptor = null;
-		RequestsDescriptorAction = null;
-		RequestsDescriptorActions = configure;
-		return Self;
+		Instance.Requests = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A set of typical search requests, together with their provided ratings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>>[] actions)
 	{
-		writer.WriteStartObject();
-		if (MetricDescriptor is not null)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, MetricDescriptor, options);
-		}
-		else if (MetricDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor(MetricDescriptorAction), options);
-		}
-		else if (MetricValue is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, MetricValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>.Build(action));
 		}
 
-		if (RequestsDescriptor is not null)
-		{
-			writer.WritePropertyName("requests");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, RequestsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (RequestsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("requests");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor(RequestsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (RequestsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("requests");
-			writer.WriteStartArray();
-			foreach (var action in RequestsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor(action), options);
-			}
+		Instance.Requests = items;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("requests");
-			JsonSerializer.Serialize(writer, RequestsValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.RankEvalRequest Build(System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class UpgradeJobSnapshotRequestParameters : RequestParameters
+public sealed partial class UpgradeJobSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -48,10 +41,39 @@ public sealed partial class UpgradeJobSnapshotRequestParameters : RequestParamet
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
+internal sealed partial class UpgradeJobSnapshotRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Upgrade a snapshot.
-/// Upgrades an anomaly detection model snapshot to the latest major version.
+/// Upgrade an anomaly detection model snapshot to the latest major version.
 /// Over time, older snapshot formats are deprecated and removed. Anomaly
 /// detection jobs support only snapshots that are from the current or previous
 /// major version.
@@ -62,15 +84,27 @@ public sealed partial class UpgradeJobSnapshotRequestParameters : RequestParamet
 /// job.
 /// </para>
 /// </summary>
-public sealed partial class UpgradeJobSnapshotRequest : PlainRequest<UpgradeJobSnapshotRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestConverter))]
+public sealed partial class UpgradeJobSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpgradeJobSnapshotRequest(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId) : base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public UpgradeJobSnapshotRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpgradeJobSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpgradeJobSnapshot;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningUpgradeJobSnapshot;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -78,10 +112,31 @@ public sealed partial class UpgradeJobSnapshotRequest : PlainRequest<UpgradeJobS
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Controls the time to wait for the request to complete.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -90,14 +145,13 @@ public sealed partial class UpgradeJobSnapshotRequest : PlainRequest<UpgradeJobS
 	/// Otherwise, it responds as soon as the upgrade task is assigned to a node.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
 /// <para>
 /// Upgrade a snapshot.
-/// Upgrades an anomaly detection model snapshot to the latest major version.
+/// Upgrade an anomaly detection model snapshot to the latest major version.
 /// Over time, older snapshot formats are deprecated and removed. Anomaly
 /// detection jobs support only snapshots that are from the current or previous
 /// major version.
@@ -108,38 +162,122 @@ public sealed partial class UpgradeJobSnapshotRequest : PlainRequest<UpgradeJobS
 /// job.
 /// </para>
 /// </summary>
-public sealed partial class UpgradeJobSnapshotRequestDescriptor : RequestDescriptor<UpgradeJobSnapshotRequestDescriptor, UpgradeJobSnapshotRequestParameters>
+public readonly partial struct UpgradeJobSnapshotRequestDescriptor
 {
-	internal UpgradeJobSnapshotRequestDescriptor(Action<UpgradeJobSnapshotRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest Instance { get; init; }
 
-	public UpgradeJobSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId) : base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpgradeJobSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpgradeJobSnapshot;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.upgrade_job_snapshot";
-
-	public UpgradeJobSnapshotRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public UpgradeJobSnapshotRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public UpgradeJobSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public UpgradeJobSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest(jobId, snapshotId);
 	}
 
-	public UpgradeJobSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id snapshotId)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UpgradeJobSnapshotRequestDescriptor()
 	{
-		RouteValues.Required("snapshot_id", snapshotId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.SnapshotId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls the time to wait for the request to complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When true, the API won’t respond until the upgrade is complete.
+	/// Otherwise, it responds as soon as the upgrade task is assigned to a node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

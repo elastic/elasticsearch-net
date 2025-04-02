@@ -17,211 +17,146 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(QueryVectorBuilderConverter))]
-public sealed partial class QueryVectorBuilder
+internal sealed partial class QueryVectorBuilderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryVectorBuilder>
 {
-	internal QueryVectorBuilder(string variantName, object variant)
+	private static readonly System.Text.Json.JsonEncodedText VariantTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.QueryVectorBuilder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
-	}
-
-	internal object Variant { get; }
-	internal string VariantName { get; }
-
-	public static QueryVectorBuilder TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbedding textEmbedding) => new QueryVectorBuilder("text_embedding", textEmbedding);
-
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
-	{
-		result = default;
-		if (Variant is T variant)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			result = variant;
-			return true;
-		}
-
-		return false;
-	}
-}
-
-internal sealed partial class QueryVectorBuilderConverter : JsonConverter<QueryVectorBuilder>
-{
-	public override QueryVectorBuilder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			if (reader.ValueTextEquals(VariantTextEmbedding))
 			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "text_embedding")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TextEmbedding?>(ref reader, options);
-				variantNameValue = propertyName;
+				variantType = VariantTextEmbedding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TextEmbedding>(options, null);
 				continue;
 			}
 
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'QueryVectorBuilder' from the response.");
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		var result = new QueryVectorBuilder(variantNameValue, variantValue);
-		return result;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, QueryVectorBuilder value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryVectorBuilder value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
+		switch (value.VariantType)
 		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "text_embedding":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.TextEmbedding>(writer, (Elastic.Clients.Elasticsearch.TextEmbedding)value.Variant, options);
-					break;
-			}
+			case "":
+				break;
+			case "text_embedding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TextEmbedding)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryVectorBuilder)}'.");
 		}
 
 		writer.WriteEndObject();
 	}
 }
 
-public sealed partial class QueryVectorBuilderDescriptor<TDocument> : SerializableDescriptor<QueryVectorBuilderDescriptor<TDocument>>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryVectorBuilderConverter))]
+public sealed partial class QueryVectorBuilder
 {
-	internal QueryVectorBuilderDescriptor(Action<QueryVectorBuilderDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public QueryVectorBuilderDescriptor() : base()
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public QueryVectorBuilder()
 	{
 	}
-
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private QueryVectorBuilderDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+#endif
+#if !NET7_0_OR_GREATER
+	public QueryVectorBuilder()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	private QueryVectorBuilderDescriptor<TDocument> Set(object variant, string variantName)
-	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
-	}
+	public Elastic.Clients.Elasticsearch.TextEmbedding? TextEmbedding { get => GetVariant<Elastic.Clients.Elasticsearch.TextEmbedding>("text_embedding"); set => SetVariant("text_embedding", value); }
 
-	public QueryVectorBuilderDescriptor<TDocument> TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbedding textEmbedding) => Set(textEmbedding, "text_embedding");
-	public QueryVectorBuilderDescriptor<TDocument> TextEmbedding(Action<Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor> configure) => Set(configure, "text_embedding");
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.TextEmbedding value) => new Elastic.Clients.Elasticsearch.QueryVectorBuilder { TextEmbedding = value };
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+			return result;
 		}
 
-		writer.WriteEndObject();
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-public sealed partial class QueryVectorBuilderDescriptor : SerializableDescriptor<QueryVectorBuilderDescriptor>
+public readonly partial struct QueryVectorBuilderDescriptor
 {
-	internal QueryVectorBuilderDescriptor(Action<QueryVectorBuilderDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryVectorBuilder Instance { get; init; }
 
-	public QueryVectorBuilderDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryVectorBuilderDescriptor(Elastic.Clients.Elasticsearch.QueryVectorBuilder instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private QueryVectorBuilderDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryVectorBuilderDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private QueryVectorBuilderDescriptor Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor(Elastic.Clients.Elasticsearch.QueryVectorBuilder instance) => new Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbedding? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.TextEmbedding = value;
+		return this;
 	}
 
-	public QueryVectorBuilderDescriptor TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbedding textEmbedding) => Set(textEmbedding, "text_embedding");
-	public QueryVectorBuilderDescriptor TextEmbedding(Action<Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor> configure) => Set(configure, "text_embedding");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor TextEmbedding(System.Action<Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.TextEmbedding = Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor.Build(action);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryVectorBuilder Build(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor(new Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

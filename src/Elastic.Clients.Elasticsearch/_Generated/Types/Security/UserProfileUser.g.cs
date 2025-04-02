@@ -17,28 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class UserProfileUserConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UserProfileUser>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEmail = System.Text.Json.JsonEncodedText.Encode("email");
+	private static readonly System.Text.Json.JsonEncodedText PropFullName = System.Text.Json.JsonEncodedText.Encode("full_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRealmDomain = System.Text.Json.JsonEncodedText.Encode("realm_domain");
+	private static readonly System.Text.Json.JsonEncodedText PropRealmName = System.Text.Json.JsonEncodedText.Encode("realm_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override Elastic.Clients.Elasticsearch.Security.UserProfileUser Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propEmail = default;
+		LocalJsonValue<string?> propFullName = default;
+		LocalJsonValue<string?> propRealmDomain = default;
+		LocalJsonValue<string> propRealmName = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propRoles = default;
+		LocalJsonValue<string> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEmail.TryReadProperty(ref reader, options, PropEmail, null))
+			{
+				continue;
+			}
+
+			if (propFullName.TryReadProperty(ref reader, options, PropFullName, null))
+			{
+				continue;
+			}
+
+			if (propRealmDomain.TryReadProperty(ref reader, options, PropRealmDomain, null))
+			{
+				continue;
+			}
+
+			if (propRealmName.TryReadProperty(ref reader, options, PropRealmName, null))
+			{
+				continue;
+			}
+
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.UserProfileUser(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Email = propEmail.Value,
+			FullName = propFullName.Value,
+			RealmDomain = propRealmDomain.Value,
+			RealmName = propRealmName.Value,
+			Roles = propRoles.Value,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.UserProfileUser value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEmail, value.Email, null, null);
+		writer.WriteProperty(options, PropFullName, value.FullName, null, null);
+		writer.WriteProperty(options, PropRealmDomain, value.RealmDomain, null, null);
+		writer.WriteProperty(options, PropRealmName, value.RealmName, null, null);
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.UserProfileUserConverter))]
 public sealed partial class UserProfileUser
 {
-	[JsonInclude, JsonPropertyName("email")]
-	public string? Email { get; init; }
-	[JsonInclude, JsonPropertyName("full_name")]
-	public string? FullName { get; init; }
-	[JsonInclude, JsonPropertyName("realm_domain")]
-	public string? RealmDomain { get; init; }
-	[JsonInclude, JsonPropertyName("realm_name")]
-	public string RealmName { get; init; }
-	[JsonInclude, JsonPropertyName("roles")]
-	public IReadOnlyCollection<string> Roles { get; init; }
-	[JsonInclude, JsonPropertyName("username")]
-	public string Username { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UserProfileUser(string realmName, System.Collections.Generic.IReadOnlyCollection<string> roles, string username)
+	{
+		RealmName = realmName;
+		Roles = roles;
+		Username = username;
+	}
+#if NET7_0_OR_GREATER
+	public UserProfileUser()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UserProfileUser()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UserProfileUser(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public string? Email { get; set; }
+	public string? FullName { get; set; }
+	public string? RealmDomain { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RealmName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Username { get; set; }
 }

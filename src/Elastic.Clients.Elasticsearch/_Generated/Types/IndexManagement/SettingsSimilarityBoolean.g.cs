@@ -17,39 +17,101 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class SettingsSimilarityBoolean : ISettingsSimilarity
+internal sealed partial class SettingsSimilarityBooleanConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean>
 {
-	[JsonInclude, JsonPropertyName("type")]
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanConverter))]
+public sealed partial class SettingsSimilarityBoolean : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
+{
+#if NET7_0_OR_GREATER
+	public SettingsSimilarityBoolean()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SettingsSimilarityBoolean()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SettingsSimilarityBoolean(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string Type => "boolean";
 }
 
-public sealed partial class SettingsSimilarityBooleanDescriptor : SerializableDescriptor<SettingsSimilarityBooleanDescriptor>, IBuildableDescriptor<SettingsSimilarityBoolean>
+public readonly partial struct SettingsSimilarityBooleanDescriptor
 {
-	internal SettingsSimilarityBooleanDescriptor(Action<SettingsSimilarityBooleanDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean Instance { get; init; }
 
-	public SettingsSimilarityBooleanDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityBooleanDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean instance)
 	{
+		Instance = instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityBooleanDescriptor()
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("boolean");
-		writer.WriteEndObject();
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	SettingsSimilarityBoolean IBuildableDescriptor<SettingsSimilarityBoolean>.Build() => new()
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor descriptor) => descriptor.Instance;
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor>? action)
 	{
-	};
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBooleanDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

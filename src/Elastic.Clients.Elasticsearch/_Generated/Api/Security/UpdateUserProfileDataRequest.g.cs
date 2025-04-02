@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class UpdateUserProfileDataRequestParameters : RequestParameters
+public sealed partial class UpdateUserProfileDataRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -55,6 +48,54 @@ public sealed partial class UpdateUserProfileDataRequestParameters : RequestPara
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+}
+
+internal sealed partial class UpdateUserProfileDataRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
+	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels");
+
+	public override Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propData = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propLabels = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propData.TryReadProperty(ref reader, options, PropData, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propLabels.TryReadProperty(ref reader, options, PropLabels, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Data = propData.Value,
+			Labels = propLabels.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropLabels, value.Labels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -93,15 +134,27 @@ public sealed partial class UpdateUserProfileDataRequestParameters : RequestPara
 /// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 /// </para>
 /// </summary>
-public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUserProfileDataRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestConverter))]
+public sealed partial class UpdateUserProfileDataRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateUserProfileDataRequest(string uid) : base(r => r.Required("uid", uid))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public UpdateUserProfileDataRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateUserProfileDataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityUpdateUserProfileData;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityUpdateUserProfileData;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -109,10 +162,20 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 
 	/// <summary>
 	/// <para>
+	/// A unique identifier for the user profile.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Uid { get => P<string>("uid"); set => PR("uid", value); }
+
+	/// <summary>
+	/// <para>
 	/// Only perform the operation if the document has this primary term.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
 	/// <summary>
@@ -120,7 +183,6 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 	/// Only perform the operation if the document has this sequence number.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
 	/// <summary>
@@ -131,7 +193,6 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 	/// If 'false', nothing is done with refreshes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
@@ -142,8 +203,7 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 	/// The data object is not searchable, but can be retrieved with the get user profile API.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data")]
-	public IDictionary<string, object>? Data { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Data { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -152,8 +212,7 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("labels")]
-	public IDictionary<string, object>? Labels { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Labels { get; set; }
 }
 
 /// <summary>
@@ -192,34 +251,76 @@ public sealed partial class UpdateUserProfileDataRequest : PlainRequest<UpdateUs
 /// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 /// </para>
 /// </summary>
-public sealed partial class UpdateUserProfileDataRequestDescriptor : RequestDescriptor<UpdateUserProfileDataRequestDescriptor, UpdateUserProfileDataRequestParameters>
+public readonly partial struct UpdateUserProfileDataRequestDescriptor
 {
-	internal UpdateUserProfileDataRequestDescriptor(Action<UpdateUserProfileDataRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest Instance { get; init; }
 
-	public UpdateUserProfileDataRequestDescriptor(string uid) : base(r => r.Required("uid", uid))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateUserProfileDataRequestDescriptor(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityUpdateUserProfileData;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.update_user_profile_data";
-
-	public UpdateUserProfileDataRequestDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
-	public UpdateUserProfileDataRequestDescriptor IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
-	public UpdateUserProfileDataRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-
-	public UpdateUserProfileDataRequestDescriptor Uid(string uid)
+	public UpdateUserProfileDataRequestDescriptor(string uid)
 	{
-		RouteValues.Required("uid", uid);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest(uid);
 	}
 
-	private IDictionary<string, object>? DataValue { get; set; }
-	private IDictionary<string, object>? LabelsValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UpdateUserProfileDataRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the user profile.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Uid(string value)
+	{
+		Instance.Uid = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this primary term.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor IfPrimaryTerm(long? value)
+	{
+		Instance.IfPrimaryTerm = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this sequence number.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor IfSeqNo(long? value)
+	{
+		Instance.IfSeqNo = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -229,10 +330,45 @@ public sealed partial class UpdateUserProfileDataRequestDescriptor : RequestDesc
 	/// The data object is not searchable, but can be retrieved with the get user profile API.
 	/// </para>
 	/// </summary>
-	public UpdateUserProfileDataRequestDescriptor Data(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Data(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		DataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Data = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Non-searchable data that you want to associate with the user profile.
+	/// This field supports a nested data structure.
+	/// Within the <c>data</c> object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
+	/// The data object is not searchable, but can be retrieved with the get user profile API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Data()
+	{
+		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Non-searchable data that you want to associate with the user profile.
+	/// This field supports a nested data structure.
+	/// Within the <c>data</c> object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
+	/// The data object is not searchable, but can be retrieved with the get user profile API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Data(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor AddDatum(string key, object value)
+	{
+		Instance.Data ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Data.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -242,27 +378,92 @@ public sealed partial class UpdateUserProfileDataRequestDescriptor : RequestDesc
 	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
 	/// </para>
 	/// </summary>
-	public UpdateUserProfileDataRequestDescriptor Labels(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Labels(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		LabelsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Labels = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Searchable data that you want to associate with the user profile.
+	/// This field supports a nested data structure.
+	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Labels()
 	{
-		writer.WriteStartObject();
-		if (DataValue is not null)
-		{
-			writer.WritePropertyName("data");
-			JsonSerializer.Serialize(writer, DataValue, options);
-		}
+		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
 
-		if (LabelsValue is not null)
-		{
-			writer.WritePropertyName("labels");
-			JsonSerializer.Serialize(writer, LabelsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Searchable data that you want to associate with the user profile.
+	/// This field supports a nested data structure.
+	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor AddLabel(string key, object value)
+	{
+		Instance.Labels ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Labels.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

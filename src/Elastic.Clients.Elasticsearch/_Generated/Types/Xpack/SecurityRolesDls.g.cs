@@ -17,18 +17,79 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class SecurityRolesDlsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDls>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBitSetCache = System.Text.Json.JsonEncodedText.Encode("bit_set_cache");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDls Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache> propBitSetCache = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBitSetCache.TryReadProperty(ref reader, options, PropBitSetCache, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BitSetCache = propBitSetCache.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDls value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBitSetCache, value.BitSetCache, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsConverter))]
 public sealed partial class SecurityRolesDls
 {
-	[JsonInclude, JsonPropertyName("bit_set_cache")]
-	public Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache BitSetCache { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SecurityRolesDls(Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache bitSetCache)
+	{
+		BitSetCache = bitSetCache;
+	}
+#if NET7_0_OR_GREATER
+	public SecurityRolesDls()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SecurityRolesDls()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SecurityRolesDls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache BitSetCache { get; set; }
 }

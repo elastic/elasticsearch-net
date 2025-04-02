@@ -17,49 +17,78 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class GetGeoipDatabaseRequestParameters : RequestParameters
+public sealed partial class GetGeoipDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class GetGeoipDatabaseRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Get GeoIP database configurations.
+/// </para>
+/// <para>
 /// Get information about one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
-public sealed partial class GetGeoipDatabaseRequest : PlainRequest<GetGeoipDatabaseRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestConverter))]
+public sealed partial class GetGeoipDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>
 {
-	public GetGeoipDatabaseRequest()
-	{
-	}
-
 	public GetGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Ids? id) : base(r => r.Optional("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetGeoipDatabaseRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetGeoipDatabaseRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGetGeoipDatabase;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IngestGetGeoipDatabase;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -67,88 +96,110 @@ public sealed partial class GetGeoipDatabaseRequest : PlainRequest<GetGeoipDatab
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// A comma-separated list of database configuration IDs to retrieve.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To get all database configurations, omit this parameter or use <c>*</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+	public Elastic.Clients.Elasticsearch.Ids? Id { get => P<Elastic.Clients.Elasticsearch.Ids?>("id"); set => PO("id", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get GeoIP database configurations.
-/// Get information about one or more IP geolocation database configurations.
 /// </para>
-/// </summary>
-public sealed partial class GetGeoipDatabaseRequestDescriptor<TDocument> : RequestDescriptor<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseRequestParameters>
-{
-	internal GetGeoipDatabaseRequestDescriptor(Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public GetGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? id) : base(r => r.Optional("id", id))
-	{
-	}
-
-	public GetGeoipDatabaseRequestDescriptor()
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGetGeoipDatabase;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ingest.get_geoip_database";
-
-	public GetGeoipDatabaseRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public GetGeoipDatabaseRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Ids? id)
-	{
-		RouteValues.Optional("id", id);
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-	}
-}
-
-/// <summary>
 /// <para>
-/// Get GeoIP database configurations.
 /// Get information about one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
-public sealed partial class GetGeoipDatabaseRequestDescriptor : RequestDescriptor<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseRequestParameters>
+public readonly partial struct GetGeoipDatabaseRequestDescriptor
 {
-	internal GetGeoipDatabaseRequestDescriptor(Action<GetGeoipDatabaseRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest Instance { get; init; }
 
-	public GetGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest(id);
 	}
 
 	public GetGeoipDatabaseRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGetGeoipDatabase;
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ingest.get_geoip_database";
-
-	public GetGeoipDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public GetGeoipDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Ids? id)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of database configuration IDs to retrieve.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// To get all database configurations, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Ids? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

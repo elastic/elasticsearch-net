@@ -17,256 +17,618 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-[JsonConverter(typeof(BoundaryScannerConverter))]
-public enum BoundaryScanner
+internal sealed partial class HighlighterTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HighlighterType>
 {
-	/// <summary>
-	/// <para>
-	/// Break highlighted fragments at the next word boundary, as determined by Java’s <c>BreakIterator</c>.
-	/// You can specify the locale to use with <c>boundary_scanner_locale</c>.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "word")]
-	Word,
-	/// <summary>
-	/// <para>
-	/// Break highlighted fragments at the next sentence boundary, as determined by Java’s <c>BreakIterator</c>.
-	/// You can specify the locale to use with <c>boundary_scanner_locale</c>.
-	/// When used with the <c>unified</c> highlighter, the <c>sentence</c> scanner splits sentences bigger than <c>fragment_size</c> at the first word boundary next to fragment_size.
-	/// You can set <c>fragment_size</c> to <c>0</c> to never split any sentence.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "sentence")]
-	Sentence,
-	/// <summary>
-	/// <para>
-	/// Use the characters specified by <c>boundary_chars</c> as highlighting boundaries.
-	/// The <c>boundary_max_scan</c> setting controls how far to scan for boundary characters.
-	/// Only valid for the <c>fvh</c> highlighter.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "chars")]
-	Chars
-}
-
-internal sealed class BoundaryScannerConverter : JsonConverter<BoundaryScanner>
-{
-	public override BoundaryScanner Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "word":
-				return BoundaryScanner.Word;
-			case "sentence":
-				return BoundaryScanner.Sentence;
-			case "chars":
-				return BoundaryScanner.Chars;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
+		return new Elastic.Clients.Elasticsearch.Core.Search.HighlighterType(reader.ReadValue<string?>(options, null));
 	}
 
-	public override void Write(Utf8JsonWriter writer, BoundaryScanner value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.HighlighterType value, System.Text.Json.JsonSerializerOptions options)
 	{
-		switch (value)
-		{
-			case BoundaryScanner.Word:
-				writer.WriteStringValue("word");
-				return;
-			case BoundaryScanner.Sentence:
-				writer.WriteStringValue("sentence");
-				return;
-			case BoundaryScanner.Chars:
-				writer.WriteStringValue("chars");
-				return;
-		}
-
-		writer.WriteNullValue();
+		writer.WriteValue(options, value.Value, null);
 	}
 }
 
-[JsonConverter(typeof(HighlighterEncoderConverter))]
-public enum HighlighterEncoder
+internal sealed partial class BoundaryScannerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner>
 {
-	[EnumMember(Value = "html")]
-	Html,
-	[EnumMember(Value = "default")]
-	Default
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberChars = System.Text.Json.JsonEncodedText.Encode("chars");
+	private static readonly System.Text.Json.JsonEncodedText MemberSentence = System.Text.Json.JsonEncodedText.Encode("sentence");
+	private static readonly System.Text.Json.JsonEncodedText MemberWord = System.Text.Json.JsonEncodedText.Encode("word");
 
-internal sealed class HighlighterEncoderConverter : JsonConverter<HighlighterEncoder>
-{
-	public override HighlighterEncoder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberChars))
 		{
-			case "html":
-				return HighlighterEncoder.Html;
-			case "default":
-				return HighlighterEncoder.Default;
+			return Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Chars;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSentence))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Sentence;
+		}
+
+		if (reader.ValueTextEquals(MemberWord))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Word;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChars.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Chars;
+		}
+
+		if (string.Equals(value, MemberSentence.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Sentence;
+		}
+
+		if (string.Equals(value, MemberWord.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Word;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, HighlighterEncoder value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case HighlighterEncoder.Html:
-				writer.WriteStringValue("html");
-				return;
-			case HighlighterEncoder.Default:
-				writer.WriteStringValue("default");
-				return;
+			case Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Chars:
+				writer.WriteStringValue(MemberChars);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Sentence:
+				writer.WriteStringValue(MemberSentence);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Word:
+				writer.WriteStringValue(MemberWord);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
-}
 
-[JsonConverter(typeof(HighlighterFragmenterConverter))]
-public enum HighlighterFragmenter
-{
-	[EnumMember(Value = "span")]
-	Span,
-	[EnumMember(Value = "simple")]
-	Simple
-}
-
-internal sealed class HighlighterFragmenterConverter : JsonConverter<HighlighterFragmenter>
-{
-	public override HighlighterFragmenter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "span":
-				return HighlighterFragmenter.Span;
-			case "simple":
-				return HighlighterFragmenter.Simple;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
+		return Read(ref reader, typeToConvert, options);
 	}
 
-	public override void Write(Utf8JsonWriter writer, HighlighterFragmenter value, JsonSerializerOptions options)
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner value, System.Text.Json.JsonSerializerOptions options)
 	{
-		switch (value)
-		{
-			case HighlighterFragmenter.Span:
-				writer.WriteStringValue("span");
-				return;
-			case HighlighterFragmenter.Simple:
-				writer.WriteStringValue("simple");
-				return;
-		}
-
-		writer.WriteNullValue();
+		Write(writer, value, options);
 	}
 }
 
-[JsonConverter(typeof(HighlighterOrderConverter))]
-public enum HighlighterOrder
+internal sealed partial class HighlighterFragmenterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter>
 {
-	[EnumMember(Value = "score")]
-	Score
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberSimple = System.Text.Json.JsonEncodedText.Encode("simple");
+	private static readonly System.Text.Json.JsonEncodedText MemberSpan = System.Text.Json.JsonEncodedText.Encode("span");
 
-internal sealed class HighlighterOrderConverter : JsonConverter<HighlighterOrder>
-{
-	public override HighlighterOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberSimple))
 		{
-			case "score":
-				return HighlighterOrder.Score;
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Simple;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSpan))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Span;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSimple.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Simple;
+		}
+
+		if (string.Equals(value, MemberSpan.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Span;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, HighlighterOrder value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case HighlighterOrder.Score:
-				writer.WriteStringValue("score");
-				return;
+			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Simple:
+				writer.WriteStringValue(MemberSimple);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Span:
+				writer.WriteStringValue(MemberSpan);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
-}
 
-[JsonConverter(typeof(HighlighterTagsSchemaConverter))]
-public enum HighlighterTagsSchema
-{
-	[EnumMember(Value = "styled")]
-	Styled
-}
-
-internal sealed class HighlighterTagsSchemaConverter : JsonConverter<HighlighterTagsSchema>
-{
-	public override HighlighterTagsSchema Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "styled":
-				return HighlighterTagsSchema.Styled;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
+		return Read(ref reader, typeToConvert, options);
 	}
 
-	public override void Write(Utf8JsonWriter writer, HighlighterTagsSchema value, JsonSerializerOptions options)
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class HighlighterOrderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberScore))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder.Score;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder.Score;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case HighlighterTagsSchema.Styled:
-				writer.WriteStringValue("styled");
-				return;
+			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder.Score:
+				writer.WriteStringValue(MemberScore);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder)}'.");
 		}
+	}
 
-		writer.WriteNullValue();
+	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }
 
-[JsonConverter(typeof(EnumStructConverter<HighlighterType>))]
-public readonly partial struct HighlighterType : IEnumStruct<HighlighterType>
+internal sealed partial class HighlighterTagsSchemaConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberStyled = System.Text.Json.JsonEncodedText.Encode("styled");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberStyled))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema.Styled;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberStyled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema.Styled;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema.Styled:
+				writer.WriteStringValue(MemberStyled);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class HighlighterEncoderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberDefault = System.Text.Json.JsonEncodedText.Encode("default");
+	private static readonly System.Text.Json.JsonEncodedText MemberHtml = System.Text.Json.JsonEncodedText.Encode("html");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberDefault))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Default;
+		}
+
+		if (reader.ValueTextEquals(MemberHtml))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Html;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDefault.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Default;
+		}
+
+		if (string.Equals(value, MemberHtml.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Html;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Default:
+				writer.WriteStringValue(MemberDefault);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Html:
+				writer.WriteStringValue(MemberHtml);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class TotalHitsRelationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberEq = System.Text.Json.JsonEncodedText.Encode("eq");
+	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberEq))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Eq;
+		}
+
+		if (reader.ValueTextEquals(MemberGte))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Gte;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberEq.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Eq;
+		}
+
+		if (string.Equals(value, MemberGte.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Gte;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Eq:
+				writer.WriteStringValue(MemberEq);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Gte:
+				writer.WriteStringValue(MemberGte);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ScoreModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.ScoreMode>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberMultiply = System.Text.Json.JsonEncodedText.Encode("multiply");
+	private static readonly System.Text.Json.JsonEncodedText MemberTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.ScoreMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAvg))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Avg;
+		}
+
+		if (reader.ValueTextEquals(MemberMax))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Max;
+		}
+
+		if (reader.ValueTextEquals(MemberMin))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Min;
+		}
+
+		if (reader.ValueTextEquals(MemberMultiply))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Multiply;
+		}
+
+		if (reader.ValueTextEquals(MemberTotal))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Total;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Avg;
+		}
+
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Max;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Min;
+		}
+
+		if (string.Equals(value, MemberMultiply.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Multiply;
+		}
+
+		if (string.Equals(value, MemberTotal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Total;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.ScoreMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Avg:
+				writer.WriteStringValue(MemberAvg);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Max:
+				writer.WriteStringValue(MemberMax);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Min:
+				writer.WriteStringValue(MemberMin);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Multiply:
+				writer.WriteStringValue(MemberMultiply);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Total:
+				writer.WriteStringValue(MemberTotal);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.ScoreMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.ScoreMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class SuggestSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SuggestSort>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score");
+	private static readonly System.Text.Json.JsonEncodedText MemberFrequency = System.Text.Json.JsonEncodedText.Encode("frequency");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.SuggestSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberScore))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score;
+		}
+
+		if (reader.ValueTextEquals(MemberFrequency))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Frequency;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score;
+		}
+
+		if (string.Equals(value, MemberFrequency.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Frequency;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.SuggestSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score:
+				writer.WriteStringValue(MemberScore);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Frequency:
+				writer.WriteStringValue(MemberFrequency);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.SuggestSort ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.SuggestSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class StringDistanceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.StringDistance>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberInternal = System.Text.Json.JsonEncodedText.Encode("internal");
+	private static readonly System.Text.Json.JsonEncodedText MemberDamerauLevenshtein = System.Text.Json.JsonEncodedText.Encode("damerau_levenshtein");
+	private static readonly System.Text.Json.JsonEncodedText MemberLevenshtein = System.Text.Json.JsonEncodedText.Encode("levenshtein");
+	private static readonly System.Text.Json.JsonEncodedText MemberJaroWinkler = System.Text.Json.JsonEncodedText.Encode("jaro_winkler");
+	private static readonly System.Text.Json.JsonEncodedText MemberNgram = System.Text.Json.JsonEncodedText.Encode("ngram");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.StringDistance Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberInternal))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal;
+		}
+
+		if (reader.ValueTextEquals(MemberDamerauLevenshtein))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.DamerauLevenshtein;
+		}
+
+		if (reader.ValueTextEquals(MemberLevenshtein))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein;
+		}
+
+		if (reader.ValueTextEquals(MemberJaroWinkler))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.JaroWinkler;
+		}
+
+		if (reader.ValueTextEquals(MemberNgram))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Ngram;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberInternal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal;
+		}
+
+		if (string.Equals(value, MemberDamerauLevenshtein.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.DamerauLevenshtein;
+		}
+
+		if (string.Equals(value, MemberLevenshtein.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein;
+		}
+
+		if (string.Equals(value, MemberJaroWinkler.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.JaroWinkler;
+		}
+
+		if (string.Equals(value, MemberNgram.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Ngram;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.StringDistance)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.StringDistance value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal:
+				writer.WriteStringValue(MemberInternal);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.DamerauLevenshtein:
+				writer.WriteStringValue(MemberDamerauLevenshtein);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein:
+				writer.WriteStringValue(MemberLevenshtein);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.JaroWinkler:
+				writer.WriteStringValue(MemberJaroWinkler);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Ngram:
+				writer.WriteStringValue(MemberNgram);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.StringDistance)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.StringDistance ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.StringDistance value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTypeConverter))]
+public readonly partial struct HighlighterType : Elastic.Clients.Elasticsearch.Serialization.IEnumStruct<Elastic.Clients.Elasticsearch.Core.Search.HighlighterType>
 {
 	public HighlighterType(string value) => Value = value;
-
+#if NET7_0_OR_GREATER
+	static HighlighterType IEnumStruct<HighlighterType>.Create(string value) => value;
+#else
 	HighlighterType IEnumStruct<HighlighterType>.Create(string value) => value;
-
+#endif
 	public readonly string Value { get; }
-
-	/// <summary>
-	/// <para>
-	/// The unified highlighter uses the Lucene Unified Highlighter.
-	/// </para>
-	/// </summary>
-	public static HighlighterType Unified { get; } = new HighlighterType("unified");
 
 	/// <summary>
 	/// <para>
@@ -282,9 +644,16 @@ public readonly partial struct HighlighterType : IEnumStruct<HighlighterType>
 	/// </summary>
 	public static HighlighterType FastVector { get; } = new HighlighterType("fvh");
 
+	/// <summary>
+	/// <para>
+	/// The unified highlighter uses the Lucene Unified Highlighter.
+	/// </para>
+	/// </summary>
+	public static HighlighterType Unified { get; } = new HighlighterType("unified");
+
 	public override string ToString() => Value ?? string.Empty;
 
-	public static implicit operator string(HighlighterType highlighterType) => highlighterType.Value;
+	public static implicit operator string(HighlighterType @enum) => @enum.Value;
 	public static implicit operator HighlighterType(string value) => new(value);
 
 	public override int GetHashCode() => Value.GetHashCode();
@@ -295,184 +664,131 @@ public readonly partial struct HighlighterType : IEnumStruct<HighlighterType>
 	public static bool operator !=(HighlighterType a, HighlighterType b) => !(a == b);
 }
 
-[JsonConverter(typeof(ScoreModeConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScannerConverter))]
+public enum BoundaryScanner
+{
+	/// <summary>
+	/// <para>
+	/// Use the characters specified by <c>boundary_chars</c> as highlighting boundaries.
+	/// The <c>boundary_max_scan</c> setting controls how far to scan for boundary characters.
+	/// Only valid for the <c>fvh</c> highlighter.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "chars")]
+	Chars,
+	/// <summary>
+	/// <para>
+	/// Break highlighted fragments at the next sentence boundary, as determined by Java’s <c>BreakIterator</c>.
+	/// You can specify the locale to use with <c>boundary_scanner_locale</c>.
+	/// When used with the <c>unified</c> highlighter, the <c>sentence</c> scanner splits sentences bigger than <c>fragment_size</c> at the first word boundary next to fragment_size.
+	/// You can set <c>fragment_size</c> to <c>0</c> to never split any sentence.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "sentence")]
+	Sentence,
+	/// <summary>
+	/// <para>
+	/// Break highlighted fragments at the next word boundary, as determined by Java’s <c>BreakIterator</c>.
+	/// You can specify the locale to use with <c>boundary_scanner_locale</c>.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "word")]
+	Word
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenterConverter))]
+public enum HighlighterFragmenter
+{
+	[System.Runtime.Serialization.EnumMember(Value = "simple")]
+	Simple,
+	[System.Runtime.Serialization.EnumMember(Value = "span")]
+	Span
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrderConverter))]
+public enum HighlighterOrder
+{
+	[System.Runtime.Serialization.EnumMember(Value = "score")]
+	Score
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchemaConverter))]
+public enum HighlighterTagsSchema
+{
+	[System.Runtime.Serialization.EnumMember(Value = "styled")]
+	Styled
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoderConverter))]
+public enum HighlighterEncoder
+{
+	[System.Runtime.Serialization.EnumMember(Value = "default")]
+	Default,
+	[System.Runtime.Serialization.EnumMember(Value = "html")]
+	Html
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelationConverter))]
+public enum TotalHitsRelation
+{
+	/// <summary>
+	/// <para>
+	/// Accurate
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "eq")]
+	Eq,
+	/// <summary>
+	/// <para>
+	/// Lower bound, including returned events or sequences
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "gte")]
+	Gte
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.ScoreModeConverter))]
 public enum ScoreMode
 {
 	/// <summary>
 	/// <para>
-	/// Add the original score and the rescore query score.
+	/// Average the original score and the rescore query score.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "total")]
-	Total,
+	[System.Runtime.Serialization.EnumMember(Value = "avg")]
+	Avg,
+	/// <summary>
+	/// <para>
+	/// Take the max of original score and the rescore query score.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "max")]
+	Max,
+	/// <summary>
+	/// <para>
+	/// Take the min of the original score and the rescore query score.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "min")]
+	Min,
 	/// <summary>
 	/// <para>
 	/// Multiply the original score by the rescore query score.
 	/// Useful for <c>function</c> query rescores.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "multiply")]
+	[System.Runtime.Serialization.EnumMember(Value = "multiply")]
 	Multiply,
 	/// <summary>
 	/// <para>
-	/// Take the min of the original score and the rescore query score.
+	/// Add the original score and the rescore query score.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "min")]
-	Min,
-	/// <summary>
-	/// <para>
-	/// Take the max of original score and the rescore query score.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "max")]
-	Max,
-	/// <summary>
-	/// <para>
-	/// Average the original score and the rescore query score.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "avg")]
-	Avg
+	[System.Runtime.Serialization.EnumMember(Value = "total")]
+	Total
 }
 
-internal sealed class ScoreModeConverter : JsonConverter<ScoreMode>
-{
-	public override ScoreMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "total":
-				return ScoreMode.Total;
-			case "multiply":
-				return ScoreMode.Multiply;
-			case "min":
-				return ScoreMode.Min;
-			case "max":
-				return ScoreMode.Max;
-			case "avg":
-				return ScoreMode.Avg;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ScoreMode value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case ScoreMode.Total:
-				writer.WriteStringValue("total");
-				return;
-			case ScoreMode.Multiply:
-				writer.WriteStringValue("multiply");
-				return;
-			case ScoreMode.Min:
-				writer.WriteStringValue("min");
-				return;
-			case ScoreMode.Max:
-				writer.WriteStringValue("max");
-				return;
-			case ScoreMode.Avg:
-				writer.WriteStringValue("avg");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(StringDistanceConverter))]
-public enum StringDistance
-{
-	/// <summary>
-	/// <para>
-	/// String distance algorithm based on character n-grams.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "ngram")]
-	Ngram,
-	/// <summary>
-	/// <para>
-	/// String distance algorithm based on the Levenshtein edit distance algorithm.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "levenshtein")]
-	Levenshtein,
-	/// <summary>
-	/// <para>
-	/// String distance algorithm based on Jaro-Winkler algorithm.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "jaro_winkler")]
-	JaroWinkler,
-	/// <summary>
-	/// <para>
-	/// Based on the Damerau-Levenshtein algorithm, but highly optimized for comparing string distance for terms inside the index.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "internal")]
-	Internal,
-	/// <summary>
-	/// <para>
-	/// String distance algorithm based on Damerau-Levenshtein algorithm.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "damerau_levenshtein")]
-	DamerauLevenshtein
-}
-
-internal sealed class StringDistanceConverter : JsonConverter<StringDistance>
-{
-	public override StringDistance Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "ngram":
-				return StringDistance.Ngram;
-			case "levenshtein":
-				return StringDistance.Levenshtein;
-			case "jaro_winkler":
-				return StringDistance.JaroWinkler;
-			case "internal":
-				return StringDistance.Internal;
-			case "damerau_levenshtein":
-				return StringDistance.DamerauLevenshtein;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, StringDistance value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case StringDistance.Ngram:
-				writer.WriteStringValue("ngram");
-				return;
-			case StringDistance.Levenshtein:
-				writer.WriteStringValue("levenshtein");
-				return;
-			case StringDistance.JaroWinkler:
-				writer.WriteStringValue("jaro_winkler");
-				return;
-			case StringDistance.Internal:
-				writer.WriteStringValue("internal");
-				return;
-			case StringDistance.DamerauLevenshtein:
-				writer.WriteStringValue("damerau_levenshtein");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(SuggestSortConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.SuggestSortConverter))]
 public enum SuggestSort
 {
 	/// <summary>
@@ -480,98 +796,53 @@ public enum SuggestSort
 	/// Sort by score first, then document frequency and then the term itself.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "score")]
+	[System.Runtime.Serialization.EnumMember(Value = "score")]
 	Score,
 	/// <summary>
 	/// <para>
 	/// Sort by document frequency first, then similarity score and then the term itself.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "frequency")]
+	[System.Runtime.Serialization.EnumMember(Value = "frequency")]
 	Frequency
 }
 
-internal sealed class SuggestSortConverter : JsonConverter<SuggestSort>
-{
-	public override SuggestSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "score":
-				return SuggestSort.Score;
-			case "frequency":
-				return SuggestSort.Frequency;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SuggestSort value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case SuggestSort.Score:
-				writer.WriteStringValue("score");
-				return;
-			case SuggestSort.Frequency:
-				writer.WriteStringValue("frequency");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(TotalHitsRelationConverter))]
-public enum TotalHitsRelation
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.StringDistanceConverter))]
+public enum StringDistance
 {
 	/// <summary>
 	/// <para>
-	/// Lower bound, including returned events or sequences
+	/// Based on the Damerau-Levenshtein algorithm, but highly optimized for comparing string distance for terms inside the index.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "gte")]
-	Gte,
+	[System.Runtime.Serialization.EnumMember(Value = "internal")]
+	Internal,
 	/// <summary>
 	/// <para>
-	/// Accurate
+	/// String distance algorithm based on Damerau-Levenshtein algorithm.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "eq")]
-	Eq
-}
-
-internal sealed class TotalHitsRelationConverter : JsonConverter<TotalHitsRelation>
-{
-	public override TotalHitsRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "gte":
-				return TotalHitsRelation.Gte;
-			case "eq":
-				return TotalHitsRelation.Eq;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, TotalHitsRelation value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case TotalHitsRelation.Gte:
-				writer.WriteStringValue("gte");
-				return;
-			case TotalHitsRelation.Eq:
-				writer.WriteStringValue("eq");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "damerau_levenshtein")]
+	DamerauLevenshtein,
+	/// <summary>
+	/// <para>
+	/// String distance algorithm based on the Levenshtein edit distance algorithm.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "levenshtein")]
+	Levenshtein,
+	/// <summary>
+	/// <para>
+	/// String distance algorithm based on Jaro-Winkler algorithm.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "jaro_winkler")]
+	JaroWinkler,
+	/// <summary>
+	/// <para>
+	/// String distance algorithm based on character n-grams.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "ngram")]
+	Ngram
 }

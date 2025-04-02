@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public sealed partial class GetTransformStatsRequestParameters : RequestParameters
+public sealed partial class GetTransformStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -82,25 +75,82 @@ public sealed partial class GetTransformStatsRequestParameters : RequestParamete
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class GetTransformStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get transform stats.
-/// Retrieves usage information for transforms.
+/// </para>
+/// <para>
+/// Get usage information for transforms.
 /// </para>
 /// </summary>
-public sealed partial class GetTransformStatsRequest : PlainRequest<GetTransformStatsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestConverter))]
+public sealed partial class GetTransformStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetTransformStatsRequest(Elastic.Clients.Elasticsearch.Names transformId) : base(r => r.Required("transform_id", transformId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetTransformStatsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetTransformStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementGetTransformStats;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.TransformManagementGetTransformStats;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "transform.get_transform_stats";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform. It can be a transform identifier or a
+	/// wildcard expression. You can get information for all transforms by using
+	/// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;transform_id></c>, or by omitting the
+	/// <c>&lt;transform_id></c>.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Names TransformId { get => P<Elastic.Clients.Elasticsearch.Names>("transform_id"); set => PR("transform_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -128,7 +178,6 @@ public sealed partial class GetTransformStatsRequest : PlainRequest<GetTransform
 	/// there are no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
@@ -136,7 +185,6 @@ public sealed partial class GetTransformStatsRequest : PlainRequest<GetTransform
 	/// Skips the specified number of transforms.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -144,7 +192,6 @@ public sealed partial class GetTransformStatsRequest : PlainRequest<GetTransform
 	/// Specifies the maximum number of transforms to obtain.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 
 	/// <summary>
@@ -152,44 +199,167 @@ public sealed partial class GetTransformStatsRequest : PlainRequest<GetTransform
 	/// Controls the time to wait for the stats
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get transform stats.
-/// Retrieves usage information for transforms.
+/// </para>
+/// <para>
+/// Get usage information for transforms.
 /// </para>
 /// </summary>
-public sealed partial class GetTransformStatsRequestDescriptor : RequestDescriptor<GetTransformStatsRequestDescriptor, GetTransformStatsRequestParameters>
+public readonly partial struct GetTransformStatsRequestDescriptor
 {
-	internal GetTransformStatsRequestDescriptor(Action<GetTransformStatsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest Instance { get; init; }
 
-	public GetTransformStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Names transformId) : base(r => r.Required("transform_id", transformId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetTransformStatsRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementGetTransformStats;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "transform.get_transform_stats";
-
-	public GetTransformStatsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-	public GetTransformStatsRequestDescriptor From(long? from) => Qs("from", from);
-	public GetTransformStatsRequestDescriptor Size(long? size) => Qs("size", size);
-	public GetTransformStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public GetTransformStatsRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Names transformId)
+	public GetTransformStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Names transformId)
 	{
-		RouteValues.Required("transform_id", transformId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest(transformId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GetTransformStatsRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform. It can be a transform identifier or a
+	/// wildcard expression. You can get information for all transforms by using
+	/// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;transform_id></c>, or by omitting the
+	/// <c>&lt;transform_id></c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Names value)
+	{
+		Instance.TransformId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no transforms that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If this parameter is false, the request returns a 404 status code when
+	/// there are no matches or only partial matches.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor AllowNoMatch(bool? value = true)
+	{
+		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of transforms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor From(long? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of transforms to obtain.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor Size(long? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls the time to wait for the stats
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

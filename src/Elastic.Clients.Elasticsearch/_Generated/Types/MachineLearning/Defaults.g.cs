@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DefaultsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Defaults>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectors = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors");
+	private static readonly System.Text.Json.JsonEncodedText PropDatafeeds = System.Text.Json.JsonEncodedText.Encode("datafeeds");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Defaults Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors> propAnomalyDetectors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds> propDatafeeds = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnomalyDetectors.TryReadProperty(ref reader, options, PropAnomalyDetectors, null))
+			{
+				continue;
+			}
+
+			if (propDatafeeds.TryReadProperty(ref reader, options, PropDatafeeds, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Defaults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AnomalyDetectors = propAnomalyDetectors.Value,
+			Datafeeds = propDatafeeds.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Defaults value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnomalyDetectors, value.AnomalyDetectors, null, null);
+		writer.WriteProperty(options, PropDatafeeds, value.Datafeeds, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DefaultsConverter))]
 public sealed partial class Defaults
 {
-	[JsonInclude, JsonPropertyName("anomaly_detectors")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors AnomalyDetectors { get; init; }
-	[JsonInclude, JsonPropertyName("datafeeds")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds Datafeeds { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Defaults(Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors anomalyDetectors, Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds datafeeds)
+	{
+		AnomalyDetectors = anomalyDetectors;
+		Datafeeds = datafeeds;
+	}
+#if NET7_0_OR_GREATER
+	public Defaults()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Defaults()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Defaults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors AnomalyDetectors { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds Datafeeds { get; set; }
 }

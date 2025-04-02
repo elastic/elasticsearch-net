@@ -17,18 +17,115 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class FileSystemTotalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailableInBytes = System.Text.Json.JsonEncodedText.Encode("available_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free");
+	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAvailable = default;
+		LocalJsonValue<long?> propAvailableInBytes = default;
+		LocalJsonValue<string?> propFree = default;
+		LocalJsonValue<long?> propFreeInBytes = default;
+		LocalJsonValue<string?> propTotal = default;
+		LocalJsonValue<long?> propTotalInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propAvailableInBytes.TryReadProperty(ref reader, options, PropAvailableInBytes, null))
+			{
+				continue;
+			}
+
+			if (propFree.TryReadProperty(ref reader, options, PropFree, null))
+			{
+				continue;
+			}
+
+			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Available = propAvailable.Value,
+			AvailableInBytes = propAvailableInBytes.Value,
+			Free = propFree.Value,
+			FreeInBytes = propFreeInBytes.Value,
+			Total = propTotal.Value,
+			TotalInBytes = propTotalInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropAvailableInBytes, value.AvailableInBytes, null, null);
+		writer.WriteProperty(options, PropFree, value.Free, null, null);
+		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.FileSystemTotalConverter))]
 public sealed partial class FileSystemTotal
 {
+#if NET7_0_OR_GREATER
+	public FileSystemTotal()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FileSystemTotal()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FileSystemTotal(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Total disk space available to this Java virtual machine on all file stores.
@@ -36,8 +133,7 @@ public sealed partial class FileSystemTotal
 	/// This is the actual amount of free disk space the Elasticsearch node can utilise.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("available")]
-	public string? Available { get; init; }
+	public string? Available { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -46,38 +142,33 @@ public sealed partial class FileSystemTotal
 	/// This is the actual amount of free disk space the Elasticsearch node can utilise.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("available_in_bytes")]
-	public long? AvailableInBytes { get; init; }
+	public long? AvailableInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total unallocated disk space in all file stores.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("free")]
-	public string? Free { get; init; }
+	public string? Free { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of unallocated bytes in all file stores.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("free_in_bytes")]
-	public long? FreeInBytes { get; init; }
+	public long? FreeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size of all file stores.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public string? Total { get; init; }
+	public string? Total { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size of all file stores in bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_in_bytes")]
-	public long? TotalInBytes { get; init; }
+	public long? TotalInBytes { get; set; }
 }

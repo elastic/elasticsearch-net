@@ -17,72 +17,82 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class GeoDecayFunctionConverter : JsonConverter<GeoDecayFunction>
+internal sealed partial class GeoDecayFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction>
 {
-	public override GeoDecayFunction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new GeoDecayFunction();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "multi_value_mode")
-				{
-					variant.MultiValueMode = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode?>(ref reader, options);
-					continue;
-				}
+	private static readonly System.Text.Json.JsonEncodedText PropMultiValueMode = System.Text.Json.JsonEncodedText.Encode("multi_value_mode");
 
-				variant.Field = property;
-				reader.Read();
-				variant.Placement = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string>>(ref reader, options);
+	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode?> propMultiValueMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string>> propPlacement = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMultiValueMode.TryReadProperty(ref reader, options, PropMultiValueMode, null))
+			{
+				continue;
 			}
+
+			propField.Initialized = propPlacement.Initialized = true;
+			reader.ReadProperty(options, out propField.Value, out propPlacement.Value, null, null);
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			MultiValueMode = propMultiValueMode.Value,
+			Placement = propPlacement.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, GeoDecayFunction value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Placement is not null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-			{
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-			}
-
-			var propertyName = settings.Inferrer.Field(value.Field);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Placement, options);
-		}
-
-		if (value.MultiValueMode is not null)
-		{
-			writer.WritePropertyName("multi_value_mode");
-			JsonSerializer.Serialize(writer, value.MultiValueMode, options);
-		}
-
+		writer.WriteProperty(options, PropMultiValueMode, value.MultiValueMode, null, null);
+		writer.WriteProperty(options, value.Field, value.Placement, null, null);
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(GeoDecayFunctionConverter))]
-public sealed partial class GeoDecayFunction
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionConverter))]
+public sealed partial class GeoDecayFunction : Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction
 {
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDecayFunction(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> placement)
+	{
+		Field = field;
+		Placement = placement;
+	}
+#if NET7_0_OR_GREATER
+	public GeoDecayFunction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeoDecayFunction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -90,37 +100,44 @@ public sealed partial class GeoDecayFunction
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
-	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> Placement { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> Placement { get; set; }
+
+	string Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.Type => "geo";
 }
 
-public sealed partial class GeoDecayFunctionDescriptor<TDocument> : SerializableDescriptor<GeoDecayFunctionDescriptor<TDocument>>
+public readonly partial struct GeoDecayFunctionDescriptor<TDocument>
 {
-	internal GeoDecayFunctionDescriptor(Action<GeoDecayFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction Instance { get; init; }
 
-	public GeoDecayFunctionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDecayFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> PlacementValue { get; set; }
-
-	public GeoDecayFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDecayFunctionDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public GeoDecayFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoDecayFunctionDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -128,66 +145,68 @@ public sealed partial class GeoDecayFunctionDescriptor<TDocument> : Serializable
 	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
 	/// </para>
 	/// </summary>
-	public GeoDecayFunctionDescriptor<TDocument> MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? multiValueMode)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument> MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? value)
 	{
-		MultiValueModeValue = multiValueMode;
-		return Self;
+		Instance.MultiValueMode = value;
+		return this;
 	}
 
-	public GeoDecayFunctionDescriptor<TDocument> Placement(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> placement)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument> Placement(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> value)
 	{
-		PlacementValue = placement;
-		return Self;
+		Instance.Placement = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument> Placement()
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && PlacementValue is not null)
-		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, PlacementValue, options);
-		}
+		Instance.Placement = Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor.Build(null);
+		return this;
+	}
 
-		if (MultiValueModeValue is not null)
-		{
-			writer.WritePropertyName("multi_value_mode");
-			JsonSerializer.Serialize(writer, MultiValueModeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument> Placement(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor>? action)
+	{
+		Instance.Placement = Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeoDecayFunctionDescriptor : SerializableDescriptor<GeoDecayFunctionDescriptor>
+public readonly partial struct GeoDecayFunctionDescriptor
 {
-	internal GeoDecayFunctionDescriptor(Action<GeoDecayFunctionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction Instance { get; init; }
 
-	public GeoDecayFunctionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDecayFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueModeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> PlacementValue { get; set; }
-
-	public GeoDecayFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoDecayFunctionDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public GeoDecayFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction(Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoDecayFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -195,34 +214,35 @@ public sealed partial class GeoDecayFunctionDescriptor : SerializableDescriptor<
 	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
 	/// </para>
 	/// </summary>
-	public GeoDecayFunctionDescriptor MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? multiValueMode)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? value)
 	{
-		MultiValueModeValue = multiValueMode;
-		return Self;
+		Instance.MultiValueMode = value;
+		return this;
 	}
 
-	public GeoDecayFunctionDescriptor Placement(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> placement)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor Placement(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> value)
 	{
-		PlacementValue = placement;
-		return Self;
+		Instance.Placement = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor Placement()
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null && PlacementValue is not null)
-		{
-			var propertyName = settings.Inferrer.Field(FieldValue);
-			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, PlacementValue, options);
-		}
+		Instance.Placement = Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor.Build(null);
+		return this;
+	}
 
-		if (MultiValueModeValue is not null)
-		{
-			writer.WritePropertyName("multi_value_mode");
-			JsonSerializer.Serialize(writer, MultiValueModeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor Placement(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor>? action)
+	{
+		Instance.Placement = Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

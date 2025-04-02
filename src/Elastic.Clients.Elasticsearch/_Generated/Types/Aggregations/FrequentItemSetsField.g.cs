@@ -17,28 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class FrequentItemSetsFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsExclude?> propExclude = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?> propInclude = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExclude.TryReadProperty(ref reader, options, PropExclude, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propInclude.TryReadProperty(ref reader, options, PropInclude, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Exclude = propExclude.Value,
+			Field = propField.Value,
+			Include = propInclude.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExclude, value.Exclude, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropInclude, value.Include, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldConverter))]
 public sealed partial class FrequentItemSetsField
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsField(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public FrequentItemSetsField()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FrequentItemSetsField()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FrequentItemSetsField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Values to exclude.
 	/// Can be regular expression strings or arrays of strings of exact terms.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -46,21 +124,27 @@ public sealed partial class FrequentItemSetsField
 	/// Can be regular expression strings or arrays of strings of exact terms.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 }
 
-public sealed partial class FrequentItemSetsFieldDescriptor<TDocument> : SerializableDescriptor<FrequentItemSetsFieldDescriptor<TDocument>>
+public readonly partial struct FrequentItemSetsFieldDescriptor<TDocument>
 {
-	internal FrequentItemSetsFieldDescriptor(Action<FrequentItemSetsFieldDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField Instance { get; init; }
 
-	public FrequentItemSetsFieldDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsFieldDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsFieldDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField instance) => new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -68,28 +152,22 @@ public sealed partial class FrequentItemSetsFieldDescriptor<TDocument> : Seriali
 	/// Can be regular expression strings or arrays of strings of exact terms.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsFieldDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
-		ExcludeValue = exclude;
-		return Self;
+		Instance.Exclude = value;
+		return this;
 	}
 
-	public FrequentItemSetsFieldDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public FrequentItemSetsFieldDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public FrequentItemSetsFieldDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -98,44 +176,39 @@ public sealed partial class FrequentItemSetsFieldDescriptor<TDocument> : Seriali
 	/// Can be regular expression strings or arrays of strings of exact terms.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsFieldDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
-		IncludeValue = include;
-		return Self;
+		Instance.Include = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (ExcludeValue is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IncludeValue is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class FrequentItemSetsFieldDescriptor : SerializableDescriptor<FrequentItemSetsFieldDescriptor>
+public readonly partial struct FrequentItemSetsFieldDescriptor
 {
-	internal FrequentItemSetsFieldDescriptor(Action<FrequentItemSetsFieldDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField Instance { get; init; }
 
-	public FrequentItemSetsFieldDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsFieldDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FrequentItemSetsFieldDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField instance) => new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -143,28 +216,22 @@ public sealed partial class FrequentItemSetsFieldDescriptor : SerializableDescri
 	/// Can be regular expression strings or arrays of strings of exact terms.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsFieldDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
-		ExcludeValue = exclude;
-		return Self;
+		Instance.Exclude = value;
+		return this;
 	}
 
-	public FrequentItemSetsFieldDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public FrequentItemSetsFieldDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public FrequentItemSetsFieldDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -173,29 +240,17 @@ public sealed partial class FrequentItemSetsFieldDescriptor : SerializableDescri
 	/// Can be regular expression strings or arrays of strings of exact terms.
 	/// </para>
 	/// </summary>
-	public FrequentItemSetsFieldDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
-		IncludeValue = include;
-		return Self;
+		Instance.Include = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ExcludeValue is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, ExcludeValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IncludeValue is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, IncludeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

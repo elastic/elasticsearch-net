@@ -17,26 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ShardFailureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ShardFailure>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+
+	public override Elastic.Clients.Elasticsearch.ShardFailure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propIndex = default;
+		LocalJsonValue<string?> propNode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause> propReason = default;
+		LocalJsonValue<int> propShard = default;
+		LocalJsonValue<string?> propStatus = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
+			{
+				continue;
+			}
+
+			if (propShard.TryReadProperty(ref reader, options, PropShard, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ShardFailure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value,
+			Node = propNode.Value,
+			Reason = propReason.Value,
+			Shard = propShard.Value,
+			Status = propStatus.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ShardFailure value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropReason, value.Reason, null, null);
+		writer.WriteProperty(options, PropShard, value.Shard, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ShardFailureConverter))]
 public sealed partial class ShardFailure
 {
-	[JsonInclude, JsonPropertyName("index")]
-	public string? Index { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
-	public string? Node { get; init; }
-	[JsonInclude, JsonPropertyName("reason")]
-	public Elastic.Clients.Elasticsearch.ErrorCause Reason { get; init; }
-	[JsonInclude, JsonPropertyName("shard")]
-	public int Shard { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
-	public string? Status { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardFailure(Elastic.Clients.Elasticsearch.ErrorCause reason, int shard)
+	{
+		Reason = reason;
+		Shard = shard;
+	}
+#if NET7_0_OR_GREATER
+	public ShardFailure()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardFailure()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardFailure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public string? Index { get; set; }
+	public string? Node { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ErrorCause Reason { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Shard { get; set; }
+	public string? Status { get; set; }
 }

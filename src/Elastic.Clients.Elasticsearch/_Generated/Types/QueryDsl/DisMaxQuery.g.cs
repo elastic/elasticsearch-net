@@ -17,18 +17,103 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class DisMaxQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropQueries = System.Text.Json.JsonEncodedText.Encode("queries");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropTieBreaker = System.Text.Json.JsonEncodedText.Encode("tie_breaker");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>> propQueries = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<double?> propTieBreaker = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propQueries.TryReadProperty(ref reader, options, PropQueries, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propTieBreaker.TryReadProperty(ref reader, options, PropTieBreaker, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Queries = propQueries.Value,
+			QueryName = propQueryName.Value,
+			TieBreaker = propTieBreaker.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropQueries, value.Queries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropTieBreaker, value.TieBreaker, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryConverter))]
 public sealed partial class DisMaxQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DisMaxQuery(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> queries)
+	{
+		Queries = queries;
+	}
+#if NET7_0_OR_GREATER
+	public DisMaxQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DisMaxQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DisMaxQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +122,6 @@ public sealed partial class DisMaxQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -47,9 +131,11 @@ public sealed partial class DisMaxQuery
 	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("queries")]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> Queries { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> Queries { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -57,27 +143,27 @@ public sealed partial class DisMaxQuery
 	/// Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(DisMaxQuery disMaxQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.DisMax(disMaxQuery);
 }
 
-public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescriptor<DisMaxQueryDescriptor<TDocument>>
+public readonly partial struct DisMaxQueryDescriptor<TDocument>
 {
-	internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery Instance { get; init; }
 
-	public DisMaxQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DisMaxQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> QueriesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueriesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueriesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] QueriesDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
-	private double? TieBreakerValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DisMaxQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -87,10 +173,10 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public DisMaxQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -100,46 +186,74 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
 	/// </para>
 	/// </summary>
-	public DisMaxQueryDescriptor<TDocument> Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> queries)
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> value)
 	{
-		QueriesDescriptor = null;
-		QueriesDescriptorAction = null;
-		QueriesDescriptorActions = null;
-		QueriesValue = queries;
-		return Self;
+		Instance.Queries = value;
+		return this;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Queries(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries()
 	{
-		QueriesValue = null;
-		QueriesDescriptorAction = null;
-		QueriesDescriptorActions = null;
-		QueriesDescriptor = descriptor;
-		return Self;
+		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
+		return this;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Queries(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
 	{
-		QueriesValue = null;
-		QueriesDescriptor = null;
-		QueriesDescriptorActions = null;
-		QueriesDescriptorAction = configure;
-		return Self;
+		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
+		return this;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Queries(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		QueriesValue = null;
-		QueriesDescriptor = null;
-		QueriesDescriptorAction = null;
-		QueriesDescriptorActions = configure;
-		return Self;
+		Instance.Queries = [.. values];
+		return this;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> QueryName(string? queryName)
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Queries = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> QueryName(string? value)
+	{
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -147,83 +261,39 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	/// Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.
 	/// </para>
 	/// </summary>
-	public DisMaxQueryDescriptor<TDocument> TieBreaker(double? tieBreaker)
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> TieBreaker(double? value)
 	{
-		TieBreakerValue = tieBreaker;
-		return Self;
+		Instance.TieBreaker = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (QueriesDescriptor is not null)
-		{
-			writer.WritePropertyName("queries");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, QueriesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (QueriesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("queries");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueriesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (QueriesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("queries");
-			writer.WriteStartArray();
-			foreach (var action in QueriesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("queries");
-			JsonSerializer.Serialize(writer, QueriesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (TieBreakerValue.HasValue)
-		{
-			writer.WritePropertyName("tie_breaker");
-			writer.WriteNumberValue(TieBreakerValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMaxQueryDescriptor>
+public readonly partial struct DisMaxQueryDescriptor
 {
-	internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery Instance { get; init; }
 
-	public DisMaxQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DisMaxQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> QueriesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueriesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueriesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] QueriesDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
-	private double? TieBreakerValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DisMaxQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -233,10 +303,10 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public DisMaxQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -246,46 +316,106 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
 	/// </para>
 	/// </summary>
-	public DisMaxQueryDescriptor Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> queries)
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> value)
 	{
-		QueriesDescriptor = null;
-		QueriesDescriptorAction = null;
-		QueriesDescriptorActions = null;
-		QueriesValue = queries;
-		return Self;
+		Instance.Queries = value;
+		return this;
 	}
 
-	public DisMaxQueryDescriptor Queries(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries()
 	{
-		QueriesValue = null;
-		QueriesDescriptorAction = null;
-		QueriesDescriptorActions = null;
-		QueriesDescriptor = descriptor;
-		return Self;
+		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
+		return this;
 	}
 
-	public DisMaxQueryDescriptor Queries(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
 	{
-		QueriesValue = null;
-		QueriesDescriptor = null;
-		QueriesDescriptorActions = null;
-		QueriesDescriptorAction = configure;
-		return Self;
+		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
+		return this;
 	}
 
-	public DisMaxQueryDescriptor Queries(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
 	{
-		QueriesValue = null;
-		QueriesDescriptor = null;
-		QueriesDescriptorAction = null;
-		QueriesDescriptorActions = configure;
-		return Self;
+		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
+		return this;
 	}
 
-	public DisMaxQueryDescriptor QueryName(string? queryName)
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.Queries = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
+		}
+
+		Instance.Queries = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// One or more query clauses.
+	/// Returned documents must match one or more of these queries.
+	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
+		}
+
+		Instance.Queries = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor QueryName(string? value)
+	{
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -293,64 +423,17 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	/// Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.
 	/// </para>
 	/// </summary>
-	public DisMaxQueryDescriptor TieBreaker(double? tieBreaker)
+	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor TieBreaker(double? value)
 	{
-		TieBreakerValue = tieBreaker;
-		return Self;
+		Instance.TieBreaker = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (QueriesDescriptor is not null)
-		{
-			writer.WritePropertyName("queries");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, QueriesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (QueriesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("queries");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueriesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (QueriesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("queries");
-			writer.WriteStartArray();
-			foreach (var action in QueriesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("queries");
-			JsonSerializer.Serialize(writer, QueriesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (TieBreakerValue.HasValue)
-		{
-			writer.WritePropertyName("tie_breaker");
-			writer.WriteNumberValue(TieBreakerValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

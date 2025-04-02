@@ -17,91 +17,193 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class StopAnalyzer : IAnalyzer
+internal sealed partial class StopAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer>
 {
-	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords_path")]
-	public string? StopwordsPath { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type => "stop";
-
-	[JsonInclude, JsonPropertyName("version")]
-	public string? Version { get; set; }
-}
-
-public sealed partial class StopAnalyzerDescriptor : SerializableDescriptor<StopAnalyzerDescriptor>, IBuildableDescriptor<StopAnalyzer>
-{
-	internal StopAnalyzerDescriptor(Action<StopAnalyzerDescriptor> configure) => configure.Invoke(this);
-
-	public StopAnalyzerDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStopwords = default;
+		LocalJsonValue<string?> propStopwordsPath = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Stopwords = propStopwords.Value,
+			StopwordsPath = propStopwordsPath.Value
+		};
 	}
 
-	private ICollection<string>? StopwordsValue { get; set; }
-	private string? StopwordsPathValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public StopAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
-	{
-		StopwordsValue = stopwords;
-		return Self;
-	}
-
-	public StopAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
-	{
-		StopwordsPathValue = stopwordsPath;
-		return Self;
-	}
-
-	public StopAnalyzerDescriptor Version(string? version)
-	{
-		VersionValue = version;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (StopwordsValue is not null)
-		{
-			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(StopwordsPathValue))
-		{
-			writer.WritePropertyName("stopwords_path");
-			writer.WriteStringValue(StopwordsPathValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("stop");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
+}
 
-	StopAnalyzer IBuildableDescriptor<StopAnalyzer>.Build() => new()
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerConverter))]
+public sealed partial class StopAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
+{
+#if NET7_0_OR_GREATER
+	public StopAnalyzer()
 	{
-		Stopwords = StopwordsValue,
-		StopwordsPath = StopwordsPathValue,
-		Version = VersionValue
-	};
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public StopAnalyzer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StopAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+	/// Defaults to <c>_none_</c>.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? Stopwords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The path to a file containing stop words.
+	/// </para>
+	/// </summary>
+	public string? StopwordsPath { get; set; }
+
+	public string Type => "stop";
+}
+
+public readonly partial struct StopAnalyzerDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StopAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StopAnalyzerDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+	/// Defaults to <c>_none_</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor Stopwords(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Stopwords = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+	/// Defaults to <c>_none_</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor Stopwords()
+	{
+		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+	/// Defaults to <c>_none_</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor Stopwords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+	/// Defaults to <c>_none_</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor Stopwords(params string[] values)
+	{
+		Instance.Stopwords = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The path to a file containing stop words.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor StopwordsPath(string? value)
+	{
+		Instance.StopwordsPath = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

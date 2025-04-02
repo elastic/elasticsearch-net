@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Simulate;
 
-public sealed partial class IngestRequestParameters : RequestParameters
+public sealed partial class IngestRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -39,6 +32,81 @@ public sealed partial class IngestRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
+}
+
+internal sealed partial class IngestRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Simulate.IngestRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropComponentTemplateSubstitutions = System.Text.Json.JsonEncodedText.Encode("component_template_substitutions");
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTemplateSubstitutions = System.Text.Json.JsonEncodedText.Encode("index_template_substitutions");
+	private static readonly System.Text.Json.JsonEncodedText PropMappingAddition = System.Text.Json.JsonEncodedText.Encode("mapping_addition");
+	private static readonly System.Text.Json.JsonEncodedText PropPipelineSubstitutions = System.Text.Json.JsonEncodedText.Encode("pipeline_substitutions");
+
+	public override Elastic.Clients.Elasticsearch.Simulate.IngestRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>?> propComponentTemplateSubstitutions = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document>> propDocs = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>?> propIndexTemplateSubstitutions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappingAddition = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>?> propPipelineSubstitutions = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propComponentTemplateSubstitutions.TryReadProperty(ref reader, options, PropComponentTemplateSubstitutions, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Document>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propIndexTemplateSubstitutions.TryReadProperty(ref reader, options, PropIndexTemplateSubstitutions, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMappingAddition.TryReadProperty(ref reader, options, PropMappingAddition, null))
+			{
+				continue;
+			}
+
+			if (propPipelineSubstitutions.TryReadProperty(ref reader, options, PropPipelineSubstitutions, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ComponentTemplateSubstitutions = propComponentTemplateSubstitutions.Value,
+			Docs = propDocs.Value,
+			IndexTemplateSubstitutions = propIndexTemplateSubstitutions.Value,
+			MappingAddition = propMappingAddition.Value,
+			PipelineSubstitutions = propPipelineSubstitutions.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Simulate.IngestRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropComponentTemplateSubstitutions, value.ComponentTemplateSubstitutions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>(o, v, null, null));
+		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Document>(o, v, null));
+		writer.WriteProperty(options, PropIndexTemplateSubstitutions, value.IndexTemplateSubstitutions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>(o, v, null, null));
+		writer.WriteProperty(options, PropMappingAddition, value.MappingAddition, null, null);
+		writer.WriteProperty(options, PropPipelineSubstitutions, value.PipelineSubstitutions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>(o, v, null, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -66,19 +134,46 @@ public sealed partial class IngestRequestParameters : RequestParameters
 /// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 /// </para>
 /// </summary>
-public sealed partial class IngestRequest : PlainRequest<IngestRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Simulate.IngestRequestConverter))]
+public sealed partial class IngestRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>
 {
-	public IngestRequest()
-	{
-	}
-
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public IngestRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SimulateIngest;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IngestRequest(Elastic.Clients.Elasticsearch.IndexName? index, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> docs) : base(r => r.Optional("index", index))
+	{
+		Docs = docs;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IngestRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> docs)
+	{
+		Docs = docs;
+	}
+#if NET7_0_OR_GREATER
+	public IngestRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IngestRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IngestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SimulateIngest;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -86,11 +181,19 @@ public sealed partial class IngestRequest : PlainRequest<IngestRequestParameters
 
 	/// <summary>
 	/// <para>
+	/// The index to simulate ingesting into.
+	/// This value can be overridden by specifying an index on each document.
+	/// If you specify this parameter in the request path, it is used for any documents that do not explicitly specify an index argument.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// The pipeline to use as the default pipeline.
 	/// This value can be used to override the default pipeline of the index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
@@ -98,25 +201,25 @@ public sealed partial class IngestRequest : PlainRequest<IngestRequestParameters
 	/// A map of component template names to substitute component template definition objects.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("component_template_substitutions")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? ComponentTemplateSubstitutions { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? ComponentTemplateSubstitutions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Sample documents to test in the pipeline.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docs")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> Docs { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> Docs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A map of index template names to substitute index template definition objects.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_template_substitutions")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? IndexTemplateSubstitutions { get; set; }
-	[JsonInclude, JsonPropertyName("mapping_addition")]
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? IndexTemplateSubstitutions { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingAddition { get; set; }
 
 	/// <summary>
@@ -126,8 +229,7 @@ public sealed partial class IngestRequest : PlainRequest<IngestRequestParameters
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pipeline_substitutions")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? PipelineSubstitutions { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? PipelineSubstitutions { get; set; }
 }
 
 /// <summary>
@@ -155,290 +257,119 @@ public sealed partial class IngestRequest : PlainRequest<IngestRequestParameters
 /// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 /// </para>
 /// </summary>
-public sealed partial class IngestRequestDescriptor<TDocument> : RequestDescriptor<IngestRequestDescriptor<TDocument>, IngestRequestParameters>
+public readonly partial struct IngestRequestDescriptor
 {
-	internal IngestRequestDescriptor(Action<IngestRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Simulate.IngestRequest Instance { get; init; }
 
-	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.Simulate.IngestRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public IngestRequestDescriptor() : this(typeof(TDocument))
+	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SimulateIngest;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "simulate.ingest";
-
-	public IngestRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-
-	public IngestRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
-	{
-		RouteValues.Optional("index", index);
-		return Self;
-	}
-
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>> ComponentTemplateSubstitutionsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> DocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor DocsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor> DocsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] DocsDescriptorActions { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>> IndexTemplateSubstitutionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingAdditionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> MappingAdditionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> MappingAdditionDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>> PipelineSubstitutionsValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A map of component template names to substitute component template definition objects.
-	/// </para>
-	/// </summary>
-	public IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>>> selector)
-	{
-		ComponentTemplateSubstitutionsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
-	public IngestRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> docs)
-	{
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsValue = docs;
-		return Self;
-	}
-
-	public IngestRequestDescriptor<TDocument> Docs(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor descriptor)
-	{
-		DocsValue = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsDescriptor = descriptor;
-		return Self;
-	}
-
-	public IngestRequestDescriptor<TDocument> Docs(Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor> configure)
-	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorActions = null;
-		DocsDescriptorAction = configure;
-		return Self;
-	}
-
-	public IngestRequestDescriptor<TDocument> Docs(params Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] configure)
-	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A map of index template names to substitute index template definition objects.
-	/// </para>
-	/// </summary>
-	public IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>>> selector)
-	{
-		IndexTemplateSubstitutionsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>>());
-		return Self;
-	}
-
-	public IngestRequestDescriptor<TDocument> MappingAddition(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappingAddition)
-	{
-		MappingAdditionDescriptor = null;
-		MappingAdditionDescriptorAction = null;
-		MappingAdditionValue = mappingAddition;
-		return Self;
-	}
-
-	public IngestRequestDescriptor<TDocument> MappingAddition(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> descriptor)
-	{
-		MappingAdditionValue = null;
-		MappingAdditionDescriptorAction = null;
-		MappingAdditionDescriptor = descriptor;
-		return Self;
-	}
-
-	public IngestRequestDescriptor<TDocument> MappingAddition(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> configure)
-	{
-		MappingAdditionValue = null;
-		MappingAdditionDescriptor = null;
-		MappingAdditionDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
-	public IngestRequestDescriptor<TDocument> PipelineSubstitutions(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>>> selector)
-	{
-		PipelineSubstitutionsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>>());
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ComponentTemplateSubstitutionsValue is not null)
-		{
-			writer.WritePropertyName("component_template_substitutions");
-			JsonSerializer.Serialize(writer, ComponentTemplateSubstitutionsValue, options);
-		}
-
-		if (DocsDescriptor is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(DocsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			foreach (var action in DocsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("docs");
-			JsonSerializer.Serialize(writer, DocsValue, options);
-		}
-
-		if (IndexTemplateSubstitutionsValue is not null)
-		{
-			writer.WritePropertyName("index_template_substitutions");
-			JsonSerializer.Serialize(writer, IndexTemplateSubstitutionsValue, options);
-		}
-
-		if (MappingAdditionDescriptor is not null)
-		{
-			writer.WritePropertyName("mapping_addition");
-			JsonSerializer.Serialize(writer, MappingAdditionDescriptor, options);
-		}
-		else if (MappingAdditionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("mapping_addition");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>(MappingAdditionDescriptorAction), options);
-		}
-		else if (MappingAdditionValue is not null)
-		{
-			writer.WritePropertyName("mapping_addition");
-			JsonSerializer.Serialize(writer, MappingAdditionValue, options);
-		}
-
-		if (PipelineSubstitutionsValue is not null)
-		{
-			writer.WritePropertyName("pipeline_substitutions");
-			JsonSerializer.Serialize(writer, PipelineSubstitutionsValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Simulate data ingestion.
-/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-/// </para>
-/// <para>
-/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-/// </para>
-/// <para>
-/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-/// No data is indexed into Elasticsearch.
-/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-/// </para>
-/// <para>
-/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-/// </para>
-/// <para>
-/// By default, the pipeline definitions that are currently in the system are used.
-/// However, you can supply substitute pipeline definitions in the body of the request.
-/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-/// </para>
-/// </summary>
-public sealed partial class IngestRequestDescriptor : RequestDescriptor<IngestRequestDescriptor, IngestRequestParameters>
-{
-	internal IngestRequestDescriptor(Action<IngestRequestDescriptor> configure) => configure.Invoke(this);
-
-	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
-	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(index);
+#pragma warning restore CS0618
 	}
 
 	public IngestRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SimulateIngest;
+	public static explicit operator Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(Elastic.Clients.Elasticsearch.Simulate.IngestRequest instance) => new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "simulate.ingest";
-
-	public IngestRequestDescriptor Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-
-	public IngestRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	/// <summary>
+	/// <para>
+	/// The index to simulate ingesting into.
+	/// This value can be overridden by specifying an index on each document.
+	/// If you specify this parameter in the request path, it is used for any documents that do not explicitly specify an index argument.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		RouteValues.Optional("index", index);
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor> ComponentTemplateSubstitutionsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> DocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor DocsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor> DocsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] DocsDescriptorActions { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor> IndexTemplateSubstitutionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingAdditionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor MappingAdditionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> MappingAdditionDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor> PipelineSubstitutionsValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// The pipeline to use as the default pipeline.
+	/// This value can be used to override the default pipeline of the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Pipeline(string? value)
+	{
+		Instance.Pipeline = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// A map of component template names to substitute component template definition objects.
 	/// </para>
 	/// </summary>
-	public IngestRequestDescriptor ComponentTemplateSubstitutions(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? value)
 	{
-		ComponentTemplateSubstitutionsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor>());
-		return Self;
+		Instance.ComponentTemplateSubstitutions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A map of component template names to substitute component template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions()
+	{
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A map of component template names to substitute component template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode>? action)
+	{
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A map of component template names to substitute component template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<T>>? action)
+	{
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddComponentTemplateSubstitution(string key, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode value)
+	{
+		Instance.ComponentTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>();
+		Instance.ComponentTemplateSubstitutions.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddComponentTemplateSubstitution(string key, System.Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor> action)
+	{
+		Instance.ComponentTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>();
+		Instance.ComponentTemplateSubstitutions.Add(key, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddComponentTemplateSubstitution<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<T>> action)
+	{
+		Instance.ComponentTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>();
+		Instance.ComponentTemplateSubstitutions.Add(key, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -446,40 +377,60 @@ public sealed partial class IngestRequestDescriptor : RequestDescriptor<IngestRe
 	/// Sample documents to test in the pipeline.
 	/// </para>
 	/// </summary>
-	public IngestRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> docs)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsValue = docs;
-		return Self;
+		Instance.Docs = value;
+		return this;
 	}
 
-	public IngestRequestDescriptor Docs(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs()
 	{
-		DocsValue = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsDescriptor = descriptor;
-		return Self;
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(null);
+		return this;
 	}
 
-	public IngestRequestDescriptor Docs(Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument>? action)
 	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorActions = null;
-		DocsDescriptorAction = configure;
-		return Self;
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(action);
+		return this;
 	}
 
-	public IngestRequestDescriptor Docs(params Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs(params Elastic.Clients.Elasticsearch.Ingest.Document[] values)
 	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = configure;
-		return Self;
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
 	}
 
 	/// <summary>
@@ -487,34 +438,88 @@ public sealed partial class IngestRequestDescriptor : RequestDescriptor<IngestRe
 	/// A map of index template names to substitute index template definition objects.
 	/// </para>
 	/// </summary>
-	public IngestRequestDescriptor IndexTemplateSubstitutions(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? value)
 	{
-		IndexTemplateSubstitutionsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor>());
-		return Self;
+		Instance.IndexTemplateSubstitutions = value;
+		return this;
 	}
 
-	public IngestRequestDescriptor MappingAddition(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappingAddition)
+	/// <summary>
+	/// <para>
+	/// A map of index template names to substitute index template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions()
 	{
-		MappingAdditionDescriptor = null;
-		MappingAdditionDescriptorAction = null;
-		MappingAdditionValue = mappingAddition;
-		return Self;
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate.Build(null);
+		return this;
 	}
 
-	public IngestRequestDescriptor MappingAddition(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A map of index template names to substitute index template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate>? action)
 	{
-		MappingAdditionValue = null;
-		MappingAdditionDescriptorAction = null;
-		MappingAdditionDescriptor = descriptor;
-		return Self;
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate.Build(action);
+		return this;
 	}
 
-	public IngestRequestDescriptor MappingAddition(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A map of index template names to substitute index template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<T>>? action)
 	{
-		MappingAdditionValue = null;
-		MappingAdditionDescriptor = null;
-		MappingAdditionDescriptorAction = configure;
-		return Self;
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddIndexTemplateSubstitution(string key, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate value)
+	{
+		Instance.IndexTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>();
+		Instance.IndexTemplateSubstitutions.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddIndexTemplateSubstitution(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor> action)
+	{
+		Instance.IndexTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>();
+		Instance.IndexTemplateSubstitutions.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddIndexTemplateSubstitution<T>(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<T>> action)
+	{
+		Instance.IndexTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>();
+		Instance.IndexTemplateSubstitutions.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor MappingAddition(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
+	{
+		Instance.MappingAddition = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor MappingAddition()
+	{
+		Instance.MappingAddition = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor MappingAddition(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor>? action)
+	{
+		Instance.MappingAddition = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor MappingAddition<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>>? action)
+	{
+		Instance.MappingAddition = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -524,80 +529,549 @@ public sealed partial class IngestRequestDescriptor : RequestDescriptor<IngestRe
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
-	public IngestRequestDescriptor PipelineSubstitutions(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? value)
 	{
-		PipelineSubstitutionsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor>());
-		return Self;
+		Instance.PipelineSubstitutions = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions()
 	{
-		writer.WriteStartObject();
-		if (ComponentTemplateSubstitutionsValue is not null)
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline>? action)
+	{
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<T>>? action)
+	{
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddPipelineSubstitution(string key, Elastic.Clients.Elasticsearch.Ingest.Pipeline value)
+	{
+		Instance.PipelineSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
+		Instance.PipelineSubstitutions.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(string key)
+	{
+		Instance.PipelineSubstitutions = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> { { key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(params string[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
+		foreach (var key in keys)
 		{
-			writer.WritePropertyName("component_template_substitutions");
-			JsonSerializer.Serialize(writer, ComponentTemplateSubstitutionsValue, options);
+			items.Add(key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.Build(null));
 		}
 
-		if (DocsDescriptor is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(DocsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			foreach (var action in DocsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(action), options);
-			}
+		Instance.PipelineSubstitutions = items;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddPipelineSubstitution(string key)
+	{
+		Instance.PipelineSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
+		Instance.PipelineSubstitutions.Add(key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddPipelineSubstitution(string key, System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor>? action)
+	{
+		Instance.PipelineSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
+		Instance.PipelineSubstitutions.Add(key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor AddPipelineSubstitution<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<T>>? action)
+	{
+		Instance.PipelineSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
+		Instance.PipelineSubstitutions.Add(key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<T>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Simulate.IngestRequest Build(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}
+
+/// <summary>
+/// <para>
+/// Simulate data ingestion.
+/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
+/// </para>
+/// <para>
+/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
+/// </para>
+/// <para>
+/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
+/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
+/// No data is indexed into Elasticsearch.
+/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
+/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
+/// </para>
+/// <para>
+/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
+/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
+/// </para>
+/// <para>
+/// By default, the pipeline definitions that are currently in the system are used.
+/// However, you can supply substitute pipeline definitions in the body of the request.
+/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
+/// </para>
+/// </summary>
+public readonly partial struct IngestRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.Simulate.IngestRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.Simulate.IngestRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(index);
+#pragma warning restore CS0618
+	}
+
+	public IngestRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Simulate.IngestRequest instance) => new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The index to simulate ingesting into.
+	/// This value can be overridden by specifying an index on each document.
+	/// If you specify this parameter in the request path, it is used for any documents that do not explicitly specify an index argument.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The pipeline to use as the default pipeline.
+	/// This value can be used to override the default pipeline of the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Pipeline(string? value)
+	{
+		Instance.Pipeline = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A map of component template names to substitute component template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? value)
+	{
+		Instance.ComponentTemplateSubstitutions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A map of component template names to substitute component template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions()
+	{
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A map of component template names to substitute component template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<TDocument>>? action)
+	{
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> AddComponentTemplateSubstitution(string key, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode value)
+	{
+		Instance.ComponentTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>();
+		Instance.ComponentTemplateSubstitutions.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> AddComponentTemplateSubstitution(string key, System.Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>> action)
+	{
+		Instance.ComponentTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>();
+		Instance.ComponentTemplateSubstitutions.Add(key, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
+	{
+		Instance.Docs = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs()
+	{
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument>? action)
+	{
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.Ingest.Document[] values)
+	{
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("docs");
-			JsonSerializer.Serialize(writer, DocsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor.Build(action));
 		}
 
-		if (IndexTemplateSubstitutionsValue is not null)
+		Instance.Docs = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A map of index template names to substitute index template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? value)
+	{
+		Instance.IndexTemplateSubstitutions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A map of index template names to substitute index template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions()
+	{
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A map of index template names to substitute index template definition objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<TDocument>>? action)
+	{
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> AddIndexTemplateSubstitution(string key, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate value)
+	{
+		Instance.IndexTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>();
+		Instance.IndexTemplateSubstitutions.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> AddIndexTemplateSubstitution(string key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>> action)
+	{
+		Instance.IndexTemplateSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>();
+		Instance.IndexTemplateSubstitutions.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> MappingAddition(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
+	{
+		Instance.MappingAddition = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> MappingAddition()
+	{
+		Instance.MappingAddition = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> MappingAddition(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>>? action)
+	{
+		Instance.MappingAddition = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? value)
+	{
+		Instance.PipelineSubstitutions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions()
+	{
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<TDocument>>? action)
+	{
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> AddPipelineSubstitution(string key, Elastic.Clients.Elasticsearch.Ingest.Pipeline value)
+	{
+		Instance.PipelineSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
+		Instance.PipelineSubstitutions.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(string key)
+	{
+		Instance.PipelineSubstitutions = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> { { key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Pipelines to test.
+	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(params string[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
+		foreach (var key in keys)
 		{
-			writer.WritePropertyName("index_template_substitutions");
-			JsonSerializer.Serialize(writer, IndexTemplateSubstitutionsValue, options);
+			items.Add(key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>.Build(null));
 		}
 
-		if (MappingAdditionDescriptor is not null)
-		{
-			writer.WritePropertyName("mapping_addition");
-			JsonSerializer.Serialize(writer, MappingAdditionDescriptor, options);
-		}
-		else if (MappingAdditionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("mapping_addition");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor(MappingAdditionDescriptorAction), options);
-		}
-		else if (MappingAdditionValue is not null)
-		{
-			writer.WritePropertyName("mapping_addition");
-			JsonSerializer.Serialize(writer, MappingAdditionValue, options);
-		}
+		Instance.PipelineSubstitutions = items;
+		return this;
+	}
 
-		if (PipelineSubstitutionsValue is not null)
-		{
-			writer.WritePropertyName("pipeline_substitutions");
-			JsonSerializer.Serialize(writer, PipelineSubstitutionsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> AddPipelineSubstitution(string key)
+	{
+		Instance.PipelineSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
+		Instance.PipelineSubstitutions.Add(key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>.Build(null));
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> AddPipelineSubstitution(string key, System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>>? action)
+	{
+		Instance.PipelineSubstitutions ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
+		Instance.PipelineSubstitutions.Add(key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Simulate.IngestRequest Build(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

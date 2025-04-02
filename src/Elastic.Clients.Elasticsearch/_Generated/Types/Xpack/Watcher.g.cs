@@ -17,26 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class WatcherConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Watcher>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropExecution = System.Text.Json.JsonEncodedText.Encode("execution");
+	private static readonly System.Text.Json.JsonEncodedText PropWatch = System.Text.Json.JsonEncodedText.Encode("watch");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.Watcher Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAvailable = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Counter> propCount = default;
+		LocalJsonValue<bool> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.WatcherActions> propExecution = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.WatcherWatch> propWatch = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propExecution.TryReadProperty(ref reader, options, PropExecution, null))
+			{
+				continue;
+			}
+
+			if (propWatch.TryReadProperty(ref reader, options, PropWatch, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.Watcher(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Available = propAvailable.Value,
+			Count = propCount.Value,
+			Enabled = propEnabled.Value,
+			Execution = propExecution.Value,
+			Watch = propWatch.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.Watcher value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropExecution, value.Execution, null, null);
+		writer.WriteProperty(options, PropWatch, value.Watch, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.WatcherConverter))]
 public sealed partial class Watcher
 {
-	[JsonInclude, JsonPropertyName("available")]
-	public bool Available { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
-	public Elastic.Clients.Elasticsearch.Xpack.Counter Count { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("execution")]
-	public Elastic.Clients.Elasticsearch.Xpack.WatcherActions Execution { get; init; }
-	[JsonInclude, JsonPropertyName("watch")]
-	public Elastic.Clients.Elasticsearch.Xpack.WatcherWatch Watch { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Watcher(bool available, Elastic.Clients.Elasticsearch.Xpack.Counter count, bool enabled, Elastic.Clients.Elasticsearch.Xpack.WatcherActions execution, Elastic.Clients.Elasticsearch.Xpack.WatcherWatch watch)
+	{
+		Available = available;
+		Count = count;
+		Enabled = enabled;
+		Execution = execution;
+		Watch = watch;
+	}
+#if NET7_0_OR_GREATER
+	public Watcher()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Watcher()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Watcher(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Available { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.Counter Count { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.WatcherActions Execution { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.WatcherWatch Watch { get; set; }
 }

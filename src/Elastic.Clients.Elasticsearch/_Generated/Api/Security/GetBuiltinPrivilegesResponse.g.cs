@@ -17,39 +17,122 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class GetBuiltinPrivilegesResponse : ElasticsearchResponse
+internal sealed partial class GetBuiltinPrivilegesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
+
+	public override Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>> propCluster = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propIndex = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege>> propRemoteCluster = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCluster.TryReadProperty(ref reader, options, PropCluster, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propRemoteCluster.TryReadProperty(ref reader, options, PropRemoteCluster, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Cluster = propCluster.Value,
+			Index = propIndex.Value,
+			RemoteCluster = propRemoteCluster.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCluster, value.Cluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropIndex, value.Index, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRemoteCluster, value.RemoteCluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponseConverter))]
+public sealed partial class GetBuiltinPrivilegesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetBuiltinPrivilegesResponse(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> cluster, System.Collections.Generic.IReadOnlyCollection<string> index, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> remoteCluster)
+	{
+		Cluster = cluster;
+		Index = index;
+		RemoteCluster = remoteCluster;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetBuiltinPrivilegesResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetBuiltinPrivilegesResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The list of cluster privileges that are understood by this version of Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The list of index privileges that are understood by this version of Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string> Indices { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The list of remote_cluster privileges that are understood by this version of Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("remote_cluster")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> RemoteCluster { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> RemoteCluster { get; set; }
 }

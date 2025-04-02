@@ -17,21 +17,47 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class CreateRequestParameters : RequestParameters
+public sealed partial class CreateRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this primary term.
+	/// </para>
+	/// </summary>
+	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this sequence number.
+	/// </para>
+	/// </summary>
+	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
+
+	/// <summary>
+	/// <para>
+	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
+	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
+	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
+	/// If a document ID is specified, this paramater defaults to <c>index</c>.
+	/// Otherwise, it defaults to <c>create</c>.
+	/// If the request targets a data stream, an <c>op_type</c> of <c>create</c> is required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpType? OpType { get => Q<Elastic.Clients.Elasticsearch.OpType?>("op_type"); set => Q("op_type", value); }
+
 	/// <summary>
 	/// <para>
 	/// The ID of the pipeline to use to preprocess incoming documents.
@@ -49,6 +75,20 @@ public sealed partial class CreateRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the destination must be an index alias.
+	/// </para>
+	/// </summary>
+	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
+	/// </para>
+	/// </summary>
+	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
 	/// <summary>
 	/// <para>
@@ -95,6 +135,36 @@ public sealed partial class CreateRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+}
+
+internal sealed partial class CreateRequestConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>>
+{
+	public override Elastic.Clients.Elasticsearch.CreateRequest<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Document = reader.ReadValue<TDocument>(options, static TDocument (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument>))!) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CreateRequest<TDocument> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Document, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument v) => w.WriteValueEx<TDocument>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument>)));
+	}
+}
+
+internal sealed partial class CreateRequestConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(CreateRequest<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(CreateRequestConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
 }
 
 /// <summary>
@@ -168,7 +238,7 @@ public sealed partial class CreateRequestParameters : RequestParameters
 /// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 /// </para>
 /// <para>
-/// ** Distributed**
+/// <strong>Distributed</strong>
 /// </para>
 /// <para>
 /// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -203,19 +273,108 @@ public sealed partial class CreateRequestParameters : RequestParameters
 /// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 /// </para>
 /// </summary>
-public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateRequestParameters>, ISelfSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CreateRequestConverterFactory))]
+public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CreateRequestParameters>
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CreateRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceCreate;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateRequest(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	{
+		Document = document;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateRequest(TDocument document, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", typeof(TDocument)).Required("id", id))
+	{
+		Document = document;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateRequest(TDocument document) : base(r => r.Required("index", typeof(TDocument)).Required("id", Elastic.Clients.Elasticsearch.Id.From(document)))
+	{
+		Document = document;
+	}
+#if NET7_0_OR_GREATER
+	public CreateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CreateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceCreate;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "create";
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the document.
+	/// To automatically generate a document ID, use the <c>POST /&lt;target>/_doc/</c> request format.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The name of the data stream or index to target.
+	/// If the target doesn't exist and matches the name or wildcard (<c>*</c>) pattern of an index template with a <c>data_stream</c> definition, this request creates the data stream.
+	/// If the target doesn't exist and doesn’t match a data stream template, this request creates the index.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this primary term.
+	/// </para>
+	/// </summary>
+	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this sequence number.
+	/// </para>
+	/// </summary>
+	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
+
+	/// <summary>
+	/// <para>
+	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
+	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
+	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
+	/// If a document ID is specified, this paramater defaults to <c>index</c>.
+	/// Otherwise, it defaults to <c>create</c>.
+	/// If the request targets a data stream, an <c>op_type</c> of <c>create</c> is required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.OpType? OpType { get => Q<Elastic.Clients.Elasticsearch.OpType?>("op_type"); set => Q("op_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -224,7 +383,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// If a final pipeline is configured, it will always run regardless of the value of this parameter.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
@@ -234,15 +392,27 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// If <c>false</c>, it does nothing with refreshes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the destination must be an index alias.
+	/// </para>
+	/// </summary>
+	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
+	/// </para>
+	/// </summary>
+	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
 	/// <summary>
 	/// <para>
 	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -258,7 +428,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -267,7 +436,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// It must be a non-negative long number.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
@@ -275,7 +443,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// The version type.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
@@ -285,15 +452,12 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// The default value of <c>1</c> means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-	[JsonIgnore]
-	public TDocument Document { get; set; }
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		settings.SourceSerializer.Serialize(Document, writer);
-	}
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	TDocument Document { get; set; }
 }
 
 /// <summary>
@@ -367,7 +531,7 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 /// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 /// </para>
 /// <para>
-/// ** Distributed**
+/// <strong>Distributed</strong>
 /// </para>
 /// <para>
 /// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -402,61 +566,288 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 /// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 /// </para>
 /// </summary>
-public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescriptor<CreateRequestDescriptor<TDocument>, CreateRequestParameters>
+public readonly partial struct CreateRequestDescriptor<TDocument>
 {
-	internal CreateRequestDescriptor(Action<CreateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id)) => DocumentValue = document;
+	internal Elastic.Clients.Elasticsearch.CreateRequest<TDocument> Instance { get; init; }
 
-	public CreateRequestDescriptor(TDocument document) : this(document, typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateRequestDescriptor(Elastic.Clients.Elasticsearch.CreateRequest<TDocument> instance)
 	{
+		Instance = instance;
 	}
 
-	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index) : this(document, index, Elastic.Clients.Elasticsearch.Id.From(document))
+	public CreateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(index, id);
+#pragma warning restore CS0618
 	}
 
-	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id id) : this(document, typeof(TDocument), id)
+	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(document, index, id);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceCreate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "create";
-
-	public CreateRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-	public CreateRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-	public CreateRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public CreateRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public CreateRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
-	public CreateRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-	public CreateRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public CreateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(document, id);
 	}
 
-	public CreateRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public CreateRequestDescriptor(TDocument document)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(document);
 	}
 
-	private TDocument DocumentValue { get; set; }
-
-	public CreateRequestDescriptor<TDocument> Document(TDocument document)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CreateRequestDescriptor()
 	{
-		DocumentValue = document;
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CreateRequest<TDocument> instance) => new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the document.
+	/// To automatically generate a document ID, use the <c>POST /&lt;target>/_doc/</c> request format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		settings.SourceSerializer.Serialize(DocumentValue, writer);
+		Instance.Id = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the data stream or index to target.
+	/// If the target doesn't exist and matches the name or wildcard (<c>*</c>) pattern of an index template with a <c>data_stream</c> definition, this request creates the data stream.
+	/// If the target doesn't exist and doesn’t match a data stream template, this request creates the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this primary term.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> IfPrimaryTerm(long? value)
+	{
+		Instance.IfPrimaryTerm = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only perform the operation if the document has this sequence number.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> IfSeqNo(long? value)
+	{
+		Instance.IfSeqNo = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> IncludeSourceOnError(bool? value = true)
+	{
+		Instance.IncludeSourceOnError = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
+	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
+	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
+	/// If a document ID is specified, this paramater defaults to <c>index</c>.
+	/// Otherwise, it defaults to <c>create</c>.
+	/// If the request targets a data stream, an <c>op_type</c> of <c>create</c> is required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> OpType(Elastic.Clients.Elasticsearch.OpType? value)
+	{
+		Instance.OpType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ID of the pipeline to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, setting the value to <c>_none</c> turns off the default ingest pipeline for this request.
+	/// If a final pipeline is configured, it will always run regardless of the value of this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Pipeline(string? value)
+	{
+		Instance.Pipeline = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If <c>wait_for</c>, it waits for a refresh to make this operation visible to search.
+	/// If <c>false</c>, it does nothing with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the destination must be an index alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> RequireAlias(bool? value = true)
+	{
+		Instance.RequireAlias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> RequireDataStream(bool? value = true)
+	{
+		Instance.RequireDataStream = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value that is used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
+	/// Elasticsearch waits for at least the specified timeout period before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// <para>
+	/// This parameter is useful for situations where the primary shard assigned to perform the operation might not be available when the operation runs.
+	/// Some reasons for this might be that the primary shard is currently recovering from a gateway or undergoing relocation.
+	/// By default, the operation will wait on the primary shard to become available for at least 1 minute before failing and responding with an error.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The explicit version number for concurrency control.
+	/// It must be a non-negative long number.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The version type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
+	{
+		Instance.VersionType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// You can set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value of <c>1</c> means it waits for each primary shard to be active.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Document(TDocument value)
+	{
+		Instance.Document = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CreateRequest<TDocument> Build(System.Action<Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,18 +17,166 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class PercolateQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropDocument = System.Text.Json.JsonEncodedText.Encode("document");
+	private static readonly System.Text.Json.JsonEncodedText PropDocuments = System.Text.Json.JsonEncodedText.Encode("documents");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropPreference = System.Text.Json.JsonEncodedText.Encode("preference");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<object?> propDocument = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<object>?> propDocuments = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<string?> propName = default;
+		LocalJsonValue<string?> propPreference = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propDocument.TryReadProperty(ref reader, options, PropDocument, null))
+			{
+				continue;
+			}
+
+			if (propDocuments.TryReadProperty(ref reader, options, PropDocuments, static System.Collections.Generic.ICollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, null)))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propPreference.TryReadProperty(ref reader, options, PropPreference, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Document = propDocument.Value,
+			Documents = propDocuments.Value,
+			Field = propField.Value,
+			Id = propId.Value,
+			Index = propIndex.Value,
+			Name = propName.Value,
+			Preference = propPreference.Value,
+			QueryName = propQueryName.Value,
+			Routing = propRouting.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropDocument, value.Document, null, null);
+		writer.WriteProperty(options, PropDocuments, value.Documents, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<object>? v) => w.WriteCollectionValue<object>(o, v, null));
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropPreference, value.Preference, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryConverter))]
 public sealed partial class PercolateQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercolateQuery(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public PercolateQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PercolateQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PercolateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +185,6 @@ public sealed partial class PercolateQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,7 +192,6 @@ public sealed partial class PercolateQuery
 	/// The source of the document being percolated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("document")]
 	public object? Document { get; set; }
 
 	/// <summary>
@@ -53,23 +199,24 @@ public sealed partial class PercolateQuery
 	/// An array of sources of the documents being percolated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("documents")]
-	public ICollection<object>? Documents { get; set; }
+	public System.Collections.Generic.ICollection<object>? Documents { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The ID of a stored document to percolate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -77,7 +224,6 @@ public sealed partial class PercolateQuery
 	/// The index of a stored document to percolate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
@@ -85,7 +231,6 @@ public sealed partial class PercolateQuery
 	/// The suffix used for the <c>_percolator_document_slot</c> field when multiple <c>percolate</c> queries are specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
 	public string? Name { get; set; }
 
 	/// <summary>
@@ -93,9 +238,7 @@ public sealed partial class PercolateQuery
 	/// Preference used to fetch document to percolate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("preference")]
 	public string? Preference { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -103,7 +246,6 @@ public sealed partial class PercolateQuery
 	/// Routing used to fetch document to percolate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <summary>
@@ -111,31 +253,27 @@ public sealed partial class PercolateQuery
 	/// The expected version of a stored document to percolate.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(PercolateQuery percolateQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Percolate(percolateQuery);
 }
 
-public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDescriptor<PercolateQueryDescriptor<TDocument>>
+public readonly partial struct PercolateQueryDescriptor<TDocument>
 {
-	internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery Instance { get; init; }
 
-	public PercolateQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercolateQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private object? DocumentValue { get; set; }
-	private ICollection<object>? DocumentsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private string? NameValue { get; set; }
-	private string? PreferenceValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private long? VersionValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercolateQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -145,10 +283,10 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -156,10 +294,10 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// The source of the document being percolated.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Document(object? document)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Document(object? value)
 	{
-		DocumentValue = document;
-		return Self;
+		Instance.Document = value;
+		return this;
 	}
 
 	/// <summary>
@@ -167,10 +305,43 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// An array of sources of the documents being percolated.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Documents(ICollection<object>? documents)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Documents(System.Collections.Generic.ICollection<object>? value)
 	{
-		DocumentsValue = documents;
-		return Self;
+		Instance.Documents = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of sources of the documents being percolated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Documents()
+	{
+		Instance.Documents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of sources of the documents being percolated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Documents(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject>? action)
+	{
+		Instance.Documents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of sources of the documents being percolated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Documents(params object[] values)
+	{
+		Instance.Documents = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -178,10 +349,10 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -189,21 +360,10 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
-	/// </para>
-	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -211,10 +371,10 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// The ID of a stored document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -222,10 +382,10 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// The index of a stored document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -233,10 +393,10 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// The suffix used for the <c>_percolator_document_slot</c> field when multiple <c>percolate</c> queries are specified.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Name(string? name)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Name(string? value)
 	{
-		NameValue = name;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
 	/// <summary>
@@ -244,16 +404,16 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// Preference used to fetch document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Preference(string? preference)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Preference(string? value)
 	{
-		PreferenceValue = preference;
-		return Self;
+		Instance.Preference = value;
+		return this;
 	}
 
-	public PercolateQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -261,10 +421,10 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// Routing used to fetch document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -272,100 +432,39 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// The expected version of a stored document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor<TDocument> Version(long? version)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DocumentValue is not null)
-		{
-			writer.WritePropertyName("document");
-			JsonSerializer.Serialize(writer, DocumentValue, options);
-		}
-
-		if (DocumentsValue is not null)
-		{
-			writer.WritePropertyName("documents");
-			JsonSerializer.Serialize(writer, DocumentsValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
-		if (!string.IsNullOrEmpty(PreferenceValue))
-		{
-			writer.WritePropertyName("preference");
-			writer.WriteStringValue(PreferenceValue);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<PercolateQueryDescriptor>
+public readonly partial struct PercolateQueryDescriptor
 {
-	internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery Instance { get; init; }
 
-	public PercolateQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercolateQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private object? DocumentValue { get; set; }
-	private ICollection<object>? DocumentsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-	private string? NameValue { get; set; }
-	private string? PreferenceValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private long? VersionValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercolateQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -375,10 +474,10 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -386,10 +485,10 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// The source of the document being percolated.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Document(object? document)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Document(object? value)
 	{
-		DocumentValue = document;
-		return Self;
+		Instance.Document = value;
+		return this;
 	}
 
 	/// <summary>
@@ -397,10 +496,43 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// An array of sources of the documents being percolated.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Documents(ICollection<object>? documents)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Documents(System.Collections.Generic.ICollection<object>? value)
 	{
-		DocumentsValue = documents;
-		return Self;
+		Instance.Documents = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of sources of the documents being percolated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Documents()
+	{
+		Instance.Documents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of sources of the documents being percolated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Documents(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject>? action)
+	{
+		Instance.Documents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of sources of the documents being percolated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Documents(params object[] values)
+	{
+		Instance.Documents = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -408,10 +540,10 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -419,21 +551,10 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
-	/// </para>
-	/// </summary>
-	public PercolateQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -441,10 +562,10 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// The ID of a stored document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -452,10 +573,10 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// The index of a stored document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -463,10 +584,10 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// The suffix used for the <c>_percolator_document_slot</c> field when multiple <c>percolate</c> queries are specified.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Name(string? name)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Name(string? value)
 	{
-		NameValue = name;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
 	/// <summary>
@@ -474,16 +595,16 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// Preference used to fetch document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Preference(string? preference)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Preference(string? value)
 	{
-		PreferenceValue = preference;
-		return Self;
+		Instance.Preference = value;
+		return this;
 	}
 
-	public PercolateQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -491,10 +612,10 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// Routing used to fetch document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -502,77 +623,17 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	/// The expected version of a stored document to percolate.
 	/// </para>
 	/// </summary>
-	public PercolateQueryDescriptor Version(long? version)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DocumentValue is not null)
-		{
-			writer.WritePropertyName("document");
-			JsonSerializer.Serialize(writer, DocumentValue, options);
-		}
-
-		if (DocumentsValue is not null)
-		{
-			writer.WritePropertyName("documents");
-			JsonSerializer.Serialize(writer, DocumentsValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
-		if (!string.IsNullOrEmpty(PreferenceValue))
-		{
-			writer.WritePropertyName("preference");
-			writer.WriteStringValue(PreferenceValue);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

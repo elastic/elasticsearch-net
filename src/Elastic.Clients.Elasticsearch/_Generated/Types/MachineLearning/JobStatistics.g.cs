@@ -17,24 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class JobStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double> propAvg = default;
+		LocalJsonValue<double> propMax = default;
+		LocalJsonValue<double> propMin = default;
+		LocalJsonValue<double> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvg.TryReadProperty(ref reader, options, PropAvg, null))
+			{
+				continue;
+			}
+
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
+			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Avg = propAvg.Value,
+			Max = propMax.Value,
+			Min = propMin.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvg, value.Avg, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.JobStatisticsConverter))]
 public sealed partial class JobStatistics
 {
-	[JsonInclude, JsonPropertyName("avg")]
-	public double Avg { get; init; }
-	[JsonInclude, JsonPropertyName("max")]
-	public double Max { get; init; }
-	[JsonInclude, JsonPropertyName("min")]
-	public double Min { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public double Total { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public JobStatistics(double avg, double max, double min, double total)
+	{
+		Avg = avg;
+		Max = max;
+		Min = min;
+		Total = total;
+	}
+#if NET7_0_OR_GREATER
+	public JobStatistics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public JobStatistics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal JobStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Avg { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Max { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Min { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Total { get; set; }
 }

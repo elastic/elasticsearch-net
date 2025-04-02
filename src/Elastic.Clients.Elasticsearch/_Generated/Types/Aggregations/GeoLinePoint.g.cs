@@ -17,46 +17,116 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class GeoLinePointConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointConverter))]
 public sealed partial class GeoLinePoint
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLinePoint(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public GeoLinePoint()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeoLinePoint()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoLinePoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The name of the geo_point field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
 
-public sealed partial class GeoLinePointDescriptor<TDocument> : SerializableDescriptor<GeoLinePointDescriptor<TDocument>>
+public readonly partial struct GeoLinePointDescriptor<TDocument>
 {
-	internal GeoLinePointDescriptor(Action<GeoLinePointDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Instance { get; init; }
 
-	public GeoLinePointDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLinePointDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLinePointDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The name of the geo_point field.
 	/// </para>
 	/// </summary>
-	public GeoLinePointDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -64,51 +134,49 @@ public sealed partial class GeoLinePointDescriptor<TDocument> : SerializableDesc
 	/// The name of the geo_point field.
 	/// </para>
 	/// </summary>
-	public GeoLinePointDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
-	public GeoLinePointDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument>> action)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeoLinePointDescriptor : SerializableDescriptor<GeoLinePointDescriptor>
+public readonly partial struct GeoLinePointDescriptor
 {
-	internal GeoLinePointDescriptor(Action<GeoLinePointDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Instance { get; init; }
 
-	public GeoLinePointDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLinePointDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLinePointDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The name of the geo_point field.
 	/// </para>
 	/// </summary>
-	public GeoLinePointDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -116,28 +184,17 @@ public sealed partial class GeoLinePointDescriptor : SerializableDescriptor<GeoL
 	/// The name of the geo_point field.
 	/// </para>
 	/// </summary>
-	public GeoLinePointDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
-	public GeoLinePointDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor> action)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

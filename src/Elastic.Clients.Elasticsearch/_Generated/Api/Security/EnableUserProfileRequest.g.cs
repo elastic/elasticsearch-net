@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class EnableUserProfileRequestParameters : RequestParameters
+public sealed partial class EnableUserProfileRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -41,6 +34,35 @@ public sealed partial class EnableUserProfileRequestParameters : RequestParamete
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+}
+
+internal sealed partial class EnableUserProfileRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -60,19 +82,42 @@ public sealed partial class EnableUserProfileRequestParameters : RequestParamete
 /// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 /// </para>
 /// </summary>
-public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserProfileRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestConverter))]
+public sealed partial class EnableUserProfileRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public EnableUserProfileRequest(string uid) : base(r => r.Required("uid", uid))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public EnableUserProfileRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EnableUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityEnableUserProfile;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityEnableUserProfile;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.enable_user_profile";
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the user profile.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Uid { get => P<string>("uid"); set => PR("uid", value); }
 
 	/// <summary>
 	/// <para>
@@ -82,7 +127,6 @@ public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserPr
 	/// If 'false', nothing is done with refreshes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
@@ -103,31 +147,102 @@ public sealed partial class EnableUserProfileRequest : PlainRequest<EnableUserPr
 /// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 /// </para>
 /// </summary>
-public sealed partial class EnableUserProfileRequestDescriptor : RequestDescriptor<EnableUserProfileRequestDescriptor, EnableUserProfileRequestParameters>
+public readonly partial struct EnableUserProfileRequestDescriptor
 {
-	internal EnableUserProfileRequestDescriptor(Action<EnableUserProfileRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest Instance { get; init; }
 
-	public EnableUserProfileRequestDescriptor(string uid) : base(r => r.Required("uid", uid))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnableUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityEnableUserProfile;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.enable_user_profile";
-
-	public EnableUserProfileRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-
-	public EnableUserProfileRequestDescriptor Uid(string uid)
+	public EnableUserProfileRequestDescriptor(string uid)
 	{
-		RouteValues.Required("uid", uid);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest(uid);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public EnableUserProfileRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest instance) => new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the user profile.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor Uid(string value)
+	{
+		Instance.Uid = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

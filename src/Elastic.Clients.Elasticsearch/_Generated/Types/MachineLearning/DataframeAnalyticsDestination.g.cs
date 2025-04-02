@@ -17,55 +17,132 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalyticsDestinationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propResultsField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value,
+			ResultsField = propResultsField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationConverter))]
 public sealed partial class DataframeAnalyticsDestination
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Index = index;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeAnalyticsDestination()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeAnalyticsDestination()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Defines the destination index to store the results of the data frame analytics job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 }
 
-public sealed partial class DataframeAnalyticsDestinationDescriptor<TDocument> : SerializableDescriptor<DataframeAnalyticsDestinationDescriptor<TDocument>>
+public readonly partial struct DataframeAnalyticsDestinationDescriptor<TDocument>
 {
-	internal DataframeAnalyticsDestinationDescriptor(Action<DataframeAnalyticsDestinationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Instance { get; init; }
 
-	public DataframeAnalyticsDestinationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalyticsDestinationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalyticsDestinationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Defines the destination index to store the results of the data frame analytics job.
 	/// </para>
 	/// </summary>
-	public DataframeAnalyticsDestinationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,10 +150,10 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor<TDocument> :
 	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -84,58 +161,49 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor<TDocument> :
 	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
-	/// </para>
-	/// </summary>
-	public DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField(Expression<Func<TDocument, object>> resultsField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>> action)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (ResultsFieldValue is not null)
-		{
-			writer.WritePropertyName("results_field");
-			JsonSerializer.Serialize(writer, ResultsFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DataframeAnalyticsDestinationDescriptor : SerializableDescriptor<DataframeAnalyticsDestinationDescriptor>
+public readonly partial struct DataframeAnalyticsDestinationDescriptor
 {
-	internal DataframeAnalyticsDestinationDescriptor(Action<DataframeAnalyticsDestinationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Instance { get; init; }
 
-	public DataframeAnalyticsDestinationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalyticsDestinationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalyticsDestinationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Defines the destination index to store the results of the data frame analytics job.
 	/// </para>
 	/// </summary>
-	public DataframeAnalyticsDestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -143,10 +211,10 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor : Serializab
 	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalyticsDestinationDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -154,34 +222,17 @@ public sealed partial class DataframeAnalyticsDestinationDescriptor : Serializab
 	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalyticsDestinationDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor ResultsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
-	/// </para>
-	/// </summary>
-	public DataframeAnalyticsDestinationDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor> action)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (ResultsFieldValue is not null)
-		{
-			writer.WritePropertyName("results_field");
-			JsonSerializer.Serialize(writer, ResultsFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class DeleteTrainedModelRequestParameters : RequestParameters
+public sealed partial class DeleteTrainedModelRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -38,23 +31,73 @@ public sealed partial class DeleteTrainedModelRequestParameters : RequestParamet
 	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+}
+
+internal sealed partial class DeleteTrainedModelRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Delete an unreferenced trained model.
+/// </para>
+/// <para>
 /// The request deletes a trained inference model that is not referenced by an ingest pipeline.
 /// </para>
 /// </summary>
-public sealed partial class DeleteTrainedModelRequest : PlainRequest<DeleteTrainedModelRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestConverter))]
+public sealed partial class DeleteTrainedModelRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteTrainedModelRequest(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteTrainedModelRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteTrainedModel;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningDeleteTrainedModel;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
@@ -62,44 +105,142 @@ public sealed partial class DeleteTrainedModelRequest : PlainRequest<DeleteTrain
 
 	/// <summary>
 	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Delete an unreferenced trained model.
+/// </para>
+/// <para>
 /// The request deletes a trained inference model that is not referenced by an ingest pipeline.
 /// </para>
 /// </summary>
-public sealed partial class DeleteTrainedModelRequestDescriptor : RequestDescriptor<DeleteTrainedModelRequestDescriptor, DeleteTrainedModelRequestParameters>
+public readonly partial struct DeleteTrainedModelRequestDescriptor
 {
-	internal DeleteTrainedModelRequestDescriptor(Action<DeleteTrainedModelRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest Instance { get; init; }
 
-	public DeleteTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningDeleteTrainedModel;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.delete_trained_model";
-
-	public DeleteTrainedModelRequestDescriptor Force(bool? force = true) => Qs("force", force);
-
-	public DeleteTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public DeleteTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId)
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest(modelId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteTrainedModelRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor Force(bool? value = true)
+	{
+		Instance.Force = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

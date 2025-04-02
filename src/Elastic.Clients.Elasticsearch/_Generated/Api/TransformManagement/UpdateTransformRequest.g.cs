@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public sealed partial class UpdateTransformRequestParameters : RequestParameters
+public sealed partial class UpdateTransformRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -50,6 +43,108 @@ public sealed partial class UpdateTransformRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class UpdateTransformRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
+	private static readonly System.Text.Json.JsonEncodedText PropFrequency = System.Text.Json.JsonEncodedText.Encode("frequency");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionPolicy = System.Text.Json.JsonEncodedText.Encode("retention_policy");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropSync = System.Text.Json.JsonEncodedText.Encode("sync");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Destination?> propDest = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy?> propRetentionPolicy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Settings?> propSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Source?> propSource = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Sync?> propSync = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
+			{
+				continue;
+			}
+
+			if (propFrequency.TryReadProperty(ref reader, options, PropFrequency, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propRetentionPolicy.TryReadProperty(ref reader, options, PropRetentionPolicy, null))
+			{
+				continue;
+			}
+
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (propSync.TryReadProperty(ref reader, options, PropSync, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			Dest = propDest.Value,
+			Frequency = propFrequency.Value,
+			Meta = propMeta.Value,
+			RetentionPolicy = propRetentionPolicy.Value,
+			Settings = propSettings.Value,
+			Source = propSource.Value,
+			Sync = propSync.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDest, value.Dest, null, null);
+		writer.WriteProperty(options, PropFrequency, value.Frequency, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRetentionPolicy, value.RetentionPolicy, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropSync, value.Sync, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Update a transform.
@@ -63,19 +158,42 @@ public sealed partial class UpdateTransformRequestParameters : RequestParameters
 /// time of update and runs with those privileges.
 /// </para>
 /// </summary>
-public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransformRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestConverter))]
+public sealed partial class UpdateTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateTransformRequest(Elastic.Clients.Elasticsearch.Id transformId) : base(r => r.Required("transform_id", transformId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public UpdateTransformRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementUpdateTransform;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.TransformManagementUpdateTransform;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "transform.update_transform";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -84,7 +202,6 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// created.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
 	/// <summary>
@@ -93,7 +210,6 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -101,7 +217,6 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// Free text description of the transform.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -109,7 +224,6 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// The destination for the transform.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Destination? Dest { get; set; }
 
 	/// <summary>
@@ -120,7 +234,6 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// indexing. The minimum value is 1s and the maximum is 1h.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("frequency")]
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
 	/// <summary>
@@ -128,8 +241,7 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// Defines optional transform metadata.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IDictionary<string, object>? Meta { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -137,7 +249,6 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// criteria is deleted from the destination index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retention_policy")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
 
 	/// <summary>
@@ -145,7 +256,6 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// Defines optional transform settings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
 
 	/// <summary>
@@ -153,7 +263,6 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// The source of the data for the transform.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Source? Source { get; set; }
 
 	/// <summary>
@@ -161,7 +270,6 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 	/// Defines the properties transforms require to run continuously.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sync")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; set; }
 }
 
@@ -178,59 +286,75 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 /// time of update and runs with those privileges.
 /// </para>
 /// </summary>
-public sealed partial class UpdateTransformRequestDescriptor<TDocument> : RequestDescriptor<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformRequestParameters>
+public readonly partial struct UpdateTransformRequestDescriptor
 {
-	internal UpdateTransformRequestDescriptor(Action<UpdateTransformRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest Instance { get; init; }
 
-	public UpdateTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId) : base(r => r.Required("transform_id", transformId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementUpdateTransform;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "transform.update_transform";
-
-	public UpdateTransformRequestDescriptor<TDocument> DeferValidation(bool? deferValidation = true) => Qs("defer_validation", deferValidation);
-	public UpdateTransformRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public UpdateTransformRequestDescriptor<TDocument> TransformId(Elastic.Clients.Elasticsearch.Id transformId)
+	public UpdateTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId)
 	{
-		RouteValues.Required("transform_id", transformId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(transformId);
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.Destination? DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor> DestDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument> RetentionPolicyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>> RetentionPolicyDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.Settings? SettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor> SettingsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.Source? SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.Sync? SyncValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument> SyncDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>> SyncDescriptorAction { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UpdateTransformRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.TransformId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When true, deferrable validations are not run. This behavior may be
+	/// desired if the source index does not exist until after the transform is
+	/// created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor DeferValidation(bool? value = true)
+	{
+		Instance.DeferValidation = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the
+	/// timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Free text description of the transform.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -238,28 +362,32 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	/// The destination for the transform.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? dest)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? value)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
+		Instance.Dest = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Dest()
 	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> Dest(Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -270,10 +398,10 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	/// indexing. The minimum value is 1s and the maximum is 1h.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		FrequencyValue = frequency;
-		return Self;
+		Instance.Frequency = value;
+		return this;
 	}
 
 	/// <summary>
@@ -281,10 +409,39 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	/// Defines optional transform metadata.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -293,28 +450,46 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	/// criteria is deleted from the destination index.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor<TDocument> RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? retentionPolicy)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? value)
 	{
-		RetentionPolicyDescriptor = null;
-		RetentionPolicyDescriptorAction = null;
-		RetentionPolicyValue = retentionPolicy;
-		return Self;
+		Instance.RetentionPolicy = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RetentionPolicy()
 	{
-		RetentionPolicyValue = null;
-		RetentionPolicyDescriptorAction = null;
-		RetentionPolicyDescriptor = descriptor;
-		return Self;
+		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> RetentionPolicy(Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RetentionPolicy(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor>? action)
 	{
-		RetentionPolicyValue = null;
-		RetentionPolicyDescriptor = null;
-		RetentionPolicyDescriptorAction = configure;
-		return Self;
+		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RetentionPolicy<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<T>>? action)
+	{
+		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -322,28 +497,32 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	/// Defines optional transform settings.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? settings)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? value)
 	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Settings()
 	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> Settings(Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor>? action)
 	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -351,28 +530,32 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	/// The source of the data for the transform.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? source)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor.Build(action);
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> Source(Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<T>> action)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -380,132 +563,82 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 	/// Defines the properties transforms require to run continuously.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor<TDocument> Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? sync)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? value)
 	{
-		SyncDescriptor = null;
-		SyncDescriptorAction = null;
-		SyncValue = sync;
-		return Self;
+		Instance.Sync = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> Sync(Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Sync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor> action)
 	{
-		SyncValue = null;
-		SyncDescriptorAction = null;
-		SyncDescriptor = descriptor;
-		return Self;
+		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor.Build(action);
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor<TDocument> Sync(Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Sync<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<T>> action)
 	{
-		SyncValue = null;
-		SyncDescriptor = null;
-		SyncDescriptorAction = configure;
-		return Self;
+		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor(DestDescriptorAction), options);
-		}
-		else if (DestValue is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (FrequencyValue is not null)
-		{
-			writer.WritePropertyName("frequency");
-			JsonSerializer.Serialize(writer, FrequencyValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (RetentionPolicyDescriptor is not null)
-		{
-			writer.WritePropertyName("retention_policy");
-			JsonSerializer.Serialize(writer, RetentionPolicyDescriptor, options);
-		}
-		else if (RetentionPolicyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retention_policy");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>(RetentionPolicyDescriptorAction), options);
-		}
-		else if (RetentionPolicyValue is not null)
-		{
-			writer.WritePropertyName("retention_policy");
-			JsonSerializer.Serialize(writer, RetentionPolicyValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (SettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-		}
-		else if (SettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor(SettingsDescriptorAction), options);
-		}
-		else if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
-		}
-		else if (SourceValue is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (SyncDescriptor is not null)
-		{
-			writer.WritePropertyName("sync");
-			JsonSerializer.Serialize(writer, SyncDescriptor, options);
-		}
-		else if (SyncDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sync");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>(SyncDescriptorAction), options);
-		}
-		else if (SyncValue is not null)
-		{
-			writer.WritePropertyName("sync");
-			JsonSerializer.Serialize(writer, SyncValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -522,59 +655,75 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 /// time of update and runs with those privileges.
 /// </para>
 /// </summary>
-public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor<UpdateTransformRequestDescriptor, UpdateTransformRequestParameters>
+public readonly partial struct UpdateTransformRequestDescriptor<TDocument>
 {
-	internal UpdateTransformRequestDescriptor(Action<UpdateTransformRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest Instance { get; init; }
 
-	public UpdateTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId) : base(r => r.Required("transform_id", transformId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementUpdateTransform;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "transform.update_transform";
-
-	public UpdateTransformRequestDescriptor DeferValidation(bool? deferValidation = true) => Qs("defer_validation", deferValidation);
-	public UpdateTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public UpdateTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id transformId)
+	public UpdateTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId)
 	{
-		RouteValues.Required("transform_id", transformId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(transformId);
 	}
 
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.Destination? DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor> DestDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? FrequencyValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor RetentionPolicyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor> RetentionPolicyDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.Settings? SettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor> SettingsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.Source? SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor> SourceDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.Sync? SyncValue { get; set; }
-	private Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor SyncDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor> SyncDescriptorAction { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public UpdateTransformRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> TransformId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.TransformId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When true, deferrable validations are not run. This behavior may be
+	/// desired if the source index does not exist until after the transform is
+	/// created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> DeferValidation(bool? value = true)
+	{
+		Instance.DeferValidation = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the
+	/// timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Free text description of the transform.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -582,28 +731,32 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	/// The destination for the transform.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? dest)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? value)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
+		Instance.Dest = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor Dest(Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Dest()
 	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor Dest(Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The destination for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -614,10 +767,10 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	/// indexing. The minimum value is 1s and the maximum is 1h.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? frequency)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		FrequencyValue = frequency;
-		return Self;
+		Instance.Frequency = value;
+		return this;
 	}
 
 	/// <summary>
@@ -625,10 +778,39 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	/// Defines optional transform metadata.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines optional transform metadata.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -637,28 +819,34 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	/// criteria is deleted from the destination index.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? retentionPolicy)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? value)
 	{
-		RetentionPolicyDescriptor = null;
-		RetentionPolicyDescriptorAction = null;
-		RetentionPolicyValue = retentionPolicy;
-		return Self;
+		Instance.RetentionPolicy = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> RetentionPolicy()
 	{
-		RetentionPolicyValue = null;
-		RetentionPolicyDescriptorAction = null;
-		RetentionPolicyDescriptor = descriptor;
-		return Self;
+		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor RetentionPolicy(Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Defines a retention policy for the transform. Data that meets the defined
+	/// criteria is deleted from the destination index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> RetentionPolicy(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>>? action)
 	{
-		RetentionPolicyValue = null;
-		RetentionPolicyDescriptor = null;
-		RetentionPolicyDescriptorAction = configure;
-		return Self;
+		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -666,28 +854,32 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	/// Defines optional transform settings.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? settings)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? value)
 	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Settings()
 	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor Settings(Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Defines optional transform settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor>? action)
 	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -695,28 +887,21 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	/// The source of the data for the transform.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? source)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor Source(Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The source of the data for the transform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
-	}
-
-	public UpdateTransformRequestDescriptor Source(Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor> configure)
-	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -724,131 +909,70 @@ public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor
 	/// Defines the properties transforms require to run continuously.
 	/// </para>
 	/// </summary>
-	public UpdateTransformRequestDescriptor Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? sync)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? value)
 	{
-		SyncDescriptor = null;
-		SyncDescriptorAction = null;
-		SyncValue = sync;
-		return Self;
+		Instance.Sync = value;
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor Sync(Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the properties transforms require to run continuously.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Sync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>> action)
 	{
-		SyncValue = null;
-		SyncDescriptorAction = null;
-		SyncDescriptor = descriptor;
-		return Self;
+		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public UpdateTransformRequestDescriptor Sync(Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>> action)
 	{
-		SyncValue = null;
-		SyncDescriptor = null;
-		SyncDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor(DestDescriptorAction), options);
-		}
-		else if (DestValue is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (FrequencyValue is not null)
-		{
-			writer.WritePropertyName("frequency");
-			JsonSerializer.Serialize(writer, FrequencyValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (RetentionPolicyDescriptor is not null)
-		{
-			writer.WritePropertyName("retention_policy");
-			JsonSerializer.Serialize(writer, RetentionPolicyDescriptor, options);
-		}
-		else if (RetentionPolicyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("retention_policy");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor(RetentionPolicyDescriptorAction), options);
-		}
-		else if (RetentionPolicyValue is not null)
-		{
-			writer.WritePropertyName("retention_policy");
-			JsonSerializer.Serialize(writer, RetentionPolicyValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (SettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-		}
-		else if (SettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor(SettingsDescriptorAction), options);
-		}
-		else if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor(SourceDescriptorAction), options);
-		}
-		else if (SourceValue is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (SyncDescriptor is not null)
-		{
-			writer.WritePropertyName("sync");
-			JsonSerializer.Serialize(writer, SyncDescriptor, options);
-		}
-		else if (SyncDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sync");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor(SyncDescriptorAction), options);
-		}
-		else if (SyncValue is not null)
-		{
-			writer.WritePropertyName("sync");
-			JsonSerializer.Serialize(writer, SyncValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

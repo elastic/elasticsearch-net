@@ -17,34 +17,138 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class GetSnapshotResponse : ElasticsearchResponse
+internal sealed partial class GetSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse>
 {
-	/// <summary>
-	/// <para>
-	/// The number of remaining snapshots that were not returned due to size limits and that can be fetched by additional requests using the next field value.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("remaining")]
-	public int Remaining { get; init; }
-	[JsonInclude, JsonPropertyName("responses")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? Responses { get; init; }
-	[JsonInclude, JsonPropertyName("snapshots")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropNext = System.Text.Json.JsonEncodedText.Encode("next");
+	private static readonly System.Text.Json.JsonEncodedText PropRemaining = System.Text.Json.JsonEncodedText.Encode("remaining");
+	private static readonly System.Text.Json.JsonEncodedText PropResponses = System.Text.Json.JsonEncodedText.Encode("responses");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propNext = default;
+		LocalJsonValue<int> propRemaining = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>?> propResponses = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>?> propSnapshots = default;
+		LocalJsonValue<int> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNext.TryReadProperty(ref reader, options, PropNext, null))
+			{
+				continue;
+			}
+
+			if (propRemaining.TryReadProperty(ref reader, options, PropRemaining, null))
+			{
+				continue;
+			}
+
+			if (propResponses.TryReadProperty(ref reader, options, PropResponses, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSnapshots.TryReadProperty(ref reader, options, PropSnapshots, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Next = propNext.Value,
+			Remaining = propRemaining.Value,
+			Responses = propResponses.Value,
+			Snapshots = propSnapshots.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNext, value.Next, null, null);
+		writer.WriteProperty(options, PropRemaining, value.Remaining, null, null);
+		writer.WriteProperty(options, PropResponses, value.Responses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>(o, v, null));
+		writer.WriteProperty(options, PropSnapshots, value.Snapshots, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>(o, v, null));
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponseConverter))]
+public sealed partial class GetSnapshotResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetSnapshotResponse(int remaining, int total)
+	{
+		Remaining = remaining;
+		Total = total;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetSnapshotResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetSnapshotResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
-	/// The total number of snapshots that match the request when ignoring size limit or after query parameter.
+	/// If the request contained a size limit and there might be more results, a <c>next</c> field will be added to the response.
+	/// It can be used as the <c>after</c> query parameter to fetch additional results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	public string? Next { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of remaining snapshots that were not returned due to size limits and that can be fetched by additional requests using the <c>next</c> field value.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Remaining { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? Responses { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The total number of snapshots that match the request when ignoring the size limit or <c>after</c> query parameter.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Total { get; set; }
 }

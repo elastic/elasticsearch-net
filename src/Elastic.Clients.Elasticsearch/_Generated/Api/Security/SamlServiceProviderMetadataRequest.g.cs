@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class SamlServiceProviderMetadataRequestParameters : RequestParameters
+public sealed partial class SamlServiceProviderMetadataRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class SamlServiceProviderMetadataRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -46,19 +68,42 @@ public sealed partial class SamlServiceProviderMetadataRequestParameters : Reque
 /// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 /// </para>
 /// </summary>
-public sealed partial class SamlServiceProviderMetadataRequest : PlainRequest<SamlServiceProviderMetadataRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestConverter))]
+public sealed partial class SamlServiceProviderMetadataRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SamlServiceProviderMetadataRequest(Elastic.Clients.Elasticsearch.Name realmName) : base(r => r.Required("realm_name", realmName))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public SamlServiceProviderMetadataRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SamlServiceProviderMetadataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlServiceProviderMetadata;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecuritySamlServiceProviderMetadata;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.saml_service_provider_metadata";
+
+	/// <summary>
+	/// <para>
+	/// The name of the SAML realm in Elasticsearch.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name RealmName { get => P<Elastic.Clients.Elasticsearch.Name>("realm_name"); set => PR("realm_name", value); }
 }
 
 /// <summary>
@@ -73,29 +118,88 @@ public sealed partial class SamlServiceProviderMetadataRequest : PlainRequest<Sa
 /// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 /// </para>
 /// </summary>
-public sealed partial class SamlServiceProviderMetadataRequestDescriptor : RequestDescriptor<SamlServiceProviderMetadataRequestDescriptor, SamlServiceProviderMetadataRequestParameters>
+public readonly partial struct SamlServiceProviderMetadataRequestDescriptor
 {
-	internal SamlServiceProviderMetadataRequestDescriptor(Action<SamlServiceProviderMetadataRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest Instance { get; init; }
 
-	public SamlServiceProviderMetadataRequestDescriptor(Elastic.Clients.Elasticsearch.Name realmName) : base(r => r.Required("realm_name", realmName))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlServiceProviderMetadataRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlServiceProviderMetadata;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.saml_service_provider_metadata";
-
-	public SamlServiceProviderMetadataRequestDescriptor RealmName(Elastic.Clients.Elasticsearch.Name realmName)
+	public SamlServiceProviderMetadataRequestDescriptor(Elastic.Clients.Elasticsearch.Name realmName)
 	{
-		RouteValues.Required("realm_name", realmName);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest(realmName);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SamlServiceProviderMetadataRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the SAML realm in Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor RealmName(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.RealmName = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

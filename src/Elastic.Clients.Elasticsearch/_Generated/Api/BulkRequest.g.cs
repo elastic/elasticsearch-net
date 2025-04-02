@@ -17,21 +17,21 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class BulkRequestParameters : RequestParameters
+public sealed partial class BulkRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
+
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the response will include the ingest pipelines that were run for each index or create.
@@ -124,546 +124,29 @@ public sealed partial class BulkRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Bulk index or delete documents.
-/// Perform multiple <c>index</c>, <c>create</c>, <c>delete</c>, and <c>update</c> actions in a single request.
-/// This reduces overhead and can greatly increase indexing speed.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// To use the <c>create</c> action, you must have the <c>create_doc</c>, <c>create</c>, <c>index</c>, or <c>write</c> index privilege. Data streams support only the <c>create</c> action.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To use the <c>index</c> action, you must have the <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To use the <c>delete</c> action, you must have the <c>delete</c> or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To use the <c>update</c> action, you must have the <c>index</c> or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To automatically create a data stream or index with a bulk API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To make the result of a bulk operation visible to search using the <c>refresh</c> parameter, you must have the <c>maintenance</c> or <c>manage</c> index privilege.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Automatic data stream creation requires a matching index template with data stream enabled.
-/// </para>
-/// <para>
-/// The actions are specified in the request body using a newline delimited JSON (NDJSON) structure:
-/// </para>
-/// <code>
-/// action_and_meta_data\n
-/// optional_source\n
-/// action_and_meta_data\n
-/// optional_source\n
-/// ....
-/// action_and_meta_data\n
-/// optional_source\n
-/// </code>
-/// <para>
-/// The <c>index</c> and <c>create</c> actions expect a source on the next line and have the same semantics as the <c>op_type</c> parameter in the standard index API.
-/// A <c>create</c> action fails if a document with the same ID already exists in the target
-/// An <c>index</c> action adds or replaces a document as necessary.
-/// </para>
-/// <para>
-/// NOTE: Data streams support only the <c>create</c> action.
-/// To update or delete a document in a data stream, you must target the backing index containing the document.
-/// </para>
-/// <para>
-/// An <c>update</c> action expects that the partial doc, upsert, and script and its options are specified on the next line.
-/// </para>
-/// <para>
-/// A <c>delete</c> action does not expect a source on the next line and has the same semantics as the standard delete API.
-/// </para>
-/// <para>
-/// NOTE: The final line of data must end with a newline character (<c>\n</c>).
-/// Each newline character may be preceded by a carriage return (<c>\r</c>).
-/// When sending NDJSON data to the <c>_bulk</c> endpoint, use a <c>Content-Type</c> header of <c>application/json</c> or <c>application/x-ndjson</c>.
-/// Because this format uses literal newline characters (<c>\n</c>) as delimiters, make sure that the JSON actions and sources are not pretty printed.
-/// </para>
-/// <para>
-/// If you provide a target in the request path, it is used for any actions that don't explicitly specify an <c>_index</c> argument.
-/// </para>
-/// <para>
-/// A note on the format: the idea here is to make processing as fast as possible.
-/// As some of the actions are redirected to other shards on other nodes, only <c>action_meta_data</c> is parsed on the receiving node side.
-/// </para>
-/// <para>
-/// Client libraries using this protocol should try and strive to do something similar on the client side, and reduce buffering as much as possible.
-/// </para>
-/// <para>
-/// There is no "correct" number of actions to perform in a single bulk request.
-/// Experiment with different settings to find the optimal size for your particular workload.
-/// Note that Elasticsearch limits the maximum size of a HTTP request to 100mb by default so clients must ensure that no request exceeds this size.
-/// It is not possible to index a single document that exceeds the size limit, so you must pre-process any such documents into smaller pieces before sending them to Elasticsearch.
-/// For instance, split documents into pages or chapters before indexing them, or store raw binary data in a system outside Elasticsearch and replace the raw data with a link to the external system in the documents that you send to Elasticsearch.
-/// </para>
-/// <para>
-/// <strong>Client suppport for bulk requests</strong>
-/// </para>
-/// <para>
-/// Some of the officially supported clients provide helpers to assist with bulk requests and reindexing:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Go: Check out <c>esutil.BulkIndexer</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Perl: Check out <c>Search::Elasticsearch::Client::5_0::Bulk</c> and <c>Search::Elasticsearch::Client::5_0::Scroll</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Python: Check out <c>elasticsearch.helpers.*</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// JavaScript: Check out <c>client.helpers.*</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// .NET: Check out <c>BulkAllObservable</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// PHP: Check out bulk indexing.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// <strong>Submitting bulk requests with cURL</strong>
-/// </para>
-/// <para>
-/// If you're providing text file input to <c>curl</c>, you must use the <c>--data-binary</c> flag instead of plain <c>-d</c>.
-/// The latter doesn't preserve newlines. For example:
-/// </para>
-/// <code>
-/// $ cat requests
-/// { "index" : { "_index" : "test", "_id" : "1" } }
-/// { "field1" : "value1" }
-/// $ curl -s -H "Content-Type: application/x-ndjson" -XPOST localhost:9200/_bulk --data-binary "@requests"; echo
-/// {"took":7, "errors": false, "items":[{"index":{"_index":"test","_id":"1","_version":1,"result":"created","forced_refresh":false}}]}
-/// </code>
-/// <para>
-/// <strong>Optimistic concurrency control</strong>
-/// </para>
-/// <para>
-/// Each <c>index</c> and <c>delete</c> action within a bulk API call may include the <c>if_seq_no</c> and <c>if_primary_term</c> parameters in their respective action and meta data lines.
-/// The <c>if_seq_no</c> and <c>if_primary_term</c> parameters control how operations are run, based on the last modification to existing documents. See Optimistic concurrency control for more details.
-/// </para>
-/// <para>
-/// <strong>Versioning</strong>
-/// </para>
-/// <para>
-/// Each bulk item can include the version value using the <c>version</c> field.
-/// It automatically follows the behavior of the index or delete operation based on the <c>_version</c> mapping.
-/// It also support the <c>version_type</c>.
-/// </para>
-/// <para>
-/// <strong>Routing</strong>
-/// </para>
-/// <para>
-/// Each bulk item can include the routing value using the <c>routing</c> field.
-/// It automatically follows the behavior of the index or delete operation based on the <c>_routing</c> mapping.
-/// </para>
-/// <para>
-/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
-/// </para>
-/// <para>
-/// <strong>Wait for active shards</strong>
-/// </para>
-/// <para>
-/// When making bulk calls, you can set the <c>wait_for_active_shards</c> parameter to require a minimum number of shard copies to be active before starting to process the bulk request.
-/// </para>
-/// <para>
-/// <strong>Refresh</strong>
-/// </para>
-/// <para>
-/// Control when the changes made by this request are visible to search.
-/// </para>
-/// <para>
-/// NOTE: Only the shards that receive the bulk request will be affected by refresh.
-/// Imagine a <c>_bulk?refresh=wait_for</c> request with three documents in it that happen to be routed to different shards in an index with five shards.
-/// The request will only wait for those three shards to refresh.
-/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
-/// </para>
-/// </summary>
-public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
+internal sealed partial class BulkRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.BulkRequest>
 {
-	public BulkRequest()
+	public override Elastic.Clients.Elasticsearch.BulkRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
 	}
 
-	public BulkRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceBulk;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "bulk";
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response will include the ingest pipelines that were run for each index or create.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? ListExecutedPipelines { get => Q<bool?>("list_executed_pipelines"); set => Q("list_executed_pipelines", value); }
-
-	/// <summary>
-	/// <para>
-	/// The pipeline identifier to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, setting the value to <c>_none</c> turns off the default ingest pipeline for this request.
-	/// If a final pipeline is configured, it will always run regardless of the value of this parameter.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If <c>wait_for</c>, wait for a refresh to make this operation visible to search.
-	/// If <c>false</c>, do nothing with refreshes.
-	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request's actions must target an index alias.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
-
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or contains a list of fields to return.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-	/// <summary>
-	/// <para>
-	/// The period each action waits for the following operations: automatic index creation, dynamic mapping updates, and waiting for active shards.
-	/// The default is <c>1m</c> (one minute), which guarantees Elasticsearch waits for at least the timeout before failing.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The default is <c>1</c>, which waits for each primary shard to be active.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-}
-
-/// <summary>
-/// <para>
-/// Bulk index or delete documents.
-/// Perform multiple <c>index</c>, <c>create</c>, <c>delete</c>, and <c>update</c> actions in a single request.
-/// This reduces overhead and can greatly increase indexing speed.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// To use the <c>create</c> action, you must have the <c>create_doc</c>, <c>create</c>, <c>index</c>, or <c>write</c> index privilege. Data streams support only the <c>create</c> action.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To use the <c>index</c> action, you must have the <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To use the <c>delete</c> action, you must have the <c>delete</c> or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To use the <c>update</c> action, you must have the <c>index</c> or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To automatically create a data stream or index with a bulk API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To make the result of a bulk operation visible to search using the <c>refresh</c> parameter, you must have the <c>maintenance</c> or <c>manage</c> index privilege.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Automatic data stream creation requires a matching index template with data stream enabled.
-/// </para>
-/// <para>
-/// The actions are specified in the request body using a newline delimited JSON (NDJSON) structure:
-/// </para>
-/// <code>
-/// action_and_meta_data\n
-/// optional_source\n
-/// action_and_meta_data\n
-/// optional_source\n
-/// ....
-/// action_and_meta_data\n
-/// optional_source\n
-/// </code>
-/// <para>
-/// The <c>index</c> and <c>create</c> actions expect a source on the next line and have the same semantics as the <c>op_type</c> parameter in the standard index API.
-/// A <c>create</c> action fails if a document with the same ID already exists in the target
-/// An <c>index</c> action adds or replaces a document as necessary.
-/// </para>
-/// <para>
-/// NOTE: Data streams support only the <c>create</c> action.
-/// To update or delete a document in a data stream, you must target the backing index containing the document.
-/// </para>
-/// <para>
-/// An <c>update</c> action expects that the partial doc, upsert, and script and its options are specified on the next line.
-/// </para>
-/// <para>
-/// A <c>delete</c> action does not expect a source on the next line and has the same semantics as the standard delete API.
-/// </para>
-/// <para>
-/// NOTE: The final line of data must end with a newline character (<c>\n</c>).
-/// Each newline character may be preceded by a carriage return (<c>\r</c>).
-/// When sending NDJSON data to the <c>_bulk</c> endpoint, use a <c>Content-Type</c> header of <c>application/json</c> or <c>application/x-ndjson</c>.
-/// Because this format uses literal newline characters (<c>\n</c>) as delimiters, make sure that the JSON actions and sources are not pretty printed.
-/// </para>
-/// <para>
-/// If you provide a target in the request path, it is used for any actions that don't explicitly specify an <c>_index</c> argument.
-/// </para>
-/// <para>
-/// A note on the format: the idea here is to make processing as fast as possible.
-/// As some of the actions are redirected to other shards on other nodes, only <c>action_meta_data</c> is parsed on the receiving node side.
-/// </para>
-/// <para>
-/// Client libraries using this protocol should try and strive to do something similar on the client side, and reduce buffering as much as possible.
-/// </para>
-/// <para>
-/// There is no "correct" number of actions to perform in a single bulk request.
-/// Experiment with different settings to find the optimal size for your particular workload.
-/// Note that Elasticsearch limits the maximum size of a HTTP request to 100mb by default so clients must ensure that no request exceeds this size.
-/// It is not possible to index a single document that exceeds the size limit, so you must pre-process any such documents into smaller pieces before sending them to Elasticsearch.
-/// For instance, split documents into pages or chapters before indexing them, or store raw binary data in a system outside Elasticsearch and replace the raw data with a link to the external system in the documents that you send to Elasticsearch.
-/// </para>
-/// <para>
-/// <strong>Client suppport for bulk requests</strong>
-/// </para>
-/// <para>
-/// Some of the officially supported clients provide helpers to assist with bulk requests and reindexing:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Go: Check out <c>esutil.BulkIndexer</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Perl: Check out <c>Search::Elasticsearch::Client::5_0::Bulk</c> and <c>Search::Elasticsearch::Client::5_0::Scroll</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Python: Check out <c>elasticsearch.helpers.*</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// JavaScript: Check out <c>client.helpers.*</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// .NET: Check out <c>BulkAllObservable</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// PHP: Check out bulk indexing.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// <strong>Submitting bulk requests with cURL</strong>
-/// </para>
-/// <para>
-/// If you're providing text file input to <c>curl</c>, you must use the <c>--data-binary</c> flag instead of plain <c>-d</c>.
-/// The latter doesn't preserve newlines. For example:
-/// </para>
-/// <code>
-/// $ cat requests
-/// { "index" : { "_index" : "test", "_id" : "1" } }
-/// { "field1" : "value1" }
-/// $ curl -s -H "Content-Type: application/x-ndjson" -XPOST localhost:9200/_bulk --data-binary "@requests"; echo
-/// {"took":7, "errors": false, "items":[{"index":{"_index":"test","_id":"1","_version":1,"result":"created","forced_refresh":false}}]}
-/// </code>
-/// <para>
-/// <strong>Optimistic concurrency control</strong>
-/// </para>
-/// <para>
-/// Each <c>index</c> and <c>delete</c> action within a bulk API call may include the <c>if_seq_no</c> and <c>if_primary_term</c> parameters in their respective action and meta data lines.
-/// The <c>if_seq_no</c> and <c>if_primary_term</c> parameters control how operations are run, based on the last modification to existing documents. See Optimistic concurrency control for more details.
-/// </para>
-/// <para>
-/// <strong>Versioning</strong>
-/// </para>
-/// <para>
-/// Each bulk item can include the version value using the <c>version</c> field.
-/// It automatically follows the behavior of the index or delete operation based on the <c>_version</c> mapping.
-/// It also support the <c>version_type</c>.
-/// </para>
-/// <para>
-/// <strong>Routing</strong>
-/// </para>
-/// <para>
-/// Each bulk item can include the routing value using the <c>routing</c> field.
-/// It automatically follows the behavior of the index or delete operation based on the <c>_routing</c> mapping.
-/// </para>
-/// <para>
-/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
-/// </para>
-/// <para>
-/// <strong>Wait for active shards</strong>
-/// </para>
-/// <para>
-/// When making bulk calls, you can set the <c>wait_for_active_shards</c> parameter to require a minimum number of shard copies to be active before starting to process the bulk request.
-/// </para>
-/// <para>
-/// <strong>Refresh</strong>
-/// </para>
-/// <para>
-/// Control when the changes made by this request are visible to search.
-/// </para>
-/// <para>
-/// NOTE: Only the shards that receive the bulk request will be affected by refresh.
-/// Imagine a <c>_bulk?refresh=wait_for</c> request with three documents in it that happen to be routed to different shards in an index with five shards.
-/// The request will only wait for those three shards to refresh.
-/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
-/// </para>
-/// </summary>
-public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor<BulkRequestDescriptor<TDocument>, BulkRequestParameters>
-{
-	internal BulkRequestDescriptor(Action<BulkRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
-	{
-	}
-
-	public BulkRequestDescriptor() : this(typeof(TDocument))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceBulk;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "bulk";
-
-	public BulkRequestDescriptor<TDocument> ListExecutedPipelines(bool? listExecutedPipelines = true) => Qs("list_executed_pipelines", listExecutedPipelines);
-	public BulkRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-	public BulkRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-	public BulkRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
-	public BulkRequestDescriptor<TDocument> RequireDataStream(bool? requireDataStream = true) => Qs("require_data_stream", requireDataStream);
-	public BulkRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public BulkRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public BulkRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public BulkRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-	public BulkRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public BulkRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public BulkRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
-	{
-		RouteValues.Optional("index", index);
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.BulkRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WriteEndObject();
@@ -860,47 +343,1077 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 /// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 /// </para>
 /// </summary>
-public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkRequestDescriptor, BulkRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.BulkRequestConverter))]
+public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.BulkRequestParameters>
 {
-	internal BulkRequestDescriptor(Action<BulkRequestDescriptor> configure) => configure.Invoke(this);
-
-	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
+	public BulkRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
 	{
+	}
+#if NET7_0_OR_GREATER
+	public BulkRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public BulkRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceBulk;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
+
+	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "bulk";
+
+	/// <summary>
+	/// <para>
+	/// The name of the data stream, index, or index alias to perform bulk actions on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response will include the ingest pipelines that were run for each index or create.
+	/// </para>
+	/// </summary>
+	public bool? ListExecutedPipelines { get => Q<bool?>("list_executed_pipelines"); set => Q("list_executed_pipelines", value); }
+
+	/// <summary>
+	/// <para>
+	/// The pipeline identifier to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, setting the value to <c>_none</c> turns off the default ingest pipeline for this request.
+	/// If a final pipeline is configured, it will always run regardless of the value of this parameter.
+	/// </para>
+	/// </summary>
+	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If <c>wait_for</c>, wait for a refresh to make this operation visible to search.
+	/// If <c>false</c>, do nothing with refreshes.
+	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target an index alias.
+	/// </para>
+	/// </summary>
+	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
+	/// </para>
+	/// </summary>
+	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
+
+	/// <summary>
+	/// <para>
+	/// A custom value that is used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or contains a list of fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period each action waits for the following operations: automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// The default is <c>1m</c> (one minute), which guarantees Elasticsearch waits for at least the timeout before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default is <c>1</c>, which waits for each primary shard to be active.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+}
+
+/// <summary>
+/// <para>
+/// Bulk index or delete documents.
+/// Perform multiple <c>index</c>, <c>create</c>, <c>delete</c>, and <c>update</c> actions in a single request.
+/// This reduces overhead and can greatly increase indexing speed.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// To use the <c>create</c> action, you must have the <c>create_doc</c>, <c>create</c>, <c>index</c>, or <c>write</c> index privilege. Data streams support only the <c>create</c> action.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To use the <c>index</c> action, you must have the <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To use the <c>delete</c> action, you must have the <c>delete</c> or <c>write</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To use the <c>update</c> action, you must have the <c>index</c> or <c>write</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with a bulk API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To make the result of a bulk operation visible to search using the <c>refresh</c> parameter, you must have the <c>maintenance</c> or <c>manage</c> index privilege.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// The actions are specified in the request body using a newline delimited JSON (NDJSON) structure:
+/// </para>
+/// <code>
+/// action_and_meta_data\n
+/// optional_source\n
+/// action_and_meta_data\n
+/// optional_source\n
+/// ....
+/// action_and_meta_data\n
+/// optional_source\n
+/// </code>
+/// <para>
+/// The <c>index</c> and <c>create</c> actions expect a source on the next line and have the same semantics as the <c>op_type</c> parameter in the standard index API.
+/// A <c>create</c> action fails if a document with the same ID already exists in the target
+/// An <c>index</c> action adds or replaces a document as necessary.
+/// </para>
+/// <para>
+/// NOTE: Data streams support only the <c>create</c> action.
+/// To update or delete a document in a data stream, you must target the backing index containing the document.
+/// </para>
+/// <para>
+/// An <c>update</c> action expects that the partial doc, upsert, and script and its options are specified on the next line.
+/// </para>
+/// <para>
+/// A <c>delete</c> action does not expect a source on the next line and has the same semantics as the standard delete API.
+/// </para>
+/// <para>
+/// NOTE: The final line of data must end with a newline character (<c>\n</c>).
+/// Each newline character may be preceded by a carriage return (<c>\r</c>).
+/// When sending NDJSON data to the <c>_bulk</c> endpoint, use a <c>Content-Type</c> header of <c>application/json</c> or <c>application/x-ndjson</c>.
+/// Because this format uses literal newline characters (<c>\n</c>) as delimiters, make sure that the JSON actions and sources are not pretty printed.
+/// </para>
+/// <para>
+/// If you provide a target in the request path, it is used for any actions that don't explicitly specify an <c>_index</c> argument.
+/// </para>
+/// <para>
+/// A note on the format: the idea here is to make processing as fast as possible.
+/// As some of the actions are redirected to other shards on other nodes, only <c>action_meta_data</c> is parsed on the receiving node side.
+/// </para>
+/// <para>
+/// Client libraries using this protocol should try and strive to do something similar on the client side, and reduce buffering as much as possible.
+/// </para>
+/// <para>
+/// There is no "correct" number of actions to perform in a single bulk request.
+/// Experiment with different settings to find the optimal size for your particular workload.
+/// Note that Elasticsearch limits the maximum size of a HTTP request to 100mb by default so clients must ensure that no request exceeds this size.
+/// It is not possible to index a single document that exceeds the size limit, so you must pre-process any such documents into smaller pieces before sending them to Elasticsearch.
+/// For instance, split documents into pages or chapters before indexing them, or store raw binary data in a system outside Elasticsearch and replace the raw data with a link to the external system in the documents that you send to Elasticsearch.
+/// </para>
+/// <para>
+/// <strong>Client suppport for bulk requests</strong>
+/// </para>
+/// <para>
+/// Some of the officially supported clients provide helpers to assist with bulk requests and reindexing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Go: Check out <c>esutil.BulkIndexer</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Perl: Check out <c>Search::Elasticsearch::Client::5_0::Bulk</c> and <c>Search::Elasticsearch::Client::5_0::Scroll</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Python: Check out <c>elasticsearch.helpers.*</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// JavaScript: Check out <c>client.helpers.*</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// .NET: Check out <c>BulkAllObservable</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// PHP: Check out bulk indexing.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// <strong>Submitting bulk requests with cURL</strong>
+/// </para>
+/// <para>
+/// If you're providing text file input to <c>curl</c>, you must use the <c>--data-binary</c> flag instead of plain <c>-d</c>.
+/// The latter doesn't preserve newlines. For example:
+/// </para>
+/// <code>
+/// $ cat requests
+/// { "index" : { "_index" : "test", "_id" : "1" } }
+/// { "field1" : "value1" }
+/// $ curl -s -H "Content-Type: application/x-ndjson" -XPOST localhost:9200/_bulk --data-binary "@requests"; echo
+/// {"took":7, "errors": false, "items":[{"index":{"_index":"test","_id":"1","_version":1,"result":"created","forced_refresh":false}}]}
+/// </code>
+/// <para>
+/// <strong>Optimistic concurrency control</strong>
+/// </para>
+/// <para>
+/// Each <c>index</c> and <c>delete</c> action within a bulk API call may include the <c>if_seq_no</c> and <c>if_primary_term</c> parameters in their respective action and meta data lines.
+/// The <c>if_seq_no</c> and <c>if_primary_term</c> parameters control how operations are run, based on the last modification to existing documents. See Optimistic concurrency control for more details.
+/// </para>
+/// <para>
+/// <strong>Versioning</strong>
+/// </para>
+/// <para>
+/// Each bulk item can include the version value using the <c>version</c> field.
+/// It automatically follows the behavior of the index or delete operation based on the <c>_version</c> mapping.
+/// It also support the <c>version_type</c>.
+/// </para>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// Each bulk item can include the routing value using the <c>routing</c> field.
+/// It automatically follows the behavior of the index or delete operation based on the <c>_routing</c> mapping.
+/// </para>
+/// <para>
+/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
+/// </para>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// When making bulk calls, you can set the <c>wait_for_active_shards</c> parameter to require a minimum number of shard copies to be active before starting to process the bulk request.
+/// </para>
+/// <para>
+/// <strong>Refresh</strong>
+/// </para>
+/// <para>
+/// Control when the changes made by this request are visible to search.
+/// </para>
+/// <para>
+/// NOTE: Only the shards that receive the bulk request will be affected by refresh.
+/// Imagine a <c>_bulk?refresh=wait_for</c> request with three documents in it that happen to be routed to different shards in an index with five shards.
+/// The request will only wait for those three shards to refresh.
+/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
+/// </para>
+/// </summary>
+public readonly partial struct BulkRequestDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.BulkRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.BulkRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(index);
 	}
 
 	public BulkRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceBulk;
+	public static explicit operator Elastic.Clients.Elasticsearch.BulkRequestDescriptor(Elastic.Clients.Elasticsearch.BulkRequest instance) => new Elastic.Clients.Elasticsearch.BulkRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.BulkRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "bulk";
-
-	public BulkRequestDescriptor ListExecutedPipelines(bool? listExecutedPipelines = true) => Qs("list_executed_pipelines", listExecutedPipelines);
-	public BulkRequestDescriptor Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-	public BulkRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-	public BulkRequestDescriptor RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
-	public BulkRequestDescriptor RequireDataStream(bool? requireDataStream = true) => Qs("require_data_stream", requireDataStream);
-	public BulkRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public BulkRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public BulkRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public BulkRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-	public BulkRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public BulkRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public BulkRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	/// <summary>
+	/// <para>
+	/// The name of the data stream, index, or index alias to perform bulk actions on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		RouteValues.Optional("index", index);
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor IncludeSourceOnError(bool? value = true)
 	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
+		Instance.IncludeSourceOnError = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response will include the ingest pipelines that were run for each index or create.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor ListExecutedPipelines(bool? value = true)
+	{
+		Instance.ListExecutedPipelines = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The pipeline identifier to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, setting the value to <c>_none</c> turns off the default ingest pipeline for this request.
+	/// If a final pipeline is configured, it will always run regardless of the value of this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Pipeline(string? value)
+	{
+		Instance.Pipeline = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If <c>wait_for</c>, wait for a refresh to make this operation visible to search.
+	/// If <c>false</c>, do nothing with refreshes.
+	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target an index alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor RequireAlias(bool? value = true)
+	{
+		Instance.RequireAlias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor RequireDataStream(bool? value = true)
+	{
+		Instance.RequireDataStream = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value that is used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or contains a list of fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
+	{
+		Instance.Source = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or contains a list of fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or contains a list of fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period each action waits for the following operations: automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// The default is <c>1m</c> (one minute), which guarantees Elasticsearch waits for at least the timeout before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default is <c>1</c>, which waits for each primary shard to be active.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.BulkRequest Build(System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor(new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}
+
+/// <summary>
+/// <para>
+/// Bulk index or delete documents.
+/// Perform multiple <c>index</c>, <c>create</c>, <c>delete</c>, and <c>update</c> actions in a single request.
+/// This reduces overhead and can greatly increase indexing speed.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// To use the <c>create</c> action, you must have the <c>create_doc</c>, <c>create</c>, <c>index</c>, or <c>write</c> index privilege. Data streams support only the <c>create</c> action.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To use the <c>index</c> action, you must have the <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To use the <c>delete</c> action, you must have the <c>delete</c> or <c>write</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To use the <c>update</c> action, you must have the <c>index</c> or <c>write</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with a bulk API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To make the result of a bulk operation visible to search using the <c>refresh</c> parameter, you must have the <c>maintenance</c> or <c>manage</c> index privilege.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// The actions are specified in the request body using a newline delimited JSON (NDJSON) structure:
+/// </para>
+/// <code>
+/// action_and_meta_data\n
+/// optional_source\n
+/// action_and_meta_data\n
+/// optional_source\n
+/// ....
+/// action_and_meta_data\n
+/// optional_source\n
+/// </code>
+/// <para>
+/// The <c>index</c> and <c>create</c> actions expect a source on the next line and have the same semantics as the <c>op_type</c> parameter in the standard index API.
+/// A <c>create</c> action fails if a document with the same ID already exists in the target
+/// An <c>index</c> action adds or replaces a document as necessary.
+/// </para>
+/// <para>
+/// NOTE: Data streams support only the <c>create</c> action.
+/// To update or delete a document in a data stream, you must target the backing index containing the document.
+/// </para>
+/// <para>
+/// An <c>update</c> action expects that the partial doc, upsert, and script and its options are specified on the next line.
+/// </para>
+/// <para>
+/// A <c>delete</c> action does not expect a source on the next line and has the same semantics as the standard delete API.
+/// </para>
+/// <para>
+/// NOTE: The final line of data must end with a newline character (<c>\n</c>).
+/// Each newline character may be preceded by a carriage return (<c>\r</c>).
+/// When sending NDJSON data to the <c>_bulk</c> endpoint, use a <c>Content-Type</c> header of <c>application/json</c> or <c>application/x-ndjson</c>.
+/// Because this format uses literal newline characters (<c>\n</c>) as delimiters, make sure that the JSON actions and sources are not pretty printed.
+/// </para>
+/// <para>
+/// If you provide a target in the request path, it is used for any actions that don't explicitly specify an <c>_index</c> argument.
+/// </para>
+/// <para>
+/// A note on the format: the idea here is to make processing as fast as possible.
+/// As some of the actions are redirected to other shards on other nodes, only <c>action_meta_data</c> is parsed on the receiving node side.
+/// </para>
+/// <para>
+/// Client libraries using this protocol should try and strive to do something similar on the client side, and reduce buffering as much as possible.
+/// </para>
+/// <para>
+/// There is no "correct" number of actions to perform in a single bulk request.
+/// Experiment with different settings to find the optimal size for your particular workload.
+/// Note that Elasticsearch limits the maximum size of a HTTP request to 100mb by default so clients must ensure that no request exceeds this size.
+/// It is not possible to index a single document that exceeds the size limit, so you must pre-process any such documents into smaller pieces before sending them to Elasticsearch.
+/// For instance, split documents into pages or chapters before indexing them, or store raw binary data in a system outside Elasticsearch and replace the raw data with a link to the external system in the documents that you send to Elasticsearch.
+/// </para>
+/// <para>
+/// <strong>Client suppport for bulk requests</strong>
+/// </para>
+/// <para>
+/// Some of the officially supported clients provide helpers to assist with bulk requests and reindexing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Go: Check out <c>esutil.BulkIndexer</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Perl: Check out <c>Search::Elasticsearch::Client::5_0::Bulk</c> and <c>Search::Elasticsearch::Client::5_0::Scroll</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Python: Check out <c>elasticsearch.helpers.*</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// JavaScript: Check out <c>client.helpers.*</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// .NET: Check out <c>BulkAllObservable</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// PHP: Check out bulk indexing.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// <strong>Submitting bulk requests with cURL</strong>
+/// </para>
+/// <para>
+/// If you're providing text file input to <c>curl</c>, you must use the <c>--data-binary</c> flag instead of plain <c>-d</c>.
+/// The latter doesn't preserve newlines. For example:
+/// </para>
+/// <code>
+/// $ cat requests
+/// { "index" : { "_index" : "test", "_id" : "1" } }
+/// { "field1" : "value1" }
+/// $ curl -s -H "Content-Type: application/x-ndjson" -XPOST localhost:9200/_bulk --data-binary "@requests"; echo
+/// {"took":7, "errors": false, "items":[{"index":{"_index":"test","_id":"1","_version":1,"result":"created","forced_refresh":false}}]}
+/// </code>
+/// <para>
+/// <strong>Optimistic concurrency control</strong>
+/// </para>
+/// <para>
+/// Each <c>index</c> and <c>delete</c> action within a bulk API call may include the <c>if_seq_no</c> and <c>if_primary_term</c> parameters in their respective action and meta data lines.
+/// The <c>if_seq_no</c> and <c>if_primary_term</c> parameters control how operations are run, based on the last modification to existing documents. See Optimistic concurrency control for more details.
+/// </para>
+/// <para>
+/// <strong>Versioning</strong>
+/// </para>
+/// <para>
+/// Each bulk item can include the version value using the <c>version</c> field.
+/// It automatically follows the behavior of the index or delete operation based on the <c>_version</c> mapping.
+/// It also support the <c>version_type</c>.
+/// </para>
+/// <para>
+/// <strong>Routing</strong>
+/// </para>
+/// <para>
+/// Each bulk item can include the routing value using the <c>routing</c> field.
+/// It automatically follows the behavior of the index or delete operation based on the <c>_routing</c> mapping.
+/// </para>
+/// <para>
+/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
+/// </para>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// When making bulk calls, you can set the <c>wait_for_active_shards</c> parameter to require a minimum number of shard copies to be active before starting to process the bulk request.
+/// </para>
+/// <para>
+/// <strong>Refresh</strong>
+/// </para>
+/// <para>
+/// Control when the changes made by this request are visible to search.
+/// </para>
+/// <para>
+/// NOTE: Only the shards that receive the bulk request will be affected by refresh.
+/// Imagine a <c>_bulk?refresh=wait_for</c> request with three documents in it that happen to be routed to different shards in an index with five shards.
+/// The request will only wait for those three shards to refresh.
+/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
+/// </para>
+/// </summary>
+public readonly partial struct BulkRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.BulkRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.BulkRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(index);
+	}
+
+	public BulkRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.BulkRequest instance) => new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the data stream, index, or index alias to perform bulk actions on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> IncludeSourceOnError(bool? value = true)
+	{
+		Instance.IncludeSourceOnError = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response will include the ingest pipelines that were run for each index or create.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> ListExecutedPipelines(bool? value = true)
+	{
+		Instance.ListExecutedPipelines = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The pipeline identifier to use to preprocess incoming documents.
+	/// If the index has a default ingest pipeline specified, setting the value to <c>_none</c> turns off the default ingest pipeline for this request.
+	/// If a final pipeline is configured, it will always run regardless of the value of this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Pipeline(string? value)
+	{
+		Instance.Pipeline = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+	/// If <c>wait_for</c>, wait for a refresh to make this operation visible to search.
+	/// If <c>false</c>, do nothing with refreshes.
+	/// Valid values: <c>true</c>, <c>false</c>, <c>wait_for</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target an index alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> RequireAlias(bool? value = true)
+	{
+		Instance.RequireAlias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> RequireDataStream(bool? value = true)
+	{
+		Instance.RequireDataStream = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value that is used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or contains a list of fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
+	{
+		Instance.Source = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or contains a list of fields to return.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to exclude from the response.
+	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of source fields to include in the response.
+	/// If this parameter is specified, only these source fields are returned.
+	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.SourceIncludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period each action waits for the following operations: automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// The default is <c>1m</c> (one minute), which guarantees Elasticsearch waits for at least the timeout before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default is <c>1</c>, which waits for each primary shard to be active.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.BulkRequest Build(System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

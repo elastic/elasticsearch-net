@@ -17,31 +17,90 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class CpuAcctConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.CpuAcct>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropControlGroup = System.Text.Json.JsonEncodedText.Encode("control_group");
+	private static readonly System.Text.Json.JsonEncodedText PropUsageNanos = System.Text.Json.JsonEncodedText.Encode("usage_nanos");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.CpuAcct Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propControlGroup = default;
+		LocalJsonValue<System.TimeSpan?> propUsageNanos = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propControlGroup.TryReadProperty(ref reader, options, PropControlGroup, null))
+			{
+				continue;
+			}
+
+			if (propUsageNanos.TryReadProperty(ref reader, options, PropUsageNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.CpuAcct(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ControlGroup = propControlGroup.Value,
+			UsageNanos = propUsageNanos.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.CpuAcct value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropControlGroup, value.ControlGroup, null, null);
+		writer.WriteProperty(options, PropUsageNanos, value.UsageNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.CpuAcctConverter))]
 public sealed partial class CpuAcct
 {
+#if NET7_0_OR_GREATER
+	public CpuAcct()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CpuAcct()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CpuAcct(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The <c>cpuacct</c> control group to which the Elasticsearch process belongs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("control_group")]
-	public string? ControlGroup { get; init; }
+	public string? ControlGroup { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total CPU time, in nanoseconds, consumed by all tasks in the same cgroup as the Elasticsearch process.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("usage_nanos")]
-	public long? UsageNanos { get; init; }
+	public System.TimeSpan? UsageNanos { get; set; }
 }

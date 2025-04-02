@@ -17,31 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalyticsMemoryEstimationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExpectedMemoryWithDisk = System.Text.Json.JsonEncodedText.Encode("expected_memory_with_disk");
+	private static readonly System.Text.Json.JsonEncodedText PropExpectedMemoryWithoutDisk = System.Text.Json.JsonEncodedText.Encode("expected_memory_without_disk");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propExpectedMemoryWithDisk = default;
+		LocalJsonValue<string> propExpectedMemoryWithoutDisk = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExpectedMemoryWithDisk.TryReadProperty(ref reader, options, PropExpectedMemoryWithDisk, null))
+			{
+				continue;
+			}
+
+			if (propExpectedMemoryWithoutDisk.TryReadProperty(ref reader, options, PropExpectedMemoryWithoutDisk, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ExpectedMemoryWithDisk = propExpectedMemoryWithDisk.Value,
+			ExpectedMemoryWithoutDisk = propExpectedMemoryWithoutDisk.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExpectedMemoryWithDisk, value.ExpectedMemoryWithDisk, null, null);
+		writer.WriteProperty(options, PropExpectedMemoryWithoutDisk, value.ExpectedMemoryWithoutDisk, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimationConverter))]
 public sealed partial class DataframeAnalyticsMemoryEstimation
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalyticsMemoryEstimation(string expectedMemoryWithDisk, string expectedMemoryWithoutDisk)
+	{
+		ExpectedMemoryWithDisk = expectedMemoryWithDisk;
+		ExpectedMemoryWithoutDisk = expectedMemoryWithoutDisk;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeAnalyticsMemoryEstimation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeAnalyticsMemoryEstimation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalyticsMemoryEstimation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Estimated memory usage under the assumption that overflowing to disk is allowed during data frame analytics. expected_memory_with_disk is usually smaller than expected_memory_without_disk as using disk allows to limit the main memory needed to perform data frame analytics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expected_memory_with_disk")]
-	public string ExpectedMemoryWithDisk { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ExpectedMemoryWithDisk { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Estimated memory usage under the assumption that the whole data frame analytics should happen in memory (i.e. without overflowing to disk).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expected_memory_without_disk")]
-	public string ExpectedMemoryWithoutDisk { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ExpectedMemoryWithoutDisk { get; set; }
 }

@@ -17,95 +17,253 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class ModelSnapshotConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropLatestRecordTimeStamp = System.Text.Json.JsonEncodedText.Encode("latest_record_time_stamp");
+	private static readonly System.Text.Json.JsonEncodedText PropLatestResultTimeStamp = System.Text.Json.JsonEncodedText.Encode("latest_result_time_stamp");
+	private static readonly System.Text.Json.JsonEncodedText PropMinVersion = System.Text.Json.JsonEncodedText.Encode("min_version");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeStats = System.Text.Json.JsonEncodedText.Encode("model_size_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropRetain = System.Text.Json.JsonEncodedText.Encode("retain");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotDocCount = System.Text.Json.JsonEncodedText.Encode("snapshot_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotId = System.Text.Json.JsonEncodedText.Encode("snapshot_id");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<string> propJobId = default;
+		LocalJsonValue<int?> propLatestRecordTimeStamp = default;
+		LocalJsonValue<int?> propLatestResultTimeStamp = default;
+		LocalJsonValue<string> propMinVersion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats?> propModelSizeStats = default;
+		LocalJsonValue<bool> propRetain = default;
+		LocalJsonValue<long> propSnapshotDocCount = default;
+		LocalJsonValue<string> propSnapshotId = default;
+		LocalJsonValue<long> propTimestamp = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
+			{
+				continue;
+			}
+
+			if (propLatestRecordTimeStamp.TryReadProperty(ref reader, options, PropLatestRecordTimeStamp, null))
+			{
+				continue;
+			}
+
+			if (propLatestResultTimeStamp.TryReadProperty(ref reader, options, PropLatestResultTimeStamp, null))
+			{
+				continue;
+			}
+
+			if (propMinVersion.TryReadProperty(ref reader, options, PropMinVersion, null))
+			{
+				continue;
+			}
+
+			if (propModelSizeStats.TryReadProperty(ref reader, options, PropModelSizeStats, null))
+			{
+				continue;
+			}
+
+			if (propRetain.TryReadProperty(ref reader, options, PropRetain, null))
+			{
+				continue;
+			}
+
+			if (propSnapshotDocCount.TryReadProperty(ref reader, options, PropSnapshotDocCount, null))
+			{
+				continue;
+			}
+
+			if (propSnapshotId.TryReadProperty(ref reader, options, PropSnapshotId, null))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			JobId = propJobId.Value,
+			LatestRecordTimeStamp = propLatestRecordTimeStamp.Value,
+			LatestResultTimeStamp = propLatestResultTimeStamp.Value,
+			MinVersion = propMinVersion.Value,
+			ModelSizeStats = propModelSizeStats.Value,
+			Retain = propRetain.Value,
+			SnapshotDocCount = propSnapshotDocCount.Value,
+			SnapshotId = propSnapshotId.Value,
+			Timestamp = propTimestamp.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropLatestRecordTimeStamp, value.LatestRecordTimeStamp, null, null);
+		writer.WriteProperty(options, PropLatestResultTimeStamp, value.LatestResultTimeStamp, null, null);
+		writer.WriteProperty(options, PropMinVersion, value.MinVersion, null, null);
+		writer.WriteProperty(options, PropModelSizeStats, value.ModelSizeStats, null, null);
+		writer.WriteProperty(options, PropRetain, value.Retain, null, null);
+		writer.WriteProperty(options, PropSnapshotDocCount, value.SnapshotDocCount, null, null);
+		writer.WriteProperty(options, PropSnapshotId, value.SnapshotId, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotConverter))]
 public sealed partial class ModelSnapshot
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ModelSnapshot(string jobId, string minVersion, bool retain, long snapshotDocCount, string snapshotId, long timestamp)
+	{
+		JobId = jobId;
+		MinVersion = minVersion;
+		Retain = retain;
+		SnapshotDocCount = snapshotDocCount;
+		SnapshotId = snapshotId;
+		Timestamp = timestamp;
+	}
+#if NET7_0_OR_GREATER
+	public ModelSnapshot()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ModelSnapshot()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ModelSnapshot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// An optional description of the job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
-	public string? Description { get; init; }
+	public string? Description { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A numerical character string that uniquely identifies the job that the snapshot was created for.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("job_id")]
-	public string JobId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The timestamp of the latest processed record.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("latest_record_time_stamp")]
-	public int? LatestRecordTimeStamp { get; init; }
+	public int? LatestRecordTimeStamp { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The timestamp of the latest bucket result.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("latest_result_time_stamp")]
-	public int? LatestResultTimeStamp { get; init; }
+	public int? LatestResultTimeStamp { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The minimum version required to be able to restore the model snapshot.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_version")]
-	public string MinVersion { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string MinVersion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Summary information describing the model.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_size_stats")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats? ModelSizeStats { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats? ModelSizeStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, this snapshot will not be deleted during automatic cleanup of snapshots older than model_snapshot_retention_days. However, this snapshot will be deleted when the job is deleted. The default value is false.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("retain")]
-	public bool Retain { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Retain { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For internal use only.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("snapshot_doc_count")]
-	public long SnapshotDocCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SnapshotDocCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A numerical character string that uniquely identifies the model snapshot.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("snapshot_id")]
-	public string SnapshotId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string SnapshotId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The creation timestamp for the snapshot.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public long Timestamp { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Timestamp { get; set; }
 }

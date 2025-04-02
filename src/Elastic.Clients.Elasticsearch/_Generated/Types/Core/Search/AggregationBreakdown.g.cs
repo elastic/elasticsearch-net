@@ -17,40 +17,234 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class AggregationBreakdownConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBuildAggregation = System.Text.Json.JsonEncodedText.Encode("build_aggregation");
+	private static readonly System.Text.Json.JsonEncodedText PropBuildAggregationCount = System.Text.Json.JsonEncodedText.Encode("build_aggregation_count");
+	private static readonly System.Text.Json.JsonEncodedText PropBuildLeafCollector = System.Text.Json.JsonEncodedText.Encode("build_leaf_collector");
+	private static readonly System.Text.Json.JsonEncodedText PropBuildLeafCollectorCount = System.Text.Json.JsonEncodedText.Encode("build_leaf_collector_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCollect = System.Text.Json.JsonEncodedText.Encode("collect");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectCount = System.Text.Json.JsonEncodedText.Encode("collect_count");
+	private static readonly System.Text.Json.JsonEncodedText PropInitialize = System.Text.Json.JsonEncodedText.Encode("initialize");
+	private static readonly System.Text.Json.JsonEncodedText PropInitializeCount = System.Text.Json.JsonEncodedText.Encode("initialize_count");
+	private static readonly System.Text.Json.JsonEncodedText PropPostCollection = System.Text.Json.JsonEncodedText.Encode("post_collection");
+	private static readonly System.Text.Json.JsonEncodedText PropPostCollectionCount = System.Text.Json.JsonEncodedText.Encode("post_collection_count");
+	private static readonly System.Text.Json.JsonEncodedText PropReduce = System.Text.Json.JsonEncodedText.Encode("reduce");
+	private static readonly System.Text.Json.JsonEncodedText PropReduceCount = System.Text.Json.JsonEncodedText.Encode("reduce_count");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propBuildAggregation = default;
+		LocalJsonValue<long> propBuildAggregationCount = default;
+		LocalJsonValue<long> propBuildLeafCollector = default;
+		LocalJsonValue<long> propBuildLeafCollectorCount = default;
+		LocalJsonValue<long> propCollect = default;
+		LocalJsonValue<long> propCollectCount = default;
+		LocalJsonValue<long> propInitialize = default;
+		LocalJsonValue<long> propInitializeCount = default;
+		LocalJsonValue<long?> propPostCollection = default;
+		LocalJsonValue<long?> propPostCollectionCount = default;
+		LocalJsonValue<long> propReduce = default;
+		LocalJsonValue<long> propReduceCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBuildAggregation.TryReadProperty(ref reader, options, PropBuildAggregation, null))
+			{
+				continue;
+			}
+
+			if (propBuildAggregationCount.TryReadProperty(ref reader, options, PropBuildAggregationCount, null))
+			{
+				continue;
+			}
+
+			if (propBuildLeafCollector.TryReadProperty(ref reader, options, PropBuildLeafCollector, null))
+			{
+				continue;
+			}
+
+			if (propBuildLeafCollectorCount.TryReadProperty(ref reader, options, PropBuildLeafCollectorCount, null))
+			{
+				continue;
+			}
+
+			if (propCollect.TryReadProperty(ref reader, options, PropCollect, null))
+			{
+				continue;
+			}
+
+			if (propCollectCount.TryReadProperty(ref reader, options, PropCollectCount, null))
+			{
+				continue;
+			}
+
+			if (propInitialize.TryReadProperty(ref reader, options, PropInitialize, null))
+			{
+				continue;
+			}
+
+			if (propInitializeCount.TryReadProperty(ref reader, options, PropInitializeCount, null))
+			{
+				continue;
+			}
+
+			if (propPostCollection.TryReadProperty(ref reader, options, PropPostCollection, null))
+			{
+				continue;
+			}
+
+			if (propPostCollectionCount.TryReadProperty(ref reader, options, PropPostCollectionCount, null))
+			{
+				continue;
+			}
+
+			if (propReduce.TryReadProperty(ref reader, options, PropReduce, null))
+			{
+				continue;
+			}
+
+			if (propReduceCount.TryReadProperty(ref reader, options, PropReduceCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BuildAggregation = propBuildAggregation.Value,
+			BuildAggregationCount = propBuildAggregationCount.Value,
+			BuildLeafCollector = propBuildLeafCollector.Value,
+			BuildLeafCollectorCount = propBuildLeafCollectorCount.Value,
+			Collect = propCollect.Value,
+			CollectCount = propCollectCount.Value,
+			Initialize = propInitialize.Value,
+			InitializeCount = propInitializeCount.Value,
+			PostCollection = propPostCollection.Value,
+			PostCollectionCount = propPostCollectionCount.Value,
+			Reduce = propReduce.Value,
+			ReduceCount = propReduceCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBuildAggregation, value.BuildAggregation, null, null);
+		writer.WriteProperty(options, PropBuildAggregationCount, value.BuildAggregationCount, null, null);
+		writer.WriteProperty(options, PropBuildLeafCollector, value.BuildLeafCollector, null, null);
+		writer.WriteProperty(options, PropBuildLeafCollectorCount, value.BuildLeafCollectorCount, null, null);
+		writer.WriteProperty(options, PropCollect, value.Collect, null, null);
+		writer.WriteProperty(options, PropCollectCount, value.CollectCount, null, null);
+		writer.WriteProperty(options, PropInitialize, value.Initialize, null, null);
+		writer.WriteProperty(options, PropInitializeCount, value.InitializeCount, null, null);
+		writer.WriteProperty(options, PropPostCollection, value.PostCollection, null, null);
+		writer.WriteProperty(options, PropPostCollectionCount, value.PostCollectionCount, null, null);
+		writer.WriteProperty(options, PropReduce, value.Reduce, null, null);
+		writer.WriteProperty(options, PropReduceCount, value.ReduceCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdownConverter))]
 public sealed partial class AggregationBreakdown
 {
-	[JsonInclude, JsonPropertyName("build_aggregation")]
-	public long BuildAggregation { get; init; }
-	[JsonInclude, JsonPropertyName("build_aggregation_count")]
-	public long BuildAggregationCount { get; init; }
-	[JsonInclude, JsonPropertyName("build_leaf_collector")]
-	public long BuildLeafCollector { get; init; }
-	[JsonInclude, JsonPropertyName("build_leaf_collector_count")]
-	public long BuildLeafCollectorCount { get; init; }
-	[JsonInclude, JsonPropertyName("collect")]
-	public long Collect { get; init; }
-	[JsonInclude, JsonPropertyName("collect_count")]
-	public long CollectCount { get; init; }
-	[JsonInclude, JsonPropertyName("initialize")]
-	public long Initialize { get; init; }
-	[JsonInclude, JsonPropertyName("initialize_count")]
-	public long InitializeCount { get; init; }
-	[JsonInclude, JsonPropertyName("post_collection")]
-	public long? PostCollection { get; init; }
-	[JsonInclude, JsonPropertyName("post_collection_count")]
-	public long? PostCollectionCount { get; init; }
-	[JsonInclude, JsonPropertyName("reduce")]
-	public long Reduce { get; init; }
-	[JsonInclude, JsonPropertyName("reduce_count")]
-	public long ReduceCount { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AggregationBreakdown(long buildAggregation, long buildAggregationCount, long buildLeafCollector, long buildLeafCollectorCount, long collect, long collectCount, long initialize, long initializeCount, long reduce, long reduceCount)
+	{
+		BuildAggregation = buildAggregation;
+		BuildAggregationCount = buildAggregationCount;
+		BuildLeafCollector = buildLeafCollector;
+		BuildLeafCollectorCount = buildLeafCollectorCount;
+		Collect = collect;
+		CollectCount = collectCount;
+		Initialize = initialize;
+		InitializeCount = initializeCount;
+		Reduce = reduce;
+		ReduceCount = reduceCount;
+	}
+#if NET7_0_OR_GREATER
+	public AggregationBreakdown()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AggregationBreakdown()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AggregationBreakdown(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long BuildAggregation { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long BuildAggregationCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long BuildLeafCollector { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long BuildLeafCollectorCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Collect { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CollectCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Initialize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long InitializeCount { get; set; }
+	public long? PostCollection { get; set; }
+	public long? PostCollectionCount { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Reduce { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long ReduceCount { get; set; }
 }

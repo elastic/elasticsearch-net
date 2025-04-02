@@ -17,18 +17,96 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterFileSystemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailableInBytes = System.Text.Json.JsonEncodedText.Encode("available_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propAvailableInBytes = default;
+		LocalJsonValue<long> propFreeInBytes = default;
+		LocalJsonValue<long> propTotalInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailableInBytes.TryReadProperty(ref reader, options, PropAvailableInBytes, null))
+			{
+				continue;
+			}
+
+			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AvailableInBytes = propAvailableInBytes.Value,
+			FreeInBytes = propFreeInBytes.Value,
+			TotalInBytes = propTotalInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailableInBytes, value.AvailableInBytes, null, null);
+		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, null);
+		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystemConverter))]
 public sealed partial class ClusterFileSystem
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterFileSystem(long availableInBytes, long freeInBytes, long totalInBytes)
+	{
+		AvailableInBytes = availableInBytes;
+		FreeInBytes = freeInBytes;
+		TotalInBytes = totalInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterFileSystem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterFileSystem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterFileSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Total number of bytes available to JVM in file stores across all selected nodes.
@@ -36,22 +114,31 @@ public sealed partial class ClusterFileSystem
 	/// This is the actual amount of free disk space the selected Elasticsearch nodes can use.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("available_in_bytes")]
-	public long AvailableInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long AvailableInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of unallocated bytes in file stores across all selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("free_in_bytes")]
-	public long FreeInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FreeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size, in bytes, of all file stores across all selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_in_bytes")]
-	public long TotalInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalInBytes { get; set; }
 }

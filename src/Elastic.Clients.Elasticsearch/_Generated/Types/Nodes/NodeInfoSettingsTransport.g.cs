@@ -17,22 +17,99 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeInfoSettingsTransportConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropTypeDefault = System.Text.Json.JsonEncodedText.Encode("type.default");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures?> propFeatures = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType> propType = default;
+		LocalJsonValue<string?> propTypeDefault = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatures.TryReadProperty(ref reader, options, PropFeatures, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (propTypeDefault.TryReadProperty(ref reader, options, PropTypeDefault, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Features = propFeatures.Value,
+			Type = propType.Value,
+			TypeDefault = propTypeDefault.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatures, value.Features, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropTypeDefault, value.TypeDefault, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportConverter))]
 public sealed partial class NodeInfoSettingsTransport
 {
-	[JsonInclude, JsonPropertyName("features")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures? Features { get; init; }
-	[JsonInclude, JsonPropertyName("type")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType Type { get; init; }
-	[JsonInclude, JsonPropertyName("type.default")]
-	public string? TypeDefault { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeInfoSettingsTransport(Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType type)
+	{
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public NodeInfoSettingsTransport()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeInfoSettingsTransport()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeInfoSettingsTransport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures? Features { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType Type { get; set; }
+	public string? TypeDefault { get; set; }
 }

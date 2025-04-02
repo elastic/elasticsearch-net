@@ -17,24 +17,174 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+internal sealed partial class ActionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllocate = System.Text.Json.JsonEncodedText.Encode("allocate");
+	private static readonly System.Text.Json.JsonEncodedText PropDelete = System.Text.Json.JsonEncodedText.Encode("delete");
+	private static readonly System.Text.Json.JsonEncodedText PropDownsample = System.Text.Json.JsonEncodedText.Encode("downsample");
+	private static readonly System.Text.Json.JsonEncodedText PropForcemerge = System.Text.Json.JsonEncodedText.Encode("forcemerge");
+	private static readonly System.Text.Json.JsonEncodedText PropMigrate = System.Text.Json.JsonEncodedText.Encode("migrate");
+	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly");
+	private static readonly System.Text.Json.JsonEncodedText PropRollover = System.Text.Json.JsonEncodedText.Encode("rollover");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchableSnapshot = System.Text.Json.JsonEncodedText.Encode("searchable_snapshot");
+	private static readonly System.Text.Json.JsonEncodedText PropSetPriority = System.Text.Json.JsonEncodedText.Encode("set_priority");
+	private static readonly System.Text.Json.JsonEncodedText PropShrink = System.Text.Json.JsonEncodedText.Encode("shrink");
+	private static readonly System.Text.Json.JsonEncodedText PropUnfollow = System.Text.Json.JsonEncodedText.Encode("unfollow");
+	private static readonly System.Text.Json.JsonEncodedText PropWaitForSnapshot = System.Text.Json.JsonEncodedText.Encode("wait_for_snapshot");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction?> propAllocate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction?> propDelete = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction?> propDownsample = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction?> propForcemerge = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction?> propMigrate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.EmptyObject?> propReadonly = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction?> propRollover = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction?> propSearchableSnapshot = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction?> propSetPriority = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction?> propShrink = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.EmptyObject?> propUnfollow = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction?> propWaitForSnapshot = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllocate.TryReadProperty(ref reader, options, PropAllocate, null))
+			{
+				continue;
+			}
+
+			if (propDelete.TryReadProperty(ref reader, options, PropDelete, null))
+			{
+				continue;
+			}
+
+			if (propDownsample.TryReadProperty(ref reader, options, PropDownsample, null))
+			{
+				continue;
+			}
+
+			if (propForcemerge.TryReadProperty(ref reader, options, PropForcemerge, null))
+			{
+				continue;
+			}
+
+			if (propMigrate.TryReadProperty(ref reader, options, PropMigrate, null))
+			{
+				continue;
+			}
+
+			if (propReadonly.TryReadProperty(ref reader, options, PropReadonly, null))
+			{
+				continue;
+			}
+
+			if (propRollover.TryReadProperty(ref reader, options, PropRollover, null))
+			{
+				continue;
+			}
+
+			if (propSearchableSnapshot.TryReadProperty(ref reader, options, PropSearchableSnapshot, null))
+			{
+				continue;
+			}
+
+			if (propSetPriority.TryReadProperty(ref reader, options, PropSetPriority, null))
+			{
+				continue;
+			}
+
+			if (propShrink.TryReadProperty(ref reader, options, PropShrink, null))
+			{
+				continue;
+			}
+
+			if (propUnfollow.TryReadProperty(ref reader, options, PropUnfollow, null))
+			{
+				continue;
+			}
+
+			if (propWaitForSnapshot.TryReadProperty(ref reader, options, PropWaitForSnapshot, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Allocate = propAllocate.Value,
+			Delete = propDelete.Value,
+			Downsample = propDownsample.Value,
+			Forcemerge = propForcemerge.Value,
+			Migrate = propMigrate.Value,
+			Readonly = propReadonly.Value,
+			Rollover = propRollover.Value,
+			SearchableSnapshot = propSearchableSnapshot.Value,
+			SetPriority = propSetPriority.Value,
+			Shrink = propShrink.Value,
+			Unfollow = propUnfollow.Value,
+			WaitForSnapshot = propWaitForSnapshot.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllocate, value.Allocate, null, null);
+		writer.WriteProperty(options, PropDelete, value.Delete, null, null);
+		writer.WriteProperty(options, PropDownsample, value.Downsample, null, null);
+		writer.WriteProperty(options, PropForcemerge, value.Forcemerge, null, null);
+		writer.WriteProperty(options, PropMigrate, value.Migrate, null, null);
+		writer.WriteProperty(options, PropReadonly, value.Readonly, null, null);
+		writer.WriteProperty(options, PropRollover, value.Rollover, null, null);
+		writer.WriteProperty(options, PropSearchableSnapshot, value.SearchableSnapshot, null, null);
+		writer.WriteProperty(options, PropSetPriority, value.SetPriority, null, null);
+		writer.WriteProperty(options, PropShrink, value.Shrink, null, null);
+		writer.WriteProperty(options, PropUnfollow, value.Unfollow, null, null);
+		writer.WriteProperty(options, PropWaitForSnapshot, value.WaitForSnapshot, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsConverter))]
 public sealed partial class Actions
 {
+#if NET7_0_OR_GREATER
+	public Actions()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Actions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Actions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Phases allowed: warm, cold.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allocate")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction? Allocate { get; set; }
 
 	/// <summary>
@@ -42,7 +192,6 @@ public sealed partial class Actions
 	/// Phases allowed: delete.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("delete")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction? Delete { get; set; }
 
 	/// <summary>
@@ -50,7 +199,6 @@ public sealed partial class Actions
 	/// Phases allowed: hot, warm, cold.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("downsample")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction? Downsample { get; set; }
 
 	/// <summary>
@@ -58,7 +206,6 @@ public sealed partial class Actions
 	/// Phases allowed: hot, warm.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("forcemerge")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction? Forcemerge { get; set; }
 
 	/// <summary>
@@ -66,7 +213,6 @@ public sealed partial class Actions
 	/// Phases allowed: warm, cold.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("migrate")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction? Migrate { get; set; }
 
 	/// <summary>
@@ -74,7 +220,6 @@ public sealed partial class Actions
 	/// Phases allowed: hot, warm, cold.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("readonly")]
 	public Elastic.Clients.Elasticsearch.EmptyObject? Readonly { get; set; }
 
 	/// <summary>
@@ -82,7 +227,6 @@ public sealed partial class Actions
 	/// Phases allowed: hot.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rollover")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction? Rollover { get; set; }
 
 	/// <summary>
@@ -90,7 +234,6 @@ public sealed partial class Actions
 	/// Phases allowed: hot, cold, frozen.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("searchable_snapshot")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction? SearchableSnapshot { get; set; }
 
 	/// <summary>
@@ -98,7 +241,6 @@ public sealed partial class Actions
 	/// Phases allowed: hot, warm, cold.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("set_priority")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction? SetPriority { get; set; }
 
 	/// <summary>
@@ -106,7 +248,6 @@ public sealed partial class Actions
 	/// Phases allowed: hot, warm.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shrink")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction? Shrink { get; set; }
 
 	/// <summary>
@@ -114,7 +255,6 @@ public sealed partial class Actions
 	/// Phases allowed: hot, warm, cold, frozen.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unfollow")]
 	public Elastic.Clients.Elasticsearch.EmptyObject? Unfollow { get; set; }
 
 	/// <summary>
@@ -122,82 +262,59 @@ public sealed partial class Actions
 	/// Phases allowed: delete.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("wait_for_snapshot")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction? WaitForSnapshot { get; set; }
 }
 
-public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDescriptor>
+public readonly partial struct ActionsDescriptor
 {
-	internal ActionsDescriptor(Action<ActionsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions Instance { get; init; }
 
-	public ActionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ActionsDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction? AllocateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor AllocateDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor> AllocateDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction? DeleteValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor DeleteDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor> DeleteDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction? DownsampleValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor DownsampleDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor> DownsampleDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction? ForcemergeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor ForcemergeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor> ForcemergeDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction? MigrateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor MigrateDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor> MigrateDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.EmptyObject? ReadonlyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.EmptyObjectDescriptor ReadonlyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor> ReadonlyDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction? RolloverValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor RolloverDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor> RolloverDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction? SearchableSnapshotValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor SearchableSnapshotDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor> SearchableSnapshotDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction? SetPriorityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor SetPriorityDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor> SetPriorityDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction? ShrinkValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor ShrinkDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor> ShrinkDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.EmptyObject? UnfollowValue { get; set; }
-	private Elastic.Clients.Elasticsearch.EmptyObjectDescriptor UnfollowDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor> UnfollowDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction? WaitForSnapshotValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor WaitForSnapshotDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor> WaitForSnapshotDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ActionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Phases allowed: warm, cold.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor Allocate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction? allocate)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Allocate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction? value)
 	{
-		AllocateDescriptor = null;
-		AllocateDescriptorAction = null;
-		AllocateValue = allocate;
-		return Self;
+		Instance.Allocate = value;
+		return this;
 	}
 
-	public ActionsDescriptor Allocate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Allocate()
 	{
-		AllocateValue = null;
-		AllocateDescriptorAction = null;
-		AllocateDescriptor = descriptor;
-		return Self;
+		Instance.Allocate = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor.Build(null);
+		return this;
 	}
 
-	public ActionsDescriptor Allocate(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Allocate(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor>? action)
 	{
-		AllocateValue = null;
-		AllocateDescriptor = null;
-		AllocateDescriptorAction = configure;
-		return Self;
+		Instance.Allocate = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -205,28 +322,32 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: delete.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor Delete(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction? delete)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Delete(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction? value)
 	{
-		DeleteDescriptor = null;
-		DeleteDescriptorAction = null;
-		DeleteValue = delete;
-		return Self;
+		Instance.Delete = value;
+		return this;
 	}
 
-	public ActionsDescriptor Delete(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: delete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Delete()
 	{
-		DeleteValue = null;
-		DeleteDescriptorAction = null;
-		DeleteDescriptor = descriptor;
-		return Self;
+		Instance.Delete = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor.Build(null);
+		return this;
 	}
 
-	public ActionsDescriptor Delete(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: delete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Delete(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor>? action)
 	{
-		DeleteValue = null;
-		DeleteDescriptor = null;
-		DeleteDescriptorAction = configure;
-		return Self;
+		Instance.Delete = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -234,28 +355,21 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: hot, warm, cold.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor Downsample(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction? downsample)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Downsample(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction? value)
 	{
-		DownsampleDescriptor = null;
-		DownsampleDescriptorAction = null;
-		DownsampleValue = downsample;
-		return Self;
+		Instance.Downsample = value;
+		return this;
 	}
 
-	public ActionsDescriptor Downsample(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Downsample(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor> action)
 	{
-		DownsampleValue = null;
-		DownsampleDescriptorAction = null;
-		DownsampleDescriptor = descriptor;
-		return Self;
-	}
-
-	public ActionsDescriptor Downsample(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor> configure)
-	{
-		DownsampleValue = null;
-		DownsampleDescriptor = null;
-		DownsampleDescriptorAction = configure;
-		return Self;
+		Instance.Downsample = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -263,28 +377,21 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: hot, warm.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor Forcemerge(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction? forcemerge)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Forcemerge(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction? value)
 	{
-		ForcemergeDescriptor = null;
-		ForcemergeDescriptorAction = null;
-		ForcemergeValue = forcemerge;
-		return Self;
+		Instance.Forcemerge = value;
+		return this;
 	}
 
-	public ActionsDescriptor Forcemerge(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Forcemerge(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor> action)
 	{
-		ForcemergeValue = null;
-		ForcemergeDescriptorAction = null;
-		ForcemergeDescriptor = descriptor;
-		return Self;
-	}
-
-	public ActionsDescriptor Forcemerge(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor> configure)
-	{
-		ForcemergeValue = null;
-		ForcemergeDescriptor = null;
-		ForcemergeDescriptorAction = configure;
-		return Self;
+		Instance.Forcemerge = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -292,28 +399,32 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: warm, cold.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor Migrate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction? migrate)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Migrate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction? value)
 	{
-		MigrateDescriptor = null;
-		MigrateDescriptorAction = null;
-		MigrateValue = migrate;
-		return Self;
+		Instance.Migrate = value;
+		return this;
 	}
 
-	public ActionsDescriptor Migrate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Migrate()
 	{
-		MigrateValue = null;
-		MigrateDescriptorAction = null;
-		MigrateDescriptor = descriptor;
-		return Self;
+		Instance.Migrate = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor.Build(null);
+		return this;
 	}
 
-	public ActionsDescriptor Migrate(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: warm, cold.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Migrate(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor>? action)
 	{
-		MigrateValue = null;
-		MigrateDescriptor = null;
-		MigrateDescriptorAction = configure;
-		return Self;
+		Instance.Migrate = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -321,28 +432,32 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: hot, warm, cold.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor Readonly(Elastic.Clients.Elasticsearch.EmptyObject? value)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Readonly(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
-		ReadonlyDescriptor = null;
-		ReadonlyDescriptorAction = null;
-		ReadonlyValue = value;
-		return Self;
+		Instance.Readonly = value;
+		return this;
 	}
 
-	public ActionsDescriptor Readonly(Elastic.Clients.Elasticsearch.EmptyObjectDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Readonly()
 	{
-		ReadonlyValue = null;
-		ReadonlyDescriptorAction = null;
-		ReadonlyDescriptor = descriptor;
-		return Self;
+		Instance.Readonly = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
+		return this;
 	}
 
-	public ActionsDescriptor Readonly(Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Readonly(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
 	{
-		ReadonlyValue = null;
-		ReadonlyDescriptor = null;
-		ReadonlyDescriptorAction = configure;
-		return Self;
+		Instance.Readonly = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -350,28 +465,32 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: hot.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor Rollover(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction? rollover)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Rollover(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction? value)
 	{
-		RolloverDescriptor = null;
-		RolloverDescriptorAction = null;
-		RolloverValue = rollover;
-		return Self;
+		Instance.Rollover = value;
+		return this;
 	}
 
-	public ActionsDescriptor Rollover(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Rollover()
 	{
-		RolloverValue = null;
-		RolloverDescriptorAction = null;
-		RolloverDescriptor = descriptor;
-		return Self;
+		Instance.Rollover = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor.Build(null);
+		return this;
 	}
 
-	public ActionsDescriptor Rollover(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Rollover(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor>? action)
 	{
-		RolloverValue = null;
-		RolloverDescriptor = null;
-		RolloverDescriptorAction = configure;
-		return Self;
+		Instance.Rollover = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -379,28 +498,21 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: hot, cold, frozen.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor SearchableSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction? searchableSnapshot)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SearchableSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction? value)
 	{
-		SearchableSnapshotDescriptor = null;
-		SearchableSnapshotDescriptorAction = null;
-		SearchableSnapshotValue = searchableSnapshot;
-		return Self;
+		Instance.SearchableSnapshot = value;
+		return this;
 	}
 
-	public ActionsDescriptor SearchableSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, cold, frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SearchableSnapshot(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor> action)
 	{
-		SearchableSnapshotValue = null;
-		SearchableSnapshotDescriptorAction = null;
-		SearchableSnapshotDescriptor = descriptor;
-		return Self;
-	}
-
-	public ActionsDescriptor SearchableSnapshot(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor> configure)
-	{
-		SearchableSnapshotValue = null;
-		SearchableSnapshotDescriptor = null;
-		SearchableSnapshotDescriptorAction = configure;
-		return Self;
+		Instance.SearchableSnapshot = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -408,28 +520,32 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: hot, warm, cold.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor SetPriority(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction? setPriority)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SetPriority(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction? value)
 	{
-		SetPriorityDescriptor = null;
-		SetPriorityDescriptorAction = null;
-		SetPriorityValue = setPriority;
-		return Self;
+		Instance.SetPriority = value;
+		return this;
 	}
 
-	public ActionsDescriptor SetPriority(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SetPriority()
 	{
-		SetPriorityValue = null;
-		SetPriorityDescriptorAction = null;
-		SetPriorityDescriptor = descriptor;
-		return Self;
+		Instance.SetPriority = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor.Build(null);
+		return this;
 	}
 
-	public ActionsDescriptor SetPriority(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm, cold.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SetPriority(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor>? action)
 	{
-		SetPriorityValue = null;
-		SetPriorityDescriptor = null;
-		SetPriorityDescriptorAction = configure;
-		return Self;
+		Instance.SetPriority = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -437,28 +553,32 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: hot, warm.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor Shrink(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction? shrink)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Shrink(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction? value)
 	{
-		ShrinkDescriptor = null;
-		ShrinkDescriptorAction = null;
-		ShrinkValue = shrink;
-		return Self;
+		Instance.Shrink = value;
+		return this;
 	}
 
-	public ActionsDescriptor Shrink(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Shrink()
 	{
-		ShrinkValue = null;
-		ShrinkDescriptorAction = null;
-		ShrinkDescriptor = descriptor;
-		return Self;
+		Instance.Shrink = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor.Build(null);
+		return this;
 	}
 
-	public ActionsDescriptor Shrink(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Shrink(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor>? action)
 	{
-		ShrinkValue = null;
-		ShrinkDescriptor = null;
-		ShrinkDescriptorAction = configure;
-		return Self;
+		Instance.Shrink = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -466,28 +586,32 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: hot, warm, cold, frozen.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor Unfollow(Elastic.Clients.Elasticsearch.EmptyObject? unfollow)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Unfollow(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
-		UnfollowDescriptor = null;
-		UnfollowDescriptorAction = null;
-		UnfollowValue = unfollow;
-		return Self;
+		Instance.Unfollow = value;
+		return this;
 	}
 
-	public ActionsDescriptor Unfollow(Elastic.Clients.Elasticsearch.EmptyObjectDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm, cold, frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Unfollow()
 	{
-		UnfollowValue = null;
-		UnfollowDescriptorAction = null;
-		UnfollowDescriptor = descriptor;
-		return Self;
+		Instance.Unfollow = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
+		return this;
 	}
 
-	public ActionsDescriptor Unfollow(Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: hot, warm, cold, frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Unfollow(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
 	{
-		UnfollowValue = null;
-		UnfollowDescriptor = null;
-		UnfollowDescriptorAction = configure;
-		return Self;
+		Instance.Unfollow = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -495,225 +619,33 @@ public sealed partial class ActionsDescriptor : SerializableDescriptor<ActionsDe
 	/// Phases allowed: delete.
 	/// </para>
 	/// </summary>
-	public ActionsDescriptor WaitForSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction? waitForSnapshot)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor WaitForSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction? value)
 	{
-		WaitForSnapshotDescriptor = null;
-		WaitForSnapshotDescriptorAction = null;
-		WaitForSnapshotValue = waitForSnapshot;
-		return Self;
+		Instance.WaitForSnapshot = value;
+		return this;
 	}
 
-	public ActionsDescriptor WaitForSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Phases allowed: delete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor WaitForSnapshot(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor> action)
 	{
-		WaitForSnapshotValue = null;
-		WaitForSnapshotDescriptorAction = null;
-		WaitForSnapshotDescriptor = descriptor;
-		return Self;
+		Instance.WaitForSnapshot = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor.Build(action);
+		return this;
 	}
 
-	public ActionsDescriptor WaitForSnapshot(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor>? action)
 	{
-		WaitForSnapshotValue = null;
-		WaitForSnapshotDescriptor = null;
-		WaitForSnapshotDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AllocateDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("allocate");
-			JsonSerializer.Serialize(writer, AllocateDescriptor, options);
-		}
-		else if (AllocateDescriptorAction is not null)
-		{
-			writer.WritePropertyName("allocate");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor(AllocateDescriptorAction), options);
-		}
-		else if (AllocateValue is not null)
-		{
-			writer.WritePropertyName("allocate");
-			JsonSerializer.Serialize(writer, AllocateValue, options);
+			return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DeleteDescriptor is not null)
-		{
-			writer.WritePropertyName("delete");
-			JsonSerializer.Serialize(writer, DeleteDescriptor, options);
-		}
-		else if (DeleteDescriptorAction is not null)
-		{
-			writer.WritePropertyName("delete");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor(DeleteDescriptorAction), options);
-		}
-		else if (DeleteValue is not null)
-		{
-			writer.WritePropertyName("delete");
-			JsonSerializer.Serialize(writer, DeleteValue, options);
-		}
-
-		if (DownsampleDescriptor is not null)
-		{
-			writer.WritePropertyName("downsample");
-			JsonSerializer.Serialize(writer, DownsampleDescriptor, options);
-		}
-		else if (DownsampleDescriptorAction is not null)
-		{
-			writer.WritePropertyName("downsample");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor(DownsampleDescriptorAction), options);
-		}
-		else if (DownsampleValue is not null)
-		{
-			writer.WritePropertyName("downsample");
-			JsonSerializer.Serialize(writer, DownsampleValue, options);
-		}
-
-		if (ForcemergeDescriptor is not null)
-		{
-			writer.WritePropertyName("forcemerge");
-			JsonSerializer.Serialize(writer, ForcemergeDescriptor, options);
-		}
-		else if (ForcemergeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("forcemerge");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor(ForcemergeDescriptorAction), options);
-		}
-		else if (ForcemergeValue is not null)
-		{
-			writer.WritePropertyName("forcemerge");
-			JsonSerializer.Serialize(writer, ForcemergeValue, options);
-		}
-
-		if (MigrateDescriptor is not null)
-		{
-			writer.WritePropertyName("migrate");
-			JsonSerializer.Serialize(writer, MigrateDescriptor, options);
-		}
-		else if (MigrateDescriptorAction is not null)
-		{
-			writer.WritePropertyName("migrate");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor(MigrateDescriptorAction), options);
-		}
-		else if (MigrateValue is not null)
-		{
-			writer.WritePropertyName("migrate");
-			JsonSerializer.Serialize(writer, MigrateValue, options);
-		}
-
-		if (ReadonlyDescriptor is not null)
-		{
-			writer.WritePropertyName("readonly");
-			JsonSerializer.Serialize(writer, ReadonlyDescriptor, options);
-		}
-		else if (ReadonlyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("readonly");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.EmptyObjectDescriptor(ReadonlyDescriptorAction), options);
-		}
-		else if (ReadonlyValue is not null)
-		{
-			writer.WritePropertyName("readonly");
-			JsonSerializer.Serialize(writer, ReadonlyValue, options);
-		}
-
-		if (RolloverDescriptor is not null)
-		{
-			writer.WritePropertyName("rollover");
-			JsonSerializer.Serialize(writer, RolloverDescriptor, options);
-		}
-		else if (RolloverDescriptorAction is not null)
-		{
-			writer.WritePropertyName("rollover");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor(RolloverDescriptorAction), options);
-		}
-		else if (RolloverValue is not null)
-		{
-			writer.WritePropertyName("rollover");
-			JsonSerializer.Serialize(writer, RolloverValue, options);
-		}
-
-		if (SearchableSnapshotDescriptor is not null)
-		{
-			writer.WritePropertyName("searchable_snapshot");
-			JsonSerializer.Serialize(writer, SearchableSnapshotDescriptor, options);
-		}
-		else if (SearchableSnapshotDescriptorAction is not null)
-		{
-			writer.WritePropertyName("searchable_snapshot");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor(SearchableSnapshotDescriptorAction), options);
-		}
-		else if (SearchableSnapshotValue is not null)
-		{
-			writer.WritePropertyName("searchable_snapshot");
-			JsonSerializer.Serialize(writer, SearchableSnapshotValue, options);
-		}
-
-		if (SetPriorityDescriptor is not null)
-		{
-			writer.WritePropertyName("set_priority");
-			JsonSerializer.Serialize(writer, SetPriorityDescriptor, options);
-		}
-		else if (SetPriorityDescriptorAction is not null)
-		{
-			writer.WritePropertyName("set_priority");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor(SetPriorityDescriptorAction), options);
-		}
-		else if (SetPriorityValue is not null)
-		{
-			writer.WritePropertyName("set_priority");
-			JsonSerializer.Serialize(writer, SetPriorityValue, options);
-		}
-
-		if (ShrinkDescriptor is not null)
-		{
-			writer.WritePropertyName("shrink");
-			JsonSerializer.Serialize(writer, ShrinkDescriptor, options);
-		}
-		else if (ShrinkDescriptorAction is not null)
-		{
-			writer.WritePropertyName("shrink");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor(ShrinkDescriptorAction), options);
-		}
-		else if (ShrinkValue is not null)
-		{
-			writer.WritePropertyName("shrink");
-			JsonSerializer.Serialize(writer, ShrinkValue, options);
-		}
-
-		if (UnfollowDescriptor is not null)
-		{
-			writer.WritePropertyName("unfollow");
-			JsonSerializer.Serialize(writer, UnfollowDescriptor, options);
-		}
-		else if (UnfollowDescriptorAction is not null)
-		{
-			writer.WritePropertyName("unfollow");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.EmptyObjectDescriptor(UnfollowDescriptorAction), options);
-		}
-		else if (UnfollowValue is not null)
-		{
-			writer.WritePropertyName("unfollow");
-			JsonSerializer.Serialize(writer, UnfollowValue, options);
-		}
-
-		if (WaitForSnapshotDescriptor is not null)
-		{
-			writer.WritePropertyName("wait_for_snapshot");
-			JsonSerializer.Serialize(writer, WaitForSnapshotDescriptor, options);
-		}
-		else if (WaitForSnapshotDescriptorAction is not null)
-		{
-			writer.WritePropertyName("wait_for_snapshot");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor(WaitForSnapshotDescriptorAction), options);
-		}
-		else if (WaitForSnapshotValue is not null)
-		{
-			writer.WritePropertyName("wait_for_snapshot");
-			JsonSerializer.Serialize(writer, WaitForSnapshotValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

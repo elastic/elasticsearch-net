@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class QueryApiKeysRequestParameters : RequestParameters
+public sealed partial class QueryApiKeysRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -57,98 +50,87 @@ public sealed partial class QueryApiKeysRequestParameters : RequestParameters
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
-internal sealed partial class QueryApiKeysRequestConverter : JsonConverter<QueryApiKeysRequest>
+internal sealed partial class QueryApiKeysRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest>
 {
-	public override QueryApiKeysRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+
+	public override Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new QueryApiKeysRequest();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>?> propAggregations = default;
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery?> propQuery = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>(o, null, null)) || propAggregations.TryReadProperty(ref reader, options, PropAggregations1, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>(o, null, null)))
 			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "search_after")
-				{
-					variant.SearchAfter = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.FieldValue>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "size")
-				{
-					variant.Size = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "sort")
-				{
-					variant.Sort = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryReadProperty(ref reader, options, PropSearchAfter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregations = propAggregations.Value,
+			From = propFrom.Value,
+			Query = propQuery.Value,
+			SearchAfter = propSearchAfter.Value,
+			Size = propSize.Value,
+			Sort = propSort.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, QueryApiKeysRequest value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.From.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(value.From.Value);
-		}
-
-		if (value.Query is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value.Query, options);
-		}
-
-		if (value.SearchAfter is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, value.SearchAfter, options);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		if (value.Sort is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, value.Sort, options);
-		}
-
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
 		writer.WriteEndObject();
 	}
 }
@@ -167,16 +149,28 @@ internal sealed partial class QueryApiKeysRequestConverter : JsonConverter<Query
 /// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 /// </para>
 /// </summary>
-[JsonConverter(typeof(QueryApiKeysRequestConverter))]
-public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestConverter))]
+public sealed partial class QueryApiKeysRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>
 {
+#if NET7_0_OR_GREATER
 	public QueryApiKeysRequest()
 	{
 	}
+#endif
+#if !NET7_0_OR_GREATER
+	public QueryApiKeysRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryApiKeys;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityQueryApiKeys;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -187,7 +181,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// Determines whether aggregation names are prefixed by their respective types in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
@@ -197,7 +190,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WithLimitedBy { get => Q<bool?>("with_limited_by"); set => Q("with_limited_by", value); }
 
 	/// <summary>
@@ -206,7 +198,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 
 	/// <summary>
@@ -218,8 +209,7 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// Additionally, aggregations only run over the same subset of fields that query works with.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggregations")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? Aggregations { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? Aggregations { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -229,7 +219,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
@@ -247,7 +236,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// Such a match query is hence equivalent to a <c>term</c> query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? Query { get; set; }
 
 	/// <summary>
@@ -255,8 +243,7 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// The search after definition.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_after")]
-	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -267,7 +254,6 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -277,9 +263,7 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
 /// <summary>
@@ -296,37 +280,59 @@ public sealed partial class QueryApiKeysRequest : PlainRequest<QueryApiKeysReque
 /// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 /// </para>
 /// </summary>
-public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDescriptor<QueryApiKeysRequestDescriptor<TDocument>, QueryApiKeysRequestParameters>
+public readonly partial struct QueryApiKeysRequestDescriptor
 {
-	internal QueryApiKeysRequestDescriptor(Action<QueryApiKeysRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryApiKeysRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public QueryApiKeysRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryApiKeys;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	/// <summary>
+	/// <para>
+	/// Determines whether aggregation names are prefixed by their respective types in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
 
-	internal override bool SupportsBody => true;
+	/// <summary>
+	/// <para>
+	/// Return the snapshot of the owner user's role descriptors associated with the API key.
+	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors (effectively limited by it).
+	/// An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor WithLimitedBy(bool? value = true)
+	{
+		Instance.WithLimitedBy = value;
+		return this;
+	}
 
-	internal override string OperationName => "security.query_api_keys";
-
-	public QueryApiKeysRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-	public QueryApiKeysRequestDescriptor<TDocument> WithLimitedBy(bool? withLimitedBy = true) => Qs("with_limited_by", withLimitedBy);
-	public QueryApiKeysRequestDescriptor<TDocument> WithProfileUid(bool? withProfileUid = true) => Qs("with_profile_uid", withProfileUid);
-
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>> AggregationsValue { get; set; }
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+	/// <summary>
+	/// <para>
+	/// Determines whether to also retrieve the profile UID for the API key owner principal.
+	/// If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor WithProfileUid(bool? value = true)
+	{
+		Instance.WithProfileUid = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -337,10 +343,76 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 	/// Additionally, aggregations only run over the same subset of fields that query works with.
 	/// </para>
 	/// </summary>
-	public QueryApiKeysRequestDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? value)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>>());
-		return Self;
+		Instance.Aggregations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Any aggregations to run over the corpus of returned API keys.
+	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
+	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
+	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
+	/// Additionally, aggregations only run over the same subset of fields that query works with.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations()
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Any aggregations to run over the corpus of returned API keys.
+	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
+	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
+	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
+	/// Additionally, aggregations only run over the same subset of fields that query works with.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Any aggregations to run over the corpus of returned API keys.
+	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
+	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
+	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
+	/// Additionally, aggregations only run over the same subset of fields that query works with.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<T>>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor AddAggregation(string key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor AddAggregation<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<T>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -351,10 +423,10 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryApiKeysRequestDescriptor<TDocument> From(int? from)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -372,248 +444,10 @@ public sealed partial class QueryApiKeysRequestDescriptor<TDocument> : RequestDe
 	/// Such a match query is hence equivalent to a <c>term</c> query.
 	/// </para>
 	/// </summary>
-	public QueryApiKeysRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? query)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
-	}
-
-	public QueryApiKeysRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> descriptor)
-	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public QueryApiKeysRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
-	public QueryApiKeysRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
-	{
-		SearchAfterValue = searchAfter;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// The <c>size</c> parameter can be set to <c>0</c>, in which case no API key matches are returned, only the aggregation results.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
-	public QueryApiKeysRequestDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public QueryApiKeysRequestDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
-	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
-	}
-
-	public QueryApiKeysRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public QueryApiKeysRequestDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public QueryApiKeysRequestDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Find API keys with a query.
-/// </para>
-/// <para>
-/// Get a paginated list of API keys and their information.
-/// You can optionally filter the results with a query.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
-/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-/// </para>
-/// </summary>
-public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<QueryApiKeysRequestDescriptor, QueryApiKeysRequestParameters>
-{
-	internal QueryApiKeysRequestDescriptor(Action<QueryApiKeysRequestDescriptor> configure) => configure.Invoke(this);
-
-	public QueryApiKeysRequestDescriptor()
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryApiKeys;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.query_api_keys";
-
-	public QueryApiKeysRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-	public QueryApiKeysRequestDescriptor WithLimitedBy(bool? withLimitedBy = true) => Qs("with_limited_by", withLimitedBy);
-	public QueryApiKeysRequestDescriptor WithProfileUid(bool? withProfileUid = true) => Qs("with_profile_uid", withProfileUid);
-
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor> AggregationsValue { get; set; }
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Any aggregations to run over the corpus of returned API keys.
-	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
-	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
-	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
-	/// Additionally, aggregations only run over the same subset of fields that query works with.
-	/// </para>
-	/// </summary>
-	public QueryApiKeysRequestDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor>> selector)
-	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
-	public QueryApiKeysRequestDescriptor From(int? from)
-	{
-		FromValue = from;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
 	/// <summary>
@@ -631,28 +465,31 @@ public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<Qu
 	/// Such a match query is hence equivalent to a <c>term</c> query.
 	/// </para>
 	/// </summary>
-	public QueryApiKeysRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? query)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor> action)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor.Build(action);
+		return this;
 	}
 
-	public QueryApiKeysRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A query to filter which API keys to return.
+	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
+	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
+	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
+	/// Such a match query is hence equivalent to a <c>term</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public QueryApiKeysRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -660,10 +497,43 @@ public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<Qu
 	/// The search after definition.
 	/// </para>
 	/// </summary>
-	public QueryApiKeysRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SearchAfter()
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -675,10 +545,10 @@ public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<Qu
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryApiKeysRequestDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -688,114 +558,523 @@ public sealed partial class QueryApiKeysRequestDescriptor : RequestDescriptor<Qu
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	public QueryApiKeysRequestDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public QueryApiKeysRequestDescriptor Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort()
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
+		return this;
 	}
 
-	public QueryApiKeysRequestDescriptor Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
+		return this;
 	}
 
-	public QueryApiKeysRequestDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
 		}
 
-		if (FromValue.HasValue)
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
 		}
 
-		if (QueryDescriptor is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SearchAfterValue is not null)
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}
+
+/// <summary>
+/// <para>
+/// Find API keys with a query.
+/// </para>
+/// <para>
+/// Get a paginated list of API keys and their information.
+/// You can optionally filter the results with a query.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
+/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
+/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
+/// </para>
+/// </summary>
+public readonly partial struct QueryApiKeysRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryApiKeysRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public QueryApiKeysRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Determines whether aggregation names are prefixed by their respective types in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Return the snapshot of the owner user's role descriptors associated with the API key.
+	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors (effectively limited by it).
+	/// An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> WithLimitedBy(bool? value = true)
+	{
+		Instance.WithLimitedBy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Determines whether to also retrieve the profile UID for the API key owner principal.
+	/// If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> WithProfileUid(bool? value = true)
+	{
+		Instance.WithProfileUid = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Any aggregations to run over the corpus of returned API keys.
+	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
+	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
+	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
+	/// Additionally, aggregations only run over the same subset of fields that query works with.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? value)
+	{
+		Instance.Aggregations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Any aggregations to run over the corpus of returned API keys.
+	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
+	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
+	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
+	/// Additionally, aggregations only run over the same subset of fields that query works with.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Aggregations()
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Any aggregations to run over the corpus of returned API keys.
+	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
+	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
+	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
+	/// Additionally, aggregations only run over the same subset of fields that query works with.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> AddAggregation(string key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The starting document offset.
+	/// It must not be negative.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A query to filter which API keys to return.
+	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
+	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
+	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
+	/// Such a match query is hence equivalent to a <c>term</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? value)
+	{
+		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A query to filter which API keys to return.
+	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
+	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
+	/// </para>
+	/// <para>
+	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
+	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
+	/// Such a match query is hence equivalent to a <c>term</c> query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	{
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SearchAfter()
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of hits to return.
+	/// It must not be negative.
+	/// The <c>size</c> parameter can be set to <c>0</c>, in which case no API key matches are returned, only the aggregation results.
+	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
+	{
+		Instance.Sort = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort()
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
+	{
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
 		}
 
-		if (SizeValue.HasValue)
+		Instance.Sort = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
+			return new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
-			}
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

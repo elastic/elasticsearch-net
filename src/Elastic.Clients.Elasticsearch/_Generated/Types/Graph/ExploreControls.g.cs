@@ -17,25 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+internal sealed partial class ExploreControlsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.ExploreControls>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropSampleDiversity = System.Text.Json.JsonEncodedText.Encode("sample_diversity");
+	private static readonly System.Text.Json.JsonEncodedText PropSampleSize = System.Text.Json.JsonEncodedText.Encode("sample_size");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropUseSignificance = System.Text.Json.JsonEncodedText.Encode("use_significance");
+
+	public override Elastic.Clients.Elasticsearch.Graph.ExploreControls Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Graph.SampleDiversity?> propSampleDiversity = default;
+		LocalJsonValue<int?> propSampleSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
+		LocalJsonValue<bool> propUseSignificance = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSampleDiversity.TryReadProperty(ref reader, options, PropSampleDiversity, null))
+			{
+				continue;
+			}
+
+			if (propSampleSize.TryReadProperty(ref reader, options, PropSampleSize, null))
+			{
+				continue;
+			}
+
+			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
+			{
+				continue;
+			}
+
+			if (propUseSignificance.TryReadProperty(ref reader, options, PropUseSignificance, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			SampleDiversity = propSampleDiversity.Value,
+			SampleSize = propSampleSize.Value,
+			Timeout = propTimeout.Value,
+			UseSignificance = propUseSignificance.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.ExploreControls value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSampleDiversity, value.SampleDiversity, null, null);
+		writer.WriteProperty(options, PropSampleSize, value.SampleSize, null, null);
+		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
+		writer.WriteProperty(options, PropUseSignificance, value.UseSignificance, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.ExploreControlsConverter))]
 public sealed partial class ExploreControls
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExploreControls(bool useSignificance)
+	{
+		UseSignificance = useSignificance;
+	}
+#if NET7_0_OR_GREATER
+	public ExploreControls()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ExploreControls()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ExploreControls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
 	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sample_diversity")]
 	public Elastic.Clients.Elasticsearch.Graph.SampleDiversity? SampleDiversity { get; set; }
 
 	/// <summary>
@@ -46,7 +130,6 @@ public sealed partial class ExploreControls
 	/// Very large sample sizes can dilute the quality of the results and increase execution times.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sample_size")]
 	public int? SampleSize { get; set; }
 
 	/// <summary>
@@ -56,7 +139,6 @@ public sealed partial class ExploreControls
 	/// Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 
 	/// <summary>
@@ -64,24 +146,31 @@ public sealed partial class ExploreControls
 	/// Filters associated terms so only those that are significantly associated with your query are included.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("use_significance")]
-	public bool UseSignificance { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool UseSignificance { get; set; }
 }
 
-public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableDescriptor<ExploreControlsDescriptor<TDocument>>
+public readonly partial struct ExploreControlsDescriptor<TDocument>
 {
-	internal ExploreControlsDescriptor(Action<ExploreControlsDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Graph.ExploreControls Instance { get; init; }
 
-	public ExploreControlsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExploreControlsDescriptor(Elastic.Clients.Elasticsearch.Graph.ExploreControls instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Graph.SampleDiversity? SampleDiversityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument> SampleDiversityDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>> SampleDiversityDescriptorAction { get; set; }
-	private int? SampleSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
-	private bool UseSignificanceValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExploreControlsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Graph.ExploreControls instance) => new Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -89,28 +178,22 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
 	/// </para>
 	/// </summary>
-	public ExploreControlsDescriptor<TDocument> SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversity? sampleDiversity)
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversity? value)
 	{
-		SampleDiversityDescriptor = null;
-		SampleDiversityDescriptorAction = null;
-		SampleDiversityValue = sampleDiversity;
-		return Self;
+		Instance.SampleDiversity = value;
+		return this;
 	}
 
-	public ExploreControlsDescriptor<TDocument> SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
+	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> SampleDiversity(System.Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>> action)
 	{
-		SampleDiversityValue = null;
-		SampleDiversityDescriptorAction = null;
-		SampleDiversityDescriptor = descriptor;
-		return Self;
-	}
-
-	public ExploreControlsDescriptor<TDocument> SampleDiversity(Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>> configure)
-	{
-		SampleDiversityValue = null;
-		SampleDiversityDescriptor = null;
-		SampleDiversityDescriptorAction = configure;
-		return Self;
+		Instance.SampleDiversity = Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -121,10 +204,10 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 	/// Very large sample sizes can dilute the quality of the results and increase execution times.
 	/// </para>
 	/// </summary>
-	public ExploreControlsDescriptor<TDocument> SampleSize(int? sampleSize)
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> SampleSize(int? value)
 	{
-		SampleSizeValue = sampleSize;
-		return Self;
+		Instance.SampleSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -134,10 +217,10 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 	/// Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.
 	/// </para>
 	/// </summary>
-	public ExploreControlsDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
 	/// <summary>
@@ -145,63 +228,39 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 	/// Filters associated terms so only those that are significantly associated with your query are included.
 	/// </para>
 	/// </summary>
-	public ExploreControlsDescriptor<TDocument> UseSignificance(bool useSignificance = true)
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> UseSignificance(bool value = true)
 	{
-		UseSignificanceValue = useSignificance;
-		return Self;
+		Instance.UseSignificance = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Graph.ExploreControls Build(System.Action<Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (SampleDiversityDescriptor is not null)
-		{
-			writer.WritePropertyName("sample_diversity");
-			JsonSerializer.Serialize(writer, SampleDiversityDescriptor, options);
-		}
-		else if (SampleDiversityDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sample_diversity");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>(SampleDiversityDescriptorAction), options);
-		}
-		else if (SampleDiversityValue is not null)
-		{
-			writer.WritePropertyName("sample_diversity");
-			JsonSerializer.Serialize(writer, SampleDiversityValue, options);
-		}
-
-		if (SampleSizeValue.HasValue)
-		{
-			writer.WritePropertyName("sample_size");
-			writer.WriteNumberValue(SampleSizeValue.Value);
-		}
-
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
-
-		writer.WritePropertyName("use_significance");
-		writer.WriteBooleanValue(UseSignificanceValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<ExploreControlsDescriptor>
+public readonly partial struct ExploreControlsDescriptor
 {
-	internal ExploreControlsDescriptor(Action<ExploreControlsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Graph.ExploreControls Instance { get; init; }
 
-	public ExploreControlsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExploreControlsDescriptor(Elastic.Clients.Elasticsearch.Graph.ExploreControls instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Graph.SampleDiversity? SampleDiversityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor SampleDiversityDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor> SampleDiversityDescriptorAction { get; set; }
-	private int? SampleSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
-	private bool UseSignificanceValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExploreControlsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor(Elastic.Clients.Elasticsearch.Graph.ExploreControls instance) => new Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -209,28 +268,34 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
 	/// </para>
 	/// </summary>
-	public ExploreControlsDescriptor SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversity? sampleDiversity)
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversity? value)
 	{
-		SampleDiversityDescriptor = null;
-		SampleDiversityDescriptorAction = null;
-		SampleDiversityValue = sampleDiversity;
-		return Self;
+		Instance.SampleDiversity = value;
+		return this;
 	}
 
-	public ExploreControlsDescriptor SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
+	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor SampleDiversity(System.Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor> action)
 	{
-		SampleDiversityValue = null;
-		SampleDiversityDescriptorAction = null;
-		SampleDiversityDescriptor = descriptor;
-		return Self;
+		Instance.SampleDiversity = Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor.Build(action);
+		return this;
 	}
 
-	public ExploreControlsDescriptor SampleDiversity(Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
+	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor SampleDiversity<T>(System.Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<T>> action)
 	{
-		SampleDiversityValue = null;
-		SampleDiversityDescriptor = null;
-		SampleDiversityDescriptorAction = configure;
-		return Self;
+		Instance.SampleDiversity = Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -241,10 +306,10 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 	/// Very large sample sizes can dilute the quality of the results and increase execution times.
 	/// </para>
 	/// </summary>
-	public ExploreControlsDescriptor SampleSize(int? sampleSize)
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor SampleSize(int? value)
 	{
-		SampleSizeValue = sampleSize;
-		return Self;
+		Instance.SampleSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -254,10 +319,10 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 	/// Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.
 	/// </para>
 	/// </summary>
-	public ExploreControlsDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout)
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimeoutValue = timeout;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
 	/// <summary>
@@ -265,45 +330,17 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 	/// Filters associated terms so only those that are significantly associated with your query are included.
 	/// </para>
 	/// </summary>
-	public ExploreControlsDescriptor UseSignificance(bool useSignificance = true)
+	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor UseSignificance(bool value = true)
 	{
-		UseSignificanceValue = useSignificance;
-		return Self;
+		Instance.UseSignificance = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Graph.ExploreControls Build(System.Action<Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (SampleDiversityDescriptor is not null)
-		{
-			writer.WritePropertyName("sample_diversity");
-			JsonSerializer.Serialize(writer, SampleDiversityDescriptor, options);
-		}
-		else if (SampleDiversityDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sample_diversity");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor(SampleDiversityDescriptorAction), options);
-		}
-		else if (SampleDiversityValue is not null)
-		{
-			writer.WritePropertyName("sample_diversity");
-			JsonSerializer.Serialize(writer, SampleDiversityValue, options);
-		}
-
-		if (SampleSizeValue.HasValue)
-		{
-			writer.WritePropertyName("sample_size");
-			writer.WriteNumberValue(SampleSizeValue.Value);
-		}
-
-		if (TimeoutValue is not null)
-		{
-			writer.WritePropertyName("timeout");
-			JsonSerializer.Serialize(writer, TimeoutValue, options);
-		}
-
-		writer.WritePropertyName("use_significance");
-		writer.WriteBooleanValue(UseSignificanceValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor(new Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,128 +17,177 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class SourceOnlyRepository : IRepository
+internal sealed partial class SourceOnlyRepositoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository>
 {
-	[JsonInclude, JsonPropertyName("settings")]
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Settings { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings> propSettings = default;
+		LocalJsonValue<string?> propUuid = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propUuid.TryReadProperty(ref reader, options, PropUuid, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Settings = propSettings.Value,
+			Uuid = propUuid.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryConverter))]
+public sealed partial class SourceOnlyRepository : Elastic.Clients.Elasticsearch.Snapshot.IRepository
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceOnlyRepository(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings settings)
+	{
+		Settings = settings;
+	}
+#if NET7_0_OR_GREATER
+	public SourceOnlyRepository()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SourceOnlyRepository()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SourceOnlyRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Settings { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The source-only repository type.
+	/// </para>
+	/// </summary>
 	public string Type => "source";
 
-	[JsonInclude, JsonPropertyName("uuid")]
 	public string? Uuid { get; set; }
 }
 
-public sealed partial class SourceOnlyRepositoryDescriptor : SerializableDescriptor<SourceOnlyRepositoryDescriptor>, IBuildableDescriptor<SourceOnlyRepository>
+public readonly partial struct SourceOnlyRepositoryDescriptor
 {
-	internal SourceOnlyRepositoryDescriptor(Action<SourceOnlyRepositoryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository Instance { get; init; }
 
-	public SourceOnlyRepositoryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceOnlyRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings SettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor> SettingsDescriptorAction { get; set; }
-	private string? UuidValue { get; set; }
-
-	public SourceOnlyRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings settings)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceOnlyRepositoryDescriptor()
 	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SourceOnlyRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository instance) => new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings value)
 	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	public SourceOnlyRepositoryDescriptor Settings(Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings()
 	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor.Build(null);
+		return this;
 	}
 
-	public SourceOnlyRepositoryDescriptor Uuid(string? uuid)
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor>? action)
 	{
-		UuidValue = uuid;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Uuid(string? value)
 	{
-		writer.WriteStartObject();
-		if (SettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-		}
-		else if (SettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor(SettingsDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("source");
-		if (!string.IsNullOrEmpty(UuidValue))
-		{
-			writer.WritePropertyName("uuid");
-			writer.WriteStringValue(UuidValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Uuid = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings BuildSettings()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor> action)
 	{
-		if (SettingsValue is not null)
-		{
-			return SettingsValue;
-		}
-
-		if ((object)SettingsDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (SettingsDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor(SettingsDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	SourceOnlyRepository IBuildableDescriptor<SourceOnlyRepository>.Build() => new()
-	{
-		Settings = BuildSettings(),
-		Uuid = UuidValue
-	};
 }

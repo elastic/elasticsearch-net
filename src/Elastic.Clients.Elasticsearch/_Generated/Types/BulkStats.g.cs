@@ -17,34 +17,179 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class BulkStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.BulkStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvgSize = System.Text.Json.JsonEncodedText.Encode("avg_size");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgSizeInBytes = System.Text.Json.JsonEncodedText.Encode("avg_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgTime = System.Text.Json.JsonEncodedText.Encode("avg_time");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgTimeInMillis = System.Text.Json.JsonEncodedText.Encode("avg_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalOperations = System.Text.Json.JsonEncodedText.Encode("total_operations");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+
+	public override Elastic.Clients.Elasticsearch.BulkStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propAvgSize = default;
+		LocalJsonValue<long> propAvgSizeInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propAvgTime = default;
+		LocalJsonValue<System.TimeSpan> propAvgTimeInMillis = default;
+		LocalJsonValue<long> propTotalOperations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalSize = default;
+		LocalJsonValue<long> propTotalSizeInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalTime = default;
+		LocalJsonValue<System.TimeSpan> propTotalTimeInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvgSize.TryReadProperty(ref reader, options, PropAvgSize, null))
+			{
+				continue;
+			}
+
+			if (propAvgSizeInBytes.TryReadProperty(ref reader, options, PropAvgSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propAvgTime.TryReadProperty(ref reader, options, PropAvgTime, null))
+			{
+				continue;
+			}
+
+			if (propAvgTimeInMillis.TryReadProperty(ref reader, options, PropAvgTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalOperations.TryReadProperty(ref reader, options, PropTotalOperations, null))
+			{
+				continue;
+			}
+
+			if (propTotalSize.TryReadProperty(ref reader, options, PropTotalSize, null))
+			{
+				continue;
+			}
+
+			if (propTotalSizeInBytes.TryReadProperty(ref reader, options, PropTotalSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalTime.TryReadProperty(ref reader, options, PropTotalTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalTimeInMillis.TryReadProperty(ref reader, options, PropTotalTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.BulkStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AvgSize = propAvgSize.Value,
+			AvgSizeInBytes = propAvgSizeInBytes.Value,
+			AvgTime = propAvgTime.Value,
+			AvgTimeInMillis = propAvgTimeInMillis.Value,
+			TotalOperations = propTotalOperations.Value,
+			TotalSize = propTotalSize.Value,
+			TotalSizeInBytes = propTotalSizeInBytes.Value,
+			TotalTime = propTotalTime.Value,
+			TotalTimeInMillis = propTotalTimeInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.BulkStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvgSize, value.AvgSize, null, null);
+		writer.WriteProperty(options, PropAvgSizeInBytes, value.AvgSizeInBytes, null, null);
+		writer.WriteProperty(options, PropAvgTime, value.AvgTime, null, null);
+		writer.WriteProperty(options, PropAvgTimeInMillis, value.AvgTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTotalOperations, value.TotalOperations, null, null);
+		writer.WriteProperty(options, PropTotalSize, value.TotalSize, null, null);
+		writer.WriteProperty(options, PropTotalSizeInBytes, value.TotalSizeInBytes, null, null);
+		writer.WriteProperty(options, PropTotalTime, value.TotalTime, null, null);
+		writer.WriteProperty(options, PropTotalTimeInMillis, value.TotalTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.BulkStatsConverter))]
 public sealed partial class BulkStats
 {
-	[JsonInclude, JsonPropertyName("avg_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? AvgSize { get; init; }
-	[JsonInclude, JsonPropertyName("avg_size_in_bytes")]
-	public long AvgSizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("avg_time")]
-	public Elastic.Clients.Elasticsearch.Duration? AvgTime { get; init; }
-	[JsonInclude, JsonPropertyName("avg_time_in_millis")]
-	public long AvgTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("total_operations")]
-	public long TotalOperations { get; init; }
-	[JsonInclude, JsonPropertyName("total_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; init; }
-	[JsonInclude, JsonPropertyName("total_size_in_bytes")]
-	public long TotalSizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("total_time")]
-	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
-	[JsonInclude, JsonPropertyName("total_time_in_millis")]
-	public long TotalTimeInMillis { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BulkStats(long avgSizeInBytes, System.TimeSpan avgTimeInMillis, long totalOperations, long totalSizeInBytes, System.TimeSpan totalTimeInMillis)
+	{
+		AvgSizeInBytes = avgSizeInBytes;
+		AvgTimeInMillis = avgTimeInMillis;
+		TotalOperations = totalOperations;
+		TotalSizeInBytes = totalSizeInBytes;
+		TotalTimeInMillis = totalTimeInMillis;
+	}
+#if NET7_0_OR_GREATER
+	public BulkStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public BulkStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BulkStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.ByteSize? AvgSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long AvgSizeInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? AvgTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan AvgTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalOperations { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalSizeInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalTimeInMillis { get; set; }
 }

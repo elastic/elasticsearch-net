@@ -17,71 +17,229 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeOperatingSystemInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllocatedProcessors = System.Text.Json.JsonEncodedText.Encode("allocated_processors");
+	private static readonly System.Text.Json.JsonEncodedText PropArch = System.Text.Json.JsonEncodedText.Encode("arch");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailableProcessors = System.Text.Json.JsonEncodedText.Encode("available_processors");
+	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropPrettyName = System.Text.Json.JsonEncodedText.Encode("pretty_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshIntervalInMillis = System.Text.Json.JsonEncodedText.Encode("refresh_interval_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropSwap = System.Text.Json.JsonEncodedText.Encode("swap");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propAllocatedProcessors = default;
+		LocalJsonValue<string> propArch = default;
+		LocalJsonValue<int> propAvailableProcessors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU?> propCpu = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory?> propMem = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<string> propPrettyName = default;
+		LocalJsonValue<System.TimeSpan> propRefreshIntervalInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory?> propSwap = default;
+		LocalJsonValue<string> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllocatedProcessors.TryReadProperty(ref reader, options, PropAllocatedProcessors, null))
+			{
+				continue;
+			}
+
+			if (propArch.TryReadProperty(ref reader, options, PropArch, null))
+			{
+				continue;
+			}
+
+			if (propAvailableProcessors.TryReadProperty(ref reader, options, PropAvailableProcessors, null))
+			{
+				continue;
+			}
+
+			if (propCpu.TryReadProperty(ref reader, options, PropCpu, null))
+			{
+				continue;
+			}
+
+			if (propMem.TryReadProperty(ref reader, options, PropMem, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propPrettyName.TryReadProperty(ref reader, options, PropPrettyName, null))
+			{
+				continue;
+			}
+
+			if (propRefreshIntervalInMillis.TryReadProperty(ref reader, options, PropRefreshIntervalInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propSwap.TryReadProperty(ref reader, options, PropSwap, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllocatedProcessors = propAllocatedProcessors.Value,
+			Arch = propArch.Value,
+			AvailableProcessors = propAvailableProcessors.Value,
+			Cpu = propCpu.Value,
+			Mem = propMem.Value,
+			Name = propName.Value,
+			PrettyName = propPrettyName.Value,
+			RefreshIntervalInMillis = propRefreshIntervalInMillis.Value,
+			Swap = propSwap.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllocatedProcessors, value.AllocatedProcessors, null, null);
+		writer.WriteProperty(options, PropArch, value.Arch, null, null);
+		writer.WriteProperty(options, PropAvailableProcessors, value.AvailableProcessors, null, null);
+		writer.WriteProperty(options, PropCpu, value.Cpu, null, null);
+		writer.WriteProperty(options, PropMem, value.Mem, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropPrettyName, value.PrettyName, null, null);
+		writer.WriteProperty(options, PropRefreshIntervalInMillis, value.RefreshIntervalInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropSwap, value.Swap, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfoConverter))]
 public sealed partial class NodeOperatingSystemInfo
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeOperatingSystemInfo(string arch, int availableProcessors, string name, string prettyName, System.TimeSpan refreshIntervalInMillis, string version)
+	{
+		Arch = arch;
+		AvailableProcessors = availableProcessors;
+		Name = name;
+		PrettyName = prettyName;
+		RefreshIntervalInMillis = refreshIntervalInMillis;
+		Version = version;
+	}
+#if NET7_0_OR_GREATER
+	public NodeOperatingSystemInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeOperatingSystemInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeOperatingSystemInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The number of processors actually used to calculate thread pool size. This number can be set with the node.processors setting of a node and defaults to the number of processors reported by the OS.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allocated_processors")]
-	public int? AllocatedProcessors { get; init; }
+	public int? AllocatedProcessors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the JVM architecture (ex: amd64, x86)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("arch")]
-	public string Arch { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Arch { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of processors available to the Java virtual machine
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("available_processors")]
-	public int AvailableProcessors { get; init; }
-	[JsonInclude, JsonPropertyName("cpu")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU? Cpu { get; init; }
-	[JsonInclude, JsonPropertyName("mem")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Mem { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int AvailableProcessors { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU? Cpu { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Mem { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the operating system (ex: Linux, Windows, Mac OS X)
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("pretty_name")]
-	public string PrettyName { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string PrettyName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refresh interval for the OS statistics
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("refresh_interval_in_millis")]
-	public long RefreshIntervalInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("swap")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Swap { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan RefreshIntervalInMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Swap { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Version of the operating system
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
-	public string Version { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Version { get; set; }
 }

@@ -17,106 +17,185 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KeepWordsTokenFilter : ITokenFilter
+internal sealed partial class KeepWordsTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("keep_words")]
-	public ICollection<string>? KeepWords { get; set; }
-	[JsonInclude, JsonPropertyName("keep_words_case")]
+	private static readonly System.Text.Json.JsonEncodedText PropKeepWords = System.Text.Json.JsonEncodedText.Encode("keep_words");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepWordsCase = System.Text.Json.JsonEncodedText.Encode("keep_words_case");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepWordsPath = System.Text.Json.JsonEncodedText.Encode("keep_words_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propKeepWords = default;
+		LocalJsonValue<bool?> propKeepWordsCase = default;
+		LocalJsonValue<string?> propKeepWordsPath = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propKeepWords.TryReadProperty(ref reader, options, PropKeepWords, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propKeepWordsCase.TryReadProperty(ref reader, options, PropKeepWordsCase, null))
+			{
+				continue;
+			}
+
+			if (propKeepWordsPath.TryReadProperty(ref reader, options, PropKeepWordsPath, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			KeepWords = propKeepWords.Value,
+			KeepWordsCase = propKeepWordsCase.Value,
+			KeepWordsPath = propKeepWordsPath.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropKeepWords, value.KeepWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropKeepWordsCase, value.KeepWordsCase, null, null);
+		writer.WriteProperty(options, PropKeepWordsPath, value.KeepWordsPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterConverter))]
+public sealed partial class KeepWordsTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public KeepWordsTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public KeepWordsTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KeepWordsTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.ICollection<string>? KeepWords { get; set; }
 	public bool? KeepWordsCase { get; set; }
-	[JsonInclude, JsonPropertyName("keep_words_path")]
 	public string? KeepWordsPath { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keep";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class KeepWordsTokenFilterDescriptor : SerializableDescriptor<KeepWordsTokenFilterDescriptor>, IBuildableDescriptor<KeepWordsTokenFilter>
+public readonly partial struct KeepWordsTokenFilterDescriptor
 {
-	internal KeepWordsTokenFilterDescriptor(Action<KeepWordsTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter Instance { get; init; }
 
-	public KeepWordsTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeepWordsTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? KeepWordsValue { get; set; }
-	private bool? KeepWordsCaseValue { get; set; }
-	private string? KeepWordsPathValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public KeepWordsTokenFilterDescriptor KeepWords(ICollection<string>? keepWords)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeepWordsTokenFilterDescriptor()
 	{
-		KeepWordsValue = keepWords;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KeepWordsTokenFilterDescriptor KeepWordsCase(bool? keepWordsCase = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWords(System.Collections.Generic.ICollection<string>? value)
 	{
-		KeepWordsCaseValue = keepWordsCase;
-		return Self;
+		Instance.KeepWords = value;
+		return this;
 	}
 
-	public KeepWordsTokenFilterDescriptor KeepWordsPath(string? keepWordsPath)
+	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWords()
 	{
-		KeepWordsPathValue = keepWordsPath;
-		return Self;
+		Instance.KeepWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public KeepWordsTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.KeepWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWords(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (KeepWordsValue is not null)
+		Instance.KeepWords = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWordsCase(bool? value = true)
+	{
+		Instance.KeepWordsCase = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWordsPath(string? value)
+	{
+		Instance.KeepWordsPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("keep_words");
-			JsonSerializer.Serialize(writer, KeepWordsValue, options);
+			return new Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (KeepWordsCaseValue.HasValue)
-		{
-			writer.WritePropertyName("keep_words_case");
-			writer.WriteBooleanValue(KeepWordsCaseValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(KeepWordsPathValue))
-		{
-			writer.WritePropertyName("keep_words_path");
-			writer.WriteStringValue(KeepWordsPathValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("keep");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	KeepWordsTokenFilter IBuildableDescriptor<KeepWordsTokenFilter>.Build() => new()
-	{
-		KeepWords = KeepWordsValue,
-		KeepWordsCase = KeepWordsCaseValue,
-		KeepWordsPath = KeepWordsPathValue,
-		Version = VersionValue
-	};
 }

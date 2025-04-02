@@ -17,20 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class SlmIndicatorUnhealthyPoliciesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropInvocationsSinceLastSuccess = System.Text.Json.JsonEncodedText.Encode("invocations_since_last_success");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, long>?> propInvocationsSinceLastSuccess = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propInvocationsSinceLastSuccess.TryReadProperty(ref reader, options, PropInvocationsSinceLastSuccess, static System.Collections.Generic.IReadOnlyDictionary<string, long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, long>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			InvocationsSinceLastSuccess = propInvocationsSinceLastSuccess.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropInvocationsSinceLastSuccess, value.InvocationsSinceLastSuccess, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long>? v) => w.WriteDictionaryValue<string, long>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPoliciesConverter))]
 public sealed partial class SlmIndicatorUnhealthyPolicies
 {
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("invocations_since_last_success")]
-	public IReadOnlyDictionary<string, long>? InvocationsSinceLastSuccess { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SlmIndicatorUnhealthyPolicies(long count)
+	{
+		Count = count;
+	}
+#if NET7_0_OR_GREATER
+	public SlmIndicatorUnhealthyPolicies()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SlmIndicatorUnhealthyPolicies()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SlmIndicatorUnhealthyPolicies(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, long>? InvocationsSinceLastSuccess { get; set; }
 }

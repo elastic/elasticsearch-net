@@ -17,24 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class SqlConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Sql>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
+	private static readonly System.Text.Json.JsonEncodedText PropQueries = System.Text.Json.JsonEncodedText.Encode("queries");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.Sql Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAvailable = default;
+		LocalJsonValue<bool> propEnabled = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propFeatures = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery>> propQueries = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propFeatures.TryReadProperty(ref reader, options, PropFeatures, static System.Collections.Generic.IReadOnlyDictionary<string, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propQueries.TryReadProperty(ref reader, options, PropQueries, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.Sql(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Available = propAvailable.Value,
+			Enabled = propEnabled.Value,
+			Features = propFeatures.Value,
+			Queries = propQueries.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.Sql value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropFeatures, value.Features, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
+		writer.WriteProperty(options, PropQueries, value.Queries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.SqlConverter))]
 public sealed partial class Sql
 {
-	[JsonInclude, JsonPropertyName("available")]
-	public bool Available { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("features")]
-	public IReadOnlyDictionary<string, int> Features { get; init; }
-	[JsonInclude, JsonPropertyName("queries")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery> Queries { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Sql(bool available, bool enabled, System.Collections.Generic.IReadOnlyDictionary<string, int> features, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery> queries)
+	{
+		Available = available;
+		Enabled = enabled;
+		Features = features;
+		Queries = queries;
+	}
+#if NET7_0_OR_GREATER
+	public Sql()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Sql()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Sql(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Available { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, int> Features { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery> Queries { get; set; }
 }

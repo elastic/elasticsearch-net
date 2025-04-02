@@ -17,33 +17,110 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class FileSystemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.FileSystem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
+	private static readonly System.Text.Json.JsonEncodedText PropIoStats = System.Text.Json.JsonEncodedText.Encode("io_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.FileSystem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>?> propData = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.IoStats?> propIoStats = default;
+		LocalJsonValue<long?> propTimestamp = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal?> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propData.TryReadProperty(ref reader, options, PropData, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIoStats.TryReadProperty(ref reader, options, PropIoStats, null))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.FileSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Data = propData.Value,
+			IoStats = propIoStats.Value,
+			Timestamp = propTimestamp.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.FileSystem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>(o, v, null));
+		writer.WriteProperty(options, PropIoStats, value.IoStats, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.FileSystemConverter))]
 public sealed partial class FileSystem
 {
+#if NET7_0_OR_GREATER
+	public FileSystem()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FileSystem()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FileSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// List of all file stores.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>? Data { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>? Data { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains I/O statistics for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("io_stats")]
-	public Elastic.Clients.Elasticsearch.Nodes.IoStats? IoStats { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.IoStats? IoStats { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -51,14 +128,12 @@ public sealed partial class FileSystem
 	/// Recorded in milliseconds since the Unix Epoch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public long? Timestamp { get; init; }
+	public long? Timestamp { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics for all file stores of the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal? Total { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal? Total { get; set; }
 }

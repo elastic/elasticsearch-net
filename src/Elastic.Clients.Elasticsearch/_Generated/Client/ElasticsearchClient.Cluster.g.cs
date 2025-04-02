@@ -18,2578 +18,631 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public partial class ClusterNamespacedClient : NamespacedClientProxy
+public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="ClusterNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected ClusterNamespacedClient() : base()
 	{
 	}
 
-	internal ClusterNamespacedClient(ElasticsearchClient client) : base(client)
+	internal ClusterNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explain the shard allocations.
-	/// Get explanations for shard allocations in the cluster.
-	/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse AllocationExplain(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<AllocationExplainRequest, AllocationExplainResponse, AllocationExplainRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explain the shard allocations.
-	/// Get explanations for shard allocations in the cluster.
-	/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse> AllocationExplainAsync(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<AllocationExplainRequest, AllocationExplainResponse, AllocationExplainRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explain the shard allocations.
-	/// Get explanations for shard allocations in the cluster.
-	/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse AllocationExplain()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explain the shard allocations.
-	/// Get explanations for shard allocations in the cluster.
-	/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AllocationExplainResponse AllocationExplain()
+	public virtual Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse AllocationExplain(System.Action<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor> action)
 	{
-		var descriptor = new AllocationExplainRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explain the shard allocations.
-	/// Get explanations for shard allocations in the cluster.
-	/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AllocationExplainResponse AllocationExplain(Action<AllocationExplainRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse> AllocationExplainAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new AllocationExplainRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explain the shard allocations.
-	/// Get explanations for shard allocations in the cluster.
-	/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse> AllocationExplainAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explain the shard allocations.
-	/// Get explanations for shard allocations in the cluster.
-	/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AllocationExplainRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Explain the shard allocations.
-	/// Get explanations for shard allocations in the cluster.
-	/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(Action<AllocationExplainRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AllocationExplainRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete component templates.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(DeleteComponentTemplateRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteComponentTemplateRequest, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete component templates.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(DeleteComponentTemplateRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteComponentTemplateRequest, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete component templates.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(DeleteComponentTemplateRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete component templates.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names name)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteComponentTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete component templates.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Action<DeleteComponentTemplateRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteComponentTemplateRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete component templates.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(DeleteComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete component templates.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteComponentTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete component templates.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<DeleteComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteComponentTemplateRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear cluster voting config exclusions.
-	/// Remove master-eligible nodes from the voting configuration exclusion list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(DeleteVotingConfigExclusionsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteVotingConfigExclusionsRequest, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Clear cluster voting config exclusions.
-	/// Remove master-eligible nodes from the voting configuration exclusion list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(DeleteVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteVotingConfigExclusionsRequest, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Clear cluster voting config exclusions.
-	/// Remove master-eligible nodes from the voting configuration exclusion list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(DeleteVotingConfigExclusionsRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Clear cluster voting config exclusions.
-	/// Remove master-eligible nodes from the voting configuration exclusion list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions()
+	public virtual Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(System.Action<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor> action)
 	{
-		var descriptor = new DeleteVotingConfigExclusionsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Clear cluster voting config exclusions.
-	/// Remove master-eligible nodes from the voting configuration exclusion list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(Action<DeleteVotingConfigExclusionsRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteVotingConfigExclusionsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Clear cluster voting config exclusions.
-	/// Remove master-eligible nodes from the voting configuration exclusion list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(DeleteVotingConfigExclusionsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Clear cluster voting config exclusions.
-	/// Remove master-eligible nodes from the voting configuration exclusion list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteVotingConfigExclusionsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear cluster voting config exclusions.
-	/// Remove master-eligible nodes from the voting configuration exclusion list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(Action<DeleteVotingConfigExclusionsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteVotingConfigExclusionsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check component templates.
-	/// Returns information about whether a particular component template exists.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(ExistsComponentTemplateRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ExistsComponentTemplateRequest, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Check component templates.
-	/// Returns information about whether a particular component template exists.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ExistsComponentTemplateRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ExistsComponentTemplateRequest, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Check component templates.
-	/// Returns information about whether a particular component template exists.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(ExistsComponentTemplateRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Check component templates.
-	/// Returns information about whether a particular component template exists.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExistsComponentTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Check component templates.
-	/// Returns information about whether a particular component template exists.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Action<ExistsComponentTemplateRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ExistsComponentTemplateRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check component templates.
-	/// Returns information about whether a particular component template exists.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ExistsComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check component templates.
-	/// Returns information about whether a particular component template exists.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ExistsComponentTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check component templates.
-	/// Returns information about whether a particular component template exists.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<ExistsComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ExistsComponentTemplateRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetComponentTemplateResponse GetComponentTemplate(GetComponentTemplateRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse GetComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetComponentTemplateRequest, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(GetComponentTemplateRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetComponentTemplateRequest, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetComponentTemplateResponse GetComponentTemplate(GetComponentTemplateRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse GetComponentTemplate()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetComponentTemplateResponse GetComponentTemplate(Elastic.Clients.Elasticsearch.Name? name)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse GetComponentTemplate(System.Action<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor> action)
 	{
-		var descriptor = new GetComponentTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetComponentTemplateResponse GetComponentTemplate(Elastic.Clients.Elasticsearch.Name? name, Action<GetComponentTemplateRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetComponentTemplateRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetComponentTemplateResponse GetComponentTemplate()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetComponentTemplateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetComponentTemplateResponse GetComponentTemplate(Action<GetComponentTemplateRequestDescriptor> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse GetComponentTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
-		var descriptor = new GetComponentTemplateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(GetComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse GetComponentTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetComponentTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, Action<GetComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetComponentTemplateRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetComponentTemplateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get component templates.
-	/// Get information about component templates.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Action<GetComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetComponentTemplateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get cluster-wide settings.
-	/// By default, it returns only settings that have been explicitly defined.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetClusterSettingsRequest, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster-wide settings.
-	/// By default, it returns only settings that have been explicitly defined.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetClusterSettingsRequest, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster-wide settings.
-	/// By default, it returns only settings that have been explicitly defined.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse GetSettings()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster-wide settings.
-	/// By default, it returns only settings that have been explicitly defined.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetClusterSettingsResponse GetSettings()
+	public virtual Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse GetSettings(System.Action<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor> action)
 	{
-		var descriptor = new GetClusterSettingsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster-wide settings.
-	/// By default, it returns only settings that have been explicitly defined.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetClusterSettingsResponse GetSettings(Action<GetClusterSettingsRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse> GetSettingsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetClusterSettingsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster-wide settings.
-	/// By default, it returns only settings that have been explicitly defined.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse> GetSettingsAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster-wide settings.
-	/// By default, it returns only settings that have been explicitly defined.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetClusterSettingsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get cluster-wide settings.
-	/// By default, it returns only settings that have been explicitly defined.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(Action<GetClusterSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetClusterSettingsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health(HealthRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health(Elastic.Clients.Elasticsearch.Cluster.HealthRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<HealthRequest, HealthResponse, HealthRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync(HealthRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Cluster.HealthRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<HealthRequest, HealthResponse, HealthRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health<TDocument>(HealthRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health(System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor> action)
 	{
-		var descriptor = new HealthRequestDescriptor<TDocument>(indices);
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HealthRequestDescriptor<TDocument>(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health<TDocument>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HealthRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var descriptor = new HealthRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health(HealthRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.HealthResponse Health(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health(Elastic.Clients.Elasticsearch.Indices? indices)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HealthRequestDescriptor(indices);
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HealthRequestDescriptor(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.HealthRequest, Elastic.Clients.Elasticsearch.Cluster.HealthResponse, Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health()
-	{
-		var descriptor = new HealthRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health(Action<HealthRequestDescriptor> configureRequest)
-	{
-		var descriptor = new HealthRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(HealthRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HealthRequestDescriptor<TDocument>(indices);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HealthRequestDescriptor<TDocument>(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HealthRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HealthRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync(HealthRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HealthRequestDescriptor(indices);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HealthRequestDescriptor(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HealthRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the cluster health status.
-	/// You can also use the API to get the health status of only specified data streams and indices.
-	/// For data streams, the API retrieves the health status of the stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// The cluster health status is: green, yellow or red.
-	/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-	/// The index level status is controlled by the worst shard status.
-	/// </para>
-	/// <para>
-	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-	/// The cluster status is controlled by the worst index status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync(Action<HealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HealthRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get cluster info.
-	/// Returns basic information about the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterInfoResponse Info(ClusterInfoRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse Info(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ClusterInfoRequest, ClusterInfoResponse, ClusterInfoRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster info.
-	/// Returns basic information about the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterInfoResponse> InfoAsync(ClusterInfoRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ClusterInfoRequest, ClusterInfoResponse, ClusterInfoRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster info.
-	/// Returns basic information about the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterInfoResponse Info(ClusterInfoRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse Info(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(target);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster info.
-	/// Returns basic information about the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterInfoResponse Info(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse> InfoAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterInfoRequestDescriptor(target);
-		descriptor.BeforeRequest();
-		return DoRequest<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(target);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster info.
-	/// Returns basic information about the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterInfoResponse Info(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, Action<ClusterInfoRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ClusterInfoRequestDescriptor(target);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get cluster info.
-	/// Returns basic information about the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterInfoResponse> InfoAsync(ClusterInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get cluster info.
-	/// Returns basic information about the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterInfoResponse> InfoAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClusterInfoRequestDescriptor(target);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get cluster info.
-	/// Returns basic information about the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterInfoResponse> InfoAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, Action<ClusterInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClusterInfoRequestDescriptor(target);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the pending cluster tasks.
-	/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns a list of any pending updates to the cluster state.
-	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PendingTasksResponse PendingTasks(PendingTasksRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse PendingTasks(Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PendingTasksRequest, PendingTasksResponse, PendingTasksRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the pending cluster tasks.
-	/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns a list of any pending updates to the cluster state.
-	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse> PendingTasksAsync(Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PendingTasksRequest, PendingTasksResponse, PendingTasksRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the pending cluster tasks.
-	/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns a list of any pending updates to the cluster state.
-	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PendingTasksResponse PendingTasks(PendingTasksRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse PendingTasks()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the pending cluster tasks.
-	/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns a list of any pending updates to the cluster state.
-	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PendingTasksResponse PendingTasks()
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse PendingTasks(System.Action<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor> action)
 	{
-		var descriptor = new PendingTasksRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the pending cluster tasks.
-	/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns a list of any pending updates to the cluster state.
-	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PendingTasksResponse PendingTasks(Action<PendingTasksRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse> PendingTasksAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PendingTasksRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the pending cluster tasks.
-	/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns a list of any pending updates to the cluster state.
-	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse> PendingTasksAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest, Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse, Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get the pending cluster tasks.
-	/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns a list of any pending updates to the cluster state.
-	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PendingTasksResponse> PendingTasksAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PendingTasksRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get the pending cluster tasks.
-	/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-	/// </para>
-	/// <para>
-	/// NOTE: This API returns a list of any pending updates to the cluster state.
-	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PendingTasksResponse> PendingTasksAsync(Action<PendingTasksRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PendingTasksRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update voting configuration exclusions.
-	/// Update the cluster voting config exclusions by node IDs or node names.
-	/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
-	/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
-	/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
-	/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
-	/// </para>
-	/// <para>
-	/// Clusters should have no voting configuration exclusions in normal operation.
-	/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// This API waits for the nodes to be fully removed from the cluster before it returns.
-	/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
-	/// </para>
-	/// <para>
-	/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
-	/// In that case, you may safely retry the call.
-	/// </para>
-	/// <para>
-	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
-	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(PostVotingConfigExclusionsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse PostVotingConfigExclusions(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PostVotingConfigExclusionsRequest, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update voting configuration exclusions.
-	/// Update the cluster voting config exclusions by node IDs or node names.
-	/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
-	/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
-	/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
-	/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
-	/// </para>
-	/// <para>
-	/// Clusters should have no voting configuration exclusions in normal operation.
-	/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// This API waits for the nodes to be fully removed from the cluster before it returns.
-	/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
-	/// </para>
-	/// <para>
-	/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
-	/// In that case, you may safely retry the call.
-	/// </para>
-	/// <para>
-	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
-	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(PostVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PostVotingConfigExclusionsRequest, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update voting configuration exclusions.
-	/// Update the cluster voting config exclusions by node IDs or node names.
-	/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
-	/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
-	/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
-	/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
-	/// </para>
-	/// <para>
-	/// Clusters should have no voting configuration exclusions in normal operation.
-	/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// This API waits for the nodes to be fully removed from the cluster before it returns.
-	/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
-	/// </para>
-	/// <para>
-	/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
-	/// In that case, you may safely retry the call.
-	/// </para>
-	/// <para>
-	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
-	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(PostVotingConfigExclusionsRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse PostVotingConfigExclusions()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update voting configuration exclusions.
-	/// Update the cluster voting config exclusions by node IDs or node names.
-	/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
-	/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
-	/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
-	/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
-	/// </para>
-	/// <para>
-	/// Clusters should have no voting configuration exclusions in normal operation.
-	/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// This API waits for the nodes to be fully removed from the cluster before it returns.
-	/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
-	/// </para>
-	/// <para>
-	/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
-	/// In that case, you may safely retry the call.
-	/// </para>
-	/// <para>
-	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
-	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions()
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse PostVotingConfigExclusions(System.Action<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor> action)
 	{
-		var descriptor = new PostVotingConfigExclusionsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update voting configuration exclusions.
-	/// Update the cluster voting config exclusions by node IDs or node names.
-	/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
-	/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
-	/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
-	/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
-	/// </para>
-	/// <para>
-	/// Clusters should have no voting configuration exclusions in normal operation.
-	/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// This API waits for the nodes to be fully removed from the cluster before it returns.
-	/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
-	/// </para>
-	/// <para>
-	/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
-	/// In that case, you may safely retry the call.
-	/// </para>
-	/// <para>
-	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
-	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(Action<PostVotingConfigExclusionsRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PostVotingConfigExclusionsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update voting configuration exclusions.
-	/// Update the cluster voting config exclusions by node IDs or node names.
-	/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
-	/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
-	/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
-	/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
-	/// </para>
-	/// <para>
-	/// Clusters should have no voting configuration exclusions in normal operation.
-	/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// This API waits for the nodes to be fully removed from the cluster before it returns.
-	/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
-	/// </para>
-	/// <para>
-	/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
-	/// In that case, you may safely retry the call.
-	/// </para>
-	/// <para>
-	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
-	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(PostVotingConfigExclusionsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Update voting configuration exclusions.
-	/// Update the cluster voting config exclusions by node IDs or node names.
-	/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
-	/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
-	/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
-	/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
-	/// </para>
-	/// <para>
-	/// Clusters should have no voting configuration exclusions in normal operation.
-	/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// This API waits for the nodes to be fully removed from the cluster before it returns.
-	/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
-	/// </para>
-	/// <para>
-	/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
-	/// In that case, you may safely retry the call.
-	/// </para>
-	/// <para>
-	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
-	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PostVotingConfigExclusionsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update voting configuration exclusions.
-	/// Update the cluster voting config exclusions by node IDs or node names.
-	/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
-	/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
-	/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
-	/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
-	/// </para>
-	/// <para>
-	/// Clusters should have no voting configuration exclusions in normal operation.
-	/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// This API waits for the nodes to be fully removed from the cluster before it returns.
-	/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
-	/// </para>
-	/// <para>
-	/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
-	/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
-	/// In that case, you may safely retry the call.
-	/// </para>
-	/// <para>
-	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
-	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(Action<PostVotingConfigExclusionsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PostVotingConfigExclusionsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutComponentTemplateResponse PutComponentTemplate(PutComponentTemplateRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutComponentTemplateRequest, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(PutComponentTemplateRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutComponentTemplateRequest, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutComponentTemplateResponse PutComponentTemplate<TDocument>(PutComponentTemplateRequestDescriptor<TDocument> descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutComponentTemplateResponse PutComponentTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse PutComponentTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>> action)
 	{
-		var descriptor = new PutComponentTemplateRequestDescriptor<TDocument>(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutComponentTemplateResponse PutComponentTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutComponentTemplateRequestDescriptor<TDocument>(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutComponentTemplateResponse PutComponentTemplate(PutComponentTemplateRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name)
-	{
-		var descriptor = new PutComponentTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutComponentTemplateRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(PutComponentTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutComponentTemplateRequestDescriptor<TDocument>(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutComponentTemplateRequestDescriptor<TDocument>(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(PutComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutComponentTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a component template.
-	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-	/// </para>
-	/// <para>
-	/// An index template can be composed of multiple component templates.
-	/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-	/// Component templates are only applied to new data streams and indices as part of a matching index template.
-	/// </para>
-	/// <para>
-	/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-	/// </para>
-	/// <para>
-	/// Component templates are only used during index creation.
-	/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-	/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-	/// </para>
-	/// <para>
-	/// You can use C-style <c>/* *\/</c> block comments in component templates.
-	/// You can include comments anywhere in the request body except before the opening curly bracket.
-	/// </para>
-	/// <para>
-	/// <strong>Applying component templates</strong>
-	/// </para>
-	/// <para>
-	/// You cannot directly apply a component template to a data stream or index.
-	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutComponentTemplateRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterStatsResponse Stats(ClusterStatsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ClusterStatsRequest, ClusterStatsResponse, ClusterStatsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequest request, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequest, ClusterStatsResponse, ClusterStatsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterStatsResponse Stats(ClusterStatsRequestDescriptor descriptor)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Stats()
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Stats(System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor> action)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor(nodeId);
-		descriptor.BeforeRequest();
-		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<ClusterStatsRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor(nodeId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterStatsResponse Stats()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClusterStatsResponse Stats(Action<ClusterStatsRequestDescriptor> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds nodeId)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds nodeId, System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor(nodeId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<ClusterStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor(nodeId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClusterStatsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get cluster statistics.
-	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(Action<ClusterStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClusterStatsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>(request, cancellationToken);
 	}
 }

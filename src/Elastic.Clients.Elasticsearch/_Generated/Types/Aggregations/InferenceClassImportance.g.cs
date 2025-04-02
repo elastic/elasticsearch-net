@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class InferenceClassImportanceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name");
+	private static readonly System.Text.Json.JsonEncodedText PropImportance = System.Text.Json.JsonEncodedText.Encode("importance");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClassName = default;
+		LocalJsonValue<double> propImportance = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClassName.TryReadProperty(ref reader, options, PropClassName, null))
+			{
+				continue;
+			}
+
+			if (propImportance.TryReadProperty(ref reader, options, PropImportance, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ClassName = propClassName.Value,
+			Importance = propImportance.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClassName, value.ClassName, null, null);
+		writer.WriteProperty(options, PropImportance, value.Importance, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportanceConverter))]
 public sealed partial class InferenceClassImportance
 {
-	[JsonInclude, JsonPropertyName("class_name")]
-	public string ClassName { get; init; }
-	[JsonInclude, JsonPropertyName("importance")]
-	public double Importance { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceClassImportance(string className, double importance)
+	{
+		ClassName = className;
+		Importance = importance;
+	}
+#if NET7_0_OR_GREATER
+	public InferenceClassImportance()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public InferenceClassImportance()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InferenceClassImportance(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ClassName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Importance { get; set; }
 }

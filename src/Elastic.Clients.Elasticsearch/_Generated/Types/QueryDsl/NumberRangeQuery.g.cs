@@ -17,143 +17,133 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class NumberRangeQueryConverter : JsonConverter<NumberRangeQuery>
+internal sealed partial class NumberRangeQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery>
 {
-	public override NumberRangeQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropGt = System.Text.Json.JsonEncodedText.Encode("gt");
+	private static readonly System.Text.Json.JsonEncodedText PropGte = System.Text.Json.JsonEncodedText.Encode("gte");
+	private static readonly System.Text.Json.JsonEncodedText PropLt = System.Text.Json.JsonEncodedText.Encode("lt");
+	private static readonly System.Text.Json.JsonEncodedText PropLte = System.Text.Json.JsonEncodedText.Encode("lte");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		var fieldName = reader.GetString();
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
-		var variant = new NumberRangeQuery(fieldName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<double?> propGt = default;
+		LocalJsonValue<double?> propGte = default;
+		LocalJsonValue<double?> propLt = default;
+		LocalJsonValue<double?> propLte = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?> propRelation = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
-				var property = reader.GetString();
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "gt")
-				{
-					variant.Gt = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "gte")
-				{
-					variant.Gte = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "lt")
-				{
-					variant.Lt = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "lte")
-				{
-					variant.Lte = JsonSerializer.Deserialize<double?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "relation")
-				{
-					variant.Relation = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propGt.TryReadProperty(ref reader, options, PropGt, null))
+			{
+				continue;
+			}
+
+			if (propGte.TryReadProperty(ref reader, options, PropGte, null))
+			{
+				continue;
+			}
+
+			if (propLt.TryReadProperty(ref reader, options, PropLt, null))
+			{
+				continue;
+			}
+
+			if (propLte.TryReadProperty(ref reader, options, PropLte, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propRelation.TryReadProperty(ref reader, options, PropRelation, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		reader.Read();
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			Gt = propGt.Value,
+			Gte = propGte.Value,
+			Lt = propLt.Value,
+			Lte = propLte.Value,
+			QueryName = propQueryName.Value,
+			Relation = propRelation.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, NumberRangeQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize NumberRangeQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.Gt.HasValue)
-		{
-			writer.WritePropertyName("gt");
-			writer.WriteNumberValue(value.Gt.Value);
-		}
-
-		if (value.Gte.HasValue)
-		{
-			writer.WritePropertyName("gte");
-			writer.WriteNumberValue(value.Gte.Value);
-		}
-
-		if (value.Lt.HasValue)
-		{
-			writer.WritePropertyName("lt");
-			writer.WriteNumberValue(value.Lt.Value);
-		}
-
-		if (value.Lte.HasValue)
-		{
-			writer.WritePropertyName("lte");
-			writer.WriteNumberValue(value.Lte.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.Relation is not null)
-		{
-			writer.WritePropertyName("relation");
-			JsonSerializer.Serialize(writer, value.Relation, options);
-		}
-
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropGt, value.Gt, null, null);
+		writer.WriteProperty(options, PropGte, value.Gte, null, null);
+		writer.WriteProperty(options, PropLt, value.Lt, null, null);
+		writer.WriteProperty(options, PropLte, value.Lte, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropRelation, value.Relation, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(NumberRangeQueryConverter))]
-public sealed partial class NumberRangeQuery
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryConverter))]
+public sealed partial class NumberRangeQuery : Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public NumberRangeQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
 		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public NumberRangeQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NumberRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
 	/// <summary>
@@ -165,7 +155,11 @@ public sealed partial class NumberRangeQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -202,24 +196,28 @@ public sealed partial class NumberRangeQuery
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
+
+	string Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.Type => "number";
 }
 
-public sealed partial class NumberRangeQueryDescriptor<TDocument> : SerializableDescriptor<NumberRangeQueryDescriptor<TDocument>>
+public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 {
-	internal NumberRangeQueryDescriptor(Action<NumberRangeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery Instance { get; init; }
 
-	public NumberRangeQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NumberRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private double? GtValue { get; set; }
-	private double? GteValue { get; set; }
-	private double? LtValue { get; set; }
-	private double? LteValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NumberRangeQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -229,28 +227,22 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public NumberRangeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public NumberRangeQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public NumberRangeQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -258,10 +250,10 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	/// Greater than.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor<TDocument> Gt(double? gt)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Gt(double? value)
 	{
-		GtValue = gt;
-		return Self;
+		Instance.Gt = value;
+		return this;
 	}
 
 	/// <summary>
@@ -269,10 +261,10 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	/// Greater than or equal to.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor<TDocument> Gte(double? gte)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Gte(double? value)
 	{
-		GteValue = gte;
-		return Self;
+		Instance.Gte = value;
+		return this;
 	}
 
 	/// <summary>
@@ -280,10 +272,10 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	/// Less than.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor<TDocument> Lt(double? lt)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Lt(double? value)
 	{
-		LtValue = lt;
-		return Self;
+		Instance.Lt = value;
+		return this;
 	}
 
 	/// <summary>
@@ -291,16 +283,16 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	/// Less than or equal to.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor<TDocument> Lte(double? lte)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Lte(double? value)
 	{
-		LteValue = lte;
-		return Self;
+		Instance.Lte = value;
+		return this;
 	}
 
-	public NumberRangeQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -308,82 +300,39 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	/// Indicates how the range query matches values for <c>range</c> fields.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
-		RelationValue = relation;
-		return Self;
+		Instance.Relation = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument>> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (GtValue.HasValue)
-		{
-			writer.WritePropertyName("gt");
-			writer.WriteNumberValue(GtValue.Value);
-		}
-
-		if (GteValue.HasValue)
-		{
-			writer.WritePropertyName("gte");
-			writer.WriteNumberValue(GteValue.Value);
-		}
-
-		if (LtValue.HasValue)
-		{
-			writer.WritePropertyName("lt");
-			writer.WriteNumberValue(LtValue.Value);
-		}
-
-		if (LteValue.HasValue)
-		{
-			writer.WritePropertyName("lte");
-			writer.WriteNumberValue(LteValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (RelationValue is not null)
-		{
-			writer.WritePropertyName("relation");
-			JsonSerializer.Serialize(writer, RelationValue, options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<NumberRangeQueryDescriptor>
+public readonly partial struct NumberRangeQueryDescriptor
 {
-	internal NumberRangeQueryDescriptor(Action<NumberRangeQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery Instance { get; init; }
 
-	public NumberRangeQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NumberRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private double? GtValue { get; set; }
-	private double? GteValue { get; set; }
-	private double? LtValue { get; set; }
-	private double? LteValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NumberRangeQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -393,28 +342,22 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public NumberRangeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public NumberRangeQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public NumberRangeQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -422,10 +365,10 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	/// Greater than.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor Gt(double? gt)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Gt(double? value)
 	{
-		GtValue = gt;
-		return Self;
+		Instance.Gt = value;
+		return this;
 	}
 
 	/// <summary>
@@ -433,10 +376,10 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	/// Greater than or equal to.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor Gte(double? gte)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Gte(double? value)
 	{
-		GteValue = gte;
-		return Self;
+		Instance.Gte = value;
+		return this;
 	}
 
 	/// <summary>
@@ -444,10 +387,10 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	/// Less than.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor Lt(double? lt)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Lt(double? value)
 	{
-		LtValue = lt;
-		return Self;
+		Instance.Lt = value;
+		return this;
 	}
 
 	/// <summary>
@@ -455,16 +398,16 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	/// Less than or equal to.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor Lte(double? lte)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Lte(double? value)
 	{
-		LteValue = lte;
-		return Self;
+		Instance.Lte = value;
+		return this;
 	}
 
-	public NumberRangeQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -472,62 +415,17 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	/// Indicates how the range query matches values for <c>range</c> fields.
 	/// </para>
 	/// </summary>
-	public NumberRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
+	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
-		RelationValue = relation;
-		return Self;
+		Instance.Relation = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (GtValue.HasValue)
-		{
-			writer.WritePropertyName("gt");
-			writer.WriteNumberValue(GtValue.Value);
-		}
-
-		if (GteValue.HasValue)
-		{
-			writer.WritePropertyName("gte");
-			writer.WriteNumberValue(GteValue.Value);
-		}
-
-		if (LtValue.HasValue)
-		{
-			writer.WritePropertyName("lt");
-			writer.WriteNumberValue(LtValue.Value);
-		}
-
-		if (LteValue.HasValue)
-		{
-			writer.WritePropertyName("lte");
-			writer.WriteNumberValue(LteValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (RelationValue is not null)
-		{
-			writer.WritePropertyName("relation");
-			JsonSerializer.Serialize(writer, RelationValue, options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

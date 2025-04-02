@@ -17,89 +17,145 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class ScriptScoreFunction
+internal sealed partial class ScriptScoreFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>
 {
-	/// <summary>
-	/// <para>
-	/// A script that computes a score.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
 
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(ScriptScoreFunction scriptScoreFunction) => Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore.ScriptScore(scriptScoreFunction);
-}
-
-public sealed partial class ScriptScoreFunctionDescriptor : SerializableDescriptor<ScriptScoreFunctionDescriptor>
-{
-	internal ScriptScoreFunctionDescriptor(Action<ScriptScoreFunctionDescriptor> configure) => configure.Invoke(this);
-
-	public ScriptScoreFunctionDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script> propScript = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Script = propScript.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A script that computes a score.
-	/// </para>
-	/// </summary>
-	public ScriptScoreFunctionDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
-	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
-	}
-
-	public ScriptScoreFunctionDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public ScriptScoreFunctionDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionConverter))]
+public sealed partial class ScriptScoreFunction
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptScoreFunction(Elastic.Clients.Elasticsearch.Script script)
+	{
+		Script = script;
+	}
+#if NET7_0_OR_GREATER
+	public ScriptScoreFunction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ScriptScoreFunction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ScriptScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A script that computes a score.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Script Script { get; set; }
+}
+
+public readonly partial struct ScriptScoreFunctionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptScoreFunctionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A script that computes a score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A script that computes a score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A script that computes a score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,30 +17,164 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class DataTiersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.DataTiers>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropDataCold = System.Text.Json.JsonEncodedText.Encode("data_cold");
+	private static readonly System.Text.Json.JsonEncodedText PropDataContent = System.Text.Json.JsonEncodedText.Encode("data_content");
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrozen = System.Text.Json.JsonEncodedText.Encode("data_frozen");
+	private static readonly System.Text.Json.JsonEncodedText PropDataHot = System.Text.Json.JsonEncodedText.Encode("data_hot");
+	private static readonly System.Text.Json.JsonEncodedText PropDataWarm = System.Text.Json.JsonEncodedText.Encode("data_warm");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.DataTiers Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAvailable = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics> propDataCold = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics> propDataContent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics?> propDataFrozen = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics> propDataHot = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics> propDataWarm = default;
+		LocalJsonValue<bool> propEnabled = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propDataCold.TryReadProperty(ref reader, options, PropDataCold, null))
+			{
+				continue;
+			}
+
+			if (propDataContent.TryReadProperty(ref reader, options, PropDataContent, null))
+			{
+				continue;
+			}
+
+			if (propDataFrozen.TryReadProperty(ref reader, options, PropDataFrozen, null))
+			{
+				continue;
+			}
+
+			if (propDataHot.TryReadProperty(ref reader, options, PropDataHot, null))
+			{
+				continue;
+			}
+
+			if (propDataWarm.TryReadProperty(ref reader, options, PropDataWarm, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.DataTiers(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Available = propAvailable.Value,
+			DataCold = propDataCold.Value,
+			DataContent = propDataContent.Value,
+			DataFrozen = propDataFrozen.Value,
+			DataHot = propDataHot.Value,
+			DataWarm = propDataWarm.Value,
+			Enabled = propEnabled.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.DataTiers value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropDataCold, value.DataCold, null, null);
+		writer.WriteProperty(options, PropDataContent, value.DataContent, null, null);
+		writer.WriteProperty(options, PropDataFrozen, value.DataFrozen, null, null);
+		writer.WriteProperty(options, PropDataHot, value.DataHot, null, null);
+		writer.WriteProperty(options, PropDataWarm, value.DataWarm, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.DataTiersConverter))]
 public sealed partial class DataTiers
 {
-	[JsonInclude, JsonPropertyName("available")]
-	public bool Available { get; init; }
-	[JsonInclude, JsonPropertyName("data_cold")]
-	public Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataCold { get; init; }
-	[JsonInclude, JsonPropertyName("data_content")]
-	public Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataContent { get; init; }
-	[JsonInclude, JsonPropertyName("data_frozen")]
-	public Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics? DataFrozen { get; init; }
-	[JsonInclude, JsonPropertyName("data_hot")]
-	public Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataHot { get; init; }
-	[JsonInclude, JsonPropertyName("data_warm")]
-	public Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataWarm { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataTiers(bool available, Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics dataCold, Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics dataContent, Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics dataHot, Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics dataWarm, bool enabled)
+	{
+		Available = available;
+		DataCold = dataCold;
+		DataContent = dataContent;
+		DataHot = dataHot;
+		DataWarm = dataWarm;
+		Enabled = enabled;
+	}
+#if NET7_0_OR_GREATER
+	public DataTiers()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataTiers()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataTiers(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Available { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataCold { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataContent { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics? DataFrozen { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataHot { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataWarm { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
 }

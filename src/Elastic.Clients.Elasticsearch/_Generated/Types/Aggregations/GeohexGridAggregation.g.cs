@@ -17,24 +17,117 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class GeohexGridAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBounds = System.Text.Json.JsonEncodedText.Encode("bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoBounds?> propBounds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<int?> propPrecision = default;
+		LocalJsonValue<int?> propShardSize = default;
+		LocalJsonValue<int?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBounds.TryReadProperty(ref reader, options, PropBounds, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			{
+				continue;
+			}
+
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Bounds = propBounds.Value,
+			Field = propField.Value,
+			Precision = propPrecision.Value,
+			ShardSize = propShardSize.Value,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBounds, value.Bounds, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationConverter))]
 public sealed partial class GeohexGridAggregation
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeohexGridAggregation(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public GeohexGridAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeohexGridAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeohexGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Bounding box used to filter the geo-points in each bucket.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("bounds")]
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 
 	/// <summary>
@@ -43,8 +136,11 @@ public sealed partial class GeohexGridAggregation
 	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -52,7 +148,6 @@ public sealed partial class GeohexGridAggregation
 	/// in the results. Value should be between 0-15.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision")]
 	public int? Precision { get; set; }
 
 	/// <summary>
@@ -60,7 +155,6 @@ public sealed partial class GeohexGridAggregation
 	/// Number of buckets returned from each shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
@@ -68,35 +162,48 @@ public sealed partial class GeohexGridAggregation
 	/// Maximum number of buckets to return.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(GeohexGridAggregation geohexGridAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeohexGrid(geohexGridAggregation);
 }
 
-public sealed partial class GeohexGridAggregationDescriptor<TDocument> : SerializableDescriptor<GeohexGridAggregationDescriptor<TDocument>>
+public readonly partial struct GeohexGridAggregationDescriptor<TDocument>
 {
-	internal GeohexGridAggregationDescriptor(Action<GeohexGridAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation Instance { get; init; }
 
-	public GeohexGridAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeohexGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int? PrecisionValue { get; set; }
-	private int? ShardSizeValue { get; set; }
-	private int? SizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeohexGridAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Bounding box used to filter the geo-points in each bucket.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
-		BoundsValue = bounds;
-		return Self;
+		Instance.Bounds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Bounding box used to filter the geo-points in each bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	{
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -105,10 +212,10 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -117,22 +224,10 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
-	public GeohexGridAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -141,10 +236,10 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	/// in the results. Value should be between 0-15.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor<TDocument> Precision(int? precision)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Precision(int? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
 	/// <summary>
@@ -152,10 +247,10 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	/// Number of buckets returned from each shard.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor<TDocument> ShardSize(int? shardSize)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
-		ShardSizeValue = shardSize;
-		return Self;
+		Instance.ShardSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -163,68 +258,60 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	/// Maximum number of buckets to return.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (BoundsValue is not null)
-		{
-			writer.WritePropertyName("bounds");
-			JsonSerializer.Serialize(writer, BoundsValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (PrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("precision");
-			writer.WriteNumberValue(PrecisionValue.Value);
-		}
-
-		if (ShardSizeValue.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(ShardSizeValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeohexGridAggregationDescriptor : SerializableDescriptor<GeohexGridAggregationDescriptor>
+public readonly partial struct GeohexGridAggregationDescriptor
 {
-	internal GeohexGridAggregationDescriptor(Action<GeohexGridAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation Instance { get; init; }
 
-	public GeohexGridAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeohexGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int? PrecisionValue { get; set; }
-	private int? ShardSizeValue { get; set; }
-	private int? SizeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeohexGridAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Bounding box used to filter the geo-points in each bucket.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
-		BoundsValue = bounds;
-		return Self;
+		Instance.Bounds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Bounding box used to filter the geo-points in each bucket.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	{
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -233,10 +320,10 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -245,22 +332,10 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
-	public GeohexGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -269,10 +344,10 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	/// in the results. Value should be between 0-15.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor Precision(int? precision)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Precision(int? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
 	/// <summary>
@@ -280,10 +355,10 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	/// Number of buckets returned from each shard.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor ShardSize(int? shardSize)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor ShardSize(int? value)
 	{
-		ShardSizeValue = shardSize;
-		return Self;
+		Instance.ShardSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -291,41 +366,17 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	/// Maximum number of buckets to return.
 	/// </para>
 	/// </summary>
-	public GeohexGridAggregationDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoundsValue is not null)
-		{
-			writer.WritePropertyName("bounds");
-			JsonSerializer.Serialize(writer, BoundsValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (PrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("precision");
-			writer.WriteNumberValue(PrecisionValue.Value);
-		}
-
-		if (ShardSizeValue.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(ShardSizeValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

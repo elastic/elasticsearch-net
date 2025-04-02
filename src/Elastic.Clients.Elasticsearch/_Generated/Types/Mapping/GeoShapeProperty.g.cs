@@ -17,62 +17,233 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
+internal sealed partial class GeoShapePropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreZValue = System.Text.Json.JsonEncodedText.Encode("ignore_z_value");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropOrientation = System.Text.Json.JsonEncodedText.Encode("orientation");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropStrategy = System.Text.Json.JsonEncodedText.Encode("strategy");
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCoerce = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIgnoreMalformed = default;
+		LocalJsonValue<bool?> propIgnoreZValue = default;
+		LocalJsonValue<bool?> propIndex = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.GeoOrientation?> propOrientation = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.GeoStrategy?> propStrategy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCoerce.TryReadProperty(ref reader, options, PropCoerce, null))
+			{
+				continue;
+			}
+
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMalformed.TryReadProperty(ref reader, options, PropIgnoreMalformed, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreZValue.TryReadProperty(ref reader, options, PropIgnoreZValue, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propOrientation.TryReadProperty(ref reader, options, PropOrientation, null))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			{
+				continue;
+			}
+
+			if (propStrategy.TryReadProperty(ref reader, options, PropStrategy, null))
+			{
+				continue;
+			}
+
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Coerce = propCoerce.Value,
+			CopyTo = propCopyTo.Value,
+			DocValues = propDocValues.Value,
+			Dynamic = propDynamic.Value,
+			Fields = propFields.Value,
+			IgnoreAbove = propIgnoreAbove.Value,
+			IgnoreMalformed = propIgnoreMalformed.Value,
+			IgnoreZValue = propIgnoreZValue.Value,
+			Index = propIndex.Value,
+			Meta = propMeta.Value,
+			Orientation = propOrientation.Value,
+			Properties = propProperties.Value,
+			Store = propStore.Value,
+			Strategy = propStrategy.Value,
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCoerce, value.Coerce, null, null);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed, null, null);
+		writer.WriteProperty(options, PropIgnoreZValue, value.IgnoreZValue, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropOrientation, value.Orientation, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropStrategy, value.Strategy, null, null);
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-public sealed partial class GeoShapeProperty : IProperty
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyConverter))]
+public sealed partial class GeoShapeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
-	[JsonInclude, JsonPropertyName("coerce")]
+#if NET7_0_OR_GREATER
+	public GeoShapeProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GeoShapeProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoShapeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? Coerce { get; set; }
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_z_value")]
 	public bool? IgnoreZValue { get; set; }
+	public bool? Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("orientation")]
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("strategy")]
 	public Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? Strategy { get; set; }
-	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "geo_shape";
 }
 
@@ -81,91 +252,91 @@ public sealed partial class GeoShapeProperty : IProperty
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-public sealed partial class GeoShapePropertyDescriptor<TDocument> : SerializableDescriptor<GeoShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<GeoShapeProperty>
+public readonly partial struct GeoShapePropertyDescriptor<TDocument>
 {
-	internal GeoShapePropertyDescriptor(Action<GeoShapePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty Instance { get; init; }
 
-	public GeoShapePropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoShapePropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? CoerceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
-	private bool? IgnoreZValueValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? StrategyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-
-	public GeoShapePropertyDescriptor<TDocument> Coerce(bool? coerce = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoShapePropertyDescriptor()
 	{
-		CoerceValue = coerce;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty(Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Coerce(bool? value = true)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.Coerce = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> CopyTo(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> DocValues(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
-		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> IgnoreZValue(bool? ignoreZValue = true)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> IgnoreMalformed(bool? value = true)
 	{
-		IgnoreZValueValue = ignoreZValue;
-		return Self;
+		Instance.IgnoreMalformed = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> IgnoreZValue(bool? value = true)
+	{
+		Instance.IgnoreZValue = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Index(bool? value = true)
+	{
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -173,165 +344,89 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public GeoShapePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Orientation(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? orientation)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Meta()
 	{
-		OrientationValue = orientation;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> AddMeta(string key, string value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Orientation(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Orientation = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		StoreValue = store;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> Strategy(Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? strategy)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		StrategyValue = strategy;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Store(bool? value = true)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Store = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Strategy(Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? value)
 	{
-		writer.WriteStartObject();
-		if (CoerceValue.HasValue)
-		{
-			writer.WritePropertyName("coerce");
-			writer.WriteBooleanValue(CoerceValue.Value);
-		}
-
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IgnoreMalformedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-		}
-
-		if (IgnoreZValueValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_z_value");
-			writer.WriteBooleanValue(IgnoreZValueValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (OrientationValue is not null)
-		{
-			writer.WritePropertyName("orientation");
-			JsonSerializer.Serialize(writer, OrientationValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (StrategyValue is not null)
-		{
-			writer.WritePropertyName("strategy");
-			JsonSerializer.Serialize(writer, StrategyValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("geo_shape");
-		writer.WriteEndObject();
+		Instance.Strategy = value;
+		return this;
 	}
 
-	GeoShapeProperty IBuildableDescriptor<GeoShapeProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		Coerce = CoerceValue,
-		CopyTo = CopyToValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		IgnoreMalformed = IgnoreMalformedValue,
-		IgnoreZValue = IgnoreZValueValue,
-		Meta = MetaValue,
-		Orientation = OrientationValue,
-		Properties = PropertiesValue,
-		Store = StoreValue,
-		Strategy = StrategyValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
+		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }
 
 /// <summary>
@@ -339,91 +434,97 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<GeoShapePropertyDescriptor>, IBuildableDescriptor<GeoShapeProperty>
+public readonly partial struct GeoShapePropertyDescriptor
 {
-	internal GeoShapePropertyDescriptor(Action<GeoShapePropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty Instance { get; init; }
 
-	public GeoShapePropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoShapePropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? CoerceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
-	private bool? IgnoreZValueValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? StrategyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
-
-	public GeoShapePropertyDescriptor Coerce(bool? coerce = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoShapePropertyDescriptor()
 	{
-		CoerceValue = coerce;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public GeoShapePropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty(Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Coerce(bool? value = true)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.Coerce = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor CopyTo<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor DocValues(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor IgnoreZValue(bool? ignoreZValue = true)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor IgnoreAbove(int? value)
 	{
-		IgnoreZValueValue = ignoreZValue;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor IgnoreMalformed(bool? value = true)
+	{
+		Instance.IgnoreMalformed = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor IgnoreZValue(bool? value = true)
+	{
+		Instance.IgnoreZValue = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Index(bool? value = true)
+	{
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
@@ -431,163 +532,93 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public GeoShapePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Orientation(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? orientation)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Meta()
 	{
-		OrientationValue = orientation;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor AddMeta(string key, string value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Orientation(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Orientation = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		StoreValue = store;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor Strategy(Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? strategy)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		StrategyValue = strategy;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public GeoShapePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		SyntheticSourceKeepValue = syntheticSourceKeep;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Store(bool? value = true)
 	{
-		writer.WriteStartObject();
-		if (CoerceValue.HasValue)
-		{
-			writer.WritePropertyName("coerce");
-			writer.WriteBooleanValue(CoerceValue.Value);
-		}
-
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IgnoreMalformedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-		}
-
-		if (IgnoreZValueValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_z_value");
-			writer.WriteBooleanValue(IgnoreZValueValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (OrientationValue is not null)
-		{
-			writer.WritePropertyName("orientation");
-			JsonSerializer.Serialize(writer, OrientationValue, options);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (StrategyValue is not null)
-		{
-			writer.WritePropertyName("strategy");
-			JsonSerializer.Serialize(writer, StrategyValue, options);
-		}
-
-		if (SyntheticSourceKeepValue is not null)
-		{
-			writer.WritePropertyName("synthetic_source_keep");
-			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("geo_shape");
-		writer.WriteEndObject();
+		Instance.Store = value;
+		return this;
 	}
 
-	GeoShapeProperty IBuildableDescriptor<GeoShapeProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Strategy(Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? value)
 	{
-		Coerce = CoerceValue,
-		CopyTo = CopyToValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		Fields = FieldsValue,
-		IgnoreAbove = IgnoreAboveValue,
-		IgnoreMalformed = IgnoreMalformedValue,
-		IgnoreZValue = IgnoreZValueValue,
-		Meta = MetaValue,
-		Orientation = OrientationValue,
-		Properties = PropertiesValue,
-		Store = StoreValue,
-		Strategy = StrategyValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
-	};
+		Instance.Strategy = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
+	{
+		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

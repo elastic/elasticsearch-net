@@ -17,88 +17,198 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class PrivilegeActionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.PrivilegeActions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
+	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+
+	public override Elastic.Clients.Elasticsearch.Security.PrivilegeActions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propActions = default;
+		LocalJsonValue<string?> propApplication = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActions.TryReadProperty(ref reader, options, PropActions, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propApplication.TryReadProperty(ref reader, options, PropApplication, null))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.PrivilegeActions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Actions = propActions.Value,
+			Application = propApplication.Value,
+			Metadata = propMetadata.Value,
+			Name = propName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.PrivilegeActions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActions, value.Actions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropApplication, value.Application, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.PrivilegeActionsConverter))]
 public sealed partial class PrivilegeActions
 {
-	[JsonInclude, JsonPropertyName("actions")]
-	public ICollection<string> Actions { get; set; }
-	[JsonInclude, JsonPropertyName("application")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrivilegeActions(System.Collections.Generic.ICollection<string> actions)
+	{
+		Actions = actions;
+	}
+#if NET7_0_OR_GREATER
+	public PrivilegeActions()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PrivilegeActions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PrivilegeActions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Actions { get; set; }
 	public string? Application { get; set; }
-	[JsonInclude, JsonPropertyName("metadata")]
-	public IDictionary<string, object>? Metadata { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
+	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 }
 
-public sealed partial class PrivilegeActionsDescriptor : SerializableDescriptor<PrivilegeActionsDescriptor>
+public readonly partial struct PrivilegeActionsDescriptor
 {
-	internal PrivilegeActionsDescriptor(Action<PrivilegeActionsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.PrivilegeActions Instance { get; init; }
 
-	public PrivilegeActionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrivilegeActionsDescriptor(Elastic.Clients.Elasticsearch.Security.PrivilegeActions instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string> ActionsValue { get; set; }
-	private string? ApplicationValue { get; set; }
-	private IDictionary<string, object>? MetadataValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-
-	public PrivilegeActionsDescriptor Actions(ICollection<string> actions)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrivilegeActionsDescriptor()
 	{
-		ActionsValue = actions;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.PrivilegeActions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PrivilegeActionsDescriptor Application(string? application)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor(Elastic.Clients.Elasticsearch.Security.PrivilegeActions instance) => new Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.PrivilegeActions(Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Actions(System.Collections.Generic.ICollection<string> value)
 	{
-		ApplicationValue = application;
-		return Self;
+		Instance.Actions = value;
+		return this;
 	}
 
-	public PrivilegeActionsDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Actions()
 	{
-		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public PrivilegeActionsDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		NameValue = name;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Actions(params string[] values)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("actions");
-		JsonSerializer.Serialize(writer, ActionsValue, options);
-		if (!string.IsNullOrEmpty(ApplicationValue))
-		{
-			writer.WritePropertyName("application");
-			writer.WriteStringValue(ApplicationValue);
-		}
+		Instance.Actions = [.. values];
+		return this;
+	}
 
-		if (MetadataValue is not null)
-		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Application(string? value)
+	{
+		Instance.Application = value;
+		return this;
+	}
 
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Metadata = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Metadata()
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor AddMetadatum(string key, object value)
+	{
+		Instance.Metadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Metadata.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.PrivilegeActions Build(System.Action<Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor(new Elastic.Clients.Elasticsearch.Security.PrivilegeActions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

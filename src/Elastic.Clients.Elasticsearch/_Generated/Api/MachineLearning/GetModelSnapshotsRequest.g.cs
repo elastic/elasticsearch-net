@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetModelSnapshotsRequestParameters : RequestParameters
+public sealed partial class GetModelSnapshotsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -47,24 +40,112 @@ public sealed partial class GetModelSnapshotsRequestParameters : RequestParamete
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
+internal sealed partial class GetModelSnapshotsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDesc = System.Text.Json.JsonEncodedText.Encode("desc");
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
+	private static readonly System.Text.Json.JsonEncodedText PropPage = System.Text.Json.JsonEncodedText.Encode("page");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDesc = default;
+		LocalJsonValue<System.DateTime?> propEnd = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Page?> propPage = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propSort = default;
+		LocalJsonValue<System.DateTime?> propStart = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDesc.TryReadProperty(ref reader, options, PropDesc, null))
+			{
+				continue;
+			}
+
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propPage.TryReadProperty(ref reader, options, PropPage, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, null))
+			{
+				continue;
+			}
+
+			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Desc = propDesc.Value,
+			End = propEnd.Value,
+			Page = propPage.Value,
+			Sort = propSort.Value,
+			Start = propStart.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDesc, value.Desc, null, null);
+		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropPage, value.Page, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, null);
+		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get model snapshots info.
 /// </para>
 /// </summary>
-public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnapshotsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestConverter))]
+public sealed partial class GetModelSnapshotsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? snapshotId) : base(r => r.Required("job_id", jobId).Optional("snapshot_id", snapshotId))
 	{
 	}
 
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetModelSnapshotsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetModelSnapshots;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetModelSnapshots;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -72,10 +153,29 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
+	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
+	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id?>("snapshot_id"); set => PO("snapshot_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Skips the specified number of snapshots.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -83,7 +183,6 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 	/// Specifies the maximum number of snapshots to obtain.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
@@ -91,7 +190,6 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 	/// Refer to the description for the <c>desc</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("desc")]
 	public bool? Desc { get; set; }
 
 	/// <summary>
@@ -99,9 +197,7 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("end")]
-	public DateTimeOffset? End { get; set; }
-	[JsonInclude, JsonPropertyName("page")]
+	public System.DateTime? End { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 
 	/// <summary>
@@ -109,7 +205,6 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Field? Sort { get; set; }
 
 	/// <summary>
@@ -117,8 +212,7 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("start")]
-	public DateTimeOffset? Start { get; set; }
+	public System.DateTime? Start { get; set; }
 }
 
 /// <summary>
@@ -126,58 +220,90 @@ public sealed partial class GetModelSnapshotsRequest : PlainRequest<GetModelSnap
 /// Get model snapshots info.
 /// </para>
 /// </summary>
-public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : RequestDescriptor<GetModelSnapshotsRequestDescriptor<TDocument>, GetModelSnapshotsRequestParameters>
+public readonly partial struct GetModelSnapshotsRequestDescriptor
 {
-	internal GetModelSnapshotsRequestDescriptor(Action<GetModelSnapshotsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest Instance { get; init; }
 
-	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? snapshotId) : base(r => r.Required("job_id", jobId).Optional("snapshot_id", snapshotId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(jobId, snapshotId);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetModelSnapshots;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.get_model_snapshots";
-
-	public GetModelSnapshotsRequestDescriptor<TDocument> From(int? from) => Qs("from", from);
-	public GetModelSnapshotsRequestDescriptor<TDocument> Size(int? size) => Qs("size", size);
-
-	public GetModelSnapshotsRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(jobId);
 	}
 
-	public GetModelSnapshotsRequestDescriptor<TDocument> SnapshotId(Elastic.Clients.Elasticsearch.Id? snapshotId)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GetModelSnapshotsRequestDescriptor()
 	{
-		RouteValues.Optional("snapshot_id", snapshotId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private bool? DescValue { get; set; }
-	private DateTimeOffset? EndValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Page? PageValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor PageDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SortValue { get; set; }
-	private DateTimeOffset? StartValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
+	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
+	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id? value)
+	{
+		Instance.SnapshotId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of snapshots.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of snapshots to obtain.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>desc</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor<TDocument> Desc(bool? desc = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Desc(bool? value = true)
 	{
-		DescValue = desc;
-		return Self;
+		Instance.Desc = value;
+		return this;
 	}
 
 	/// <summary>
@@ -185,34 +311,28 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor<TDocument> End(DateTimeOffset? end)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor End(System.DateTime? value)
 	{
-		EndValue = end;
-		return Self;
+		Instance.End = value;
+		return this;
 	}
 
-	public GetModelSnapshotsRequestDescriptor<TDocument> Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? page)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
-		PageDescriptor = null;
-		PageDescriptorAction = null;
-		PageValue = page;
-		return Self;
+		Instance.Page = value;
+		return this;
 	}
 
-	public GetModelSnapshotsRequestDescriptor<TDocument> Page(Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Page()
 	{
-		PageValue = null;
-		PageDescriptorAction = null;
-		PageDescriptor = descriptor;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
+		return this;
 	}
 
-	public GetModelSnapshotsRequestDescriptor<TDocument> Page(Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
-		PageValue = null;
-		PageDescriptor = null;
-		PageDescriptorAction = configure;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -220,10 +340,10 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? sort)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -231,21 +351,10 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor<TDocument> Sort<TValue>(Expression<Func<TDocument, TValue>> sort)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Sort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		SortValue = sort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
-	public GetModelSnapshotsRequestDescriptor<TDocument> Sort(Expression<Func<TDocument, object>> sort)
-	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -253,56 +362,60 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor<TDocument> Start(DateTimeOffset? start)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Start(System.DateTime? value)
 	{
-		StartValue = start;
-		return Self;
+		Instance.Start = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (DescValue.HasValue)
-		{
-			writer.WritePropertyName("desc");
-			writer.WriteBooleanValue(DescValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (EndValue is not null)
-		{
-			writer.WritePropertyName("end");
-			JsonSerializer.Serialize(writer, EndValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (PageDescriptor is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageDescriptor, options);
-		}
-		else if (PageDescriptorAction is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(PageDescriptorAction), options);
-		}
-		else if (PageValue is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (StartValue is not null)
-		{
-			writer.WritePropertyName("start");
-			JsonSerializer.Serialize(writer, StartValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -311,58 +424,90 @@ public sealed partial class GetModelSnapshotsRequestDescriptor<TDocument> : Requ
 /// Get model snapshots info.
 /// </para>
 /// </summary>
-public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescriptor<GetModelSnapshotsRequestDescriptor, GetModelSnapshotsRequestParameters>
+public readonly partial struct GetModelSnapshotsRequestDescriptor<TDocument>
 {
-	internal GetModelSnapshotsRequestDescriptor(Action<GetModelSnapshotsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest Instance { get; init; }
 
-	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? snapshotId) : base(r => r.Required("job_id", jobId).Optional("snapshot_id", snapshotId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(jobId, snapshotId);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetModelSnapshots;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.get_model_snapshots";
-
-	public GetModelSnapshotsRequestDescriptor From(int? from) => Qs("from", from);
-	public GetModelSnapshotsRequestDescriptor Size(int? size) => Qs("size", size);
-
-	public GetModelSnapshotsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(jobId);
 	}
 
-	public GetModelSnapshotsRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id? snapshotId)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GetModelSnapshotsRequestDescriptor()
 	{
-		RouteValues.Optional("snapshot_id", snapshotId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private bool? DescValue { get; set; }
-	private DateTimeOffset? EndValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Page? PageValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor PageDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> PageDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? SortValue { get; set; }
-	private DateTimeOffset? StartValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
+	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
+	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> SnapshotId(Elastic.Clients.Elasticsearch.Id? value)
+	{
+		Instance.SnapshotId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of snapshots.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of snapshots to obtain.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>desc</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor Desc(bool? desc = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Desc(bool? value = true)
 	{
-		DescValue = desc;
-		return Self;
+		Instance.Desc = value;
+		return this;
 	}
 
 	/// <summary>
@@ -370,34 +515,28 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor End(DateTimeOffset? end)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> End(System.DateTime? value)
 	{
-		EndValue = end;
-		return Self;
+		Instance.End = value;
+		return this;
 	}
 
-	public GetModelSnapshotsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? page)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
-		PageDescriptor = null;
-		PageDescriptorAction = null;
-		PageValue = page;
-		return Self;
+		Instance.Page = value;
+		return this;
 	}
 
-	public GetModelSnapshotsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Page()
 	{
-		PageValue = null;
-		PageDescriptorAction = null;
-		PageDescriptor = descriptor;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
+		return this;
 	}
 
-	public GetModelSnapshotsRequestDescriptor Page(Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
-		PageValue = null;
-		PageDescriptor = null;
-		PageDescriptorAction = configure;
-		return Self;
+		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -405,10 +544,10 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? sort)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -416,21 +555,10 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	/// Refer to the description for the <c>sort</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor Sort<TDocument, TValue>(Expression<Func<TDocument, TValue>> sort)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Sort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		SortValue = sort;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
-	public GetModelSnapshotsRequestDescriptor Sort<TDocument>(Expression<Func<TDocument, object>> sort)
-	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -438,55 +566,59 @@ public sealed partial class GetModelSnapshotsRequestDescriptor : RequestDescript
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public GetModelSnapshotsRequestDescriptor Start(DateTimeOffset? start)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Start(System.DateTime? value)
 	{
-		StartValue = start;
-		return Self;
+		Instance.Start = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (DescValue.HasValue)
-		{
-			writer.WritePropertyName("desc");
-			writer.WriteBooleanValue(DescValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (EndValue is not null)
-		{
-			writer.WritePropertyName("end");
-			JsonSerializer.Serialize(writer, EndValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (PageDescriptor is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageDescriptor, options);
-		}
-		else if (PageDescriptorAction is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(PageDescriptorAction), options);
-		}
-		else if (PageValue is not null)
-		{
-			writer.WritePropertyName("page");
-			JsonSerializer.Serialize(writer, PageValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (StartValue is not null)
-		{
-			writer.WritePropertyName("start");
-			JsonSerializer.Serialize(writer, StartValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

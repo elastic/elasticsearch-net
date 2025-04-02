@@ -17,24 +17,199 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class GeoGridProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropChildrenField = System.Text.Json.JsonEncodedText.Encode("children_field");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropNonChildrenField = System.Text.Json.JsonEncodedText.Encode("non_children_field");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropParentField = System.Text.Json.JsonEncodedText.Encode("parent_field");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecisionField = System.Text.Json.JsonEncodedText.Encode("precision_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetFormat = System.Text.Json.JsonEncodedText.Encode("target_format");
+	private static readonly System.Text.Json.JsonEncodedText PropTileType = System.Text.Json.JsonEncodedText.Encode("tile_type");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propChildrenField = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<string> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propNonChildrenField = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propParentField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propPrecisionField = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat?> propTargetFormat = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType> propTileType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propChildrenField.TryReadProperty(ref reader, options, PropChildrenField, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propNonChildrenField.TryReadProperty(ref reader, options, PropNonChildrenField, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propParentField.TryReadProperty(ref reader, options, PropParentField, null))
+			{
+				continue;
+			}
+
+			if (propPrecisionField.TryReadProperty(ref reader, options, PropPrecisionField, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (propTargetFormat.TryReadProperty(ref reader, options, PropTargetFormat, null))
+			{
+				continue;
+			}
+
+			if (propTileType.TryReadProperty(ref reader, options, PropTileType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ChildrenField = propChildrenField.Value,
+			Description = propDescription.Value,
+			Field = propField.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			NonChildrenField = propNonChildrenField.Value,
+			OnFailure = propOnFailure.Value,
+			ParentField = propParentField.Value,
+			PrecisionField = propPrecisionField.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value,
+			TargetFormat = propTargetFormat.Value,
+			TileType = propTileType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropChildrenField, value.ChildrenField, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropNonChildrenField, value.NonChildrenField, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropParentField, value.ParentField, null, null);
+		writer.WriteProperty(options, PropPrecisionField, value.PrecisionField, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteProperty(options, PropTargetFormat, value.TargetFormat, null, null);
+		writer.WriteProperty(options, PropTileType, value.TileType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorConverter))]
 public sealed partial class GeoGridProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridProcessor(string field, Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType tileType)
+	{
+		Field = field;
+		TileType = tileType;
+	}
+#if NET7_0_OR_GREATER
+	public GeoGridProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeoGridProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoGridProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("children_field")]
 	public Elastic.Clients.Elasticsearch.Field? ChildrenField { get; set; }
 
 	/// <summary>
@@ -43,7 +218,6 @@ public sealed partial class GeoGridProcessor
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -52,23 +226,24 @@ public sealed partial class GeoGridProcessor
 	/// The field format is determined by the <c>tile_type</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public string Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -76,7 +251,6 @@ public sealed partial class GeoGridProcessor
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -84,7 +258,6 @@ public sealed partial class GeoGridProcessor
 	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("non_children_field")]
 	public Elastic.Clients.Elasticsearch.Field? NonChildrenField { get; set; }
 
 	/// <summary>
@@ -92,15 +265,13 @@ public sealed partial class GeoGridProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If specified and a parent tile exists, save that tile address to this field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("parent_field")]
 	public Elastic.Clients.Elasticsearch.Field? ParentField { get; set; }
 
 	/// <summary>
@@ -108,7 +279,6 @@ public sealed partial class GeoGridProcessor
 	/// If specified, save the tile precision (zoom) as an integer to this field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision_field")]
 	public Elastic.Clients.Elasticsearch.Field? PrecisionField { get; set; }
 
 	/// <summary>
@@ -117,7 +287,6 @@ public sealed partial class GeoGridProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -125,7 +294,6 @@ public sealed partial class GeoGridProcessor
 	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
 	/// <summary>
@@ -133,7 +301,6 @@ public sealed partial class GeoGridProcessor
 	/// Which format to save the generated polygon in.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_format")]
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? TargetFormat { get; set; }
 
 	/// <summary>
@@ -141,47 +308,41 @@ public sealed partial class GeoGridProcessor
 	/// Three tile formats are understood: geohash, geotile and geohex.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tile_type")]
-	public Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType TileType { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(GeoGridProcessor geoGridProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.GeoGrid(geoGridProcessor);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType TileType { get; set; }
 }
 
-public sealed partial class GeoGridProcessorDescriptor<TDocument> : SerializableDescriptor<GeoGridProcessorDescriptor<TDocument>>
+public readonly partial struct GeoGridProcessorDescriptor<TDocument>
 {
-	internal GeoGridProcessorDescriptor(Action<GeoGridProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor Instance { get; init; }
 
-	public GeoGridProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? ChildrenFieldValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private string FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? NonChildrenFieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? ParentFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PrecisionFieldValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? TargetFormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType TileTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> ChildrenField(Elastic.Clients.Elasticsearch.Field? childrenField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> ChildrenField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ChildrenFieldValue = childrenField;
-		return Self;
+		Instance.ChildrenField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -189,21 +350,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> ChildrenField<TValue>(Expression<Func<TDocument, TValue>> childrenField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> ChildrenField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		ChildrenFieldValue = childrenField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> ChildrenField(Expression<Func<TDocument, object>> childrenField)
-	{
-		ChildrenFieldValue = childrenField;
-		return Self;
+		Instance.ChildrenField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -212,10 +362,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -224,10 +374,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// The field format is determined by the <c>tile_type</c>.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> Field(string field)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> Field(string value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -235,10 +385,32 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -246,10 +418,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -257,10 +429,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -268,10 +440,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> NonChildrenField(Elastic.Clients.Elasticsearch.Field? nonChildrenField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> NonChildrenField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		NonChildrenFieldValue = nonChildrenField;
-		return Self;
+		Instance.NonChildrenField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -279,21 +451,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> NonChildrenField<TValue>(Expression<Func<TDocument, TValue>> nonChildrenField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> NonChildrenField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		NonChildrenFieldValue = nonChildrenField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> NonChildrenField(Expression<Func<TDocument, object>> nonChildrenField)
-	{
-		NonChildrenFieldValue = nonChildrenField;
-		return Self;
+		Instance.NonChildrenField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -301,40 +462,60 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public GeoGridProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public GeoGridProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public GeoGridProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -342,10 +523,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// If specified and a parent tile exists, save that tile address to this field.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> ParentField(Elastic.Clients.Elasticsearch.Field? parentField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> ParentField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ParentFieldValue = parentField;
-		return Self;
+		Instance.ParentField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -353,21 +534,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// If specified and a parent tile exists, save that tile address to this field.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> ParentField<TValue>(Expression<Func<TDocument, TValue>> parentField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> ParentField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		ParentFieldValue = parentField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified and a parent tile exists, save that tile address to this field.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> ParentField(Expression<Func<TDocument, object>> parentField)
-	{
-		ParentFieldValue = parentField;
-		return Self;
+		Instance.ParentField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -375,10 +545,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// If specified, save the tile precision (zoom) as an integer to this field.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> PrecisionField(Elastic.Clients.Elasticsearch.Field? precisionField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> PrecisionField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PrecisionFieldValue = precisionField;
-		return Self;
+		Instance.PrecisionField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -386,21 +556,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// If specified, save the tile precision (zoom) as an integer to this field.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> PrecisionField<TValue>(Expression<Func<TDocument, TValue>> precisionField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> PrecisionField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PrecisionFieldValue = precisionField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified, save the tile precision (zoom) as an integer to this field.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> PrecisionField(Expression<Func<TDocument, object>> precisionField)
-	{
-		PrecisionFieldValue = precisionField;
-		return Self;
+		Instance.PrecisionField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -409,10 +568,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -420,10 +579,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -431,21 +590,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -453,10 +601,10 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// Which format to save the generated polygon in.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> TargetFormat(Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? targetFormat)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> TargetFormat(Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? value)
 	{
-		TargetFormatValue = targetFormat;
-		return Self;
+		Instance.TargetFormat = value;
+		return this;
 	}
 
 	/// <summary>
@@ -464,155 +612,49 @@ public sealed partial class GeoGridProcessorDescriptor<TDocument> : Serializable
 	/// Three tile formats are understood: geohash, geotile and geohex.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor<TDocument> TileType(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType tileType)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> TileType(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType value)
 	{
-		TileTypeValue = tileType;
-		return Self;
+		Instance.TileType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (ChildrenFieldValue is not null)
-		{
-			writer.WritePropertyName("children_field");
-			JsonSerializer.Serialize(writer, ChildrenFieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		writer.WriteStringValue(FieldValue);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (NonChildrenFieldValue is not null)
-		{
-			writer.WritePropertyName("non_children_field");
-			JsonSerializer.Serialize(writer, NonChildrenFieldValue, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (ParentFieldValue is not null)
-		{
-			writer.WritePropertyName("parent_field");
-			JsonSerializer.Serialize(writer, ParentFieldValue, options);
-		}
-
-		if (PrecisionFieldValue is not null)
-		{
-			writer.WritePropertyName("precision_field");
-			JsonSerializer.Serialize(writer, PrecisionFieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		if (TargetFormatValue is not null)
-		{
-			writer.WritePropertyName("target_format");
-			JsonSerializer.Serialize(writer, TargetFormatValue, options);
-		}
-
-		writer.WritePropertyName("tile_type");
-		JsonSerializer.Serialize(writer, TileTypeValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<GeoGridProcessorDescriptor>
+public readonly partial struct GeoGridProcessorDescriptor
 {
-	internal GeoGridProcessorDescriptor(Action<GeoGridProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor Instance { get; init; }
 
-	public GeoGridProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? ChildrenFieldValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private string FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? NonChildrenFieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? ParentFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PrecisionFieldValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? TargetFormatValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType TileTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoGridProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor ChildrenField(Elastic.Clients.Elasticsearch.Field? childrenField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor ChildrenField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ChildrenFieldValue = childrenField;
-		return Self;
+		Instance.ChildrenField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -620,21 +662,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor ChildrenField<TDocument, TValue>(Expression<Func<TDocument, TValue>> childrenField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor ChildrenField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		ChildrenFieldValue = childrenField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor ChildrenField<TDocument>(Expression<Func<TDocument, object>> childrenField)
-	{
-		ChildrenFieldValue = childrenField;
-		return Self;
+		Instance.ChildrenField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -643,10 +674,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -655,10 +686,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// The field format is determined by the <c>tile_type</c>.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor Field(string field)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor Field(string value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -666,10 +697,32 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -677,10 +730,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -688,10 +741,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -699,10 +752,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor NonChildrenField(Elastic.Clients.Elasticsearch.Field? nonChildrenField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor NonChildrenField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		NonChildrenFieldValue = nonChildrenField;
-		return Self;
+		Instance.NonChildrenField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -710,21 +763,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor NonChildrenField<TDocument, TValue>(Expression<Func<TDocument, TValue>> nonChildrenField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor NonChildrenField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		NonChildrenFieldValue = nonChildrenField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor NonChildrenField<TDocument>(Expression<Func<TDocument, object>> nonChildrenField)
-	{
-		NonChildrenFieldValue = nonChildrenField;
-		return Self;
+		Instance.NonChildrenField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -732,40 +774,88 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public GeoGridProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
 	}
 
-	public GeoGridProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
 	}
 
-	public GeoGridProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -773,10 +863,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// If specified and a parent tile exists, save that tile address to this field.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor ParentField(Elastic.Clients.Elasticsearch.Field? parentField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor ParentField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ParentFieldValue = parentField;
-		return Self;
+		Instance.ParentField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -784,21 +874,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// If specified and a parent tile exists, save that tile address to this field.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor ParentField<TDocument, TValue>(Expression<Func<TDocument, TValue>> parentField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor ParentField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		ParentFieldValue = parentField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified and a parent tile exists, save that tile address to this field.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor ParentField<TDocument>(Expression<Func<TDocument, object>> parentField)
-	{
-		ParentFieldValue = parentField;
-		return Self;
+		Instance.ParentField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -806,10 +885,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// If specified, save the tile precision (zoom) as an integer to this field.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor PrecisionField(Elastic.Clients.Elasticsearch.Field? precisionField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor PrecisionField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PrecisionFieldValue = precisionField;
-		return Self;
+		Instance.PrecisionField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -817,21 +896,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// If specified, save the tile precision (zoom) as an integer to this field.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor PrecisionField<TDocument, TValue>(Expression<Func<TDocument, TValue>> precisionField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor PrecisionField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		PrecisionFieldValue = precisionField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If specified, save the tile precision (zoom) as an integer to this field.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor PrecisionField<TDocument>(Expression<Func<TDocument, object>> precisionField)
-	{
-		PrecisionFieldValue = precisionField;
-		return Self;
+		Instance.PrecisionField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -840,10 +908,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -851,10 +919,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -862,21 +930,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
-	public GeoGridProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -884,10 +941,10 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// Which format to save the generated polygon in.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor TargetFormat(Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? targetFormat)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor TargetFormat(Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? value)
 	{
-		TargetFormatValue = targetFormat;
-		return Self;
+		Instance.TargetFormat = value;
+		return this;
 	}
 
 	/// <summary>
@@ -895,116 +952,17 @@ public sealed partial class GeoGridProcessorDescriptor : SerializableDescriptor<
 	/// Three tile formats are understood: geohash, geotile and geohex.
 	/// </para>
 	/// </summary>
-	public GeoGridProcessorDescriptor TileType(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType tileType)
+	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor TileType(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType value)
 	{
-		TileTypeValue = tileType;
-		return Self;
+		Instance.TileType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ChildrenFieldValue is not null)
-		{
-			writer.WritePropertyName("children_field");
-			JsonSerializer.Serialize(writer, ChildrenFieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		writer.WriteStringValue(FieldValue);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (NonChildrenFieldValue is not null)
-		{
-			writer.WritePropertyName("non_children_field");
-			JsonSerializer.Serialize(writer, NonChildrenFieldValue, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (ParentFieldValue is not null)
-		{
-			writer.WritePropertyName("parent_field");
-			JsonSerializer.Serialize(writer, ParentFieldValue, options);
-		}
-
-		if (PrecisionFieldValue is not null)
-		{
-			writer.WritePropertyName("precision_field");
-			JsonSerializer.Serialize(writer, PrecisionFieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		if (TargetFormatValue is not null)
-		{
-			writer.WritePropertyName("target_format");
-			JsonSerializer.Serialize(writer, TargetFormatValue, options);
-		}
-
-		writer.WritePropertyName("tile_type");
-		JsonSerializer.Serialize(writer, TileTypeValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

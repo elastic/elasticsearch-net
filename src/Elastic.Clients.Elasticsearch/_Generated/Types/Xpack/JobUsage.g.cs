@@ -17,26 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class JobUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.JobUsage>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedBy = System.Text.Json.JsonEncodedText.Encode("created_by");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors");
+	private static readonly System.Text.Json.JsonEncodedText PropForecasts = System.Text.Json.JsonEncodedText.Encode("forecasts");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSize = System.Text.Json.JsonEncodedText.Encode("model_size");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.JobUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, long>> propCreatedBy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics> propDetectors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts> propForecasts = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics> propModelSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propCreatedBy.TryReadProperty(ref reader, options, PropCreatedBy, static System.Collections.Generic.IReadOnlyDictionary<string, long> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, long>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propDetectors.TryReadProperty(ref reader, options, PropDetectors, null))
+			{
+				continue;
+			}
+
+			if (propForecasts.TryReadProperty(ref reader, options, PropForecasts, null))
+			{
+				continue;
+			}
+
+			if (propModelSize.TryReadProperty(ref reader, options, PropModelSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.JobUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			CreatedBy = propCreatedBy.Value,
+			Detectors = propDetectors.Value,
+			Forecasts = propForecasts.Value,
+			ModelSize = propModelSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.JobUsage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropCreatedBy, value.CreatedBy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long> v) => w.WriteDictionaryValue<string, long>(o, v, null, null));
+		writer.WriteProperty(options, PropDetectors, value.Detectors, null, null);
+		writer.WriteProperty(options, PropForecasts, value.Forecasts, null, null);
+		writer.WriteProperty(options, PropModelSize, value.ModelSize, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.JobUsageConverter))]
 public sealed partial class JobUsage
 {
-	[JsonInclude, JsonPropertyName("count")]
-	public int Count { get; init; }
-	[JsonInclude, JsonPropertyName("created_by")]
-	public IReadOnlyDictionary<string, long> CreatedBy { get; init; }
-	[JsonInclude, JsonPropertyName("detectors")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics Detectors { get; init; }
-	[JsonInclude, JsonPropertyName("forecasts")]
-	public Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts Forecasts { get; init; }
-	[JsonInclude, JsonPropertyName("model_size")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics ModelSize { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public JobUsage(int count, System.Collections.Generic.IReadOnlyDictionary<string, long> createdBy, Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics detectors, Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts forecasts, Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics modelSize)
+	{
+		Count = count;
+		CreatedBy = createdBy;
+		Detectors = detectors;
+		Forecasts = forecasts;
+		ModelSize = modelSize;
+	}
+#if NET7_0_OR_GREATER
+	public JobUsage()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public JobUsage()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal JobUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Count { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, long> CreatedBy { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics Detectors { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts Forecasts { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics ModelSize { get; set; }
 }

@@ -17,24 +17,114 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class WatcherWatchConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.WatcherWatch>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
+	private static readonly System.Text.Json.JsonEncodedText PropCondition = System.Text.Json.JsonEncodedText.Encode("condition");
+	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input");
+	private static readonly System.Text.Json.JsonEncodedText PropTrigger = System.Text.Json.JsonEncodedText.Encode("trigger");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.WatcherWatch Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>?> propAction = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>?> propCondition = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>> propInput = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger> propTrigger = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAction.TryReadProperty(ref reader, options, PropAction, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Counter>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propCondition.TryReadProperty(ref reader, options, PropCondition, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Counter>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propInput.TryReadProperty(ref reader, options, PropInput, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Counter>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propTrigger.TryReadProperty(ref reader, options, PropTrigger, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.WatcherWatch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Action = propAction.Value,
+			Condition = propCondition.Value,
+			Input = propInput.Value,
+			Trigger = propTrigger.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.WatcherWatch value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAction, value.Action, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Counter>(o, v, null, null));
+		writer.WriteProperty(options, PropCondition, value.Condition, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Counter>(o, v, null, null));
+		writer.WriteProperty(options, PropInput, value.Input, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Counter>(o, v, null, null));
+		writer.WriteProperty(options, PropTrigger, value.Trigger, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.WatcherWatchConverter))]
 public sealed partial class WatcherWatch
 {
-	[JsonInclude, JsonPropertyName("action")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? Action { get; init; }
-	[JsonInclude, JsonPropertyName("condition")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? Condition { get; init; }
-	[JsonInclude, JsonPropertyName("input")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter> Input { get; init; }
-	[JsonInclude, JsonPropertyName("trigger")]
-	public Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger Trigger { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public WatcherWatch(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter> input, Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger trigger)
+	{
+		Input = input;
+		Trigger = trigger;
+	}
+#if NET7_0_OR_GREATER
+	public WatcherWatch()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public WatcherWatch()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal WatcherWatch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? Action { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? Condition { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter> Input { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger Trigger { get; set; }
 }

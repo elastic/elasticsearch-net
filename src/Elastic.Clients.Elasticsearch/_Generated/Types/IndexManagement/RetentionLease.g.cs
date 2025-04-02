@@ -17,43 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class RetentionLease
+internal sealed partial class RetentionLeaseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease>
 {
-	[JsonInclude, JsonPropertyName("period")]
-	public Elastic.Clients.Elasticsearch.Duration Period { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropPeriod = System.Text.Json.JsonEncodedText.Encode("period");
 
-public sealed partial class RetentionLeaseDescriptor : SerializableDescriptor<RetentionLeaseDescriptor>
-{
-	internal RetentionLeaseDescriptor(Action<RetentionLeaseDescriptor> configure) => configure.Invoke(this);
-
-	public RetentionLeaseDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propPeriod = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPeriod.TryReadProperty(ref reader, options, PropPeriod, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Period = propPeriod.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Duration PeriodValue { get; set; }
-
-	public RetentionLeaseDescriptor Period(Elastic.Clients.Elasticsearch.Duration period)
-	{
-		PeriodValue = period;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("period");
-		JsonSerializer.Serialize(writer, PeriodValue, options);
+		writer.WriteProperty(options, PropPeriod, value.Period, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseConverter))]
+public sealed partial class RetentionLease
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetentionLease(Elastic.Clients.Elasticsearch.Duration period)
+	{
+		Period = period;
+	}
+#if NET7_0_OR_GREATER
+	public RetentionLease()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RetentionLease()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RetentionLease(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration Period { get; set; }
+}
+
+public readonly partial struct RetentionLeaseDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetentionLeaseDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RetentionLeaseDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor Period(Elastic.Clients.Elasticsearch.Duration value)
+	{
+		Instance.Period = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

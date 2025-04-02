@@ -17,32 +17,139 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class CpuConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Cpu>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLoadAverage = System.Text.Json.JsonEncodedText.Encode("load_average");
+	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent");
+	private static readonly System.Text.Json.JsonEncodedText PropSys = System.Text.Json.JsonEncodedText.Encode("sys");
+	private static readonly System.Text.Json.JsonEncodedText PropSysInMillis = System.Text.Json.JsonEncodedText.Encode("sys_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInMillis = System.Text.Json.JsonEncodedText.Encode("total_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user");
+	private static readonly System.Text.Json.JsonEncodedText PropUserInMillis = System.Text.Json.JsonEncodedText.Encode("user_in_millis");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.Cpu Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, double>?> propLoadAverage = default;
+		LocalJsonValue<int?> propPercent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propSys = default;
+		LocalJsonValue<System.TimeSpan?> propSysInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotal = default;
+		LocalJsonValue<System.TimeSpan?> propTotalInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propUser = default;
+		LocalJsonValue<System.TimeSpan?> propUserInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLoadAverage.TryReadProperty(ref reader, options, PropLoadAverage, static System.Collections.Generic.IReadOnlyDictionary<string, double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, double>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPercent.TryReadProperty(ref reader, options, PropPercent, null))
+			{
+				continue;
+			}
+
+			if (propSys.TryReadProperty(ref reader, options, PropSys, null))
+			{
+				continue;
+			}
+
+			if (propSysInMillis.TryReadProperty(ref reader, options, PropSysInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (propTotalInMillis.TryReadProperty(ref reader, options, PropTotalInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propUser.TryReadProperty(ref reader, options, PropUser, null))
+			{
+				continue;
+			}
+
+			if (propUserInMillis.TryReadProperty(ref reader, options, PropUserInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.Cpu(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			LoadAverage = propLoadAverage.Value,
+			Percent = propPercent.Value,
+			Sys = propSys.Value,
+			SysInMillis = propSysInMillis.Value,
+			Total = propTotal.Value,
+			TotalInMillis = propTotalInMillis.Value,
+			User = propUser.Value,
+			UserInMillis = propUserInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Cpu value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLoadAverage, value.LoadAverage, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, double>? v) => w.WriteDictionaryValue<string, double>(o, v, null, null));
+		writer.WriteProperty(options, PropPercent, value.Percent, null, null);
+		writer.WriteProperty(options, PropSys, value.Sys, null, null);
+		writer.WriteProperty(options, PropSysInMillis, value.SysInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropTotalInMillis, value.TotalInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropUser, value.User, null, null);
+		writer.WriteProperty(options, PropUserInMillis, value.UserInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.CpuConverter))]
 public sealed partial class Cpu
 {
-	[JsonInclude, JsonPropertyName("load_average")]
-	public IReadOnlyDictionary<string, double>? LoadAverage { get; init; }
-	[JsonInclude, JsonPropertyName("percent")]
-	public int? Percent { get; init; }
-	[JsonInclude, JsonPropertyName("sys")]
-	public Elastic.Clients.Elasticsearch.Duration? Sys { get; init; }
-	[JsonInclude, JsonPropertyName("sys_in_millis")]
-	public long? SysInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public Elastic.Clients.Elasticsearch.Duration? Total { get; init; }
-	[JsonInclude, JsonPropertyName("total_in_millis")]
-	public long? TotalInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("user")]
-	public Elastic.Clients.Elasticsearch.Duration? User { get; init; }
-	[JsonInclude, JsonPropertyName("user_in_millis")]
-	public long? UserInMillis { get; init; }
+#if NET7_0_OR_GREATER
+	public Cpu()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Cpu()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Cpu(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.IReadOnlyDictionary<string, double>? LoadAverage { get; set; }
+	public int? Percent { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? Sys { get; set; }
+	public System.TimeSpan? SysInMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? Total { get; set; }
+	public System.TimeSpan? TotalInMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? User { get; set; }
+	public System.TimeSpan? UserInMillis { get; set; }
 }

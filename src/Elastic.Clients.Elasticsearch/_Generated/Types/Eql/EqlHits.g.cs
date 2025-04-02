@@ -17,39 +17,123 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+internal sealed partial class EqlHitsConverter<TEvent> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent>>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEvents = System.Text.Json.JsonEncodedText.Encode("events");
+	private static readonly System.Text.Json.JsonEncodedText PropSequences = System.Text.Json.JsonEncodedText.Encode("sequences");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+
+	public override Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>?> propEvents = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>?> propSequences = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.TotalHits?> propTotal = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEvents.TryReadProperty(ref reader, options, PropEvents, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSequences.TryReadProperty(ref reader, options, PropSequences, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Events = propEvents.Value,
+			Sequences = propSequences.Value,
+			Total = propTotal.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEvents, value.Events, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>(o, v, null));
+		writer.WriteProperty(options, PropSequences, value.Sequences, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>(o, v, null));
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+internal sealed partial class EqlHitsConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
+{
+	public override bool CanConvert(System.Type typeToConvert)
+	{
+		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(EqlHits<>);
+	}
+
+	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var args = typeToConvert.GetGenericArguments();
+#pragma warning disable IL3050
+		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(EqlHitsConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
+#pragma warning restore IL3050
+		return converter;
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.EqlHitsConverterFactory))]
 public sealed partial class EqlHits<TEvent>
 {
+#if NET7_0_OR_GREATER
+	public EqlHits()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public EqlHits()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EqlHits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Contains events matching the query. Each object represents a matching event.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("events")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? Events { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? Events { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains event sequences matching the query. Each object represents a matching sequence. This parameter is only returned for EQL queries containing a sequence.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sequences")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? Sequences { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? Sequences { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Metadata about the number of matching events or sequences.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public Elastic.Clients.Elasticsearch.Core.Search.TotalHits? Total { get; init; }
+	public Elastic.Clients.Elasticsearch.Core.Search.TotalHits? Total { get; set; }
 }

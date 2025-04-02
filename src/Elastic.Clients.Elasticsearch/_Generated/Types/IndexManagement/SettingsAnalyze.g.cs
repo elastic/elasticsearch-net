@@ -17,47 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class SettingsAnalyzeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTokenCount = System.Text.Json.JsonEncodedText.Encode("max_token_count");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propMaxTokenCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxTokenCount.TryReadProperty(ref reader, options, PropMaxTokenCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxTokenCount = propMaxTokenCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxTokenCount, value.MaxTokenCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeConverter))]
 public sealed partial class SettingsAnalyze
 {
-	[JsonInclude, JsonPropertyName("max_token_count")]
+#if NET7_0_OR_GREATER
+	public SettingsAnalyze()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SettingsAnalyze()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SettingsAnalyze(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public int? MaxTokenCount { get; set; }
 }
 
-public sealed partial class SettingsAnalyzeDescriptor : SerializableDescriptor<SettingsAnalyzeDescriptor>
+public readonly partial struct SettingsAnalyzeDescriptor
 {
-	internal SettingsAnalyzeDescriptor(Action<SettingsAnalyzeDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze Instance { get; init; }
 
-	public SettingsAnalyzeDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsAnalyzeDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze instance)
 	{
+		Instance = instance;
 	}
 
-	private int? MaxTokenCountValue { get; set; }
-
-	public SettingsAnalyzeDescriptor MaxTokenCount(int? maxTokenCount)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsAnalyzeDescriptor()
 	{
-		MaxTokenCountValue = maxTokenCount;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor MaxTokenCount(int? value)
 	{
-		writer.WriteStartObject();
-		if (MaxTokenCountValue.HasValue)
+		Instance.MaxTokenCount = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("max_token_count");
-			writer.WriteNumberValue(MaxTokenCountValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

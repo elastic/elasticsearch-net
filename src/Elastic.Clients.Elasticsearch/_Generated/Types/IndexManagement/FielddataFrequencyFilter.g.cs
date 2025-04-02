@@ -17,65 +17,155 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class FielddataFrequencyFilter
+internal sealed partial class FielddataFrequencyFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter>
 {
-	[JsonInclude, JsonPropertyName("max")]
-	public double Max { get; set; }
-	[JsonInclude, JsonPropertyName("min")]
-	public double Min { get; set; }
-	[JsonInclude, JsonPropertyName("min_segment_size")]
-	public int MinSegmentSize { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText PropMinSegmentSize = System.Text.Json.JsonEncodedText.Encode("min_segment_size");
 
-public sealed partial class FielddataFrequencyFilterDescriptor : SerializableDescriptor<FielddataFrequencyFilterDescriptor>
-{
-	internal FielddataFrequencyFilterDescriptor(Action<FielddataFrequencyFilterDescriptor> configure) => configure.Invoke(this);
-
-	public FielddataFrequencyFilterDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double> propMax = default;
+		LocalJsonValue<double> propMin = default;
+		LocalJsonValue<int> propMinSegmentSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
+			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			{
+				continue;
+			}
+
+			if (propMinSegmentSize.TryReadProperty(ref reader, options, PropMinSegmentSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Max = propMax.Value,
+			Min = propMin.Value,
+			MinSegmentSize = propMinSegmentSize.Value
+		};
 	}
 
-	private double MaxValue { get; set; }
-	private double MinValue { get; set; }
-	private int MinSegmentSizeValue { get; set; }
-
-	public FielddataFrequencyFilterDescriptor Max(double max)
-	{
-		MaxValue = max;
-		return Self;
-	}
-
-	public FielddataFrequencyFilterDescriptor Min(double min)
-	{
-		MinValue = min;
-		return Self;
-	}
-
-	public FielddataFrequencyFilterDescriptor MinSegmentSize(int minSegmentSize)
-	{
-		MinSegmentSizeValue = minSegmentSize;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("max");
-		writer.WriteNumberValue(MaxValue);
-		writer.WritePropertyName("min");
-		writer.WriteNumberValue(MinValue);
-		writer.WritePropertyName("min_segment_size");
-		writer.WriteNumberValue(MinSegmentSizeValue);
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteProperty(options, PropMinSegmentSize, value.MinSegmentSize, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterConverter))]
+public sealed partial class FielddataFrequencyFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FielddataFrequencyFilter(double max, double min, int minSegmentSize)
+	{
+		Max = max;
+		Min = min;
+		MinSegmentSize = minSegmentSize;
+	}
+#if NET7_0_OR_GREATER
+	public FielddataFrequencyFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FielddataFrequencyFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Max { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Min { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MinSegmentSize { get; set; }
+}
+
+public readonly partial struct FielddataFrequencyFilterDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FielddataFrequencyFilterDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FielddataFrequencyFilterDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter instance) => new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor Max(double value)
+	{
+		Instance.Max = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor Min(double value)
+	{
+		Instance.Min = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor MinSegmentSize(int value)
+	{
+		Instance.MinSegmentSize = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

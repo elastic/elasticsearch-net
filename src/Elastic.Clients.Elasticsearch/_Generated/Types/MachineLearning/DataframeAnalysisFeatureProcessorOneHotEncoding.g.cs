@@ -17,68 +17,137 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropHotMap = System.Text.Json.JsonEncodedText.Encode("hot_map");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<string> propHotMap = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propHotMap.TryReadProperty(ref reader, options, PropHotMap, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			HotMap = propHotMap.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropHotMap, value.HotMap, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingConverter))]
 public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncoding
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.Field field, string hotMap)
+	{
+		Field = field;
+		HotMap = hotMap;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeAnalysisFeatureProcessorOneHotEncoding()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeAnalysisFeatureProcessorOneHotEncoding()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The name of the field to encode.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The one hot map mapping the field value with the column name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("hot_map")]
-	public string HotMap { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor(DataframeAnalysisFeatureProcessorOneHotEncoding dataframeAnalysisFeatureProcessorOneHotEncoding) => Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor.OneHotEncoding(dataframeAnalysisFeatureProcessorOneHotEncoding);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string HotMap { get; set; }
 }
 
-public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> : SerializableDescriptor<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>>
+public readonly partial struct DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>
 {
-	internal DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding Instance { get; init; }
 
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string HotMapValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The name of the field to encode.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -86,10 +155,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	/// The name of the field to encode.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -97,54 +166,49 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	/// The one hot map mapping the field value with the column name.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> HotMap(string hotMap)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> HotMap(string value)
 	{
-		HotMapValue = hotMap;
-		return Self;
+		Instance.HotMap = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("hot_map");
-		writer.WriteStringValue(HotMapValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor : SerializableDescriptor<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor>
+public readonly partial struct DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor
 {
-	internal DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding Instance { get; init; }
 
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string HotMapValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The name of the field to encode.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -152,10 +216,10 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	/// The name of the field to encode.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -163,19 +227,17 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescr
 	/// The one hot map mapping the field value with the column name.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor HotMap(string hotMap)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor HotMap(string value)
 	{
-		HotMapValue = hotMap;
-		return Self;
+		Instance.HotMap = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("hot_map");
-		writer.WriteStringValue(HotMapValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

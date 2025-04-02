@@ -17,972 +17,817 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class TypeMappingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.TypeMapping>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllField = System.Text.Json.JsonEncodedText.Encode("all_field");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamTimestamp = System.Text.Json.JsonEncodedText.Encode("_data_stream_timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropDateDetection = System.Text.Json.JsonEncodedText.Encode("date_detection");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicDateFormats = System.Text.Json.JsonEncodedText.Encode("dynamic_date_formats");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldNames = System.Text.Json.JsonEncodedText.Encode("_field_names");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexField = System.Text.Json.JsonEncodedText.Encode("index_field");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNumericDetection = System.Text.Json.JsonEncodedText.Encode("numeric_detection");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntime = System.Text.Json.JsonEncodedText.Encode("runtime");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("_size");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropSubobjects = System.Text.Json.JsonEncodedText.Encode("subobjects");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.TypeMapping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.AllField?> propAllField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp?> propDataStreamTimestamp = default;
+		LocalJsonValue<bool?> propDateDetection = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propDynamicDateFormats = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?> propDynamicTemplates = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.FieldNamesField?> propFieldNames = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.IndexField?> propIndexField = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<bool?> propNumericDetection = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.RoutingField?> propRouting = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntime = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SizeField?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SourceField?> propSource = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Subobjects?> propSubobjects = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllField.TryReadProperty(ref reader, options, PropAllField, null))
+			{
+				continue;
+			}
+
+			if (propDataStreamTimestamp.TryReadProperty(ref reader, options, PropDataStreamTimestamp, null))
+			{
+				continue;
+			}
+
+			if (propDateDetection.TryReadProperty(ref reader, options, PropDateDetection, null))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propDynamicDateFormats.TryReadProperty(ref reader, options, PropDynamicDateFormats, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDynamicTemplates.TryReadProperty(ref reader, options, PropDynamicTemplates, static System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(o, static System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>(o, null, null))))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propFieldNames.TryReadProperty(ref reader, options, PropFieldNames, null))
+			{
+				continue;
+			}
+
+			if (propIndexField.TryReadProperty(ref reader, options, PropIndexField, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propNumericDetection.TryReadProperty(ref reader, options, PropNumericDetection, null))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propRuntime.TryReadProperty(ref reader, options, PropRuntime, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (propSubobjects.TryReadProperty(ref reader, options, PropSubobjects, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.TypeMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllField = propAllField.Value,
+			DataStreamTimestamp = propDataStreamTimestamp.Value,
+			DateDetection = propDateDetection.Value,
+			Dynamic = propDynamic.Value,
+			DynamicDateFormats = propDynamicDateFormats.Value,
+			DynamicTemplates = propDynamicTemplates.Value,
+			Enabled = propEnabled.Value,
+			FieldNames = propFieldNames.Value,
+			IndexField = propIndexField.Value,
+			Meta = propMeta.Value,
+			NumericDetection = propNumericDetection.Value,
+			Properties = propProperties.Value,
+			Routing = propRouting.Value,
+			Runtime = propRuntime.Value,
+			Size = propSize.Value,
+			Source = propSource.Value,
+			Subobjects = propSubobjects.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.TypeMapping value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllField, value.AllField, null, null);
+		writer.WriteProperty(options, PropDataStreamTimestamp, value.DataStreamTimestamp, null, null);
+		writer.WriteProperty(options, PropDateDetection, value.DateDetection, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropDynamicDateFormats, value.DynamicDateFormats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDynamicTemplates, value.DynamicTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? v) => w.WriteCollectionValue<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate> v) => w.WriteKeyValuePairValue<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>(o, v, null, null)));
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropFieldNames, value.FieldNames, null, null);
+		writer.WriteProperty(options, PropIndexField, value.IndexField, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropNumericDetection, value.NumericDetection, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropRuntime, value.Runtime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropSubobjects, value.Subobjects, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.TypeMappingConverter))]
 public sealed partial class TypeMapping
 {
-	[JsonInclude, JsonPropertyName("all_field")]
+#if NET7_0_OR_GREATER
+	public TypeMapping()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TypeMapping()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TypeMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.AllField? AllField { get; set; }
-	[JsonInclude, JsonPropertyName("_data_stream_timestamp")]
 	public Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestamp { get; set; }
-	[JsonInclude, JsonPropertyName("date_detection")]
 	public bool? DateDetection { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic_date_formats")]
-	public ICollection<string>? DynamicDateFormats { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic_templates")]
-	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
-	[JsonInclude, JsonPropertyName("enabled")]
+	public System.Collections.Generic.ICollection<string>? DynamicDateFormats { get; set; }
+	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 	public bool? Enabled { get; set; }
-	[JsonInclude, JsonPropertyName("_field_names")]
 	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
-	[JsonInclude, JsonPropertyName("index_field")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexField { get; set; }
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("numeric_detection")]
+	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 	public bool? NumericDetection { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("_routing")]
 	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
-	[JsonInclude, JsonPropertyName("runtime")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
-	[JsonInclude, JsonPropertyName("_size")]
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SizeField? Size { get; set; }
-	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
-	[JsonInclude, JsonPropertyName("subobjects")]
-	public bool? Subobjects { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.Subobjects? Subobjects { get; set; }
 }
 
-public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescriptor<TypeMappingDescriptor<TDocument>>
+public readonly partial struct TypeMappingDescriptor<TDocument>
 {
-	internal TypeMappingDescriptor(Action<TypeMappingDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping Instance { get; init; }
 
-	public TypeMappingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TypeMappingDescriptor(Elastic.Clients.Elasticsearch.Mapping.TypeMapping instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.AllField? AllFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor AllFieldDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> AllFieldDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestampValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor DataStreamTimestampDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> DataStreamTimestampDescriptorAction { get; set; }
-	private bool? DateDetectionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private ICollection<string>? DynamicDateFormatsValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
-	private bool? EnabledValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor IndexFieldDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> IndexFieldDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private bool? NumericDetectionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SizeField? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor SizeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> SizeDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
-	private bool? SubobjectsValue { get; set; }
-
-	public TypeMappingDescriptor<TDocument> AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TypeMappingDescriptor()
 	{
-		AllFieldDescriptor = null;
-		AllFieldDescriptorAction = null;
-		AllFieldValue = allField;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.TypeMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public TypeMappingDescriptor<TDocument> AllField(Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.TypeMapping instance) => new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.TypeMapping(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? value)
 	{
-		AllFieldValue = null;
-		AllFieldDescriptorAction = null;
-		AllFieldDescriptor = descriptor;
-		return Self;
+		Instance.AllField = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> AllField(Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> AllField(System.Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> action)
 	{
-		AllFieldValue = null;
-		AllFieldDescriptor = null;
-		AllFieldDescriptorAction = configure;
-		return Self;
+		Instance.AllField = Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? dataStreamTimestamp)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? value)
 	{
-		DataStreamTimestampDescriptor = null;
-		DataStreamTimestampDescriptorAction = null;
-		DataStreamTimestampValue = dataStreamTimestamp;
-		return Self;
+		Instance.DataStreamTimestamp = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DataStreamTimestamp(System.Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> action)
 	{
-		DataStreamTimestampValue = null;
-		DataStreamTimestampDescriptorAction = null;
-		DataStreamTimestampDescriptor = descriptor;
-		return Self;
+		Instance.DataStreamTimestamp = Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> DataStreamTimestamp(Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DateDetection(bool? value = true)
 	{
-		DataStreamTimestampValue = null;
-		DataStreamTimestampDescriptor = null;
-		DataStreamTimestampDescriptorAction = configure;
-		return Self;
+		Instance.DateDetection = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> DateDetection(bool? dateDetection = true)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		DateDetectionValue = dateDetection;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicDateFormats(System.Collections.Generic.ICollection<string>? value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.DynamicDateFormats = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> DynamicDateFormats(ICollection<string>? dynamicDateFormats)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicDateFormats()
 	{
-		DynamicDateFormatsValue = dynamicDateFormats;
-		return Self;
+		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicDateFormats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		DynamicTemplatesValue = dynamicTemplates;
-		return Self;
+		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Enabled(bool? enabled = true)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicDateFormats(params string[] values)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.DynamicDateFormats = [.. values];
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicTemplates(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? value)
 	{
-		FieldNamesDescriptor = null;
-		FieldNamesDescriptorAction = null;
-		FieldNamesValue = fieldNames;
-		return Self;
+		Instance.DynamicTemplates = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicTemplates()
 	{
-		FieldNamesValue = null;
-		FieldNamesDescriptorAction = null;
-		FieldNamesDescriptor = descriptor;
-		return Self;
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(null);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> FieldNames(Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>>? action)
 	{
-		FieldNamesValue = null;
-		FieldNamesDescriptor = null;
-		FieldNamesDescriptorAction = configure;
-		return Self;
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexField? indexField)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> AddDynamicTemplate(string key, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate value)
 	{
-		IndexFieldDescriptor = null;
-		IndexFieldDescriptorAction = null;
-		IndexFieldValue = indexField;
-		return Self;
+		Instance.DynamicTemplates ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>();
+		Instance.DynamicTemplates.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>(key, value));
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> AddDynamicTemplate(string key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument>> action)
 	{
-		IndexFieldValue = null;
-		IndexFieldDescriptorAction = null;
-		IndexFieldDescriptor = descriptor;
-		return Self;
+		Instance.DynamicTemplates ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>();
+		Instance.DynamicTemplates.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>(key, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument>.Build(action)));
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> IndexField(Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Enabled(bool? value = true)
 	{
-		IndexFieldValue = null;
-		IndexFieldDescriptor = null;
-		IndexFieldDescriptorAction = configure;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.FieldNames = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> NumericDetection(bool? numericDetection = true)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> FieldNames(System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> action)
 	{
-		NumericDetectionValue = numericDetection;
-		return Self;
+		Instance.FieldNames = Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexField? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.IndexField = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> IndexField(System.Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> action)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.IndexField = Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Meta()
 	{
-		RoutingDescriptor = null;
-		RoutingDescriptorAction = null;
-		RoutingValue = routing;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
 	{
-		RoutingValue = null;
-		RoutingDescriptorAction = null;
-		RoutingDescriptor = descriptor;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Routing(Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> AddMeta(string key, object value)
 	{
-		RoutingValue = null;
-		RoutingDescriptor = null;
-		RoutingDescriptorAction = configure;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Runtime(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> NumericDetection(bool? value = true)
 	{
-		RuntimeValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
-		return Self;
+		Instance.NumericDetection = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Size(Elastic.Clients.Elasticsearch.Mapping.SizeField? size)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		SizeDescriptor = null;
-		SizeDescriptorAction = null;
-		SizeValue = size;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Size(Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		SizeValue = null;
-		SizeDescriptorAction = null;
-		SizeDescriptor = descriptor;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Size(Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? value)
 	{
-		SizeValue = null;
-		SizeDescriptor = null;
-		SizeDescriptorAction = configure;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Routing(System.Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> action)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Routing = Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Runtime(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Runtime = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Source(Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Runtime()
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<TDocument>.Build(null);
+		return this;
 	}
 
-	public TypeMappingDescriptor<TDocument> Subobjects(bool? subobjects = true)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<TDocument>>? action)
 	{
-		SubobjectsValue = subobjects;
-		return Self;
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> AddRuntime(string key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
 	{
-		writer.WriteStartObject();
-		if (AllFieldDescriptor is not null)
+		Instance.Runtime ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.Runtime.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> AddRuntime(string key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.Runtime ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.Runtime.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Size(Elastic.Clients.Elasticsearch.Mapping.SizeField? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Size(System.Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> action)
+	{
+		Instance.Size = Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? value)
+	{
+		Instance.Source = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Source()
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor>? action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Subobjects(Elastic.Clients.Elasticsearch.Mapping.Subobjects? value)
+	{
+		Instance.Subobjects = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.TypeMapping Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("all_field");
-			JsonSerializer.Serialize(writer, AllFieldDescriptor, options);
-		}
-		else if (AllFieldDescriptorAction is not null)
-		{
-			writer.WritePropertyName("all_field");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor(AllFieldDescriptorAction), options);
-		}
-		else if (AllFieldValue is not null)
-		{
-			writer.WritePropertyName("all_field");
-			JsonSerializer.Serialize(writer, AllFieldValue, options);
+			return new Elastic.Clients.Elasticsearch.Mapping.TypeMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DataStreamTimestampDescriptor is not null)
-		{
-			writer.WritePropertyName("_data_stream_timestamp");
-			JsonSerializer.Serialize(writer, DataStreamTimestampDescriptor, options);
-		}
-		else if (DataStreamTimestampDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_data_stream_timestamp");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor(DataStreamTimestampDescriptorAction), options);
-		}
-		else if (DataStreamTimestampValue is not null)
-		{
-			writer.WritePropertyName("_data_stream_timestamp");
-			JsonSerializer.Serialize(writer, DataStreamTimestampValue, options);
-		}
-
-		if (DateDetectionValue.HasValue)
-		{
-			writer.WritePropertyName("date_detection");
-			writer.WriteBooleanValue(DateDetectionValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (DynamicDateFormatsValue is not null)
-		{
-			writer.WritePropertyName("dynamic_date_formats");
-			JsonSerializer.Serialize(writer, DynamicDateFormatsValue, options);
-		}
-
-		if (DynamicTemplatesValue is not null)
-		{
-			writer.WritePropertyName("dynamic_templates");
-			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
-		}
-
-		if (EnabledValue.HasValue)
-		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
-		}
-
-		if (FieldNamesDescriptor is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
-		}
-		else if (FieldNamesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
-		}
-		else if (FieldNamesValue is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, FieldNamesValue, options);
-		}
-
-		if (IndexFieldDescriptor is not null)
-		{
-			writer.WritePropertyName("index_field");
-			JsonSerializer.Serialize(writer, IndexFieldDescriptor, options);
-		}
-		else if (IndexFieldDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_field");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor(IndexFieldDescriptorAction), options);
-		}
-		else if (IndexFieldValue is not null)
-		{
-			writer.WritePropertyName("index_field");
-			JsonSerializer.Serialize(writer, IndexFieldValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (NumericDetectionValue.HasValue)
-		{
-			writer.WritePropertyName("numeric_detection");
-			writer.WriteBooleanValue(NumericDetectionValue.Value);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (RoutingDescriptor is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, RoutingDescriptor, options);
-		}
-		else if (RoutingDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
-		}
-		else if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (RuntimeValue is not null)
-		{
-			writer.WritePropertyName("runtime");
-			JsonSerializer.Serialize(writer, RuntimeValue, options);
-		}
-
-		if (SizeDescriptor is not null)
-		{
-			writer.WritePropertyName("_size");
-			JsonSerializer.Serialize(writer, SizeDescriptor, options);
-		}
-		else if (SizeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_size");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor(SizeDescriptorAction), options);
-		}
-		else if (SizeValue is not null)
-		{
-			writer.WritePropertyName("_size");
-			JsonSerializer.Serialize(writer, SizeValue, options);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
-		}
-		else if (SourceValue is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (SubobjectsValue.HasValue)
-		{
-			writer.WritePropertyName("subobjects");
-			writer.WriteBooleanValue(SubobjectsValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.TypeMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeMappingDescriptor>
+public readonly partial struct TypeMappingDescriptor
 {
-	internal TypeMappingDescriptor(Action<TypeMappingDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping Instance { get; init; }
 
-	public TypeMappingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TypeMappingDescriptor(Elastic.Clients.Elasticsearch.Mapping.TypeMapping instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.AllField? AllFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor AllFieldDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> AllFieldDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestampValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor DataStreamTimestampDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> DataStreamTimestampDescriptorAction { get; set; }
-	private bool? DateDetectionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private ICollection<string>? DynamicDateFormatsValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
-	private bool? EnabledValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor IndexFieldDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> IndexFieldDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private bool? NumericDetectionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SizeField? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor SizeDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> SizeDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
-	private bool? SubobjectsValue { get; set; }
-
-	public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TypeMappingDescriptor()
 	{
-		AllFieldDescriptor = null;
-		AllFieldDescriptorAction = null;
-		AllFieldValue = allField;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.TypeMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor(Elastic.Clients.Elasticsearch.Mapping.TypeMapping instance) => new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.TypeMapping(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? value)
 	{
-		AllFieldValue = null;
-		AllFieldDescriptorAction = null;
-		AllFieldDescriptor = descriptor;
-		return Self;
+		Instance.AllField = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor AllField(Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor AllField(System.Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> action)
 	{
-		AllFieldValue = null;
-		AllFieldDescriptor = null;
-		AllFieldDescriptorAction = configure;
-		return Self;
+		Instance.AllField = Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? dataStreamTimestamp)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? value)
 	{
-		DataStreamTimestampDescriptor = null;
-		DataStreamTimestampDescriptorAction = null;
-		DataStreamTimestampValue = dataStreamTimestamp;
-		return Self;
+		Instance.DataStreamTimestamp = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DataStreamTimestamp(System.Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> action)
 	{
-		DataStreamTimestampValue = null;
-		DataStreamTimestampDescriptorAction = null;
-		DataStreamTimestampDescriptor = descriptor;
-		return Self;
+		Instance.DataStreamTimestamp = Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor DataStreamTimestamp(Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DateDetection(bool? value = true)
 	{
-		DataStreamTimestampValue = null;
-		DataStreamTimestampDescriptor = null;
-		DataStreamTimestampDescriptorAction = configure;
-		return Self;
+		Instance.DateDetection = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor DateDetection(bool? dateDetection = true)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		DateDetectionValue = dateDetection;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicDateFormats(System.Collections.Generic.ICollection<string>? value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.DynamicDateFormats = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor DynamicDateFormats(ICollection<string>? dynamicDateFormats)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicDateFormats()
 	{
-		DynamicDateFormatsValue = dynamicDateFormats;
-		return Self;
+		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	public TypeMappingDescriptor DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicDateFormats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		DynamicTemplatesValue = dynamicTemplates;
-		return Self;
+		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor Enabled(bool? enabled = true)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicDateFormats(params string[] values)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.DynamicDateFormats = [.. values];
+		return this;
 	}
 
-	public TypeMappingDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicTemplates(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? value)
 	{
-		FieldNamesDescriptor = null;
-		FieldNamesDescriptorAction = null;
-		FieldNamesValue = fieldNames;
-		return Self;
+		Instance.DynamicTemplates = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicTemplates()
 	{
-		FieldNamesValue = null;
-		FieldNamesDescriptorAction = null;
-		FieldNamesDescriptor = descriptor;
-		return Self;
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate.Build(null);
+		return this;
 	}
 
-	public TypeMappingDescriptor FieldNames(Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate>? action)
 	{
-		FieldNamesValue = null;
-		FieldNamesDescriptor = null;
-		FieldNamesDescriptorAction = configure;
-		return Self;
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexField? indexField)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicTemplates<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<T>>? action)
 	{
-		IndexFieldDescriptor = null;
-		IndexFieldDescriptorAction = null;
-		IndexFieldValue = indexField;
-		return Self;
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<T>.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor AddDynamicTemplate(string key, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate value)
 	{
-		IndexFieldValue = null;
-		IndexFieldDescriptorAction = null;
-		IndexFieldDescriptor = descriptor;
-		return Self;
+		Instance.DynamicTemplates ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>();
+		Instance.DynamicTemplates.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>(key, value));
+		return this;
 	}
 
-	public TypeMappingDescriptor IndexField(Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor AddDynamicTemplate(string key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor> action)
 	{
-		IndexFieldValue = null;
-		IndexFieldDescriptor = null;
-		IndexFieldDescriptorAction = configure;
-		return Self;
+		Instance.DynamicTemplates ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>();
+		Instance.DynamicTemplates.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>(key, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor.Build(action)));
+		return this;
 	}
 
-	public TypeMappingDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor AddDynamicTemplate<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<T>> action)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.DynamicTemplates ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>();
+		Instance.DynamicTemplates.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>(key, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<T>.Build(action)));
+		return this;
 	}
 
-	public TypeMappingDescriptor NumericDetection(bool? numericDetection = true)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Enabled(bool? value = true)
 	{
-		NumericDetectionValue = numericDetection;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.FieldNames = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor FieldNames(System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> action)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.FieldNames = Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexField? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.IndexField = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor IndexField(System.Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> action)
 	{
-		RoutingDescriptor = null;
-		RoutingDescriptorAction = null;
-		RoutingValue = routing;
-		return Self;
+		Instance.IndexField = Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		RoutingValue = null;
-		RoutingDescriptorAction = null;
-		RoutingDescriptor = descriptor;
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor Routing(Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Meta()
 	{
-		RoutingValue = null;
-		RoutingDescriptor = null;
-		RoutingDescriptorAction = configure;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
 	}
 
-	public TypeMappingDescriptor Runtime(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
 	{
-		RuntimeValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor Size(Elastic.Clients.Elasticsearch.Mapping.SizeField? size)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor AddMeta(string key, object value)
 	{
-		SizeDescriptor = null;
-		SizeDescriptorAction = null;
-		SizeValue = size;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public TypeMappingDescriptor Size(Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor NumericDetection(bool? value = true)
 	{
-		SizeValue = null;
-		SizeDescriptorAction = null;
-		SizeDescriptor = descriptor;
-		return Self;
+		Instance.NumericDetection = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor Size(Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		SizeValue = null;
-		SizeDescriptor = null;
-		SizeDescriptorAction = configure;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public TypeMappingDescriptor Source(Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? value)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
-	public TypeMappingDescriptor Subobjects(bool? subobjects = true)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Routing(System.Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> action)
 	{
-		SubobjectsValue = subobjects;
-		return Self;
+		Instance.Routing = Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Runtime(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		writer.WriteStartObject();
-		if (AllFieldDescriptor is not null)
+		Instance.Runtime = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Runtime()
+	{
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField>? action)
+	{
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Runtime<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<T>>? action)
+	{
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor AddRuntime(string key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.Runtime ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.Runtime.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor AddRuntime(string key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.Runtime ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.Runtime.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor AddRuntime<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.Runtime ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.Runtime.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Size(Elastic.Clients.Elasticsearch.Mapping.SizeField? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Size(System.Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> action)
+	{
+		Instance.Size = Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? value)
+	{
+		Instance.Source = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Source()
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor>? action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Subobjects(Elastic.Clients.Elasticsearch.Mapping.Subobjects? value)
+	{
+		Instance.Subobjects = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.TypeMapping Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("all_field");
-			JsonSerializer.Serialize(writer, AllFieldDescriptor, options);
-		}
-		else if (AllFieldDescriptorAction is not null)
-		{
-			writer.WritePropertyName("all_field");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor(AllFieldDescriptorAction), options);
-		}
-		else if (AllFieldValue is not null)
-		{
-			writer.WritePropertyName("all_field");
-			JsonSerializer.Serialize(writer, AllFieldValue, options);
-		}
-
-		if (DataStreamTimestampDescriptor is not null)
-		{
-			writer.WritePropertyName("_data_stream_timestamp");
-			JsonSerializer.Serialize(writer, DataStreamTimestampDescriptor, options);
-		}
-		else if (DataStreamTimestampDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_data_stream_timestamp");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor(DataStreamTimestampDescriptorAction), options);
-		}
-		else if (DataStreamTimestampValue is not null)
-		{
-			writer.WritePropertyName("_data_stream_timestamp");
-			JsonSerializer.Serialize(writer, DataStreamTimestampValue, options);
+			return new Elastic.Clients.Elasticsearch.Mapping.TypeMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DateDetectionValue.HasValue)
-		{
-			writer.WritePropertyName("date_detection");
-			writer.WriteBooleanValue(DateDetectionValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (DynamicDateFormatsValue is not null)
-		{
-			writer.WritePropertyName("dynamic_date_formats");
-			JsonSerializer.Serialize(writer, DynamicDateFormatsValue, options);
-		}
-
-		if (DynamicTemplatesValue is not null)
-		{
-			writer.WritePropertyName("dynamic_templates");
-			JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
-		}
-
-		if (EnabledValue.HasValue)
-		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
-		}
-
-		if (FieldNamesDescriptor is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
-		}
-		else if (FieldNamesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
-		}
-		else if (FieldNamesValue is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, FieldNamesValue, options);
-		}
-
-		if (IndexFieldDescriptor is not null)
-		{
-			writer.WritePropertyName("index_field");
-			JsonSerializer.Serialize(writer, IndexFieldDescriptor, options);
-		}
-		else if (IndexFieldDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_field");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor(IndexFieldDescriptorAction), options);
-		}
-		else if (IndexFieldValue is not null)
-		{
-			writer.WritePropertyName("index_field");
-			JsonSerializer.Serialize(writer, IndexFieldValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (NumericDetectionValue.HasValue)
-		{
-			writer.WritePropertyName("numeric_detection");
-			writer.WriteBooleanValue(NumericDetectionValue.Value);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (RoutingDescriptor is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, RoutingDescriptor, options);
-		}
-		else if (RoutingDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
-		}
-		else if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (RuntimeValue is not null)
-		{
-			writer.WritePropertyName("runtime");
-			JsonSerializer.Serialize(writer, RuntimeValue, options);
-		}
-
-		if (SizeDescriptor is not null)
-		{
-			writer.WritePropertyName("_size");
-			JsonSerializer.Serialize(writer, SizeDescriptor, options);
-		}
-		else if (SizeDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_size");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor(SizeDescriptorAction), options);
-		}
-		else if (SizeValue is not null)
-		{
-			writer.WritePropertyName("_size");
-			JsonSerializer.Serialize(writer, SizeValue, options);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
-		}
-		else if (SourceValue is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (SubobjectsValue.HasValue)
-		{
-			writer.WritePropertyName("subobjects");
-			writer.WriteBooleanValue(SubobjectsValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor(new Elastic.Clients.Elasticsearch.Mapping.TypeMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,90 +17,151 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class LengthTokenFilter : ITokenFilter
+internal sealed partial class LengthTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("max")]
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propMax = default;
+		LocalJsonValue<int?> propMin = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
+			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Max = propMax.Value,
+			Min = propMin.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterConverter))]
+public sealed partial class LengthTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public LengthTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public LengthTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal LengthTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public int? Max { get; set; }
-	[JsonInclude, JsonPropertyName("min")]
 	public int? Min { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "length";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class LengthTokenFilterDescriptor : SerializableDescriptor<LengthTokenFilterDescriptor>, IBuildableDescriptor<LengthTokenFilter>
+public readonly partial struct LengthTokenFilterDescriptor
 {
-	internal LengthTokenFilterDescriptor(Action<LengthTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter Instance { get; init; }
 
-	public LengthTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LengthTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private int? MaxValue { get; set; }
-	private int? MinValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public LengthTokenFilterDescriptor Max(int? max)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LengthTokenFilterDescriptor()
 	{
-		MaxValue = max;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public LengthTokenFilterDescriptor Min(int? min)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter(Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor Max(int? value)
 	{
-		MinValue = min;
-		return Self;
+		Instance.Max = value;
+		return this;
 	}
 
-	public LengthTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor Min(int? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Min = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (MaxValue.HasValue)
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("max");
-			writer.WriteNumberValue(MaxValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MinValue.HasValue)
-		{
-			writer.WritePropertyName("min");
-			writer.WriteNumberValue(MinValue.Value);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("length");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	LengthTokenFilter IBuildableDescriptor<LengthTokenFilter>.Build() => new()
-	{
-		Max = MaxValue,
-		Min = MinValue,
-		Version = VersionValue
-	};
 }

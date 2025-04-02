@@ -17,89 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Simulate;
 
-internal sealed partial class IngestDocumentSimulationConverter : JsonConverter<IngestDocumentSimulation>
+internal sealed partial class IngestDocumentSimulationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Simulate.IngestDocumentSimulation>
 {
-	public override IngestDocumentSimulation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
+	private static readonly System.Text.Json.JsonEncodedText PropExecutedPipelines = System.Text.Json.JsonEncodedText.Encode("executed_pipelines");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoredFields = System.Text.Json.JsonEncodedText.Encode("ignored_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+
+	public override Elastic.Clients.Elasticsearch.Simulate.IngestDocumentSimulation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		Elastic.Clients.Elasticsearch.ErrorCause? error = default;
-		IReadOnlyCollection<string> executedPipelines = default;
-		string id = default;
-		IReadOnlyCollection<IReadOnlyDictionary<string, string>>? ignoredFields = default;
-		string index = default;
-		IReadOnlyDictionary<string, object> source = default;
-		long version = default;
-		Dictionary<string, string> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propError = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propExecutedPipelines = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, string>>?> propIgnoredFields = default;
+		LocalJsonValue<string> propIndex = default;
+		System.Collections.Generic.Dictionary<string, string>? propMetadata = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propSource = default;
+		LocalJsonValue<long> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
 			{
-				var property = reader.GetString();
-				if (property == "error")
-				{
-					error = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ErrorCause?>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "executed_pipelines")
-				{
-					executedPipelines = JsonSerializer.Deserialize<IReadOnlyCollection<string>>(ref reader, options);
-					continue;
-				}
+			if (propExecutedPipelines.TryReadProperty(ref reader, options, PropExecutedPipelines, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
 
-				if (property == "_id")
-				{
-					id = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
 
-				if (property == "ignored_fields")
-				{
-					ignoredFields = JsonSerializer.Deserialize<IReadOnlyCollection<IReadOnlyDictionary<string, string>>?>(ref reader, options);
-					continue;
-				}
+			if (propIgnoredFields.TryReadProperty(ref reader, options, PropIgnoredFields, static System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.IReadOnlyDictionary<string, string>>(o, static System.Collections.Generic.IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!)))
+			{
+				continue;
+			}
 
-				if (property == "_index")
-				{
-					index = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
 
-				if (property == "_source")
-				{
-					source = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>>(ref reader, options);
-					continue;
-				}
+			if (propSource.TryReadProperty(ref reader, options, PropSource, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
 
-				if (property == "_version")
-				{
-					version = JsonSerializer.Deserialize<long>(ref reader, options);
-					continue;
-				}
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
 
-				additionalProperties ??= new Dictionary<string, string>();
-				var additionalValue = JsonSerializer.Deserialize<string>(ref reader, options);
-				additionalProperties.Add(property, additionalValue);
+			propMetadata ??= new System.Collections.Generic.Dictionary<string, string>();
+			reader.ReadProperty(options, out string key, out string value, null, null);
+			propMetadata[key] = value;
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Simulate.IngestDocumentSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Error = propError.Value,
+			ExecutedPipelines = propExecutedPipelines.Value,
+			Id = propId.Value,
+			IgnoredFields = propIgnoredFields.Value,
+			Index = propIndex.Value,
+			Metadata = propMetadata,
+			Source = propSource.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Simulate.IngestDocumentSimulation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropExecutedPipelines, value.ExecutedPipelines, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIgnoredFields, value.IgnoredFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, string>>? v) => w.WriteCollectionValue<System.Collections.Generic.IReadOnlyDictionary<string, string>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null)));
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		if (value.Metadata is not null)
+		{
+			foreach (var item in value.Metadata)
+			{
+				writer.WriteProperty(options, item.Key, item.Value, null, null);
 			}
 		}
 
-		return new IngestDocumentSimulation { Error = error, ExecutedPipelines = executedPipelines, Id = id, IgnoredFields = ignoredFields, Index = index, Metadata = additionalProperties, Source = source, Version = version };
-	}
-
-	public override void Write(Utf8JsonWriter writer, IngestDocumentSimulation value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'IngestDocumentSimulation' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 
@@ -111,9 +130,35 @@ internal sealed partial class IngestDocumentSimulationConverter : JsonConverter<
 /// document had been ingested into _index.
 /// </para>
 /// </summary>
-[JsonConverter(typeof(IngestDocumentSimulationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Simulate.IngestDocumentSimulationConverter))]
 public sealed partial class IngestDocumentSimulation
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IngestDocumentSimulation(System.Collections.Generic.IReadOnlyCollection<string> executedPipelines, string id, string index, System.Collections.Generic.IReadOnlyDictionary<string, object> source, long version)
+	{
+		ExecutedPipelines = executedPipelines;
+		Id = id;
+		Index = index;
+		Source = source;
+		Version = version;
+	}
+#if NET7_0_OR_GREATER
+	public IngestDocumentSimulation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IngestDocumentSimulation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IngestDocumentSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Any error resulting from simulatng ingest on this doc. This can be an error generated by
@@ -121,21 +166,29 @@ public sealed partial class IngestDocumentSimulation
 	/// doc.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
+	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of the names of the pipelines executed on this document.
 	/// </para>
 	/// </summary>
-	public IReadOnlyCollection<string> ExecutedPipelines { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> ExecutedPipelines { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifier for the document.
 	/// </para>
 	/// </summary>
-	public string Id { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -144,27 +197,39 @@ public sealed partial class IngestDocumentSimulation
 	/// would not be indexed into Elasticsearch.
 	/// </para>
 	/// </summary>
-	public IReadOnlyCollection<IReadOnlyDictionary<string, string>>? IgnoredFields { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, string>>? IgnoredFields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the index that the document would be indexed into if this were not a simulation.
 	/// </para>
 	/// </summary>
-	public string Index { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Additional metadata
 	/// </para>
 	/// </summary>
-	public IReadOnlyDictionary<string, string> Metadata { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, string>? Metadata { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// JSON body for the document.
 	/// </para>
 	/// </summary>
-	public IReadOnlyDictionary<string, object> Source { get; init; }
-	public long Version { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, object> Source { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Version { get; set; }
 }

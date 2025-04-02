@@ -17,22 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class SnapshotIndexStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText PropShardsStats = System.Text.Json.JsonEncodedText.Encode("shards_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus>> propShards = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.ShardsStats> propShardsStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats> propStats = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propShards.TryReadProperty(ref reader, options, PropShards, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propShardsStats.TryReadProperty(ref reader, options, PropShardsStats, null))
+			{
+				continue;
+			}
+
+			if (propStats.TryReadProperty(ref reader, options, PropStats, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Shards = propShards.Value,
+			ShardsStats = propShardsStats.Value,
+			Stats = propStats.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropShards, value.Shards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus>(o, v, null, null));
+		writer.WriteProperty(options, PropShardsStats, value.ShardsStats, null, null);
+		writer.WriteProperty(options, PropStats, value.Stats, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStatsConverter))]
 public sealed partial class SnapshotIndexStats
 {
-	[JsonInclude, JsonPropertyName("shards")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus> Shards { get; init; }
-	[JsonInclude, JsonPropertyName("shards_stats")]
-	public Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats { get; init; }
-	[JsonInclude, JsonPropertyName("stats")]
-	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SnapshotIndexStats(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus> shards, Elastic.Clients.Elasticsearch.Snapshot.ShardsStats shardsStats, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats stats)
+	{
+		Shards = shards;
+		ShardsStats = shardsStats;
+		Stats = stats;
+	}
+#if NET7_0_OR_GREATER
+	public SnapshotIndexStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SnapshotIndexStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SnapshotIndexStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus> Shards { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats { get; set; }
 }

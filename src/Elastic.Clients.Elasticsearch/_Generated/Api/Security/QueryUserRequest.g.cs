@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class QueryUserRequestParameters : RequestParameters
+public sealed partial class QueryUserRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -38,6 +31,81 @@ public sealed partial class QueryUserRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
+}
+
+internal sealed partial class QueryUserRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.QueryUserRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+
+	public override Elastic.Clients.Elasticsearch.Security.QueryUserRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.UserQuery?> propQuery = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryReadProperty(ref reader, options, PropSearchAfter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			From = propFrom.Value,
+			Query = propQuery.Value,
+			SearchAfter = propSearchAfter.Value,
+			Size = propSize.Value,
+			Sort = propSort.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.QueryUserRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -53,11 +121,28 @@ public sealed partial class QueryUserRequestParameters : RequestParameters
 /// This API is only for native users.
 /// </para>
 /// </summary>
-public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.QueryUserRequestConverter))]
+public sealed partial class QueryUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryUser;
+#if NET7_0_OR_GREATER
+	public QueryUserRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public QueryUserRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal QueryUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityQueryUser;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -68,7 +153,6 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 
 	/// <summary>
@@ -79,7 +163,6 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
@@ -91,7 +174,6 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Security.UserQuery? Query { get; set; }
 
 	/// <summary>
@@ -99,8 +181,7 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 	/// The search after definition
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_after")]
-	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -110,7 +191,6 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -120,9 +200,7 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
 /// <summary>
@@ -138,34 +216,34 @@ public sealed partial class QueryUserRequest : PlainRequest<QueryUserRequestPara
 /// This API is only for native users.
 /// </para>
 /// </summary>
-public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescriptor<QueryUserRequestDescriptor<TDocument>, QueryUserRequestParameters>
+public readonly partial struct QueryUserRequestDescriptor
 {
-	internal QueryUserRequestDescriptor(Action<QueryUserRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.QueryUserRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryUserRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public QueryUserRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryUser;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.query_user";
-
-	public QueryUserRequestDescriptor<TDocument> WithProfileUid(bool? withProfileUid = true) => Qs("with_profile_uid", withProfileUid);
-
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.UserQuery? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+	/// <summary>
+	/// <para>
+	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor WithProfileUid(bool? value = true)
+	{
+		Instance.WithProfileUid = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -175,10 +253,10 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor<TDocument> From(int? from)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -190,28 +268,40 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.UserQuery? query)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.UserQuery? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public QueryUserRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A query to filter which users to return.
+	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Build(action);
+		return this;
 	}
 
-	public QueryUserRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A query to filter which users to return.
+	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -219,10 +309,43 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 	/// The search after definition
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SearchAfter()
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -233,10 +356,10 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -246,109 +369,155 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public QueryUserRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort()
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
+		return this;
 	}
 
-	public QueryUserRequestDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
+		return this;
 	}
 
-	public QueryUserRequestDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		writer.WriteStartObject();
-		if (FromValue.HasValue)
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
 		}
 
-		if (QueryDescriptor is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
 		}
 
-		if (SearchAfterValue is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.QueryUserRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -365,34 +534,34 @@ public sealed partial class QueryUserRequestDescriptor<TDocument> : RequestDescr
 /// This API is only for native users.
 /// </para>
 /// </summary>
-public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<QueryUserRequestDescriptor, QueryUserRequestParameters>
+public readonly partial struct QueryUserRequestDescriptor<TDocument>
 {
-	internal QueryUserRequestDescriptor(Action<QueryUserRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.QueryUserRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryUserRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public QueryUserRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryUser;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.QueryUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.query_user";
-
-	public QueryUserRequestDescriptor WithProfileUid(bool? withProfileUid = true) => Qs("with_profile_uid", withProfileUid);
-
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.UserQuery? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+	/// <summary>
+	/// <para>
+	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> WithProfileUid(bool? value = true)
+	{
+		Instance.WithProfileUid = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -402,10 +571,10 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor From(int? from)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -417,28 +586,25 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.UserQuery? query)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.UserQuery? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public QueryUserRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A query to filter which users to return.
+	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public QueryUserRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -446,10 +612,43 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 	/// The search after definition
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SearchAfter()
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -460,10 +659,10 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -473,108 +672,122 @@ public sealed partial class QueryUserRequestDescriptor : RequestDescriptor<Query
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	public QueryUserRequestDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public QueryUserRequestDescriptor Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort()
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
+		return this;
 	}
 
-	public QueryUserRequestDescriptor Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
+		return this;
 	}
 
-	public QueryUserRequestDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
-		writer.WriteStartObject();
-		if (FromValue.HasValue)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
 		}
 
-		if (QueryDescriptor is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.QueryUserRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,198 +17,1239 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-[JsonConverter(typeof(CalendarIntervalConverter))]
-public enum CalendarInterval
+internal sealed partial class CardinalityExecutionModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode>
 {
-	[EnumMember(Value = "year")]
-	Year,
-	[EnumMember(Value = "week")]
-	Week,
-	[EnumMember(Value = "second")]
-	Second,
-	[EnumMember(Value = "quarter")]
-	Quarter,
-	[EnumMember(Value = "month")]
-	Month,
-	[EnumMember(Value = "minute")]
-	Minute,
-	[EnumMember(Value = "hour")]
-	Hour,
-	[EnumMember(Value = "day")]
-	Day
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals");
+	private static readonly System.Text.Json.JsonEncodedText MemberSegmentOrdinals = System.Text.Json.JsonEncodedText.Encode("segment_ordinals");
+	private static readonly System.Text.Json.JsonEncodedText MemberDirect = System.Text.Json.JsonEncodedText.Encode("direct");
+	private static readonly System.Text.Json.JsonEncodedText MemberSaveMemoryHeuristic = System.Text.Json.JsonEncodedText.Encode("save_memory_heuristic");
+	private static readonly System.Text.Json.JsonEncodedText MemberSaveTimeHeuristic = System.Text.Json.JsonEncodedText.Encode("save_time_heuristic");
 
-internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval>
-{
-	public override CalendarInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberGlobalOrdinals))
 		{
-			case "year":
-			case "1y":
-				return CalendarInterval.Year;
-			case "week":
-			case "1w":
-				return CalendarInterval.Week;
-			case "second":
-			case "1s":
-				return CalendarInterval.Second;
-			case "quarter":
-			case "1q":
-				return CalendarInterval.Quarter;
-			case "month":
-			case "1M":
-				return CalendarInterval.Month;
-			case "minute":
-			case "1m":
-				return CalendarInterval.Minute;
-			case "hour":
-			case "1h":
-				return CalendarInterval.Hour;
-			case "day":
-			case "1d":
-				return CalendarInterval.Day;
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.GlobalOrdinals;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberSegmentOrdinals))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SegmentOrdinals;
+		}
+
+		if (reader.ValueTextEquals(MemberDirect))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.Direct;
+		}
+
+		if (reader.ValueTextEquals(MemberSaveMemoryHeuristic))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveMemoryHeuristic;
+		}
+
+		if (reader.ValueTextEquals(MemberSaveTimeHeuristic))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveTimeHeuristic;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberGlobalOrdinals.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.GlobalOrdinals;
+		}
+
+		if (string.Equals(value, MemberSegmentOrdinals.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SegmentOrdinals;
+		}
+
+		if (string.Equals(value, MemberDirect.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.Direct;
+		}
+
+		if (string.Equals(value, MemberSaveMemoryHeuristic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveMemoryHeuristic;
+		}
+
+		if (string.Equals(value, MemberSaveTimeHeuristic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveTimeHeuristic;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, CalendarInterval value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case CalendarInterval.Year:
-				writer.WriteStringValue("year");
-				return;
-			case CalendarInterval.Week:
-				writer.WriteStringValue("week");
-				return;
-			case CalendarInterval.Second:
-				writer.WriteStringValue("second");
-				return;
-			case CalendarInterval.Quarter:
-				writer.WriteStringValue("quarter");
-				return;
-			case CalendarInterval.Month:
-				writer.WriteStringValue("month");
-				return;
-			case CalendarInterval.Minute:
-				writer.WriteStringValue("minute");
-				return;
-			case CalendarInterval.Hour:
-				writer.WriteStringValue("hour");
-				return;
-			case CalendarInterval.Day:
-				writer.WriteStringValue("day");
-				return;
+			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.GlobalOrdinals:
+				writer.WriteStringValue(MemberGlobalOrdinals);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SegmentOrdinals:
+				writer.WriteStringValue(MemberSegmentOrdinals);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.Direct:
+				writer.WriteStringValue(MemberDirect);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveMemoryHeuristic:
+				writer.WriteStringValue(MemberSaveMemoryHeuristic);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveTimeHeuristic:
+				writer.WriteStringValue(MemberSaveTimeHeuristic);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode)}'.");
 		}
+	}
 
-		writer.WriteNullValue();
+	public override Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
 	}
 }
 
-[JsonConverter(typeof(CardinalityExecutionModeConverter))]
+internal sealed partial class TermsAggregationCollectModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberDepthFirst = System.Text.Json.JsonEncodedText.Encode("depth_first");
+	private static readonly System.Text.Json.JsonEncodedText MemberBreadthFirst = System.Text.Json.JsonEncodedText.Encode("breadth_first");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberDepthFirst))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.DepthFirst;
+		}
+
+		if (reader.ValueTextEquals(MemberBreadthFirst))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.BreadthFirst;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDepthFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.DepthFirst;
+		}
+
+		if (string.Equals(value, MemberBreadthFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.BreadthFirst;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.DepthFirst:
+				writer.WriteStringValue(MemberDepthFirst);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.BreadthFirst:
+				writer.WriteStringValue(MemberBreadthFirst);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class TermsAggregationExecutionHintConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberMap = System.Text.Json.JsonEncodedText.Encode("map");
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals");
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinalsHash = System.Text.Json.JsonEncodedText.Encode("global_ordinals_hash");
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinalsLowCardinality = System.Text.Json.JsonEncodedText.Encode("global_ordinals_low_cardinality");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberMap))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.Map;
+		}
+
+		if (reader.ValueTextEquals(MemberGlobalOrdinals))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinals;
+		}
+
+		if (reader.ValueTextEquals(MemberGlobalOrdinalsHash))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsHash;
+		}
+
+		if (reader.ValueTextEquals(MemberGlobalOrdinalsLowCardinality))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMap.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.Map;
+		}
+
+		if (string.Equals(value, MemberGlobalOrdinals.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinals;
+		}
+
+		if (string.Equals(value, MemberGlobalOrdinalsHash.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsHash;
+		}
+
+		if (string.Equals(value, MemberGlobalOrdinalsLowCardinality.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.Map:
+				writer.WriteStringValue(MemberMap);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinals:
+				writer.WriteStringValue(MemberGlobalOrdinals);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsHash:
+				writer.WriteStringValue(MemberGlobalOrdinalsHash);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality:
+				writer.WriteStringValue(MemberGlobalOrdinalsLowCardinality);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class MissingOrderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberFirst = System.Text.Json.JsonEncodedText.Encode("first");
+	private static readonly System.Text.Json.JsonEncodedText MemberLast = System.Text.Json.JsonEncodedText.Encode("last");
+	private static readonly System.Text.Json.JsonEncodedText MemberDefault = System.Text.Json.JsonEncodedText.Encode("default");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.MissingOrder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberFirst))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.First;
+		}
+
+		if (reader.ValueTextEquals(MemberLast))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Last;
+		}
+
+		if (reader.ValueTextEquals(MemberDefault))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Default;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.First;
+		}
+
+		if (string.Equals(value, MemberLast.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Last;
+		}
+
+		if (string.Equals(value, MemberDefault.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Default;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MissingOrder value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.First:
+				writer.WriteStringValue(MemberFirst);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Last:
+				writer.WriteStringValue(MemberLast);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Default:
+				writer.WriteStringValue(MemberDefault);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.MissingOrder ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MissingOrder value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class MinimumIntervalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberSecond = System.Text.Json.JsonEncodedText.Encode("second");
+	private static readonly System.Text.Json.JsonEncodedText MemberMinute = System.Text.Json.JsonEncodedText.Encode("minute");
+	private static readonly System.Text.Json.JsonEncodedText MemberHour = System.Text.Json.JsonEncodedText.Encode("hour");
+	private static readonly System.Text.Json.JsonEncodedText MemberDay = System.Text.Json.JsonEncodedText.Encode("day");
+	private static readonly System.Text.Json.JsonEncodedText MemberMonth = System.Text.Json.JsonEncodedText.Encode("month");
+	private static readonly System.Text.Json.JsonEncodedText MemberYear = System.Text.Json.JsonEncodedText.Encode("year");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberSecond))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Second;
+		}
+
+		if (reader.ValueTextEquals(MemberMinute))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Minute;
+		}
+
+		if (reader.ValueTextEquals(MemberHour))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Hour;
+		}
+
+		if (reader.ValueTextEquals(MemberDay))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Day;
+		}
+
+		if (reader.ValueTextEquals(MemberMonth))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Month;
+		}
+
+		if (reader.ValueTextEquals(MemberYear))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Year;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSecond.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Second;
+		}
+
+		if (string.Equals(value, MemberMinute.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Minute;
+		}
+
+		if (string.Equals(value, MemberHour.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Hour;
+		}
+
+		if (string.Equals(value, MemberDay.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Day;
+		}
+
+		if (string.Equals(value, MemberMonth.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Month;
+		}
+
+		if (string.Equals(value, MemberYear.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Year;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Second:
+				writer.WriteStringValue(MemberSecond);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Minute:
+				writer.WriteStringValue(MemberMinute);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Hour:
+				writer.WriteStringValue(MemberHour);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Day:
+				writer.WriteStringValue(MemberDay);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Month:
+				writer.WriteStringValue(MemberMonth);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Year:
+				writer.WriteStringValue(MemberYear);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class GapPolicyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberSkip = System.Text.Json.JsonEncodedText.Encode("skip");
+	private static readonly System.Text.Json.JsonEncodedText MemberInsertZeros = System.Text.Json.JsonEncodedText.Encode("insert_zeros");
+	private static readonly System.Text.Json.JsonEncodedText MemberKeepValues = System.Text.Json.JsonEncodedText.Encode("keep_values");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.GapPolicy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberSkip))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.Skip;
+		}
+
+		if (reader.ValueTextEquals(MemberInsertZeros))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.InsertZeros;
+		}
+
+		if (reader.ValueTextEquals(MemberKeepValues))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.KeepValues;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSkip.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.Skip;
+		}
+
+		if (string.Equals(value, MemberInsertZeros.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.InsertZeros;
+		}
+
+		if (string.Equals(value, MemberKeepValues.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.KeepValues;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GapPolicy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.Skip:
+				writer.WriteStringValue(MemberSkip);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.InsertZeros:
+				writer.WriteStringValue(MemberInsertZeros);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.KeepValues:
+				writer.WriteStringValue(MemberKeepValues);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.GapPolicy ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GapPolicy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class CalendarIntervalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberSecond = System.Text.Json.JsonEncodedText.Encode("second");
+	private static readonly System.Text.Json.JsonEncodedText MemberSecond1 = System.Text.Json.JsonEncodedText.Encode("1s");
+	private static readonly System.Text.Json.JsonEncodedText MemberMinute = System.Text.Json.JsonEncodedText.Encode("minute");
+	private static readonly System.Text.Json.JsonEncodedText MemberMinute1 = System.Text.Json.JsonEncodedText.Encode("1m");
+	private static readonly System.Text.Json.JsonEncodedText MemberHour = System.Text.Json.JsonEncodedText.Encode("hour");
+	private static readonly System.Text.Json.JsonEncodedText MemberHour1 = System.Text.Json.JsonEncodedText.Encode("1h");
+	private static readonly System.Text.Json.JsonEncodedText MemberDay = System.Text.Json.JsonEncodedText.Encode("day");
+	private static readonly System.Text.Json.JsonEncodedText MemberDay1 = System.Text.Json.JsonEncodedText.Encode("1d");
+	private static readonly System.Text.Json.JsonEncodedText MemberWeek = System.Text.Json.JsonEncodedText.Encode("week");
+	private static readonly System.Text.Json.JsonEncodedText MemberWeek1 = System.Text.Json.JsonEncodedText.Encode("1w");
+	private static readonly System.Text.Json.JsonEncodedText MemberMonth = System.Text.Json.JsonEncodedText.Encode("month");
+	private static readonly System.Text.Json.JsonEncodedText MemberMonth1 = System.Text.Json.JsonEncodedText.Encode("1M");
+	private static readonly System.Text.Json.JsonEncodedText MemberQuarter = System.Text.Json.JsonEncodedText.Encode("quarter");
+	private static readonly System.Text.Json.JsonEncodedText MemberQuarter1 = System.Text.Json.JsonEncodedText.Encode("1q");
+	private static readonly System.Text.Json.JsonEncodedText MemberYear = System.Text.Json.JsonEncodedText.Encode("year");
+	private static readonly System.Text.Json.JsonEncodedText MemberYear1 = System.Text.Json.JsonEncodedText.Encode("1y");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberSecond) || reader.ValueTextEquals(MemberSecond1))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Second;
+		}
+
+		if (reader.ValueTextEquals(MemberMinute) || reader.ValueTextEquals(MemberMinute1))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Minute;
+		}
+
+		if (reader.ValueTextEquals(MemberHour) || reader.ValueTextEquals(MemberHour1))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Hour;
+		}
+
+		if (reader.ValueTextEquals(MemberDay) || reader.ValueTextEquals(MemberDay1))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Day;
+		}
+
+		if (reader.ValueTextEquals(MemberWeek) || reader.ValueTextEquals(MemberWeek1))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Week;
+		}
+
+		if (reader.ValueTextEquals(MemberMonth) || reader.ValueTextEquals(MemberMonth1))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Month;
+		}
+
+		if (reader.ValueTextEquals(MemberQuarter) || reader.ValueTextEquals(MemberQuarter1))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Quarter;
+		}
+
+		if (reader.ValueTextEquals(MemberYear) || reader.ValueTextEquals(MemberYear1))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Year;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSecond.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberSecond1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Second;
+		}
+
+		if (string.Equals(value, MemberMinute.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMinute1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Minute;
+		}
+
+		if (string.Equals(value, MemberHour.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberHour1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Hour;
+		}
+
+		if (string.Equals(value, MemberDay.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberDay1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Day;
+		}
+
+		if (string.Equals(value, MemberWeek.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberWeek1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Week;
+		}
+
+		if (string.Equals(value, MemberMonth.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMonth1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Month;
+		}
+
+		if (string.Equals(value, MemberQuarter.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberQuarter1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Quarter;
+		}
+
+		if (string.Equals(value, MemberYear.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberYear1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Year;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Second:
+				writer.WriteStringValue(MemberSecond);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Minute:
+				writer.WriteStringValue(MemberMinute);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Hour:
+				writer.WriteStringValue(MemberHour);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Day:
+				writer.WriteStringValue(MemberDay);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Week:
+				writer.WriteStringValue(MemberWeek);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Month:
+				writer.WriteStringValue(MemberMonth);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Quarter:
+				writer.WriteStringValue(MemberQuarter);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Year:
+				writer.WriteStringValue(MemberYear);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class SamplerAggregationExecutionHintConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberMap = System.Text.Json.JsonEncodedText.Encode("map");
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals");
+	private static readonly System.Text.Json.JsonEncodedText MemberBytesHash = System.Text.Json.JsonEncodedText.Encode("bytes_hash");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberMap))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.Map;
+		}
+
+		if (reader.ValueTextEquals(MemberGlobalOrdinals))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.GlobalOrdinals;
+		}
+
+		if (reader.ValueTextEquals(MemberBytesHash))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.BytesHash;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMap.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.Map;
+		}
+
+		if (string.Equals(value, MemberGlobalOrdinals.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.GlobalOrdinals;
+		}
+
+		if (string.Equals(value, MemberBytesHash.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.BytesHash;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.Map:
+				writer.WriteStringValue(MemberMap);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.GlobalOrdinals:
+				writer.WriteStringValue(MemberGlobalOrdinals);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.BytesHash:
+				writer.WriteStringValue(MemberBytesHash);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class NormalizeMethodConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberRescale01 = System.Text.Json.JsonEncodedText.Encode("rescale_0_1");
+	private static readonly System.Text.Json.JsonEncodedText MemberRescale0100 = System.Text.Json.JsonEncodedText.Encode("rescale_0_100");
+	private static readonly System.Text.Json.JsonEncodedText MemberPercentOfSum = System.Text.Json.JsonEncodedText.Encode("percent_of_sum");
+	private static readonly System.Text.Json.JsonEncodedText MemberMean = System.Text.Json.JsonEncodedText.Encode("mean");
+	private static readonly System.Text.Json.JsonEncodedText MemberZScore = System.Text.Json.JsonEncodedText.Encode("z-score");
+	private static readonly System.Text.Json.JsonEncodedText MemberSoftmax = System.Text.Json.JsonEncodedText.Encode("softmax");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberRescale01))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale01;
+		}
+
+		if (reader.ValueTextEquals(MemberRescale0100))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale0100;
+		}
+
+		if (reader.ValueTextEquals(MemberPercentOfSum))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.PercentOfSum;
+		}
+
+		if (reader.ValueTextEquals(MemberMean))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Mean;
+		}
+
+		if (reader.ValueTextEquals(MemberZScore))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.ZScore;
+		}
+
+		if (reader.ValueTextEquals(MemberSoftmax))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Softmax;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRescale01.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale01;
+		}
+
+		if (string.Equals(value, MemberRescale0100.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale0100;
+		}
+
+		if (string.Equals(value, MemberPercentOfSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.PercentOfSum;
+		}
+
+		if (string.Equals(value, MemberMean.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Mean;
+		}
+
+		if (string.Equals(value, MemberZScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.ZScore;
+		}
+
+		if (string.Equals(value, MemberSoftmax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Softmax;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale01:
+				writer.WriteStringValue(MemberRescale01);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale0100:
+				writer.WriteStringValue(MemberRescale0100);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.PercentOfSum:
+				writer.WriteStringValue(MemberPercentOfSum);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Mean:
+				writer.WriteStringValue(MemberMean);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.ZScore:
+				writer.WriteStringValue(MemberZScore);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Softmax:
+				writer.WriteStringValue(MemberSoftmax);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class RateModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.RateMode>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
+	private static readonly System.Text.Json.JsonEncodedText MemberValueCount = System.Text.Json.JsonEncodedText.Encode("value_count");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.RateMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberSum))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.RateMode.Sum;
+		}
+
+		if (reader.ValueTextEquals(MemberValueCount))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.RateMode.ValueCount;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.RateMode.Sum;
+		}
+
+		if (string.Equals(value, MemberValueCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.RateMode.ValueCount;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.RateMode)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.RateMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.RateMode.Sum:
+				writer.WriteStringValue(MemberSum);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.RateMode.ValueCount:
+				writer.WriteStringValue(MemberValueCount);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.RateMode)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.RateMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.RateMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class TTestTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TTestType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberPaired = System.Text.Json.JsonEncodedText.Encode("paired");
+	private static readonly System.Text.Json.JsonEncodedText MemberHomoscedastic = System.Text.Json.JsonEncodedText.Encode("homoscedastic");
+	private static readonly System.Text.Json.JsonEncodedText MemberHeteroscedastic = System.Text.Json.JsonEncodedText.Encode("heteroscedastic");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TTestType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberPaired))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TTestType.Paired;
+		}
+
+		if (reader.ValueTextEquals(MemberHomoscedastic))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TTestType.Homoscedastic;
+		}
+
+		if (reader.ValueTextEquals(MemberHeteroscedastic))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TTestType.Heteroscedastic;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPaired.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TTestType.Paired;
+		}
+
+		if (string.Equals(value, MemberHomoscedastic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TTestType.Homoscedastic;
+		}
+
+		if (string.Equals(value, MemberHeteroscedastic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TTestType.Heteroscedastic;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.TTestType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TTestType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.TTestType.Paired:
+				writer.WriteStringValue(MemberPaired);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TTestType.Homoscedastic:
+				writer.WriteStringValue(MemberHomoscedastic);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TTestType.Heteroscedastic:
+				writer.WriteStringValue(MemberHeteroscedastic);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.TTestType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TTestType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TTestType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ValueTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ValueType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string");
+	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long");
+	private static readonly System.Text.Json.JsonEncodedText MemberDouble = System.Text.Json.JsonEncodedText.Encode("double");
+	private static readonly System.Text.Json.JsonEncodedText MemberNumber = System.Text.Json.JsonEncodedText.Encode("number");
+	private static readonly System.Text.Json.JsonEncodedText MemberDate = System.Text.Json.JsonEncodedText.Encode("date");
+	private static readonly System.Text.Json.JsonEncodedText MemberDateNanos = System.Text.Json.JsonEncodedText.Encode("date_nanos");
+	private static readonly System.Text.Json.JsonEncodedText MemberIp = System.Text.Json.JsonEncodedText.Encode("ip");
+	private static readonly System.Text.Json.JsonEncodedText MemberNumeric = System.Text.Json.JsonEncodedText.Encode("numeric");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoPoint = System.Text.Json.JsonEncodedText.Encode("geo_point");
+	private static readonly System.Text.Json.JsonEncodedText MemberBoolean = System.Text.Json.JsonEncodedText.Encode("boolean");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.ValueType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberString))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.String;
+		}
+
+		if (reader.ValueTextEquals(MemberLong))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Long;
+		}
+
+		if (reader.ValueTextEquals(MemberDouble))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Double;
+		}
+
+		if (reader.ValueTextEquals(MemberNumber))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Number;
+		}
+
+		if (reader.ValueTextEquals(MemberDate))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Date;
+		}
+
+		if (reader.ValueTextEquals(MemberDateNanos))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.DateNanos;
+		}
+
+		if (reader.ValueTextEquals(MemberIp))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Ip;
+		}
+
+		if (reader.ValueTextEquals(MemberNumeric))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Numeric;
+		}
+
+		if (reader.ValueTextEquals(MemberGeoPoint))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.GeoPoint;
+		}
+
+		if (reader.ValueTextEquals(MemberBoolean))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Boolean;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberString.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.String;
+		}
+
+		if (string.Equals(value, MemberLong.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Long;
+		}
+
+		if (string.Equals(value, MemberDouble.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Double;
+		}
+
+		if (string.Equals(value, MemberNumber.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Number;
+		}
+
+		if (string.Equals(value, MemberDate.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Date;
+		}
+
+		if (string.Equals(value, MemberDateNanos.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.DateNanos;
+		}
+
+		if (string.Equals(value, MemberIp.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Ip;
+		}
+
+		if (string.Equals(value, MemberNumeric.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Numeric;
+		}
+
+		if (string.Equals(value, MemberGeoPoint.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.GeoPoint;
+		}
+
+		if (string.Equals(value, MemberBoolean.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.ValueType.Boolean;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.ValueType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.ValueType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.String:
+				writer.WriteStringValue(MemberString);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Long:
+				writer.WriteStringValue(MemberLong);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Double:
+				writer.WriteStringValue(MemberDouble);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Number:
+				writer.WriteStringValue(MemberNumber);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Date:
+				writer.WriteStringValue(MemberDate);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.DateNanos:
+				writer.WriteStringValue(MemberDateNanos);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Ip:
+				writer.WriteStringValue(MemberIp);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Numeric:
+				writer.WriteStringValue(MemberNumeric);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.GeoPoint:
+				writer.WriteStringValue(MemberGeoPoint);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Boolean:
+				writer.WriteStringValue(MemberBoolean);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.ValueType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.ValueType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.ValueType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionModeConverter))]
 public enum CardinalityExecutionMode
 {
-	/// <summary>
-	/// <para>
-	/// Run the aggregation by using segment ordinal values and resolving those values after each segment.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "segment_ordinals")]
-	SegmentOrdinals,
-	/// <summary>
-	/// <para>
-	/// Heuristic-based mode, default in Elasticsearch 8.4 and later.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "save_time_heuristic")]
-	SaveTimeHeuristic,
-	/// <summary>
-	/// <para>
-	/// Heuristic-based mode, default in Elasticsearch 8.3 and earlier.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "save_memory_heuristic")]
-	SaveMemoryHeuristic,
 	/// <summary>
 	/// <para>
 	/// Run the aggregation by using global ordinals of the field and resolving those values after finishing a shard.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "global_ordinals")]
+	[System.Runtime.Serialization.EnumMember(Value = "global_ordinals")]
 	GlobalOrdinals,
+	/// <summary>
+	/// <para>
+	/// Run the aggregation by using segment ordinal values and resolving those values after each segment.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "segment_ordinals")]
+	SegmentOrdinals,
 	/// <summary>
 	/// <para>
 	/// Run the aggregation by using field values directly.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "direct")]
-	Direct
+	[System.Runtime.Serialization.EnumMember(Value = "direct")]
+	Direct,
+	/// <summary>
+	/// <para>
+	/// Heuristic-based mode, default in Elasticsearch 8.3 and earlier.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "save_memory_heuristic")]
+	SaveMemoryHeuristic,
+	/// <summary>
+	/// <para>
+	/// Heuristic-based mode, default in Elasticsearch 8.4 and later.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "save_time_heuristic")]
+	SaveTimeHeuristic
 }
 
-internal sealed class CardinalityExecutionModeConverter : JsonConverter<CardinalityExecutionMode>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectModeConverter))]
+public enum TermsAggregationCollectMode
 {
-	public override CardinalityExecutionMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "segment_ordinals":
-				return CardinalityExecutionMode.SegmentOrdinals;
-			case "save_time_heuristic":
-				return CardinalityExecutionMode.SaveTimeHeuristic;
-			case "save_memory_heuristic":
-				return CardinalityExecutionMode.SaveMemoryHeuristic;
-			case "global_ordinals":
-				return CardinalityExecutionMode.GlobalOrdinals;
-			case "direct":
-				return CardinalityExecutionMode.Direct;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, CardinalityExecutionMode value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case CardinalityExecutionMode.SegmentOrdinals:
-				writer.WriteStringValue("segment_ordinals");
-				return;
-			case CardinalityExecutionMode.SaveTimeHeuristic:
-				writer.WriteStringValue("save_time_heuristic");
-				return;
-			case CardinalityExecutionMode.SaveMemoryHeuristic:
-				writer.WriteStringValue("save_memory_heuristic");
-				return;
-			case CardinalityExecutionMode.GlobalOrdinals:
-				writer.WriteStringValue("global_ordinals");
-				return;
-			case CardinalityExecutionMode.Direct:
-				writer.WriteStringValue("direct");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	/// <summary>
+	/// <para>
+	/// Expands all branches of the aggregation tree in one depth-first pass, before any pruning occurs.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "depth_first")]
+	DepthFirst,
+	/// <summary>
+	/// <para>
+	/// Caches the set of documents that fall into the uppermost buckets for subsequent replay.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "breadth_first")]
+	BreadthFirst
 }
 
-[JsonConverter(typeof(GapPolicyConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintConverter))]
+public enum TermsAggregationExecutionHint
+{
+	[System.Runtime.Serialization.EnumMember(Value = "map")]
+	Map,
+	[System.Runtime.Serialization.EnumMember(Value = "global_ordinals")]
+	GlobalOrdinals,
+	[System.Runtime.Serialization.EnumMember(Value = "global_ordinals_hash")]
+	GlobalOrdinalsHash,
+	[System.Runtime.Serialization.EnumMember(Value = "global_ordinals_low_cardinality")]
+	GlobalOrdinalsLowCardinality
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.MissingOrderConverter))]
+public enum MissingOrder
+{
+	[System.Runtime.Serialization.EnumMember(Value = "first")]
+	First,
+	[System.Runtime.Serialization.EnumMember(Value = "last")]
+	Last,
+	[System.Runtime.Serialization.EnumMember(Value = "default")]
+	Default
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.MinimumIntervalConverter))]
+public enum MinimumInterval
+{
+	[System.Runtime.Serialization.EnumMember(Value = "second")]
+	Second,
+	[System.Runtime.Serialization.EnumMember(Value = "minute")]
+	Minute,
+	[System.Runtime.Serialization.EnumMember(Value = "hour")]
+	Hour,
+	[System.Runtime.Serialization.EnumMember(Value = "day")]
+	Day,
+	[System.Runtime.Serialization.EnumMember(Value = "month")]
+	Month,
+	[System.Runtime.Serialization.EnumMember(Value = "year")]
+	Year
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.GapPolicyConverter))]
 public enum GapPolicy
 {
 	/// <summary>
@@ -217,335 +1258,47 @@ public enum GapPolicy
 	/// continue calculating using the next available value.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "skip")]
+	[System.Runtime.Serialization.EnumMember(Value = "skip")]
 	Skip,
+	/// <summary>
+	/// <para>
+	/// Replace missing values with a zero (0) and pipeline aggregation computation will proceed as normal.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "insert_zeros")]
+	InsertZeros,
 	/// <summary>
 	/// <para>
 	/// Similar to skip, except if the metric provides a non-null, non-NaN value this value is used,
 	/// otherwise the empty bucket is skipped.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "keep_values")]
-	KeepValues,
-	/// <summary>
-	/// <para>
-	/// Replace missing values with a zero (0) and pipeline aggregation computation will proceed as normal.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "insert_zeros")]
-	InsertZeros
+	[System.Runtime.Serialization.EnumMember(Value = "keep_values")]
+	KeepValues
 }
 
-internal sealed class GapPolicyConverter : JsonConverter<GapPolicy>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalConverter))]
+public enum CalendarInterval
 {
-	public override GapPolicy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "skip":
-				return GapPolicy.Skip;
-			case "keep_values":
-				return GapPolicy.KeepValues;
-			case "insert_zeros":
-				return GapPolicy.InsertZeros;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, GapPolicy value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case GapPolicy.Skip:
-				writer.WriteStringValue("skip");
-				return;
-			case GapPolicy.KeepValues:
-				writer.WriteStringValue("keep_values");
-				return;
-			case GapPolicy.InsertZeros:
-				writer.WriteStringValue("insert_zeros");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(MinimumIntervalConverter))]
-public enum MinimumInterval
-{
-	[EnumMember(Value = "year")]
-	Year,
-	[EnumMember(Value = "second")]
+	[System.Runtime.Serialization.EnumMember(Value = "second")]
 	Second,
-	[EnumMember(Value = "month")]
-	Month,
-	[EnumMember(Value = "minute")]
+	[System.Runtime.Serialization.EnumMember(Value = "minute")]
 	Minute,
-	[EnumMember(Value = "hour")]
+	[System.Runtime.Serialization.EnumMember(Value = "hour")]
 	Hour,
-	[EnumMember(Value = "day")]
-	Day
+	[System.Runtime.Serialization.EnumMember(Value = "day")]
+	Day,
+	[System.Runtime.Serialization.EnumMember(Value = "week")]
+	Week,
+	[System.Runtime.Serialization.EnumMember(Value = "month")]
+	Month,
+	[System.Runtime.Serialization.EnumMember(Value = "quarter")]
+	Quarter,
+	[System.Runtime.Serialization.EnumMember(Value = "year")]
+	Year
 }
 
-internal sealed class MinimumIntervalConverter : JsonConverter<MinimumInterval>
-{
-	public override MinimumInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "year":
-				return MinimumInterval.Year;
-			case "second":
-				return MinimumInterval.Second;
-			case "month":
-				return MinimumInterval.Month;
-			case "minute":
-				return MinimumInterval.Minute;
-			case "hour":
-				return MinimumInterval.Hour;
-			case "day":
-				return MinimumInterval.Day;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, MinimumInterval value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case MinimumInterval.Year:
-				writer.WriteStringValue("year");
-				return;
-			case MinimumInterval.Second:
-				writer.WriteStringValue("second");
-				return;
-			case MinimumInterval.Month:
-				writer.WriteStringValue("month");
-				return;
-			case MinimumInterval.Minute:
-				writer.WriteStringValue("minute");
-				return;
-			case MinimumInterval.Hour:
-				writer.WriteStringValue("hour");
-				return;
-			case MinimumInterval.Day:
-				writer.WriteStringValue("day");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(MissingOrderConverter))]
-public enum MissingOrder
-{
-	[EnumMember(Value = "last")]
-	Last,
-	[EnumMember(Value = "first")]
-	First,
-	[EnumMember(Value = "default")]
-	Default
-}
-
-internal sealed class MissingOrderConverter : JsonConverter<MissingOrder>
-{
-	public override MissingOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "last":
-				return MissingOrder.Last;
-			case "first":
-				return MissingOrder.First;
-			case "default":
-				return MissingOrder.Default;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, MissingOrder value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case MissingOrder.Last:
-				writer.WriteStringValue("last");
-				return;
-			case MissingOrder.First:
-				writer.WriteStringValue("first");
-				return;
-			case MissingOrder.Default:
-				writer.WriteStringValue("default");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(NormalizeMethodConverter))]
-public enum NormalizeMethod
-{
-	/// <summary>
-	/// <para>
-	/// This method normalizes such that each value represents how far it is from the mean relative to the standard deviation.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "z-score")]
-	ZScore,
-	/// <summary>
-	/// <para>
-	/// This method normalizes such that each value is exponentiated and relative to the sum of the exponents of the original values.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "softmax")]
-	Softmax,
-	/// <summary>
-	/// <para>
-	/// This method rescales the data such that the minimum number is 0, and the maximum number is 100, with the rest normalized linearly in-between.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "rescale_0_100")]
-	Rescale0100,
-	/// <summary>
-	/// <para>
-	/// This method rescales the data such that the minimum number is 0, and the maximum number is 1, with the rest normalized linearly in-between.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "rescale_0_1")]
-	Rescale01,
-	/// <summary>
-	/// <para>
-	/// This method normalizes each value so that it represents a percentage of the total sum it attributes to.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "percent_of_sum")]
-	PercentOfSum,
-	/// <summary>
-	/// <para>
-	/// This method normalizes such that each value is normalized by how much it differs from the average.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "mean")]
-	Mean
-}
-
-internal sealed class NormalizeMethodConverter : JsonConverter<NormalizeMethod>
-{
-	public override NormalizeMethod Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "z-score":
-				return NormalizeMethod.ZScore;
-			case "softmax":
-				return NormalizeMethod.Softmax;
-			case "rescale_0_100":
-				return NormalizeMethod.Rescale0100;
-			case "rescale_0_1":
-				return NormalizeMethod.Rescale01;
-			case "percent_of_sum":
-				return NormalizeMethod.PercentOfSum;
-			case "mean":
-				return NormalizeMethod.Mean;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, NormalizeMethod value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case NormalizeMethod.ZScore:
-				writer.WriteStringValue("z-score");
-				return;
-			case NormalizeMethod.Softmax:
-				writer.WriteStringValue("softmax");
-				return;
-			case NormalizeMethod.Rescale0100:
-				writer.WriteStringValue("rescale_0_100");
-				return;
-			case NormalizeMethod.Rescale01:
-				writer.WriteStringValue("rescale_0_1");
-				return;
-			case NormalizeMethod.PercentOfSum:
-				writer.WriteStringValue("percent_of_sum");
-				return;
-			case NormalizeMethod.Mean:
-				writer.WriteStringValue("mean");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(RateModeConverter))]
-public enum RateMode
-{
-	/// <summary>
-	/// <para>
-	/// Uses the number of values of the field.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "value_count")]
-	ValueCount,
-	/// <summary>
-	/// <para>
-	/// Calculates the sum of all values of the field.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "sum")]
-	Sum
-}
-
-internal sealed class RateModeConverter : JsonConverter<RateMode>
-{
-	public override RateMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "value_count":
-				return RateMode.ValueCount;
-			case "sum":
-				return RateMode.Sum;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, RateMode value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case RateMode.ValueCount:
-				writer.WriteStringValue("value_count");
-				return;
-			case RateMode.Sum:
-				writer.WriteStringValue("sum");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(SamplerAggregationExecutionHintConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHintConverter))]
 public enum SamplerAggregationExecutionHint
 {
 	/// <summary>
@@ -553,171 +1306,91 @@ public enum SamplerAggregationExecutionHint
 	/// Hold field values directly.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "map")]
+	[System.Runtime.Serialization.EnumMember(Value = "map")]
 	Map,
 	/// <summary>
 	/// <para>
 	/// Hold ordinals of the field as determined by the Lucene index.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "global_ordinals")]
+	[System.Runtime.Serialization.EnumMember(Value = "global_ordinals")]
 	GlobalOrdinals,
 	/// <summary>
 	/// <para>
 	/// Hold hashes of the field values - with potential for hash collisions.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "bytes_hash")]
+	[System.Runtime.Serialization.EnumMember(Value = "bytes_hash")]
 	BytesHash
 }
 
-internal sealed class SamplerAggregationExecutionHintConverter : JsonConverter<SamplerAggregationExecutionHint>
-{
-	public override SamplerAggregationExecutionHint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "map":
-				return SamplerAggregationExecutionHint.Map;
-			case "global_ordinals":
-				return SamplerAggregationExecutionHint.GlobalOrdinals;
-			case "bytes_hash":
-				return SamplerAggregationExecutionHint.BytesHash;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SamplerAggregationExecutionHint value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case SamplerAggregationExecutionHint.Map:
-				writer.WriteStringValue("map");
-				return;
-			case SamplerAggregationExecutionHint.GlobalOrdinals:
-				writer.WriteStringValue("global_ordinals");
-				return;
-			case SamplerAggregationExecutionHint.BytesHash:
-				writer.WriteStringValue("bytes_hash");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(TermsAggregationCollectModeConverter))]
-public enum TermsAggregationCollectMode
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethodConverter))]
+public enum NormalizeMethod
 {
 	/// <summary>
 	/// <para>
-	/// Expands all branches of the aggregation tree in one depth-first pass, before any pruning occurs.
+	/// This method rescales the data such that the minimum number is 0, and the maximum number is 1, with the rest normalized linearly in-between.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "depth_first")]
-	DepthFirst,
+	[System.Runtime.Serialization.EnumMember(Value = "rescale_0_1")]
+	Rescale01,
 	/// <summary>
 	/// <para>
-	/// Caches the set of documents that fall into the uppermost buckets for subsequent replay.
+	/// This method rescales the data such that the minimum number is 0, and the maximum number is 100, with the rest normalized linearly in-between.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "breadth_first")]
-	BreadthFirst
+	[System.Runtime.Serialization.EnumMember(Value = "rescale_0_100")]
+	Rescale0100,
+	/// <summary>
+	/// <para>
+	/// This method normalizes each value so that it represents a percentage of the total sum it attributes to.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "percent_of_sum")]
+	PercentOfSum,
+	/// <summary>
+	/// <para>
+	/// This method normalizes such that each value is normalized by how much it differs from the average.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "mean")]
+	Mean,
+	/// <summary>
+	/// <para>
+	/// This method normalizes such that each value represents how far it is from the mean relative to the standard deviation.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "z-score")]
+	ZScore,
+	/// <summary>
+	/// <para>
+	/// This method normalizes such that each value is exponentiated and relative to the sum of the exponents of the original values.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "softmax")]
+	Softmax
 }
 
-internal sealed class TermsAggregationCollectModeConverter : JsonConverter<TermsAggregationCollectMode>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.RateModeConverter))]
+public enum RateMode
 {
-	public override TermsAggregationCollectMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "depth_first":
-				return TermsAggregationCollectMode.DepthFirst;
-			case "breadth_first":
-				return TermsAggregationCollectMode.BreadthFirst;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, TermsAggregationCollectMode value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case TermsAggregationCollectMode.DepthFirst:
-				writer.WriteStringValue("depth_first");
-				return;
-			case TermsAggregationCollectMode.BreadthFirst:
-				writer.WriteStringValue("breadth_first");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	/// <summary>
+	/// <para>
+	/// Calculates the sum of all values of the field.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "sum")]
+	Sum,
+	/// <summary>
+	/// <para>
+	/// Uses the number of values of the field.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "value_count")]
+	ValueCount
 }
 
-[JsonConverter(typeof(TermsAggregationExecutionHintConverter))]
-public enum TermsAggregationExecutionHint
-{
-	[EnumMember(Value = "map")]
-	Map,
-	[EnumMember(Value = "global_ordinals_low_cardinality")]
-	GlobalOrdinalsLowCardinality,
-	[EnumMember(Value = "global_ordinals_hash")]
-	GlobalOrdinalsHash,
-	[EnumMember(Value = "global_ordinals")]
-	GlobalOrdinals
-}
-
-internal sealed class TermsAggregationExecutionHintConverter : JsonConverter<TermsAggregationExecutionHint>
-{
-	public override TermsAggregationExecutionHint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "map":
-				return TermsAggregationExecutionHint.Map;
-			case "global_ordinals_low_cardinality":
-				return TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality;
-			case "global_ordinals_hash":
-				return TermsAggregationExecutionHint.GlobalOrdinalsHash;
-			case "global_ordinals":
-				return TermsAggregationExecutionHint.GlobalOrdinals;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, TermsAggregationExecutionHint value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case TermsAggregationExecutionHint.Map:
-				writer.WriteStringValue("map");
-				return;
-			case TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality:
-				writer.WriteStringValue("global_ordinals_low_cardinality");
-				return;
-			case TermsAggregationExecutionHint.GlobalOrdinalsHash:
-				writer.WriteStringValue("global_ordinals_hash");
-				return;
-			case TermsAggregationExecutionHint.GlobalOrdinals:
-				writer.WriteStringValue("global_ordinals");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(TTestTypeConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TTestTypeConverter))]
 public enum TTestType
 {
 	/// <summary>
@@ -725,156 +1398,45 @@ public enum TTestType
 	/// Performs paired t-test.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "paired")]
+	[System.Runtime.Serialization.EnumMember(Value = "paired")]
 	Paired,
 	/// <summary>
 	/// <para>
 	/// Performs two-sample equal variance test.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "homoscedastic")]
+	[System.Runtime.Serialization.EnumMember(Value = "homoscedastic")]
 	Homoscedastic,
 	/// <summary>
 	/// <para>
 	/// Performs two-sample unequal variance test.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "heteroscedastic")]
+	[System.Runtime.Serialization.EnumMember(Value = "heteroscedastic")]
 	Heteroscedastic
 }
 
-internal sealed class TTestTypeConverter : JsonConverter<TTestType>
-{
-	public override TTestType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "paired":
-				return TTestType.Paired;
-			case "homoscedastic":
-				return TTestType.Homoscedastic;
-			case "heteroscedastic":
-				return TTestType.Heteroscedastic;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, TTestType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case TTestType.Paired:
-				writer.WriteStringValue("paired");
-				return;
-			case TTestType.Homoscedastic:
-				writer.WriteStringValue("homoscedastic");
-				return;
-			case TTestType.Heteroscedastic:
-				writer.WriteStringValue("heteroscedastic");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(ValueTypeConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.ValueTypeConverter))]
 public enum ValueType
 {
-	[EnumMember(Value = "string")]
+	[System.Runtime.Serialization.EnumMember(Value = "string")]
 	String,
-	[EnumMember(Value = "numeric")]
-	Numeric,
-	[EnumMember(Value = "number")]
-	Number,
-	[EnumMember(Value = "long")]
+	[System.Runtime.Serialization.EnumMember(Value = "long")]
 	Long,
-	[EnumMember(Value = "ip")]
-	Ip,
-	[EnumMember(Value = "geo_point")]
-	GeoPoint,
-	[EnumMember(Value = "double")]
+	[System.Runtime.Serialization.EnumMember(Value = "double")]
 	Double,
-	[EnumMember(Value = "date_nanos")]
-	DateNanos,
-	[EnumMember(Value = "date")]
+	[System.Runtime.Serialization.EnumMember(Value = "number")]
+	Number,
+	[System.Runtime.Serialization.EnumMember(Value = "date")]
 	Date,
-	[EnumMember(Value = "boolean")]
+	[System.Runtime.Serialization.EnumMember(Value = "date_nanos")]
+	DateNanos,
+	[System.Runtime.Serialization.EnumMember(Value = "ip")]
+	Ip,
+	[System.Runtime.Serialization.EnumMember(Value = "numeric")]
+	Numeric,
+	[System.Runtime.Serialization.EnumMember(Value = "geo_point")]
+	GeoPoint,
+	[System.Runtime.Serialization.EnumMember(Value = "boolean")]
 	Boolean
-}
-
-internal sealed class ValueTypeConverter : JsonConverter<ValueType>
-{
-	public override ValueType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "string":
-				return ValueType.String;
-			case "numeric":
-				return ValueType.Numeric;
-			case "number":
-				return ValueType.Number;
-			case "long":
-				return ValueType.Long;
-			case "ip":
-				return ValueType.Ip;
-			case "geo_point":
-				return ValueType.GeoPoint;
-			case "double":
-				return ValueType.Double;
-			case "date_nanos":
-				return ValueType.DateNanos;
-			case "date":
-				return ValueType.Date;
-			case "boolean":
-				return ValueType.Boolean;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ValueType value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case ValueType.String:
-				writer.WriteStringValue("string");
-				return;
-			case ValueType.Numeric:
-				writer.WriteStringValue("numeric");
-				return;
-			case ValueType.Number:
-				writer.WriteStringValue("number");
-				return;
-			case ValueType.Long:
-				writer.WriteStringValue("long");
-				return;
-			case ValueType.Ip:
-				writer.WriteStringValue("ip");
-				return;
-			case ValueType.GeoPoint:
-				writer.WriteStringValue("geo_point");
-				return;
-			case ValueType.Double:
-				writer.WriteStringValue("double");
-				return;
-			case ValueType.DateNanos:
-				writer.WriteStringValue("date_nanos");
-				return;
-			case ValueType.Date:
-				writer.WriteStringValue("date");
-				return;
-			case ValueType.Boolean:
-				writer.WriteStringValue("boolean");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
 }

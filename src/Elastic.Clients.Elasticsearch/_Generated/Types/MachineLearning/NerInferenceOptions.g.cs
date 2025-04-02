@@ -17,50 +17,76 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Named entity recognition options
-/// </para>
-/// </summary>
-public sealed partial class NerInferenceOptions
+internal sealed partial class NerInferenceOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions>
 {
-	/// <summary>
-	/// <para>
-	/// The token classification labels. Must be IOB formatted tags
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("classification_labels")]
-	public ICollection<string>? ClassificationLabels { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropClassificationLabels = System.Text.Json.JsonEncodedText.Encode("classification_labels");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
+	private static readonly System.Text.Json.JsonEncodedText PropVocabulary = System.Text.Json.JsonEncodedText.Encode("vocabulary");
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
-	public string? ResultsField { get; set; }
+	public override Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propClassificationLabels = default;
+		LocalJsonValue<string?> propResultsField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig?> propTokenization = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary?> propVocabulary = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClassificationLabels.TryReadProperty(ref reader, options, PropClassificationLabels, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("tokenization")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
-	[JsonInclude, JsonPropertyName("vocabulary")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
 
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(NerInferenceOptions nerInferenceOptions) => Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate.Ner(nerInferenceOptions);
+			if (propTokenization.TryReadProperty(ref reader, options, PropTokenization, null))
+			{
+				continue;
+			}
+
+			if (propVocabulary.TryReadProperty(ref reader, options, PropVocabulary, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ClassificationLabels = propClassificationLabels.Value,
+			ResultsField = propResultsField.Value,
+			Tokenization = propTokenization.Value,
+			Vocabulary = propVocabulary.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClassificationLabels, value.ClassificationLabels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
+		writer.WriteProperty(options, PropVocabulary, value.Vocabulary, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -68,32 +94,114 @@ public sealed partial class NerInferenceOptions
 /// Named entity recognition options
 /// </para>
 /// </summary>
-public sealed partial class NerInferenceOptionsDescriptor : SerializableDescriptor<NerInferenceOptionsDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsConverter))]
+public sealed partial class NerInferenceOptions
 {
-	internal NerInferenceOptionsDescriptor(Action<NerInferenceOptionsDescriptor> configure) => configure.Invoke(this);
-
-	public NerInferenceOptionsDescriptor() : base()
+#if NET7_0_OR_GREATER
+	public NerInferenceOptions()
 	{
 	}
-
-	private ICollection<string>? ClassificationLabelsValue { get; set; }
-	private string? ResultsFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? TokenizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? VocabularyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor VocabularyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> VocabularyDescriptorAction { get; set; }
+#endif
+#if !NET7_0_OR_GREATER
+	public NerInferenceOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NerInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The token classification labels. Must be IOB formatted tags
 	/// </para>
 	/// </summary>
-	public NerInferenceOptionsDescriptor ClassificationLabels(ICollection<string>? classificationLabels)
+	public System.Collections.Generic.ICollection<string>? ClassificationLabels { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
+	/// </summary>
+	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The tokenization options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// Named entity recognition options
+/// </para>
+/// </summary>
+public readonly partial struct NerInferenceOptionsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NerInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions instance)
 	{
-		ClassificationLabelsValue = classificationLabels;
-		return Self;
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NerInferenceOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The token classification labels. Must be IOB formatted tags
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ClassificationLabels(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.ClassificationLabels = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The token classification labels. Must be IOB formatted tags
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ClassificationLabels()
+	{
+		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The token classification labels. Must be IOB formatted tags
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ClassificationLabels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The token classification labels. Must be IOB formatted tags
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ClassificationLabels(params string[] values)
+	{
+		Instance.ClassificationLabels = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -101,10 +209,10 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	public NerInferenceOptionsDescriptor ResultsField(string? resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ResultsField(string? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -112,101 +220,45 @@ public sealed partial class NerInferenceOptionsDescriptor : SerializableDescript
 	/// The tokenization options
 	/// </para>
 	/// </summary>
-	public NerInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? tokenization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = null;
-		TokenizationValue = tokenization;
-		return Self;
+		Instance.Tokenization = value;
+		return this;
 	}
 
-	public NerInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The tokenization options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptorAction = null;
-		TokenizationDescriptor = descriptor;
-		return Self;
+		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);
+		return this;
 	}
 
-	public NerInferenceOptionsDescriptor Tokenization(Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? value)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = configure;
-		return Self;
+		Instance.Vocabulary = value;
+		return this;
 	}
 
-	public NerInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? vocabulary)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor Vocabulary(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> action)
 	{
-		VocabularyDescriptor = null;
-		VocabularyDescriptorAction = null;
-		VocabularyValue = vocabulary;
-		return Self;
+		Instance.Vocabulary = Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor.Build(action);
+		return this;
 	}
 
-	public NerInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor descriptor)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor>? action)
 	{
-		VocabularyValue = null;
-		VocabularyDescriptorAction = null;
-		VocabularyDescriptor = descriptor;
-		return Self;
-	}
-
-	public NerInferenceOptionsDescriptor Vocabulary(Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> configure)
-	{
-		VocabularyValue = null;
-		VocabularyDescriptor = null;
-		VocabularyDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ClassificationLabelsValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("classification_labels");
-			JsonSerializer.Serialize(writer, ClassificationLabelsValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(ResultsFieldValue))
-		{
-			writer.WritePropertyName("results_field");
-			writer.WriteStringValue(ResultsFieldValue);
-		}
-
-		if (TokenizationDescriptor is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-		}
-		else if (TokenizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor(TokenizationDescriptorAction), options);
-		}
-		else if (TokenizationValue is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationValue, options);
-		}
-
-		if (VocabularyDescriptor is not null)
-		{
-			writer.WritePropertyName("vocabulary");
-			JsonSerializer.Serialize(writer, VocabularyDescriptor, options);
-		}
-		else if (VocabularyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("vocabulary");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor(VocabularyDescriptorAction), options);
-		}
-		else if (VocabularyValue is not null)
-		{
-			writer.WritePropertyName("vocabulary");
-			JsonSerializer.Serialize(writer, VocabularyValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

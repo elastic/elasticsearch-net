@@ -17,69 +17,204 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-[JsonConverter(typeof(FailureStoreStatusConverter))]
-public enum FailureStoreStatus
+internal sealed partial class OperationTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Bulk.OperationType>
 {
-	[EnumMember(Value = "used")]
-	Used,
-	[EnumMember(Value = "not_enabled")]
-	NotEnabled,
-	[EnumMember(Value = "not_applicable_or_unknown")]
-	NotApplicableOrUnknown,
-	[EnumMember(Value = "failed")]
-	Failed
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText MemberCreate = System.Text.Json.JsonEncodedText.Encode("create");
+	private static readonly System.Text.Json.JsonEncodedText MemberUpdate = System.Text.Json.JsonEncodedText.Encode("update");
+	private static readonly System.Text.Json.JsonEncodedText MemberDelete = System.Text.Json.JsonEncodedText.Encode("delete");
 
-internal sealed class FailureStoreStatusConverter : JsonConverter<FailureStoreStatus>
-{
-	public override FailureStoreStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Core.Bulk.OperationType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberIndex))
 		{
-			case "used":
-				return FailureStoreStatus.Used;
-			case "not_enabled":
-				return FailureStoreStatus.NotEnabled;
-			case "not_applicable_or_unknown":
-				return FailureStoreStatus.NotApplicableOrUnknown;
-			case "failed":
-				return FailureStoreStatus.Failed;
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberCreate))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Create;
+		}
+
+		if (reader.ValueTextEquals(MemberUpdate))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update;
+		}
+
+		if (reader.ValueTextEquals(MemberDelete))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Delete;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberIndex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index;
+		}
+
+		if (string.Equals(value, MemberCreate.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Create;
+		}
+
+		if (string.Equals(value, MemberUpdate.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update;
+		}
+
+		if (string.Equals(value, MemberDelete.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Delete;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Bulk.OperationType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, FailureStoreStatus value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Bulk.OperationType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case FailureStoreStatus.Used:
-				writer.WriteStringValue("used");
-				return;
-			case FailureStoreStatus.NotEnabled:
-				writer.WriteStringValue("not_enabled");
-				return;
-			case FailureStoreStatus.NotApplicableOrUnknown:
-				writer.WriteStringValue("not_applicable_or_unknown");
-				return;
-			case FailureStoreStatus.Failed:
-				writer.WriteStringValue("failed");
-				return;
+			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index:
+				writer.WriteStringValue(MemberIndex);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Create:
+				writer.WriteStringValue(MemberCreate);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update:
+				writer.WriteStringValue(MemberUpdate);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Delete:
+				writer.WriteStringValue(MemberDelete);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Bulk.OperationType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Core.Bulk.OperationType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Bulk.OperationType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class FailureStoreStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberNotApplicableOrUnknown = System.Text.Json.JsonEncodedText.Encode("not_applicable_or_unknown");
+	private static readonly System.Text.Json.JsonEncodedText MemberUsed = System.Text.Json.JsonEncodedText.Encode("used");
+	private static readonly System.Text.Json.JsonEncodedText MemberNotEnabled = System.Text.Json.JsonEncodedText.Encode("not_enabled");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+
+	public override Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberNotApplicableOrUnknown))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotApplicableOrUnknown;
 		}
 
-		writer.WriteNullValue();
+		if (reader.ValueTextEquals(MemberUsed))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used;
+		}
+
+		if (reader.ValueTextEquals(MemberNotEnabled))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotEnabled;
+		}
+
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberNotApplicableOrUnknown.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotApplicableOrUnknown;
+		}
+
+		if (string.Equals(value, MemberUsed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used;
+		}
+
+		if (string.Equals(value, MemberNotEnabled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotEnabled;
+		}
+
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus)}'.");
 	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotApplicableOrUnknown:
+				writer.WriteStringValue(MemberNotApplicableOrUnknown);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used:
+				writer.WriteStringValue(MemberUsed);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotEnabled:
+				writer.WriteStringValue(MemberNotEnabled);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed:
+				writer.WriteStringValue(MemberFailed);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Bulk.OperationTypeConverter))]
+public enum OperationType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "index")]
+	Index,
+	[System.Runtime.Serialization.EnumMember(Value = "create")]
+	Create,
+	[System.Runtime.Serialization.EnumMember(Value = "update")]
+	Update,
+	[System.Runtime.Serialization.EnumMember(Value = "delete")]
+	Delete
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatusConverter))]
+public enum FailureStoreStatus
+{
+	[System.Runtime.Serialization.EnumMember(Value = "not_applicable_or_unknown")]
+	NotApplicableOrUnknown,
+	[System.Runtime.Serialization.EnumMember(Value = "used")]
+	Used,
+	[System.Runtime.Serialization.EnumMember(Value = "not_enabled")]
+	NotEnabled,
+	[System.Runtime.Serialization.EnumMember(Value = "failed")]
+	Failed
 }

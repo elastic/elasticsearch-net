@@ -17,44 +17,269 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterNodeCountConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingOnly = System.Text.Json.JsonEncodedText.Encode("coordinating_only");
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
+	private static readonly System.Text.Json.JsonEncodedText PropDataCold = System.Text.Json.JsonEncodedText.Encode("data_cold");
+	private static readonly System.Text.Json.JsonEncodedText PropDataContent = System.Text.Json.JsonEncodedText.Encode("data_content");
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrozen = System.Text.Json.JsonEncodedText.Encode("data_frozen");
+	private static readonly System.Text.Json.JsonEncodedText PropDataHot = System.Text.Json.JsonEncodedText.Encode("data_hot");
+	private static readonly System.Text.Json.JsonEncodedText PropDataWarm = System.Text.Json.JsonEncodedText.Encode("data_warm");
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText PropMaster = System.Text.Json.JsonEncodedText.Encode("master");
+	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteClusterClient = System.Text.Json.JsonEncodedText.Encode("remote_cluster_client");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropTransform = System.Text.Json.JsonEncodedText.Encode("transform");
+	private static readonly System.Text.Json.JsonEncodedText PropVotingOnly = System.Text.Json.JsonEncodedText.Encode("voting_only");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCoordinatingOnly = default;
+		LocalJsonValue<int> propData = default;
+		LocalJsonValue<int> propDataCold = default;
+		LocalJsonValue<int> propDataContent = default;
+		LocalJsonValue<int?> propDataFrozen = default;
+		LocalJsonValue<int> propDataHot = default;
+		LocalJsonValue<int> propDataWarm = default;
+		LocalJsonValue<int> propIngest = default;
+		LocalJsonValue<int> propMaster = default;
+		LocalJsonValue<int> propMl = default;
+		LocalJsonValue<int> propRemoteClusterClient = default;
+		LocalJsonValue<int> propTotal = default;
+		LocalJsonValue<int> propTransform = default;
+		LocalJsonValue<int> propVotingOnly = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCoordinatingOnly.TryReadProperty(ref reader, options, PropCoordinatingOnly, null))
+			{
+				continue;
+			}
+
+			if (propData.TryReadProperty(ref reader, options, PropData, null))
+			{
+				continue;
+			}
+
+			if (propDataCold.TryReadProperty(ref reader, options, PropDataCold, null))
+			{
+				continue;
+			}
+
+			if (propDataContent.TryReadProperty(ref reader, options, PropDataContent, null))
+			{
+				continue;
+			}
+
+			if (propDataFrozen.TryReadProperty(ref reader, options, PropDataFrozen, null))
+			{
+				continue;
+			}
+
+			if (propDataHot.TryReadProperty(ref reader, options, PropDataHot, null))
+			{
+				continue;
+			}
+
+			if (propDataWarm.TryReadProperty(ref reader, options, PropDataWarm, null))
+			{
+				continue;
+			}
+
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, null))
+			{
+				continue;
+			}
+
+			if (propMaster.TryReadProperty(ref reader, options, PropMaster, null))
+			{
+				continue;
+			}
+
+			if (propMl.TryReadProperty(ref reader, options, PropMl, null))
+			{
+				continue;
+			}
+
+			if (propRemoteClusterClient.TryReadProperty(ref reader, options, PropRemoteClusterClient, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (propTransform.TryReadProperty(ref reader, options, PropTransform, null))
+			{
+				continue;
+			}
+
+			if (propVotingOnly.TryReadProperty(ref reader, options, PropVotingOnly, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CoordinatingOnly = propCoordinatingOnly.Value,
+			Data = propData.Value,
+			DataCold = propDataCold.Value,
+			DataContent = propDataContent.Value,
+			DataFrozen = propDataFrozen.Value,
+			DataHot = propDataHot.Value,
+			DataWarm = propDataWarm.Value,
+			Ingest = propIngest.Value,
+			Master = propMaster.Value,
+			Ml = propMl.Value,
+			RemoteClusterClient = propRemoteClusterClient.Value,
+			Total = propTotal.Value,
+			Transform = propTransform.Value,
+			VotingOnly = propVotingOnly.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCoordinatingOnly, value.CoordinatingOnly, null, null);
+		writer.WriteProperty(options, PropData, value.Data, null, null);
+		writer.WriteProperty(options, PropDataCold, value.DataCold, null, null);
+		writer.WriteProperty(options, PropDataContent, value.DataContent, null, null);
+		writer.WriteProperty(options, PropDataFrozen, value.DataFrozen, null, null);
+		writer.WriteProperty(options, PropDataHot, value.DataHot, null, null);
+		writer.WriteProperty(options, PropDataWarm, value.DataWarm, null, null);
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
+		writer.WriteProperty(options, PropMaster, value.Master, null, null);
+		writer.WriteProperty(options, PropMl, value.Ml, null, null);
+		writer.WriteProperty(options, PropRemoteClusterClient, value.RemoteClusterClient, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropTransform, value.Transform, null, null);
+		writer.WriteProperty(options, PropVotingOnly, value.VotingOnly, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCountConverter))]
 public sealed partial class ClusterNodeCount
 {
-	[JsonInclude, JsonPropertyName("coordinating_only")]
-	public int CoordinatingOnly { get; init; }
-	[JsonInclude, JsonPropertyName("data")]
-	public int Data { get; init; }
-	[JsonInclude, JsonPropertyName("data_cold")]
-	public int DataCold { get; init; }
-	[JsonInclude, JsonPropertyName("data_content")]
-	public int DataContent { get; init; }
-	[JsonInclude, JsonPropertyName("data_frozen")]
-	public int? DataFrozen { get; init; }
-	[JsonInclude, JsonPropertyName("data_hot")]
-	public int DataHot { get; init; }
-	[JsonInclude, JsonPropertyName("data_warm")]
-	public int DataWarm { get; init; }
-	[JsonInclude, JsonPropertyName("ingest")]
-	public int Ingest { get; init; }
-	[JsonInclude, JsonPropertyName("master")]
-	public int Master { get; init; }
-	[JsonInclude, JsonPropertyName("ml")]
-	public int Ml { get; init; }
-	[JsonInclude, JsonPropertyName("remote_cluster_client")]
-	public int RemoteClusterClient { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
-	[JsonInclude, JsonPropertyName("transform")]
-	public int Transform { get; init; }
-	[JsonInclude, JsonPropertyName("voting_only")]
-	public int VotingOnly { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterNodeCount(int coordinatingOnly, int data, int dataCold, int dataContent, int dataHot, int dataWarm, int ingest, int master, int ml, int remoteClusterClient, int total, int transform, int votingOnly)
+	{
+		CoordinatingOnly = coordinatingOnly;
+		Data = data;
+		DataCold = dataCold;
+		DataContent = dataContent;
+		DataHot = dataHot;
+		DataWarm = dataWarm;
+		Ingest = ingest;
+		Master = master;
+		Ml = ml;
+		RemoteClusterClient = remoteClusterClient;
+		Total = total;
+		Transform = transform;
+		VotingOnly = votingOnly;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterNodeCount()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterNodeCount()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterNodeCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int CoordinatingOnly { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Data { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int DataCold { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int DataContent { get; set; }
+	public int? DataFrozen { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int DataHot { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int DataWarm { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Ingest { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Master { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Ml { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int RemoteClusterClient { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Total { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Transform { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int VotingOnly { get; set; }
 }

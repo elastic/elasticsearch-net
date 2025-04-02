@@ -17,43 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class Vocabulary
+internal sealed partial class VocabularyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary>
 {
-	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
 
-public sealed partial class VocabularyDescriptor : SerializableDescriptor<VocabularyDescriptor>
-{
-	internal VocabularyDescriptor(Action<VocabularyDescriptor> configure) => configure.Invoke(this);
-
-	public VocabularyDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-
-	public VocabularyDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
-	{
-		IndexValue = index;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.VocabularyConverter))]
+public sealed partial class Vocabulary
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Vocabulary(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Index = index;
+	}
+#if NET7_0_OR_GREATER
+	public Vocabulary()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Vocabulary()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Vocabulary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+}
+
+public readonly partial struct VocabularyDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VocabularyDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public VocabularyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary instance) => new Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

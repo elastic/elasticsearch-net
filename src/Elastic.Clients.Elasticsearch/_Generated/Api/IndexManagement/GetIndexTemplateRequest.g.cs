@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class GetIndexTemplateRequestParameters : RequestParameters
+public sealed partial class GetIndexTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -61,25 +54,66 @@ public sealed partial class GetIndexTemplateRequestParameters : RequestParameter
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+internal sealed partial class GetIndexTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest>
+{
+	public override Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get index templates.
 /// Get information about one or more index templates.
 /// </para>
 /// </summary>
-public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTemplateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestConverter))]
+public sealed partial class GetIndexTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>
 {
-	public GetIndexTemplateRequest()
-	{
-	}
-
 	public GetIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetIndexTemplateRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetIndexTemplateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetIndexTemplate;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementGetIndexTemplate;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -87,10 +121,16 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 
 	/// <summary>
 	/// <para>
+	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
+
+	/// <summary>
+	/// <para>
 	/// If true, returns settings in flat format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
@@ -98,7 +138,6 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 	/// If true, returns all relevant default configurations for the index template.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
@@ -106,7 +145,6 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -114,7 +152,6 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
@@ -124,38 +161,136 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 /// Get information about one or more index templates.
 /// </para>
 /// </summary>
-public sealed partial class GetIndexTemplateRequestDescriptor : RequestDescriptor<GetIndexTemplateRequestDescriptor, GetIndexTemplateRequestParameters>
+public readonly partial struct GetIndexTemplateRequestDescriptor
 {
-	internal GetIndexTemplateRequestDescriptor(Action<GetIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest Instance { get; init; }
 
-	public GetIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest(name);
 	}
 
 	public GetIndexTemplateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetIndexTemplate;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "indices.get_index_template";
-
-	public GetIndexTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-	public GetIndexTemplateRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
-	public GetIndexTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
-	public GetIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public GetIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		RouteValues.Optional("name", name);
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If true, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor FlatSettings(bool? value = true)
 	{
+		Instance.FlatSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, returns all relevant default configurations for the index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor IncludeDefaults(bool? value = true)
+	{
+		Instance.IncludeDefaults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor Local(bool? value = true)
+	{
+		Instance.Local = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

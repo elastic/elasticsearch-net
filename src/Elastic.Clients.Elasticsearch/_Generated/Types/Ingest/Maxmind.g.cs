@@ -17,46 +17,113 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class Maxmind
+internal sealed partial class MaxmindConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.Maxmind>
 {
-	[JsonInclude, JsonPropertyName("account_id")]
-	public Elastic.Clients.Elasticsearch.Id AccountId { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropAccountId = System.Text.Json.JsonEncodedText.Encode("account_id");
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration(Maxmind maxmind) => Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration.Maxmind(maxmind);
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFull(Maxmind maxmind) => Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFull.Maxmind(maxmind);
-}
-
-public sealed partial class MaxmindDescriptor : SerializableDescriptor<MaxmindDescriptor>
-{
-	internal MaxmindDescriptor(Action<MaxmindDescriptor> configure) => configure.Invoke(this);
-
-	public MaxmindDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Ingest.Maxmind Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propAccountId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccountId.TryReadProperty(ref reader, options, PropAccountId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.Maxmind(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AccountId = propAccountId.Value
+		};
 	}
 
-	private Elastic.Clients.Elasticsearch.Id AccountIdValue { get; set; }
-
-	public MaxmindDescriptor AccountId(Elastic.Clients.Elasticsearch.Id accountId)
-	{
-		AccountIdValue = accountId;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.Maxmind value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("account_id");
-		JsonSerializer.Serialize(writer, AccountIdValue, options);
+		writer.WriteProperty(options, PropAccountId, value.AccountId, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.MaxmindConverter))]
+public sealed partial class Maxmind
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Maxmind(Elastic.Clients.Elasticsearch.Id accountId)
+	{
+		AccountId = accountId;
+	}
+#if NET7_0_OR_GREATER
+	public Maxmind()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Maxmind()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Maxmind(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id AccountId { get; set; }
+}
+
+public readonly partial struct MaxmindDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Ingest.Maxmind Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MaxmindDescriptor(Elastic.Clients.Elasticsearch.Ingest.Maxmind instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MaxmindDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.Maxmind(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor(Elastic.Clients.Elasticsearch.Ingest.Maxmind instance) => new Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Maxmind(Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor AccountId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.AccountId = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.Maxmind Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor(new Elastic.Clients.Elasticsearch.Ingest.Maxmind(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,25 +17,121 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class PipelineConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.Pipeline>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.Pipeline Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDeprecated = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propProcessors = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeprecated.TryReadProperty(ref reader, options, PropDeprecated, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propProcessors.TryReadProperty(ref reader, options, PropProcessors, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Deprecated = propDeprecated.Value,
+			Description = propDescription.Value,
+			Meta = propMeta.Value,
+			OnFailure = propOnFailure.Value,
+			Processors = propProcessors.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.Pipeline value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropProcessors, value.Processors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PipelineConverter))]
 public sealed partial class Pipeline
 {
+#if NET7_0_OR_GREATER
+	public Pipeline()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Pipeline()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Marks this ingest pipeline as deprecated.
 	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("deprecated")]
 	public bool? Deprecated { get; set; }
 
 	/// <summary>
@@ -43,7 +139,6 @@ public sealed partial class Pipeline
 	/// Description of the ingest pipeline.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -51,16 +146,14 @@ public sealed partial class Pipeline
 	/// Arbitrary metadata about the ingest pipeline. This map is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IDictionary<string, object>? Meta { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Processors to run immediately after a processor failure.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -68,38 +161,34 @@ public sealed partial class Pipeline
 	/// Processors run sequentially in the order specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("processors")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? Processors { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? Processors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Version number used by external systems to track ingest pipelines.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
 
-public sealed partial class PipelineDescriptor<TDocument> : SerializableDescriptor<PipelineDescriptor<TDocument>>
+public readonly partial struct PipelineDescriptor<TDocument>
 {
-	internal PipelineDescriptor(Action<PipelineDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.Pipeline Instance { get; init; }
 
-	public PipelineDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PipelineDescriptor(Elastic.Clients.Elasticsearch.Ingest.Pipeline instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? DeprecatedValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? ProcessorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> ProcessorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> ProcessorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] ProcessorsDescriptorActions { get; set; }
-	private long? VersionValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PipelineDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.Pipeline instance) => new Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -107,10 +196,10 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor<TDocument> Deprecated(bool? deprecated = true)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Deprecated(bool? value = true)
 	{
-		DeprecatedValue = deprecated;
-		return Self;
+		Instance.Deprecated = value;
+		return this;
 	}
 
 	/// <summary>
@@ -118,10 +207,10 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 	/// Description of the ingest pipeline.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -129,10 +218,39 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 	/// Arbitrary metadata about the ingest pipeline. This map is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata about the ingest pipeline. This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata about the ingest pipeline. This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -140,40 +258,60 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 	/// Processors to run immediately after a processor failure.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public PipelineDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public PipelineDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PipelineDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -182,40 +320,64 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 	/// Processors run sequentially in the order specified.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor<TDocument> Processors(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? processors)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Processors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		ProcessorsDescriptor = null;
-		ProcessorsDescriptorAction = null;
-		ProcessorsDescriptorActions = null;
-		ProcessorsValue = processors;
-		return Self;
+		Instance.Processors = value;
+		return this;
 	}
 
-	public PipelineDescriptor<TDocument> Processors(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Processors()
 	{
-		ProcessorsValue = null;
-		ProcessorsDescriptorAction = null;
-		ProcessorsDescriptorActions = null;
-		ProcessorsDescriptor = descriptor;
-		return Self;
+		Instance.Processors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public PipelineDescriptor<TDocument> Processors(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Processors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		ProcessorsValue = null;
-		ProcessorsDescriptor = null;
-		ProcessorsDescriptorActions = null;
-		ProcessorsDescriptorAction = configure;
-		return Self;
+		Instance.Processors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PipelineDescriptor<TDocument> Processors(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Processors(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		ProcessorsValue = null;
-		ProcessorsDescriptor = null;
-		ProcessorsDescriptorAction = null;
-		ProcessorsDescriptorActions = configure;
-		return Self;
+		Instance.Processors = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Processors(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Processors = items;
+		return this;
 	}
 
 	/// <summary>
@@ -223,125 +385,44 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 	/// Version number used by external systems to track ingest pipelines.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor<TDocument> Version(long? version)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.Pipeline Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (DeprecatedValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("deprecated");
-			writer.WriteBooleanValue(DeprecatedValue.Value);
+			return new Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (ProcessorsDescriptor is not null)
-		{
-			writer.WritePropertyName("processors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ProcessorsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ProcessorsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("processors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(ProcessorsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ProcessorsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("processors");
-			writer.WriteStartArray();
-			foreach (var action in ProcessorsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (ProcessorsValue is not null)
-		{
-			writer.WritePropertyName("processors");
-			JsonSerializer.Serialize(writer, ProcessorsValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class PipelineDescriptor : SerializableDescriptor<PipelineDescriptor>
+public readonly partial struct PipelineDescriptor
 {
-	internal PipelineDescriptor(Action<PipelineDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.Pipeline Instance { get; init; }
 
-	public PipelineDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PipelineDescriptor(Elastic.Clients.Elasticsearch.Ingest.Pipeline instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? DeprecatedValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? ProcessorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor ProcessorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> ProcessorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] ProcessorsDescriptorActions { get; set; }
-	private long? VersionValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PipelineDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor(Elastic.Clients.Elasticsearch.Ingest.Pipeline instance) => new Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -349,10 +430,10 @@ public sealed partial class PipelineDescriptor : SerializableDescriptor<Pipeline
 	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor Deprecated(bool? deprecated = true)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Deprecated(bool? value = true)
 	{
-		DeprecatedValue = deprecated;
-		return Self;
+		Instance.Deprecated = value;
+		return this;
 	}
 
 	/// <summary>
@@ -360,10 +441,10 @@ public sealed partial class PipelineDescriptor : SerializableDescriptor<Pipeline
 	/// Description of the ingest pipeline.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -371,10 +452,39 @@ public sealed partial class PipelineDescriptor : SerializableDescriptor<Pipeline
 	/// Arbitrary metadata about the ingest pipeline. This map is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata about the ingest pipeline. This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata about the ingest pipeline. This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -382,40 +492,88 @@ public sealed partial class PipelineDescriptor : SerializableDescriptor<Pipeline
 	/// Processors to run immediately after a processor failure.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public PipelineDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
 	}
 
-	public PipelineDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
 	}
 
-	public PipelineDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Processors to run immediately after a processor failure.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -424,40 +582,94 @@ public sealed partial class PipelineDescriptor : SerializableDescriptor<Pipeline
 	/// Processors run sequentially in the order specified.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor Processors(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? processors)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Processors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		ProcessorsDescriptor = null;
-		ProcessorsDescriptorAction = null;
-		ProcessorsDescriptorActions = null;
-		ProcessorsValue = processors;
-		return Self;
+		Instance.Processors = value;
+		return this;
 	}
 
-	public PipelineDescriptor Processors(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Processors()
 	{
-		ProcessorsValue = null;
-		ProcessorsDescriptorAction = null;
-		ProcessorsDescriptorActions = null;
-		ProcessorsDescriptor = descriptor;
-		return Self;
+		Instance.Processors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
 	}
 
-	public PipelineDescriptor Processors(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Processors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
 	{
-		ProcessorsValue = null;
-		ProcessorsDescriptor = null;
-		ProcessorsDescriptorActions = null;
-		ProcessorsDescriptorAction = configure;
-		return Self;
+		Instance.Processors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
 	}
 
-	public PipelineDescriptor Processors(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Processors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
 	{
-		ProcessorsValue = null;
-		ProcessorsDescriptor = null;
-		ProcessorsDescriptorAction = null;
-		ProcessorsDescriptorActions = configure;
-		return Self;
+		Instance.Processors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Processors(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.Processors = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Processors(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.Processors = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Processors used to perform transformations on documents before indexing.
+	/// Processors run sequentially in the order specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Processors<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.Processors = items;
+		return this;
 	}
 
 	/// <summary>
@@ -465,101 +677,22 @@ public sealed partial class PipelineDescriptor : SerializableDescriptor<Pipeline
 	/// Version number used by external systems to track ingest pipelines.
 	/// </para>
 	/// </summary>
-	public PipelineDescriptor Version(long? version)
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.Pipeline Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (DeprecatedValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("deprecated");
-			writer.WriteBooleanValue(DeprecatedValue.Value);
+			return new Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (ProcessorsDescriptor is not null)
-		{
-			writer.WritePropertyName("processors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ProcessorsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ProcessorsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("processors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(ProcessorsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ProcessorsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("processors");
-			writer.WriteStartArray();
-			foreach (var action in ProcessorsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (ProcessorsValue is not null)
-		{
-			writer.WritePropertyName("processors");
-			JsonSerializer.Serialize(writer, ProcessorsValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor(new Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

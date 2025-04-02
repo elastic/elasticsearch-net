@@ -17,77 +17,272 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ClusterNodesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterNodes>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropDiscoveryTypes = System.Text.Json.JsonEncodedText.Encode("discovery_types");
+	private static readonly System.Text.Json.JsonEncodedText PropFs = System.Text.Json.JsonEncodedText.Encode("fs");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexingPressure = System.Text.Json.JsonEncodedText.Encode("indexing_pressure");
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText PropJvm = System.Text.Json.JsonEncodedText.Encode("jvm");
+	private static readonly System.Text.Json.JsonEncodedText PropNetworkTypes = System.Text.Json.JsonEncodedText.Encode("network_types");
+	private static readonly System.Text.Json.JsonEncodedText PropOs = System.Text.Json.JsonEncodedText.Encode("os");
+	private static readonly System.Text.Json.JsonEncodedText PropPackagingTypes = System.Text.Json.JsonEncodedText.Encode("packaging_types");
+	private static readonly System.Text.Json.JsonEncodedText PropPlugins = System.Text.Json.JsonEncodedText.Encode("plugins");
+	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process");
+	private static readonly System.Text.Json.JsonEncodedText PropVersions = System.Text.Json.JsonEncodedText.Encode("versions");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterNodes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount> propCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propDiscoveryTypes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem> propFs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.IndexingPressure> propIndexingPressure = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterIngest> propIngest = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterJvm> propJvm = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes> propNetworkTypes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem> propOs = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType>> propPackagingTypes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>> propPlugins = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterProcess> propProcess = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propVersions = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propDiscoveryTypes.TryReadProperty(ref reader, options, PropDiscoveryTypes, static System.Collections.Generic.IReadOnlyDictionary<string, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propFs.TryReadProperty(ref reader, options, PropFs, null))
+			{
+				continue;
+			}
+
+			if (propIndexingPressure.TryReadProperty(ref reader, options, PropIndexingPressure, null))
+			{
+				continue;
+			}
+
+			if (propIngest.TryReadProperty(ref reader, options, PropIngest, null))
+			{
+				continue;
+			}
+
+			if (propJvm.TryReadProperty(ref reader, options, PropJvm, null))
+			{
+				continue;
+			}
+
+			if (propNetworkTypes.TryReadProperty(ref reader, options, PropNetworkTypes, null))
+			{
+				continue;
+			}
+
+			if (propOs.TryReadProperty(ref reader, options, PropOs, null))
+			{
+				continue;
+			}
+
+			if (propPackagingTypes.TryReadProperty(ref reader, options, PropPackagingTypes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propPlugins.TryReadProperty(ref reader, options, PropPlugins, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.PluginStats>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propProcess.TryReadProperty(ref reader, options, PropProcess, null))
+			{
+				continue;
+			}
+
+			if (propVersions.TryReadProperty(ref reader, options, PropVersions, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterNodes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			DiscoveryTypes = propDiscoveryTypes.Value,
+			Fs = propFs.Value,
+			IndexingPressure = propIndexingPressure.Value,
+			Ingest = propIngest.Value,
+			Jvm = propJvm.Value,
+			NetworkTypes = propNetworkTypes.Value,
+			Os = propOs.Value,
+			PackagingTypes = propPackagingTypes.Value,
+			Plugins = propPlugins.Value,
+			Process = propProcess.Value,
+			Versions = propVersions.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterNodes value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropDiscoveryTypes, value.DiscoveryTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
+		writer.WriteProperty(options, PropFs, value.Fs, null, null);
+		writer.WriteProperty(options, PropIndexingPressure, value.IndexingPressure, null, null);
+		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
+		writer.WriteProperty(options, PropJvm, value.Jvm, null, null);
+		writer.WriteProperty(options, PropNetworkTypes, value.NetworkTypes, null, null);
+		writer.WriteProperty(options, PropOs, value.Os, null, null);
+		writer.WriteProperty(options, PropPackagingTypes, value.PackagingTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType>(o, v, null));
+		writer.WriteProperty(options, PropPlugins, value.Plugins, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.PluginStats>(o, v, null));
+		writer.WriteProperty(options, PropProcess, value.Process, null, null);
+		writer.WriteProperty(options, PropVersions, value.Versions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterNodesConverter))]
 public sealed partial class ClusterNodes
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterNodes(Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount count, System.Collections.Generic.IReadOnlyDictionary<string, int> discoveryTypes, Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem fs, Elastic.Clients.Elasticsearch.Cluster.IndexingPressure indexingPressure, Elastic.Clients.Elasticsearch.Cluster.ClusterIngest ingest, Elastic.Clients.Elasticsearch.Cluster.ClusterJvm jvm, Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes networkTypes, Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem os, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> packagingTypes, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> plugins, Elastic.Clients.Elasticsearch.Cluster.ClusterProcess process, System.Collections.Generic.IReadOnlyCollection<string> versions)
+	{
+		Count = count;
+		DiscoveryTypes = discoveryTypes;
+		Fs = fs;
+		IndexingPressure = indexingPressure;
+		Ingest = ingest;
+		Jvm = jvm;
+		NetworkTypes = networkTypes;
+		Os = os;
+		PackagingTypes = packagingTypes;
+		Plugins = plugins;
+		Process = process;
+		Versions = versions;
+	}
+#if NET7_0_OR_GREATER
+	public ClusterNodes()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClusterNodes()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterNodes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Contains counts for nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the discovery types used by selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("discovery_types")]
-	public IReadOnlyDictionary<string, int> DiscoveryTypes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, int> DiscoveryTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about file stores by selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fs")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem Fs { get; init; }
-	[JsonInclude, JsonPropertyName("indexing_pressure")]
-	public Elastic.Clients.Elasticsearch.Cluster.IndexingPressure IndexingPressure { get; init; }
-	[JsonInclude, JsonPropertyName("ingest")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterIngest Ingest { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem Fs { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.IndexingPressure IndexingPressure { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterIngest Ingest { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the Java Virtual Machines (JVMs) used by selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("jvm")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterJvm Jvm { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterJvm Jvm { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the transport and HTTP networks used by selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("network_types")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes NetworkTypes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes NetworkTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the operating systems used by selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("os")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem Os { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem Os { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about Elasticsearch distributions installed on selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("packaging_types")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> PackagingTypes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> PackagingTypes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -95,22 +290,31 @@ public sealed partial class ClusterNodes
 	/// If no plugins or modules are installed, this array is empty.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("plugins")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> Plugins { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> Plugins { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about processes used by selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("process")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterProcess Process { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterProcess Process { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Array of Elasticsearch versions used on selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("versions")]
-	public IReadOnlyCollection<string> Versions { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> Versions { get; set; }
 }

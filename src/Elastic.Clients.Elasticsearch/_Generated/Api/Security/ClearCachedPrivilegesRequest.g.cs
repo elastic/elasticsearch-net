@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class ClearCachedPrivilegesRequestParameters : RequestParameters
+public sealed partial class ClearCachedPrivilegesRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ClearCachedPrivilegesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -43,19 +65,44 @@ public sealed partial class ClearCachedPrivilegesRequestParameters : RequestPara
 /// The cache is also automatically cleared for applications that have their privileges updated.
 /// </para>
 /// </summary>
-public sealed partial class ClearCachedPrivilegesRequest : PlainRequest<ClearCachedPrivilegesRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestConverter))]
+public sealed partial class ClearCachedPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Name application) : base(r => r.Required("application", application))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ClearCachedPrivilegesRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedPrivileges;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityClearCachedPrivileges;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.clear_cached_privileges";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of applications.
+	/// To clear all applications, use an asterism (<c>*</c>).
+	/// It does not support other wildcard patterns.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Application { get => P<Elastic.Clients.Elasticsearch.Name>("application"); set => PR("application", value); }
 }
 
 /// <summary>
@@ -67,29 +114,90 @@ public sealed partial class ClearCachedPrivilegesRequest : PlainRequest<ClearCac
 /// The cache is also automatically cleared for applications that have their privileges updated.
 /// </para>
 /// </summary>
-public sealed partial class ClearCachedPrivilegesRequestDescriptor : RequestDescriptor<ClearCachedPrivilegesRequestDescriptor, ClearCachedPrivilegesRequestParameters>
+public readonly partial struct ClearCachedPrivilegesRequestDescriptor
 {
-	internal ClearCachedPrivilegesRequestDescriptor(Action<ClearCachedPrivilegesRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest Instance { get; init; }
 
-	public ClearCachedPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Name application) : base(r => r.Required("application", application))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearCachedPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedPrivileges;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.clear_cached_privileges";
-
-	public ClearCachedPrivilegesRequestDescriptor Application(Elastic.Clients.Elasticsearch.Name application)
+	public ClearCachedPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Name application)
 	{
-		RouteValues.Required("application", application);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest(application);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClearCachedPrivilegesRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest instance) => new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of applications.
+	/// To clear all applications, use an asterism (<c>*</c>).
+	/// It does not support other wildcard patterns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor Application(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Application = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

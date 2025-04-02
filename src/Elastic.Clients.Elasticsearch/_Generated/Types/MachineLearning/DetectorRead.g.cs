@@ -17,18 +17,157 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DetectorReadConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropByFieldName = System.Text.Json.JsonEncodedText.Encode("by_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropCustomRules = System.Text.Json.JsonEncodedText.Encode("custom_rules");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectorDescription = System.Text.Json.JsonEncodedText.Encode("detector_description");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectorIndex = System.Text.Json.JsonEncodedText.Encode("detector_index");
+	private static readonly System.Text.Json.JsonEncodedText PropExcludeFrequent = System.Text.Json.JsonEncodedText.Encode("exclude_frequent");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldName = System.Text.Json.JsonEncodedText.Encode("field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropFunction = System.Text.Json.JsonEncodedText.Encode("function");
+	private static readonly System.Text.Json.JsonEncodedText PropOverFieldName = System.Text.Json.JsonEncodedText.Encode("over_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldName = System.Text.Json.JsonEncodedText.Encode("partition_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropUseNull = System.Text.Json.JsonEncodedText.Encode("use_null");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propByFieldName = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>?> propCustomRules = default;
+		LocalJsonValue<string?> propDetectorDescription = default;
+		LocalJsonValue<int?> propDetectorIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent?> propExcludeFrequent = default;
+		LocalJsonValue<string?> propFieldName = default;
+		LocalJsonValue<string> propFunction = default;
+		LocalJsonValue<string?> propOverFieldName = default;
+		LocalJsonValue<string?> propPartitionFieldName = default;
+		LocalJsonValue<bool?> propUseNull = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propByFieldName.TryReadProperty(ref reader, options, PropByFieldName, null))
+			{
+				continue;
+			}
+
+			if (propCustomRules.TryReadProperty(ref reader, options, PropCustomRules, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDetectorDescription.TryReadProperty(ref reader, options, PropDetectorDescription, null))
+			{
+				continue;
+			}
+
+			if (propDetectorIndex.TryReadProperty(ref reader, options, PropDetectorIndex, null))
+			{
+				continue;
+			}
+
+			if (propExcludeFrequent.TryReadProperty(ref reader, options, PropExcludeFrequent, null))
+			{
+				continue;
+			}
+
+			if (propFieldName.TryReadProperty(ref reader, options, PropFieldName, null))
+			{
+				continue;
+			}
+
+			if (propFunction.TryReadProperty(ref reader, options, PropFunction, null))
+			{
+				continue;
+			}
+
+			if (propOverFieldName.TryReadProperty(ref reader, options, PropOverFieldName, null))
+			{
+				continue;
+			}
+
+			if (propPartitionFieldName.TryReadProperty(ref reader, options, PropPartitionFieldName, null))
+			{
+				continue;
+			}
+
+			if (propUseNull.TryReadProperty(ref reader, options, PropUseNull, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ByFieldName = propByFieldName.Value,
+			CustomRules = propCustomRules.Value,
+			DetectorDescription = propDetectorDescription.Value,
+			DetectorIndex = propDetectorIndex.Value,
+			ExcludeFrequent = propExcludeFrequent.Value,
+			FieldName = propFieldName.Value,
+			Function = propFunction.Value,
+			OverFieldName = propOverFieldName.Value,
+			PartitionFieldName = propPartitionFieldName.Value,
+			UseNull = propUseNull.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropByFieldName, value.ByFieldName, null, null);
+		writer.WriteProperty(options, PropCustomRules, value.CustomRules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>(o, v, null));
+		writer.WriteProperty(options, PropDetectorDescription, value.DetectorDescription, null, null);
+		writer.WriteProperty(options, PropDetectorIndex, value.DetectorIndex, null, null);
+		writer.WriteProperty(options, PropExcludeFrequent, value.ExcludeFrequent, null, null);
+		writer.WriteProperty(options, PropFieldName, value.FieldName, null, null);
+		writer.WriteProperty(options, PropFunction, value.Function, null, null);
+		writer.WriteProperty(options, PropOverFieldName, value.OverFieldName, null, null);
+		writer.WriteProperty(options, PropPartitionFieldName, value.PartitionFieldName, null, null);
+		writer.WriteProperty(options, PropUseNull, value.UseNull, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DetectorReadConverter))]
 public sealed partial class DetectorRead
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorRead(string function)
+	{
+		Function = function;
+	}
+#if NET7_0_OR_GREATER
+	public DetectorRead()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DetectorRead()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DetectorRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The field used to split the data.
@@ -36,8 +175,7 @@ public sealed partial class DetectorRead
 	/// It is used for finding unusual values in the context of the split.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("by_field_name")]
-	public string? ByFieldName { get; init; }
+	public string? ByFieldName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -46,16 +184,14 @@ public sealed partial class DetectorRead
 	/// Kibana refers to custom rules as job rules.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("custom_rules")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A description of the detector.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("detector_description")]
-	public string? DetectorDescription { get; init; }
+	public string? DetectorDescription { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -63,8 +199,7 @@ public sealed partial class DetectorRead
 	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("detector_index")]
-	public int? DetectorIndex { get; init; }
+	public int? DetectorIndex { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -74,8 +209,7 @@ public sealed partial class DetectorRead
 	/// If you are working with both over and by fields, then you can set <c>exclude_frequent</c> to all for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude_frequent")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? ExcludeFrequent { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? ExcludeFrequent { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -83,8 +217,7 @@ public sealed partial class DetectorRead
 	/// If you use an event rate function such as <c>count</c> or <c>rare</c>, do not specify this field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field_name")]
-	public string? FieldName { get; init; }
+	public string? FieldName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -92,8 +225,11 @@ public sealed partial class DetectorRead
 	/// For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, and <c>sum</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("function")]
-	public string Function { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Function { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -102,8 +238,7 @@ public sealed partial class DetectorRead
 	/// It is used for finding unusual values in the population of all splits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("over_field_name")]
-	public string? OverFieldName { get; init; }
+	public string? OverFieldName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -111,14 +246,12 @@ public sealed partial class DetectorRead
 	/// When you use this property, you have completely independent baselines for each value of this field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("partition_field_name")]
-	public string? PartitionFieldName { get; init; }
+	public string? PartitionFieldName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("use_null")]
-	public bool? UseNull { get; init; }
+	public bool? UseNull { get; set; }
 }

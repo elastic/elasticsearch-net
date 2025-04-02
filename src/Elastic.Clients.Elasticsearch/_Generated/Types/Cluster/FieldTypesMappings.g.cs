@@ -17,63 +17,164 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFieldTypes = System.Text.Json.JsonEncodedText.Encode("field_types");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeFieldTypes = System.Text.Json.JsonEncodedText.Encode("runtime_field_types");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedFieldCount = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_field_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedMappingSize = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_mapping_size");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedMappingSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_mapping_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalFieldCount = System.Text.Json.JsonEncodedText.Encode("total_field_count");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propFieldTypes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>?> propRuntimeFieldTypes = default;
+		LocalJsonValue<int?> propTotalDeduplicatedFieldCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalDeduplicatedMappingSize = default;
+		LocalJsonValue<long?> propTotalDeduplicatedMappingSizeInBytes = default;
+		LocalJsonValue<int?> propTotalFieldCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFieldTypes.TryReadProperty(ref reader, options, PropFieldTypes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propRuntimeFieldTypes.TryReadProperty(ref reader, options, PropRuntimeFieldTypes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTotalDeduplicatedFieldCount.TryReadProperty(ref reader, options, PropTotalDeduplicatedFieldCount, null))
+			{
+				continue;
+			}
+
+			if (propTotalDeduplicatedMappingSize.TryReadProperty(ref reader, options, PropTotalDeduplicatedMappingSize, null))
+			{
+				continue;
+			}
+
+			if (propTotalDeduplicatedMappingSizeInBytes.TryReadProperty(ref reader, options, PropTotalDeduplicatedMappingSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalFieldCount.TryReadProperty(ref reader, options, PropTotalFieldCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FieldTypes = propFieldTypes.Value,
+			RuntimeFieldTypes = propRuntimeFieldTypes.Value,
+			TotalDeduplicatedFieldCount = propTotalDeduplicatedFieldCount.Value,
+			TotalDeduplicatedMappingSize = propTotalDeduplicatedMappingSize.Value,
+			TotalDeduplicatedMappingSizeInBytes = propTotalDeduplicatedMappingSizeInBytes.Value,
+			TotalFieldCount = propTotalFieldCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFieldTypes, value.FieldTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropRuntimeFieldTypes, value.RuntimeFieldTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropTotalDeduplicatedFieldCount, value.TotalDeduplicatedFieldCount, null, null);
+		writer.WriteProperty(options, PropTotalDeduplicatedMappingSize, value.TotalDeduplicatedMappingSize, null, null);
+		writer.WriteProperty(options, PropTotalDeduplicatedMappingSizeInBytes, value.TotalDeduplicatedMappingSizeInBytes, null, null);
+		writer.WriteProperty(options, PropTotalFieldCount, value.TotalFieldCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappingsConverter))]
 public sealed partial class FieldTypesMappings
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldTypesMappings(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> fieldTypes)
+	{
+		FieldTypes = fieldTypes;
+	}
+#if NET7_0_OR_GREATER
+	public FieldTypesMappings()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FieldTypesMappings()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldTypesMappings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Contains statistics about field data types used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field_types")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FieldTypes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FieldTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about runtime field data types used in selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_field_types")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>? RuntimeFieldTypes { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>? RuntimeFieldTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of fields in all non-system indices, accounting for mapping deduplication.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_deduplicated_field_count")]
-	public int? TotalDeduplicatedFieldCount { get; init; }
+	public int? TotalDeduplicatedFieldCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size of all mappings after deduplication and compression.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_deduplicated_mapping_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? TotalDeduplicatedMappingSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalDeduplicatedMappingSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size of all mappings, in bytes, after deduplication and compression.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_deduplicated_mapping_size_in_bytes")]
-	public long? TotalDeduplicatedMappingSizeInBytes { get; init; }
+	public long? TotalDeduplicatedMappingSizeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of fields in all non-system indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_field_count")]
-	public int? TotalFieldCount { get; init; }
+	public int? TotalFieldCount { get; set; }
 }

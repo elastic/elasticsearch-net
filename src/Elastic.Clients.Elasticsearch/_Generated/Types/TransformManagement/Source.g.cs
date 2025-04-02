@@ -17,18 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+internal sealed partial class SourceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Source>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+
+	public override Elastic.Clients.Elasticsearch.TransformManagement.Source Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices> propIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.Source(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Indices = propIndices.Value,
+			Query = propQuery.Value,
+			RuntimeMappings = propRuntimeMappings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Source value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.SourceConverter))]
 public sealed partial class Source
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Source(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Indices = indices;
+	}
+#if NET7_0_OR_GREATER
+	public Source()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Source()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Source(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The source indices for the transform. It can be a single index, an index pattern (for example, <c>"my-index-*""</c>), an
@@ -37,15 +113,17 @@ public sealed partial class Source
 	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A query clause that retrieves a subset of data from the source index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
@@ -54,23 +132,27 @@ public sealed partial class Source
 	/// nodes, including remote nodes, must be 7.12 or later.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
-public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor<SourceDescriptor<TDocument>>
+public readonly partial struct SourceDescriptor<TDocument>
 {
-	internal SourceDescriptor(Action<SourceDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Source Instance { get; init; }
 
-	public SourceDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Source instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Indices IndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Source(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.Source instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Source(Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -80,10 +162,10 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
 	/// </para>
 	/// </summary>
-	public SourceDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -91,28 +173,21 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	/// A query clause that retrieves a subset of data from the source index.
 	/// </para>
 	/// </summary>
-	public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public SourceDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -121,56 +196,91 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	/// nodes, including remote nodes, must be 7.12 or later.
 	/// </para>
 	/// </summary>
-	public SourceDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
+	/// nodes, including remote nodes, must be 7.12 or later.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> RuntimeMappings()
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndicesValue, options);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		return this;
+	}
 
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
+	/// nodes, including remote nodes, must be 7.12 or later.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Source Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TransformManagement.Source(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDescriptor>
+public readonly partial struct SourceDescriptor
 {
-	internal SourceDescriptor(Action<SourceDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Source Instance { get; init; }
 
-	public SourceDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Source instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Indices IndicesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SourceDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Source(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Source instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Source(Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -180,10 +290,10 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
 	/// </para>
 	/// </summary>
-	public SourceDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		IndicesValue = indices;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
 	/// <summary>
@@ -191,28 +301,32 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	/// A query clause that retrieves a subset of data from the source index.
 	/// </para>
 	/// </summary>
-	public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SourceDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A query clause that retrieves a subset of data from the source index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -221,39 +335,95 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	/// nodes, including remote nodes, must be 7.12 or later.
 	/// </para>
 	/// </summary>
-	public SourceDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
+	/// nodes, including remote nodes, must be 7.12 or later.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor RuntimeMappings()
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndicesValue, options);
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(null);
+		return this;
+	}
 
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
+	/// nodes, including remote nodes, must be 7.12 or later.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
+	/// nodes, including remote nodes, must be 7.12 or later.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor AddRuntimeMapping<T>(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Source Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.Source(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

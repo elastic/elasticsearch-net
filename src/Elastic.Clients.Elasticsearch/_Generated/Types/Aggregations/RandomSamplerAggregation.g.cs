@@ -17,18 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class RandomSamplerAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropProbability = System.Text.Json.JsonEncodedText.Encode("probability");
+	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed");
+	private static readonly System.Text.Json.JsonEncodedText PropShardSeed = System.Text.Json.JsonEncodedText.Encode("shard_seed");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double> propProbability = default;
+		LocalJsonValue<int?> propSeed = default;
+		LocalJsonValue<int?> propShardSeed = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propProbability.TryReadProperty(ref reader, options, PropProbability, null))
+			{
+				continue;
+			}
+
+			if (propSeed.TryReadProperty(ref reader, options, PropSeed, null))
+			{
+				continue;
+			}
+
+			if (propShardSeed.TryReadProperty(ref reader, options, PropShardSeed, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Probability = propProbability.Value,
+			Seed = propSeed.Value,
+			ShardSeed = propShardSeed.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropProbability, value.Probability, null, null);
+		writer.WriteProperty(options, PropSeed, value.Seed, null, null);
+		writer.WriteProperty(options, PropShardSeed, value.ShardSeed, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationConverter))]
 public sealed partial class RandomSamplerAggregation
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RandomSamplerAggregation(double probability)
+	{
+		Probability = probability;
+	}
+#if NET7_0_OR_GREATER
+	public RandomSamplerAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RandomSamplerAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RandomSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The probability that a document will be included in the aggregated data.
@@ -36,8 +112,11 @@ public sealed partial class RandomSamplerAggregation
 	/// The lower the probability, the fewer documents are matched.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("probability")]
-	public double Probability { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Probability { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -45,7 +124,6 @@ public sealed partial class RandomSamplerAggregation
 	/// When a seed is provided, the random subset of documents is the same between calls.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("seed")]
 	public int? Seed { get; set; }
 
 	/// <summary>
@@ -53,23 +131,27 @@ public sealed partial class RandomSamplerAggregation
 	/// When combined with seed, setting shard_seed ensures 100% consistent sampling over shards where data is exactly the same.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_seed")]
 	public int? ShardSeed { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(RandomSamplerAggregation randomSamplerAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.RandomSampler(randomSamplerAggregation);
 }
 
-public sealed partial class RandomSamplerAggregationDescriptor : SerializableDescriptor<RandomSamplerAggregationDescriptor>
+public readonly partial struct RandomSamplerAggregationDescriptor
 {
-	internal RandomSamplerAggregationDescriptor(Action<RandomSamplerAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation Instance { get; init; }
 
-	public RandomSamplerAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RandomSamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private double ProbabilityValue { get; set; }
-	private int? SeedValue { get; set; }
-	private int? ShardSeedValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RandomSamplerAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -78,10 +160,10 @@ public sealed partial class RandomSamplerAggregationDescriptor : SerializableDes
 	/// The lower the probability, the fewer documents are matched.
 	/// </para>
 	/// </summary>
-	public RandomSamplerAggregationDescriptor Probability(double probability)
+	public Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor Probability(double value)
 	{
-		ProbabilityValue = probability;
-		return Self;
+		Instance.Probability = value;
+		return this;
 	}
 
 	/// <summary>
@@ -90,10 +172,10 @@ public sealed partial class RandomSamplerAggregationDescriptor : SerializableDes
 	/// When a seed is provided, the random subset of documents is the same between calls.
 	/// </para>
 	/// </summary>
-	public RandomSamplerAggregationDescriptor Seed(int? seed)
+	public Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor Seed(int? value)
 	{
-		SeedValue = seed;
-		return Self;
+		Instance.Seed = value;
+		return this;
 	}
 
 	/// <summary>
@@ -101,29 +183,17 @@ public sealed partial class RandomSamplerAggregationDescriptor : SerializableDes
 	/// When combined with seed, setting shard_seed ensures 100% consistent sampling over shards where data is exactly the same.
 	/// </para>
 	/// </summary>
-	public RandomSamplerAggregationDescriptor ShardSeed(int? shardSeed)
+	public Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor ShardSeed(int? value)
 	{
-		ShardSeedValue = shardSeed;
-		return Self;
+		Instance.ShardSeed = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("probability");
-		writer.WriteNumberValue(ProbabilityValue);
-		if (SeedValue.HasValue)
-		{
-			writer.WritePropertyName("seed");
-			writer.WriteNumberValue(SeedValue.Value);
-		}
-
-		if (ShardSeedValue.HasValue)
-		{
-			writer.WritePropertyName("shard_seed");
-			writer.WriteNumberValue(ShardSeedValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

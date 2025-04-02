@@ -17,80 +17,349 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class RepositoryAnalyzeResponse : ElasticsearchResponse
+internal sealed partial class RepositoryAnalyzeResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropBlobCount = System.Text.Json.JsonEncodedText.Encode("blob_count");
+	private static readonly System.Text.Json.JsonEncodedText PropBlobPath = System.Text.Json.JsonEncodedText.Encode("blob_path");
+	private static readonly System.Text.Json.JsonEncodedText PropConcurrency = System.Text.Json.JsonEncodedText.Encode("concurrency");
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingNode = System.Text.Json.JsonEncodedText.Encode("coordinating_node");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteElapsed = System.Text.Json.JsonEncodedText.Encode("delete_elapsed");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteElapsedNanos = System.Text.Json.JsonEncodedText.Encode("delete_elapsed_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
+	private static readonly System.Text.Json.JsonEncodedText PropEarlyReadNodeCount = System.Text.Json.JsonEncodedText.Encode("early_read_node_count");
+	private static readonly System.Text.Json.JsonEncodedText PropIssuesDetected = System.Text.Json.JsonEncodedText.Encode("issues_detected");
+	private static readonly System.Text.Json.JsonEncodedText PropListingElapsed = System.Text.Json.JsonEncodedText.Encode("listing_elapsed");
+	private static readonly System.Text.Json.JsonEncodedText PropListingElapsedNanos = System.Text.Json.JsonEncodedText.Encode("listing_elapsed_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxBlobSize = System.Text.Json.JsonEncodedText.Encode("max_blob_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxBlobSizeBytes = System.Text.Json.JsonEncodedText.Encode("max_blob_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTotalDataSize = System.Text.Json.JsonEncodedText.Encode("max_total_data_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTotalDataSizeBytes = System.Text.Json.JsonEncodedText.Encode("max_total_data_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropRareActionProbability = System.Text.Json.JsonEncodedText.Encode("rare_action_probability");
+	private static readonly System.Text.Json.JsonEncodedText PropReadNodeCount = System.Text.Json.JsonEncodedText.Encode("read_node_count");
+	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
+	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed");
+	private static readonly System.Text.Json.JsonEncodedText PropSummary = System.Text.Json.JsonEncodedText.Encode("summary");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propBlobCount = default;
+		LocalJsonValue<string> propBlobPath = default;
+		LocalJsonValue<int> propConcurrency = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo> propCoordinatingNode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propDeleteElapsed = default;
+		LocalJsonValue<System.TimeSpan> propDeleteElapsedNanos = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo> propDetails = default;
+		LocalJsonValue<int> propEarlyReadNodeCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propIssuesDetected = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propListingElapsed = default;
+		LocalJsonValue<System.TimeSpan> propListingElapsedNanos = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propMaxBlobSize = default;
+		LocalJsonValue<long> propMaxBlobSizeBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propMaxTotalDataSize = default;
+		LocalJsonValue<long> propMaxTotalDataSizeBytes = default;
+		LocalJsonValue<double> propRareActionProbability = default;
+		LocalJsonValue<int> propReadNodeCount = default;
+		LocalJsonValue<string> propRepository = default;
+		LocalJsonValue<long> propSeed = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo> propSummary = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBlobCount.TryReadProperty(ref reader, options, PropBlobCount, null))
+			{
+				continue;
+			}
+
+			if (propBlobPath.TryReadProperty(ref reader, options, PropBlobPath, null))
+			{
+				continue;
+			}
+
+			if (propConcurrency.TryReadProperty(ref reader, options, PropConcurrency, null))
+			{
+				continue;
+			}
+
+			if (propCoordinatingNode.TryReadProperty(ref reader, options, PropCoordinatingNode, null))
+			{
+				continue;
+			}
+
+			if (propDeleteElapsed.TryReadProperty(ref reader, options, PropDeleteElapsed, null))
+			{
+				continue;
+			}
+
+			if (propDeleteElapsedNanos.TryReadProperty(ref reader, options, PropDeleteElapsedNanos, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (propDetails.TryReadProperty(ref reader, options, PropDetails, null))
+			{
+				continue;
+			}
+
+			if (propEarlyReadNodeCount.TryReadProperty(ref reader, options, PropEarlyReadNodeCount, null))
+			{
+				continue;
+			}
+
+			if (propIssuesDetected.TryReadProperty(ref reader, options, PropIssuesDetected, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propListingElapsed.TryReadProperty(ref reader, options, PropListingElapsed, null))
+			{
+				continue;
+			}
+
+			if (propListingElapsedNanos.TryReadProperty(ref reader, options, PropListingElapsedNanos, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (propMaxBlobSize.TryReadProperty(ref reader, options, PropMaxBlobSize, null))
+			{
+				continue;
+			}
+
+			if (propMaxBlobSizeBytes.TryReadProperty(ref reader, options, PropMaxBlobSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (propMaxTotalDataSize.TryReadProperty(ref reader, options, PropMaxTotalDataSize, null))
+			{
+				continue;
+			}
+
+			if (propMaxTotalDataSizeBytes.TryReadProperty(ref reader, options, PropMaxTotalDataSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (propRareActionProbability.TryReadProperty(ref reader, options, PropRareActionProbability, null))
+			{
+				continue;
+			}
+
+			if (propReadNodeCount.TryReadProperty(ref reader, options, PropReadNodeCount, null))
+			{
+				continue;
+			}
+
+			if (propRepository.TryReadProperty(ref reader, options, PropRepository, null))
+			{
+				continue;
+			}
+
+			if (propSeed.TryReadProperty(ref reader, options, PropSeed, null))
+			{
+				continue;
+			}
+
+			if (propSummary.TryReadProperty(ref reader, options, PropSummary, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			BlobCount = propBlobCount.Value,
+			BlobPath = propBlobPath.Value,
+			Concurrency = propConcurrency.Value,
+			CoordinatingNode = propCoordinatingNode.Value,
+			DeleteElapsed = propDeleteElapsed.Value,
+			DeleteElapsedNanos = propDeleteElapsedNanos.Value,
+			Details = propDetails.Value,
+			EarlyReadNodeCount = propEarlyReadNodeCount.Value,
+			IssuesDetected = propIssuesDetected.Value,
+			ListingElapsed = propListingElapsed.Value,
+			ListingElapsedNanos = propListingElapsedNanos.Value,
+			MaxBlobSize = propMaxBlobSize.Value,
+			MaxBlobSizeBytes = propMaxBlobSizeBytes.Value,
+			MaxTotalDataSize = propMaxTotalDataSize.Value,
+			MaxTotalDataSizeBytes = propMaxTotalDataSizeBytes.Value,
+			RareActionProbability = propRareActionProbability.Value,
+			ReadNodeCount = propReadNodeCount.Value,
+			Repository = propRepository.Value,
+			Seed = propSeed.Value,
+			Summary = propSummary.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBlobCount, value.BlobCount, null, null);
+		writer.WriteProperty(options, PropBlobPath, value.BlobPath, null, null);
+		writer.WriteProperty(options, PropConcurrency, value.Concurrency, null, null);
+		writer.WriteProperty(options, PropCoordinatingNode, value.CoordinatingNode, null, null);
+		writer.WriteProperty(options, PropDeleteElapsed, value.DeleteElapsed, null, null);
+		writer.WriteProperty(options, PropDeleteElapsedNanos, value.DeleteElapsedNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropDetails, value.Details, null, null);
+		writer.WriteProperty(options, PropEarlyReadNodeCount, value.EarlyReadNodeCount, null, null);
+		writer.WriteProperty(options, PropIssuesDetected, value.IssuesDetected, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropListingElapsed, value.ListingElapsed, null, null);
+		writer.WriteProperty(options, PropListingElapsedNanos, value.ListingElapsedNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropMaxBlobSize, value.MaxBlobSize, null, null);
+		writer.WriteProperty(options, PropMaxBlobSizeBytes, value.MaxBlobSizeBytes, null, null);
+		writer.WriteProperty(options, PropMaxTotalDataSize, value.MaxTotalDataSize, null, null);
+		writer.WriteProperty(options, PropMaxTotalDataSizeBytes, value.MaxTotalDataSizeBytes, null, null);
+		writer.WriteProperty(options, PropRareActionProbability, value.RareActionProbability, null, null);
+		writer.WriteProperty(options, PropReadNodeCount, value.ReadNodeCount, null, null);
+		writer.WriteProperty(options, PropRepository, value.Repository, null, null);
+		writer.WriteProperty(options, PropSeed, value.Seed, null, null);
+		writer.WriteProperty(options, PropSummary, value.Summary, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponseConverter))]
+public sealed partial class RepositoryAnalyzeResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RepositoryAnalyzeResponse(int blobCount, string blobPath, int concurrency, Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo coordinatingNode, Elastic.Clients.Elasticsearch.Duration deleteElapsed, System.TimeSpan deleteElapsedNanos, Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo details, int earlyReadNodeCount, System.Collections.Generic.IReadOnlyCollection<string> issuesDetected, Elastic.Clients.Elasticsearch.Duration listingElapsed, System.TimeSpan listingElapsedNanos, Elastic.Clients.Elasticsearch.ByteSize maxBlobSize, long maxBlobSizeBytes, Elastic.Clients.Elasticsearch.ByteSize maxTotalDataSize, long maxTotalDataSizeBytes, double rareActionProbability, int readNodeCount, string repository, long seed, Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo summary)
+	{
+		BlobCount = blobCount;
+		BlobPath = blobPath;
+		Concurrency = concurrency;
+		CoordinatingNode = coordinatingNode;
+		DeleteElapsed = deleteElapsed;
+		DeleteElapsedNanos = deleteElapsedNanos;
+		Details = details;
+		EarlyReadNodeCount = earlyReadNodeCount;
+		IssuesDetected = issuesDetected;
+		ListingElapsed = listingElapsed;
+		ListingElapsedNanos = listingElapsedNanos;
+		MaxBlobSize = maxBlobSize;
+		MaxBlobSizeBytes = maxBlobSizeBytes;
+		MaxTotalDataSize = maxTotalDataSize;
+		MaxTotalDataSizeBytes = maxTotalDataSizeBytes;
+		RareActionProbability = rareActionProbability;
+		ReadNodeCount = readNodeCount;
+		Repository = repository;
+		Seed = seed;
+		Summary = summary;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RepositoryAnalyzeResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RepositoryAnalyzeResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The number of blobs written to the repository during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("blob_count")]
-	public int BlobCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int BlobCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The path in the repository under which all the blobs were written during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("blob_path")]
-	public string BlobPath { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string BlobPath { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of write operations performed concurrently during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("concurrency")]
-	public int Concurrency { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Concurrency { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The node that coordinated the analysis and performed the final cleanup.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("coordinating_node")]
-	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo CoordinatingNode { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo CoordinatingNode { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time it took to delete all the blobs in the container.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("delete_elapsed")]
-	public Elastic.Clients.Elasticsearch.Duration DeleteElapsed { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration DeleteElapsed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time it took to delete all the blobs in the container, in nanoseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("delete_elapsed_nanos")]
-	public long DeleteElapsedNanos { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan DeleteElapsedNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A description of every read and write operation performed during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("details")]
-	public Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo Details { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo Details { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit on the number of nodes on which early read operations were performed after writing each blob.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("early_read_node_count")]
-	public int EarlyReadNodeCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int EarlyReadNodeCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -98,94 +367,130 @@ public sealed partial class RepositoryAnalyzeResponse : ElasticsearchResponse
 	/// It is included to emphasize that a successful response does not guarantee correct behaviour in future.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("issues_detected")]
-	public IReadOnlyCollection<string> IssuesDetected { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<string> IssuesDetected { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time it took to retrieve a list of all the blobs in the container.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("listing_elapsed")]
-	public Elastic.Clients.Elasticsearch.Duration ListingElapsed { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration ListingElapsed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time it took to retrieve a list of all the blobs in the container, in nanoseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("listing_elapsed_nanos")]
-	public long ListingElapsedNanos { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan ListingElapsedNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit on the size of a blob written during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_blob_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize MaxBlobSize { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize MaxBlobSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit, in bytes, on the size of a blob written during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_blob_size_bytes")]
-	public long MaxBlobSizeBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MaxBlobSizeBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit on the total size of all blob written during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_total_data_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize MaxTotalDataSize { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize MaxTotalDataSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit, in bytes, on the total size of all blob written during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_total_data_size_bytes")]
-	public long MaxTotalDataSizeBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MaxTotalDataSizeBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The probability of performing rare actions during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rare_action_probability")]
-	public double RareActionProbability { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double RareActionProbability { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit on the number of nodes on which read operations were performed after writing each blob.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("read_node_count")]
-	public int ReadNodeCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int ReadNodeCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the repository that was the subject of the analysis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("repository")]
-	public string Repository { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Repository { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The seed for the pseudo-random number generator used to generate the operations used during the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("seed")]
-	public long Seed { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Seed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A collection of statistics that summarize the results of the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("summary")]
-	public Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo Summary { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo Summary { get; set; }
 }

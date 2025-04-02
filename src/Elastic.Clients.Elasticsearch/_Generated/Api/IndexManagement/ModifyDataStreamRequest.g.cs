@@ -17,21 +17,53 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ModifyDataStreamRequestParameters : RequestParameters
+public sealed partial class ModifyDataStreamRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ModifyDataStreamRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction>> propActions = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActions.TryReadProperty(ref reader, options, PropActions, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Actions = propActions.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActions, value.Actions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,11 +72,34 @@ public sealed partial class ModifyDataStreamRequestParameters : RequestParameter
 /// Performs one or more data stream modification actions in a single atomic operation.
 /// </para>
 /// </summary>
-public sealed partial class ModifyDataStreamRequest : PlainRequest<ModifyDataStreamRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestConverter))]
+public sealed partial class ModifyDataStreamRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementModifyDataStream;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ModifyDataStreamRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> actions)
+	{
+		Actions = actions;
+	}
+#if NET7_0_OR_GREATER
+	public ModifyDataStreamRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ModifyDataStreamRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ModifyDataStreamRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementModifyDataStream;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -55,8 +110,11 @@ public sealed partial class ModifyDataStreamRequest : PlainRequest<ModifyDataStr
 	/// Actions to perform.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("actions")]
-	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> Actions { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> Actions { get; set; }
 }
 
 /// <summary>
@@ -65,102 +123,132 @@ public sealed partial class ModifyDataStreamRequest : PlainRequest<ModifyDataStr
 /// Performs one or more data stream modification actions in a single atomic operation.
 /// </para>
 /// </summary>
-public sealed partial class ModifyDataStreamRequestDescriptor : RequestDescriptor<ModifyDataStreamRequestDescriptor, ModifyDataStreamRequestParameters>
+public readonly partial struct ModifyDataStreamRequestDescriptor
 {
-	internal ModifyDataStreamRequestDescriptor(Action<ModifyDataStreamRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ModifyDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ModifyDataStreamRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementModifyDataStream;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.modify_data_stream";
-
-	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> ActionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor ActionsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor> ActionsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor>[] ActionsDescriptorActions { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Actions to perform.
 	/// </para>
 	/// </summary>
-	public ModifyDataStreamRequestDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> actions)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> value)
 	{
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptorActions = null;
-		ActionsValue = actions;
-		return Self;
+		Instance.Actions = value;
+		return this;
 	}
 
-	public ModifyDataStreamRequestDescriptor Actions(Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions()
 	{
-		ActionsValue = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptorActions = null;
-		ActionsDescriptor = descriptor;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexModifyDataStreamAction.Build(null);
+		return this;
 	}
 
-	public ModifyDataStreamRequestDescriptor Actions(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexModifyDataStreamAction>? action)
 	{
-		ActionsValue = null;
-		ActionsDescriptor = null;
-		ActionsDescriptorActions = null;
-		ActionsDescriptorAction = configure;
-		return Self;
+		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexModifyDataStreamAction.Build(action);
+		return this;
 	}
 
-	public ModifyDataStreamRequestDescriptor Actions(params Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions(params Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction[] values)
 	{
-		ActionsValue = null;
-		ActionsDescriptor = null;
-		ActionsDescriptorAction = null;
-		ActionsDescriptorActions = configure;
-		return Self;
+		Instance.Actions = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Actions to perform.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor>[] actions)
 	{
-		writer.WriteStartObject();
-		if (ActionsDescriptor is not null)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("actions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ActionsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ActionsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("actions");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor(ActionsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ActionsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("actions");
-			writer.WriteStartArray();
-			foreach (var action in ActionsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("actions");
-			JsonSerializer.Serialize(writer, ActionsValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor.Build(action));
 		}
 
-		writer.WriteEndObject();
+		Instance.Actions = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

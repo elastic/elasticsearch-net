@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class StartDataFrameAnalyticsRequestParameters : RequestParameters
+public sealed partial class StartDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -39,6 +32,35 @@ public sealed partial class StartDataFrameAnalyticsRequestParameters : RequestPa
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+}
+
+internal sealed partial class StartDataFrameAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -57,15 +79,27 @@ public sealed partial class StartDataFrameAnalyticsRequestParameters : RequestPa
 /// the destination index in advance with custom settings and mappings.
 /// </para>
 /// </summary>
-public sealed partial class StartDataFrameAnalyticsRequest : PlainRequest<StartDataFrameAnalyticsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestConverter))]
+public sealed partial class StartDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StartDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public StartDataFrameAnalyticsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StartDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStartDataFrameAnalytics;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningStartDataFrameAnalytics;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -73,11 +107,23 @@ public sealed partial class StartDataFrameAnalyticsRequest : PlainRequest<StartD
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Controls the amount of time to wait until the data frame analytics job
 	/// starts.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
@@ -97,76 +143,102 @@ public sealed partial class StartDataFrameAnalyticsRequest : PlainRequest<StartD
 /// the destination index in advance with custom settings and mappings.
 /// </para>
 /// </summary>
-public sealed partial class StartDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<StartDataFrameAnalyticsRequestDescriptor<TDocument>, StartDataFrameAnalyticsRequestParameters>
+public readonly partial struct StartDataFrameAnalyticsRequestDescriptor
 {
-	internal StartDataFrameAnalyticsRequestDescriptor(Action<StartDataFrameAnalyticsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest Instance { get; init; }
 
-	public StartDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StartDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStartDataFrameAnalytics;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.start_data_frame_analytics";
-
-	public StartDataFrameAnalyticsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public StartDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public StartDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StartDataFrameAnalyticsRequestDescriptor()
 	{
-	}
-}
-
-/// <summary>
-/// <para>
-/// Start a data frame analytics job.
-/// A data frame analytics job can be started and stopped multiple times
-/// throughout its lifecycle.
-/// If the destination index does not exist, it is created automatically the
-/// first time you start the data frame analytics job. The
-/// <c>index.number_of_shards</c> and <c>index.number_of_replicas</c> settings for the
-/// destination index are copied from the source index. If there are multiple
-/// source indices, the destination index copies the highest setting values. The
-/// mappings for the destination index are also copied from the source indices.
-/// If there are any mapping conflicts, the job fails to start.
-/// If the destination index exists, it is used as is. You can therefore set up
-/// the destination index in advance with custom settings and mappings.
-/// </para>
-/// </summary>
-public sealed partial class StartDataFrameAnalyticsRequestDescriptor : RequestDescriptor<StartDataFrameAnalyticsRequestDescriptor, StartDataFrameAnalyticsRequestParameters>
-{
-	internal StartDataFrameAnalyticsRequestDescriptor(Action<StartDataFrameAnalyticsRequestDescriptor> configure) => configure.Invoke(this);
-
-	public StartDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStartDataFrameAnalytics;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.start_data_frame_analytics";
-
-	public StartDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public StartDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Controls the amount of time to wait until the data frame analytics job
+	/// starts.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

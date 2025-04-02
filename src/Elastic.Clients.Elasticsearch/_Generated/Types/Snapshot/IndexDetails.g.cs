@@ -17,24 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class IndexDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSegmentsPerShard = System.Text.Json.JsonEncodedText.Encode("max_segments_per_shard");
+	private static readonly System.Text.Json.JsonEncodedText PropShardCount = System.Text.Json.JsonEncodedText.Encode("shard_count");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.IndexDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propMaxSegmentsPerShard = default;
+		LocalJsonValue<int> propShardCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propSize = default;
+		LocalJsonValue<long> propSizeInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxSegmentsPerShard.TryReadProperty(ref reader, options, PropMaxSegmentsPerShard, null))
+			{
+				continue;
+			}
+
+			if (propShardCount.TryReadProperty(ref reader, options, PropShardCount, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSizeInBytes.TryReadProperty(ref reader, options, PropSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.IndexDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxSegmentsPerShard = propMaxSegmentsPerShard.Value,
+			ShardCount = propShardCount.Value,
+			Size = propSize.Value,
+			SizeInBytes = propSizeInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxSegmentsPerShard, value.MaxSegmentsPerShard, null, null);
+		writer.WriteProperty(options, PropShardCount, value.ShardCount, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSizeInBytes, value.SizeInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.IndexDetailsConverter))]
 public sealed partial class IndexDetails
 {
-	[JsonInclude, JsonPropertyName("max_segments_per_shard")]
-	public long MaxSegmentsPerShard { get; init; }
-	[JsonInclude, JsonPropertyName("shard_count")]
-	public int ShardCount { get; init; }
-	[JsonInclude, JsonPropertyName("size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
-	[JsonInclude, JsonPropertyName("size_in_bytes")]
-	public long SizeInBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexDetails(long maxSegmentsPerShard, int shardCount, long sizeInBytes)
+	{
+		MaxSegmentsPerShard = maxSegmentsPerShard;
+		ShardCount = shardCount;
+		SizeInBytes = sizeInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public IndexDetails()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IndexDetails()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long MaxSegmentsPerShard { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int ShardCount { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SizeInBytes { get; set; }
 }

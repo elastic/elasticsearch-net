@@ -17,42 +17,152 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class InfoResponse : ElasticsearchResponse
+internal sealed partial class InfoResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.InfoResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterUuid = System.Text.Json.JsonEncodedText.Encode("cluster_uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropTagline = System.Text.Json.JsonEncodedText.Encode("tagline");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.InfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<string> propClusterUuid = default;
+		LocalJsonValue<string> propName = default;
+		LocalJsonValue<string> propTagline = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
+			{
+				continue;
+			}
+
+			if (propClusterUuid.TryReadProperty(ref reader, options, PropClusterUuid, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propTagline.TryReadProperty(ref reader, options, PropTagline, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.InfoResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ClusterName = propClusterName.Value,
+			ClusterUuid = propClusterUuid.Value,
+			Name = propName.Value,
+			Tagline = propTagline.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.InfoResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropClusterUuid, value.ClusterUuid, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropTagline, value.Tagline, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.InfoResponseConverter))]
+public sealed partial class InfoResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InfoResponse(string clusterName, string clusterUuid, string name, string tagline, Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo version)
+	{
+		ClusterName = clusterName;
+		ClusterUuid = clusterUuid;
+		Name = name;
+		Tagline = tagline;
+		Version = version;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InfoResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InfoResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The responding cluster's name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_name")]
-	public string ClusterName { get; init; }
-	[JsonInclude, JsonPropertyName("cluster_uuid")]
-	public string ClusterUuid { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ClusterName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ClusterUuid { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The responding node's name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
-	[JsonInclude, JsonPropertyName("tagline")]
-	public string Tagline { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Name { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Tagline { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The running version of Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
-	public Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; set; }
 }

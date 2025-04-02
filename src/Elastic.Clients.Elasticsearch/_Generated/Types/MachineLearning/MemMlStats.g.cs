@@ -17,95 +17,248 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class MemMlStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectors = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors");
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectorsInBytes = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalytics = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics");
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalyticsInBytes = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxInBytes = System.Text.Json.JsonEncodedText.Encode("max_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropNativeCodeOverhead = System.Text.Json.JsonEncodedText.Encode("native_code_overhead");
+	private static readonly System.Text.Json.JsonEncodedText PropNativeCodeOverheadInBytes = System.Text.Json.JsonEncodedText.Encode("native_code_overhead_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropNativeInference = System.Text.Json.JsonEncodedText.Encode("native_inference");
+	private static readonly System.Text.Json.JsonEncodedText PropNativeInferenceInBytes = System.Text.Json.JsonEncodedText.Encode("native_inference_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propAnomalyDetectors = default;
+		LocalJsonValue<int> propAnomalyDetectorsInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propDataFrameAnalytics = default;
+		LocalJsonValue<int> propDataFrameAnalyticsInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMax = default;
+		LocalJsonValue<int> propMaxInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propNativeCodeOverhead = default;
+		LocalJsonValue<int> propNativeCodeOverheadInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propNativeInference = default;
+		LocalJsonValue<int> propNativeInferenceInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnomalyDetectors.TryReadProperty(ref reader, options, PropAnomalyDetectors, null))
+			{
+				continue;
+			}
+
+			if (propAnomalyDetectorsInBytes.TryReadProperty(ref reader, options, PropAnomalyDetectorsInBytes, null))
+			{
+				continue;
+			}
+
+			if (propDataFrameAnalytics.TryReadProperty(ref reader, options, PropDataFrameAnalytics, null))
+			{
+				continue;
+			}
+
+			if (propDataFrameAnalyticsInBytes.TryReadProperty(ref reader, options, PropDataFrameAnalyticsInBytes, null))
+			{
+				continue;
+			}
+
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
+			if (propMaxInBytes.TryReadProperty(ref reader, options, PropMaxInBytes, null))
+			{
+				continue;
+			}
+
+			if (propNativeCodeOverhead.TryReadProperty(ref reader, options, PropNativeCodeOverhead, null))
+			{
+				continue;
+			}
+
+			if (propNativeCodeOverheadInBytes.TryReadProperty(ref reader, options, PropNativeCodeOverheadInBytes, null))
+			{
+				continue;
+			}
+
+			if (propNativeInference.TryReadProperty(ref reader, options, PropNativeInference, null))
+			{
+				continue;
+			}
+
+			if (propNativeInferenceInBytes.TryReadProperty(ref reader, options, PropNativeInferenceInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AnomalyDetectors = propAnomalyDetectors.Value,
+			AnomalyDetectorsInBytes = propAnomalyDetectorsInBytes.Value,
+			DataFrameAnalytics = propDataFrameAnalytics.Value,
+			DataFrameAnalyticsInBytes = propDataFrameAnalyticsInBytes.Value,
+			Max = propMax.Value,
+			MaxInBytes = propMaxInBytes.Value,
+			NativeCodeOverhead = propNativeCodeOverhead.Value,
+			NativeCodeOverheadInBytes = propNativeCodeOverheadInBytes.Value,
+			NativeInference = propNativeInference.Value,
+			NativeInferenceInBytes = propNativeInferenceInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnomalyDetectors, value.AnomalyDetectors, null, null);
+		writer.WriteProperty(options, PropAnomalyDetectorsInBytes, value.AnomalyDetectorsInBytes, null, null);
+		writer.WriteProperty(options, PropDataFrameAnalytics, value.DataFrameAnalytics, null, null);
+		writer.WriteProperty(options, PropDataFrameAnalyticsInBytes, value.DataFrameAnalyticsInBytes, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMaxInBytes, value.MaxInBytes, null, null);
+		writer.WriteProperty(options, PropNativeCodeOverhead, value.NativeCodeOverhead, null, null);
+		writer.WriteProperty(options, PropNativeCodeOverheadInBytes, value.NativeCodeOverheadInBytes, null, null);
+		writer.WriteProperty(options, PropNativeInference, value.NativeInference, null, null);
+		writer.WriteProperty(options, PropNativeInferenceInBytes, value.NativeInferenceInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.MemMlStatsConverter))]
 public sealed partial class MemMlStats
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MemMlStats(int anomalyDetectorsInBytes, int dataFrameAnalyticsInBytes, int maxInBytes, int nativeCodeOverheadInBytes, int nativeInferenceInBytes)
+	{
+		AnomalyDetectorsInBytes = anomalyDetectorsInBytes;
+		DataFrameAnalyticsInBytes = dataFrameAnalyticsInBytes;
+		MaxInBytes = maxInBytes;
+		NativeCodeOverheadInBytes = nativeCodeOverheadInBytes;
+		NativeInferenceInBytes = nativeInferenceInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public MemMlStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MemMlStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MemMlStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Amount of native memory set aside for anomaly detection jobs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("anomaly_detectors")]
-	public Elastic.Clients.Elasticsearch.ByteSize? AnomalyDetectors { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? AnomalyDetectors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Amount of native memory, in bytes, set aside for anomaly detection jobs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("anomaly_detectors_in_bytes")]
-	public int AnomalyDetectorsInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int AnomalyDetectorsInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Amount of native memory set aside for data frame analytics jobs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_frame_analytics")]
-	public Elastic.Clients.Elasticsearch.ByteSize? DataFrameAnalytics { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? DataFrameAnalytics { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Amount of native memory, in bytes, set aside for data frame analytics jobs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_frame_analytics_in_bytes")]
-	public int DataFrameAnalyticsInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int DataFrameAnalyticsInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum amount of native memory (separate to the JVM heap) that may be used by machine learning native processes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max")]
-	public Elastic.Clients.Elasticsearch.ByteSize? Max { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Max { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum amount of native memory (separate to the JVM heap), in bytes, that may be used by machine learning native processes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_in_bytes")]
-	public int MaxInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MaxInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Amount of native memory set aside for loading machine learning native code shared libraries.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("native_code_overhead")]
-	public Elastic.Clients.Elasticsearch.ByteSize? NativeCodeOverhead { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? NativeCodeOverhead { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Amount of native memory, in bytes, set aside for loading machine learning native code shared libraries.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("native_code_overhead_in_bytes")]
-	public int NativeCodeOverheadInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NativeCodeOverheadInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Amount of native memory set aside for trained models that have a PyTorch model_type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("native_inference")]
-	public Elastic.Clients.Elasticsearch.ByteSize? NativeInference { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? NativeInference { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Amount of native memory, in bytes, set aside for trained models that have a PyTorch model_type.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("native_inference_in_bytes")]
-	public int NativeInferenceInBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NativeInferenceInBytes { get; set; }
 }

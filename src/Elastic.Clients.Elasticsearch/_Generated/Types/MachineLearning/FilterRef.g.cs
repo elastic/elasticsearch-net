@@ -17,55 +17,132 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class FilterRefConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilterId = System.Text.Json.JsonEncodedText.Encode("filter_id");
+	private static readonly System.Text.Json.JsonEncodedText PropFilterType = System.Text.Json.JsonEncodedText.Encode("filter_type");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.FilterRef Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propFilterId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.FilterType?> propFilterType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilterId.TryReadProperty(ref reader, options, PropFilterId, null))
+			{
+				continue;
+			}
+
+			if (propFilterType.TryReadProperty(ref reader, options, PropFilterType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.FilterRef(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FilterId = propFilterId.Value,
+			FilterType = propFilterType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilterId, value.FilterId, null, null);
+		writer.WriteProperty(options, PropFilterType, value.FilterType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.FilterRefConverter))]
 public sealed partial class FilterRef
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FilterRef(Elastic.Clients.Elasticsearch.Id filterId)
+	{
+		FilterId = filterId;
+	}
+#if NET7_0_OR_GREATER
+	public FilterRef()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FilterRef()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FilterRef(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The identifier for the filter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter_id")]
-	public Elastic.Clients.Elasticsearch.Id FilterId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id FilterId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If set to <c>include</c>, the rule applies for values in the filter. If set to <c>exclude</c>, the rule applies for values not in the filter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter_type")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.FilterType? FilterType { get; set; }
 }
 
-public sealed partial class FilterRefDescriptor : SerializableDescriptor<FilterRefDescriptor>
+public readonly partial struct FilterRefDescriptor
 {
-	internal FilterRefDescriptor(Action<FilterRefDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.FilterRef Instance { get; init; }
 
-	public FilterRefDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FilterRefDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.FilterRef instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id FilterIdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.FilterType? FilterTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FilterRefDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.FilterRef(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.FilterRef instance) => new Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.FilterRef(Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The identifier for the filter.
 	/// </para>
 	/// </summary>
-	public FilterRefDescriptor FilterId(Elastic.Clients.Elasticsearch.Id filterId)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor FilterId(Elastic.Clients.Elasticsearch.Id value)
 	{
-		FilterIdValue = filterId;
-		return Self;
+		Instance.FilterId = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,23 +150,17 @@ public sealed partial class FilterRefDescriptor : SerializableDescriptor<FilterR
 	/// If set to <c>include</c>, the rule applies for values in the filter. If set to <c>exclude</c>, the rule applies for values not in the filter.
 	/// </para>
 	/// </summary>
-	public FilterRefDescriptor FilterType(Elastic.Clients.Elasticsearch.MachineLearning.FilterType? filterType)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor FilterType(Elastic.Clients.Elasticsearch.MachineLearning.FilterType? value)
 	{
-		FilterTypeValue = filterType;
-		return Self;
+		Instance.FilterType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.FilterRef Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("filter_id");
-		JsonSerializer.Serialize(writer, FilterIdValue, options);
-		if (FilterTypeValue is not null)
-		{
-			writer.WritePropertyName("filter_type");
-			JsonSerializer.Serialize(writer, FilterTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.FilterRef(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,24 +17,156 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DetectorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Detector>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropByFieldName = System.Text.Json.JsonEncodedText.Encode("by_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropCustomRules = System.Text.Json.JsonEncodedText.Encode("custom_rules");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectorDescription = System.Text.Json.JsonEncodedText.Encode("detector_description");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectorIndex = System.Text.Json.JsonEncodedText.Encode("detector_index");
+	private static readonly System.Text.Json.JsonEncodedText PropExcludeFrequent = System.Text.Json.JsonEncodedText.Encode("exclude_frequent");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldName = System.Text.Json.JsonEncodedText.Encode("field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropFunction = System.Text.Json.JsonEncodedText.Encode("function");
+	private static readonly System.Text.Json.JsonEncodedText PropOverFieldName = System.Text.Json.JsonEncodedText.Encode("over_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldName = System.Text.Json.JsonEncodedText.Encode("partition_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropUseNull = System.Text.Json.JsonEncodedText.Encode("use_null");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.Detector Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propByFieldName = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>?> propCustomRules = default;
+		LocalJsonValue<string?> propDetectorDescription = default;
+		LocalJsonValue<int?> propDetectorIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent?> propExcludeFrequent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propFieldName = default;
+		LocalJsonValue<string?> propFunction = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propOverFieldName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propPartitionFieldName = default;
+		LocalJsonValue<bool?> propUseNull = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propByFieldName.TryReadProperty(ref reader, options, PropByFieldName, null))
+			{
+				continue;
+			}
+
+			if (propCustomRules.TryReadProperty(ref reader, options, PropCustomRules, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDetectorDescription.TryReadProperty(ref reader, options, PropDetectorDescription, null))
+			{
+				continue;
+			}
+
+			if (propDetectorIndex.TryReadProperty(ref reader, options, PropDetectorIndex, null))
+			{
+				continue;
+			}
+
+			if (propExcludeFrequent.TryReadProperty(ref reader, options, PropExcludeFrequent, null))
+			{
+				continue;
+			}
+
+			if (propFieldName.TryReadProperty(ref reader, options, PropFieldName, null))
+			{
+				continue;
+			}
+
+			if (propFunction.TryReadProperty(ref reader, options, PropFunction, null))
+			{
+				continue;
+			}
+
+			if (propOverFieldName.TryReadProperty(ref reader, options, PropOverFieldName, null))
+			{
+				continue;
+			}
+
+			if (propPartitionFieldName.TryReadProperty(ref reader, options, PropPartitionFieldName, null))
+			{
+				continue;
+			}
+
+			if (propUseNull.TryReadProperty(ref reader, options, PropUseNull, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ByFieldName = propByFieldName.Value,
+			CustomRules = propCustomRules.Value,
+			DetectorDescription = propDetectorDescription.Value,
+			DetectorIndex = propDetectorIndex.Value,
+			ExcludeFrequent = propExcludeFrequent.Value,
+			FieldName = propFieldName.Value,
+			Function = propFunction.Value,
+			OverFieldName = propOverFieldName.Value,
+			PartitionFieldName = propPartitionFieldName.Value,
+			UseNull = propUseNull.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Detector value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropByFieldName, value.ByFieldName, null, null);
+		writer.WriteProperty(options, PropCustomRules, value.CustomRules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>(o, v, null));
+		writer.WriteProperty(options, PropDetectorDescription, value.DetectorDescription, null, null);
+		writer.WriteProperty(options, PropDetectorIndex, value.DetectorIndex, null, null);
+		writer.WriteProperty(options, PropExcludeFrequent, value.ExcludeFrequent, null, null);
+		writer.WriteProperty(options, PropFieldName, value.FieldName, null, null);
+		writer.WriteProperty(options, PropFunction, value.Function, null, null);
+		writer.WriteProperty(options, PropOverFieldName, value.OverFieldName, null, null);
+		writer.WriteProperty(options, PropPartitionFieldName, value.PartitionFieldName, null, null);
+		writer.WriteProperty(options, PropUseNull, value.UseNull, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DetectorConverter))]
 public sealed partial class Detector
 {
+#if NET7_0_OR_GREATER
+	public Detector()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Detector()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Detector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("by_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? ByFieldName { get; set; }
 
 	/// <summary>
@@ -42,15 +174,13 @@ public sealed partial class Detector
 	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("custom_rules")]
-	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A description of the detector.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("detector_description")]
 	public string? DetectorDescription { get; set; }
 
 	/// <summary>
@@ -58,7 +188,6 @@ public sealed partial class Detector
 	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("detector_index")]
 	public int? DetectorIndex { get; set; }
 
 	/// <summary>
@@ -66,7 +195,6 @@ public sealed partial class Detector
 	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude_frequent")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? ExcludeFrequent { get; set; }
 
 	/// <summary>
@@ -74,7 +202,6 @@ public sealed partial class Detector
 	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field_name")]
 	public Elastic.Clients.Elasticsearch.Field? FieldName { get; set; }
 
 	/// <summary>
@@ -82,7 +209,6 @@ public sealed partial class Detector
 	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("function")]
 	public string? Function { get; set; }
 
 	/// <summary>
@@ -90,7 +216,6 @@ public sealed partial class Detector
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("over_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? OverFieldName { get; set; }
 
 	/// <summary>
@@ -98,7 +223,6 @@ public sealed partial class Detector
 	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("partition_field_name")]
 	public Elastic.Clients.Elasticsearch.Field? PartitionFieldName { get; set; }
 
 	/// <summary>
@@ -106,41 +230,37 @@ public sealed partial class Detector
 	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("use_null")]
 	public bool? UseNull { get; set; }
 }
 
-public sealed partial class DetectorDescriptor<TDocument> : SerializableDescriptor<DetectorDescriptor<TDocument>>
+public readonly partial struct DetectorDescriptor<TDocument>
 {
-	internal DetectorDescriptor(Action<DetectorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.Detector Instance { get; init; }
 
-	public DetectorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Detector instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? ByFieldNameValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRulesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> CustomRulesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>> CustomRulesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>>[] CustomRulesDescriptorActions { get; set; }
-	private string? DetectorDescriptionValue { get; set; }
-	private int? DetectorIndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? ExcludeFrequentValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldNameValue { get; set; }
-	private string? FunctionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? OverFieldNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PartitionFieldNameValue { get; set; }
-	private bool? UseNullValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.Detector instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> ByFieldName(Elastic.Clients.Elasticsearch.Field? byFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> ByFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ByFieldNameValue = byFieldName;
-		return Self;
+		Instance.ByFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -148,21 +268,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> ByFieldName<TValue>(Expression<Func<TDocument, TValue>> byFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> ByFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		ByFieldNameValue = byFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
-	/// </para>
-	/// </summary>
-	public DetectorDescriptor<TDocument> ByFieldName(Expression<Func<TDocument, object>> byFieldName)
-	{
-		ByFieldNameValue = byFieldName;
-		return Self;
+		Instance.ByFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -170,40 +279,60 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> CustomRules(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? customRules)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? value)
 	{
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesValue = customRules;
-		return Self;
+		Instance.CustomRules = value;
+		return this;
 	}
 
-	public DetectorDescriptor<TDocument> CustomRules(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules()
 	{
-		CustomRulesValue = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesDescriptor = descriptor;
-		return Self;
+		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<TDocument>.Build(null);
+		return this;
 	}
 
-	public DetectorDescriptor<TDocument> CustomRules(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<TDocument>>? action)
 	{
-		CustomRulesValue = null;
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesDescriptorAction = configure;
-		return Self;
+		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<TDocument>.Build(action);
+		return this;
 	}
 
-	public DetectorDescriptor<TDocument> CustomRules(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules(params Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule[] values)
 	{
-		CustomRulesValue = null;
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = configure;
-		return Self;
+		Instance.CustomRules = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.CustomRules = items;
+		return this;
 	}
 
 	/// <summary>
@@ -211,10 +340,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// A description of the detector.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> DetectorDescription(string? detectorDescription)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> DetectorDescription(string? value)
 	{
-		DetectorDescriptionValue = detectorDescription;
-		return Self;
+		Instance.DetectorDescription = value;
+		return this;
 	}
 
 	/// <summary>
@@ -222,10 +351,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> DetectorIndex(int? detectorIndex)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> DetectorIndex(int? value)
 	{
-		DetectorIndexValue = detectorIndex;
-		return Self;
+		Instance.DetectorIndex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -233,10 +362,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> ExcludeFrequent(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? excludeFrequent)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> ExcludeFrequent(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? value)
 	{
-		ExcludeFrequentValue = excludeFrequent;
-		return Self;
+		Instance.ExcludeFrequent = value;
+		return this;
 	}
 
 	/// <summary>
@@ -244,10 +373,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> FieldName(Elastic.Clients.Elasticsearch.Field? fieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> FieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldNameValue = fieldName;
-		return Self;
+		Instance.FieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -255,21 +384,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> FieldName<TValue>(Expression<Func<TDocument, TValue>> fieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> FieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldNameValue = fieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
-	/// </para>
-	/// </summary>
-	public DetectorDescriptor<TDocument> FieldName(Expression<Func<TDocument, object>> fieldName)
-	{
-		FieldNameValue = fieldName;
-		return Self;
+		Instance.FieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -277,10 +395,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> Function(string? function)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> Function(string? value)
 	{
-		FunctionValue = function;
-		return Self;
+		Instance.Function = value;
+		return this;
 	}
 
 	/// <summary>
@@ -288,10 +406,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> OverFieldName(Elastic.Clients.Elasticsearch.Field? overFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> OverFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		OverFieldNameValue = overFieldName;
-		return Self;
+		Instance.OverFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -299,21 +417,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> OverFieldName<TValue>(Expression<Func<TDocument, TValue>> overFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> OverFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		OverFieldNameValue = overFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
-	/// </para>
-	/// </summary>
-	public DetectorDescriptor<TDocument> OverFieldName(Expression<Func<TDocument, object>> overFieldName)
-	{
-		OverFieldNameValue = overFieldName;
-		return Self;
+		Instance.OverFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -321,10 +428,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> PartitionFieldName(Elastic.Clients.Elasticsearch.Field? partitionFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> PartitionFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PartitionFieldNameValue = partitionFieldName;
-		return Self;
+		Instance.PartitionFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -332,21 +439,10 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> PartitionFieldName<TValue>(Expression<Func<TDocument, TValue>> partitionFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> PartitionFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PartitionFieldNameValue = partitionFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
-	/// </para>
-	/// </summary>
-	public DetectorDescriptor<TDocument> PartitionFieldName(Expression<Func<TDocument, object>> partitionFieldName)
-	{
-		PartitionFieldNameValue = partitionFieldName;
-		return Self;
+		Instance.PartitionFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -354,135 +450,54 @@ public sealed partial class DetectorDescriptor<TDocument> : SerializableDescript
 	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor<TDocument> UseNull(bool? useNull = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> UseNull(bool? value = true)
 	{
-		UseNullValue = useNull;
-		return Self;
+		Instance.UseNull = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.Detector Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (ByFieldNameValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("by_field_name");
-			JsonSerializer.Serialize(writer, ByFieldNameValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (CustomRulesDescriptor is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, CustomRulesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>(CustomRulesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			foreach (var action in CustomRulesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesValue is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			JsonSerializer.Serialize(writer, CustomRulesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DetectorDescriptionValue))
-		{
-			writer.WritePropertyName("detector_description");
-			writer.WriteStringValue(DetectorDescriptionValue);
-		}
-
-		if (DetectorIndexValue.HasValue)
-		{
-			writer.WritePropertyName("detector_index");
-			writer.WriteNumberValue(DetectorIndexValue.Value);
-		}
-
-		if (ExcludeFrequentValue is not null)
-		{
-			writer.WritePropertyName("exclude_frequent");
-			JsonSerializer.Serialize(writer, ExcludeFrequentValue, options);
-		}
-
-		if (FieldNameValue is not null)
-		{
-			writer.WritePropertyName("field_name");
-			JsonSerializer.Serialize(writer, FieldNameValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FunctionValue))
-		{
-			writer.WritePropertyName("function");
-			writer.WriteStringValue(FunctionValue);
-		}
-
-		if (OverFieldNameValue is not null)
-		{
-			writer.WritePropertyName("over_field_name");
-			JsonSerializer.Serialize(writer, OverFieldNameValue, options);
-		}
-
-		if (PartitionFieldNameValue is not null)
-		{
-			writer.WritePropertyName("partition_field_name");
-			JsonSerializer.Serialize(writer, PartitionFieldNameValue, options);
-		}
-
-		if (UseNullValue.HasValue)
-		{
-			writer.WritePropertyName("use_null");
-			writer.WriteBooleanValue(UseNullValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DetectorDescriptor : SerializableDescriptor<DetectorDescriptor>
+public readonly partial struct DetectorDescriptor
 {
-	internal DetectorDescriptor(Action<DetectorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.Detector Instance { get; init; }
 
-	public DetectorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Detector instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? ByFieldNameValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRulesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor CustomRulesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor> CustomRulesDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor>[] CustomRulesDescriptorActions { get; set; }
-	private string? DetectorDescriptionValue { get; set; }
-	private int? DetectorIndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? ExcludeFrequentValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldNameValue { get; set; }
-	private string? FunctionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? OverFieldNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PartitionFieldNameValue { get; set; }
-	private bool? UseNullValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DetectorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Detector instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor ByFieldName(Elastic.Clients.Elasticsearch.Field? byFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor ByFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		ByFieldNameValue = byFieldName;
-		return Self;
+		Instance.ByFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -490,21 +505,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor ByFieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> byFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor ByFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		ByFieldNameValue = byFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
-	/// </para>
-	/// </summary>
-	public DetectorDescriptor ByFieldName<TDocument>(Expression<Func<TDocument, object>> byFieldName)
-	{
-		ByFieldNameValue = byFieldName;
-		return Self;
+		Instance.ByFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -512,40 +516,88 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor CustomRules(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? customRules)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? value)
 	{
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesValue = customRules;
-		return Self;
+		Instance.CustomRules = value;
+		return this;
 	}
 
-	public DetectorDescriptor CustomRules(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules()
 	{
-		CustomRulesValue = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesDescriptor = descriptor;
-		return Self;
+		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule.Build(null);
+		return this;
 	}
 
-	public DetectorDescriptor CustomRules(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule>? action)
 	{
-		CustomRulesValue = null;
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorActions = null;
-		CustomRulesDescriptorAction = configure;
-		return Self;
+		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule.Build(action);
+		return this;
 	}
 
-	public DetectorDescriptor CustomRules(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<T>>? action)
 	{
-		CustomRulesValue = null;
-		CustomRulesDescriptor = null;
-		CustomRulesDescriptorAction = null;
-		CustomRulesDescriptorActions = configure;
-		return Self;
+		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules(params Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule[] values)
+	{
+		Instance.CustomRules = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor.Build(action));
+		}
+
+		Instance.CustomRules = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules<T>(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<T>>?[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<T>.Build(action));
+		}
+
+		Instance.CustomRules = items;
+		return this;
 	}
 
 	/// <summary>
@@ -553,10 +605,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// A description of the detector.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor DetectorDescription(string? detectorDescription)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor DetectorDescription(string? value)
 	{
-		DetectorDescriptionValue = detectorDescription;
-		return Self;
+		Instance.DetectorDescription = value;
+		return this;
 	}
 
 	/// <summary>
@@ -564,10 +616,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor DetectorIndex(int? detectorIndex)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor DetectorIndex(int? value)
 	{
-		DetectorIndexValue = detectorIndex;
-		return Self;
+		Instance.DetectorIndex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -575,10 +627,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor ExcludeFrequent(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? excludeFrequent)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor ExcludeFrequent(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? value)
 	{
-		ExcludeFrequentValue = excludeFrequent;
-		return Self;
+		Instance.ExcludeFrequent = value;
+		return this;
 	}
 
 	/// <summary>
@@ -586,10 +638,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor FieldName(Elastic.Clients.Elasticsearch.Field? fieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor FieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldNameValue = fieldName;
-		return Self;
+		Instance.FieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -597,21 +649,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor FieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> fieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor FieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldNameValue = fieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
-	/// </para>
-	/// </summary>
-	public DetectorDescriptor FieldName<TDocument>(Expression<Func<TDocument, object>> fieldName)
-	{
-		FieldNameValue = fieldName;
-		return Self;
+		Instance.FieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -619,10 +660,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor Function(string? function)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor Function(string? value)
 	{
-		FunctionValue = function;
-		return Self;
+		Instance.Function = value;
+		return this;
 	}
 
 	/// <summary>
@@ -630,10 +671,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor OverFieldName(Elastic.Clients.Elasticsearch.Field? overFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor OverFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		OverFieldNameValue = overFieldName;
-		return Self;
+		Instance.OverFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -641,21 +682,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor OverFieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> overFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor OverFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		OverFieldNameValue = overFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
-	/// </para>
-	/// </summary>
-	public DetectorDescriptor OverFieldName<TDocument>(Expression<Func<TDocument, object>> overFieldName)
-	{
-		OverFieldNameValue = overFieldName;
-		return Self;
+		Instance.OverFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -663,10 +693,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor PartitionFieldName(Elastic.Clients.Elasticsearch.Field? partitionFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor PartitionFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PartitionFieldNameValue = partitionFieldName;
-		return Self;
+		Instance.PartitionFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -674,21 +704,10 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor PartitionFieldName<TDocument, TValue>(Expression<Func<TDocument, TValue>> partitionFieldName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor PartitionFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		PartitionFieldNameValue = partitionFieldName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
-	/// </para>
-	/// </summary>
-	public DetectorDescriptor PartitionFieldName<TDocument>(Expression<Func<TDocument, object>> partitionFieldName)
-	{
-		PartitionFieldNameValue = partitionFieldName;
-		return Self;
+		Instance.PartitionFieldName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -696,100 +715,22 @@ public sealed partial class DetectorDescriptor : SerializableDescriptor<Detector
 	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
 	/// </para>
 	/// </summary>
-	public DetectorDescriptor UseNull(bool? useNull = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor UseNull(bool? value = true)
 	{
-		UseNullValue = useNull;
-		return Self;
+		Instance.UseNull = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.Detector Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ByFieldNameValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("by_field_name");
-			JsonSerializer.Serialize(writer, ByFieldNameValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (CustomRulesDescriptor is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, CustomRulesDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor(CustomRulesDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesDescriptorActions is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			writer.WriteStartArray();
-			foreach (var action in CustomRulesDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (CustomRulesValue is not null)
-		{
-			writer.WritePropertyName("custom_rules");
-			JsonSerializer.Serialize(writer, CustomRulesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DetectorDescriptionValue))
-		{
-			writer.WritePropertyName("detector_description");
-			writer.WriteStringValue(DetectorDescriptionValue);
-		}
-
-		if (DetectorIndexValue.HasValue)
-		{
-			writer.WritePropertyName("detector_index");
-			writer.WriteNumberValue(DetectorIndexValue.Value);
-		}
-
-		if (ExcludeFrequentValue is not null)
-		{
-			writer.WritePropertyName("exclude_frequent");
-			JsonSerializer.Serialize(writer, ExcludeFrequentValue, options);
-		}
-
-		if (FieldNameValue is not null)
-		{
-			writer.WritePropertyName("field_name");
-			JsonSerializer.Serialize(writer, FieldNameValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FunctionValue))
-		{
-			writer.WritePropertyName("function");
-			writer.WriteStringValue(FunctionValue);
-		}
-
-		if (OverFieldNameValue is not null)
-		{
-			writer.WritePropertyName("over_field_name");
-			JsonSerializer.Serialize(writer, OverFieldNameValue, options);
-		}
-
-		if (PartitionFieldNameValue is not null)
-		{
-			writer.WritePropertyName("partition_field_name");
-			JsonSerializer.Serialize(writer, PartitionFieldNameValue, options);
-		}
-
-		if (UseNullValue.HasValue)
-		{
-			writer.WritePropertyName("use_null");
-			writer.WriteBooleanValue(UseNullValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

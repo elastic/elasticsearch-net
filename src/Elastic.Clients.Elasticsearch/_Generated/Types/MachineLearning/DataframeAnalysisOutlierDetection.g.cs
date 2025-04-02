@@ -17,24 +17,120 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalysisOutlierDetectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropComputeFeatureInfluence = System.Text.Json.JsonEncodedText.Encode("compute_feature_influence");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureInfluenceThreshold = System.Text.Json.JsonEncodedText.Encode("feature_influence_threshold");
+	private static readonly System.Text.Json.JsonEncodedText PropMethod = System.Text.Json.JsonEncodedText.Encode("method");
+	private static readonly System.Text.Json.JsonEncodedText PropNNeighbors = System.Text.Json.JsonEncodedText.Encode("n_neighbors");
+	private static readonly System.Text.Json.JsonEncodedText PropOutlierFraction = System.Text.Json.JsonEncodedText.Encode("outlier_fraction");
+	private static readonly System.Text.Json.JsonEncodedText PropStandardizationEnabled = System.Text.Json.JsonEncodedText.Encode("standardization_enabled");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propComputeFeatureInfluence = default;
+		LocalJsonValue<double?> propFeatureInfluenceThreshold = default;
+		LocalJsonValue<string?> propMethod = default;
+		LocalJsonValue<int?> propNNeighbors = default;
+		LocalJsonValue<double?> propOutlierFraction = default;
+		LocalJsonValue<bool?> propStandardizationEnabled = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propComputeFeatureInfluence.TryReadProperty(ref reader, options, PropComputeFeatureInfluence, null))
+			{
+				continue;
+			}
+
+			if (propFeatureInfluenceThreshold.TryReadProperty(ref reader, options, PropFeatureInfluenceThreshold, null))
+			{
+				continue;
+			}
+
+			if (propMethod.TryReadProperty(ref reader, options, PropMethod, null))
+			{
+				continue;
+			}
+
+			if (propNNeighbors.TryReadProperty(ref reader, options, PropNNeighbors, null))
+			{
+				continue;
+			}
+
+			if (propOutlierFraction.TryReadProperty(ref reader, options, PropOutlierFraction, null))
+			{
+				continue;
+			}
+
+			if (propStandardizationEnabled.TryReadProperty(ref reader, options, PropStandardizationEnabled, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ComputeFeatureInfluence = propComputeFeatureInfluence.Value,
+			FeatureInfluenceThreshold = propFeatureInfluenceThreshold.Value,
+			Method = propMethod.Value,
+			NNeighbors = propNNeighbors.Value,
+			OutlierFraction = propOutlierFraction.Value,
+			StandardizationEnabled = propStandardizationEnabled.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropComputeFeatureInfluence, value.ComputeFeatureInfluence, null, null);
+		writer.WriteProperty(options, PropFeatureInfluenceThreshold, value.FeatureInfluenceThreshold, null, null);
+		writer.WriteProperty(options, PropMethod, value.Method, null, null);
+		writer.WriteProperty(options, PropNNeighbors, value.NNeighbors, null, null);
+		writer.WriteProperty(options, PropOutlierFraction, value.OutlierFraction, null, null);
+		writer.WriteProperty(options, PropStandardizationEnabled, value.StandardizationEnabled, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionConverter))]
 public sealed partial class DataframeAnalysisOutlierDetection
 {
+#if NET7_0_OR_GREATER
+	public DataframeAnalysisOutlierDetection()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataframeAnalysisOutlierDetection()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalysisOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Specifies whether the feature influence calculation is enabled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("compute_feature_influence")]
 	public bool? ComputeFeatureInfluence { get; set; }
 
 	/// <summary>
@@ -42,7 +138,6 @@ public sealed partial class DataframeAnalysisOutlierDetection
 	/// The minimum outlier score that a document needs to have in order to calculate its feature influence score. Value range: 0-1.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("feature_influence_threshold")]
 	public double? FeatureInfluenceThreshold { get; set; }
 
 	/// <summary>
@@ -50,7 +145,6 @@ public sealed partial class DataframeAnalysisOutlierDetection
 	/// The method that outlier detection uses. Available methods are <c>lof</c>, <c>ldof</c>, <c>distance_kth_nn</c>, <c>distance_knn</c>, and <c>ensemble</c>. The default value is ensemble, which means that outlier detection uses an ensemble of different methods and normalises and combines their individual outlier scores to obtain the overall outlier score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("method")]
 	public string? Method { get; set; }
 
 	/// <summary>
@@ -58,7 +152,6 @@ public sealed partial class DataframeAnalysisOutlierDetection
 	/// Defines the value for how many nearest neighbors each method of outlier detection uses to calculate its outlier score. When the value is not set, different values are used for different ensemble members. This default behavior helps improve the diversity in the ensemble; only override it if you are confident that the value you choose is appropriate for the data set.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("n_neighbors")]
 	public int? NNeighbors { get; set; }
 
 	/// <summary>
@@ -66,7 +159,6 @@ public sealed partial class DataframeAnalysisOutlierDetection
 	/// The proportion of the data set that is assumed to be outlying prior to outlier detection. For example, 0.05 means it is assumed that 5% of values are real outliers and 95% are inliers.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("outlier_fraction")]
 	public double? OutlierFraction { get; set; }
 
 	/// <summary>
@@ -74,36 +166,37 @@ public sealed partial class DataframeAnalysisOutlierDetection
 	/// If true, the following operation is performed on the columns before computing outlier scores: <c>(x_i - mean(x_i)) / sd(x_i)</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("standardization_enabled")]
 	public bool? StandardizationEnabled { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(DataframeAnalysisOutlierDetection dataframeAnalysisOutlierDetection) => Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis.OutlierDetection(dataframeAnalysisOutlierDetection);
 }
 
-public sealed partial class DataframeAnalysisOutlierDetectionDescriptor : SerializableDescriptor<DataframeAnalysisOutlierDetectionDescriptor>
+public readonly partial struct DataframeAnalysisOutlierDetectionDescriptor
 {
-	internal DataframeAnalysisOutlierDetectionDescriptor(Action<DataframeAnalysisOutlierDetectionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection Instance { get; init; }
 
-	public DataframeAnalysisOutlierDetectionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisOutlierDetectionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? ComputeFeatureInfluenceValue { get; set; }
-	private double? FeatureInfluenceThresholdValue { get; set; }
-	private string? MethodValue { get; set; }
-	private int? NNeighborsValue { get; set; }
-	private double? OutlierFractionValue { get; set; }
-	private bool? StandardizationEnabledValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisOutlierDetectionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies whether the feature influence calculation is enabled.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisOutlierDetectionDescriptor ComputeFeatureInfluence(bool? computeFeatureInfluence = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor ComputeFeatureInfluence(bool? value = true)
 	{
-		ComputeFeatureInfluenceValue = computeFeatureInfluence;
-		return Self;
+		Instance.ComputeFeatureInfluence = value;
+		return this;
 	}
 
 	/// <summary>
@@ -111,10 +204,10 @@ public sealed partial class DataframeAnalysisOutlierDetectionDescriptor : Serial
 	/// The minimum outlier score that a document needs to have in order to calculate its feature influence score. Value range: 0-1.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisOutlierDetectionDescriptor FeatureInfluenceThreshold(double? featureInfluenceThreshold)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor FeatureInfluenceThreshold(double? value)
 	{
-		FeatureInfluenceThresholdValue = featureInfluenceThreshold;
-		return Self;
+		Instance.FeatureInfluenceThreshold = value;
+		return this;
 	}
 
 	/// <summary>
@@ -122,10 +215,10 @@ public sealed partial class DataframeAnalysisOutlierDetectionDescriptor : Serial
 	/// The method that outlier detection uses. Available methods are <c>lof</c>, <c>ldof</c>, <c>distance_kth_nn</c>, <c>distance_knn</c>, and <c>ensemble</c>. The default value is ensemble, which means that outlier detection uses an ensemble of different methods and normalises and combines their individual outlier scores to obtain the overall outlier score.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisOutlierDetectionDescriptor Method(string? method)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor Method(string? value)
 	{
-		MethodValue = method;
-		return Self;
+		Instance.Method = value;
+		return this;
 	}
 
 	/// <summary>
@@ -133,10 +226,10 @@ public sealed partial class DataframeAnalysisOutlierDetectionDescriptor : Serial
 	/// Defines the value for how many nearest neighbors each method of outlier detection uses to calculate its outlier score. When the value is not set, different values are used for different ensemble members. This default behavior helps improve the diversity in the ensemble; only override it if you are confident that the value you choose is appropriate for the data set.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisOutlierDetectionDescriptor NNeighbors(int? nNeighbors)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor NNeighbors(int? value)
 	{
-		NNeighborsValue = nNeighbors;
-		return Self;
+		Instance.NNeighbors = value;
+		return this;
 	}
 
 	/// <summary>
@@ -144,10 +237,10 @@ public sealed partial class DataframeAnalysisOutlierDetectionDescriptor : Serial
 	/// The proportion of the data set that is assumed to be outlying prior to outlier detection. For example, 0.05 means it is assumed that 5% of values are real outliers and 95% are inliers.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisOutlierDetectionDescriptor OutlierFraction(double? outlierFraction)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor OutlierFraction(double? value)
 	{
-		OutlierFractionValue = outlierFraction;
-		return Self;
+		Instance.OutlierFraction = value;
+		return this;
 	}
 
 	/// <summary>
@@ -155,51 +248,22 @@ public sealed partial class DataframeAnalysisOutlierDetectionDescriptor : Serial
 	/// If true, the following operation is performed on the columns before computing outlier scores: <c>(x_i - mean(x_i)) / sd(x_i)</c>.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisOutlierDetectionDescriptor StandardizationEnabled(bool? standardizationEnabled = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor StandardizationEnabled(bool? value = true)
 	{
-		StandardizationEnabledValue = standardizationEnabled;
-		return Self;
+		Instance.StandardizationEnabled = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ComputeFeatureInfluenceValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("compute_feature_influence");
-			writer.WriteBooleanValue(ComputeFeatureInfluenceValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FeatureInfluenceThresholdValue.HasValue)
-		{
-			writer.WritePropertyName("feature_influence_threshold");
-			writer.WriteNumberValue(FeatureInfluenceThresholdValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(MethodValue))
-		{
-			writer.WritePropertyName("method");
-			writer.WriteStringValue(MethodValue);
-		}
-
-		if (NNeighborsValue.HasValue)
-		{
-			writer.WritePropertyName("n_neighbors");
-			writer.WriteNumberValue(NNeighborsValue.Value);
-		}
-
-		if (OutlierFractionValue.HasValue)
-		{
-			writer.WritePropertyName("outlier_fraction");
-			writer.WriteNumberValue(OutlierFractionValue.Value);
-		}
-
-		if (StandardizationEnabledValue.HasValue)
-		{
-			writer.WritePropertyName("standardization_enabled");
-			writer.WriteBooleanValue(StandardizationEnabledValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

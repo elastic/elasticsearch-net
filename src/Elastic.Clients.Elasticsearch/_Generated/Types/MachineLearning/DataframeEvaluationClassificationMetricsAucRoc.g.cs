@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeEvaluationClassificationMetricsAucRocConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeCurve = System.Text.Json.JsonEncodedText.Encode("include_curve");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propClassName = default;
+		LocalJsonValue<bool?> propIncludeCurve = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClassName.TryReadProperty(ref reader, options, PropClassName, null))
+			{
+				continue;
+			}
+
+			if (propIncludeCurve.TryReadProperty(ref reader, options, PropIncludeCurve, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ClassName = propClassName.Value,
+			IncludeCurve = propIncludeCurve.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClassName, value.ClassName, null, null);
+		writer.WriteProperty(options, PropIncludeCurve, value.IncludeCurve, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocConverter))]
 public sealed partial class DataframeEvaluationClassificationMetricsAucRoc
 {
+#if NET7_0_OR_GREATER
+	public DataframeEvaluationClassificationMetricsAucRoc()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataframeEvaluationClassificationMetricsAucRoc()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeEvaluationClassificationMetricsAucRoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Name of the only class that is treated as positive during AUC ROC calculation. Other classes are treated as negative ("one-vs-all" strategy). All the evaluated documents must have class_name in the list of their top classes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("class_name")]
 	public Elastic.Clients.Elasticsearch.Name? ClassName { get; set; }
 
 	/// <summary>
@@ -42,30 +102,37 @@ public sealed partial class DataframeEvaluationClassificationMetricsAucRoc
 	/// Whether or not the curve should be returned in addition to the score. Default value is false.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include_curve")]
 	public bool? IncludeCurve { get; set; }
 }
 
-public sealed partial class DataframeEvaluationClassificationMetricsAucRocDescriptor : SerializableDescriptor<DataframeEvaluationClassificationMetricsAucRocDescriptor>
+public readonly partial struct DataframeEvaluationClassificationMetricsAucRocDescriptor
 {
-	internal DataframeEvaluationClassificationMetricsAucRocDescriptor(Action<DataframeEvaluationClassificationMetricsAucRocDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc Instance { get; init; }
 
-	public DataframeEvaluationClassificationMetricsAucRocDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationClassificationMetricsAucRocDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Name? ClassNameValue { get; set; }
-	private bool? IncludeCurveValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationClassificationMetricsAucRocDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Name of the only class that is treated as positive during AUC ROC calculation. Other classes are treated as negative ("one-vs-all" strategy). All the evaluated documents must have class_name in the list of their top classes.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationMetricsAucRocDescriptor ClassName(Elastic.Clients.Elasticsearch.Name? className)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor ClassName(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		ClassNameValue = className;
-		return Self;
+		Instance.ClassName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,22 @@ public sealed partial class DataframeEvaluationClassificationMetricsAucRocDescri
 	/// Whether or not the curve should be returned in addition to the score. Default value is false.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationMetricsAucRocDescriptor IncludeCurve(bool? includeCurve = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor IncludeCurve(bool? value = true)
 	{
-		IncludeCurveValue = includeCurve;
-		return Self;
+		Instance.IncludeCurve = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ClassNameValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("class_name");
-			JsonSerializer.Serialize(writer, ClassNameValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IncludeCurveValue.HasValue)
-		{
-			writer.WritePropertyName("include_curve");
-			writer.WriteBooleanValue(IncludeCurveValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

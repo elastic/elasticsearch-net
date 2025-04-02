@@ -17,46 +17,252 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class BoxplotAggregate : IAggregate
+internal sealed partial class BoxplotAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate>
 {
-	[JsonInclude, JsonPropertyName("lower")]
-	public double Lower { get; init; }
-	[JsonInclude, JsonPropertyName("lower_as_string")]
-	public string? LowerAsString { get; init; }
-	[JsonInclude, JsonPropertyName("max")]
-	public double Max { get; init; }
-	[JsonInclude, JsonPropertyName("max_as_string")]
-	public string? MaxAsString { get; init; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("min")]
-	public double Min { get; init; }
-	[JsonInclude, JsonPropertyName("min_as_string")]
-	public string? MinAsString { get; init; }
-	[JsonInclude, JsonPropertyName("q1")]
-	public double Q1 { get; init; }
-	[JsonInclude, JsonPropertyName("q1_as_string")]
-	public string? Q1AsString { get; init; }
-	[JsonInclude, JsonPropertyName("q2")]
-	public double Q2 { get; init; }
-	[JsonInclude, JsonPropertyName("q2_as_string")]
-	public string? Q2AsString { get; init; }
-	[JsonInclude, JsonPropertyName("q3")]
-	public double Q3 { get; init; }
-	[JsonInclude, JsonPropertyName("q3_as_string")]
-	public string? Q3AsString { get; init; }
-	[JsonInclude, JsonPropertyName("upper")]
-	public double Upper { get; init; }
-	[JsonInclude, JsonPropertyName("upper_as_string")]
-	public string? UpperAsString { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropLower = System.Text.Json.JsonEncodedText.Encode("lower");
+	private static readonly System.Text.Json.JsonEncodedText PropLowerAsString = System.Text.Json.JsonEncodedText.Encode("lower_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAsString = System.Text.Json.JsonEncodedText.Encode("max_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText PropMinAsString = System.Text.Json.JsonEncodedText.Encode("min_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropQ1 = System.Text.Json.JsonEncodedText.Encode("q1");
+	private static readonly System.Text.Json.JsonEncodedText PropQ1AsString = System.Text.Json.JsonEncodedText.Encode("q1_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropQ2 = System.Text.Json.JsonEncodedText.Encode("q2");
+	private static readonly System.Text.Json.JsonEncodedText PropQ2AsString = System.Text.Json.JsonEncodedText.Encode("q2_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropQ3 = System.Text.Json.JsonEncodedText.Encode("q3");
+	private static readonly System.Text.Json.JsonEncodedText PropQ3AsString = System.Text.Json.JsonEncodedText.Encode("q3_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropUpper = System.Text.Json.JsonEncodedText.Encode("upper");
+	private static readonly System.Text.Json.JsonEncodedText PropUpperAsString = System.Text.Json.JsonEncodedText.Encode("upper_as_string");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double> propLower = default;
+		LocalJsonValue<string?> propLowerAsString = default;
+		LocalJsonValue<double> propMax = default;
+		LocalJsonValue<string?> propMaxAsString = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<double> propMin = default;
+		LocalJsonValue<string?> propMinAsString = default;
+		LocalJsonValue<double> propQ1 = default;
+		LocalJsonValue<string?> propQ1AsString = default;
+		LocalJsonValue<double> propQ2 = default;
+		LocalJsonValue<string?> propQ2AsString = default;
+		LocalJsonValue<double> propQ3 = default;
+		LocalJsonValue<string?> propQ3AsString = default;
+		LocalJsonValue<double> propUpper = default;
+		LocalJsonValue<string?> propUpperAsString = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLower.TryReadProperty(ref reader, options, PropLower, null))
+			{
+				continue;
+			}
+
+			if (propLowerAsString.TryReadProperty(ref reader, options, PropLowerAsString, null))
+			{
+				continue;
+			}
+
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
+			if (propMaxAsString.TryReadProperty(ref reader, options, PropMaxAsString, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			{
+				continue;
+			}
+
+			if (propMinAsString.TryReadProperty(ref reader, options, PropMinAsString, null))
+			{
+				continue;
+			}
+
+			if (propQ1.TryReadProperty(ref reader, options, PropQ1, null))
+			{
+				continue;
+			}
+
+			if (propQ1AsString.TryReadProperty(ref reader, options, PropQ1AsString, null))
+			{
+				continue;
+			}
+
+			if (propQ2.TryReadProperty(ref reader, options, PropQ2, null))
+			{
+				continue;
+			}
+
+			if (propQ2AsString.TryReadProperty(ref reader, options, PropQ2AsString, null))
+			{
+				continue;
+			}
+
+			if (propQ3.TryReadProperty(ref reader, options, PropQ3, null))
+			{
+				continue;
+			}
+
+			if (propQ3AsString.TryReadProperty(ref reader, options, PropQ3AsString, null))
+			{
+				continue;
+			}
+
+			if (propUpper.TryReadProperty(ref reader, options, PropUpper, null))
+			{
+				continue;
+			}
+
+			if (propUpperAsString.TryReadProperty(ref reader, options, PropUpperAsString, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Lower = propLower.Value,
+			LowerAsString = propLowerAsString.Value,
+			Max = propMax.Value,
+			MaxAsString = propMaxAsString.Value,
+			Meta = propMeta.Value,
+			Min = propMin.Value,
+			MinAsString = propMinAsString.Value,
+			Q1 = propQ1.Value,
+			Q1AsString = propQ1AsString.Value,
+			Q2 = propQ2.Value,
+			Q2AsString = propQ2AsString.Value,
+			Q3 = propQ3.Value,
+			Q3AsString = propQ3AsString.Value,
+			Upper = propUpper.Value,
+			UpperAsString = propUpperAsString.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLower, value.Lower, null, null);
+		writer.WriteProperty(options, PropLowerAsString, value.LowerAsString, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMaxAsString, value.MaxAsString, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteProperty(options, PropMinAsString, value.MinAsString, null, null);
+		writer.WriteProperty(options, PropQ1, value.Q1, null, null);
+		writer.WriteProperty(options, PropQ1AsString, value.Q1AsString, null, null);
+		writer.WriteProperty(options, PropQ2, value.Q2, null, null);
+		writer.WriteProperty(options, PropQ2AsString, value.Q2AsString, null, null);
+		writer.WriteProperty(options, PropQ3, value.Q3, null, null);
+		writer.WriteProperty(options, PropQ3AsString, value.Q3AsString, null, null);
+		writer.WriteProperty(options, PropUpper, value.Upper, null, null);
+		writer.WriteProperty(options, PropUpperAsString, value.UpperAsString, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregateConverter))]
+public sealed partial class BoxplotAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public BoxplotAggregate(double lower, double max, double min, double q1, double q2, double q3, double upper)
+	{
+		Lower = lower;
+		Max = max;
+		Min = min;
+		Q1 = q1;
+		Q2 = q2;
+		Q3 = q3;
+		Upper = upper;
+	}
+#if NET7_0_OR_GREATER
+	public BoxplotAggregate()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public BoxplotAggregate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal BoxplotAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Lower { get; set; }
+	public string? LowerAsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Max { get; set; }
+	public string? MaxAsString { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Min { get; set; }
+	public string? MinAsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Q1 { get; set; }
+	public string? Q1AsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Q2 { get; set; }
+	public string? Q2AsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Q3 { get; set; }
+	public string? Q3AsString { get; set; }
+
+	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "boxplot";
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Upper { get; set; }
+	public string? UpperAsString { get; set; }
 }

@@ -17,25 +17,208 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class TermSuggesterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropLowercaseTerms = System.Text.Json.JsonEncodedText.Encode("lowercase_terms");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxEdits = System.Text.Json.JsonEncodedText.Encode("max_edits");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxInspections = System.Text.Json.JsonEncodedText.Encode("max_inspections");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTermFreq = System.Text.Json.JsonEncodedText.Encode("max_term_freq");
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocFreq = System.Text.Json.JsonEncodedText.Encode("min_doc_freq");
+	private static readonly System.Text.Json.JsonEncodedText PropMinWordLength = System.Text.Json.JsonEncodedText.Encode("min_word_length");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropStringDistance = System.Text.Json.JsonEncodedText.Encode("string_distance");
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestMode = System.Text.Json.JsonEncodedText.Encode("suggest_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.TermSuggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<bool?> propLowercaseTerms = default;
+		LocalJsonValue<int?> propMaxEdits = default;
+		LocalJsonValue<int?> propMaxInspections = default;
+		LocalJsonValue<float?> propMaxTermFreq = default;
+		LocalJsonValue<float?> propMinDocFreq = default;
+		LocalJsonValue<int?> propMinWordLength = default;
+		LocalJsonValue<int?> propPrefixLength = default;
+		LocalJsonValue<int?> propShardSize = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SuggestSort?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.StringDistance?> propStringDistance = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SuggestMode?> propSuggestMode = default;
+		LocalJsonValue<string?> propText = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propLowercaseTerms.TryReadProperty(ref reader, options, PropLowercaseTerms, null))
+			{
+				continue;
+			}
+
+			if (propMaxEdits.TryReadProperty(ref reader, options, PropMaxEdits, null))
+			{
+				continue;
+			}
+
+			if (propMaxInspections.TryReadProperty(ref reader, options, PropMaxInspections, null))
+			{
+				continue;
+			}
+
+			if (propMaxTermFreq.TryReadProperty(ref reader, options, PropMaxTermFreq, null))
+			{
+				continue;
+			}
+
+			if (propMinDocFreq.TryReadProperty(ref reader, options, PropMinDocFreq, null))
+			{
+				continue;
+			}
+
+			if (propMinWordLength.TryReadProperty(ref reader, options, PropMinWordLength, null))
+			{
+				continue;
+			}
+
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			{
+				continue;
+			}
+
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, null))
+			{
+				continue;
+			}
+
+			if (propStringDistance.TryReadProperty(ref reader, options, PropStringDistance, null))
+			{
+				continue;
+			}
+
+			if (propSuggestMode.TryReadProperty(ref reader, options, PropSuggestMode, null))
+			{
+				continue;
+			}
+
+			if (propText.TryReadProperty(ref reader, options, PropText, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.TermSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analyzer = propAnalyzer.Value,
+			Field = propField.Value,
+			LowercaseTerms = propLowercaseTerms.Value,
+			MaxEdits = propMaxEdits.Value,
+			MaxInspections = propMaxInspections.Value,
+			MaxTermFreq = propMaxTermFreq.Value,
+			MinDocFreq = propMinDocFreq.Value,
+			MinWordLength = propMinWordLength.Value,
+			PrefixLength = propPrefixLength.Value,
+			ShardSize = propShardSize.Value,
+			Size = propSize.Value,
+			Sort = propSort.Value,
+			StringDistance = propStringDistance.Value,
+			SuggestMode = propSuggestMode.Value,
+			Text = propText.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.TermSuggester value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropLowercaseTerms, value.LowercaseTerms, null, null);
+		writer.WriteProperty(options, PropMaxEdits, value.MaxEdits, null, null);
+		writer.WriteProperty(options, PropMaxInspections, value.MaxInspections, null, null);
+		writer.WriteProperty(options, PropMaxTermFreq, value.MaxTermFreq, null, null);
+		writer.WriteProperty(options, PropMinDocFreq, value.MinDocFreq, null, null);
+		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, null);
+		writer.WriteProperty(options, PropStringDistance, value.StringDistance, null, null);
+		writer.WriteProperty(options, PropSuggestMode, value.SuggestMode, null, null);
+		writer.WriteProperty(options, PropText, value.Text, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterConverter))]
 public sealed partial class TermSuggester
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermSuggester(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public TermSuggester()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TermSuggester()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TermSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The analyzer to analyze the suggest text with.
 	/// Defaults to the search analyzer of the suggest field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -44,9 +227,11 @@ public sealed partial class TermSuggester
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	[JsonInclude, JsonPropertyName("lowercase_terms")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public bool? LowercaseTerms { get; set; }
 
 	/// <summary>
@@ -55,7 +240,6 @@ public sealed partial class TermSuggester
 	/// Can only be <c>1</c> or <c>2</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_edits")]
 	public int? MaxEdits { get; set; }
 
 	/// <summary>
@@ -64,7 +248,6 @@ public sealed partial class TermSuggester
 	/// Can improve accuracy at the cost of performance.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_inspections")]
 	public int? MaxInspections { get; set; }
 
 	/// <summary>
@@ -74,7 +257,6 @@ public sealed partial class TermSuggester
 	/// If a value higher than 1 is specified, then fractional can not be specified.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_term_freq")]
 	public float? MaxTermFreq { get; set; }
 
 	/// <summary>
@@ -85,7 +267,6 @@ public sealed partial class TermSuggester
 	/// If a value higher than 1 is specified, then the number cannot be fractional.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public float? MinDocFreq { get; set; }
 
 	/// <summary>
@@ -93,7 +274,6 @@ public sealed partial class TermSuggester
 	/// The minimum length a suggest text term must have in order to be included.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
 
 	/// <summary>
@@ -102,7 +282,6 @@ public sealed partial class TermSuggester
 	/// Increasing this number improves spellcheck performance.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
 
 	/// <summary>
@@ -110,7 +289,6 @@ public sealed partial class TermSuggester
 	/// Sets the maximum number of suggestions to be retrieved from each individual shard.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
@@ -118,7 +296,6 @@ public sealed partial class TermSuggester
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -126,7 +303,6 @@ public sealed partial class TermSuggester
 	/// Defines how suggestions should be sorted per suggest text term.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? Sort { get; set; }
 
 	/// <summary>
@@ -134,7 +310,6 @@ public sealed partial class TermSuggester
 	/// The string distance implementation to use for comparing how similar suggested terms are.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("string_distance")]
 	public Elastic.Clients.Elasticsearch.Core.Search.StringDistance? StringDistance { get; set; }
 
 	/// <summary>
@@ -142,7 +317,6 @@ public sealed partial class TermSuggester
 	/// Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("suggest_mode")]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 
 	/// <summary>
@@ -151,35 +325,27 @@ public sealed partial class TermSuggester
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(TermSuggester termSuggester) => Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester.Term(termSuggester);
 }
 
-public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDescriptor<TermSuggesterDescriptor<TDocument>>
+public readonly partial struct TermSuggesterDescriptor<TDocument>
 {
-	internal TermSuggesterDescriptor(Action<TermSuggesterDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.TermSuggester Instance { get; init; }
 
-	public TermSuggesterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? LowercaseTermsValue { get; set; }
-	private int? MaxEditsValue { get; set; }
-	private int? MaxInspectionsValue { get; set; }
-	private float? MaxTermFreqValue { get; set; }
-	private float? MinDocFreqValue { get; set; }
-	private int? MinWordLengthValue { get; set; }
-	private int? PrefixLengthValue { get; set; }
-	private int? ShardSizeValue { get; set; }
-	private int? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.StringDistance? StringDistanceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
-	private string? TextValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermSuggesterDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.TermSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.TermSuggester(Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -187,10 +353,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Defaults to the search analyzer of the suggest field.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -199,10 +365,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -211,28 +377,16 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
-	public TermSuggesterDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> LowercaseTerms(bool? value = true)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public TermSuggesterDescriptor<TDocument> LowercaseTerms(bool? lowercaseTerms = true)
-	{
-		LowercaseTermsValue = lowercaseTerms;
-		return Self;
+		Instance.LowercaseTerms = value;
+		return this;
 	}
 
 	/// <summary>
@@ -241,10 +395,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Can only be <c>1</c> or <c>2</c>.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> MaxEdits(int? maxEdits)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MaxEdits(int? value)
 	{
-		MaxEditsValue = maxEdits;
-		return Self;
+		Instance.MaxEdits = value;
+		return this;
 	}
 
 	/// <summary>
@@ -253,10 +407,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Can improve accuracy at the cost of performance.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> MaxInspections(int? maxInspections)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MaxInspections(int? value)
 	{
-		MaxInspectionsValue = maxInspections;
-		return Self;
+		Instance.MaxInspections = value;
+		return this;
 	}
 
 	/// <summary>
@@ -266,10 +420,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// If a value higher than 1 is specified, then fractional can not be specified.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> MaxTermFreq(float? maxTermFreq)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MaxTermFreq(float? value)
 	{
-		MaxTermFreqValue = maxTermFreq;
-		return Self;
+		Instance.MaxTermFreq = value;
+		return this;
 	}
 
 	/// <summary>
@@ -280,10 +434,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// If a value higher than 1 is specified, then the number cannot be fractional.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> MinDocFreq(float? minDocFreq)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MinDocFreq(float? value)
 	{
-		MinDocFreqValue = minDocFreq;
-		return Self;
+		Instance.MinDocFreq = value;
+		return this;
 	}
 
 	/// <summary>
@@ -291,10 +445,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// The minimum length a suggest text term must have in order to be included.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> MinWordLength(int? minWordLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MinWordLength(int? value)
 	{
-		MinWordLengthValue = minWordLength;
-		return Self;
+		Instance.MinWordLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -303,10 +457,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Increasing this number improves spellcheck performance.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> PrefixLength(int? prefixLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> PrefixLength(int? value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -314,10 +468,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Sets the maximum number of suggestions to be retrieved from each individual shard.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> ShardSize(int? shardSize)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> ShardSize(int? value)
 	{
-		ShardSizeValue = shardSize;
-		return Self;
+		Instance.ShardSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -325,10 +479,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -336,10 +490,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Defines how suggestions should be sorted per suggest text term.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? sort)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? value)
 	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -347,10 +501,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// The string distance implementation to use for comparing how similar suggested terms are.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> StringDistance(Elastic.Clients.Elasticsearch.Core.Search.StringDistance? stringDistance)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> StringDistance(Elastic.Clients.Elasticsearch.Core.Search.StringDistance? value)
 	{
-		StringDistanceValue = stringDistance;
-		return Self;
+		Instance.StringDistance = value;
+		return this;
 	}
 
 	/// <summary>
@@ -358,10 +512,10 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
-		SuggestModeValue = suggestMode;
-		return Self;
+		Instance.SuggestMode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -370,128 +524,39 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor<TDocument> Text(string? text)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Text(string? value)
 	{
-		TextValue = text;
-		return Self;
+		Instance.Text = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.TermSuggester Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (LowercaseTermsValue.HasValue)
-		{
-			writer.WritePropertyName("lowercase_terms");
-			writer.WriteBooleanValue(LowercaseTermsValue.Value);
-		}
-
-		if (MaxEditsValue.HasValue)
-		{
-			writer.WritePropertyName("max_edits");
-			writer.WriteNumberValue(MaxEditsValue.Value);
-		}
-
-		if (MaxInspectionsValue.HasValue)
-		{
-			writer.WritePropertyName("max_inspections");
-			writer.WriteNumberValue(MaxInspectionsValue.Value);
-		}
-
-		if (MaxTermFreqValue.HasValue)
-		{
-			writer.WritePropertyName("max_term_freq");
-			writer.WriteNumberValue(MaxTermFreqValue.Value);
-		}
-
-		if (MinDocFreqValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_freq");
-			writer.WriteNumberValue(MinDocFreqValue.Value);
-		}
-
-		if (MinWordLengthValue.HasValue)
-		{
-			writer.WritePropertyName("min_word_length");
-			writer.WriteNumberValue(MinWordLengthValue.Value);
-		}
-
-		if (PrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(PrefixLengthValue.Value);
-		}
-
-		if (ShardSizeValue.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(ShardSizeValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortValue, options);
-		}
-
-		if (StringDistanceValue is not null)
-		{
-			writer.WritePropertyName("string_distance");
-			JsonSerializer.Serialize(writer, StringDistanceValue, options);
-		}
-
-		if (SuggestModeValue is not null)
-		{
-			writer.WritePropertyName("suggest_mode");
-			JsonSerializer.Serialize(writer, SuggestModeValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TextValue))
-		{
-			writer.WritePropertyName("text");
-			writer.WriteStringValue(TextValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.Search.TermSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<TermSuggesterDescriptor>
+public readonly partial struct TermSuggesterDescriptor
 {
-	internal TermSuggesterDescriptor(Action<TermSuggesterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.TermSuggester Instance { get; init; }
 
-	public TermSuggesterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private bool? LowercaseTermsValue { get; set; }
-	private int? MaxEditsValue { get; set; }
-	private int? MaxInspectionsValue { get; set; }
-	private float? MaxTermFreqValue { get; set; }
-	private float? MinDocFreqValue { get; set; }
-	private int? MinWordLengthValue { get; set; }
-	private int? PrefixLengthValue { get; set; }
-	private int? ShardSizeValue { get; set; }
-	private int? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.StringDistance? StringDistanceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
-	private string? TextValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermSuggesterDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.TermSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.TermSuggester(Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -499,10 +564,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Defaults to the search analyzer of the suggest field.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -511,10 +576,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -523,28 +588,16 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
-	public TermSuggesterDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor LowercaseTerms(bool? value = true)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public TermSuggesterDescriptor LowercaseTerms(bool? lowercaseTerms = true)
-	{
-		LowercaseTermsValue = lowercaseTerms;
-		return Self;
+		Instance.LowercaseTerms = value;
+		return this;
 	}
 
 	/// <summary>
@@ -553,10 +606,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Can only be <c>1</c> or <c>2</c>.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor MaxEdits(int? maxEdits)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MaxEdits(int? value)
 	{
-		MaxEditsValue = maxEdits;
-		return Self;
+		Instance.MaxEdits = value;
+		return this;
 	}
 
 	/// <summary>
@@ -565,10 +618,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Can improve accuracy at the cost of performance.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor MaxInspections(int? maxInspections)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MaxInspections(int? value)
 	{
-		MaxInspectionsValue = maxInspections;
-		return Self;
+		Instance.MaxInspections = value;
+		return this;
 	}
 
 	/// <summary>
@@ -578,10 +631,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// If a value higher than 1 is specified, then fractional can not be specified.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor MaxTermFreq(float? maxTermFreq)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MaxTermFreq(float? value)
 	{
-		MaxTermFreqValue = maxTermFreq;
-		return Self;
+		Instance.MaxTermFreq = value;
+		return this;
 	}
 
 	/// <summary>
@@ -592,10 +645,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// If a value higher than 1 is specified, then the number cannot be fractional.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor MinDocFreq(float? minDocFreq)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MinDocFreq(float? value)
 	{
-		MinDocFreqValue = minDocFreq;
-		return Self;
+		Instance.MinDocFreq = value;
+		return this;
 	}
 
 	/// <summary>
@@ -603,10 +656,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// The minimum length a suggest text term must have in order to be included.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor MinWordLength(int? minWordLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MinWordLength(int? value)
 	{
-		MinWordLengthValue = minWordLength;
-		return Self;
+		Instance.MinWordLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -615,10 +668,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Increasing this number improves spellcheck performance.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor PrefixLength(int? prefixLength)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor PrefixLength(int? value)
 	{
-		PrefixLengthValue = prefixLength;
-		return Self;
+		Instance.PrefixLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -626,10 +679,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Sets the maximum number of suggestions to be retrieved from each individual shard.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor ShardSize(int? shardSize)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor ShardSize(int? value)
 	{
-		ShardSizeValue = shardSize;
-		return Self;
+		Instance.ShardSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -637,10 +690,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -648,10 +701,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Defines how suggestions should be sorted per suggest text term.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor Sort(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? sort)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Sort(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? value)
 	{
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
@@ -659,10 +712,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// The string distance implementation to use for comparing how similar suggested terms are.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor StringDistance(Elastic.Clients.Elasticsearch.Core.Search.StringDistance? stringDistance)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor StringDistance(Elastic.Clients.Elasticsearch.Core.Search.StringDistance? value)
 	{
-		StringDistanceValue = stringDistance;
-		return Self;
+		Instance.StringDistance = value;
+		return this;
 	}
 
 	/// <summary>
@@ -670,10 +723,10 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
-		SuggestModeValue = suggestMode;
-		return Self;
+		Instance.SuggestMode = value;
+		return this;
 	}
 
 	/// <summary>
@@ -682,101 +735,17 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public TermSuggesterDescriptor Text(string? text)
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Text(string? value)
 	{
-		TextValue = text;
-		return Self;
+		Instance.Text = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.TermSuggester Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (LowercaseTermsValue.HasValue)
-		{
-			writer.WritePropertyName("lowercase_terms");
-			writer.WriteBooleanValue(LowercaseTermsValue.Value);
-		}
-
-		if (MaxEditsValue.HasValue)
-		{
-			writer.WritePropertyName("max_edits");
-			writer.WriteNumberValue(MaxEditsValue.Value);
-		}
-
-		if (MaxInspectionsValue.HasValue)
-		{
-			writer.WritePropertyName("max_inspections");
-			writer.WriteNumberValue(MaxInspectionsValue.Value);
-		}
-
-		if (MaxTermFreqValue.HasValue)
-		{
-			writer.WritePropertyName("max_term_freq");
-			writer.WriteNumberValue(MaxTermFreqValue.Value);
-		}
-
-		if (MinDocFreqValue.HasValue)
-		{
-			writer.WritePropertyName("min_doc_freq");
-			writer.WriteNumberValue(MinDocFreqValue.Value);
-		}
-
-		if (MinWordLengthValue.HasValue)
-		{
-			writer.WritePropertyName("min_word_length");
-			writer.WriteNumberValue(MinWordLengthValue.Value);
-		}
-
-		if (PrefixLengthValue.HasValue)
-		{
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(PrefixLengthValue.Value);
-		}
-
-		if (ShardSizeValue.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(ShardSizeValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortValue, options);
-		}
-
-		if (StringDistanceValue is not null)
-		{
-			writer.WritePropertyName("string_distance");
-			JsonSerializer.Serialize(writer, StringDistanceValue, options);
-		}
-
-		if (SuggestModeValue is not null)
-		{
-			writer.WritePropertyName("suggest_mode");
-			JsonSerializer.Serialize(writer, SuggestModeValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TextValue))
-		{
-			writer.WritePropertyName("text");
-			writer.WriteStringValue(TextValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.TermSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

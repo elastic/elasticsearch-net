@@ -17,87 +17,236 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class Hint
+internal sealed partial class HintConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.Hint>
 {
-	/// <summary>
-	/// <para>
-	/// A single key-value pair to match against the labels section
-	/// of a profile. A profile is considered matching if it matches
-	/// at least one of the strings.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("labels")]
-	public IDictionary<string, Union<string, ICollection<string>>>? Labels { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels");
+	private static readonly System.Text.Json.JsonEncodedText PropUids = System.Text.Json.JsonEncodedText.Encode("uids");
 
-	/// <summary>
-	/// <para>
-	/// A list of profile UIDs to match against.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("uids")]
-	public ICollection<string>? Uids { get; set; }
-}
-
-public sealed partial class HintDescriptor : SerializableDescriptor<HintDescriptor>
-{
-	internal HintDescriptor(Action<HintDescriptor> configure) => configure.Invoke(this);
-
-	public HintDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Security.Hint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>?> propLabels = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propUids = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLabels.TryReadProperty(ref reader, options, PropLabels, static System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propUids.TryReadProperty(ref reader, options, PropUids, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.Hint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Labels = propLabels.Value,
+			Uids = propUids.Value
+		};
 	}
 
-	private IDictionary<string, Union<string, ICollection<string>>>? LabelsValue { get; set; }
-	private ICollection<string>? UidsValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A single key-value pair to match against the labels section
-	/// of a profile. A profile is considered matching if it matches
-	/// at least one of the strings.
-	/// </para>
-	/// </summary>
-	public HintDescriptor Labels(Func<FluentDictionary<string, Union<string, ICollection<string>>>, FluentDictionary<string, Union<string, ICollection<string>>>> selector)
-	{
-		LabelsValue = selector?.Invoke(new FluentDictionary<string, Union<string, ICollection<string>>>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of profile UIDs to match against.
-	/// </para>
-	/// </summary>
-	public HintDescriptor Uids(ICollection<string>? uids)
-	{
-		UidsValue = uids;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.Hint value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (LabelsValue is not null)
-		{
-			writer.WritePropertyName("labels");
-			JsonSerializer.Serialize(writer, LabelsValue, options);
-		}
-
-		if (UidsValue is not null)
-		{
-			writer.WritePropertyName("uids");
-			JsonSerializer.Serialize(writer, UidsValue, options);
-		}
-
+		writer.WriteProperty(options, PropLabels, value.Labels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null)));
+		writer.WriteProperty(options, PropUids, value.Uids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.HintConverter))]
+public sealed partial class Hint
+{
+#if NET7_0_OR_GREATER
+	public Hint()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Hint()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Hint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single key-value pair to match against the labels section
+	/// of a profile. A profile is considered matching if it matches
+	/// at least one of the strings.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Labels { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of profile UIDs to match against.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? Uids { get; set; }
+}
+
+public readonly partial struct HintDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.Hint Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HintDescriptor(Elastic.Clients.Elasticsearch.Security.Hint instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HintDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.Hint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.HintDescriptor(Elastic.Clients.Elasticsearch.Security.Hint instance) => new Elastic.Clients.Elasticsearch.Security.HintDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.Hint(Elastic.Clients.Elasticsearch.Security.HintDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A single key-value pair to match against the labels section
+	/// of a profile. A profile is considered matching if it matches
+	/// at least one of the strings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Labels(System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? value)
+	{
+		Instance.Labels = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single key-value pair to match against the labels section
+	/// of a profile. A profile is considered matching if it matches
+	/// at least one of the strings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Labels()
+	{
+		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A single key-value pair to match against the labels section
+	/// of a profile. A profile is considered matching if it matches
+	/// at least one of the strings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	{
+		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor AddLabel(string key, System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Labels ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Labels.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor AddLabel(string key)
+	{
+		Instance.Labels ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Labels.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor AddLabel(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Labels ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Labels.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor AddLabel(string key, params string[] values)
+	{
+		Instance.Labels ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Labels.Add(key, [.. values]);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of profile UIDs to match against.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Uids(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Uids = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of profile UIDs to match against.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Uids()
+	{
+		Instance.Uids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of profile UIDs to match against.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Uids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Uids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of profile UIDs to match against.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Uids(params string[] values)
+	{
+		Instance.Uids = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.Hint Build(System.Action<Elastic.Clients.Elasticsearch.Security.HintDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Security.Hint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Security.HintDescriptor(new Elastic.Clients.Elasticsearch.Security.Hint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

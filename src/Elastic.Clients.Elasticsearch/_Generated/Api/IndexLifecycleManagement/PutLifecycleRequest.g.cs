@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class PutLifecycleRequestParameters : RequestParameters
+public sealed partial class PutLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -47,6 +40,45 @@ public sealed partial class PutLifecycleRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PutLifecycleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPolicy = System.Text.Json.JsonEncodedText.Encode("policy");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy?> propPolicy = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPolicy.TryReadProperty(ref reader, options, PropPolicy, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Policy = propPolicy.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPolicy, value.Policy, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create or update a lifecycle policy.
@@ -56,15 +88,27 @@ public sealed partial class PutLifecycleRequestParameters : RequestParameters
 /// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 /// </para>
 /// </summary>
-public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestConverter))]
+public sealed partial class PutLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutLifecycleRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("policy", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutLifecycleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementPutLifecycle;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexLifecycleManagementPutLifecycle;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -72,10 +116,20 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the policy.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("policy"); set => PR("policy", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -83,9 +137,7 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonInclude, JsonPropertyName("policy")]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy? Policy { get; set; }
 }
 
@@ -98,78 +150,122 @@ public sealed partial class PutLifecycleRequest : PlainRequest<PutLifecycleReque
 /// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 /// </para>
 /// </summary>
-public sealed partial class PutLifecycleRequestDescriptor : RequestDescriptor<PutLifecycleRequestDescriptor, PutLifecycleRequestParameters>
+public readonly partial struct PutLifecycleRequestDescriptor
 {
-	internal PutLifecycleRequestDescriptor(Action<PutLifecycleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest Instance { get; init; }
 
-	public PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("policy", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementPutLifecycle;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ilm.put_lifecycle";
-
-	public PutLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("policy", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest(name);
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy? PolicyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor PolicyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor> PolicyDescriptorAction { get; set; }
-
-	public PutLifecycleRequestDescriptor Policy(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy? policy)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutLifecycleRequestDescriptor()
 	{
-		PolicyDescriptor = null;
-		PolicyDescriptorAction = null;
-		PolicyValue = policy;
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public PutLifecycleRequestDescriptor Policy(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the policy.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
-		PolicyValue = null;
-		PolicyDescriptorAction = null;
-		PolicyDescriptor = descriptor;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	public PutLifecycleRequestDescriptor Policy(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		PolicyValue = null;
-		PolicyDescriptor = null;
-		PolicyDescriptorAction = configure;
-		return Self;
+		Instance.MasterTimeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		writer.WriteStartObject();
-		if (PolicyDescriptor is not null)
-		{
-			writer.WritePropertyName("policy");
-			JsonSerializer.Serialize(writer, PolicyDescriptor, options);
-		}
-		else if (PolicyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("policy");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor(PolicyDescriptorAction), options);
-		}
-		else if (PolicyValue is not null)
-		{
-			writer.WritePropertyName("policy");
-			JsonSerializer.Serialize(writer, PolicyValue, options);
-		}
+		Instance.Timeout = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Policy(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy? value)
+	{
+		Instance.Policy = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Policy(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor> action)
+	{
+		Instance.Policy = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

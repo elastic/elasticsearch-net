@@ -17,37 +17,148 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-[JsonConverter(typeof(PinnedQueryConverter))]
-public sealed partial class PinnedQuery
+internal sealed partial class PinnedQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery>
 {
-	internal PinnedQuery(string variantName, object variant)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropOrganic = System.Text.Json.JsonEncodedText.Encode("organic");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText VariantDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+	private static readonly System.Text.Json.JsonEncodedText VariantIds = System.Text.Json.JsonEncodedText.Encode("ids");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propOrganic = default;
+		LocalJsonValue<string?> propQueryName = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propOrganic.TryReadProperty(ref reader, options, PropOrganic, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDocs))
+			{
+				variantType = VariantDocs.Value;
+				reader.Read();
+				variant = reader.ReadValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>>(options, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>(o, null)!);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantIds))
+			{
+				variantType = VariantIds.Value;
+				reader.Read();
+				variant = reader.ReadValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>>(options, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, null)!);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant,
+			Boost = propBoost.Value,
+			Organic = propOrganic.Value,
+			QueryName = propQueryName.Value
+		};
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "docs":
+				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>(o, v, null));
+				break;
+			case "ids":
+				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery)}'.");
+		}
 
-	public static PinnedQuery Docs(IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> pinnedDoc) => new PinnedQuery("docs", pinnedDoc);
-	public static PinnedQuery Ids(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id> id) => new PinnedQuery("ids", id);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropOrganic, value.Organic, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryConverter))]
+public sealed partial class PinnedQuery
+{
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PinnedQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query organic)
+	{
+		Organic = organic;
+	}
+#if NET7_0_OR_GREATER
+	public PinnedQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PinnedQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PinnedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? Docs { get => GetVariant<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>>("docs"); set => SetVariant("docs", value); }
+
+	/// <summary>
+	/// <para>
+	/// Document IDs listed in the order they are to appear in results.
+	/// Required if <c>docs</c> is not specified.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get => GetVariant<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>>("ids"); set => SetVariant("ids", value); }
 
 	/// <summary>
 	/// <para>
@@ -57,7 +168,6 @@ public sealed partial class PinnedQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -65,167 +175,164 @@ public sealed partial class PinnedQuery
 	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("organic")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
 	public string? QueryName { get; set; }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class PinnedQueryConverter : JsonConverter<PinnedQuery>
+public readonly partial struct PinnedQueryDescriptor<TDocument>
 {
-	public override PinnedQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PinnedQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		float? boostValue = default;
-		Elastic.Clients.Elasticsearch.QueryDsl.Query organicValue = default;
-		string? queryNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "boost")
-			{
-				boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "organic")
-			{
-				organicValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "_name")
-			{
-				queryNameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "docs")
-			{
-				variantValue = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "ids")
-			{
-				variantValue = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Id>?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PinnedQuery' from the response.");
-		}
-
-		var result = new PinnedQuery(variantNameValue, variantValue);
-		result.Boost = boostValue;
-		result.Organic = organicValue;
-		result.QueryName = queryNameValue;
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, PinnedQuery value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PinnedQueryDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (value.Organic is not null)
-		{
-			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, value.Organic, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "docs":
-					JsonSerializer.Serialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>>(writer, (IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>)value.Variant, options);
-					break;
-				case "ids":
-					JsonSerializer.Serialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id>>(writer, (IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id>)value.Variant, options);
-					break;
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescriptor<PinnedQueryDescriptor<TDocument>>
-{
-	internal PinnedQueryDescriptor(Action<PinnedQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public PinnedQueryDescriptor() : base()
-	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	private PinnedQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Docs = value;
+		return this;
 	}
 
-	private PinnedQueryDescriptor<TDocument> Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs()
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(null);
+		return this;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query OrganicValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc>? action)
+	{
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc[] values)
+	{
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Document IDs listed in the order they are to appear in results.
+	/// Required if <c>docs</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
+	{
+		Instance.Ids = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Document IDs listed in the order they are to appear in results.
+	/// Required if <c>docs</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Ids()
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Document IDs listed in the order they are to appear in results.
+	/// Required if <c>docs</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Document IDs listed in the order they are to appear in results.
+	/// Required if <c>docs</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Ids(params Elastic.Clients.Elasticsearch.Id[] values)
+	{
+		Instance.Ids = [.. values];
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -235,10 +342,10 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public PinnedQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -246,94 +353,170 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
 	/// </para>
 	/// </summary>
-	public PinnedQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query organic)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		OrganicValue = organic;
-		return Self;
+		Instance.Organic = value;
+		return this;
 	}
 
-	public PinnedQueryDescriptor<TDocument> QueryName(string? queryName)
+	/// <summary>
+	/// <para>
+	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Organic(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.Organic = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public PinnedQueryDescriptor<TDocument> Docs(IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> pinnedDoc) => Set(pinnedDoc, "docs");
-	public PinnedQueryDescriptor<TDocument> Docs(Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor> configure) => Set(configure, "docs");
-	public PinnedQueryDescriptor<TDocument> Ids(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id> id) => Set(id, "ids");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
+		Instance.QueryName = value;
+		return this;
+	}
 
-		if (OrganicValue is not null)
-		{
-			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, OrganicValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<PinnedQueryDescriptor>
+public readonly partial struct PinnedQueryDescriptor
 {
-	internal PinnedQueryDescriptor(Action<PinnedQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery Instance { get; init; }
 
-	public PinnedQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PinnedQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private PinnedQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PinnedQueryDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private PinnedQueryDescriptor Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Docs = value;
+		return this;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query OrganicValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs()
+	{
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc>? action)
+	{
+		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs(params Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc[] values)
+	{
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Documents listed in the order they are to appear in results.
+	/// Required if <c>ids</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Document IDs listed in the order they are to appear in results.
+	/// Required if <c>docs</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
+	{
+		Instance.Ids = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Document IDs listed in the order they are to appear in results.
+	/// Required if <c>docs</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Ids()
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Document IDs listed in the order they are to appear in results.
+	/// Required if <c>docs</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
+	{
+		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Document IDs listed in the order they are to appear in results.
+	/// Required if <c>docs</c> is not specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Ids(params Elastic.Clients.Elasticsearch.Id[] values)
+	{
+		Instance.Ids = [.. values];
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -343,10 +526,10 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public PinnedQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -354,56 +537,45 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
 	/// </para>
 	/// </summary>
-	public PinnedQueryDescriptor Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query organic)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		OrganicValue = organic;
-		return Self;
+		Instance.Organic = value;
+		return this;
 	}
 
-	public PinnedQueryDescriptor QueryName(string? queryName)
+	/// <summary>
+	/// <para>
+	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Organic(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.Organic = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public PinnedQueryDescriptor Docs(IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> pinnedDoc) => Set(pinnedDoc, "docs");
-	public PinnedQueryDescriptor Docs(Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor> configure) => Set(configure, "docs");
-	public PinnedQueryDescriptor Ids(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id> id) => Set(id, "ids");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Organic<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
+		Instance.Organic = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
 
-		if (OrganicValue is not null)
-		{
-			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, OrganicValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor QueryName(string? value)
+	{
+		Instance.QueryName = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

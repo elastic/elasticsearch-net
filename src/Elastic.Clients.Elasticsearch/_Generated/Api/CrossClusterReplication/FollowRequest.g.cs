@@ -17,27 +17,186 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-public sealed partial class FollowRequestParameters : RequestParameters
+public sealed partial class FollowRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Sets the number of shard copies that must be active before returning. Defaults to 0. Set to <c>all</c> for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Specifies the number of shards to wait on being active before responding. This defaults to waiting on none of the shards to be
+	/// active.
+	/// A shard must be restored from the leader index before being active. Restoring a follower shard requires transferring all the
+	/// remote Lucene segment files to the follower index.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+}
+
+internal sealed partial class FollowRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamName = System.Text.Json.JsonEncodedText.Encode("data_stream_name");
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndex = System.Text.Json.JsonEncodedText.Encode("leader_index");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingReadRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_read_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingWriteRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_write_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_read_request_operation_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestSize = System.Text.Json.JsonEncodedText.Encode("max_read_request_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRetryDelay = System.Text.Json.JsonEncodedText.Encode("max_retry_delay");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferCount = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferSize = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_write_request_operation_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestSize = System.Text.Json.JsonEncodedText.Encode("max_write_request_size");
+	private static readonly System.Text.Json.JsonEncodedText PropReadPollTimeout = System.Text.Json.JsonEncodedText.Encode("read_poll_timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDataStreamName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propLeaderIndex = default;
+		LocalJsonValue<long?> propMaxOutstandingReadRequests = default;
+		LocalJsonValue<int?> propMaxOutstandingWriteRequests = default;
+		LocalJsonValue<int?> propMaxReadRequestOperationCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxReadRequestSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propMaxRetryDelay = default;
+		LocalJsonValue<int?> propMaxWriteBufferCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxWriteBufferSize = default;
+		LocalJsonValue<int?> propMaxWriteRequestOperationCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxWriteRequestSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propReadPollTimeout = default;
+		LocalJsonValue<string> propRemoteCluster = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propSettings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDataStreamName.TryReadProperty(ref reader, options, PropDataStreamName, null))
+			{
+				continue;
+			}
+
+			if (propLeaderIndex.TryReadProperty(ref reader, options, PropLeaderIndex, null))
+			{
+				continue;
+			}
+
+			if (propMaxOutstandingReadRequests.TryReadProperty(ref reader, options, PropMaxOutstandingReadRequests, null))
+			{
+				continue;
+			}
+
+			if (propMaxOutstandingWriteRequests.TryReadProperty(ref reader, options, PropMaxOutstandingWriteRequests, null))
+			{
+				continue;
+			}
+
+			if (propMaxReadRequestOperationCount.TryReadProperty(ref reader, options, PropMaxReadRequestOperationCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxReadRequestSize.TryReadProperty(ref reader, options, PropMaxReadRequestSize, null))
+			{
+				continue;
+			}
+
+			if (propMaxRetryDelay.TryReadProperty(ref reader, options, PropMaxRetryDelay, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteBufferCount.TryReadProperty(ref reader, options, PropMaxWriteBufferCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteBufferSize.TryReadProperty(ref reader, options, PropMaxWriteBufferSize, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteRequestOperationCount.TryReadProperty(ref reader, options, PropMaxWriteRequestOperationCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteRequestSize.TryReadProperty(ref reader, options, PropMaxWriteRequestSize, null))
+			{
+				continue;
+			}
+
+			if (propReadPollTimeout.TryReadProperty(ref reader, options, PropReadPollTimeout, null))
+			{
+				continue;
+			}
+
+			if (propRemoteCluster.TryReadProperty(ref reader, options, PropRemoteCluster, null))
+			{
+				continue;
+			}
+
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DataStreamName = propDataStreamName.Value,
+			LeaderIndex = propLeaderIndex.Value,
+			MaxOutstandingReadRequests = propMaxOutstandingReadRequests.Value,
+			MaxOutstandingWriteRequests = propMaxOutstandingWriteRequests.Value,
+			MaxReadRequestOperationCount = propMaxReadRequestOperationCount.Value,
+			MaxReadRequestSize = propMaxReadRequestSize.Value,
+			MaxRetryDelay = propMaxRetryDelay.Value,
+			MaxWriteBufferCount = propMaxWriteBufferCount.Value,
+			MaxWriteBufferSize = propMaxWriteBufferSize.Value,
+			MaxWriteRequestOperationCount = propMaxWriteRequestOperationCount.Value,
+			MaxWriteRequestSize = propMaxWriteRequestSize.Value,
+			ReadPollTimeout = propReadPollTimeout.Value,
+			RemoteCluster = propRemoteCluster.Value,
+			Settings = propSettings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDataStreamName, value.DataStreamName, null, null);
+		writer.WriteProperty(options, PropLeaderIndex, value.LeaderIndex, null, null);
+		writer.WriteProperty(options, PropMaxOutstandingReadRequests, value.MaxOutstandingReadRequests, null, null);
+		writer.WriteProperty(options, PropMaxOutstandingWriteRequests, value.MaxOutstandingWriteRequests, null, null);
+		writer.WriteProperty(options, PropMaxReadRequestOperationCount, value.MaxReadRequestOperationCount, null, null);
+		writer.WriteProperty(options, PropMaxReadRequestSize, value.MaxReadRequestSize, null, null);
+		writer.WriteProperty(options, PropMaxRetryDelay, value.MaxRetryDelay, null, null);
+		writer.WriteProperty(options, PropMaxWriteBufferCount, value.MaxWriteBufferCount, null, null);
+		writer.WriteProperty(options, PropMaxWriteBufferSize, value.MaxWriteBufferSize, null, null);
+		writer.WriteProperty(options, PropMaxWriteRequestOperationCount, value.MaxWriteRequestOperationCount, null, null);
+		writer.WriteProperty(options, PropMaxWriteRequestSize, value.MaxWriteRequestSize, null, null);
+		writer.WriteProperty(options, PropReadPollTimeout, value.ReadPollTimeout, null, null);
+		writer.WriteProperty(options, PropRemoteCluster, value.RemoteCluster, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -47,15 +206,35 @@ public sealed partial class FollowRequestParameters : RequestParameters
 /// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 /// </para>
 /// </summary>
-public sealed partial class FollowRequest : PlainRequest<FollowRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestConverter))]
+public sealed partial class FollowRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>
 {
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public FollowRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationFollow;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FollowRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName leaderIndex, string remoteCluster) : base(r => r.Required("index", index))
+	{
+		LeaderIndex = leaderIndex;
+		RemoteCluster = remoteCluster;
+	}
+#if NET7_0_OR_GREATER
+	public FollowRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FollowRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.CrossClusterReplicationFollow;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -63,35 +242,142 @@ public sealed partial class FollowRequest : PlainRequest<FollowRequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Sets the number of shard copies that must be active before returning. Defaults to 0. Set to <c>all</c> for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+	/// The name of the follower index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Specifies the number of shards to wait on being active before responding. This defaults to waiting on none of the shards to be
+	/// active.
+	/// A shard must be restored from the leader index before being active. Restoring a follower shard requires transferring all the
+	/// remote Lucene segment files to the follower index.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-	[JsonInclude, JsonPropertyName("leader_index")]
-	public Elastic.Clients.Elasticsearch.IndexName? LeaderIndex { get; set; }
-	[JsonInclude, JsonPropertyName("max_outstanding_read_requests")]
+
+	/// <summary>
+	/// <para>
+	/// If the leader index is part of a data stream, the name to which the local data stream for the followed index should be renamed.
+	/// </para>
+	/// </summary>
+	public string? DataStreamName { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index in the leader cluster to follow.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName LeaderIndex { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of outstanding reads requests from the remote cluster.
+	/// </para>
+	/// </summary>
 	public long? MaxOutstandingReadRequests { get; set; }
-	[JsonInclude, JsonPropertyName("max_outstanding_write_requests")]
-	public long? MaxOutstandingWriteRequests { get; set; }
-	[JsonInclude, JsonPropertyName("max_read_request_operation_count")]
-	public long? MaxReadRequestOperationCount { get; set; }
-	[JsonInclude, JsonPropertyName("max_read_request_size")]
-	public string? MaxReadRequestSize { get; set; }
-	[JsonInclude, JsonPropertyName("max_retry_delay")]
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of outstanding write requests on the follower.
+	/// </para>
+	/// </summary>
+	public int? MaxOutstandingWriteRequests { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations to pull per read from the remote cluster.
+	/// </para>
+	/// </summary>
+	public int? MaxReadRequestOperationCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
+	/// retrying.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; set; }
-	[JsonInclude, JsonPropertyName("max_write_buffer_count")]
-	public long? MaxWriteBufferCount { get; set; }
-	[JsonInclude, JsonPropertyName("max_write_buffer_size")]
-	public string? MaxWriteBufferSize { get; set; }
-	[JsonInclude, JsonPropertyName("max_write_request_operation_count")]
-	public long? MaxWriteRequestOperationCount { get; set; }
-	[JsonInclude, JsonPropertyName("max_write_request_size")]
-	public string? MaxWriteRequestSize { get; set; }
-	[JsonInclude, JsonPropertyName("read_poll_timeout")]
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
+	/// deferred until the number of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
+	public int? MaxWriteBufferCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
+	/// be deferred until the total bytes of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
+	public int? MaxWriteRequestOperationCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
+	/// When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
+	/// Then the follower will immediately attempt to read from the leader again.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
-	[JsonInclude, JsonPropertyName("remote_cluster")]
-	public string? RemoteCluster { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The remote cluster containing the leader index.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RemoteCluster { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 }
 
 /// <summary>
@@ -101,195 +387,342 @@ public sealed partial class FollowRequest : PlainRequest<FollowRequestParameters
 /// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 /// </para>
 /// </summary>
-public sealed partial class FollowRequestDescriptor<TDocument> : RequestDescriptor<FollowRequestDescriptor<TDocument>, FollowRequestParameters>
+public readonly partial struct FollowRequestDescriptor
 {
-	internal FollowRequestDescriptor(Action<FollowRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest Instance { get; init; }
 
-	public FollowRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FollowRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public FollowRequestDescriptor() : this(typeof(TDocument))
+	public FollowRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(index);
+#pragma warning restore CS0618
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationFollow;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ccr.follow";
-
-	public FollowRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public FollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FollowRequestDescriptor()
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexName? LeaderIndexValue { get; set; }
-	private long? MaxOutstandingReadRequestsValue { get; set; }
-	private long? MaxOutstandingWriteRequestsValue { get; set; }
-	private long? MaxReadRequestOperationCountValue { get; set; }
-	private string? MaxReadRequestSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? MaxRetryDelayValue { get; set; }
-	private long? MaxWriteBufferCountValue { get; set; }
-	private string? MaxWriteBufferSizeValue { get; set; }
-	private long? MaxWriteRequestOperationCountValue { get; set; }
-	private string? MaxWriteRequestSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? ReadPollTimeoutValue { get; set; }
-	private string? RemoteClusterValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor descriptor) => descriptor.Instance;
 
-	public FollowRequestDescriptor<TDocument> LeaderIndex(Elastic.Clients.Elasticsearch.IndexName? leaderIndex)
+	/// <summary>
+	/// <para>
+	/// The name of the follower index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		LeaderIndexValue = leaderIndex;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> MaxOutstandingReadRequests(long? maxOutstandingReadRequests)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		MaxOutstandingReadRequestsValue = maxOutstandingReadRequests;
-		return Self;
+		Instance.MasterTimeout = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> MaxOutstandingWriteRequests(long? maxOutstandingWriteRequests)
+	/// <summary>
+	/// <para>
+	/// Specifies the number of shards to wait on being active before responding. This defaults to waiting on none of the shards to be
+	/// active.
+	/// A shard must be restored from the leader index before being active. Restoring a follower shard requires transferring all the
+	/// remote Lucene segment files to the follower index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
-		MaxOutstandingWriteRequestsValue = maxOutstandingWriteRequests;
-		return Self;
+		Instance.WaitForActiveShards = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> MaxReadRequestOperationCount(long? maxReadRequestOperationCount)
+	/// <summary>
+	/// <para>
+	/// If the leader index is part of a data stream, the name to which the local data stream for the followed index should be renamed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor DataStreamName(string? value)
 	{
-		MaxReadRequestOperationCountValue = maxReadRequestOperationCount;
-		return Self;
+		Instance.DataStreamName = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> MaxReadRequestSize(string? maxReadRequestSize)
+	/// <summary>
+	/// <para>
+	/// The name of the index in the leader cluster to follow.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor LeaderIndex(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		MaxReadRequestSizeValue = maxReadRequestSize;
-		return Self;
+		Instance.LeaderIndex = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? maxRetryDelay)
+	/// <summary>
+	/// <para>
+	/// The maximum number of outstanding reads requests from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxOutstandingReadRequests(long? value)
 	{
-		MaxRetryDelayValue = maxRetryDelay;
-		return Self;
+		Instance.MaxOutstandingReadRequests = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> MaxWriteBufferCount(long? maxWriteBufferCount)
+	/// <summary>
+	/// <para>
+	/// The maximum number of outstanding write requests on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxOutstandingWriteRequests(int? value)
 	{
-		MaxWriteBufferCountValue = maxWriteBufferCount;
-		return Self;
+		Instance.MaxOutstandingWriteRequests = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> MaxWriteBufferSize(string? maxWriteBufferSize)
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations to pull per read from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxReadRequestOperationCount(int? value)
 	{
-		MaxWriteBufferSizeValue = maxWriteBufferSize;
-		return Self;
+		Instance.MaxReadRequestOperationCount = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> MaxWriteRequestOperationCount(long? maxWriteRequestOperationCount)
+	/// <summary>
+	/// <para>
+	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxReadRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
-		MaxWriteRequestOperationCountValue = maxWriteRequestOperationCount;
-		return Self;
+		Instance.MaxReadRequestSize = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> MaxWriteRequestSize(string? maxWriteRequestSize)
+	/// <summary>
+	/// <para>
+	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		MaxWriteRequestSizeValue = maxWriteRequestSize;
-		return Self;
+		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? readPollTimeout)
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
+	/// retrying.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		ReadPollTimeoutValue = readPollTimeout;
-		return Self;
+		Instance.MaxRetryDelay = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor<TDocument> RemoteCluster(string? remoteCluster)
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
+	/// deferred until the number of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteBufferCount(int? value)
 	{
-		RemoteClusterValue = remoteCluster;
-		return Self;
+		Instance.MaxWriteBufferCount = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
+	/// be deferred until the total bytes of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteBufferSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
-		writer.WriteStartObject();
-		if (LeaderIndexValue is not null)
-		{
-			writer.WritePropertyName("leader_index");
-			JsonSerializer.Serialize(writer, LeaderIndexValue, options);
-		}
+		Instance.MaxWriteBufferSize = value;
+		return this;
+	}
 
-		if (MaxOutstandingReadRequestsValue.HasValue)
-		{
-			writer.WritePropertyName("max_outstanding_read_requests");
-			writer.WriteNumberValue(MaxOutstandingReadRequestsValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
+	/// be deferred until the total bytes of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		return this;
+	}
 
-		if (MaxOutstandingWriteRequestsValue.HasValue)
-		{
-			writer.WritePropertyName("max_outstanding_write_requests");
-			writer.WriteNumberValue(MaxOutstandingWriteRequestsValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteRequestOperationCount(int? value)
+	{
+		Instance.MaxWriteRequestOperationCount = value;
+		return this;
+	}
 
-		if (MaxReadRequestOperationCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_read_request_operation_count");
-			writer.WriteNumberValue(MaxReadRequestOperationCountValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.MaxWriteRequestSize = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(MaxReadRequestSizeValue))
-		{
-			writer.WritePropertyName("max_read_request_size");
-			writer.WriteStringValue(MaxReadRequestSizeValue);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		return this;
+	}
 
-		if (MaxRetryDelayValue is not null)
-		{
-			writer.WritePropertyName("max_retry_delay");
-			JsonSerializer.Serialize(writer, MaxRetryDelayValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
+	/// When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
+	/// Then the follower will immediately attempt to read from the leader again.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.ReadPollTimeout = value;
+		return this;
+	}
 
-		if (MaxWriteBufferCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_write_buffer_count");
-			writer.WriteNumberValue(MaxWriteBufferCountValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The remote cluster containing the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor RemoteCluster(string value)
+	{
+		Instance.RemoteCluster = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(MaxWriteBufferSizeValue))
-		{
-			writer.WritePropertyName("max_write_buffer_size");
-			writer.WriteStringValue(MaxWriteBufferSizeValue);
-		}
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
+	{
+		Instance.Settings = value;
+		return this;
+	}
 
-		if (MaxWriteRequestOperationCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_write_request_operation_count");
-			writer.WriteNumberValue(MaxWriteRequestOperationCountValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Settings()
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(null);
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(MaxWriteRequestSizeValue))
-		{
-			writer.WritePropertyName("max_write_request_size");
-			writer.WriteStringValue(MaxWriteRequestSizeValue);
-		}
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(action);
+		return this;
+	}
 
-		if (ReadPollTimeoutValue is not null)
-		{
-			writer.WritePropertyName("read_poll_timeout");
-			JsonSerializer.Serialize(writer, ReadPollTimeoutValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Settings<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>.Build(action);
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(RemoteClusterValue))
-		{
-			writer.WritePropertyName("remote_cluster");
-			writer.WriteStringValue(RemoteClusterValue);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor(new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -300,190 +733,330 @@ public sealed partial class FollowRequestDescriptor<TDocument> : RequestDescript
 /// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 /// </para>
 /// </summary>
-public sealed partial class FollowRequestDescriptor : RequestDescriptor<FollowRequestDescriptor, FollowRequestParameters>
+public readonly partial struct FollowRequestDescriptor<TDocument>
 {
-	internal FollowRequestDescriptor(Action<FollowRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest Instance { get; init; }
 
-	public FollowRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FollowRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationFollow;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ccr.follow";
-
-	public FollowRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public FollowRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public FollowRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(index);
+#pragma warning restore CS0618
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexName? LeaderIndexValue { get; set; }
-	private long? MaxOutstandingReadRequestsValue { get; set; }
-	private long? MaxOutstandingWriteRequestsValue { get; set; }
-	private long? MaxReadRequestOperationCountValue { get; set; }
-	private string? MaxReadRequestSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? MaxRetryDelayValue { get; set; }
-	private long? MaxWriteBufferCountValue { get; set; }
-	private string? MaxWriteBufferSizeValue { get; set; }
-	private long? MaxWriteRequestOperationCountValue { get; set; }
-	private string? MaxWriteRequestSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? ReadPollTimeoutValue { get; set; }
-	private string? RemoteClusterValue { get; set; }
-
-	public FollowRequestDescriptor LeaderIndex(Elastic.Clients.Elasticsearch.IndexName? leaderIndex)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FollowRequestDescriptor()
 	{
-		LeaderIndexValue = leaderIndex;
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public FollowRequestDescriptor MaxOutstandingReadRequests(long? maxOutstandingReadRequests)
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the follower index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		MaxOutstandingReadRequestsValue = maxOutstandingReadRequests;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor MaxOutstandingWriteRequests(long? maxOutstandingWriteRequests)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		MaxOutstandingWriteRequestsValue = maxOutstandingWriteRequests;
-		return Self;
+		Instance.MasterTimeout = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor MaxReadRequestOperationCount(long? maxReadRequestOperationCount)
+	/// <summary>
+	/// <para>
+	/// Specifies the number of shards to wait on being active before responding. This defaults to waiting on none of the shards to be
+	/// active.
+	/// A shard must be restored from the leader index before being active. Restoring a follower shard requires transferring all the
+	/// remote Lucene segment files to the follower index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
-		MaxReadRequestOperationCountValue = maxReadRequestOperationCount;
-		return Self;
+		Instance.WaitForActiveShards = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor MaxReadRequestSize(string? maxReadRequestSize)
+	/// <summary>
+	/// <para>
+	/// If the leader index is part of a data stream, the name to which the local data stream for the followed index should be renamed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> DataStreamName(string? value)
 	{
-		MaxReadRequestSizeValue = maxReadRequestSize;
-		return Self;
+		Instance.DataStreamName = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? maxRetryDelay)
+	/// <summary>
+	/// <para>
+	/// The name of the index in the leader cluster to follow.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> LeaderIndex(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		MaxRetryDelayValue = maxRetryDelay;
-		return Self;
+		Instance.LeaderIndex = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor MaxWriteBufferCount(long? maxWriteBufferCount)
+	/// <summary>
+	/// <para>
+	/// The maximum number of outstanding reads requests from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxOutstandingReadRequests(long? value)
 	{
-		MaxWriteBufferCountValue = maxWriteBufferCount;
-		return Self;
+		Instance.MaxOutstandingReadRequests = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor MaxWriteBufferSize(string? maxWriteBufferSize)
+	/// <summary>
+	/// <para>
+	/// The maximum number of outstanding write requests on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxOutstandingWriteRequests(int? value)
 	{
-		MaxWriteBufferSizeValue = maxWriteBufferSize;
-		return Self;
+		Instance.MaxOutstandingWriteRequests = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor MaxWriteRequestOperationCount(long? maxWriteRequestOperationCount)
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations to pull per read from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxReadRequestOperationCount(int? value)
 	{
-		MaxWriteRequestOperationCountValue = maxWriteRequestOperationCount;
-		return Self;
+		Instance.MaxReadRequestOperationCount = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor MaxWriteRequestSize(string? maxWriteRequestSize)
+	/// <summary>
+	/// <para>
+	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxReadRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
-		MaxWriteRequestSizeValue = maxWriteRequestSize;
-		return Self;
+		Instance.MaxReadRequestSize = value;
+		return this;
 	}
 
-	public FollowRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? readPollTimeout)
+	/// <summary>
+	/// <para>
+	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		ReadPollTimeoutValue = readPollTimeout;
-		return Self;
+		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		return this;
 	}
 
-	public FollowRequestDescriptor RemoteCluster(string? remoteCluster)
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
+	/// retrying.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		RemoteClusterValue = remoteCluster;
-		return Self;
+		Instance.MaxRetryDelay = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
+	/// deferred until the number of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteBufferCount(int? value)
 	{
-		writer.WriteStartObject();
-		if (LeaderIndexValue is not null)
-		{
-			writer.WritePropertyName("leader_index");
-			JsonSerializer.Serialize(writer, LeaderIndexValue, options);
-		}
+		Instance.MaxWriteBufferCount = value;
+		return this;
+	}
 
-		if (MaxOutstandingReadRequestsValue.HasValue)
-		{
-			writer.WritePropertyName("max_outstanding_read_requests");
-			writer.WriteNumberValue(MaxOutstandingReadRequestsValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
+	/// be deferred until the total bytes of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteBufferSize(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.MaxWriteBufferSize = value;
+		return this;
+	}
 
-		if (MaxOutstandingWriteRequestsValue.HasValue)
-		{
-			writer.WritePropertyName("max_outstanding_write_requests");
-			writer.WriteNumberValue(MaxOutstandingWriteRequestsValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
+	/// be deferred until the total bytes of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		return this;
+	}
 
-		if (MaxReadRequestOperationCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_read_request_operation_count");
-			writer.WriteNumberValue(MaxReadRequestOperationCountValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum number of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteRequestOperationCount(int? value)
+	{
+		Instance.MaxWriteRequestOperationCount = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(MaxReadRequestSizeValue))
-		{
-			writer.WritePropertyName("max_read_request_size");
-			writer.WriteStringValue(MaxReadRequestSizeValue);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.MaxWriteRequestSize = value;
+		return this;
+	}
 
-		if (MaxRetryDelayValue is not null)
-		{
-			writer.WritePropertyName("max_retry_delay");
-			JsonSerializer.Serialize(writer, MaxRetryDelayValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		return this;
+	}
 
-		if (MaxWriteBufferCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_write_buffer_count");
-			writer.WriteNumberValue(MaxWriteBufferCountValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
+	/// When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
+	/// Then the follower will immediately attempt to read from the leader again.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.ReadPollTimeout = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(MaxWriteBufferSizeValue))
-		{
-			writer.WritePropertyName("max_write_buffer_size");
-			writer.WriteStringValue(MaxWriteBufferSizeValue);
-		}
+	/// <summary>
+	/// <para>
+	/// The remote cluster containing the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> RemoteCluster(string value)
+	{
+		Instance.RemoteCluster = value;
+		return this;
+	}
 
-		if (MaxWriteRequestOperationCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_write_request_operation_count");
-			writer.WriteNumberValue(MaxWriteRequestOperationCountValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
+	{
+		Instance.Settings = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(MaxWriteRequestSizeValue))
-		{
-			writer.WritePropertyName("max_write_request_size");
-			writer.WriteStringValue(MaxWriteRequestSizeValue);
-		}
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Settings()
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(null);
+		return this;
+	}
 
-		if (ReadPollTimeoutValue is not null)
-		{
-			writer.WritePropertyName("read_poll_timeout");
-			JsonSerializer.Serialize(writer, ReadPollTimeoutValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(RemoteClusterValue))
-		{
-			writer.WritePropertyName("remote_cluster");
-			writer.WriteStringValue(RemoteClusterValue);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

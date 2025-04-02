@@ -17,204 +17,244 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class PrivilegesCheck
+internal sealed partial class PrivilegesCheckConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.PrivilegesCheck>
 {
-	[JsonInclude, JsonPropertyName("application")]
-	public ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? Application { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application");
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
 
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster")]
-	public ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
-	[JsonInclude, JsonPropertyName("index")]
-	public ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? Index { get; set; }
-}
-
-public sealed partial class PrivilegesCheckDescriptor : SerializableDescriptor<PrivilegesCheckDescriptor>
-{
-	internal PrivilegesCheckDescriptor(Action<PrivilegesCheckDescriptor> configure) => configure.Invoke(this);
-
-	public PrivilegesCheckDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>?> propApplication = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>?> propCluster = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>?> propIndex = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propApplication.TryReadProperty(ref reader, options, PropApplication, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>(o, null)))
+			{
+				continue;
+			}
+
+			if (propCluster.TryReadProperty(ref reader, options, PropCluster, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.PrivilegesCheck(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Application = propApplication.Value,
+			Cluster = propCluster.Value,
+			Index = propIndex.Value
+		};
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? ApplicationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor ApplicationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor> ApplicationDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor>[] ApplicationDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? ClusterValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor IndexDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor> IndexDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor>[] IndexDescriptorActions { get; set; }
-
-	public PrivilegesCheckDescriptor Application(ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? application)
-	{
-		ApplicationDescriptor = null;
-		ApplicationDescriptorAction = null;
-		ApplicationDescriptorActions = null;
-		ApplicationValue = application;
-		return Self;
-	}
-
-	public PrivilegesCheckDescriptor Application(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor descriptor)
-	{
-		ApplicationValue = null;
-		ApplicationDescriptorAction = null;
-		ApplicationDescriptorActions = null;
-		ApplicationDescriptor = descriptor;
-		return Self;
-	}
-
-	public PrivilegesCheckDescriptor Application(Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor> configure)
-	{
-		ApplicationValue = null;
-		ApplicationDescriptor = null;
-		ApplicationDescriptorActions = null;
-		ApplicationDescriptorAction = configure;
-		return Self;
-	}
-
-	public PrivilegesCheckDescriptor Application(params Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor>[] configure)
-	{
-		ApplicationValue = null;
-		ApplicationDescriptor = null;
-		ApplicationDescriptorAction = null;
-		ApplicationDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
-	public PrivilegesCheckDescriptor Cluster(ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? cluster)
-	{
-		ClusterValue = cluster;
-		return Self;
-	}
-
-	public PrivilegesCheckDescriptor Index(ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? index)
-	{
-		IndexDescriptor = null;
-		IndexDescriptorAction = null;
-		IndexDescriptorActions = null;
-		IndexValue = index;
-		return Self;
-	}
-
-	public PrivilegesCheckDescriptor Index(Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor descriptor)
-	{
-		IndexValue = null;
-		IndexDescriptorAction = null;
-		IndexDescriptorActions = null;
-		IndexDescriptor = descriptor;
-		return Self;
-	}
-
-	public PrivilegesCheckDescriptor Index(Action<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor> configure)
-	{
-		IndexValue = null;
-		IndexDescriptor = null;
-		IndexDescriptorActions = null;
-		IndexDescriptorAction = configure;
-		return Self;
-	}
-
-	public PrivilegesCheckDescriptor Index(params Action<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor>[] configure)
-	{
-		IndexValue = null;
-		IndexDescriptor = null;
-		IndexDescriptorAction = null;
-		IndexDescriptorActions = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.PrivilegesCheck value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (ApplicationDescriptor is not null)
-		{
-			writer.WritePropertyName("application");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, ApplicationDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (ApplicationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("application");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor(ApplicationDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (ApplicationDescriptorActions is not null)
-		{
-			writer.WritePropertyName("application");
-			writer.WriteStartArray();
-			foreach (var action in ApplicationDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (ApplicationValue is not null)
-		{
-			writer.WritePropertyName("application");
-			JsonSerializer.Serialize(writer, ApplicationValue, options);
-		}
-
-		if (ClusterValue is not null)
-		{
-			writer.WritePropertyName("cluster");
-			JsonSerializer.Serialize(writer, ClusterValue, options);
-		}
-
-		if (IndexDescriptor is not null)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, IndexDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (IndexDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor(IndexDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (IndexDescriptorActions is not null)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteStartArray();
-			foreach (var action in IndexDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
+		writer.WriteProperty(options, PropApplication, value.Application, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>(o, v, null));
+		writer.WriteProperty(options, PropCluster, value.Cluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropIndex, value.Index, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>(o, v, null));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.PrivilegesCheckConverter))]
+public sealed partial class PrivilegesCheck
+{
+#if NET7_0_OR_GREATER
+	public PrivilegesCheck()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PrivilegesCheck()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PrivilegesCheck(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? Application { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of the cluster privileges that you want to check.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? Index { get; set; }
+}
+
+public readonly partial struct PrivilegesCheckDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrivilegesCheckDescriptor(Elastic.Clients.Elasticsearch.Security.PrivilegesCheck instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PrivilegesCheckDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.PrivilegesCheck(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor(Elastic.Clients.Elasticsearch.Security.PrivilegesCheck instance) => new Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.PrivilegesCheck(Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Application(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? value)
+	{
+		Instance.Application = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Application()
+	{
+		Instance.Application = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApplicationPrivilegesCheck.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Application(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApplicationPrivilegesCheck>? action)
+	{
+		Instance.Application = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApplicationPrivilegesCheck.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Application(params Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck[] values)
+	{
+		Instance.Application = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Application(params System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor.Build(action));
+		}
+
+		Instance.Application = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of the cluster privileges that you want to check.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Cluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? value)
+	{
+		Instance.Cluster = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of the cluster privileges that you want to check.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Cluster()
+	{
+		Instance.Cluster = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfClusterPrivilege.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of the cluster privileges that you want to check.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Cluster(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfClusterPrivilege>? action)
+	{
+		Instance.Cluster = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfClusterPrivilege.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of the cluster privileges that you want to check.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
+	{
+		Instance.Cluster = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Index(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Index()
+	{
+		Instance.Index = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilegesCheck.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Index(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilegesCheck>? action)
+	{
+		Instance.Index = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilegesCheck.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Index(params Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck[] values)
+	{
+		Instance.Index = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Index(params System.Action<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor.Build(action));
+		}
+
+		Instance.Index = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Build(System.Action<Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Security.PrivilegesCheck(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor(new Elastic.Clients.Elasticsearch.Security.PrivilegesCheck(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

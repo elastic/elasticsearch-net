@@ -17,15 +17,49 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class DiskUsageResponse : ElasticsearchResponse
+internal sealed partial class DiskUsageResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse>
 {
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { DiskUsage = reader.ReadValue<object>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.DiskUsage, null);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponseConverter))]
+public sealed partial class DiskUsageResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DiskUsageResponse(object diskUsage)
+	{
+		DiskUsage = diskUsage;
+	}
+
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DiskUsageResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DiskUsageResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+object DiskUsage { get; set; }
 }

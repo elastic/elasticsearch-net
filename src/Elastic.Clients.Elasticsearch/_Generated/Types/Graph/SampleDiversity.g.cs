@@ -17,112 +17,186 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+internal sealed partial class SampleDiversityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.SampleDiversity>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocsPerValue = System.Text.Json.JsonEncodedText.Encode("max_docs_per_value");
+
+	public override Elastic.Clients.Elasticsearch.Graph.SampleDiversity Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<int> propMaxDocsPerValue = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propMaxDocsPerValue.TryReadProperty(ref reader, options, PropMaxDocsPerValue, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Graph.SampleDiversity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			MaxDocsPerValue = propMaxDocsPerValue.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.SampleDiversity value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropMaxDocsPerValue, value.MaxDocsPerValue, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.SampleDiversityConverter))]
 public sealed partial class SampleDiversity
 {
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	[JsonInclude, JsonPropertyName("max_docs_per_value")]
-	public int MaxDocsPerValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SampleDiversity(Elastic.Clients.Elasticsearch.Field field, int maxDocsPerValue)
+	{
+		Field = field;
+		MaxDocsPerValue = maxDocsPerValue;
+	}
+#if NET7_0_OR_GREATER
+	public SampleDiversity()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SampleDiversity()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SampleDiversity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MaxDocsPerValue { get; set; }
 }
 
-public sealed partial class SampleDiversityDescriptor<TDocument> : SerializableDescriptor<SampleDiversityDescriptor<TDocument>>
+public readonly partial struct SampleDiversityDescriptor<TDocument>
 {
-	internal SampleDiversityDescriptor(Action<SampleDiversityDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Graph.SampleDiversity Instance { get; init; }
 
-	public SampleDiversityDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SampleDiversityDescriptor(Elastic.Clients.Elasticsearch.Graph.SampleDiversity instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int MaxDocsPerValueValue { get; set; }
-
-	public SampleDiversityDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SampleDiversityDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Graph.SampleDiversity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SampleDiversityDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Graph.SampleDiversity instance) => new Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Graph.SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public SampleDiversityDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public SampleDiversityDescriptor<TDocument> MaxDocsPerValue(int maxDocsPerValue)
+	public Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument> MaxDocsPerValue(int value)
 	{
-		MaxDocsPerValueValue = maxDocsPerValue;
-		return Self;
+		Instance.MaxDocsPerValue = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Graph.SampleDiversity Build(System.Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("max_docs_per_value");
-		writer.WriteNumberValue(MaxDocsPerValueValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Graph.SampleDiversity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SampleDiversityDescriptor : SerializableDescriptor<SampleDiversityDescriptor>
+public readonly partial struct SampleDiversityDescriptor
 {
-	internal SampleDiversityDescriptor(Action<SampleDiversityDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Graph.SampleDiversity Instance { get; init; }
 
-	public SampleDiversityDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SampleDiversityDescriptor(Elastic.Clients.Elasticsearch.Graph.SampleDiversity instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private int MaxDocsPerValueValue { get; set; }
-
-	public SampleDiversityDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SampleDiversityDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Graph.SampleDiversity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SampleDiversityDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor(Elastic.Clients.Elasticsearch.Graph.SampleDiversity instance) => new Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Graph.SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public SampleDiversityDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public SampleDiversityDescriptor MaxDocsPerValue(int maxDocsPerValue)
+	public Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor MaxDocsPerValue(int value)
 	{
-		MaxDocsPerValueValue = maxDocsPerValue;
-		return Self;
+		Instance.MaxDocsPerValue = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Graph.SampleDiversity Build(System.Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("max_docs_per_value");
-		writer.WriteNumberValue(MaxDocsPerValueValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor(new Elastic.Clients.Elasticsearch.Graph.SampleDiversity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

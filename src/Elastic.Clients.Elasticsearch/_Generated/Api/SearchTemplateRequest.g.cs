@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class SearchTemplateRequestParameters : RequestParameters
+public sealed partial class SearchTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -56,7 +49,7 @@ public sealed partial class SearchTemplateRequestParameters : RequestParameters
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -111,28 +104,123 @@ public sealed partial class SearchTemplateRequestParameters : RequestParameters
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
+internal sealed partial class SearchTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchTemplateRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Elastic.Clients.Elasticsearch.SearchTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propExplain = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<string?> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExplain.TryReadProperty(ref reader, options, PropExplain, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Explain = propExplain.Value,
+			Id = propId.Value,
+			Params = propParams.Value,
+			Profile = propProfile.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExplain, value.Explain, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Run a search with a search template.
 /// </para>
 /// </summary>
-public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchTemplateRequestConverter))]
+public sealed partial class SearchTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>
 {
-	public SearchTemplateRequest()
-	{
-	}
-
 	public SearchTemplateRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public SearchTemplateRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SearchTemplateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchTemplate;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceSearchTemplate;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "search_template";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -141,7 +229,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -149,7 +236,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
@@ -160,15 +246,13 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -177,7 +261,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// It is random by default.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
@@ -186,7 +269,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// If <c>false</c>, it is rendered as an object.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
@@ -194,7 +276,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// A custom value used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
@@ -203,7 +284,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// should be maintained for scrolled search.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
@@ -211,7 +291,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// The type of the search operation.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
@@ -219,7 +298,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
@@ -228,7 +306,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
 	/// <summary>
@@ -237,7 +314,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// this parameter is required.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -247,15 +323,13 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// The value is the variable value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the query execution is profiled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
 	/// <summary>
@@ -265,7 +339,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// parameter is required.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
 
@@ -274,48 +347,200 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 /// Run a search with a search template.
 /// </para>
 /// </summary>
-public sealed partial class SearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateRequestParameters>
+public readonly partial struct SearchTemplateRequestDescriptor
 {
-	internal SearchTemplateRequestDescriptor(Action<SearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SearchTemplateRequest Instance { get; init; }
 
-	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.SearchTemplateRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(indices);
 	}
 
 	public SearchTemplateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchTemplate;
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.SearchTemplateRequest instance) => new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "search_template";
-
-	public SearchTemplateRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public SearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-	public SearchTemplateRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public SearchTemplateRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public SearchTemplateRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public SearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public SearchTemplateRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public SearchTemplateRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-	public SearchTemplateRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public SearchTemplateRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-
-	public SearchTemplateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private bool? ExplainValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private bool? ProfileValue { get; set; }
-	private string? SourceValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+	/// This behavior applies even if the request targets other open indices.
+	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
+	{
+		Instance.CcsMinimizeRoundtrips = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, <c>hits.total</c> is rendered as an integer in the response.
+	/// If <c>false</c>, it is rendered as an object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor RestTotalHitsAsInt(bool? value = true)
+	{
+		Instance.RestTotalHitsAsInt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies how long a consistent view of the index
+	/// should be maintained for scrolled search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Scroll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of the search operation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -323,10 +548,10 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
 	/// </para>
 	/// </summary>
-	public SearchTemplateRequestDescriptor<TDocument> Explain(bool? explain = true)
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Explain(bool? value = true)
 	{
-		ExplainValue = explain;
-		return Self;
+		Instance.Explain = value;
+		return this;
 	}
 
 	/// <summary>
@@ -335,10 +560,10 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	/// this parameter is required.
 	/// </para>
 	/// </summary>
-	public SearchTemplateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -348,143 +573,10 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	/// The value is the variable value.
 	/// </para>
 	/// </summary>
-	public SearchTemplateRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query execution is profiled.
-	/// </para>
-	/// </summary>
-	public SearchTemplateRequestDescriptor<TDocument> Profile(bool? profile = true)
-	{
-		ProfileValue = profile;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
-	/// parameter is required.
-	/// </para>
-	/// </summary>
-	public SearchTemplateRequestDescriptor<TDocument> Source(string? source)
-	{
-		SourceValue = source;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
-
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(SourceValue))
-		{
-			writer.WritePropertyName("source");
-			writer.WriteStringValue(SourceValue);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Run a search with a search template.
-/// </para>
-/// </summary>
-public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<SearchTemplateRequestDescriptor, SearchTemplateRequestParameters>
-{
-	internal SearchTemplateRequestDescriptor(Action<SearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
-
-	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
-	{
-	}
-
-	public SearchTemplateRequestDescriptor()
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchTemplate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "search_template";
-
-	public SearchTemplateRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public SearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-	public SearchTemplateRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public SearchTemplateRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public SearchTemplateRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public SearchTemplateRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public SearchTemplateRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public SearchTemplateRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-	public SearchTemplateRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public SearchTemplateRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-
-	public SearchTemplateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
-	{
-		RouteValues.Optional("index", indices);
-		return Self;
-	}
-
-	private bool? ExplainValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private bool? ProfileValue { get; set; }
-	private string? SourceValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
-	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
-	/// </para>
-	/// </summary>
-	public SearchTemplateRequestDescriptor Explain(bool? explain = true)
-	{
-		ExplainValue = explain;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The ID of the search template to use. If no <c>source</c> is specified,
-	/// this parameter is required.
-	/// </para>
-	/// </summary>
-	public SearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
-	{
-		IdValue = id;
-		return Self;
+		Instance.Params = value;
+		return this;
 	}
 
 	/// <summary>
@@ -494,10 +586,30 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	/// The value is the variable value.
 	/// </para>
 	/// </summary>
-	public SearchTemplateRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Params()
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -505,10 +617,10 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	/// If <c>true</c>, the query execution is profiled.
 	/// </para>
 	/// </summary>
-	public SearchTemplateRequestDescriptor Profile(bool? profile = true)
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Profile(bool? value = true)
 	{
-		ProfileValue = profile;
-		return Self;
+		Instance.Profile = value;
+		return this;
 	}
 
 	/// <summary>
@@ -518,45 +630,64 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	/// parameter is required.
 	/// </para>
 	/// </summary>
-	public SearchTemplateRequestDescriptor Source(string? source)
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Source(string? value)
 	{
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ExplainValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
+			return new Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor(new Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(SourceValue))
-		{
-			writer.WritePropertyName("source");
-			writer.WriteStringValue(SourceValue);
-		}
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

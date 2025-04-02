@@ -17,44 +17,26 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class ValidateDetectorRequestParameters : RequestParameters
+public sealed partial class ValidateDetectorRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Validate an anomaly detection job.
-/// </para>
-/// </summary>
-public sealed partial class ValidateDetectorRequest : PlainRequest<ValidateDetectorRequestParameters>, ISelfSerializable
+internal sealed partial class ValidateDetectorRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningValidateDetector;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.validate_detector";
-
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.MachineLearning.Detector Detector { get; set; }
-
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		JsonSerializer.Serialize(writer, Detector, options);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Detector = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.Detector>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Detector, null);
 	}
 }
 
@@ -63,50 +45,141 @@ public sealed partial class ValidateDetectorRequest : PlainRequest<ValidateDetec
 /// Validate an anomaly detection job.
 /// </para>
 /// </summary>
-public sealed partial class ValidateDetectorRequestDescriptor<TDocument> : RequestDescriptor<ValidateDetectorRequestDescriptor<TDocument>, ValidateDetectorRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestConverter))]
+public sealed partial class ValidateDetectorRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestParameters>
 {
-	internal ValidateDetectorRequestDescriptor(Action<ValidateDetectorRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-	public ValidateDetectorRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Detector detector) => DetectorValue = detector;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ValidateDetectorRequest(Elastic.Clients.Elasticsearch.MachineLearning.Detector detector)
+	{
+		Detector = detector;
+	}
+#if NET7_0_OR_GREATER
+	public ValidateDetectorRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ValidateDetectorRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ValidateDetectorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningValidateDetector;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningValidateDetector;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.validate_detector";
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.Detector DetectorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> DetectorDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>> DetectorDescriptorAction { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.Detector Detector { get; set; }
+}
 
-	public ValidateDetectorRequestDescriptor<TDocument> Detector(Elastic.Clients.Elasticsearch.MachineLearning.Detector detector)
+/// <summary>
+/// <para>
+/// Validate an anomaly detection job.
+/// </para>
+/// </summary>
+public readonly partial struct ValidateDetectorRequestDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ValidateDetectorRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest instance)
 	{
-		DetectorDescriptor = null;
-		DetectorDescriptorAction = null;
-		DetectorValue = detector;
-		return Self;
+		Instance = instance;
 	}
 
-	public ValidateDetectorRequestDescriptor<TDocument> Detector(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> descriptor)
+	public ValidateDetectorRequestDescriptor()
 	{
-		DetectorValue = null;
-		DetectorDescriptorAction = null;
-		DetectorDescriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ValidateDetectorRequestDescriptor<TDocument> Detector(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>> configure)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor Detector(Elastic.Clients.Elasticsearch.MachineLearning.Detector value)
 	{
-		DetectorValue = null;
-		DetectorDescriptor = null;
-		DetectorDescriptorAction = configure;
-		return Self;
+		Instance.Detector = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor Detector()
 	{
-		JsonSerializer.Serialize(writer, DetectorValue, options);
+		Instance.Detector = Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor Detector(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>? action)
+	{
+		Instance.Detector = Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor Detector<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<T>>? action)
+	{
+		Instance.Detector = Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -115,49 +188,89 @@ public sealed partial class ValidateDetectorRequestDescriptor<TDocument> : Reque
 /// Validate an anomaly detection job.
 /// </para>
 /// </summary>
-public sealed partial class ValidateDetectorRequestDescriptor : RequestDescriptor<ValidateDetectorRequestDescriptor, ValidateDetectorRequestParameters>
+public readonly partial struct ValidateDetectorRequestDescriptor<TDocument>
 {
-	internal ValidateDetectorRequestDescriptor(Action<ValidateDetectorRequestDescriptor> configure) => configure.Invoke(this);
-	public ValidateDetectorRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Detector detector) => DetectorValue = detector;
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest Instance { get; init; }
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningValidateDetector;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.validate_detector";
-
-	private Elastic.Clients.Elasticsearch.MachineLearning.Detector DetectorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor DetectorDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor> DetectorDescriptorAction { get; set; }
-
-	public ValidateDetectorRequestDescriptor Detector(Elastic.Clients.Elasticsearch.MachineLearning.Detector detector)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ValidateDetectorRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest instance)
 	{
-		DetectorDescriptor = null;
-		DetectorDescriptorAction = null;
-		DetectorValue = detector;
-		return Self;
+		Instance = instance;
 	}
 
-	public ValidateDetectorRequestDescriptor Detector(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor descriptor)
+	public ValidateDetectorRequestDescriptor()
 	{
-		DetectorValue = null;
-		DetectorDescriptorAction = null;
-		DetectorDescriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ValidateDetectorRequestDescriptor Detector(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor> configure)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> Detector(Elastic.Clients.Elasticsearch.MachineLearning.Detector value)
 	{
-		DetectorValue = null;
-		DetectorDescriptor = null;
-		DetectorDescriptorAction = configure;
-		return Self;
+		Instance.Detector = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> Detector()
 	{
-		JsonSerializer.Serialize(writer, DetectorValue, options);
+		Instance.Detector = Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> Detector(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>? action)
+	{
+		Instance.Detector = Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

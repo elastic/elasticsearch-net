@@ -17,56 +17,134 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class TextEmbedding
+internal sealed partial class TextEmbeddingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextEmbedding>
 {
-	[JsonInclude, JsonPropertyName("model_id")]
-	public string ModelId { get; set; }
-	[JsonInclude, JsonPropertyName("model_text")]
-	public string ModelText { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
+	private static readonly System.Text.Json.JsonEncodedText PropModelText = System.Text.Json.JsonEncodedText.Encode("model_text");
 
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilder(TextEmbedding textEmbedding) => Elastic.Clients.Elasticsearch.QueryVectorBuilder.TextEmbedding(textEmbedding);
-}
-
-public sealed partial class TextEmbeddingDescriptor : SerializableDescriptor<TextEmbeddingDescriptor>
-{
-	internal TextEmbeddingDescriptor(Action<TextEmbeddingDescriptor> configure) => configure.Invoke(this);
-
-	public TextEmbeddingDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.TextEmbedding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propModelId = default;
+		LocalJsonValue<string> propModelText = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propModelId.TryReadProperty(ref reader, options, PropModelId, null))
+			{
+				continue;
+			}
+
+			if (propModelText.TryReadProperty(ref reader, options, PropModelText, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TextEmbedding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ModelId = propModelId.Value,
+			ModelText = propModelText.Value
+		};
 	}
 
-	private string ModelIdValue { get; set; }
-	private string ModelTextValue { get; set; }
-
-	public TextEmbeddingDescriptor ModelId(string modelId)
-	{
-		ModelIdValue = modelId;
-		return Self;
-	}
-
-	public TextEmbeddingDescriptor ModelText(string modelText)
-	{
-		ModelTextValue = modelText;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextEmbedding value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("model_id");
-		writer.WriteStringValue(ModelIdValue);
-		writer.WritePropertyName("model_text");
-		writer.WriteStringValue(ModelTextValue);
+		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
+		writer.WriteProperty(options, PropModelText, value.ModelText, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextEmbeddingConverter))]
+public sealed partial class TextEmbedding
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextEmbedding(string modelId, string modelText)
+	{
+		ModelId = modelId;
+		ModelText = modelText;
+	}
+#if NET7_0_OR_GREATER
+	public TextEmbedding()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TextEmbedding()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TextEmbedding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ModelId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ModelText { get; set; }
+}
+
+public readonly partial struct TextEmbeddingDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.TextEmbedding Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextEmbeddingDescriptor(Elastic.Clients.Elasticsearch.TextEmbedding instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextEmbeddingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TextEmbedding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor(Elastic.Clients.Elasticsearch.TextEmbedding instance) => new Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor ModelId(string value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor ModelText(string value)
+	{
+		Instance.ModelText = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TextEmbedding Build(System.Action<Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor(new Elastic.Clients.Elasticsearch.TextEmbedding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

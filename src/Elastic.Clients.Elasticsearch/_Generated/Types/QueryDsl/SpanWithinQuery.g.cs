@@ -17,26 +17,115 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class SpanWithinQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBig = System.Text.Json.JsonEncodedText.Encode("big");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropLittle = System.Text.Json.JsonEncodedText.Encode("little");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> propBig = default;
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> propLittle = default;
+		LocalJsonValue<string?> propQueryName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBig.TryReadProperty(ref reader, options, PropBig, null))
+			{
+				continue;
+			}
+
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propLittle.TryReadProperty(ref reader, options, PropLittle, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Big = propBig.Value,
+			Boost = propBoost.Value,
+			Little = propLittle.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBig, value.Big, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropLittle, value.Little, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryConverter))]
 public sealed partial class SpanWithinQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanWithinQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big, Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery little)
+	{
+		Big = big;
+		Little = little;
+	}
+#if NET7_0_OR_GREATER
+	public SpanWithinQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SpanWithinQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SpanWithinQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Can be any span query.
 	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("big")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -46,7 +135,6 @@ public sealed partial class SpanWithinQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -55,31 +143,32 @@ public sealed partial class SpanWithinQuery
 	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("little")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 	public string? QueryName { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanWithinQuery spanWithinQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanWithin(spanWithinQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanWithinQuery spanWithinQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.SpanWithin(spanWithinQuery);
 }
 
-public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableDescriptor<SpanWithinQueryDescriptor<TDocument>>
+public readonly partial struct SpanWithinQueryDescriptor<TDocument>
 {
-	internal SpanWithinQueryDescriptor(Action<SpanWithinQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery Instance { get; init; }
 
-	public SpanWithinQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanWithinQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery BigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> BigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> BigDescriptorAction { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery LittleValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> LittleDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> LittleDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanWithinQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -87,28 +176,22 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
 	/// </para>
 	/// </summary>
-	public SpanWithinQueryDescriptor<TDocument> Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		BigDescriptor = null;
-		BigDescriptorAction = null;
-		BigValue = big;
-		return Self;
+		Instance.Big = value;
+		return this;
 	}
 
-	public SpanWithinQueryDescriptor<TDocument> Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Big(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
-		BigValue = null;
-		BigDescriptorAction = null;
-		BigDescriptor = descriptor;
-		return Self;
-	}
-
-	public SpanWithinQueryDescriptor<TDocument> Big(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> configure)
-	{
-		BigValue = null;
-		BigDescriptor = null;
-		BigDescriptorAction = configure;
-		return Self;
+		Instance.Big = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -119,10 +202,10 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanWithinQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -131,103 +214,57 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
 	/// </para>
 	/// </summary>
-	public SpanWithinQueryDescriptor<TDocument> Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery little)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		LittleDescriptor = null;
-		LittleDescriptorAction = null;
-		LittleValue = little;
-		return Self;
+		Instance.Little = value;
+		return this;
 	}
 
-	public SpanWithinQueryDescriptor<TDocument> Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Little(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
-		LittleValue = null;
-		LittleDescriptorAction = null;
-		LittleDescriptor = descriptor;
-		return Self;
+		Instance.Little = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public SpanWithinQueryDescriptor<TDocument> Little(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		LittleValue = null;
-		LittleDescriptor = null;
-		LittleDescriptorAction = configure;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public SpanWithinQueryDescriptor<TDocument> QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BigDescriptor is not null)
-		{
-			writer.WritePropertyName("big");
-			JsonSerializer.Serialize(writer, BigDescriptor, options);
-		}
-		else if (BigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("big");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(BigDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("big");
-			JsonSerializer.Serialize(writer, BigValue, options);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (LittleDescriptor is not null)
-		{
-			writer.WritePropertyName("little");
-			JsonSerializer.Serialize(writer, LittleDescriptor, options);
-		}
-		else if (LittleDescriptorAction is not null)
-		{
-			writer.WritePropertyName("little");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(LittleDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("little");
-			JsonSerializer.Serialize(writer, LittleValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<SpanWithinQueryDescriptor>
+public readonly partial struct SpanWithinQueryDescriptor
 {
-	internal SpanWithinQueryDescriptor(Action<SpanWithinQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery Instance { get; init; }
 
-	public SpanWithinQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanWithinQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery BigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor BigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> BigDescriptorAction { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery LittleValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor LittleDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> LittleDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SpanWithinQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -235,28 +272,34 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
 	/// </para>
 	/// </summary>
-	public SpanWithinQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		BigDescriptor = null;
-		BigDescriptorAction = null;
-		BigValue = big;
-		return Self;
+		Instance.Big = value;
+		return this;
 	}
 
-	public SpanWithinQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Big(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
-		BigValue = null;
-		BigDescriptorAction = null;
-		BigDescriptor = descriptor;
-		return Self;
+		Instance.Big = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SpanWithinQueryDescriptor Big(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Big<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
-		BigValue = null;
-		BigDescriptor = null;
-		BigDescriptorAction = configure;
-		return Self;
+		Instance.Big = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -267,10 +310,10 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public SpanWithinQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -279,83 +322,47 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
 	/// </para>
 	/// </summary>
-	public SpanWithinQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery little)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
-		LittleDescriptor = null;
-		LittleDescriptorAction = null;
-		LittleValue = little;
-		return Self;
+		Instance.Little = value;
+		return this;
 	}
 
-	public SpanWithinQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Little(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
-		LittleValue = null;
-		LittleDescriptorAction = null;
-		LittleDescriptor = descriptor;
-		return Self;
+		Instance.Little = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SpanWithinQueryDescriptor Little(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Can be any span query.
+	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Little<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
-		LittleValue = null;
-		LittleDescriptor = null;
-		LittleDescriptorAction = configure;
-		return Self;
+		Instance.Little = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public SpanWithinQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BigDescriptor is not null)
-		{
-			writer.WritePropertyName("big");
-			JsonSerializer.Serialize(writer, BigDescriptor, options);
-		}
-		else if (BigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("big");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(BigDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("big");
-			JsonSerializer.Serialize(writer, BigValue, options);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (LittleDescriptor is not null)
-		{
-			writer.WritePropertyName("little");
-			JsonSerializer.Serialize(writer, LittleDescriptor, options);
-		}
-		else if (LittleDescriptorAction is not null)
-		{
-			writer.WritePropertyName("little");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(LittleDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("little");
-			JsonSerializer.Serialize(writer, LittleValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

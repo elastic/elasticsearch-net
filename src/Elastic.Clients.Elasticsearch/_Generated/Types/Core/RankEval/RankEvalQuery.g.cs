@@ -17,164 +17,194 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+internal sealed partial class RankEvalQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var readerSnapshot = reader;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
+		LocalJsonValue<int?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			try
+			{
+				reader = readerSnapshot;
+				var result = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(options, null);
+				return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+				{
+					Query = result
+				};
+			}
+			catch (System.Text.Json.JsonException)
+			{
+				throw;
+			}
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Query = propQuery.Value,
+			Size = propSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryConverter))]
 public sealed partial class RankEvalQuery
 {
-	[JsonInclude, JsonPropertyName("query")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-	[JsonInclude, JsonPropertyName("size")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	{
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public RankEvalQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RankEvalQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankEvalQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public int? Size { get; set; }
 }
 
-public sealed partial class RankEvalQueryDescriptor<TDocument> : SerializableDescriptor<RankEvalQueryDescriptor<TDocument>>
+public readonly partial struct RankEvalQueryDescriptor<TDocument>
 {
-	internal RankEvalQueryDescriptor(Action<RankEvalQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery Instance { get; init; }
 
-	public RankEvalQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalQueryDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private int? SizeValue { get; set; }
-
-	public RankEvalQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalQueryDescriptor()
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public RankEvalQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public RankEvalQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public RankEvalQueryDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery Build(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RankEvalQueryDescriptor : SerializableDescriptor<RankEvalQueryDescriptor>
+public readonly partial struct RankEvalQueryDescriptor
 {
-	internal RankEvalQueryDescriptor(Action<RankEvalQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery Instance { get; init; }
 
-	public RankEvalQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalQueryDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private int? SizeValue { get; set; }
-
-	public RankEvalQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalQueryDescriptor()
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public RankEvalQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public RankEvalQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public RankEvalQueryDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor Size(int? value)
 	{
-		writer.WriteStartObject();
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+		Instance.Size = value;
+		return this;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery Build(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor(new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

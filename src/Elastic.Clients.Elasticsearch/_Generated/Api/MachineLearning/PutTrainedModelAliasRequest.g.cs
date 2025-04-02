@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutTrainedModelAliasRequestParameters : RequestParameters
+public sealed partial class PutTrainedModelAliasRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -40,6 +33,35 @@ public sealed partial class PutTrainedModelAliasRequestParameters : RequestParam
 	/// </para>
 	/// </summary>
 	public bool? Reassign { get => Q<bool?>("reassign"); set => Q("reassign", value); }
+}
+
+internal sealed partial class PutTrainedModelAliasRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -63,19 +85,53 @@ public sealed partial class PutTrainedModelAliasRequestParameters : RequestParam
 /// returns a warning.
 /// </para>
 /// </summary>
-public sealed partial class PutTrainedModelAliasRequest : PlainRequest<PutTrainedModelAliasRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestConverter))]
+public sealed partial class PutTrainedModelAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias) : base(r => r.Required("model_id", modelId).Required("model_alias", modelAlias))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutTrainedModelAliasRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModelAlias;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPutTrainedModelAlias;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.put_trained_model_alias";
+
+	/// <summary>
+	/// <para>
+	/// The alias to create or update. This value cannot end in numbers.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name ModelAlias { get => P<Elastic.Clients.Elasticsearch.Name>("model_alias"); set => PR("model_alias", value); }
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the trained model that the alias refers to.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -84,7 +140,6 @@ public sealed partial class PutTrainedModelAliasRequest : PlainRequest<PutTraine
 	/// already assigned and this parameter is false, the API returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Reassign { get => Q<bool?>("reassign"); set => Q("reassign", value); }
 }
 
@@ -109,37 +164,112 @@ public sealed partial class PutTrainedModelAliasRequest : PlainRequest<PutTraine
 /// returns a warning.
 /// </para>
 /// </summary>
-public sealed partial class PutTrainedModelAliasRequestDescriptor : RequestDescriptor<PutTrainedModelAliasRequestDescriptor, PutTrainedModelAliasRequestParameters>
+public readonly partial struct PutTrainedModelAliasRequestDescriptor
 {
-	internal PutTrainedModelAliasRequestDescriptor(Action<PutTrainedModelAliasRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest Instance { get; init; }
 
-	public PutTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias) : base(r => r.Required("model_id", modelId).Required("model_alias", modelAlias))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutTrainedModelAlias;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.put_trained_model_alias";
-
-	public PutTrainedModelAliasRequestDescriptor Reassign(bool? reassign = true) => Qs("reassign", reassign);
-
-	public PutTrainedModelAliasRequestDescriptor ModelAlias(Elastic.Clients.Elasticsearch.Name modelAlias)
+	public PutTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias)
 	{
-		RouteValues.Required("model_alias", modelAlias);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest(modelId, modelAlias);
 	}
 
-	public PutTrainedModelAliasRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutTrainedModelAliasRequestDescriptor()
 	{
-		RouteValues.Required("model_id", modelId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The alias to create or update. This value cannot end in numbers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor ModelAlias(Elastic.Clients.Elasticsearch.Name value)
 	{
+		Instance.ModelAlias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the trained model that the alias refers to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether the alias gets reassigned to the specified trained
+	/// model if it is already assigned to a different model. If the alias is
+	/// already assigned and this parameter is false, the API returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor Reassign(bool? value = true)
+	{
+		Instance.Reassign = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

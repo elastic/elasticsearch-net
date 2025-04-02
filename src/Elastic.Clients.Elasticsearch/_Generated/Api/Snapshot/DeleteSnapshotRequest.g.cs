@@ -17,27 +17,51 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class DeleteSnapshotRequestParameters : RequestParameters
+public sealed partial class DeleteSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class DeleteSnapshotRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -45,15 +69,27 @@ public sealed partial class DeleteSnapshotRequestParameters : RequestParameters
 /// Delete snapshots.
 /// </para>
 /// </summary>
-public sealed partial class DeleteSnapshotRequest : PlainRequest<DeleteSnapshotRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestConverter))]
+public sealed partial class DeleteSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteSnapshotRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteSnapshotRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotDelete;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotDelete;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
@@ -61,10 +97,34 @@ public sealed partial class DeleteSnapshotRequest : PlainRequest<DeleteSnapshotR
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The name of the repository to delete a snapshot from.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of snapshot names to delete.
+	/// It also accepts wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
@@ -73,37 +133,113 @@ public sealed partial class DeleteSnapshotRequest : PlainRequest<DeleteSnapshotR
 /// Delete snapshots.
 /// </para>
 /// </summary>
-public sealed partial class DeleteSnapshotRequestDescriptor : RequestDescriptor<DeleteSnapshotRequestDescriptor, DeleteSnapshotRequestParameters>
+public readonly partial struct DeleteSnapshotRequestDescriptor
 {
-	internal DeleteSnapshotRequestDescriptor(Action<DeleteSnapshotRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest Instance { get; init; }
 
-	public DeleteSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotDelete;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "snapshot.delete";
-
-	public DeleteSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public DeleteSnapshotRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name repository)
+	public DeleteSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
-		RouteValues.Required("repository", repository);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest(repository, snapshot);
 	}
 
-	public DeleteSnapshotRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name snapshot)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteSnapshotRequestDescriptor()
 	{
-		RouteValues.Required("snapshot", snapshot);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest(Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the repository to delete a snapshot from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name value)
 	{
+		Instance.Repository = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of snapshot names to delete.
+	/// It also accepts wildcards (<c>*</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Snapshot = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

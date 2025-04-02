@@ -17,280 +17,334 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(SortOptionsConverter))]
+internal sealed partial class SortOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SortOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantDoc = System.Text.Json.JsonEncodedText.Encode("_doc");
+	private static readonly System.Text.Json.JsonEncodedText VariantGeoDistance = System.Text.Json.JsonEncodedText.Encode("_geo_distance");
+	private static readonly System.Text.Json.JsonEncodedText VariantScore = System.Text.Json.JsonEncodedText.Encode("_score");
+	private static readonly System.Text.Json.JsonEncodedText VariantScript = System.Text.Json.JsonEncodedText.Encode("_script");
+
+	public override Elastic.Clients.Elasticsearch.SortOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantDoc))
+			{
+				variantType = VariantDoc.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.ScoreSort>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantGeoDistance))
+			{
+				variantType = VariantGeoDistance.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.GeoDistanceSort>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantScore))
+			{
+				variantType = VariantScore.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.ScoreSort>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantScript))
+			{
+				variantType = VariantScript.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.ScriptSort>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SortOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "_doc":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.ScoreSort)value.Variant, null, null);
+				break;
+			case "_geo_distance":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.GeoDistanceSort)value.Variant, null, null);
+				break;
+			case "_score":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.ScoreSort)value.Variant, null, null);
+				break;
+			case "_script":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.ScriptSort)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.SortOptions)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SortOptionsConverter))]
 public sealed partial class SortOptions
 {
-	internal SortOptions(string variantName, object variant)
-	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
-	}
-
-	internal SortOptions(Elastic.Clients.Elasticsearch.Field field, object variant)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		AdditionalPropertyName = field;
-		Variant = variant;
-	}
-
-	internal object Variant { get; }
-	internal string VariantName { get; }
-	internal Elastic.Clients.Elasticsearch.Field? AdditionalPropertyName { get; }
-
-	public static SortOptions Doc(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_doc", scoreSort);
-	public static SortOptions GeoDistance(Elastic.Clients.Elasticsearch.GeoDistanceSort geoDistanceSort) => new SortOptions("_geo_distance", geoDistanceSort);
-	public static SortOptions Score(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_score", scoreSort);
-	public static SortOptions Script(Elastic.Clients.Elasticsearch.ScriptSort scriptSort) => new SortOptions("_script", scriptSort);
-	public static SortOptions Field(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldSort fieldSort) => new SortOptions(field, fieldSort);
-}
-
-public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescriptor<SortOptionsDescriptor<TDocument>>
-{
-	internal SortOptionsDescriptor(Action<SortOptionsDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public SortOptionsDescriptor() : base()
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public SortOptions()
 	{
 	}
-
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-	private Elastic.Clients.Elasticsearch.Field AdditionalPropertyName { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldSort AdditionalPropertyValue { get; set; }
-
-	private SortOptionsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+#endif
+#if !NET7_0_OR_GREATER
+	public SortOptions()
 	{
-		AdditionalPropertyValue = null;
-		AdditionalPropertyName = null;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SortOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	private SortOptionsDescriptor<TDocument> Set(object variant, string variantName)
-	{
-		AdditionalPropertyValue = null;
-		AdditionalPropertyName = null;
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
-	}
+	public Elastic.Clients.Elasticsearch.ScoreSort? Doc { get => GetVariant<Elastic.Clients.Elasticsearch.ScoreSort>("_doc"); set => SetVariant("_doc", value); }
+	public Elastic.Clients.Elasticsearch.GeoDistanceSort? GeoDistance { get => GetVariant<Elastic.Clients.Elasticsearch.GeoDistanceSort>("_geo_distance"); set => SetVariant("_geo_distance", value); }
+	public Elastic.Clients.Elasticsearch.ScoreSort? Score { get => GetVariant<Elastic.Clients.Elasticsearch.ScoreSort>("_score"); set => SetVariant("_score", value); }
+	public Elastic.Clients.Elasticsearch.ScriptSort? Script { get => GetVariant<Elastic.Clients.Elasticsearch.ScriptSort>("_script"); set => SetVariant("_script", value); }
 
-	private SortOptionsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, Elastic.Clients.Elasticsearch.Field variantName) where T : Descriptor
-	{
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		ContainedVariantName = null;
-		Variant = null;
-		AdditionalPropertyValue = null;
-		AdditionalPropertyName = variantName;
-		ContainsVariant = true;
-		return Self;
-	}
+	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.GeoDistanceSort value) => new Elastic.Clients.Elasticsearch.SortOptions { GeoDistance = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.ScriptSort value) => new Elastic.Clients.Elasticsearch.SortOptions { Script = value };
 
-	private SortOptionsDescriptor<TDocument> Set(Elastic.Clients.Elasticsearch.FieldSort variant, Elastic.Clients.Elasticsearch.Field variantName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		ContainedVariantName = null;
-		Variant = null;
-		AdditionalPropertyValue = variant;
-		AdditionalPropertyName = variantName;
-		ContainsVariant = true;
-		return Self;
-	}
-
-	public SortOptionsDescriptor<TDocument> Doc(ScoreSort scoreSort) => Set(scoreSort, "_doc");
-	public SortOptionsDescriptor<TDocument> Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-	public SortOptionsDescriptor<TDocument> GeoDistance(GeoDistanceSort geoDistanceSort) => Set(geoDistanceSort, "_geo_distance");
-	public SortOptionsDescriptor<TDocument> GeoDistance(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
-	public SortOptionsDescriptor<TDocument> Score(ScoreSort scoreSort) => Set(scoreSort, "_score");
-	public SortOptionsDescriptor<TDocument> Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
-	public SortOptionsDescriptor<TDocument> Script(ScriptSort scriptSort) => Set(scriptSort, "_script");
-	public SortOptionsDescriptor<TDocument> Script(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
-	public SortOptionsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Set(FieldSort.Empty, field);
-	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field) => Set(FieldSort.Empty, field);
-	public SortOptionsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldSort sort) => Set(sort, field);
-	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field, Elastic.Clients.Elasticsearch.FieldSort sort) => Set(sort, field);
-	public SortOptionsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field, Action<FieldSortDescriptor<TDocument>> configure) => Set(configure, field);
-	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field, Action<FieldSortDescriptor<TDocument>> configure) => Set(configure, field);
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		if (!ContainsVariant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			writer.WriteNullValue();
-			return;
+			return result;
 		}
 
-		var fieldName = ContainedVariantName;
-		if (AdditionalPropertyName is IUrlParameter urlParameter)
-		{
-			fieldName = urlParameter.GetString(settings);
-		}
+		return default;
+	}
 
-		if ((Variant is not null && Variant.Equals(FieldSort.Empty)) || (AdditionalPropertyValue is not null && AdditionalPropertyValue.Equals(FieldSort.Empty)))
-		{
-			writer.WriteStringValue(fieldName);
-			return;
-		}
-
-		writer.WriteStartObject();
-		writer.WritePropertyName(fieldName);
-		if (Variant is not null)
-		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
-		}
-
-		if (AdditionalPropertyValue is not null)
-		{
-			JsonSerializer.Serialize(writer, AdditionalPropertyValue, options);
-			writer.WriteEndObject();
-			return;
-		}
-
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortOptionsDescriptor>
+public readonly partial struct SortOptionsDescriptor<TDocument>
 {
-	internal SortOptionsDescriptor(Action<SortOptionsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SortOptions Instance { get; init; }
 
-	public SortOptionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SortOptionsDescriptor(Elastic.Clients.Elasticsearch.SortOptions instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-	private Elastic.Clients.Elasticsearch.Field AdditionalPropertyName { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldSort AdditionalPropertyValue { get; set; }
-
-	private SortOptionsDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SortOptionsDescriptor()
 	{
-		AdditionalPropertyValue = null;
-		AdditionalPropertyName = null;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private SortOptionsDescriptor Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SortOptions instance) => new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Doc(Elastic.Clients.Elasticsearch.ScoreSort? value)
 	{
-		AdditionalPropertyValue = null;
-		AdditionalPropertyName = null;
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Doc = value;
+		return this;
 	}
 
-	private SortOptionsDescriptor Set<T>(Action<T> descriptorAction, Elastic.Clients.Elasticsearch.Field variantName) where T : Descriptor
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Doc()
 	{
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		ContainedVariantName = null;
-		Variant = null;
-		AdditionalPropertyValue = null;
-		AdditionalPropertyName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Doc = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(null);
+		return this;
 	}
 
-	private SortOptionsDescriptor Set(Elastic.Clients.Elasticsearch.FieldSort variant, Elastic.Clients.Elasticsearch.Field variantName)
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Doc(System.Action<Elastic.Clients.Elasticsearch.ScoreSortDescriptor>? action)
 	{
-		ContainedVariantName = null;
-		Variant = null;
-		AdditionalPropertyValue = variant;
-		AdditionalPropertyName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Doc = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(action);
+		return this;
 	}
 
-	public SortOptionsDescriptor Doc(ScoreSort scoreSort) => Set(scoreSort, "_doc");
-	public SortOptionsDescriptor Doc(Action<ScoreSortDescriptor> configure) => Set(configure, "_doc");
-	public SortOptionsDescriptor GeoDistance(GeoDistanceSort geoDistanceSort) => Set(geoDistanceSort, "_geo_distance");
-	public SortOptionsDescriptor GeoDistance(Action<GeoDistanceSortDescriptor> configure) => Set(configure, "_geo_distance");
-	public SortOptionsDescriptor GeoDistance<TDocument>(Action<GeoDistanceSortDescriptor<TDocument>> configure) => Set(configure, "_geo_distance");
-	public SortOptionsDescriptor Score(ScoreSort scoreSort) => Set(scoreSort, "_score");
-	public SortOptionsDescriptor Score(Action<ScoreSortDescriptor> configure) => Set(configure, "_score");
-	public SortOptionsDescriptor Script(ScriptSort scriptSort) => Set(scriptSort, "_script");
-	public SortOptionsDescriptor Script(Action<ScriptSortDescriptor> configure) => Set(configure, "_script");
-	public SortOptionsDescriptor Script<TDocument>(Action<ScriptSortDescriptor<TDocument>> configure) => Set(configure, "_script");
-	public SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.Field field) => Set(FieldSort.Empty, field);
-	public SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldSort sort) => Set(sort, field);
-	public SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.Field field, Action<FieldSortDescriptor> configure) => Set(configure, field);
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> GeoDistance(Elastic.Clients.Elasticsearch.GeoDistanceSort? value)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
+		Instance.GeoDistance = value;
+		return this;
+	}
 
-		var fieldName = ContainedVariantName;
-		if (AdditionalPropertyName is IUrlParameter urlParameter)
-		{
-			fieldName = urlParameter.GetString(settings);
-		}
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> GeoDistance(System.Action<Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument>> action)
+	{
+		Instance.GeoDistance = Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
-		if ((Variant is not null && Variant.Equals(FieldSort.Empty)) || (AdditionalPropertyValue is not null && AdditionalPropertyValue.Equals(FieldSort.Empty)))
-		{
-			writer.WriteStringValue(fieldName);
-			return;
-		}
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Score(Elastic.Clients.Elasticsearch.ScoreSort? value)
+	{
+		Instance.Score = value;
+		return this;
+	}
 
-		writer.WriteStartObject();
-		writer.WritePropertyName(fieldName);
-		if (Variant is not null)
-		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
-		}
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Score()
+	{
+		Instance.Score = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(null);
+		return this;
+	}
 
-		if (AdditionalPropertyValue is not null)
-		{
-			JsonSerializer.Serialize(writer, AdditionalPropertyValue, options);
-			writer.WriteEndObject();
-			return;
-		}
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Score(System.Action<Elastic.Clients.Elasticsearch.ScoreSortDescriptor>? action)
+	{
+		Instance.Score = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(action);
+		return this;
+	}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptSort? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument>> action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptSortDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SortOptions Build(System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct SortOptionsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.SortOptions Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SortOptionsDescriptor(Elastic.Clients.Elasticsearch.SortOptions instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SortOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.SortOptionsDescriptor(Elastic.Clients.Elasticsearch.SortOptions instance) => new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Doc(Elastic.Clients.Elasticsearch.ScoreSort? value)
+	{
+		Instance.Doc = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Doc()
+	{
+		Instance.Doc = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Doc(System.Action<Elastic.Clients.Elasticsearch.ScoreSortDescriptor>? action)
+	{
+		Instance.Doc = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor GeoDistance(Elastic.Clients.Elasticsearch.GeoDistanceSort? value)
+	{
+		Instance.GeoDistance = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor GeoDistance(System.Action<Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor> action)
+	{
+		Instance.GeoDistance = Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor GeoDistance<T>(System.Action<Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<T>> action)
+	{
+		Instance.GeoDistance = Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Score(Elastic.Clients.Elasticsearch.ScoreSort? value)
+	{
+		Instance.Score = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Score()
+	{
+		Instance.Score = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Score(System.Action<Elastic.Clients.Elasticsearch.ScoreSortDescriptor>? action)
+	{
+		Instance.Score = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Script(Elastic.Clients.Elasticsearch.ScriptSort? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptSortDescriptor> action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptSortDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Script<T>(System.Action<Elastic.Clients.Elasticsearch.ScriptSortDescriptor<T>> action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptSortDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SortOptions Build(System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(new Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

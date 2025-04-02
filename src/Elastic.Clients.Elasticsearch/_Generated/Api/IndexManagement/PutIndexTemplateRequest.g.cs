@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class PutIndexTemplateRequestParameters : RequestParameters
+public sealed partial class PutIndexTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -53,6 +46,126 @@ public sealed partial class PutIndexTemplateRequestParameters : RequestParameter
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class PutIndexTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowAutoCreate = System.Text.Json.JsonEncodedText.Encode("allow_auto_create");
+	private static readonly System.Text.Json.JsonEncodedText PropComposedOf = System.Text.Json.JsonEncodedText.Encode("composed_of");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStream = System.Text.Json.JsonEncodedText.Encode("data_stream");
+	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissingComponentTemplates = System.Text.Json.JsonEncodedText.Encode("ignore_missing_component_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexPatterns = System.Text.Json.JsonEncodedText.Encode("index_patterns");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowAutoCreate = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>?> propComposedOf = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility?> propDataStream = default;
+		LocalJsonValue<bool?> propDeprecated = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIgnoreMissingComponentTemplates = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndexPatterns = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<long?> propPriority = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping?> propTemplate = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowAutoCreate.TryReadProperty(ref reader, options, PropAllowAutoCreate, null))
+			{
+				continue;
+			}
+
+			if (propComposedOf.TryReadProperty(ref reader, options, PropComposedOf, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Name>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDataStream.TryReadProperty(ref reader, options, PropDataStream, null))
+			{
+				continue;
+			}
+
+			if (propDeprecated.TryReadProperty(ref reader, options, PropDeprecated, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissingComponentTemplates.TryReadProperty(ref reader, options, PropIgnoreMissingComponentTemplates, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propIndexPatterns.TryReadProperty(ref reader, options, PropIndexPatterns, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
+			{
+				continue;
+			}
+
+			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowAutoCreate = propAllowAutoCreate.Value,
+			ComposedOf = propComposedOf.Value,
+			DataStream = propDataStream.Value,
+			Deprecated = propDeprecated.Value,
+			IgnoreMissingComponentTemplates = propIgnoreMissingComponentTemplates.Value,
+			IndexPatterns = propIndexPatterns.Value,
+			Meta = propMeta.Value,
+			Priority = propPriority.Value,
+			Template = propTemplate.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowAutoCreate, value.AllowAutoCreate, null, null);
+		writer.WriteProperty(options, PropComposedOf, value.ComposedOf, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Name>(o, v, null));
+		writer.WriteProperty(options, PropDataStream, value.DataStream, null, null);
+		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, null);
+		writer.WriteProperty(options, PropIgnoreMissingComponentTemplates, value.IgnoreMissingComponentTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropIndexPatterns, value.IndexPatterns, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -94,15 +207,27 @@ public sealed partial class PutIndexTemplateRequestParameters : RequestParameter
 /// If an entry already exists with the same key, then it is overwritten by the new definition.
 /// </para>
 /// </summary>
-public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTemplateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestConverter))]
+public sealed partial class PutIndexTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutIndexTemplateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutIndexTemplate;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementPutIndexTemplate;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -110,10 +235,20 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 
 	/// <summary>
 	/// <para>
+	/// Index or template name
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
 	/// User defined reason for creating/updating the index template
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
 	/// <summary>
@@ -121,7 +256,6 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// If <c>true</c>, this request cannot replace or update existing index templates.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
@@ -130,7 +264,6 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -140,7 +273,6 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// If set to <c>false</c>, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_auto_create")]
 	public bool? AllowAutoCreate { get; set; }
 
 	/// <summary>
@@ -149,8 +281,7 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("composed_of")]
-	public ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -159,7 +290,6 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// Data streams require a matching index template with a <c>data_stream</c> object.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_stream")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStream { get; set; }
 
 	/// <summary>
@@ -168,7 +298,6 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("deprecated")]
 	public bool? Deprecated { get; set; }
 
 	/// <summary>
@@ -177,15 +306,13 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// references a component template that might not exist
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing_component_templates")]
-	public ICollection<string>? IgnoreMissingComponentTemplates { get; set; }
+	public System.Collections.Generic.ICollection<string>? IgnoreMissingComponentTemplates { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the index template to create.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_patterns")]
 	public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
 
 	/// <summary>
@@ -197,8 +324,7 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// To unset the metadata, replace the template without specifying it.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IDictionary<string, object>? Meta { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -208,7 +334,6 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// This number is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("priority")]
 	public long? Priority { get; set; }
 
 	/// <summary>
@@ -217,7 +342,6 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? Template { get; set; }
 
 	/// <summary>
@@ -228,7 +352,6 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	/// To unset a version, replace the template without specifying one.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
 
@@ -271,46 +394,74 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 /// If an entry already exists with the same key, then it is overwritten by the new definition.
 /// </para>
 /// </summary>
-public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : RequestDescriptor<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateRequestParameters>
+public readonly partial struct PutIndexTemplateRequestDescriptor
 {
-	internal PutIndexTemplateRequestDescriptor(Action<PutIndexTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest Instance { get; init; }
 
-	public PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutIndexTemplate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.put_index_template";
-
-	public PutIndexTemplateRequestDescriptor<TDocument> Cause(string? cause) => Qs("cause", cause);
-	public PutIndexTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
-	public PutIndexTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public PutIndexTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
+	public PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest(name);
 	}
 
-	private bool? AllowAutoCreateValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
-	private bool? DeprecatedValue { get; set; }
-	private ICollection<string>? IgnoreMissingComponentTemplatesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private long? PriorityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument> TemplateDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
-	private long? VersionValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutIndexTemplateRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Index or template name
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// User defined reason for creating/updating the index template
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Cause(string? value)
+	{
+		Instance.Cause = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing index templates.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Create(bool? value = true)
+	{
+		Instance.Create = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -319,10 +470,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// If set to <c>false</c>, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> AllowAutoCreate(bool? allowAutoCreate = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor AllowAutoCreate(bool? value = true)
 	{
-		AllowAutoCreateValue = allowAutoCreate;
-		return Self;
+		Instance.AllowAutoCreate = value;
+		return this;
 	}
 
 	/// <summary>
@@ -331,10 +482,46 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> ComposedOf(ICollection<Elastic.Clients.Elasticsearch.Name>? composedOf)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor ComposedOf(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? value)
 	{
-		ComposedOfValue = composedOf;
-		return Self;
+		Instance.ComposedOf = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor ComposedOf()
+	{
+		Instance.ComposedOf = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor ComposedOf(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName>? action)
+	{
+		Instance.ComposedOf = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor ComposedOf(params Elastic.Clients.Elasticsearch.Name[] values)
+	{
+		Instance.ComposedOf = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -344,28 +531,36 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// Data streams require a matching index template with a <c>data_stream</c> object.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? dataStream)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? value)
 	{
-		DataStreamDescriptor = null;
-		DataStreamDescriptorAction = null;
-		DataStreamValue = dataStream;
-		return Self;
+		Instance.DataStream = value;
+		return this;
 	}
 
-	public PutIndexTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor DataStream()
 	{
-		DataStreamValue = null;
-		DataStreamDescriptorAction = null;
-		DataStreamDescriptor = descriptor;
-		return Self;
+		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.Build(null);
+		return this;
 	}
 
-	public PutIndexTemplateRequestDescriptor<TDocument> DataStream(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor DataStream(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor>? action)
 	{
-		DataStreamValue = null;
-		DataStreamDescriptor = null;
-		DataStreamDescriptorAction = configure;
-		return Self;
+		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -374,10 +569,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> Deprecated(bool? deprecated = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Deprecated(bool? value = true)
 	{
-		DeprecatedValue = deprecated;
-		return Self;
+		Instance.Deprecated = value;
+		return this;
 	}
 
 	/// <summary>
@@ -386,10 +581,46 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// references a component template that might not exist
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates(ICollection<string>? ignoreMissingComponentTemplates)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor IgnoreMissingComponentTemplates(System.Collections.Generic.ICollection<string>? value)
 	{
-		IgnoreMissingComponentTemplatesValue = ignoreMissingComponentTemplates;
-		return Self;
+		Instance.IgnoreMissingComponentTemplates = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration option ignore_missing_component_templates can be used when an index template
+	/// references a component template that might not exist
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor IgnoreMissingComponentTemplates()
+	{
+		Instance.IgnoreMissingComponentTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration option ignore_missing_component_templates can be used when an index template
+	/// references a component template that might not exist
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor IgnoreMissingComponentTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.IgnoreMissingComponentTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration option ignore_missing_component_templates can be used when an index template
+	/// references a component template that might not exist
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor IgnoreMissingComponentTemplates(params string[] values)
+	{
+		Instance.IgnoreMissingComponentTemplates = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -397,10 +628,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// Name of the index template to create.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		IndexPatternsValue = indexPatterns;
-		return Self;
+		Instance.IndexPatterns = value;
+		return this;
 	}
 
 	/// <summary>
@@ -412,10 +643,47 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// To unset the metadata, replace the template without specifying it.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template.
+	/// It may have any contents.
+	/// It is not automatically generated or used by Elasticsearch.
+	/// This user-defined object is stored in the cluster state, so keeping it short is preferable
+	/// To unset the metadata, replace the template without specifying it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template.
+	/// It may have any contents.
+	/// It is not automatically generated or used by Elasticsearch.
+	/// This user-defined object is stored in the cluster state, so keeping it short is preferable
+	/// To unset the metadata, replace the template without specifying it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -426,10 +694,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// This number is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> Priority(long? priority)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Priority(long? value)
 	{
-		PriorityValue = priority;
-		return Self;
+		Instance.Priority = value;
+		return this;
 	}
 
 	/// <summary>
@@ -438,28 +706,46 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? template)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? value)
 	{
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = null;
-		TemplateValue = template;
-		return Self;
+		Instance.Template = value;
+		return this;
 	}
 
-	public PutIndexTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Template()
 	{
-		TemplateValue = null;
-		TemplateDescriptorAction = null;
-		TemplateDescriptor = descriptor;
-		return Self;
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.Build(null);
+		return this;
 	}
 
-	public PutIndexTemplateRequestDescriptor<TDocument> Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor>? action)
 	{
-		TemplateValue = null;
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = configure;
-		return Self;
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Template<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<T>>? action)
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -470,96 +756,60 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	/// To unset a version, replace the template without specifying one.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor<TDocument> Version(long? version)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AllowAutoCreateValue.HasValue)
-		{
-			writer.WritePropertyName("allow_auto_create");
-			writer.WriteBooleanValue(AllowAutoCreateValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ComposedOfValue is not null)
-		{
-			writer.WritePropertyName("composed_of");
-			JsonSerializer.Serialize(writer, ComposedOfValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (DataStreamDescriptor is not null)
-		{
-			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, DataStreamDescriptor, options);
-		}
-		else if (DataStreamDescriptorAction is not null)
-		{
-			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
-		}
-		else if (DataStreamValue is not null)
-		{
-			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, DataStreamValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (DeprecatedValue.HasValue)
-		{
-			writer.WritePropertyName("deprecated");
-			writer.WriteBooleanValue(DeprecatedValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (IgnoreMissingComponentTemplatesValue is not null)
-		{
-			writer.WritePropertyName("ignore_missing_component_templates");
-			JsonSerializer.Serialize(writer, IgnoreMissingComponentTemplatesValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (IndexPatternsValue is not null)
-		{
-			writer.WritePropertyName("index_patterns");
-			JsonSerializer.Serialize(writer, IndexPatternsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (PriorityValue.HasValue)
-		{
-			writer.WritePropertyName("priority");
-			writer.WriteNumberValue(PriorityValue.Value);
-		}
-
-		if (TemplateDescriptor is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateDescriptor, options);
-		}
-		else if (TemplateDescriptorAction is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>(TemplateDescriptorAction), options);
-		}
-		else if (TemplateValue is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -602,46 +852,74 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 /// If an entry already exists with the same key, then it is overwritten by the new definition.
 /// </para>
 /// </summary>
-public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescriptor<PutIndexTemplateRequestDescriptor, PutIndexTemplateRequestParameters>
+public readonly partial struct PutIndexTemplateRequestDescriptor<TDocument>
 {
-	internal PutIndexTemplateRequestDescriptor(Action<PutIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest Instance { get; init; }
 
-	public PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutIndexTemplate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.put_index_template";
-
-	public PutIndexTemplateRequestDescriptor Cause(string? cause) => Qs("cause", cause);
-	public PutIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
-	public PutIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public PutIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest(name);
 	}
 
-	private bool? AllowAutoCreateValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
-	private bool? DeprecatedValue { get; set; }
-	private ICollection<string>? IgnoreMissingComponentTemplatesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private long? PriorityValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor TemplateDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor> TemplateDescriptorAction { get; set; }
-	private long? VersionValue { get; set; }
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutIndexTemplateRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Index or template name
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// User defined reason for creating/updating the index template
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Cause(string? value)
+	{
+		Instance.Cause = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, this request cannot replace or update existing index templates.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Create(bool? value = true)
+	{
+		Instance.Create = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -650,10 +928,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// If set to <c>false</c>, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor AllowAutoCreate(bool? allowAutoCreate = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> AllowAutoCreate(bool? value = true)
 	{
-		AllowAutoCreateValue = allowAutoCreate;
-		return Self;
+		Instance.AllowAutoCreate = value;
+		return this;
 	}
 
 	/// <summary>
@@ -662,10 +940,46 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor ComposedOf(ICollection<Elastic.Clients.Elasticsearch.Name>? composedOf)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> ComposedOf(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? value)
 	{
-		ComposedOfValue = composedOf;
-		return Self;
+		Instance.ComposedOf = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> ComposedOf()
+	{
+		Instance.ComposedOf = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> ComposedOf(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName>? action)
+	{
+		Instance.ComposedOf = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> ComposedOf(params Elastic.Clients.Elasticsearch.Name[] values)
+	{
+		Instance.ComposedOf = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -675,28 +989,36 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// Data streams require a matching index template with a <c>data_stream</c> object.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? dataStream)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? value)
 	{
-		DataStreamDescriptor = null;
-		DataStreamDescriptorAction = null;
-		DataStreamValue = dataStream;
-		return Self;
+		Instance.DataStream = value;
+		return this;
 	}
 
-	public PutIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> DataStream()
 	{
-		DataStreamValue = null;
-		DataStreamDescriptorAction = null;
-		DataStreamDescriptor = descriptor;
-		return Self;
+		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.Build(null);
+		return this;
 	}
 
-	public PutIndexTemplateRequestDescriptor DataStream(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> DataStream(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor>? action)
 	{
-		DataStreamValue = null;
-		DataStreamDescriptor = null;
-		DataStreamDescriptorAction = configure;
-		return Self;
+		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -705,10 +1027,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor Deprecated(bool? deprecated = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Deprecated(bool? value = true)
 	{
-		DeprecatedValue = deprecated;
-		return Self;
+		Instance.Deprecated = value;
+		return this;
 	}
 
 	/// <summary>
@@ -717,10 +1039,46 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// references a component template that might not exist
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor IgnoreMissingComponentTemplates(ICollection<string>? ignoreMissingComponentTemplates)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates(System.Collections.Generic.ICollection<string>? value)
 	{
-		IgnoreMissingComponentTemplatesValue = ignoreMissingComponentTemplates;
-		return Self;
+		Instance.IgnoreMissingComponentTemplates = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration option ignore_missing_component_templates can be used when an index template
+	/// references a component template that might not exist
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates()
+	{
+		Instance.IgnoreMissingComponentTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration option ignore_missing_component_templates can be used when an index template
+	/// references a component template that might not exist
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.IgnoreMissingComponentTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration option ignore_missing_component_templates can be used when an index template
+	/// references a component template that might not exist
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates(params string[] values)
+	{
+		Instance.IgnoreMissingComponentTemplates = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -728,10 +1086,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// Name of the index template to create.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> IndexPatterns(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		IndexPatternsValue = indexPatterns;
-		return Self;
+		Instance.IndexPatterns = value;
+		return this;
 	}
 
 	/// <summary>
@@ -743,10 +1101,47 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// To unset the metadata, replace the template without specifying it.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template.
+	/// It may have any contents.
+	/// It is not automatically generated or used by Elasticsearch.
+	/// This user-defined object is stored in the cluster state, so keeping it short is preferable
+	/// To unset the metadata, replace the template without specifying it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template.
+	/// It may have any contents.
+	/// It is not automatically generated or used by Elasticsearch.
+	/// This user-defined object is stored in the cluster state, so keeping it short is preferable
+	/// To unset the metadata, replace the template without specifying it.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -757,10 +1152,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// This number is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor Priority(long? priority)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Priority(long? value)
 	{
-		PriorityValue = priority;
-		return Self;
+		Instance.Priority = value;
+		return this;
 	}
 
 	/// <summary>
@@ -769,28 +1164,34 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? template)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? value)
 	{
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = null;
-		TemplateValue = template;
-		return Self;
+		Instance.Template = value;
+		return this;
 	}
 
-	public PutIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Template()
 	{
-		TemplateValue = null;
-		TemplateDescriptorAction = null;
-		TemplateDescriptor = descriptor;
-		return Self;
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public PutIndexTemplateRequestDescriptor Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>>? action)
 	{
-		TemplateValue = null;
-		TemplateDescriptor = null;
-		TemplateDescriptorAction = configure;
-		return Self;
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -801,95 +1202,59 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	/// To unset a version, replace the template without specifying one.
 	/// </para>
 	/// </summary>
-	public PutIndexTemplateRequestDescriptor Version(long? version)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Version(long? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AllowAutoCreateValue.HasValue)
-		{
-			writer.WritePropertyName("allow_auto_create");
-			writer.WriteBooleanValue(AllowAutoCreateValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ComposedOfValue is not null)
-		{
-			writer.WritePropertyName("composed_of");
-			JsonSerializer.Serialize(writer, ComposedOfValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (DataStreamDescriptor is not null)
-		{
-			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, DataStreamDescriptor, options);
-		}
-		else if (DataStreamDescriptorAction is not null)
-		{
-			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
-		}
-		else if (DataStreamValue is not null)
-		{
-			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, DataStreamValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (DeprecatedValue.HasValue)
-		{
-			writer.WritePropertyName("deprecated");
-			writer.WriteBooleanValue(DeprecatedValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (IgnoreMissingComponentTemplatesValue is not null)
-		{
-			writer.WritePropertyName("ignore_missing_component_templates");
-			JsonSerializer.Serialize(writer, IgnoreMissingComponentTemplatesValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (IndexPatternsValue is not null)
-		{
-			writer.WritePropertyName("index_patterns");
-			JsonSerializer.Serialize(writer, IndexPatternsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (PriorityValue.HasValue)
-		{
-			writer.WritePropertyName("priority");
-			writer.WriteNumberValue(PriorityValue.Value);
-		}
-
-		if (TemplateDescriptor is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateDescriptor, options);
-		}
-		else if (TemplateDescriptorAction is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor(TemplateDescriptorAction), options);
-		}
-		else if (TemplateValue is not null)
-		{
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, TemplateValue, options);
-		}
-
-		if (VersionValue.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteNumberValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

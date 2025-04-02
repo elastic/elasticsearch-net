@@ -17,36 +17,175 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+internal sealed partial class MachineLearningConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MachineLearning>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
+	private static readonly System.Text.Json.JsonEncodedText PropDatafeeds = System.Text.Json.JsonEncodedText.Encode("datafeeds");
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalyticsJobs = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics_jobs");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropInference = System.Text.Json.JsonEncodedText.Encode("inference");
+	private static readonly System.Text.Json.JsonEncodedText PropJobs = System.Text.Json.JsonEncodedText.Encode("jobs");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeCount = System.Text.Json.JsonEncodedText.Encode("node_count");
+
+	public override Elastic.Clients.Elasticsearch.Xpack.MachineLearning Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propAvailable = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed>> propDatafeeds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs> propDataFrameAnalyticsJobs = default;
+		LocalJsonValue<bool> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlInference> propInference = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage>> propJobs = default;
+		LocalJsonValue<int> propNodeCount = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
+			{
+				continue;
+			}
+
+			if (propDatafeeds.TryReadProperty(ref reader, options, PropDatafeeds, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propDataFrameAnalyticsJobs.TryReadProperty(ref reader, options, PropDataFrameAnalyticsJobs, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propInference.TryReadProperty(ref reader, options, PropInference, null))
+			{
+				continue;
+			}
+
+			if (propJobs.TryReadProperty(ref reader, options, PropJobs, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propNodeCount.TryReadProperty(ref reader, options, PropNodeCount, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Xpack.MachineLearning(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Available = propAvailable.Value,
+			Datafeeds = propDatafeeds.Value,
+			DataFrameAnalyticsJobs = propDataFrameAnalyticsJobs.Value,
+			Enabled = propEnabled.Value,
+			Inference = propInference.Value,
+			Jobs = propJobs.Value,
+			NodeCount = propNodeCount.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MachineLearning value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropDatafeeds, value.Datafeeds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed>(o, v, null, null));
+		writer.WriteProperty(options, PropDataFrameAnalyticsJobs, value.DataFrameAnalyticsJobs, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropInference, value.Inference, null, null);
+		writer.WriteProperty(options, PropJobs, value.Jobs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage>(o, v, null, null));
+		writer.WriteProperty(options, PropNodeCount, value.NodeCount, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MachineLearningConverter))]
 public sealed partial class MachineLearning
 {
-	[JsonInclude, JsonPropertyName("available")]
-	public bool Available { get; init; }
-	[JsonInclude, JsonPropertyName("datafeeds")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed> Datafeeds { get; init; }
-	[JsonInclude, JsonPropertyName("data_frame_analytics_jobs")]
-	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs DataFrameAnalyticsJobs { get; init; }
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("inference")]
-	public Elastic.Clients.Elasticsearch.Xpack.MlInference Inference { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MachineLearning(bool available, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed> datafeeds, Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs dataFrameAnalyticsJobs, bool enabled, Elastic.Clients.Elasticsearch.Xpack.MlInference inference, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage> jobs, int nodeCount)
+	{
+		Available = available;
+		Datafeeds = datafeeds;
+		DataFrameAnalyticsJobs = dataFrameAnalyticsJobs;
+		Enabled = enabled;
+		Inference = inference;
+		Jobs = jobs;
+		NodeCount = nodeCount;
+	}
+#if NET7_0_OR_GREATER
+	public MachineLearning()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MachineLearning()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MachineLearning(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Available { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed> Datafeeds { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs DataFrameAnalyticsJobs { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.MlInference Inference { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Job usage statistics. The <c>_all</c> entry is always present and gathers statistics for all jobs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("jobs")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage> Jobs { get; init; }
-	[JsonInclude, JsonPropertyName("node_count")]
-	public int NodeCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage> Jobs { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NodeCount { get; set; }
 }

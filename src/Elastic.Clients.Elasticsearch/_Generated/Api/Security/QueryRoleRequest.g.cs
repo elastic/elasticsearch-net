@@ -17,21 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class QueryRoleRequestParameters : RequestParameters
+public sealed partial class QueryRoleRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class QueryRoleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+
+	public override Elastic.Clients.Elasticsearch.Security.QueryRoleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propFrom = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.RoleQuery?> propQuery = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propSearchAfter.TryReadProperty(ref reader, options, PropSearchAfter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			From = propFrom.Value,
+			Query = propQuery.Value,
+			SearchAfter = propSearchAfter.Value,
+			Size = propSize.Value,
+			Sort = propSort.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.QueryRoleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -46,11 +114,28 @@ public sealed partial class QueryRoleRequestParameters : RequestParameters
 /// Also, the results can be paginated and sorted.
 /// </para>
 /// </summary>
-public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.QueryRoleRequestConverter))]
+public sealed partial class QueryRoleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryRole;
+#if NET7_0_OR_GREATER
+	public QueryRoleRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public QueryRoleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal QueryRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityQueryRole;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -64,7 +149,6 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
@@ -77,7 +161,6 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Security.RoleQuery? Query { get; set; }
 
 	/// <summary>
@@ -85,8 +168,7 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// The search after definition.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_after")]
-	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -96,7 +178,6 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -106,9 +187,7 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
 /// <summary>
@@ -123,32 +202,23 @@ public sealed partial class QueryRoleRequest : PlainRequest<QueryRoleRequestPara
 /// Also, the results can be paginated and sorted.
 /// </para>
 /// </summary>
-public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescriptor<QueryRoleRequestDescriptor<TDocument>, QueryRoleRequestParameters>
+public readonly partial struct QueryRoleRequestDescriptor
 {
-	internal QueryRoleRequestDescriptor(Action<QueryRoleRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.QueryRoleRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public QueryRoleRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryRole;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.query_role";
-
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RoleQuery? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -158,10 +228,10 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor<TDocument> From(int? from)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -174,28 +244,42 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.RoleQuery? query)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.RoleQuery? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public QueryRoleRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// A query to filter which roles to return.
+	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
+	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor.Build(action);
+		return this;
 	}
 
-	public QueryRoleRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// A query to filter which roles to return.
+	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
+	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -203,10 +287,43 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 	/// The search after definition.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor SearchAfter()
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -217,10 +334,10 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -230,109 +347,155 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public QueryRoleRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort()
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
+		return this;
 	}
 
-	public QueryRoleRequestDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
+		return this;
 	}
 
-	public QueryRoleRequestDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		writer.WriteStartObject();
-		if (FromValue.HasValue)
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
 		}
 
-		if (QueryDescriptor is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
 		}
 
-		if (SearchAfterValue is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.QueryRoleRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -348,32 +511,23 @@ public sealed partial class QueryRoleRequestDescriptor<TDocument> : RequestDescr
 /// Also, the results can be paginated and sorted.
 /// </para>
 /// </summary>
-public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<QueryRoleRequestDescriptor, QueryRoleRequestParameters>
+public readonly partial struct QueryRoleRequestDescriptor<TDocument>
 {
-	internal QueryRoleRequestDescriptor(Action<QueryRoleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.QueryRoleRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public QueryRoleRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityQueryRole;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.query_role";
-
-	private int? FromValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RoleQuery? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor> QueryDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -383,10 +537,10 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor From(int? from)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> From(int? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -399,28 +553,26 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.RoleQuery? query)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.RoleQuery? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public QueryRoleRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A query to filter which roles to return.
+	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
+	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public QueryRoleRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -428,10 +580,43 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 	/// The search after definition.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? searchAfter)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
-		SearchAfterValue = searchAfter;
-		return Self;
+		Instance.SearchAfter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> SearchAfter()
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
+	{
+		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The search after definition.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	{
+		Instance.SearchAfter = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -442,10 +627,10 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 	/// To page through more hits, use the <c>search_after</c> parameter.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -455,108 +640,122 @@ public sealed partial class QueryRoleRequestDescriptor : RequestDescriptor<Query
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
-	public QueryRoleRequestDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
-	public QueryRoleRequestDescriptor Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Sort()
 	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
+		return this;
 	}
 
-	public QueryRoleRequestDescriptor Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
+		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
+		return this;
 	}
 
-	public QueryRoleRequestDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The sort definition.
+	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
-		writer.WriteStartObject();
-		if (FromValue.HasValue)
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
 		}
 
-		if (QueryDescriptor is not null)
+		Instance.Sort = items;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.QueryRoleRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,19 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class GeoCentroidAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropLocation = System.Text.Json.JsonEncodedText.Encode("location");
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoLocation?> propLocation = default;
+		LocalJsonValue<object?> propMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propLocation.TryReadProperty(ref reader, options, PropLocation, null))
+			{
+				continue;
+			}
+
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			Field = propField.Value,
+			Location = propLocation.Value,
+			Missing = propMissing.Value,
+			Script = propScript.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropLocation, value.Location, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationConverter))]
 public sealed partial class GeoCentroidAggregation
 {
-	[JsonInclude, JsonPropertyName("count")]
+#if NET7_0_OR_GREATER
+	public GeoCentroidAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GeoCentroidAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public long? Count { get; set; }
 
 	/// <summary>
@@ -37,9 +124,7 @@ public sealed partial class GeoCentroidAggregation
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("location")]
 	public Elastic.Clients.Elasticsearch.GeoLocation? Location { get; set; }
 
 	/// <summary>
@@ -48,45 +133,33 @@ public sealed partial class GeoCentroidAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("missing")]
-	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
+	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(GeoCentroidAggregation geoCentroidAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoCentroid(geoCentroidAggregation);
 }
 
-public sealed partial class GeoCentroidAggregationDescriptor<TDocument> : SerializableDescriptor<GeoCentroidAggregationDescriptor<TDocument>>
+public readonly partial struct GeoCentroidAggregationDescriptor<TDocument>
 {
-	internal GeoCentroidAggregationDescriptor(Action<GeoCentroidAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation Instance { get; init; }
 
-	public GeoCentroidAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoCentroidAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private long? CountValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoLocation? LocationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
-	public GeoCentroidAggregationDescriptor<TDocument> Count(long? count)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoCentroidAggregationDescriptor()
 	{
-		CountValue = count;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public GeoCentroidAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Count(long? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Count = value;
+		return this;
 	}
 
 	/// <summary>
@@ -94,10 +167,10 @@ public sealed partial class GeoCentroidAggregationDescriptor<TDocument> : Serial
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public GeoCentroidAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -105,16 +178,22 @@ public sealed partial class GeoCentroidAggregationDescriptor<TDocument> : Serial
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public GeoCentroidAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoCentroidAggregationDescriptor<TDocument> Location(Elastic.Clients.Elasticsearch.GeoLocation? location)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Location(Elastic.Clients.Elasticsearch.GeoLocation? value)
 	{
-		LocationValue = location;
-		return Self;
+		Instance.Location = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Location(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	{
+		Instance.Location = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -123,114 +202,67 @@ public sealed partial class GeoCentroidAggregationDescriptor<TDocument> : Serial
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public GeoCentroidAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
-	public GeoCentroidAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public GeoCentroidAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public GeoCentroidAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (CountValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("count");
-			writer.WriteNumberValue(CountValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (LocationValue is not null)
-		{
-			writer.WritePropertyName("location");
-			JsonSerializer.Serialize(writer, LocationValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeoCentroidAggregationDescriptor : SerializableDescriptor<GeoCentroidAggregationDescriptor>
+public readonly partial struct GeoCentroidAggregationDescriptor
 {
-	internal GeoCentroidAggregationDescriptor(Action<GeoCentroidAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation Instance { get; init; }
 
-	public GeoCentroidAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoCentroidAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private long? CountValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoLocation? LocationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-
-	public GeoCentroidAggregationDescriptor Count(long? count)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoCentroidAggregationDescriptor()
 	{
-		CountValue = count;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
-	public GeoCentroidAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Count(long? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Count = value;
+		return this;
 	}
 
 	/// <summary>
@@ -238,10 +270,10 @@ public sealed partial class GeoCentroidAggregationDescriptor : SerializableDescr
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public GeoCentroidAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -249,16 +281,22 @@ public sealed partial class GeoCentroidAggregationDescriptor : SerializableDescr
 	/// The field on which to run the aggregation.
 	/// </para>
 	/// </summary>
-	public GeoCentroidAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public GeoCentroidAggregationDescriptor Location(Elastic.Clients.Elasticsearch.GeoLocation? location)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Location(Elastic.Clients.Elasticsearch.GeoLocation? value)
 	{
-		LocationValue = location;
-		return Self;
+		Instance.Location = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Location(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	{
+		Instance.Location = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -267,79 +305,40 @@ public sealed partial class GeoCentroidAggregationDescriptor : SerializableDescr
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public GeoCentroidAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Missing(object? value)
 	{
-		MissingValue = missing;
-		return Self;
+		Instance.Missing = value;
+		return this;
 	}
 
-	public GeoCentroidAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public GeoCentroidAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public GeoCentroidAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (CountValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("count");
-			writer.WriteNumberValue(CountValue.Value);
+			return new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (LocationValue is not null)
-		{
-			writer.WritePropertyName("location");
-			JsonSerializer.Serialize(writer, LocationValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

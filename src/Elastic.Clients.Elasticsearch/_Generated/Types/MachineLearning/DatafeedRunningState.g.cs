@@ -17,25 +17,105 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DatafeedRunningStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRealTimeConfigured = System.Text.Json.JsonEncodedText.Encode("real_time_configured");
+	private static readonly System.Text.Json.JsonEncodedText PropRealTimeRunning = System.Text.Json.JsonEncodedText.Encode("real_time_running");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchInterval = System.Text.Json.JsonEncodedText.Encode("search_interval");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propRealTimeConfigured = default;
+		LocalJsonValue<bool> propRealTimeRunning = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval?> propSearchInterval = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRealTimeConfigured.TryReadProperty(ref reader, options, PropRealTimeConfigured, null))
+			{
+				continue;
+			}
+
+			if (propRealTimeRunning.TryReadProperty(ref reader, options, PropRealTimeRunning, null))
+			{
+				continue;
+			}
+
+			if (propSearchInterval.TryReadProperty(ref reader, options, PropSearchInterval, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			RealTimeConfigured = propRealTimeConfigured.Value,
+			RealTimeRunning = propRealTimeRunning.Value,
+			SearchInterval = propSearchInterval.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRealTimeConfigured, value.RealTimeConfigured, null, null);
+		writer.WriteProperty(options, PropRealTimeRunning, value.RealTimeRunning, null, null);
+		writer.WriteProperty(options, PropSearchInterval, value.SearchInterval, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningStateConverter))]
 public sealed partial class DatafeedRunningState
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DatafeedRunningState(bool realTimeConfigured, bool realTimeRunning)
+	{
+		RealTimeConfigured = realTimeConfigured;
+		RealTimeRunning = realTimeRunning;
+	}
+#if NET7_0_OR_GREATER
+	public DatafeedRunningState()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DatafeedRunningState()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DatafeedRunningState(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Indicates if the datafeed is "real-time"; meaning that the datafeed has no configured <c>end</c> time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("real_time_configured")]
-	public bool RealTimeConfigured { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool RealTimeConfigured { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -43,14 +123,16 @@ public sealed partial class DatafeedRunningState
 	/// For datafeeds without a configured <c>end</c> time, this means that the datafeed is now running on "real-time" data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("real_time_running")]
-	public bool RealTimeRunning { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool RealTimeRunning { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Provides the latest time interval the datafeed has searched.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_interval")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval? SearchInterval { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval? SearchInterval { get; set; }
 }

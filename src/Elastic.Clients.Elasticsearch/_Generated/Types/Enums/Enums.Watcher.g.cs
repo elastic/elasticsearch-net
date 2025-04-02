@@ -17,69 +17,106 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Watcher;
 
-[JsonConverter(typeof(ActionStatusOptionsConverter))]
-public enum ActionStatusOptions
+internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions>
 {
-	[EnumMember(Value = "throttled")]
-	Throttled,
-	[EnumMember(Value = "success")]
-	Success,
-	[EnumMember(Value = "simulated")]
-	Simulated,
-	[EnumMember(Value = "failure")]
-	Failure
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("success");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailure = System.Text.Json.JsonEncodedText.Encode("failure");
+	private static readonly System.Text.Json.JsonEncodedText MemberSimulated = System.Text.Json.JsonEncodedText.Encode("simulated");
+	private static readonly System.Text.Json.JsonEncodedText MemberThrottled = System.Text.Json.JsonEncodedText.Encode("throttled");
 
-internal sealed class ActionStatusOptionsConverter : JsonConverter<ActionStatusOptions>
-{
-	public override ActionStatusOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberSuccess))
 		{
-			case "throttled":
-				return ActionStatusOptions.Throttled;
-			case "success":
-				return ActionStatusOptions.Success;
-			case "simulated":
-				return ActionStatusOptions.Simulated;
-			case "failure":
-				return ActionStatusOptions.Failure;
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Success;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberFailure))
+		{
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Failure;
+		}
+
+		if (reader.ValueTextEquals(MemberSimulated))
+		{
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Simulated;
+		}
+
+		if (reader.ValueTextEquals(MemberThrottled))
+		{
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Throttled;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSuccess.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Success;
+		}
+
+		if (string.Equals(value, MemberFailure.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Failure;
+		}
+
+		if (string.Equals(value, MemberSimulated.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Simulated;
+		}
+
+		if (string.Equals(value, MemberThrottled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Throttled;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, ActionStatusOptions value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case ActionStatusOptions.Throttled:
-				writer.WriteStringValue("throttled");
-				return;
-			case ActionStatusOptions.Success:
-				writer.WriteStringValue("success");
-				return;
-			case ActionStatusOptions.Simulated:
-				writer.WriteStringValue("simulated");
-				return;
-			case ActionStatusOptions.Failure:
-				writer.WriteStringValue("failure");
-				return;
+			case Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Success:
+				writer.WriteStringValue(MemberSuccess);
+				break;
+			case Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Failure:
+				writer.WriteStringValue(MemberFailure);
+				break;
+			case Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Simulated:
+				writer.WriteStringValue(MemberSimulated);
+				break;
+			case Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Throttled:
+				writer.WriteStringValue(MemberThrottled);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions)}'.");
 		}
-
-		writer.WriteNullValue();
 	}
+
+	public override Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptionsConverter))]
+public enum ActionStatusOptions
+{
+	[System.Runtime.Serialization.EnumMember(Value = "success")]
+	Success,
+	[System.Runtime.Serialization.EnumMember(Value = "failure")]
+	Failure,
+	[System.Runtime.Serialization.EnumMember(Value = "simulated")]
+	Simulated,
+	[System.Runtime.Serialization.EnumMember(Value = "throttled")]
+	Throttled
 }

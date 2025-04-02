@@ -17,20 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeInfoNetworkConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetwork>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryInterface = System.Text.Json.JsonEncodedText.Encode("primary_interface");
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshInterval = System.Text.Json.JsonEncodedText.Encode("refresh_interval");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetwork Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetworkInterface> propPrimaryInterface = default;
+		LocalJsonValue<int> propRefreshInterval = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPrimaryInterface.TryReadProperty(ref reader, options, PropPrimaryInterface, null))
+			{
+				continue;
+			}
+
+			if (propRefreshInterval.TryReadProperty(ref reader, options, PropRefreshInterval, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetwork(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			PrimaryInterface = propPrimaryInterface.Value,
+			RefreshInterval = propRefreshInterval.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetwork value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPrimaryInterface, value.PrimaryInterface, null, null);
+		writer.WriteProperty(options, PropRefreshInterval, value.RefreshInterval, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetworkConverter))]
 public sealed partial class NodeInfoNetwork
 {
-	[JsonInclude, JsonPropertyName("primary_interface")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetworkInterface PrimaryInterface { get; init; }
-	[JsonInclude, JsonPropertyName("refresh_interval")]
-	public int RefreshInterval { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeInfoNetwork(Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetworkInterface primaryInterface, int refreshInterval)
+	{
+		PrimaryInterface = primaryInterface;
+		RefreshInterval = refreshInterval;
+	}
+#if NET7_0_OR_GREATER
+	public NodeInfoNetwork()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeInfoNetwork()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeInfoNetwork(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetworkInterface PrimaryInterface { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int RefreshInterval { get; set; }
 }

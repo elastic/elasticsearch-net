@@ -17,21 +17,49 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
-public sealed partial class EnrichStatsRequestParameters : RequestParameters
+public sealed partial class EnrichStatsRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class EnrichStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,15 +68,39 @@ public sealed partial class EnrichStatsRequestParameters : RequestParameters
 /// Returns enrich coordinator statistics and information about enrich policies that are currently executing.
 /// </para>
 /// </summary>
-public sealed partial class EnrichStatsRequest : PlainRequest<EnrichStatsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestConverter))]
+public sealed partial class EnrichStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichStats;
+#if NET7_0_OR_GREATER
+	public EnrichStatsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public EnrichStatsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EnrichStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.EnrichStats;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.stats";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -57,23 +109,87 @@ public sealed partial class EnrichStatsRequest : PlainRequest<EnrichStatsRequest
 /// Returns enrich coordinator statistics and information about enrich policies that are currently executing.
 /// </para>
 /// </summary>
-public sealed partial class EnrichStatsRequestDescriptor : RequestDescriptor<EnrichStatsRequestDescriptor, EnrichStatsRequestParameters>
+public readonly partial struct EnrichStatsRequestDescriptor
 {
-	internal EnrichStatsRequestDescriptor(Action<EnrichStatsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrichStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public EnrichStatsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichStats;
+	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "enrich.stats";
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor(new Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

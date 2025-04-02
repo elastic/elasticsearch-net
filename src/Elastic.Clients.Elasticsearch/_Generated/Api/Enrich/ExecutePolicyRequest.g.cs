@@ -17,21 +17,21 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
-public sealed partial class ExecutePolicyRequestParameters : RequestParameters
+public sealed partial class ExecutePolicyRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the request blocks other enrich policy execution requests until complete.
@@ -40,21 +40,62 @@ public sealed partial class ExecutePolicyRequestParameters : RequestParameters
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
+internal sealed partial class ExecutePolicyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Run an enrich policy.
 /// Create the enrich index for an existing enrich policy.
 /// </para>
 /// </summary>
-public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestConverter))]
+public sealed partial class ExecutePolicyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ExecutePolicyRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ExecutePolicyRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ExecutePolicyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichExecutePolicy;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.EnrichExecutePolicy;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => false;
 
@@ -62,10 +103,27 @@ public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyReq
 
 	/// <summary>
 	/// <para>
+	/// Enrich policy to execute.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, the request blocks other enrich policy execution requests until complete.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
@@ -75,31 +133,110 @@ public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyReq
 /// Create the enrich index for an existing enrich policy.
 /// </para>
 /// </summary>
-public sealed partial class ExecutePolicyRequestDescriptor : RequestDescriptor<ExecutePolicyRequestDescriptor, ExecutePolicyRequestParameters>
+public readonly partial struct ExecutePolicyRequestDescriptor
 {
-	internal ExecutePolicyRequestDescriptor(Action<ExecutePolicyRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest Instance { get; init; }
 
-	public ExecutePolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExecutePolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichExecutePolicy;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "enrich.execute_policy";
-
-	public ExecutePolicyRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	public ExecutePolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public ExecutePolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest(name);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ExecutePolicyRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Enrich policy to execute.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request blocks other enrich policy execution requests until complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor(new Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

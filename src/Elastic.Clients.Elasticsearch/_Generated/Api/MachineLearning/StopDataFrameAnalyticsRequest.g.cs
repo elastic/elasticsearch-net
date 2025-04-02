@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class StopDataFrameAnalyticsRequestParameters : RequestParameters
+public sealed partial class StopDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -79,6 +72,35 @@ public sealed partial class StopDataFrameAnalyticsRequestParameters : RequestPar
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class StopDataFrameAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Stop data frame analytics jobs.
@@ -86,19 +108,44 @@ public sealed partial class StopDataFrameAnalyticsRequestParameters : RequestPar
 /// throughout its lifecycle.
 /// </para>
 /// </summary>
-public sealed partial class StopDataFrameAnalyticsRequest : PlainRequest<StopDataFrameAnalyticsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestConverter))]
+public sealed partial class StopDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public StopDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public StopDataFrameAnalyticsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StopDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStopDataFrameAnalytics;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningStopDataFrameAnalytics;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.stop_data_frame_analytics";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -129,7 +176,6 @@ public sealed partial class StopDataFrameAnalyticsRequest : PlainRequest<StopDat
 	/// status code when there are no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
@@ -137,7 +183,6 @@ public sealed partial class StopDataFrameAnalyticsRequest : PlainRequest<StopDat
 	/// If true, the data frame analytics job is stopped forcefully.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 	/// <summary>
@@ -146,7 +191,6 @@ public sealed partial class StopDataFrameAnalyticsRequest : PlainRequest<StopDat
 	/// stops. Defaults to 20 seconds.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
@@ -157,71 +201,148 @@ public sealed partial class StopDataFrameAnalyticsRequest : PlainRequest<StopDat
 /// throughout its lifecycle.
 /// </para>
 /// </summary>
-public sealed partial class StopDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<StopDataFrameAnalyticsRequestDescriptor<TDocument>, StopDataFrameAnalyticsRequestParameters>
+public readonly partial struct StopDataFrameAnalyticsRequestDescriptor
 {
-	internal StopDataFrameAnalyticsRequestDescriptor(Action<StopDataFrameAnalyticsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest Instance { get; init; }
 
-	public StopDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StopDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStopDataFrameAnalytics;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.stop_data_frame_analytics";
-
-	public StopDataFrameAnalyticsRequestDescriptor<TDocument> AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-	public StopDataFrameAnalyticsRequestDescriptor<TDocument> Force(bool? force = true) => Qs("force", force);
-	public StopDataFrameAnalyticsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public StopDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public StopDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StopDataFrameAnalyticsRequestDescriptor()
 	{
-	}
-}
-
-/// <summary>
-/// <para>
-/// Stop data frame analytics jobs.
-/// A data frame analytics job can be started and stopped multiple times
-/// throughout its lifecycle.
-/// </para>
-/// </summary>
-public sealed partial class StopDataFrameAnalyticsRequestDescriptor : RequestDescriptor<StopDataFrameAnalyticsRequestDescriptor, StopDataFrameAnalyticsRequestParameters>
-{
-	internal StopDataFrameAnalyticsRequestDescriptor(Action<StopDataFrameAnalyticsRequestDescriptor> configure) => configure.Invoke(this);
-
-	public StopDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningStopDataFrameAnalytics;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.stop_data_frame_analytics";
-
-	public StopDataFrameAnalyticsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-	public StopDataFrameAnalyticsRequestDescriptor Force(bool? force = true) => Qs("force", force);
-	public StopDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public StopDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	/// <summary>
+	/// <para>
+	/// Identifier for the data frame analytics job. This identifier can contain
+	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+	/// underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="number">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no data frame analytics
+	/// jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value is true, which returns an empty data_frame_analytics
+	/// array when there are no matches and the subset of results when there are
+	/// partial matches. If this parameter is false, the request returns a 404
+	/// status code when there are no matches or only partial matches.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
+		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, the data frame analytics job is stopped forcefully.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor Force(bool? value = true)
+	{
+		Instance.Force = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Controls the amount of time to wait until the data frame analytics job
+	/// stops. Defaults to 20 seconds.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

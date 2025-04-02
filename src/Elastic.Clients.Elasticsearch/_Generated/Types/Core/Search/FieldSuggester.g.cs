@@ -17,45 +17,164 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-[JsonConverter(typeof(FieldSuggesterConverter))]
-public sealed partial class FieldSuggester
+internal sealed partial class FieldSuggesterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>
 {
-	internal FieldSuggester(string variantName, object variant)
+	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex");
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText VariantCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText VariantPhrase = System.Text.Json.JsonEncodedText.Encode("phrase");
+	private static readonly System.Text.Json.JsonEncodedText VariantTerm = System.Text.Json.JsonEncodedText.Encode("term");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propPrefix = default;
+		LocalJsonValue<string?> propRegex = default;
+		LocalJsonValue<string?> propText = default;
+		var variantType = string.Empty;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPrefix.TryReadProperty(ref reader, options, PropPrefix, null))
+			{
+				continue;
+			}
+
+			if (propRegex.TryReadProperty(ref reader, options, PropRegex, null))
+			{
+				continue;
+			}
+
+			if (propText.TryReadProperty(ref reader, options, PropText, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantCompletion))
+			{
+				variantType = VariantCompletion.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPhrase))
+			{
+				variantType = VariantPhrase.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantTerm))
+			{
+				variantType = VariantTerm.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant,
+			Prefix = propPrefix.Value,
+			Regex = propRegex.Value,
+			Text = propText.Value
+		};
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case "":
+				break;
+			case "completion":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester)value.Variant, null, null);
+				break;
+			case "phrase":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester)value.Variant, null, null);
+				break;
+			case "term":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.TermSuggester)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester)}'.");
+		}
 
-	public static FieldSuggester Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester completionSuggester) => new FieldSuggester("completion", completionSuggester);
-	public static FieldSuggester Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester phraseSuggester) => new FieldSuggester("phrase", phraseSuggester);
-	public static FieldSuggester Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester termSuggester) => new FieldSuggester("term", termSuggester);
+		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
+		writer.WriteProperty(options, PropRegex, value.Regex, null, null);
+		writer.WriteProperty(options, PropText, value.Text, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterConverter))]
+public sealed partial class FieldSuggester
+{
+	public string VariantType { get; internal set; } = string.Empty;
+	public object? Variant { get; internal set; }
+#if NET7_0_OR_GREATER
+	public FieldSuggester()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FieldSuggester()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Provides auto-complete/search-as-you-type functionality.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester? Completion { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester>("completion"); set => SetVariant("completion", value); }
+
+	/// <summary>
+	/// <para>
+	/// Provides access to word alternatives on a per token basis within a certain string distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester? Phrase { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester>("phrase"); set => SetVariant("phrase", value); }
+
+	/// <summary>
+	/// <para>
+	/// Suggests terms based on edit distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggester? Term { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester>("term"); set => SetVariant("term", value); }
 
 	/// <summary>
 	/// <para>
 	/// Prefix used to search for suggestions.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
 
 	/// <summary>
@@ -63,7 +182,6 @@ public sealed partial class FieldSuggester
 	/// A prefix expressed as a regular expression.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("regex")]
 	public string? Regex { get; set; }
 
 	/// <summary>
@@ -72,185 +190,125 @@ public sealed partial class FieldSuggester
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester value) => new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester { Completion = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester value) => new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester { Phrase = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester value) => new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester { Term = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class FieldSuggesterConverter : JsonConverter<FieldSuggester>
+public readonly partial struct FieldSuggesterDescriptor<TDocument>
 {
-	public override FieldSuggester Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		string? prefixValue = default;
-		string? regexValue = default;
-		string? textValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "prefix")
-			{
-				prefixValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "regex")
-			{
-				regexValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "text")
-			{
-				textValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
-			if (propertyName == "completion")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "phrase")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "term")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FieldSuggester' from the response.");
-		}
-
-		var result = new FieldSuggester(variantNameValue, variantValue);
-		result.Prefix = prefixValue;
-		result.Regex = regexValue;
-		result.Text = textValue;
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, FieldSuggester value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSuggesterDescriptor()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(value.Prefix))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(value.Prefix);
-		}
-
-		if (!string.IsNullOrEmpty(value.Regex))
-		{
-			writer.WritePropertyName("regex");
-			writer.WriteStringValue(value.Regex);
-		}
-
-		if (!string.IsNullOrEmpty(value.Text))
-		{
-			writer.WritePropertyName("text");
-			writer.WriteStringValue(value.Text);
-		}
-
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "completion":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester)value.Variant, options);
-					break;
-				case "phrase":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester)value.Variant, options);
-					break;
-				case "term":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.TermSuggester)value.Variant, options);
-					break;
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDescriptor<FieldSuggesterDescriptor<TDocument>>
-{
-	internal FieldSuggesterDescriptor(Action<FieldSuggesterDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public FieldSuggesterDescriptor() : base()
-	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	private FieldSuggesterDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Provides auto-complete/search-as-you-type functionality.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester? value)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Completion = value;
+		return this;
 	}
 
-	private FieldSuggesterDescriptor<TDocument> Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Provides auto-complete/search-as-you-type functionality.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Completion(System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>> action)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Completion = Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	private string? PrefixValue { get; set; }
-	private string? RegexValue { get; set; }
-	private string? TextValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Provides access to word alternatives on a per token basis within a certain string distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester? value)
+	{
+		Instance.Phrase = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Provides access to word alternatives on a per token basis within a certain string distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Phrase(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument>> action)
+	{
+		Instance.Phrase = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Suggests terms based on edit distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester? value)
+	{
+		Instance.Term = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Suggests terms based on edit distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Term(System.Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>> action)
+	{
+		Instance.Term = Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Prefix used to search for suggestions.
 	/// </para>
 	/// </summary>
-	public FieldSuggesterDescriptor<TDocument> Prefix(string? prefix)
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Prefix(string? value)
 	{
-		PrefixValue = prefix;
-		return Self;
+		Instance.Prefix = value;
+		return this;
 	}
 
 	/// <summary>
@@ -258,10 +316,10 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 	/// A prefix expressed as a regular expression.
 	/// </para>
 	/// </summary>
-	public FieldSuggesterDescriptor<TDocument> Regex(string? regex)
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Regex(string? value)
 	{
-		RegexValue = regex;
-		return Self;
+		Instance.Regex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -270,101 +328,148 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public FieldSuggesterDescriptor<TDocument> Text(string? text)
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Text(string? value)
 	{
-		TextValue = text;
-		return Self;
+		Instance.Text = value;
+		return this;
 	}
 
-	public FieldSuggesterDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester completionSuggester) => Set(completionSuggester, "completion");
-	public FieldSuggesterDescriptor<TDocument> Completion(Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
-	public FieldSuggesterDescriptor<TDocument> Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester phraseSuggester) => Set(phraseSuggester, "phrase");
-	public FieldSuggesterDescriptor<TDocument> Phrase(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
-	public FieldSuggesterDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester termSuggester) => Set(termSuggester, "term");
-	public FieldSuggesterDescriptor<TDocument> Term(Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
-
-		if (!string.IsNullOrEmpty(RegexValue))
-		{
-			writer.WritePropertyName("regex");
-			writer.WriteStringValue(RegexValue);
-		}
-
-		if (!string.IsNullOrEmpty(TextValue))
-		{
-			writer.WritePropertyName("text");
-			writer.WriteStringValue(TextValue);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<FieldSuggesterDescriptor>
+public readonly partial struct FieldSuggesterDescriptor
 {
-	internal FieldSuggesterDescriptor(Action<FieldSuggesterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester Instance { get; init; }
 
-	public FieldSuggesterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private FieldSuggesterDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSuggesterDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private FieldSuggesterDescriptor Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Provides auto-complete/search-as-you-type functionality.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Completion = value;
+		return this;
 	}
 
-	private string? PrefixValue { get; set; }
-	private string? RegexValue { get; set; }
-	private string? TextValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Provides auto-complete/search-as-you-type functionality.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Completion(System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor> action)
+	{
+		Instance.Completion = Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Provides auto-complete/search-as-you-type functionality.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Completion<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<T>> action)
+	{
+		Instance.Completion = Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Provides access to word alternatives on a per token basis within a certain string distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester? value)
+	{
+		Instance.Phrase = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Provides access to word alternatives on a per token basis within a certain string distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Phrase(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor> action)
+	{
+		Instance.Phrase = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Provides access to word alternatives on a per token basis within a certain string distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Phrase<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<T>> action)
+	{
+		Instance.Phrase = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Suggests terms based on edit distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester? value)
+	{
+		Instance.Term = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Suggests terms based on edit distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Term(System.Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor> action)
+	{
+		Instance.Term = Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Suggests terms based on edit distance.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Term<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<T>> action)
+	{
+		Instance.Term = Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<T>.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Prefix used to search for suggestions.
 	/// </para>
 	/// </summary>
-	public FieldSuggesterDescriptor Prefix(string? prefix)
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Prefix(string? value)
 	{
-		PrefixValue = prefix;
-		return Self;
+		Instance.Prefix = value;
+		return this;
 	}
 
 	/// <summary>
@@ -372,10 +477,10 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 	/// A prefix expressed as a regular expression.
 	/// </para>
 	/// </summary>
-	public FieldSuggesterDescriptor Regex(string? regex)
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Regex(string? value)
 	{
-		RegexValue = regex;
-		return Self;
+		Instance.Regex = value;
+		return this;
 	}
 
 	/// <summary>
@@ -384,53 +489,17 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public FieldSuggesterDescriptor Text(string? text)
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Text(string? value)
 	{
-		TextValue = text;
-		return Self;
+		Instance.Text = value;
+		return this;
 	}
 
-	public FieldSuggesterDescriptor Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester completionSuggester) => Set(completionSuggester, "completion");
-	public FieldSuggesterDescriptor Completion<TDocument>(Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor> configure) => Set(configure, "completion");
-	public FieldSuggesterDescriptor Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester phraseSuggester) => Set(phraseSuggester, "phrase");
-	public FieldSuggesterDescriptor Phrase<TDocument>(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor> configure) => Set(configure, "phrase");
-	public FieldSuggesterDescriptor Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester termSuggester) => Set(termSuggester, "term");
-	public FieldSuggesterDescriptor Term<TDocument>(Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor> configure) => Set(configure, "term");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
-
-		if (!string.IsNullOrEmpty(RegexValue))
-		{
-			writer.WritePropertyName("regex");
-			writer.WriteStringValue(RegexValue);
-		}
-
-		if (!string.IsNullOrEmpty(TextValue))
-		{
-			writer.WritePropertyName("text");
-			writer.WriteStringValue(TextValue);
-		}
-
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,46 +17,264 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class IndexingStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexingStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteCurrent = System.Text.Json.JsonEncodedText.Encode("delete_current");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteTime = System.Text.Json.JsonEncodedText.Encode("delete_time");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteTimeInMillis = System.Text.Json.JsonEncodedText.Encode("delete_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteTotal = System.Text.Json.JsonEncodedText.Encode("delete_total");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCurrent = System.Text.Json.JsonEncodedText.Encode("index_current");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFailed = System.Text.Json.JsonEncodedText.Encode("index_failed");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTime = System.Text.Json.JsonEncodedText.Encode("index_time");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTimeInMillis = System.Text.Json.JsonEncodedText.Encode("index_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTotal = System.Text.Json.JsonEncodedText.Encode("index_total");
+	private static readonly System.Text.Json.JsonEncodedText PropIsThrottled = System.Text.Json.JsonEncodedText.Encode("is_throttled");
+	private static readonly System.Text.Json.JsonEncodedText PropNoopUpdateTotal = System.Text.Json.JsonEncodedText.Encode("noop_update_total");
+	private static readonly System.Text.Json.JsonEncodedText PropThrottleTime = System.Text.Json.JsonEncodedText.Encode("throttle_time");
+	private static readonly System.Text.Json.JsonEncodedText PropThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("throttle_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTypes = System.Text.Json.JsonEncodedText.Encode("types");
+	private static readonly System.Text.Json.JsonEncodedText PropWriteLoad = System.Text.Json.JsonEncodedText.Encode("write_load");
+
+	public override Elastic.Clients.Elasticsearch.IndexingStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propDeleteCurrent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDeleteTime = default;
+		LocalJsonValue<System.TimeSpan> propDeleteTimeInMillis = default;
+		LocalJsonValue<long> propDeleteTotal = default;
+		LocalJsonValue<long> propIndexCurrent = default;
+		LocalJsonValue<long> propIndexFailed = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propIndexTime = default;
+		LocalJsonValue<System.TimeSpan> propIndexTimeInMillis = default;
+		LocalJsonValue<long> propIndexTotal = default;
+		LocalJsonValue<bool> propIsThrottled = default;
+		LocalJsonValue<long> propNoopUpdateTotal = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propThrottleTime = default;
+		LocalJsonValue<System.TimeSpan> propThrottleTimeInMillis = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>?> propTypes = default;
+		LocalJsonValue<double?> propWriteLoad = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeleteCurrent.TryReadProperty(ref reader, options, PropDeleteCurrent, null))
+			{
+				continue;
+			}
+
+			if (propDeleteTime.TryReadProperty(ref reader, options, PropDeleteTime, null))
+			{
+				continue;
+			}
+
+			if (propDeleteTimeInMillis.TryReadProperty(ref reader, options, PropDeleteTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propDeleteTotal.TryReadProperty(ref reader, options, PropDeleteTotal, null))
+			{
+				continue;
+			}
+
+			if (propIndexCurrent.TryReadProperty(ref reader, options, PropIndexCurrent, null))
+			{
+				continue;
+			}
+
+			if (propIndexFailed.TryReadProperty(ref reader, options, PropIndexFailed, null))
+			{
+				continue;
+			}
+
+			if (propIndexTime.TryReadProperty(ref reader, options, PropIndexTime, null))
+			{
+				continue;
+			}
+
+			if (propIndexTimeInMillis.TryReadProperty(ref reader, options, PropIndexTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propIndexTotal.TryReadProperty(ref reader, options, PropIndexTotal, null))
+			{
+				continue;
+			}
+
+			if (propIsThrottled.TryReadProperty(ref reader, options, PropIsThrottled, null))
+			{
+				continue;
+			}
+
+			if (propNoopUpdateTotal.TryReadProperty(ref reader, options, PropNoopUpdateTotal, null))
+			{
+				continue;
+			}
+
+			if (propThrottleTime.TryReadProperty(ref reader, options, PropThrottleTime, null))
+			{
+				continue;
+			}
+
+			if (propThrottleTimeInMillis.TryReadProperty(ref reader, options, PropThrottleTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTypes.TryReadProperty(ref reader, options, PropTypes, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexingStats>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propWriteLoad.TryReadProperty(ref reader, options, PropWriteLoad, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexingStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DeleteCurrent = propDeleteCurrent.Value,
+			DeleteTime = propDeleteTime.Value,
+			DeleteTimeInMillis = propDeleteTimeInMillis.Value,
+			DeleteTotal = propDeleteTotal.Value,
+			IndexCurrent = propIndexCurrent.Value,
+			IndexFailed = propIndexFailed.Value,
+			IndexTime = propIndexTime.Value,
+			IndexTimeInMillis = propIndexTimeInMillis.Value,
+			IndexTotal = propIndexTotal.Value,
+			IsThrottled = propIsThrottled.Value,
+			NoopUpdateTotal = propNoopUpdateTotal.Value,
+			ThrottleTime = propThrottleTime.Value,
+			ThrottleTimeInMillis = propThrottleTimeInMillis.Value,
+			Types = propTypes.Value,
+			WriteLoad = propWriteLoad.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexingStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeleteCurrent, value.DeleteCurrent, null, null);
+		writer.WriteProperty(options, PropDeleteTime, value.DeleteTime, null, null);
+		writer.WriteProperty(options, PropDeleteTimeInMillis, value.DeleteTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropDeleteTotal, value.DeleteTotal, null, null);
+		writer.WriteProperty(options, PropIndexCurrent, value.IndexCurrent, null, null);
+		writer.WriteProperty(options, PropIndexFailed, value.IndexFailed, null, null);
+		writer.WriteProperty(options, PropIndexTime, value.IndexTime, null, null);
+		writer.WriteProperty(options, PropIndexTimeInMillis, value.IndexTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropIndexTotal, value.IndexTotal, null, null);
+		writer.WriteProperty(options, PropIsThrottled, value.IsThrottled, null, null);
+		writer.WriteProperty(options, PropNoopUpdateTotal, value.NoopUpdateTotal, null, null);
+		writer.WriteProperty(options, PropThrottleTime, value.ThrottleTime, null, null);
+		writer.WriteProperty(options, PropThrottleTimeInMillis, value.ThrottleTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTypes, value.Types, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexingStats>(o, v, null, null));
+		writer.WriteProperty(options, PropWriteLoad, value.WriteLoad, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexingStatsConverter))]
 public sealed partial class IndexingStats
 {
-	[JsonInclude, JsonPropertyName("delete_current")]
-	public long DeleteCurrent { get; init; }
-	[JsonInclude, JsonPropertyName("delete_time")]
-	public Elastic.Clients.Elasticsearch.Duration? DeleteTime { get; init; }
-	[JsonInclude, JsonPropertyName("delete_time_in_millis")]
-	public long DeleteTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("delete_total")]
-	public long DeleteTotal { get; init; }
-	[JsonInclude, JsonPropertyName("index_current")]
-	public long IndexCurrent { get; init; }
-	[JsonInclude, JsonPropertyName("index_failed")]
-	public long IndexFailed { get; init; }
-	[JsonInclude, JsonPropertyName("index_time")]
-	public Elastic.Clients.Elasticsearch.Duration? IndexTime { get; init; }
-	[JsonInclude, JsonPropertyName("index_time_in_millis")]
-	public long IndexTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("index_total")]
-	public long IndexTotal { get; init; }
-	[JsonInclude, JsonPropertyName("is_throttled")]
-	public bool IsThrottled { get; init; }
-	[JsonInclude, JsonPropertyName("noop_update_total")]
-	public long NoopUpdateTotal { get; init; }
-	[JsonInclude, JsonPropertyName("throttle_time")]
-	public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; init; }
-	[JsonInclude, JsonPropertyName("throttle_time_in_millis")]
-	public long ThrottleTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("types")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? Types { get; init; }
-	[JsonInclude, JsonPropertyName("write_load")]
-	public double? WriteLoad { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexingStats(long deleteCurrent, System.TimeSpan deleteTimeInMillis, long deleteTotal, long indexCurrent, long indexFailed, System.TimeSpan indexTimeInMillis, long indexTotal, bool isThrottled, long noopUpdateTotal, System.TimeSpan throttleTimeInMillis)
+	{
+		DeleteCurrent = deleteCurrent;
+		DeleteTimeInMillis = deleteTimeInMillis;
+		DeleteTotal = deleteTotal;
+		IndexCurrent = indexCurrent;
+		IndexFailed = indexFailed;
+		IndexTimeInMillis = indexTimeInMillis;
+		IndexTotal = indexTotal;
+		IsThrottled = isThrottled;
+		NoopUpdateTotal = noopUpdateTotal;
+		ThrottleTimeInMillis = throttleTimeInMillis;
+	}
+#if NET7_0_OR_GREATER
+	public IndexingStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IndexingStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexingStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DeleteCurrent { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? DeleteTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan DeleteTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DeleteTotal { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long IndexCurrent { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long IndexFailed { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? IndexTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan IndexTimeInMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long IndexTotal { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool IsThrottled { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NoopUpdateTotal { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan ThrottleTimeInMillis { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? Types { get; set; }
+	public double? WriteLoad { get; set; }
 }

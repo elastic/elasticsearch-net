@@ -17,78 +17,164 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFrequencyMap = System.Text.Json.JsonEncodedText.Encode("frequency_map");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name> propFeatureName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, double>> propFrequencyMap = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFeatureName.TryReadProperty(ref reader, options, PropFeatureName, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFrequencyMap.TryReadProperty(ref reader, options, PropFrequencyMap, static System.Collections.Generic.IDictionary<string, double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, double>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FeatureName = propFeatureName.Value,
+			Field = propField.Value,
+			FrequencyMap = propFrequencyMap.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFeatureName, value.FeatureName, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFrequencyMap, value.FrequencyMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, double> v) => w.WriteDictionaryValue<string, double>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingConverter))]
 public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncoding
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.Name featureName, Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.IDictionary<string, double> frequencyMap)
+	{
+		FeatureName = featureName;
+		Field = field;
+		FrequencyMap = frequencyMap;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeAnalysisFeatureProcessorFrequencyEncoding()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeAnalysisFeatureProcessorFrequencyEncoding()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The resulting feature name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("feature_name")]
-	public Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("frequency_map")]
-	public IDictionary<string, double> FrequencyMap { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor(DataframeAnalysisFeatureProcessorFrequencyEncoding dataframeAnalysisFeatureProcessorFrequencyEncoding) => Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor.FrequencyEncoding(dataframeAnalysisFeatureProcessorFrequencyEncoding);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IDictionary<string, double> FrequencyMap { get; set; }
 }
 
-public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> : SerializableDescriptor<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>>
+public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>
 {
-	internal DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding Instance { get; init; }
 
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Name FeatureNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private IDictionary<string, double> FrequencyMapValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The resulting feature name.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FeatureName(Elastic.Clients.Elasticsearch.Name featureName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FeatureName(Elastic.Clients.Elasticsearch.Name value)
 	{
-		FeatureNameValue = featureName;
-		return Self;
+		Instance.FeatureName = value;
+		return this;
 	}
 
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -96,64 +182,90 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDe
 	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap(Func<FluentDictionary<string, double>, FluentDictionary<string, double>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap(System.Collections.Generic.IDictionary<string, double> value)
 	{
-		FrequencyMapValue = selector?.Invoke(new FluentDictionary<string, double>());
-		return Self;
+		Instance.FrequencyMap = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap()
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("feature_name");
-		JsonSerializer.Serialize(writer, FeatureNameValue, options);
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("frequency_map");
-		JsonSerializer.Serialize(writer, FrequencyMapValue, options);
-		writer.WriteEndObject();
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble>? action)
+	{
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> AddFrequencyMap(string key, double value)
+	{
+		Instance.FrequencyMap ??= new System.Collections.Generic.Dictionary<string, double>();
+		Instance.FrequencyMap.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor : SerializableDescriptor<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor>
+public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor
 {
-	internal DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(Action<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding Instance { get; init; }
 
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Name FeatureNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private IDictionary<string, double> FrequencyMapValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The resulting feature name.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FeatureName(Elastic.Clients.Elasticsearch.Name featureName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FeatureName(Elastic.Clients.Elasticsearch.Name value)
 	{
-		FeatureNameValue = featureName;
-		return Self;
+		Instance.FeatureName = value;
+		return this;
 	}
 
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -161,21 +273,46 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDe
 	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
 	/// </para>
 	/// </summary>
-	public DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap(Func<FluentDictionary<string, double>, FluentDictionary<string, double>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap(System.Collections.Generic.IDictionary<string, double> value)
 	{
-		FrequencyMapValue = selector?.Invoke(new FluentDictionary<string, double>());
-		return Self;
+		Instance.FrequencyMap = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap()
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("feature_name");
-		JsonSerializer.Serialize(writer, FeatureNameValue, options);
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("frequency_map");
-		JsonSerializer.Serialize(writer, FrequencyMapValue, options);
-		writer.WriteEndObject();
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble>? action)
+	{
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor AddFrequencyMap(string key, double value)
+	{
+		Instance.FrequencyMap ??= new System.Collections.Generic.Dictionary<string, double>();
+		Instance.FrequencyMap.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

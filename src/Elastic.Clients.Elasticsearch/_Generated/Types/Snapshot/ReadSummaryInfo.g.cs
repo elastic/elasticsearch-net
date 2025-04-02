@@ -17,103 +17,294 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class ReadSummaryInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWait = System.Text.Json.JsonEncodedText.Encode("max_wait");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWaitNanos = System.Text.Json.JsonEncodedText.Encode("max_wait_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalElapsed = System.Text.Json.JsonEncodedText.Encode("total_elapsed");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalElapsedNanos = System.Text.Json.JsonEncodedText.Encode("total_elapsed_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottled = System.Text.Json.JsonEncodedText.Encode("total_throttled");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottledNanos = System.Text.Json.JsonEncodedText.Encode("total_throttled_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalWait = System.Text.Json.JsonEncodedText.Encode("total_wait");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalWaitNanos = System.Text.Json.JsonEncodedText.Encode("total_wait_nanos");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propMaxWait = default;
+		LocalJsonValue<System.TimeSpan> propMaxWaitNanos = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propTotalElapsed = default;
+		LocalJsonValue<System.TimeSpan> propTotalElapsedNanos = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propTotalSize = default;
+		LocalJsonValue<long> propTotalSizeBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propTotalThrottled = default;
+		LocalJsonValue<System.TimeSpan> propTotalThrottledNanos = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propTotalWait = default;
+		LocalJsonValue<System.TimeSpan> propTotalWaitNanos = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxWait.TryReadProperty(ref reader, options, PropMaxWait, null))
+			{
+				continue;
+			}
+
+			if (propMaxWaitNanos.TryReadProperty(ref reader, options, PropMaxWaitNanos, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalElapsed.TryReadProperty(ref reader, options, PropTotalElapsed, null))
+			{
+				continue;
+			}
+
+			if (propTotalElapsedNanos.TryReadProperty(ref reader, options, PropTotalElapsedNanos, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalSize.TryReadProperty(ref reader, options, PropTotalSize, null))
+			{
+				continue;
+			}
+
+			if (propTotalSizeBytes.TryReadProperty(ref reader, options, PropTotalSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalThrottled.TryReadProperty(ref reader, options, PropTotalThrottled, null))
+			{
+				continue;
+			}
+
+			if (propTotalThrottledNanos.TryReadProperty(ref reader, options, PropTotalThrottledNanos, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalWait.TryReadProperty(ref reader, options, PropTotalWait, null))
+			{
+				continue;
+			}
+
+			if (propTotalWaitNanos.TryReadProperty(ref reader, options, PropTotalWaitNanos, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Count = propCount.Value,
+			MaxWait = propMaxWait.Value,
+			MaxWaitNanos = propMaxWaitNanos.Value,
+			TotalElapsed = propTotalElapsed.Value,
+			TotalElapsedNanos = propTotalElapsedNanos.Value,
+			TotalSize = propTotalSize.Value,
+			TotalSizeBytes = propTotalSizeBytes.Value,
+			TotalThrottled = propTotalThrottled.Value,
+			TotalThrottledNanos = propTotalThrottledNanos.Value,
+			TotalWait = propTotalWait.Value,
+			TotalWaitNanos = propTotalWaitNanos.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropMaxWait, value.MaxWait, null, null);
+		writer.WriteProperty(options, PropMaxWaitNanos, value.MaxWaitNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropTotalElapsed, value.TotalElapsed, null, null);
+		writer.WriteProperty(options, PropTotalElapsedNanos, value.TotalElapsedNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropTotalSize, value.TotalSize, null, null);
+		writer.WriteProperty(options, PropTotalSizeBytes, value.TotalSizeBytes, null, null);
+		writer.WriteProperty(options, PropTotalThrottled, value.TotalThrottled, null, null);
+		writer.WriteProperty(options, PropTotalThrottledNanos, value.TotalThrottledNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropTotalWait, value.TotalWait, null, null);
+		writer.WriteProperty(options, PropTotalWaitNanos, value.TotalWaitNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfoConverter))]
 public sealed partial class ReadSummaryInfo
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReadSummaryInfo(int count, Elastic.Clients.Elasticsearch.Duration maxWait, System.TimeSpan maxWaitNanos, Elastic.Clients.Elasticsearch.Duration totalElapsed, System.TimeSpan totalElapsedNanos, Elastic.Clients.Elasticsearch.ByteSize totalSize, long totalSizeBytes, Elastic.Clients.Elasticsearch.Duration totalThrottled, System.TimeSpan totalThrottledNanos, Elastic.Clients.Elasticsearch.Duration totalWait, System.TimeSpan totalWaitNanos)
+	{
+		Count = count;
+		MaxWait = maxWait;
+		MaxWaitNanos = maxWaitNanos;
+		TotalElapsed = totalElapsed;
+		TotalElapsedNanos = totalElapsedNanos;
+		TotalSize = totalSize;
+		TotalSizeBytes = totalSizeBytes;
+		TotalThrottled = totalThrottled;
+		TotalThrottledNanos = totalThrottledNanos;
+		TotalWait = totalWait;
+		TotalWaitNanos = totalWaitNanos;
+	}
+#if NET7_0_OR_GREATER
+	public ReadSummaryInfo()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ReadSummaryInfo()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ReadSummaryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The number of read operations performed in the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("count")]
-	public int Count { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum time spent waiting for the first byte of any read request to be received.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_wait")]
-	public Elastic.Clients.Elasticsearch.Duration MaxWait { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration MaxWait { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum time spent waiting for the first byte of any read request to be received, in nanoseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_wait_nanos")]
-	public long MaxWaitNanos { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan MaxWaitNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total elapsed time spent on reading blobs in the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_elapsed")]
-	public Elastic.Clients.Elasticsearch.Duration TotalElapsed { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration TotalElapsed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total elapsed time spent on reading blobs in the test, in nanoseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_elapsed_nanos")]
-	public long TotalElapsedNanos { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalElapsedNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total size of all the blobs or partial blobs read in the test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize TotalSize { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ByteSize TotalSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total size of all the blobs or partial blobs read in the test, in bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_size_bytes")]
-	public long TotalSizeBytes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalSizeBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_throttled")]
-	public Elastic.Clients.Elasticsearch.Duration TotalThrottled { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration TotalThrottled { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles, in nanoseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_throttled_nanos")]
-	public long TotalThrottledNanos { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalThrottledNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting for the first byte of each read request to be received.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_wait")]
-	public Elastic.Clients.Elasticsearch.Duration TotalWait { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Duration TotalWait { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting for the first byte of each read request to be received, in nanoseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_wait_nanos")]
-	public long TotalWaitNanos { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalWaitNanos { get; set; }
 }

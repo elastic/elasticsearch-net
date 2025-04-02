@@ -17,77 +17,176 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class CustomCategorizeTextAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCharFilter = System.Text.Json.JsonEncodedText.Encode("char_filter");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propCharFilter = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propFilter = default;
+		LocalJsonValue<string?> propTokenizer = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCharFilter.TryReadProperty(ref reader, options, PropCharFilter, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTokenizer.TryReadProperty(ref reader, options, PropTokenizer, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CharFilter = propCharFilter.Value,
+			Filter = propFilter.Value,
+			Tokenizer = propTokenizer.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCharFilter, value.CharFilter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTokenizer, value.Tokenizer, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerConverter))]
 public sealed partial class CustomCategorizeTextAnalyzer
 {
-	[JsonInclude, JsonPropertyName("char_filter")]
-	public ICollection<string>? CharFilter { get; set; }
-	[JsonInclude, JsonPropertyName("filter")]
-	public ICollection<string>? Filter { get; set; }
-	[JsonInclude, JsonPropertyName("tokenizer")]
+#if NET7_0_OR_GREATER
+	public CustomCategorizeTextAnalyzer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CustomCategorizeTextAnalyzer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CustomCategorizeTextAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.ICollection<string>? CharFilter { get; set; }
+	public System.Collections.Generic.ICollection<string>? Filter { get; set; }
 	public string? Tokenizer { get; set; }
 }
 
-public sealed partial class CustomCategorizeTextAnalyzerDescriptor : SerializableDescriptor<CustomCategorizeTextAnalyzerDescriptor>
+public readonly partial struct CustomCategorizeTextAnalyzerDescriptor
 {
-	internal CustomCategorizeTextAnalyzerDescriptor(Action<CustomCategorizeTextAnalyzerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer Instance { get; init; }
 
-	public CustomCategorizeTextAnalyzerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CustomCategorizeTextAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? CharFilterValue { get; set; }
-	private ICollection<string>? FilterValue { get; set; }
-	private string? TokenizerValue { get; set; }
-
-	public CustomCategorizeTextAnalyzerDescriptor CharFilter(ICollection<string>? charFilter)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CustomCategorizeTextAnalyzerDescriptor()
 	{
-		CharFilterValue = charFilter;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public CustomCategorizeTextAnalyzerDescriptor Filter(ICollection<string>? filter)
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer instance) => new Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer(Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor CharFilter(System.Collections.Generic.ICollection<string>? value)
 	{
-		FilterValue = filter;
-		return Self;
+		Instance.CharFilter = value;
+		return this;
 	}
 
-	public CustomCategorizeTextAnalyzerDescriptor Tokenizer(string? tokenizer)
+	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor CharFilter()
 	{
-		TokenizerValue = tokenizer;
-		return Self;
+		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor CharFilter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
 	{
-		writer.WriteStartObject();
-		if (CharFilterValue is not null)
+		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor CharFilter(params string[] values)
+	{
+		Instance.CharFilter = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor Filter(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Filter = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor Filter()
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor Filter(params string[] values)
+	{
+		Instance.Filter = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor Tokenizer(string? value)
+	{
+		Instance.Tokenizer = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("char_filter");
-			JsonSerializer.Serialize(writer, CharFilterValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TokenizerValue))
-		{
-			writer.WritePropertyName("tokenizer");
-			writer.WriteStringValue(TokenizerValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

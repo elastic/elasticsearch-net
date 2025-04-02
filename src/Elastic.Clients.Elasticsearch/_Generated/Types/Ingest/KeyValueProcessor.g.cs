@@ -17,25 +17,219 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class KeyValueProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropExcludeKeys = System.Text.Json.JsonEncodedText.Encode("exclude_keys");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldSplit = System.Text.Json.JsonEncodedText.Encode("field_split");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeKeys = System.Text.Json.JsonEncodedText.Encode("include_keys");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText PropStripBrackets = System.Text.Json.JsonEncodedText.Encode("strip_brackets");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTrimKey = System.Text.Json.JsonEncodedText.Encode("trim_key");
+	private static readonly System.Text.Json.JsonEncodedText PropTrimValue = System.Text.Json.JsonEncodedText.Encode("trim_value");
+	private static readonly System.Text.Json.JsonEncodedText PropValueSplit = System.Text.Json.JsonEncodedText.Encode("value_split");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propExcludeKeys = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<string> propFieldSplit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIncludeKeys = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<string?> propPrefix = default;
+		LocalJsonValue<bool?> propStripBrackets = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		LocalJsonValue<string?> propTrimKey = default;
+		LocalJsonValue<string?> propTrimValue = default;
+		LocalJsonValue<string> propValueSplit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propExcludeKeys.TryReadProperty(ref reader, options, PropExcludeKeys, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFieldSplit.TryReadProperty(ref reader, options, PropFieldSplit, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propIncludeKeys.TryReadProperty(ref reader, options, PropIncludeKeys, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propPrefix.TryReadProperty(ref reader, options, PropPrefix, null))
+			{
+				continue;
+			}
+
+			if (propStripBrackets.TryReadProperty(ref reader, options, PropStripBrackets, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (propTrimKey.TryReadProperty(ref reader, options, PropTrimKey, null))
+			{
+				continue;
+			}
+
+			if (propTrimValue.TryReadProperty(ref reader, options, PropTrimValue, null))
+			{
+				continue;
+			}
+
+			if (propValueSplit.TryReadProperty(ref reader, options, PropValueSplit, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			ExcludeKeys = propExcludeKeys.Value,
+			Field = propField.Value,
+			FieldSplit = propFieldSplit.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			IncludeKeys = propIncludeKeys.Value,
+			OnFailure = propOnFailure.Value,
+			Prefix = propPrefix.Value,
+			StripBrackets = propStripBrackets.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value,
+			TrimKey = propTrimKey.Value,
+			TrimValue = propTrimValue.Value,
+			ValueSplit = propValueSplit.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropExcludeKeys, value.ExcludeKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFieldSplit, value.FieldSplit, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropIncludeKeys, value.IncludeKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
+		writer.WriteProperty(options, PropStripBrackets, value.StripBrackets, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteProperty(options, PropTrimKey, value.TrimKey, null, null);
+		writer.WriteProperty(options, PropTrimValue, value.TrimValue, null, null);
+		writer.WriteProperty(options, PropValueSplit, value.ValueSplit, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorConverter))]
 public sealed partial class KeyValueProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeyValueProcessor(Elastic.Clients.Elasticsearch.Field field, string fieldSplit, string valueSplit)
+	{
+		Field = field;
+		FieldSplit = fieldSplit;
+		ValueSplit = valueSplit;
+	}
+#if NET7_0_OR_GREATER
+	public KeyValueProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public KeyValueProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KeyValueProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -43,8 +237,7 @@ public sealed partial class KeyValueProcessor
 	/// List of keys to exclude from document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exclude_keys")]
-	public ICollection<string>? ExcludeKeys { get; set; }
+	public System.Collections.Generic.ICollection<string>? ExcludeKeys { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -52,31 +245,35 @@ public sealed partial class KeyValueProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Regex pattern to use for splitting key-value pairs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field_split")]
-	public string FieldSplit { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string FieldSplit { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -84,7 +281,6 @@ public sealed partial class KeyValueProcessor
 	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -93,23 +289,20 @@ public sealed partial class KeyValueProcessor
 	/// Defaults to including all keys.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("include_keys")]
-	public ICollection<string>? IncludeKeys { get; set; }
+	public System.Collections.Generic.ICollection<string>? IncludeKeys { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Prefix to be added to extracted keys.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
 
 	/// <summary>
@@ -117,7 +310,6 @@ public sealed partial class KeyValueProcessor
 	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("strip_brackets")]
 	public bool? StripBrackets { get; set; }
 
 	/// <summary>
@@ -126,7 +318,6 @@ public sealed partial class KeyValueProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -136,7 +327,6 @@ public sealed partial class KeyValueProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
 	/// <summary>
@@ -144,7 +334,6 @@ public sealed partial class KeyValueProcessor
 	/// String of characters to trim from extracted keys.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("trim_key")]
 	public string? TrimKey { get; set; }
 
 	/// <summary>
@@ -152,7 +341,6 @@ public sealed partial class KeyValueProcessor
 	/// String of characters to trim from extracted values.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("trim_value")]
 	public string? TrimValue { get; set; }
 
 	/// <summary>
@@ -160,39 +348,31 @@ public sealed partial class KeyValueProcessor
 	/// Regex pattern to use for splitting the key from the value within a key-value pair.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("value_split")]
-	public string ValueSplit { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(KeyValueProcessor keyValueProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Kv(keyValueProcessor);
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ValueSplit { get; set; }
 }
 
-public sealed partial class KeyValueProcessorDescriptor<TDocument> : SerializableDescriptor<KeyValueProcessorDescriptor<TDocument>>
+public readonly partial struct KeyValueProcessorDescriptor<TDocument>
 {
-	internal KeyValueProcessorDescriptor(Action<KeyValueProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor Instance { get; init; }
 
-	public KeyValueProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeyValueProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private ICollection<string>? ExcludeKeysValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string FieldSplitValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<string>? IncludeKeysValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private string? PrefixValue { get; set; }
-	private bool? StripBracketsValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-	private string? TrimKeyValue { get; set; }
-	private string? TrimValueValue { get; set; }
-	private string ValueSplitValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeyValueProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -200,10 +380,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -211,10 +391,43 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	/// List of keys to exclude from document.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> ExcludeKeys(ICollection<string>? excludeKeys)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ExcludeKeys(System.Collections.Generic.ICollection<string>? value)
 	{
-		ExcludeKeysValue = excludeKeys;
-		return Self;
+		Instance.ExcludeKeys = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ExcludeKeys()
+	{
+		Instance.ExcludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ExcludeKeys(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.ExcludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ExcludeKeys(params string[] values)
+	{
+		Instance.ExcludeKeys = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -223,10 +436,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -235,22 +448,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -258,10 +459,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	/// Regex pattern to use for splitting key-value pairs.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> FieldSplit(string fieldSplit)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> FieldSplit(string value)
 	{
-		FieldSplitValue = fieldSplit;
-		return Self;
+		Instance.FieldSplit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -269,10 +470,32 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -280,10 +503,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -291,10 +514,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -303,404 +526,10 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 	/// Defaults to including all keys.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> IncludeKeys(ICollection<string>? includeKeys)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IncludeKeys(System.Collections.Generic.ICollection<string>? value)
 	{
-		IncludeKeysValue = includeKeys;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public KeyValueProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public KeyValueProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public KeyValueProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prefix to be added to extracted keys.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> Prefix(string? prefix)
-	{
-		PrefixValue = prefix;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> StripBrackets(bool? stripBrackets = true)
-	{
-		StripBracketsValue = stripBrackets;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> Tag(string? tag)
-	{
-		TagValue = tag;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to insert the extracted keys into.
-	/// Defaults to the root of the document.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to insert the extracted keys into.
-	/// Defaults to the root of the document.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to insert the extracted keys into.
-	/// Defaults to the root of the document.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// String of characters to trim from extracted keys.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> TrimKey(string? trimKey)
-	{
-		TrimKeyValue = trimKey;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// String of characters to trim from extracted values.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> TrimValue(string? trimValue)
-	{
-		TrimValueValue = trimValue;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Regex pattern to use for splitting the key from the value within a key-value pair.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor<TDocument> ValueSplit(string valueSplit)
-	{
-		ValueSplitValue = valueSplit;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (ExcludeKeysValue is not null)
-		{
-			writer.WritePropertyName("exclude_keys");
-			JsonSerializer.Serialize(writer, ExcludeKeysValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("field_split");
-		writer.WriteStringValue(FieldSplitValue);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (IncludeKeysValue is not null)
-		{
-			writer.WritePropertyName("include_keys");
-			JsonSerializer.Serialize(writer, IncludeKeysValue, options);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
-
-		if (StripBracketsValue.HasValue)
-		{
-			writer.WritePropertyName("strip_brackets");
-			writer.WriteBooleanValue(StripBracketsValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TrimKeyValue))
-		{
-			writer.WritePropertyName("trim_key");
-			writer.WriteStringValue(TrimKeyValue);
-		}
-
-		if (!string.IsNullOrEmpty(TrimValueValue))
-		{
-			writer.WritePropertyName("trim_value");
-			writer.WriteStringValue(TrimValueValue);
-		}
-
-		writer.WritePropertyName("value_split");
-		writer.WriteStringValue(ValueSplitValue);
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor<KeyValueProcessorDescriptor>
-{
-	internal KeyValueProcessorDescriptor(Action<KeyValueProcessorDescriptor> configure) => configure.Invoke(this);
-
-	public KeyValueProcessorDescriptor() : base()
-	{
-	}
-
-	private string? DescriptionValue { get; set; }
-	private ICollection<string>? ExcludeKeysValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string FieldSplitValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<string>? IncludeKeysValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private string? PrefixValue { get; set; }
-	private bool? StripBracketsValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-	private string? TrimKeyValue { get; set; }
-	private string? TrimValueValue { get; set; }
-	private string ValueSplitValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor ExcludeKeys(ICollection<string>? excludeKeys)
-	{
-		ExcludeKeysValue = excludeKeys;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Regex pattern to use for splitting key-value pairs.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor FieldSplit(string fieldSplit)
-	{
-		FieldSplitValue = fieldSplit;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor If(string? value)
-	{
-		IfValue = value;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
-	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IncludeKeys = value;
+		return this;
 	}
 
 	/// <summary>
@@ -709,10 +538,34 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// Defaults to including all keys.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor IncludeKeys(ICollection<string>? includeKeys)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IncludeKeys()
 	{
-		IncludeKeysValue = includeKeys;
-		return Self;
+		Instance.IncludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to filter and insert into document.
+	/// Defaults to including all keys.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IncludeKeys(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.IncludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to filter and insert into document.
+	/// Defaults to including all keys.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IncludeKeys(params string[] values)
+	{
+		Instance.IncludeKeys = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -720,40 +573,60 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public KeyValueProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure()
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
+		return this;
 	}
 
-	public KeyValueProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
+		return this;
 	}
 
-	public KeyValueProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -761,10 +634,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// Prefix to be added to extracted keys.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor Prefix(string? prefix)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Prefix(string? value)
 	{
-		PrefixValue = prefix;
-		return Self;
+		Instance.Prefix = value;
+		return this;
 	}
 
 	/// <summary>
@@ -772,10 +645,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor StripBrackets(bool? stripBrackets = true)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> StripBrackets(bool? value = true)
 	{
-		StripBracketsValue = stripBrackets;
-		return Self;
+		Instance.StripBrackets = value;
+		return this;
 	}
 
 	/// <summary>
@@ -784,10 +657,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -797,10 +670,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -810,23 +683,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to insert the extracted keys into.
-	/// Defaults to the root of the document.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
-	public KeyValueProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -834,10 +694,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// String of characters to trim from extracted keys.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor TrimKey(string? trimKey)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> TrimKey(string? value)
 	{
-		TrimKeyValue = trimKey;
-		return Self;
+		Instance.TrimKey = value;
+		return this;
 	}
 
 	/// <summary>
@@ -845,10 +705,10 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// String of characters to trim from extracted values.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor TrimValue(string? trimValue)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> TrimValue(string? value)
 	{
-		TrimValueValue = trimValue;
-		return Self;
+		Instance.TrimValue = value;
+		return this;
 	}
 
 	/// <summary>
@@ -856,124 +716,421 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 	/// Regex pattern to use for splitting the key from the value within a key-value pair.
 	/// </para>
 	/// </summary>
-	public KeyValueProcessorDescriptor ValueSplit(string valueSplit)
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ValueSplit(string value)
 	{
-		ValueSplitValue = valueSplit;
-		return Self;
+		Instance.ValueSplit = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct KeyValueProcessorDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeyValueProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeyValueProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Description(string? value)
+	{
+		Instance.Description = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ExcludeKeys(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.ExcludeKeys = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ExcludeKeys()
+	{
+		Instance.ExcludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ExcludeKeys(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.ExcludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to exclude from document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ExcludeKeys(params string[] values)
+	{
+		Instance.ExcludeKeys = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field to be parsed.
+	/// Supports template snippets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field to be parsed.
+	/// Supports template snippets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regex pattern to use for splitting key-value pairs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor FieldSplit(string value)
+	{
+		Instance.FieldSplit = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IgnoreFailure(bool? value = true)
+	{
+		Instance.IgnoreFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IgnoreMissing(bool? value = true)
+	{
+		Instance.IgnoreMissing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to filter and insert into document.
+	/// Defaults to including all keys.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IncludeKeys(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.IncludeKeys = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to filter and insert into document.
+	/// Defaults to including all keys.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IncludeKeys()
+	{
+		Instance.IncludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to filter and insert into document.
+	/// Defaults to including all keys.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IncludeKeys(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
+	{
+		Instance.IncludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// List of keys to filter and insert into document.
+	/// Defaults to including all keys.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IncludeKeys(params string[] values)
+	{
+		Instance.IncludeKeys = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
+	{
+		Instance.OnFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure()
+	{
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
+	{
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
+	{
+		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
 		}
 
-		if (ExcludeKeysValue is not null)
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
 		{
-			writer.WritePropertyName("exclude_keys");
-			JsonSerializer.Serialize(writer, ExcludeKeysValue, options);
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
 		}
 
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("field_split");
-		writer.WriteStringValue(FieldSplitValue);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
+		Instance.OnFailure = items;
+		return this;
+	}
 
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// Prefix to be added to extracted keys.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Prefix(string? value)
+	{
+		Instance.Prefix = value;
+		return this;
+	}
 
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor StripBrackets(bool? value = true)
+	{
+		Instance.StripBrackets = value;
+		return this;
+	}
 
-		if (IncludeKeysValue is not null)
-		{
-			writer.WritePropertyName("include_keys");
-			JsonSerializer.Serialize(writer, IncludeKeysValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Tag(string? value)
+	{
+		Instance.Tag = value;
+		return this;
+	}
 
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
+	/// <summary>
+	/// <para>
+	/// The field to insert the extracted keys into.
+	/// Defaults to the root of the document.
+	/// Supports template snippets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.TargetField = value;
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// The field to insert the extracted keys into.
+	/// Defaults to the root of the document.
+	/// Supports template snippets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.TargetField = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
+	/// <summary>
+	/// <para>
+	/// String of characters to trim from extracted keys.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor TrimKey(string? value)
+	{
+		Instance.TrimKey = value;
+		return this;
+	}
 
-		if (StripBracketsValue.HasValue)
-		{
-			writer.WritePropertyName("strip_brackets");
-			writer.WriteBooleanValue(StripBracketsValue.Value);
-		}
+	/// <summary>
+	/// <para>
+	/// String of characters to trim from extracted values.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor TrimValue(string? value)
+	{
+		Instance.TrimValue = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
+	/// <summary>
+	/// <para>
+	/// Regex pattern to use for splitting the key from the value within a key-value pair.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ValueSplit(string value)
+	{
+		Instance.ValueSplit = value;
+		return this;
+	}
 
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TrimKeyValue))
-		{
-			writer.WritePropertyName("trim_key");
-			writer.WriteStringValue(TrimKeyValue);
-		}
-
-		if (!string.IsNullOrEmpty(TrimValueValue))
-		{
-			writer.WritePropertyName("trim_value");
-			writer.WriteStringValue(TrimValueValue);
-		}
-
-		writer.WritePropertyName("value_split");
-		writer.WriteStringValue(ValueSplitValue);
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

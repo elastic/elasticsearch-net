@@ -17,22 +17,104 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+internal sealed partial class SlmIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorDetails>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPolicies = System.Text.Json.JsonEncodedText.Encode("policies");
+	private static readonly System.Text.Json.JsonEncodedText PropSlmStatus = System.Text.Json.JsonEncodedText.Encode("slm_status");
+	private static readonly System.Text.Json.JsonEncodedText PropUnhealthyPolicies = System.Text.Json.JsonEncodedText.Encode("unhealthy_policies");
+
+	public override Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propPolicies = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.LifecycleOperationMode> propSlmStatus = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies?> propUnhealthyPolicies = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPolicies.TryReadProperty(ref reader, options, PropPolicies, null))
+			{
+				continue;
+			}
+
+			if (propSlmStatus.TryReadProperty(ref reader, options, PropSlmStatus, null))
+			{
+				continue;
+			}
+
+			if (propUnhealthyPolicies.TryReadProperty(ref reader, options, PropUnhealthyPolicies, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Policies = propPolicies.Value,
+			SlmStatus = propSlmStatus.Value,
+			UnhealthyPolicies = propUnhealthyPolicies.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorDetails value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPolicies, value.Policies, null, null);
+		writer.WriteProperty(options, PropSlmStatus, value.SlmStatus, null, null);
+		writer.WriteProperty(options, PropUnhealthyPolicies, value.UnhealthyPolicies, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorDetailsConverter))]
 public sealed partial class SlmIndicatorDetails
 {
-	[JsonInclude, JsonPropertyName("policies")]
-	public long Policies { get; init; }
-	[JsonInclude, JsonPropertyName("slm_status")]
-	public Elastic.Clients.Elasticsearch.LifecycleOperationMode SlmStatus { get; init; }
-	[JsonInclude, JsonPropertyName("unhealthy_policies")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies? UnhealthyPolicies { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SlmIndicatorDetails(long policies, Elastic.Clients.Elasticsearch.LifecycleOperationMode slmStatus)
+	{
+		Policies = policies;
+		SlmStatus = slmStatus;
+	}
+#if NET7_0_OR_GREATER
+	public SlmIndicatorDetails()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SlmIndicatorDetails()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SlmIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Policies { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.LifecycleOperationMode SlmStatus { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies? UnhealthyPolicies { get; set; }
 }

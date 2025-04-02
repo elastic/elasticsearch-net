@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
-public sealed partial class DeleteRulesetRequestParameters : RequestParameters
+public sealed partial class DeleteRulesetRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DeleteRulesetRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest>
+{
+	public override Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,19 +63,42 @@ public sealed partial class DeleteRulesetRequestParameters : RequestParameters
 /// This is a destructive action that is not recoverable.
 /// </para>
 /// </summary>
-public sealed partial class DeleteRulesetRequest : PlainRequest<DeleteRulesetRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestConverter))]
+public sealed partial class DeleteRulesetRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteRulesetRequest(Elastic.Clients.Elasticsearch.Id rulesetId) : base(r => r.Required("ruleset_id", rulesetId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteRulesetRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteRulesetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesDeleteRuleset;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.QueryRulesDeleteRuleset;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "query_rules.delete_ruleset";
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset to delete
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 }
 
 /// <summary>
@@ -63,29 +108,88 @@ public sealed partial class DeleteRulesetRequest : PlainRequest<DeleteRulesetReq
 /// This is a destructive action that is not recoverable.
 /// </para>
 /// </summary>
-public sealed partial class DeleteRulesetRequestDescriptor : RequestDescriptor<DeleteRulesetRequestDescriptor, DeleteRulesetRequestParameters>
+public readonly partial struct DeleteRulesetRequestDescriptor
 {
-	internal DeleteRulesetRequestDescriptor(Action<DeleteRulesetRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest Instance { get; init; }
 
-	public DeleteRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.Id rulesetId) : base(r => r.Required("ruleset_id", rulesetId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesDeleteRuleset;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "query_rules.delete_ruleset";
-
-	public DeleteRulesetRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id rulesetId)
+	public DeleteRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.Id rulesetId)
 	{
-		RouteValues.Required("ruleset_id", rulesetId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest(rulesetId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DeleteRulesetRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest(Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the query ruleset to delete
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.RulesetId = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest Build(System.Action<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor(new Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

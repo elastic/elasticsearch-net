@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class GetServiceAccountsRequestParameters : RequestParameters
+public sealed partial class GetServiceAccountsRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetServiceAccountsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -45,27 +67,56 @@ public sealed partial class GetServiceAccountsRequestParameters : RequestParamet
 /// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 /// </para>
 /// </summary>
-public sealed partial class GetServiceAccountsRequest : PlainRequest<GetServiceAccountsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestConverter))]
+public sealed partial class GetServiceAccountsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>
 {
+	public GetServiceAccountsRequest(string? @namespace, string? service) : base(r => r.Optional("namespace", @namespace).Optional("service", service))
+	{
+	}
+
+	public GetServiceAccountsRequest(string? @namespace) : base(r => r.Optional("namespace", @namespace))
+	{
+	}
+#if NET7_0_OR_GREATER
 	public GetServiceAccountsRequest()
 	{
 	}
-
-	public GetServiceAccountsRequest(string? ns, string? service) : base(r => r.Optional("namespace", ns).Optional("service", service))
+#endif
+#if !NET7_0_OR_GREATER
+	public GetServiceAccountsRequest()
 	{
 	}
-
-	public GetServiceAccountsRequest(string? ns) : base(r => r.Optional("namespace", ns))
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetServiceAccountsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
+		_ = sentinel;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetServiceAccounts;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityGetServiceAccounts;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_service_accounts";
+
+	/// <summary>
+	/// <para>
+	/// The name of the namespace.
+	/// Omit this parameter to retrieve information about all service accounts.
+	/// If you omit this parameter, you must also omit the <c>service</c> parameter.
+	/// </para>
+	/// </summary>
+	public string? Namespace { get => P<string?>("namespace"); set => PO("namespace", value); }
+
+	/// <summary>
+	/// <para>
+	/// The service name.
+	/// Omit this parameter to retrieve information about all service accounts that belong to the specified <c>namespace</c>.
+	/// </para>
+	/// </summary>
+	public string? Service { get => P<string?>("service"); set => PO("service", value); }
 }
 
 /// <summary>
@@ -79,39 +130,111 @@ public sealed partial class GetServiceAccountsRequest : PlainRequest<GetServiceA
 /// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 /// </para>
 /// </summary>
-public sealed partial class GetServiceAccountsRequestDescriptor : RequestDescriptor<GetServiceAccountsRequestDescriptor, GetServiceAccountsRequestParameters>
+public readonly partial struct GetServiceAccountsRequestDescriptor
 {
-	internal GetServiceAccountsRequestDescriptor(Action<GetServiceAccountsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest Instance { get; init; }
 
-	public GetServiceAccountsRequestDescriptor(string? ns, string? service) : base(r => r.Optional("namespace", ns).Optional("service", service))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetServiceAccountsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetServiceAccountsRequestDescriptor(string @namespace, string service)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(@namespace, service);
+	}
+
+	public GetServiceAccountsRequestDescriptor(string @namespace)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(@namespace);
 	}
 
 	public GetServiceAccountsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetServiceAccounts;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.get_service_accounts";
-
-	public GetServiceAccountsRequestDescriptor Namespace(string? ns)
+	/// <summary>
+	/// <para>
+	/// The name of the namespace.
+	/// Omit this parameter to retrieve information about all service accounts.
+	/// If you omit this parameter, you must also omit the <c>service</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Namespace(string? value)
 	{
-		RouteValues.Optional("namespace", ns);
-		return Self;
+		Instance.Namespace = value;
+		return this;
 	}
 
-	public GetServiceAccountsRequestDescriptor Service(string? service)
+	/// <summary>
+	/// <para>
+	/// The service name.
+	/// Omit this parameter to retrieve information about all service accounts that belong to the specified <c>namespace</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Service(string? value)
 	{
-		RouteValues.Optional("service", service);
-		return Self;
+		Instance.Service = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

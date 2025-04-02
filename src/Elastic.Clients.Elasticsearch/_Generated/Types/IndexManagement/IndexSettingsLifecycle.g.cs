@@ -17,25 +17,130 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexSettingsLifecycleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndexingComplete = System.Text.Json.JsonEncodedText.Encode("indexing_complete");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropOriginationDate = System.Text.Json.JsonEncodedText.Encode("origination_date");
+	private static readonly System.Text.Json.JsonEncodedText PropParseOriginationDate = System.Text.Json.JsonEncodedText.Encode("parse_origination_date");
+	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm");
+	private static readonly System.Text.Json.JsonEncodedText PropRolloverAlias = System.Text.Json.JsonEncodedText.Encode("rollover_alias");
+	private static readonly System.Text.Json.JsonEncodedText PropStep = System.Text.Json.JsonEncodedText.Encode("step");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propIndexingComplete = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
+		LocalJsonValue<long?> propOriginationDate = default;
+		LocalJsonValue<bool?> propParseOriginationDate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<bool, string>?> propPreferIlm = default;
+		LocalJsonValue<string?> propRolloverAlias = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep?> propStep = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndexingComplete.TryReadProperty(ref reader, options, PropIndexingComplete, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propOriginationDate.TryReadProperty(ref reader, options, PropOriginationDate, null))
+			{
+				continue;
+			}
+
+			if (propParseOriginationDate.TryReadProperty(ref reader, options, PropParseOriginationDate, null))
+			{
+				continue;
+			}
+
+			if (propPreferIlm.TryReadProperty(ref reader, options, PropPreferIlm, static Elastic.Clients.Elasticsearch.Union<bool, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<bool, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), null, null)))
+			{
+				continue;
+			}
+
+			if (propRolloverAlias.TryReadProperty(ref reader, options, PropRolloverAlias, null))
+			{
+				continue;
+			}
+
+			if (propStep.TryReadProperty(ref reader, options, PropStep, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			IndexingComplete = propIndexingComplete.Value,
+			Name = propName.Value,
+			OriginationDate = propOriginationDate.Value,
+			ParseOriginationDate = propParseOriginationDate.Value,
+			PreferIlm = propPreferIlm.Value,
+			RolloverAlias = propRolloverAlias.Value,
+			Step = propStep.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndexingComplete, value.IndexingComplete, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropOriginationDate, value.OriginationDate, null, null);
+		writer.WriteProperty(options, PropParseOriginationDate, value.ParseOriginationDate, null, null);
+		writer.WriteProperty(options, PropPreferIlm, value.PreferIlm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, string>? v) => w.WriteUnionValue<bool, string>(o, v, null, null));
+		writer.WriteProperty(options, PropRolloverAlias, value.RolloverAlias, null, null);
+		writer.WriteProperty(options, PropStep, value.Step, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleConverter))]
 public sealed partial class IndexSettingsLifecycle
 {
+#if NET7_0_OR_GREATER
+	public IndexSettingsLifecycle()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexSettingsLifecycle()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexSettingsLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Indicates whether or not the index has been rolled over. Automatically set to true when ILM completes the rollover action.
 	/// You can explicitly set it to skip rollover.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indexing_complete")]
 	public bool? IndexingComplete { get; set; }
 
 	/// <summary>
@@ -43,7 +148,6 @@ public sealed partial class IndexSettingsLifecycle
 	/// The name of the policy to use to manage the index. For information about how Elasticsearch applies policy changes, see Policy updates.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
 	/// <summary>
@@ -53,7 +157,6 @@ public sealed partial class IndexSettingsLifecycle
 	/// age. Specified as a Unix epoch value in milliseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("origination_date")]
 	public long? OriginationDate { get; set; }
 
 	/// <summary>
@@ -64,7 +167,6 @@ public sealed partial class IndexSettingsLifecycle
 	/// for example logs-2016.10.31-000002). If the index name doesn’t match the pattern, index creation fails.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("parse_origination_date")]
 	public bool? ParseOriginationDate { get; set; }
 
 	/// <summary>
@@ -73,8 +175,7 @@ public sealed partial class IndexSettingsLifecycle
 	/// applicable for an index).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefer_ilm")]
-	public object? PreferIlm { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<bool, string>? PreferIlm { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -83,29 +184,28 @@ public sealed partial class IndexSettingsLifecycle
 	/// information about rolling indices, see Rollover.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rollover_alias")]
 	public string? RolloverAlias { get; set; }
-	[JsonInclude, JsonPropertyName("step")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? Step { get; set; }
 }
 
-public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescriptor<IndexSettingsLifecycleDescriptor>
+public readonly partial struct IndexSettingsLifecycleDescriptor
 {
-	internal IndexSettingsLifecycleDescriptor(Action<IndexSettingsLifecycleDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle Instance { get; init; }
 
-	public IndexSettingsLifecycleDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingsLifecycleDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? IndexingCompleteValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-	private long? OriginationDateValue { get; set; }
-	private bool? ParseOriginationDateValue { get; set; }
-	private object? PreferIlmValue { get; set; }
-	private string? RolloverAliasValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? StepValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor StepDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor> StepDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingsLifecycleDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -113,10 +213,10 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	/// You can explicitly set it to skip rollover.
 	/// </para>
 	/// </summary>
-	public IndexSettingsLifecycleDescriptor IndexingComplete(bool? indexingComplete = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor IndexingComplete(bool? value = true)
 	{
-		IndexingCompleteValue = indexingComplete;
-		return Self;
+		Instance.IndexingComplete = value;
+		return this;
 	}
 
 	/// <summary>
@@ -124,10 +224,10 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	/// The name of the policy to use to manage the index. For information about how Elasticsearch applies policy changes, see Policy updates.
 	/// </para>
 	/// </summary>
-	public IndexSettingsLifecycleDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		NameValue = name;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
 	/// <summary>
@@ -137,10 +237,10 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	/// age. Specified as a Unix epoch value in milliseconds.
 	/// </para>
 	/// </summary>
-	public IndexSettingsLifecycleDescriptor OriginationDate(long? originationDate)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor OriginationDate(long? value)
 	{
-		OriginationDateValue = originationDate;
-		return Self;
+		Instance.OriginationDate = value;
+		return this;
 	}
 
 	/// <summary>
@@ -151,10 +251,10 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	/// for example logs-2016.10.31-000002). If the index name doesn’t match the pattern, index creation fails.
 	/// </para>
 	/// </summary>
-	public IndexSettingsLifecycleDescriptor ParseOriginationDate(bool? parseOriginationDate = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor ParseOriginationDate(bool? value = true)
 	{
-		ParseOriginationDateValue = parseOriginationDate;
-		return Self;
+		Instance.ParseOriginationDate = value;
+		return this;
 	}
 
 	/// <summary>
@@ -163,10 +263,10 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	/// applicable for an index).
 	/// </para>
 	/// </summary>
-	public IndexSettingsLifecycleDescriptor PreferIlm(object? preferIlm)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor PreferIlm(Elastic.Clients.Elasticsearch.Union<bool, string>? value)
 	{
-		PreferIlmValue = preferIlm;
-		return Self;
+		Instance.PreferIlm = value;
+		return this;
 	}
 
 	/// <summary>
@@ -176,91 +276,40 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	/// information about rolling indices, see Rollover.
 	/// </para>
 	/// </summary>
-	public IndexSettingsLifecycleDescriptor RolloverAlias(string? rolloverAlias)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor RolloverAlias(string? value)
 	{
-		RolloverAliasValue = rolloverAlias;
-		return Self;
+		Instance.RolloverAlias = value;
+		return this;
 	}
 
-	public IndexSettingsLifecycleDescriptor Step(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? step)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor Step(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? value)
 	{
-		StepDescriptor = null;
-		StepDescriptorAction = null;
-		StepValue = step;
-		return Self;
+		Instance.Step = value;
+		return this;
 	}
 
-	public IndexSettingsLifecycleDescriptor Step(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor Step()
 	{
-		StepValue = null;
-		StepDescriptorAction = null;
-		StepDescriptor = descriptor;
-		return Self;
+		Instance.Step = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor.Build(null);
+		return this;
 	}
 
-	public IndexSettingsLifecycleDescriptor Step(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor Step(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor>? action)
 	{
-		StepValue = null;
-		StepDescriptor = null;
-		StepDescriptorAction = configure;
-		return Self;
+		Instance.Step = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (IndexingCompleteValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("indexing_complete");
-			writer.WriteBooleanValue(IndexingCompleteValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
-
-		if (OriginationDateValue.HasValue)
-		{
-			writer.WritePropertyName("origination_date");
-			writer.WriteNumberValue(OriginationDateValue.Value);
-		}
-
-		if (ParseOriginationDateValue.HasValue)
-		{
-			writer.WritePropertyName("parse_origination_date");
-			writer.WriteBooleanValue(ParseOriginationDateValue.Value);
-		}
-
-		if (PreferIlmValue is not null)
-		{
-			writer.WritePropertyName("prefer_ilm");
-			JsonSerializer.Serialize(writer, PreferIlmValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(RolloverAliasValue))
-		{
-			writer.WritePropertyName("rollover_alias");
-			writer.WriteStringValue(RolloverAliasValue);
-		}
-
-		if (StepDescriptor is not null)
-		{
-			writer.WritePropertyName("step");
-			JsonSerializer.Serialize(writer, StepDescriptor, options);
-		}
-		else if (StepDescriptorAction is not null)
-		{
-			writer.WritePropertyName("step");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor(StepDescriptorAction), options);
-		}
-		else if (StepValue is not null)
-		{
-			writer.WritePropertyName("step");
-			JsonSerializer.Serialize(writer, StepValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

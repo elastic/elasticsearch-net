@@ -17,24 +17,17 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
-public sealed partial class GetAsyncSearchRequestParameters : RequestParameters
+public sealed partial class GetAsyncSearchRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Specifies how long the async search should be available in the cluster.
+	/// The length of time that the async search should be available in the cluster.
 	/// When not specified, the <c>keep_alive</c> set with the corresponding submit async request will be used.
 	/// Otherwise, it is possible to override the value and extend the validity of the request.
 	/// When this period expires, the search, if still running, is cancelled.
@@ -60,6 +53,35 @@ public sealed partial class GetAsyncSearchRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
+internal sealed partial class GetAsyncSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest>
+{
+	public override Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get async search results.
@@ -69,15 +91,27 @@ public sealed partial class GetAsyncSearchRequestParameters : RequestParameters
 /// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
 /// </para>
 /// </summary>
-public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestConverter))]
+public partial class GetAsyncSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetAsyncSearchRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetAsyncSearchRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchGet;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.AsyncSearchGet;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -85,14 +119,24 @@ public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchR
 
 	/// <summary>
 	/// <para>
-	/// Specifies how long the async search should be available in the cluster.
+	/// A unique identifier for the async search.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The length of time that the async search should be available in the cluster.
 	/// When not specified, the <c>keep_alive</c> set with the corresponding submit async request will be used.
 	/// Otherwise, it is possible to override the value and extend the validity of the request.
 	/// When this period expires, the search, if still running, is cancelled.
 	/// If the search is completed, its saved results are deleted.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
@@ -100,7 +144,6 @@ public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchR
 	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
@@ -110,7 +153,6 @@ public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchR
 	/// By default no timeout is set meaning that the currently available results will be returned without any additional wait.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
@@ -123,73 +165,127 @@ public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchR
 /// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
 /// </para>
 /// </summary>
-public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchRequestParameters>
+public readonly partial struct GetAsyncSearchRequestDescriptor
 {
-	internal GetAsyncSearchRequestDescriptor(Action<GetAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest Instance { get; init; }
 
-	public GetAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchGet;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "async_search.get";
-
-	public GetAsyncSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public GetAsyncSearchRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-	public GetAsyncSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-
-	public GetAsyncSearchRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public GetAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GetAsyncSearchRequestDescriptor()
 	{
-	}
-}
-
-/// <summary>
-/// <para>
-/// Get async search results.
-/// </para>
-/// <para>
-/// Retrieve the results of a previously submitted asynchronous search request.
-/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-/// </para>
-/// </summary>
-public sealed partial class GetAsyncSearchRequestDescriptor : RequestDescriptor<GetAsyncSearchRequestDescriptor, GetAsyncSearchRequestParameters>
-{
-	internal GetAsyncSearchRequestDescriptor(Action<GetAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);
-
-	public GetAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchGet;
+	public static explicit operator Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest instance) => new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "async_search.get";
-
-	public GetAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public GetAsyncSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-	public GetAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-
-	public GetAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	/// <summary>
+	/// <para>
+	/// A unique identifier for the async search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The length of time that the async search should be available in the cluster.
+	/// When not specified, the <c>keep_alive</c> set with the corresponding submit async request will be used.
+	/// Otherwise, it is possible to override the value and extend the validity of the request.
+	/// When this period expires, the search, if still running, is cancelled.
+	/// If the search is completed, its saved results are deleted.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies to wait for the search to be completed up until the provided timeout.
+	/// Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.
+	/// By default no timeout is set meaning that the currently available results will be returned without any additional wait.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.WaitForCompletionTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor(new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

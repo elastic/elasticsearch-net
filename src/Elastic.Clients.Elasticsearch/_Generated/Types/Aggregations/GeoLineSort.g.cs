@@ -17,46 +17,116 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class GeoLineSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortConverter))]
 public sealed partial class GeoLineSort
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLineSort(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public GeoLineSort()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GeoLineSort()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GeoLineSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The name of the numeric field to use as the sort key for ordering the points.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
 
-public sealed partial class GeoLineSortDescriptor<TDocument> : SerializableDescriptor<GeoLineSortDescriptor<TDocument>>
+public readonly partial struct GeoLineSortDescriptor<TDocument>
 {
-	internal GeoLineSortDescriptor(Action<GeoLineSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Instance { get; init; }
 
-	public GeoLineSortDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLineSortDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLineSortDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The name of the numeric field to use as the sort key for ordering the points.
 	/// </para>
 	/// </summary>
-	public GeoLineSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -64,51 +134,49 @@ public sealed partial class GeoLineSortDescriptor<TDocument> : SerializableDescr
 	/// The name of the numeric field to use as the sort key for ordering the points.
 	/// </para>
 	/// </summary>
-	public GeoLineSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// </para>
-	/// </summary>
-	public GeoLineSortDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument>> action)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class GeoLineSortDescriptor : SerializableDescriptor<GeoLineSortDescriptor>
+public readonly partial struct GeoLineSortDescriptor
 {
-	internal GeoLineSortDescriptor(Action<GeoLineSortDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Instance { get; init; }
 
-	public GeoLineSortDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLineSortDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GeoLineSortDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The name of the numeric field to use as the sort key for ordering the points.
 	/// </para>
 	/// </summary>
-	public GeoLineSortDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -116,28 +184,17 @@ public sealed partial class GeoLineSortDescriptor : SerializableDescriptor<GeoLi
 	/// The name of the numeric field to use as the sort key for ordering the points.
 	/// </para>
 	/// </summary>
-	public GeoLineSortDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// </para>
-	/// </summary>
-	public GeoLineSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor> action)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

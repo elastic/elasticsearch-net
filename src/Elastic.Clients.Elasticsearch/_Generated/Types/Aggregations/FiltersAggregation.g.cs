@@ -17,24 +17,93 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class FiltersAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFilters = System.Text.Json.JsonEncodedText.Encode("filters");
+	private static readonly System.Text.Json.JsonEncodedText PropOtherBucket = System.Text.Json.JsonEncodedText.Encode("other_bucket");
+	private static readonly System.Text.Json.JsonEncodedText PropOtherBucketKey = System.Text.Json.JsonEncodedText.Encode("other_bucket_key");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilters = default;
+		LocalJsonValue<bool?> propOtherBucket = default;
+		LocalJsonValue<string?> propOtherBucketKey = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFilters.TryReadProperty(ref reader, options, PropFilters, null))
+			{
+				continue;
+			}
+
+			if (propOtherBucket.TryReadProperty(ref reader, options, PropOtherBucket, null))
+			{
+				continue;
+			}
+
+			if (propOtherBucketKey.TryReadProperty(ref reader, options, PropOtherBucketKey, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Filters = propFilters.Value,
+			OtherBucket = propOtherBucket.Value,
+			OtherBucketKey = propOtherBucketKey.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFilters, value.Filters, null, null);
+		writer.WriteProperty(options, PropOtherBucket, value.OtherBucket, null, null);
+		writer.WriteProperty(options, PropOtherBucketKey, value.OtherBucketKey, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationConverter))]
 public sealed partial class FiltersAggregation
 {
+#if NET7_0_OR_GREATER
+	public FiltersAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FiltersAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filters")]
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
 
 	/// <summary>
@@ -42,7 +111,6 @@ public sealed partial class FiltersAggregation
 	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("other_bucket")]
 	public bool? OtherBucket { get; set; }
 
 	/// <summary>
@@ -50,33 +118,48 @@ public sealed partial class FiltersAggregation
 	/// The key with which the other bucket is returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("other_bucket_key")]
 	public string? OtherBucketKey { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(FiltersAggregation filtersAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Filters(filtersAggregation);
 }
 
-public sealed partial class FiltersAggregationDescriptor<TDocument> : SerializableDescriptor<FiltersAggregationDescriptor<TDocument>>
+public readonly partial struct FiltersAggregationDescriptor<TDocument>
 {
-	internal FiltersAggregationDescriptor(Action<FiltersAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation Instance { get; init; }
 
-	public FiltersAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FiltersAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
-	private bool? OtherBucketValue { get; set; }
-	private string? OtherBucketKeyValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FiltersAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filters)
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FiltersValue = filters;
-		return Self;
+		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collection of queries from which to build buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -84,10 +167,10 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
 	/// </para>
 	/// </summary>
-	public FiltersAggregationDescriptor<TDocument> OtherBucket(bool? otherBucket = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> OtherBucket(bool? value = true)
 	{
-		OtherBucketValue = otherBucket;
-		return Self;
+		Instance.OtherBucket = value;
+		return this;
 	}
 
 	/// <summary>
@@ -95,58 +178,76 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 	/// The key with which the other bucket is returned.
 	/// </para>
 	/// </summary>
-	public FiltersAggregationDescriptor<TDocument> OtherBucketKey(string? otherBucketKey)
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> OtherBucketKey(string? value)
 	{
-		OtherBucketKeyValue = otherBucketKey;
-		return Self;
+		Instance.OtherBucketKey = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (FiltersValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("filters");
-			JsonSerializer.Serialize(writer, FiltersValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (OtherBucketValue.HasValue)
-		{
-			writer.WritePropertyName("other_bucket");
-			writer.WriteBooleanValue(OtherBucketValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(OtherBucketKeyValue))
-		{
-			writer.WritePropertyName("other_bucket_key");
-			writer.WriteStringValue(OtherBucketKeyValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class FiltersAggregationDescriptor : SerializableDescriptor<FiltersAggregationDescriptor>
+public readonly partial struct FiltersAggregationDescriptor
 {
-	internal FiltersAggregationDescriptor(Action<FiltersAggregationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation Instance { get; init; }
 
-	public FiltersAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FiltersAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
-	private bool? OtherBucketValue { get; set; }
-	private string? OtherBucketKeyValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FiltersAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public FiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filters)
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FiltersValue = filters;
-		return Self;
+		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collection of queries from which to build buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Collection of queries from which to build buckets.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters<T>(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<T>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
+	{
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -154,10 +255,10 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
 	/// </para>
 	/// </summary>
-	public FiltersAggregationDescriptor OtherBucket(bool? otherBucket = true)
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor OtherBucket(bool? value = true)
 	{
-		OtherBucketValue = otherBucket;
-		return Self;
+		Instance.OtherBucket = value;
+		return this;
 	}
 
 	/// <summary>
@@ -165,33 +266,22 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 	/// The key with which the other bucket is returned.
 	/// </para>
 	/// </summary>
-	public FiltersAggregationDescriptor OtherBucketKey(string? otherBucketKey)
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor OtherBucketKey(string? value)
 	{
-		OtherBucketKeyValue = otherBucketKey;
-		return Self;
+		Instance.OtherBucketKey = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (FiltersValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("filters");
-			JsonSerializer.Serialize(writer, FiltersValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (OtherBucketValue.HasValue)
-		{
-			writer.WritePropertyName("other_bucket");
-			writer.WriteBooleanValue(OtherBucketValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(OtherBucketKeyValue))
-		{
-			writer.WritePropertyName("other_bucket_key");
-			writer.WriteStringValue(OtherBucketKeyValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

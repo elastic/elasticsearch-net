@@ -17,39 +17,125 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
+internal sealed partial class FieldAndFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeUnmapped = System.Text.Json.JsonEncodedText.Encode("include_unmapped");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options, null);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+			{
+				Field = value
+			};
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<bool?> propIncludeUnmapped = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propIncludeUnmapped.TryReadProperty(ref reader, options, PropIncludeUnmapped, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			Format = propFormat.Value,
+			IncludeUnmapped = propIncludeUnmapped.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropIncludeUnmapped, value.IncludeUnmapped, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// A reference to a field with formatting instructions on how to return the value
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatConverter))]
 public sealed partial class FieldAndFormat
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldAndFormat(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public FieldAndFormat()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FieldAndFormat()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldAndFormat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The format in which the values are returned.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("include_unmapped")]
 	public bool? IncludeUnmapped { get; set; }
 }
 
@@ -58,38 +144,34 @@ public sealed partial class FieldAndFormat
 /// A reference to a field with formatting instructions on how to return the value
 /// </para>
 /// </summary>
-public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDescriptor<FieldAndFormatDescriptor<TDocument>>
+public readonly partial struct FieldAndFormatDescriptor<TDocument>
 {
-	internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat Instance { get; init; }
 
-	public FieldAndFormatDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldAndFormatDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private bool? IncludeUnmappedValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldAndFormatDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
-	public FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A wildcard pattern. The request returns values for field names matching this pattern.
-	/// </para>
-	/// </summary>
-	public FieldAndFormatDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -97,10 +179,10 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
-	public FieldAndFormatDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -108,36 +190,24 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 	/// The format in which the values are returned.
 	/// </para>
 	/// </summary>
-	public FieldAndFormatDescriptor<TDocument> Format(string? format)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public FieldAndFormatDescriptor<TDocument> IncludeUnmapped(bool? includeUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> IncludeUnmapped(bool? value = true)
 	{
-		IncludeUnmappedValue = includeUnmapped;
-		return Self;
+		Instance.IncludeUnmapped = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (IncludeUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("include_unmapped");
-			writer.WriteBooleanValue(IncludeUnmappedValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
@@ -146,38 +216,34 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 /// A reference to a field with formatting instructions on how to return the value
 /// </para>
 /// </summary>
-public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<FieldAndFormatDescriptor>
+public readonly partial struct FieldAndFormatDescriptor
 {
-	internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat Instance { get; init; }
 
-	public FieldAndFormatDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldAndFormatDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private bool? IncludeUnmappedValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldAndFormatDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
-	public FieldAndFormatDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A wildcard pattern. The request returns values for field names matching this pattern.
-	/// </para>
-	/// </summary>
-	public FieldAndFormatDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -185,10 +251,10 @@ public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<Fi
 	/// A wildcard pattern. The request returns values for field names matching this pattern.
 	/// </para>
 	/// </summary>
-	public FieldAndFormatDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -196,35 +262,23 @@ public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<Fi
 	/// The format in which the values are returned.
 	/// </para>
 	/// </summary>
-	public FieldAndFormatDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public FieldAndFormatDescriptor IncludeUnmapped(bool? includeUnmapped = true)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor IncludeUnmapped(bool? value = true)
 	{
-		IncludeUnmappedValue = includeUnmapped;
-		return Self;
+		Instance.IncludeUnmapped = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (IncludeUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("include_unmapped");
-			writer.WriteBooleanValue(IncludeUnmappedValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,22 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class MultiSearchTemplateRequestParameters : RequestParameters
+public sealed partial class MultiSearchTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -71,6 +62,19 @@ public sealed partial class MultiSearchTemplateRequestParameters : RequestParame
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
+internal sealed partial class MultiSearchTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { SearchTemplates = reader.ReadValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem>>(options, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem>(o, null)!) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.SearchTemplates, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem>(o, v, null));
+	}
+}
+
 /// <summary>
 /// <para>
 /// Run multiple templated searches.
@@ -90,19 +94,46 @@ public sealed partial class MultiSearchTemplateRequestParameters : RequestParame
 /// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 /// </code>
 /// </summary>
-public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>, IStreamSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestConverter))]
+public partial class MultiSearchTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>
 {
-	public MultiSearchTemplateRequest()
-	{
-	}
-
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearchTemplate;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> searchTemplates) : base(r => r.Optional("index", indices))
+	{
+		SearchTemplates = searchTemplates;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiSearchTemplateRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> searchTemplates)
+	{
+		SearchTemplates = searchTemplates;
+	}
+#if NET7_0_OR_GREATER
+	public MultiSearchTemplateRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MultiSearchTemplateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceMultiSearchTemplate;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -110,10 +141,18 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 
 	/// <summary>
 	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
@@ -121,7 +160,6 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	/// The maximum number of concurrent searches the API can run.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
 	/// <summary>
@@ -130,7 +168,6 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	/// If <c>false</c>, it returns <c>hits.total</c> as an object.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
@@ -138,7 +175,6 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	/// The type of the search operation.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
@@ -146,31 +182,12 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	public List<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
-
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (SearchTemplates is null)
-			return;
-		foreach (var item in SearchTemplates)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (SearchTemplates is null)
-			return;
-		foreach (var item in SearchTemplates)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
 }
 
 /// <summary>
@@ -192,155 +209,171 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 /// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 /// </code>
 /// </summary>
-public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>, IStreamSerializable
+public readonly partial struct MultiSearchTemplateRequestDescriptor
 {
-	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest Instance { get; init; }
 
-	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(indices);
+#pragma warning restore CS0618
 	}
 
 	public MultiSearchTemplateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearchTemplate;
+	public static explicit operator Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest instance) => new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "msearch_template";
-
-	public MultiSearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-	public MultiSearchTemplateRequestDescriptor<TDocument> MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
-	public MultiSearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public MultiSearchTemplateRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public MultiSearchTemplateRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-
-	public MultiSearchTemplateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams, indices, and aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-	}
-
-	List<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
-
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
-
-	public MultiSearchTemplateRequestDescriptor<TDocument> AddSearchTemplates(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem searchTemplates)
-	{
-		_items.Add(searchTemplates);
+		Instance.Indices = value;
 		return this;
 	}
-}
 
-/// <summary>
-/// <para>
-/// Run multiple templated searches.
-/// </para>
-/// <para>
-/// Run multiple templated searches with a single request.
-/// If you are providing a text file or text input to <c>curl</c>, use the <c>--data-binary</c> flag instead of <c>-d</c> to preserve newlines.
-/// For example:
-/// </para>
-/// <code>
-/// $ cat requests
-/// { "index": "my-index" }
-/// { "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
-/// { "index": "my-other-index" }
-/// { "id": "my-other-search-template", "params": { "query_type": "match_all" }}
-/// 
-/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
-/// </code>
-/// </summary>
-public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>, IStreamSerializable
-{
-	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
-
-	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
 	{
+		Instance.CcsMinimizeRoundtrips = value;
+		return this;
 	}
 
-	public MultiSearchTemplateRequestDescriptor()
+	/// <summary>
+	/// <para>
+	/// The maximum number of concurrent searches the API can run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor MaxConcurrentSearches(long? value)
 	{
+		Instance.MaxConcurrentSearches = value;
+		return this;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearchTemplate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "msearch_template";
-
-	public MultiSearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
-	public MultiSearchTemplateRequestDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
-	public MultiSearchTemplateRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public MultiSearchTemplateRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-	public MultiSearchTemplateRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-
-	public MultiSearchTemplateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response returns <c>hits.total</c> as an integer.
+	/// If <c>false</c>, it returns <c>hits.total</c> as an object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.RestTotalHitsAsInt = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The type of the search operation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
+		Instance.SearchType = value;
+		return this;
 	}
 
-	List<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
-
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor TypedKeys(bool? value = true)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
+		Instance.TypedKeys = value;
+		return this;
 	}
 
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SearchTemplates(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> value)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
+		Instance.SearchTemplates = value;
+		return this;
 	}
 
-	public MultiSearchTemplateRequestDescriptor AddSearchTemplates(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem searchTemplates)
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SearchTemplates()
 	{
-		_items.Add(searchTemplates);
+		Instance.SearchTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SearchTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem>? action)
+	{
+		Instance.SearchTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SearchTemplates(params Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem[] values)
+	{
+		Instance.SearchTemplates = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor(new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
 		return this;
 	}
 }

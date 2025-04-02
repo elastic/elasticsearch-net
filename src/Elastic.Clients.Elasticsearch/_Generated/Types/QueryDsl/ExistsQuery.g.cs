@@ -17,18 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class ExistsQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<string?> propQueryName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			QueryName = propQueryName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryConverter))]
 public sealed partial class ExistsQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExistsQuery(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public ExistsQuery()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ExistsQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ExistsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
@@ -37,7 +113,6 @@ public sealed partial class ExistsQuery
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -45,28 +120,32 @@ public sealed partial class ExistsQuery
 	/// Name of the field you wish to search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	[JsonInclude, JsonPropertyName("_name")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Exists(existsQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Security.ApiKeyQuery.Exists(existsQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleQuery(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Security.RoleQuery.Exists(existsQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.UserQuery(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.Security.UserQuery.Exists(existsQuery);
 }
 
-public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescriptor<ExistsQueryDescriptor<TDocument>>
+public readonly partial struct ExistsQueryDescriptor<TDocument>
 {
-	internal ExistsQueryDescriptor(Action<ExistsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery Instance { get; init; }
 
-	public ExistsQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExistsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExistsQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -76,10 +155,10 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public ExistsQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -87,10 +166,10 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	/// Name of the field you wish to search.
 	/// </para>
 	/// </summary>
-	public ExistsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -98,61 +177,45 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	/// Name of the field you wish to search.
 	/// </para>
 	/// </summary>
-	public ExistsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field you wish to search.
-	/// </para>
-	/// </summary>
-	public ExistsQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public ExistsQueryDescriptor<TDocument> QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<ExistsQueryDescriptor>
+public readonly partial struct ExistsQueryDescriptor
 {
-	internal ExistsQueryDescriptor(Action<ExistsQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery Instance { get; init; }
 
-	public ExistsQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExistsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? QueryNameValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExistsQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -162,10 +225,10 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public ExistsQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -173,10 +236,10 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 	/// Name of the field you wish to search.
 	/// </para>
 	/// </summary>
-	public ExistsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -184,46 +247,23 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 	/// Name of the field you wish to search.
 	/// </para>
 	/// </summary>
-	public ExistsQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field you wish to search.
-	/// </para>
-	/// </summary>
-	public ExistsQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor QueryName(string? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
-	public ExistsQueryDescriptor QueryName(string? queryName)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor> action)
 	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,36 +17,189 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class NodeInfoJvmMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDirectMax = System.Text.Json.JsonEncodedText.Encode("direct_max");
+	private static readonly System.Text.Json.JsonEncodedText PropDirectMaxInBytes = System.Text.Json.JsonEncodedText.Encode("direct_max_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropHeapInit = System.Text.Json.JsonEncodedText.Encode("heap_init");
+	private static readonly System.Text.Json.JsonEncodedText PropHeapInitInBytes = System.Text.Json.JsonEncodedText.Encode("heap_init_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max");
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapInit = System.Text.Json.JsonEncodedText.Encode("non_heap_init");
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapInitInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_init_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapMax = System.Text.Json.JsonEncodedText.Encode("non_heap_max");
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_max_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propDirectMax = default;
+		LocalJsonValue<long> propDirectMaxInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propHeapInit = default;
+		LocalJsonValue<long> propHeapInitInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propHeapMax = default;
+		LocalJsonValue<long> propHeapMaxInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propNonHeapInit = default;
+		LocalJsonValue<long> propNonHeapInitInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propNonHeapMax = default;
+		LocalJsonValue<long> propNonHeapMaxInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDirectMax.TryReadProperty(ref reader, options, PropDirectMax, null))
+			{
+				continue;
+			}
+
+			if (propDirectMaxInBytes.TryReadProperty(ref reader, options, PropDirectMaxInBytes, null))
+			{
+				continue;
+			}
+
+			if (propHeapInit.TryReadProperty(ref reader, options, PropHeapInit, null))
+			{
+				continue;
+			}
+
+			if (propHeapInitInBytes.TryReadProperty(ref reader, options, PropHeapInitInBytes, null))
+			{
+				continue;
+			}
+
+			if (propHeapMax.TryReadProperty(ref reader, options, PropHeapMax, null))
+			{
+				continue;
+			}
+
+			if (propHeapMaxInBytes.TryReadProperty(ref reader, options, PropHeapMaxInBytes, null))
+			{
+				continue;
+			}
+
+			if (propNonHeapInit.TryReadProperty(ref reader, options, PropNonHeapInit, null))
+			{
+				continue;
+			}
+
+			if (propNonHeapInitInBytes.TryReadProperty(ref reader, options, PropNonHeapInitInBytes, null))
+			{
+				continue;
+			}
+
+			if (propNonHeapMax.TryReadProperty(ref reader, options, PropNonHeapMax, null))
+			{
+				continue;
+			}
+
+			if (propNonHeapMaxInBytes.TryReadProperty(ref reader, options, PropNonHeapMaxInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DirectMax = propDirectMax.Value,
+			DirectMaxInBytes = propDirectMaxInBytes.Value,
+			HeapInit = propHeapInit.Value,
+			HeapInitInBytes = propHeapInitInBytes.Value,
+			HeapMax = propHeapMax.Value,
+			HeapMaxInBytes = propHeapMaxInBytes.Value,
+			NonHeapInit = propNonHeapInit.Value,
+			NonHeapInitInBytes = propNonHeapInitInBytes.Value,
+			NonHeapMax = propNonHeapMax.Value,
+			NonHeapMaxInBytes = propNonHeapMaxInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDirectMax, value.DirectMax, null, null);
+		writer.WriteProperty(options, PropDirectMaxInBytes, value.DirectMaxInBytes, null, null);
+		writer.WriteProperty(options, PropHeapInit, value.HeapInit, null, null);
+		writer.WriteProperty(options, PropHeapInitInBytes, value.HeapInitInBytes, null, null);
+		writer.WriteProperty(options, PropHeapMax, value.HeapMax, null, null);
+		writer.WriteProperty(options, PropHeapMaxInBytes, value.HeapMaxInBytes, null, null);
+		writer.WriteProperty(options, PropNonHeapInit, value.NonHeapInit, null, null);
+		writer.WriteProperty(options, PropNonHeapInitInBytes, value.NonHeapInitInBytes, null, null);
+		writer.WriteProperty(options, PropNonHeapMax, value.NonHeapMax, null, null);
+		writer.WriteProperty(options, PropNonHeapMaxInBytes, value.NonHeapMaxInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemoryConverter))]
 public sealed partial class NodeInfoJvmMemory
 {
-	[JsonInclude, JsonPropertyName("direct_max")]
-	public Elastic.Clients.Elasticsearch.ByteSize? DirectMax { get; init; }
-	[JsonInclude, JsonPropertyName("direct_max_in_bytes")]
-	public long DirectMaxInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("heap_init")]
-	public Elastic.Clients.Elasticsearch.ByteSize? HeapInit { get; init; }
-	[JsonInclude, JsonPropertyName("heap_init_in_bytes")]
-	public long HeapInitInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("heap_max")]
-	public Elastic.Clients.Elasticsearch.ByteSize? HeapMax { get; init; }
-	[JsonInclude, JsonPropertyName("heap_max_in_bytes")]
-	public long HeapMaxInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("non_heap_init")]
-	public Elastic.Clients.Elasticsearch.ByteSize? NonHeapInit { get; init; }
-	[JsonInclude, JsonPropertyName("non_heap_init_in_bytes")]
-	public long NonHeapInitInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("non_heap_max")]
-	public Elastic.Clients.Elasticsearch.ByteSize? NonHeapMax { get; init; }
-	[JsonInclude, JsonPropertyName("non_heap_max_in_bytes")]
-	public long NonHeapMaxInBytes { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NodeInfoJvmMemory(long directMaxInBytes, long heapInitInBytes, long heapMaxInBytes, long nonHeapInitInBytes, long nonHeapMaxInBytes)
+	{
+		DirectMaxInBytes = directMaxInBytes;
+		HeapInitInBytes = heapInitInBytes;
+		HeapMaxInBytes = heapMaxInBytes;
+		NonHeapInitInBytes = nonHeapInitInBytes;
+		NonHeapMaxInBytes = nonHeapMaxInBytes;
+	}
+#if NET7_0_OR_GREATER
+	public NodeInfoJvmMemory()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public NodeInfoJvmMemory()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NodeInfoJvmMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.ByteSize? DirectMax { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long DirectMaxInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? HeapInit { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long HeapInitInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? HeapMax { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long HeapMaxInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? NonHeapInit { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NonHeapInitInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? NonHeapMax { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long NonHeapMaxInBytes { get; set; }
 }
