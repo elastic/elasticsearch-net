@@ -37,7 +37,6 @@ internal sealed partial class PutElserRequestConverter : System.Text.Json.Serial
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ElserServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings> propServiceSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -46,8 +45,9 @@ internal sealed partial class PutElserRequestConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -69,7 +69,6 @@ internal sealed partial class PutElserRequestConverter : System.Text.Json.Serial
 		return new Elastic.Clients.Elasticsearch.Inference.PutElserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value
 		};
 	}
@@ -120,9 +119,8 @@ public sealed partial class PutElserRequest : Elastic.Clients.Elasticsearch.Requ
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutElserRequest(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId, Elastic.Clients.Elasticsearch.Inference.ElserServiceType service, Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("elser_inference_id", elserInferenceId))
+	public PutElserRequest(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId, Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("elser_inference_id", elserInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -178,11 +176,7 @@ public sealed partial class PutElserRequest : Elastic.Clients.Elasticsearch.Requ
 	/// The type of service supported for the specified task type. In this case, <c>elser</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.ElserServiceType Service { get; set; }
+	public string Service => "elser";
 
 	/// <summary>
 	/// <para>
@@ -300,17 +294,6 @@ public readonly partial struct PutElserRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>elser</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.ElserServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

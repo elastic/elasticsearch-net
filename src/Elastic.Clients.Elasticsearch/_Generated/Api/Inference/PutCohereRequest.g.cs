@@ -38,7 +38,6 @@ internal sealed partial class PutCohereRequestConverter : System.Text.Json.Seria
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CohereServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CohereServiceSettings> propServiceSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -48,8 +47,9 @@ internal sealed partial class PutCohereRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -76,7 +76,6 @@ internal sealed partial class PutCohereRequestConverter : System.Text.Json.Seria
 		return new Elastic.Clients.Elasticsearch.Inference.PutCohereRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value,
 			TaskSettings = propTaskSettings.Value
 		};
@@ -118,9 +117,8 @@ public sealed partial class PutCohereRequest : Elastic.Clients.Elasticsearch.Req
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutCohereRequest(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId, Elastic.Clients.Elasticsearch.Inference.CohereServiceType service, Elastic.Clients.Elasticsearch.Inference.CohereServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("cohere_inference_id", cohereInferenceId))
+	public PutCohereRequest(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId, Elastic.Clients.Elasticsearch.Inference.CohereServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("cohere_inference_id", cohereInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -176,11 +174,7 @@ public sealed partial class PutCohereRequest : Elastic.Clients.Elasticsearch.Req
 	/// The type of service supported for the specified task type. In this case, <c>cohere</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.CohereServiceType Service { get; set; }
+	public string Service => "cohere";
 
 	/// <summary>
 	/// <para>
@@ -296,17 +290,6 @@ public readonly partial struct PutCohereRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>cohere</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.CohereServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

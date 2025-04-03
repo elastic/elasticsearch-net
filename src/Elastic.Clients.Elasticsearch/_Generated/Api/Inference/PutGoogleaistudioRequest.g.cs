@@ -37,7 +37,6 @@ internal sealed partial class PutGoogleaistudioRequestConverter : System.Text.Js
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.GoogleAiServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettings> propServiceSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -46,8 +45,9 @@ internal sealed partial class PutGoogleaistudioRequestConverter : System.Text.Js
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -69,7 +69,6 @@ internal sealed partial class PutGoogleaistudioRequestConverter : System.Text.Js
 		return new Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value
 		};
 	}
@@ -109,9 +108,8 @@ public sealed partial class PutGoogleaistudioRequest : Elastic.Clients.Elasticse
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutGoogleaistudioRequest(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId, Elastic.Clients.Elasticsearch.Inference.GoogleAiServiceType service, Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("googleaistudio_inference_id", googleaistudioInferenceId))
+	public PutGoogleaistudioRequest(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId, Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("googleaistudio_inference_id", googleaistudioInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -167,11 +165,7 @@ public sealed partial class PutGoogleaistudioRequest : Elastic.Clients.Elasticse
 	/// The type of service supported for the specified task type. In this case, <c>googleaistudio</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.GoogleAiServiceType Service { get; set; }
+	public string Service => "googleaistudio";
 
 	/// <summary>
 	/// <para>
@@ -278,17 +272,6 @@ public readonly partial struct PutGoogleaistudioRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>googleaistudio</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.GoogleAiServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

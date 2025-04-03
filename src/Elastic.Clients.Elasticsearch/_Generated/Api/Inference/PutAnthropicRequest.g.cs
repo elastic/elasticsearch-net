@@ -38,7 +38,6 @@ internal sealed partial class PutAnthropicRequestConverter : System.Text.Json.Se
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AnthropicServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings> propServiceSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -48,8 +47,9 @@ internal sealed partial class PutAnthropicRequestConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -76,7 +76,6 @@ internal sealed partial class PutAnthropicRequestConverter : System.Text.Json.Se
 		return new Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value,
 			TaskSettings = propTaskSettings.Value
 		};
@@ -118,9 +117,8 @@ public sealed partial class PutAnthropicRequest : Elastic.Clients.Elasticsearch.
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutAnthropicRequest(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId, Elastic.Clients.Elasticsearch.Inference.AnthropicServiceType service, Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("anthropic_inference_id", anthropicInferenceId))
+	public PutAnthropicRequest(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId, Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("anthropic_inference_id", anthropicInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -177,11 +175,7 @@ public sealed partial class PutAnthropicRequest : Elastic.Clients.Elasticsearch.
 	/// The type of service supported for the specified task type. In this case, <c>anthropic</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.AnthropicServiceType Service { get; set; }
+	public string Service => "anthropic";
 
 	/// <summary>
 	/// <para>
@@ -297,17 +291,6 @@ public readonly partial struct PutAnthropicRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>anthropic</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.AnthropicServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

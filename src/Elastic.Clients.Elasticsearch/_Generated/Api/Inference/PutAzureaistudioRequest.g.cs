@@ -38,7 +38,6 @@ internal sealed partial class PutAzureaistudioRequestConverter : System.Text.Jso
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings> propServiceSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -48,8 +47,9 @@ internal sealed partial class PutAzureaistudioRequestConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -76,7 +76,6 @@ internal sealed partial class PutAzureaistudioRequestConverter : System.Text.Jso
 		return new Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value,
 			TaskSettings = propTaskSettings.Value
 		};
@@ -118,9 +117,8 @@ public sealed partial class PutAzureaistudioRequest : Elastic.Clients.Elasticsea
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutAzureaistudioRequest(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId, Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceType service, Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("azureaistudio_inference_id", azureaistudioInferenceId))
+	public PutAzureaistudioRequest(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId, Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("azureaistudio_inference_id", azureaistudioInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -176,11 +174,7 @@ public sealed partial class PutAzureaistudioRequest : Elastic.Clients.Elasticsea
 	/// The type of service supported for the specified task type. In this case, <c>azureaistudio</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceType Service { get; set; }
+	public string Service => "azureaistudio";
 
 	/// <summary>
 	/// <para>
@@ -295,17 +289,6 @@ public readonly partial struct PutAzureaistudioRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>azureaistudio</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

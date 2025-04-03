@@ -35,12 +35,12 @@ internal sealed partial class PutEisRequestConverter : System.Text.Json.Serializ
 	public override Elastic.Clients.Elasticsearch.Inference.PutEisRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.EisServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.EisServiceSettings> propServiceSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -61,7 +61,6 @@ internal sealed partial class PutEisRequestConverter : System.Text.Json.Serializ
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Inference.PutEisRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value
 		};
 	}
@@ -93,9 +92,8 @@ public sealed partial class PutEisRequest : Elastic.Clients.Elasticsearch.Reques
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutEisRequest(Elastic.Clients.Elasticsearch.Inference.EisTaskType taskType, Elastic.Clients.Elasticsearch.Id eisInferenceId, Elastic.Clients.Elasticsearch.Inference.EisServiceType service, Elastic.Clients.Elasticsearch.Inference.EisServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("eis_inference_id", eisInferenceId))
+	public PutEisRequest(Elastic.Clients.Elasticsearch.Inference.EisTaskType taskType, Elastic.Clients.Elasticsearch.Id eisInferenceId, Elastic.Clients.Elasticsearch.Inference.EisServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("eis_inference_id", eisInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -145,11 +143,7 @@ public sealed partial class PutEisRequest : Elastic.Clients.Elasticsearch.Reques
 	/// The type of service supported for the specified task type. In this case, <c>elastic</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.EisServiceType Service { get; set; }
+	public string Service => "elastic";
 
 	/// <summary>
 	/// <para>
@@ -217,17 +211,6 @@ public readonly partial struct PutEisRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutEisRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.EisTaskType value)
 	{
 		Instance.TaskType = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>elastic</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutEisRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.EisServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

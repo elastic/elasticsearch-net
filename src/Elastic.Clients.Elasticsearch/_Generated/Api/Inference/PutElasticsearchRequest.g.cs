@@ -38,7 +38,6 @@ internal sealed partial class PutElasticsearchRequestConverter : System.Text.Jso
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings> propServiceSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -48,8 +47,9 @@ internal sealed partial class PutElasticsearchRequestConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -76,7 +76,6 @@ internal sealed partial class PutElasticsearchRequestConverter : System.Text.Jso
 		return new Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value,
 			TaskSettings = propTaskSettings.Value
 		};
@@ -128,9 +127,8 @@ public sealed partial class PutElasticsearchRequest : Elastic.Clients.Elasticsea
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutElasticsearchRequest(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId, Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceType service, Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("elasticsearch_inference_id", elasticsearchInferenceId))
+	public PutElasticsearchRequest(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId, Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("elasticsearch_inference_id", elasticsearchInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -187,11 +185,7 @@ public sealed partial class PutElasticsearchRequest : Elastic.Clients.Elasticsea
 	/// The type of service supported for the specified task type. In this case, <c>elasticsearch</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceType Service { get; set; }
+	public string Service => "elasticsearch";
 
 	/// <summary>
 	/// <para>
@@ -317,17 +311,6 @@ public readonly partial struct PutElasticsearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>elasticsearch</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

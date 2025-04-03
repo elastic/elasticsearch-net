@@ -37,7 +37,6 @@ internal sealed partial class PutHuggingFaceRequestConverter : System.Text.Json.
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings> propServiceSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -46,8 +45,9 @@ internal sealed partial class PutHuggingFaceRequestConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -69,7 +69,6 @@ internal sealed partial class PutHuggingFaceRequestConverter : System.Text.Json.
 		return new Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value
 		};
 	}
@@ -154,9 +153,8 @@ public sealed partial class PutHuggingFaceRequest : Elastic.Clients.Elasticsearc
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutHuggingFaceRequest(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceType service, Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("huggingface_inference_id", huggingfaceInferenceId))
+	public PutHuggingFaceRequest(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("huggingface_inference_id", huggingfaceInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -212,11 +210,7 @@ public sealed partial class PutHuggingFaceRequest : Elastic.Clients.Elasticsearc
 	/// The type of service supported for the specified task type. In this case, <c>hugging_face</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceType Service { get; set; }
+	public string Service => "hugging_face";
 
 	/// <summary>
 	/// <para>
@@ -368,17 +362,6 @@ public readonly partial struct PutHuggingFaceRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>hugging_face</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

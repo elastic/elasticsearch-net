@@ -38,7 +38,6 @@ internal sealed partial class PutOpenaiRequestConverter : System.Text.Json.Seria
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.OpenAIServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings> propServiceSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -48,8 +47,9 @@ internal sealed partial class PutOpenaiRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -76,7 +76,6 @@ internal sealed partial class PutOpenaiRequestConverter : System.Text.Json.Seria
 		return new Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value,
 			TaskSettings = propTaskSettings.Value
 		};
@@ -118,9 +117,8 @@ public sealed partial class PutOpenaiRequest : Elastic.Clients.Elasticsearch.Req
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutOpenaiRequest(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId, Elastic.Clients.Elasticsearch.Inference.OpenAIServiceType service, Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("openai_inference_id", openaiInferenceId))
+	public PutOpenaiRequest(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId, Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("openai_inference_id", openaiInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -177,11 +175,7 @@ public sealed partial class PutOpenaiRequest : Elastic.Clients.Elasticsearch.Req
 	/// The type of service supported for the specified task type. In this case, <c>openai</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.OpenAIServiceType Service { get; set; }
+	public string Service => "openai";
 
 	/// <summary>
 	/// <para>
@@ -297,17 +291,6 @@ public readonly partial struct PutOpenaiRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>openai</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.OpenAIServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

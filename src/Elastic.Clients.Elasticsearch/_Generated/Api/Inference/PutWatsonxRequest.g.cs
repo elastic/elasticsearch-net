@@ -35,12 +35,12 @@ internal sealed partial class PutWatsonxRequestConverter : System.Text.Json.Seri
 	public override Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.WatsonxServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings> propServiceSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -61,7 +61,6 @@ internal sealed partial class PutWatsonxRequestConverter : System.Text.Json.Seri
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value
 		};
 	}
@@ -102,9 +101,8 @@ public sealed partial class PutWatsonxRequest : Elastic.Clients.Elasticsearch.Re
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutWatsonxRequest(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId, Elastic.Clients.Elasticsearch.Inference.WatsonxServiceType service, Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("watsonx_inference_id", watsonxInferenceId))
+	public PutWatsonxRequest(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId, Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("watsonx_inference_id", watsonxInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -154,11 +152,7 @@ public sealed partial class PutWatsonxRequest : Elastic.Clients.Elasticsearch.Re
 	/// The type of service supported for the specified task type. In this case, <c>watsonxai</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.WatsonxServiceType Service { get; set; }
+	public string Service => "watsonxai";
 
 	/// <summary>
 	/// <para>
@@ -235,17 +229,6 @@ public readonly partial struct PutWatsonxRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor WatsonxInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.WatsonxInferenceId = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>watsonxai</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.WatsonxServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

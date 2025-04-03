@@ -38,7 +38,6 @@ internal sealed partial class PutGooglevertexaiRequestConverter : System.Text.Js
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings> propServiceSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -48,8 +47,9 @@ internal sealed partial class PutGooglevertexaiRequestConverter : System.Text.Js
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -76,7 +76,6 @@ internal sealed partial class PutGooglevertexaiRequestConverter : System.Text.Js
 		return new Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value,
 			TaskSettings = propTaskSettings.Value
 		};
@@ -118,9 +117,8 @@ public sealed partial class PutGooglevertexaiRequest : Elastic.Clients.Elasticse
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutGooglevertexaiRequest(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId, Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceType service, Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("googlevertexai_inference_id", googlevertexaiInferenceId))
+	public PutGooglevertexaiRequest(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId, Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("googlevertexai_inference_id", googlevertexaiInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -176,11 +174,7 @@ public sealed partial class PutGooglevertexaiRequest : Elastic.Clients.Elasticse
 	/// The type of service supported for the specified task type. In this case, <c>googlevertexai</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceType Service { get; set; }
+	public string Service => "googlevertexai";
 
 	/// <summary>
 	/// <para>
@@ -295,17 +289,6 @@ public readonly partial struct PutGooglevertexaiRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>googlevertexai</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

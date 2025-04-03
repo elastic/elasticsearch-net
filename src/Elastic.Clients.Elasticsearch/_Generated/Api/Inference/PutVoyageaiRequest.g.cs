@@ -38,7 +38,6 @@ internal sealed partial class PutVoyageaiRequestConverter : System.Text.Json.Ser
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings> propServiceSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.VoyageAITaskSettings?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -48,8 +47,9 @@ internal sealed partial class PutVoyageaiRequestConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -76,7 +76,6 @@ internal sealed partial class PutVoyageaiRequestConverter : System.Text.Json.Ser
 		return new Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value,
 			TaskSettings = propTaskSettings.Value
 		};
@@ -114,9 +113,8 @@ public sealed partial class PutVoyageaiRequest : Elastic.Clients.Elasticsearch.R
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutVoyageaiRequest(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType taskType, Elastic.Clients.Elasticsearch.Id voyageaiInferenceId, Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceType service, Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("voyageai_inference_id", voyageaiInferenceId))
+	public PutVoyageaiRequest(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType taskType, Elastic.Clients.Elasticsearch.Id voyageaiInferenceId, Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("voyageai_inference_id", voyageaiInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -172,11 +170,7 @@ public sealed partial class PutVoyageaiRequest : Elastic.Clients.Elasticsearch.R
 	/// The type of service supported for the specified task type. In this case, <c>voyageai</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceType Service { get; set; }
+	public string Service => "voyageai";
 
 	/// <summary>
 	/// <para>
@@ -287,17 +281,6 @@ public readonly partial struct PutVoyageaiRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>voyageai</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

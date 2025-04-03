@@ -37,7 +37,6 @@ internal sealed partial class PutMistralRequestConverter : System.Text.Json.Seri
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.MistralServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings> propServiceSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -46,8 +45,9 @@ internal sealed partial class PutMistralRequestConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -69,7 +69,6 @@ internal sealed partial class PutMistralRequestConverter : System.Text.Json.Seri
 		return new Elastic.Clients.Elasticsearch.Inference.PutMistralRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value
 		};
 	}
@@ -109,9 +108,8 @@ public sealed partial class PutMistralRequest : Elastic.Clients.Elasticsearch.Re
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutMistralRequest(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId, Elastic.Clients.Elasticsearch.Inference.MistralServiceType service, Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("mistral_inference_id", mistralInferenceId))
+	public PutMistralRequest(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId, Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("mistral_inference_id", mistralInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -168,11 +166,7 @@ public sealed partial class PutMistralRequest : Elastic.Clients.Elasticsearch.Re
 	/// The type of service supported for the specified task type. In this case, <c>mistral</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.MistralServiceType Service { get; set; }
+	public string Service => "mistral";
 
 	/// <summary>
 	/// <para>
@@ -280,17 +274,6 @@ public readonly partial struct PutMistralRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>mistral</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.MistralServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 

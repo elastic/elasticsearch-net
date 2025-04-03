@@ -38,7 +38,6 @@ internal sealed partial class PutAlibabacloudRequestConverter : System.Text.Json
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceType> propService = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings> propServiceSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettings?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -48,8 +47,9 @@ internal sealed partial class PutAlibabacloudRequestConverter : System.Text.Json
 				continue;
 			}
 
-			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			if (reader.ValueTextEquals(PropService))
 			{
+				reader.Skip();
 				continue;
 			}
 
@@ -76,7 +76,6 @@ internal sealed partial class PutAlibabacloudRequestConverter : System.Text.Json
 		return new Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			Service = propService.Value,
 			ServiceSettings = propServiceSettings.Value,
 			TaskSettings = propTaskSettings.Value
 		};
@@ -118,9 +117,8 @@ public sealed partial class PutAlibabacloudRequest : Elastic.Clients.Elasticsear
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutAlibabacloudRequest(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId, Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceType service, Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("alibabacloud_inference_id", alibabacloudInferenceId))
+	public PutAlibabacloudRequest(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId, Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings serviceSettings) : base(r => r.Required("task_type", taskType).Required("alibabacloud_inference_id", alibabacloudInferenceId))
 	{
-		Service = service;
 		ServiceSettings = serviceSettings;
 	}
 #if NET7_0_OR_GREATER
@@ -176,11 +174,7 @@ public sealed partial class PutAlibabacloudRequest : Elastic.Clients.Elasticsear
 	/// The type of service supported for the specified task type. In this case, <c>alibabacloud-ai-search</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceType Service { get; set; }
+	public string Service => "alibabacloud-ai-search";
 
 	/// <summary>
 	/// <para>
@@ -295,17 +289,6 @@ public readonly partial struct PutAlibabacloudRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>alibabacloud-ai-search</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor Service(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceType value)
-	{
-		Instance.Service = value;
 		return this;
 	}
 
