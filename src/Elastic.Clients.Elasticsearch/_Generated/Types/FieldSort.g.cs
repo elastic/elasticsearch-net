@@ -35,11 +35,18 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 
 	public override Elastic.Clients.Elasticsearch.FieldSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		reader.Read();
+		propField.ReadPropertyName(ref reader, options, null);
+		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
 			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.SortOrder?>(options, null);
+			reader.Read();
 			return new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 			{
+				Field = propField.Value,
 				Order = value
 			};
 		}
@@ -99,8 +106,11 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		reader.Read();
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Field = propField.Value,
 			Format = propFormat.Value,
 			Missing = propMissing.Value,
 			Mode = propMode.Value,
@@ -114,6 +124,8 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.FieldSort value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WritePropertyName(options, value.Field, null);
+		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
 		writer.WriteProperty(options, PropMode, value.Mode, null, null);
@@ -122,18 +134,19 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 		writer.WriteProperty(options, PropOrder, value.Order, null, null);
 		writer.WriteProperty(options, PropUnmappedType, value.UnmappedType, null, null);
 		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.FieldSortConverter))]
-public partial class FieldSort
+public sealed partial class FieldSort
 {
-#if NET7_0_OR_GREATER
-	public FieldSort()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSort(Elastic.Clients.Elasticsearch.Field field)
 	{
+		Field = field;
 	}
-#endif
-#if !NET7_0_OR_GREATER
+#if NET7_0_OR_GREATER
 	public FieldSort()
 	{
 	}
@@ -144,6 +157,11 @@ public partial class FieldSort
 		_ = sentinel;
 	}
 
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? Format { get; set; }
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
@@ -151,4 +169,186 @@ public partial class FieldSort
 	public Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericType { get; set; }
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; set; }
+}
+
+public readonly partial struct FieldSortDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.FieldSort Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSortDescriptor(Elastic.Clients.Elasticsearch.FieldSort instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSortDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument>(Elastic.Clients.Elasticsearch.FieldSort instance) => new Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> Format(string? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> Missing(object? value)
+	{
+		Instance.Missing = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? value)
+	{
+		Instance.Mode = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? value)
+	{
+		Instance.Nested = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> Nested(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> action)
+	{
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> NumericType(Elastic.Clients.Elasticsearch.FieldSortNumericType? value)
+	{
+		Instance.NumericType = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? value)
+	{
+		Instance.Order = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument> UnmappedType(Elastic.Clients.Elasticsearch.Mapping.FieldType? value)
+	{
+		Instance.UnmappedType = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.FieldSort Build(System.Action<Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct FieldSortDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.FieldSort Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSortDescriptor(Elastic.Clients.Elasticsearch.FieldSort instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldSortDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.FieldSortDescriptor(Elastic.Clients.Elasticsearch.FieldSort instance) => new Elastic.Clients.Elasticsearch.FieldSortDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.FieldSortDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor Format(string? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor Missing(object? value)
+	{
+		Instance.Missing = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? value)
+	{
+		Instance.Mode = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? value)
+	{
+		Instance.Nested = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor Nested(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> action)
+	{
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor Nested<T>(System.Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<T>> action)
+	{
+		Instance.Nested = Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor NumericType(Elastic.Clients.Elasticsearch.FieldSortNumericType? value)
+	{
+		Instance.NumericType = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? value)
+	{
+		Instance.Order = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.FieldSortDescriptor UnmappedType(Elastic.Clients.Elasticsearch.Mapping.FieldType? value)
+	{
+		Instance.UnmappedType = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.FieldSort Build(System.Action<Elastic.Clients.Elasticsearch.FieldSortDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.FieldSortDescriptor(new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

@@ -42,7 +42,7 @@ internal sealed partial class SparseVectorQueryConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig?> propPruningConfig = default;
 		LocalJsonValue<string?> propQuery = default;
 		LocalJsonValue<string?> propQueryName = default;
-		var variantType = string.Empty;
+		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -112,7 +112,7 @@ internal sealed partial class SparseVectorQueryConverter : System.Text.Json.Seri
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
-			case "":
+			case null:
 				break;
 			case "inference_id":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Id)value.Variant, null, null);
@@ -134,8 +134,8 @@ internal sealed partial class SparseVectorQueryConverter : System.Text.Json.Seri
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryConverter))]
 public sealed partial class SparseVectorQuery
 {
-	public string VariantType { get; internal set; } = string.Empty;
-	public object? Variant { get; internal set; }
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SparseVectorQuery(Elastic.Clients.Elasticsearch.Field field)

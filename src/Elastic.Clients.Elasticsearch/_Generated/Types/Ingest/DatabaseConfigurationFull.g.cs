@@ -35,7 +35,7 @@ internal sealed partial class DatabaseConfigurationFullConverter : System.Text.J
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propName = default;
-		var variantType = string.Empty;
+		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -99,7 +99,7 @@ internal sealed partial class DatabaseConfigurationFullConverter : System.Text.J
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
-			case "":
+			case null:
 				break;
 			case "ipinfo":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.Ipinfo)value.Variant, null, null);
@@ -125,8 +125,8 @@ internal sealed partial class DatabaseConfigurationFullConverter : System.Text.J
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFullConverter))]
 public sealed partial class DatabaseConfigurationFull
 {
-	public string VariantType { get; internal set; } = string.Empty;
-	public object? Variant { get; internal set; }
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DatabaseConfigurationFull(string name)

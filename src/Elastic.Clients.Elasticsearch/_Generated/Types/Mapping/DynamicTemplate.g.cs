@@ -45,7 +45,7 @@ internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serial
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propPathUnmatch = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propUnmatch = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propUnmatchMappingType = default;
-		var variantType = string.Empty;
+		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -129,7 +129,7 @@ internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serial
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
-			case "":
+			case null:
 				break;
 			case "mapping":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Mapping.IProperty)value.Variant, null, null);
@@ -155,8 +155,8 @@ internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serial
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateConverter))]
 public sealed partial class DynamicTemplate
 {
-	public string VariantType { get; internal set; } = string.Empty;
-	public object? Variant { get; internal set; }
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 #if NET7_0_OR_GREATER
 	public DynamicTemplate()
 	{

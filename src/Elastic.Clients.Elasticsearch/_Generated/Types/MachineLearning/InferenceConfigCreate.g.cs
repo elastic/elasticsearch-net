@@ -40,7 +40,7 @@ internal sealed partial class InferenceConfigCreateConverter : System.Text.Json.
 	public override Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		var variantType = string.Empty;
+		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -154,7 +154,7 @@ internal sealed partial class InferenceConfigCreateConverter : System.Text.Json.
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
-			case "":
+			case null:
 				break;
 			case "classification":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions)value.Variant, null, null);
@@ -200,8 +200,8 @@ internal sealed partial class InferenceConfigCreateConverter : System.Text.Json.
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateConverter))]
 public sealed partial class InferenceConfigCreate
 {
-	public string VariantType { get; internal set; } = string.Empty;
-	public object? Variant { get; internal set; }
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 #if NET7_0_OR_GREATER
 	public InferenceConfigCreate()
 	{

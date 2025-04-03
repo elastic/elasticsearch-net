@@ -44,7 +44,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propBoost = default;
 		LocalJsonValue<string?> propQueryName = default;
-		var variantType = string.Empty;
+		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -135,7 +135,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
-			case "":
+			case null:
 				break;
 			case "all_of":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf)value.Variant, null, null);
@@ -169,8 +169,8 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryConverter))]
 public sealed partial class IntervalsQuery
 {
-	public string VariantType { get; internal set; } = string.Empty;
-	public object? Variant { get; internal set; }
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public IntervalsQuery(Elastic.Clients.Elasticsearch.Field field)

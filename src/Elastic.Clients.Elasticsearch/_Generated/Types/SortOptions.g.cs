@@ -32,8 +32,9 @@ internal sealed partial class SortOptionsConverter : System.Text.Json.Serializat
 
 	public override Elastic.Clients.Elasticsearch.SortOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		var readerSnapshot = reader;
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		var variantType = string.Empty;
+		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -69,13 +70,10 @@ internal sealed partial class SortOptionsConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+			reader = readerSnapshot;
+			variantType = "";
+			variant = reader.ReadValue<Elastic.Clients.Elasticsearch.FieldSort>(options, null);
+			break;
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -88,10 +86,16 @@ internal sealed partial class SortOptionsConverter : System.Text.Json.Serializat
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SortOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (value.VariantType is "" && value.Variant is not null)
+		{
+			writer.WriteValue(options, (Elastic.Clients.Elasticsearch.FieldSort)value.Variant, null);
+			return;
+		}
+
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
-			case "":
+			case null:
 				break;
 			case "_doc":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.ScoreSort)value.Variant, null, null);
@@ -116,8 +120,8 @@ internal sealed partial class SortOptionsConverter : System.Text.Json.Serializat
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SortOptionsConverter))]
 public sealed partial class SortOptions
 {
-	public string VariantType { get; internal set; } = string.Empty;
-	public object? Variant { get; internal set; }
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 #if NET7_0_OR_GREATER
 	public SortOptions()
 	{
@@ -135,10 +139,12 @@ public sealed partial class SortOptions
 	}
 
 	public Elastic.Clients.Elasticsearch.ScoreSort? Doc { get => GetVariant<Elastic.Clients.Elasticsearch.ScoreSort>("_doc"); set => SetVariant("_doc", value); }
+	public Elastic.Clients.Elasticsearch.FieldSort? Field { get => GetVariant<Elastic.Clients.Elasticsearch.FieldSort>(""); set => SetVariant("", value); }
 	public Elastic.Clients.Elasticsearch.GeoDistanceSort? GeoDistance { get => GetVariant<Elastic.Clients.Elasticsearch.GeoDistanceSort>("_geo_distance"); set => SetVariant("_geo_distance", value); }
 	public Elastic.Clients.Elasticsearch.ScoreSort? Score { get => GetVariant<Elastic.Clients.Elasticsearch.ScoreSort>("_score"); set => SetVariant("_score", value); }
 	public Elastic.Clients.Elasticsearch.ScriptSort? Script { get => GetVariant<Elastic.Clients.Elasticsearch.ScriptSort>("_script"); set => SetVariant("_script", value); }
 
+	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.FieldSort value) => new Elastic.Clients.Elasticsearch.SortOptions { Field = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.GeoDistanceSort value) => new Elastic.Clients.Elasticsearch.SortOptions { GeoDistance = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.ScriptSort value) => new Elastic.Clients.Elasticsearch.SortOptions { Script = value };
 
@@ -195,6 +201,18 @@ public readonly partial struct SortOptionsDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Doc(System.Action<Elastic.Clients.Elasticsearch.ScoreSortDescriptor>? action)
 	{
 		Instance.Doc = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.FieldSort? value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> Field(System.Action<Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument>> action)
+	{
+		Instance.Field = Elastic.Clients.Elasticsearch.FieldSortDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -283,6 +301,24 @@ public readonly partial struct SortOptionsDescriptor
 	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Doc(System.Action<Elastic.Clients.Elasticsearch.ScoreSortDescriptor>? action)
 	{
 		Instance.Doc = Elastic.Clients.Elasticsearch.ScoreSortDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.FieldSort? value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Field(System.Action<Elastic.Clients.Elasticsearch.FieldSortDescriptor> action)
+	{
+		Instance.Field = Elastic.Clients.Elasticsearch.FieldSortDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SortOptionsDescriptor Field<T>(System.Action<Elastic.Clients.Elasticsearch.FieldSortDescriptor<T>> action)
+	{
+		Instance.Field = Elastic.Clients.Elasticsearch.FieldSortDescriptor<T>.Build(action);
 		return this;
 	}
 

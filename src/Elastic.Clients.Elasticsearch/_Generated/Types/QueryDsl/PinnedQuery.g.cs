@@ -37,7 +37,7 @@ internal sealed partial class PinnedQueryConverter : System.Text.Json.Serializat
 		LocalJsonValue<float?> propBoost = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propOrganic = default;
 		LocalJsonValue<string?> propQueryName = default;
-		var variantType = string.Empty;
+		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -97,7 +97,7 @@ internal sealed partial class PinnedQueryConverter : System.Text.Json.Serializat
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
-			case "":
+			case null:
 				break;
 			case "docs":
 				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>(o, v, null));
@@ -119,8 +119,8 @@ internal sealed partial class PinnedQueryConverter : System.Text.Json.Serializat
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryConverter))]
 public sealed partial class PinnedQuery
 {
-	public string VariantType { get; internal set; } = string.Empty;
-	public object? Variant { get; internal set; }
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PinnedQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query organic)

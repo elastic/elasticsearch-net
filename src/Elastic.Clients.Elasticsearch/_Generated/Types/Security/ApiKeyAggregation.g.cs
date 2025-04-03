@@ -43,7 +43,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>?> propAggregations = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
-		var variantType = string.Empty;
+		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -153,7 +153,7 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
-			case "":
+			case null:
 				break;
 			case "cardinality":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation)value.Variant, null, null);
@@ -195,8 +195,8 @@ internal sealed partial class ApiKeyAggregationConverter : System.Text.Json.Seri
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationConverter))]
 public sealed partial class ApiKeyAggregation
 {
-	public string VariantType { get; internal set; } = string.Empty;
-	public object? Variant { get; internal set; }
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 #if NET7_0_OR_GREATER
 	public ApiKeyAggregation()
 	{

@@ -3,7 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-
+using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 using System.Text.Json;
@@ -13,6 +14,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+[DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(NumberConverter))]
 public readonly struct Number
 {
@@ -43,7 +45,7 @@ public readonly struct Number
 			return false;
 		}
 
-		value = _tag;
+		value = _data;
 		return true;
 	}
 
@@ -58,6 +60,13 @@ public readonly struct Number
 		value = Unsafe.As<long, double>(ref Unsafe.AsRef(in _data));
 		return true;
 	}
+
+	internal string DebugDisplay => _tag switch
+	{
+		1 => TryGetLong(out var l) ? l.ToString(CultureInfo.InvariantCulture) : string.Empty,
+		2 => TryGetDouble(out var d) ? d.ToString(CultureInfo.InvariantCulture) : string.Empty,
+		_ => "<empty>"
+	};
 }
 
 internal sealed class NumberConverter :
@@ -85,11 +94,13 @@ internal sealed class NumberConverter :
 		if (value.TryGetDouble(out var d))
 		{
 			writer.WriteNumberValue(d);
+			return;
 		}
 
 		if (value.TryGetLong(out var l))
 		{
 			writer.WriteNumberValue(l);
+			return;
 		}
 
 		throw new JsonException($"The '{nameof(Number)}' does not contain a value.");

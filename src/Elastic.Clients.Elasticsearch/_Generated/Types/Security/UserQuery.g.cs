@@ -40,7 +40,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 	public override Elastic.Clients.Elasticsearch.Security.UserQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		var variantType = string.Empty;
+		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -154,7 +154,7 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
-			case "":
+			case null:
 				break;
 			case "bool":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery)value.Variant, null, null);
@@ -200,8 +200,8 @@ internal sealed partial class UserQueryConverter : System.Text.Json.Serializatio
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.UserQueryConverter))]
 public sealed partial class UserQuery
 {
-	public string VariantType { get; internal set; } = string.Empty;
-	public object? Variant { get; internal set; }
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 #if NET7_0_OR_GREATER
 	public UserQuery()
 	{
