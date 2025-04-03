@@ -25,18 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Watcher;
 
 internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("success");
 	private static readonly System.Text.Json.JsonEncodedText MemberFailure = System.Text.Json.JsonEncodedText.Encode("failure");
 	private static readonly System.Text.Json.JsonEncodedText MemberSimulated = System.Text.Json.JsonEncodedText.Encode("simulated");
+	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("success");
 	private static readonly System.Text.Json.JsonEncodedText MemberThrottled = System.Text.Json.JsonEncodedText.Encode("throttled");
 
 	public override Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberSuccess))
-		{
-			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Success;
-		}
-
 		if (reader.ValueTextEquals(MemberFailure))
 		{
 			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Failure;
@@ -47,17 +42,17 @@ internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Se
 			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Simulated;
 		}
 
+		if (reader.ValueTextEquals(MemberSuccess))
+		{
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Success;
+		}
+
 		if (reader.ValueTextEquals(MemberThrottled))
 		{
 			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Throttled;
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberSuccess.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Success;
-		}
-
 		if (string.Equals(value, MemberFailure.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Failure;
@@ -66,6 +61,11 @@ internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Se
 		if (string.Equals(value, MemberSimulated.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Simulated;
+		}
+
+		if (string.Equals(value, MemberSuccess.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Success;
 		}
 
 		if (string.Equals(value, MemberThrottled.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -80,14 +80,14 @@ internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Se
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Success:
-				writer.WriteStringValue(MemberSuccess);
-				break;
 			case Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Failure:
 				writer.WriteStringValue(MemberFailure);
 				break;
 			case Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Simulated:
 				writer.WriteStringValue(MemberSimulated);
+				break;
+			case Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Success:
+				writer.WriteStringValue(MemberSuccess);
 				break;
 			case Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions.Throttled:
 				writer.WriteStringValue(MemberThrottled);
@@ -111,12 +111,12 @@ internal sealed partial class ActionStatusOptionsConverter : System.Text.Json.Se
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptionsConverter))]
 public enum ActionStatusOptions
 {
-	[System.Runtime.Serialization.EnumMember(Value = "success")]
-	Success,
 	[System.Runtime.Serialization.EnumMember(Value = "failure")]
 	Failure,
 	[System.Runtime.Serialization.EnumMember(Value = "simulated")]
 	Simulated,
+	[System.Runtime.Serialization.EnumMember(Value = "success")]
+	Success,
 	[System.Runtime.Serialization.EnumMember(Value = "throttled")]
 	Throttled
 }

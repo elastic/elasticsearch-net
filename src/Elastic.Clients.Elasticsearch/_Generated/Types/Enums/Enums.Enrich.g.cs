@@ -25,22 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberScheduled = System.Text.Json.JsonEncodedText.Encode("SCHEDULED");
-	private static readonly System.Text.Json.JsonEncodedText MemberRunning = System.Text.Json.JsonEncodedText.Encode("RUNNING");
+	private static readonly System.Text.Json.JsonEncodedText MemberCancelled = System.Text.Json.JsonEncodedText.Encode("CANCELLED");
 	private static readonly System.Text.Json.JsonEncodedText MemberComplete = System.Text.Json.JsonEncodedText.Encode("COMPLETE");
 	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED");
-	private static readonly System.Text.Json.JsonEncodedText MemberCancelled = System.Text.Json.JsonEncodedText.Encode("CANCELLED");
+	private static readonly System.Text.Json.JsonEncodedText MemberRunning = System.Text.Json.JsonEncodedText.Encode("RUNNING");
+	private static readonly System.Text.Json.JsonEncodedText MemberScheduled = System.Text.Json.JsonEncodedText.Encode("SCHEDULED");
 
 	public override Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberScheduled))
+		if (reader.ValueTextEquals(MemberCancelled))
 		{
-			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled;
-		}
-
-		if (reader.ValueTextEquals(MemberRunning))
-		{
-			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running;
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled;
 		}
 
 		if (reader.ValueTextEquals(MemberComplete))
@@ -53,20 +48,20 @@ internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Failed;
 		}
 
-		if (reader.ValueTextEquals(MemberCancelled))
+		if (reader.ValueTextEquals(MemberRunning))
 		{
-			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled;
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberScheduled.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberScheduled))
 		{
 			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled;
 		}
 
-		if (string.Equals(value, MemberRunning.Value, System.StringComparison.OrdinalIgnoreCase))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCancelled.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running;
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled;
 		}
 
 		if (string.Equals(value, MemberComplete.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -79,9 +74,14 @@ internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Failed;
 		}
 
-		if (string.Equals(value, MemberCancelled.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberRunning.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled;
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running;
+		}
+
+		if (string.Equals(value, MemberScheduled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase)}'.");
@@ -91,11 +91,8 @@ internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Seri
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled:
-				writer.WriteStringValue(MemberScheduled);
-				break;
-			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running:
-				writer.WriteStringValue(MemberRunning);
+			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled:
+				writer.WriteStringValue(MemberCancelled);
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Complete:
 				writer.WriteStringValue(MemberComplete);
@@ -103,8 +100,11 @@ internal sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Seri
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Failed:
 				writer.WriteStringValue(MemberFailed);
 				break;
-			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled:
-				writer.WriteStringValue(MemberCancelled);
+			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running:
+				writer.WriteStringValue(MemberRunning);
+				break;
+			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled:
+				writer.WriteStringValue(MemberScheduled);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase)}'.");
@@ -196,16 +196,16 @@ internal sealed partial class PolicyTypeConverter : System.Text.Json.Serializati
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhaseConverter))]
 public enum EnrichPolicyPhase
 {
-	[System.Runtime.Serialization.EnumMember(Value = "SCHEDULED")]
-	Scheduled,
-	[System.Runtime.Serialization.EnumMember(Value = "RUNNING")]
-	Running,
+	[System.Runtime.Serialization.EnumMember(Value = "CANCELLED")]
+	Cancelled,
 	[System.Runtime.Serialization.EnumMember(Value = "COMPLETE")]
 	Complete,
 	[System.Runtime.Serialization.EnumMember(Value = "FAILED")]
 	Failed,
-	[System.Runtime.Serialization.EnumMember(Value = "CANCELLED")]
-	Cancelled
+	[System.Runtime.Serialization.EnumMember(Value = "RUNNING")]
+	Running,
+	[System.Runtime.Serialization.EnumMember(Value = "SCHEDULED")]
+	Scheduled
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.PolicyTypeConverter))]

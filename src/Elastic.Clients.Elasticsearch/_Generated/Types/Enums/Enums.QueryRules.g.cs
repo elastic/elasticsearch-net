@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 internal sealed partial class QueryRuleTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberPinned = System.Text.Json.JsonEncodedText.Encode("pinned");
 	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText MemberPinned = System.Text.Json.JsonEncodedText.Encode("pinned");
 
 	public override Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberPinned))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Pinned;
-		}
-
 		if (reader.ValueTextEquals(MemberExclude))
 		{
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Exclude;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberPinned.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberPinned))
 		{
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Pinned;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberExclude.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Exclude;
+		}
+
+		if (string.Equals(value, MemberPinned.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Pinned;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType)}'.");
@@ -58,11 +58,11 @@ internal sealed partial class QueryRuleTypeConverter : System.Text.Json.Serializ
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Pinned:
-				writer.WriteStringValue(MemberPinned);
-				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Exclude:
 				writer.WriteStringValue(MemberExclude);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Pinned:
+				writer.WriteStringValue(MemberPinned);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType)}'.");
@@ -82,24 +82,29 @@ internal sealed partial class QueryRuleTypeConverter : System.Text.Json.Serializ
 
 internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGlobal = System.Text.Json.JsonEncodedText.Encode("global");
+	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("always");
+	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains");
 	private static readonly System.Text.Json.JsonEncodedText MemberExact = System.Text.Json.JsonEncodedText.Encode("exact");
 	private static readonly System.Text.Json.JsonEncodedText MemberExactFuzzy = System.Text.Json.JsonEncodedText.Encode("exact_fuzzy");
 	private static readonly System.Text.Json.JsonEncodedText MemberFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
-	private static readonly System.Text.Json.JsonEncodedText MemberPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
-	private static readonly System.Text.Json.JsonEncodedText MemberSuffix = System.Text.Json.JsonEncodedText.Encode("suffix");
-	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains");
-	private static readonly System.Text.Json.JsonEncodedText MemberLt = System.Text.Json.JsonEncodedText.Encode("lt");
-	private static readonly System.Text.Json.JsonEncodedText MemberLte = System.Text.Json.JsonEncodedText.Encode("lte");
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobal = System.Text.Json.JsonEncodedText.Encode("global");
 	private static readonly System.Text.Json.JsonEncodedText MemberGt = System.Text.Json.JsonEncodedText.Encode("gt");
 	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte");
-	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("always");
+	private static readonly System.Text.Json.JsonEncodedText MemberLt = System.Text.Json.JsonEncodedText.Encode("lt");
+	private static readonly System.Text.Json.JsonEncodedText MemberLte = System.Text.Json.JsonEncodedText.Encode("lte");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText MemberSuffix = System.Text.Json.JsonEncodedText.Encode("suffix");
 
 	public override Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberGlobal))
+		if (reader.ValueTextEquals(MemberAlways))
 		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Global;
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Always;
+		}
+
+		if (reader.ValueTextEquals(MemberContains))
+		{
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Contains;
 		}
 
 		if (reader.ValueTextEquals(MemberExact))
@@ -117,29 +122,9 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Fuzzy;
 		}
 
-		if (reader.ValueTextEquals(MemberPrefix))
+		if (reader.ValueTextEquals(MemberGlobal))
 		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Prefix;
-		}
-
-		if (reader.ValueTextEquals(MemberSuffix))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Suffix;
-		}
-
-		if (reader.ValueTextEquals(MemberContains))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Contains;
-		}
-
-		if (reader.ValueTextEquals(MemberLt))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lt;
-		}
-
-		if (reader.ValueTextEquals(MemberLte))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lte;
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Global;
 		}
 
 		if (reader.ValueTextEquals(MemberGt))
@@ -152,15 +137,35 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Gte;
 		}
 
-		if (reader.ValueTextEquals(MemberAlways))
+		if (reader.ValueTextEquals(MemberLt))
+		{
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lt;
+		}
+
+		if (reader.ValueTextEquals(MemberLte))
+		{
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lte;
+		}
+
+		if (reader.ValueTextEquals(MemberPrefix))
+		{
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Prefix;
+		}
+
+		if (reader.ValueTextEquals(MemberSuffix))
+		{
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Suffix;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAlways.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Always;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberGlobal.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberContains.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Global;
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Contains;
 		}
 
 		if (string.Equals(value, MemberExact.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -178,29 +183,9 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Fuzzy;
 		}
 
-		if (string.Equals(value, MemberPrefix.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberGlobal.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Prefix;
-		}
-
-		if (string.Equals(value, MemberSuffix.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Suffix;
-		}
-
-		if (string.Equals(value, MemberContains.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Contains;
-		}
-
-		if (string.Equals(value, MemberLt.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lt;
-		}
-
-		if (string.Equals(value, MemberLte.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lte;
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Global;
 		}
 
 		if (string.Equals(value, MemberGt.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -213,9 +198,24 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Gte;
 		}
 
-		if (string.Equals(value, MemberAlways.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberLt.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Always;
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lt;
+		}
+
+		if (string.Equals(value, MemberLte.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lte;
+		}
+
+		if (string.Equals(value, MemberPrefix.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Prefix;
+		}
+
+		if (string.Equals(value, MemberSuffix.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Suffix;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType)}'.");
@@ -225,8 +225,11 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Global:
-				writer.WriteStringValue(MemberGlobal);
+			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Always:
+				writer.WriteStringValue(MemberAlways);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Contains:
+				writer.WriteStringValue(MemberContains);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Exact:
 				writer.WriteStringValue(MemberExact);
@@ -237,20 +240,8 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Fuzzy:
 				writer.WriteStringValue(MemberFuzzy);
 				break;
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Prefix:
-				writer.WriteStringValue(MemberPrefix);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Suffix:
-				writer.WriteStringValue(MemberSuffix);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Contains:
-				writer.WriteStringValue(MemberContains);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lt:
-				writer.WriteStringValue(MemberLt);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lte:
-				writer.WriteStringValue(MemberLte);
+			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Global:
+				writer.WriteStringValue(MemberGlobal);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Gt:
 				writer.WriteStringValue(MemberGt);
@@ -258,8 +249,17 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Gte:
 				writer.WriteStringValue(MemberGte);
 				break;
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Always:
-				writer.WriteStringValue(MemberAlways);
+			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lt:
+				writer.WriteStringValue(MemberLt);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lte:
+				writer.WriteStringValue(MemberLte);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Prefix:
+				writer.WriteStringValue(MemberPrefix);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Suffix:
+				writer.WriteStringValue(MemberSuffix);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType)}'.");
@@ -280,37 +280,37 @@ internal sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleTypeConverter))]
 public enum QueryRuleType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "pinned")]
-	Pinned,
 	[System.Runtime.Serialization.EnumMember(Value = "exclude")]
-	Exclude
+	Exclude,
+	[System.Runtime.Serialization.EnumMember(Value = "pinned")]
+	Pinned
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaTypeConverter))]
 public enum QueryRuleCriteriaType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "global")]
-	Global,
+	[System.Runtime.Serialization.EnumMember(Value = "always")]
+	Always,
+	[System.Runtime.Serialization.EnumMember(Value = "contains")]
+	Contains,
 	[System.Runtime.Serialization.EnumMember(Value = "exact")]
 	Exact,
 	[System.Runtime.Serialization.EnumMember(Value = "exact_fuzzy")]
 	ExactFuzzy,
 	[System.Runtime.Serialization.EnumMember(Value = "fuzzy")]
 	Fuzzy,
-	[System.Runtime.Serialization.EnumMember(Value = "prefix")]
-	Prefix,
-	[System.Runtime.Serialization.EnumMember(Value = "suffix")]
-	Suffix,
-	[System.Runtime.Serialization.EnumMember(Value = "contains")]
-	Contains,
-	[System.Runtime.Serialization.EnumMember(Value = "lt")]
-	Lt,
-	[System.Runtime.Serialization.EnumMember(Value = "lte")]
-	Lte,
+	[System.Runtime.Serialization.EnumMember(Value = "global")]
+	Global,
 	[System.Runtime.Serialization.EnumMember(Value = "gt")]
 	Gt,
 	[System.Runtime.Serialization.EnumMember(Value = "gte")]
 	Gte,
-	[System.Runtime.Serialization.EnumMember(Value = "always")]
-	Always
+	[System.Runtime.Serialization.EnumMember(Value = "lt")]
+	Lt,
+	[System.Runtime.Serialization.EnumMember(Value = "lte")]
+	Lte,
+	[System.Runtime.Serialization.EnumMember(Value = "prefix")]
+	Prefix,
+	[System.Runtime.Serialization.EnumMember(Value = "suffix")]
+	Suffix
 }

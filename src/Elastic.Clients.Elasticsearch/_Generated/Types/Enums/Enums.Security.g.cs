@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 internal sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText MemberClientCredentials = System.Text.Json.JsonEncodedText.Encode("client_credentials");
 	private static readonly System.Text.Json.JsonEncodedText MemberKerberos = System.Text.Json.JsonEncodedText.Encode("_kerberos");
+	private static readonly System.Text.Json.JsonEncodedText MemberClientCredentials = System.Text.Json.JsonEncodedText.Encode("client_credentials");
+	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password");
 	private static readonly System.Text.Json.JsonEncodedText MemberRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
 
 	public override Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberPassword))
+		if (reader.ValueTextEquals(MemberKerberos))
 		{
-			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Password;
+			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos;
 		}
 
 		if (reader.ValueTextEquals(MemberClientCredentials))
@@ -42,9 +42,9 @@ internal sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.ClientCredentials;
 		}
 
-		if (reader.ValueTextEquals(MemberKerberos))
+		if (reader.ValueTextEquals(MemberPassword))
 		{
-			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos;
+			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Password;
 		}
 
 		if (reader.ValueTextEquals(MemberRefreshToken))
@@ -53,9 +53,9 @@ internal sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.S
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberKerberos.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Password;
+			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos;
 		}
 
 		if (string.Equals(value, MemberClientCredentials.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -63,9 +63,9 @@ internal sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.ClientCredentials;
 		}
 
-		if (string.Equals(value, MemberKerberos.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos;
+			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Password;
 		}
 
 		if (string.Equals(value, MemberRefreshToken.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -80,14 +80,14 @@ internal sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.S
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Password:
-				writer.WriteStringValue(MemberPassword);
+			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos:
+				writer.WriteStringValue(MemberKerberos);
 				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.ClientCredentials:
 				writer.WriteStringValue(MemberClientCredentials);
 				break;
-			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos:
-				writer.WriteStringValue(MemberKerberos);
+			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Password:
+				writer.WriteStringValue(MemberPassword);
 				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.RefreshToken:
 				writer.WriteStringValue(MemberRefreshToken);
@@ -167,30 +167,30 @@ internal sealed partial class ApiKeyGrantTypeConverter : System.Text.Json.Serial
 
 internal sealed partial class GrantTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GrantType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password");
 	private static readonly System.Text.Json.JsonEncodedText MemberAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
+	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password");
 
 	public override Elastic.Clients.Elasticsearch.Security.GrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberPassword))
-		{
-			return Elastic.Clients.Elasticsearch.Security.GrantType.Password;
-		}
-
 		if (reader.ValueTextEquals(MemberAccessToken))
 		{
 			return Elastic.Clients.Elasticsearch.Security.GrantType.AccessToken;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberPassword))
 		{
 			return Elastic.Clients.Elasticsearch.Security.GrantType.Password;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAccessToken.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Security.GrantType.AccessToken;
+		}
+
+		if (string.Equals(value, MemberPassword.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Security.GrantType.Password;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.GrantType)}'.");
@@ -200,11 +200,11 @@ internal sealed partial class GrantTypeConverter : System.Text.Json.Serializatio
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Security.GrantType.Password:
-				writer.WriteStringValue(MemberPassword);
-				break;
 			case Elastic.Clients.Elasticsearch.Security.GrantType.AccessToken:
 				writer.WriteStringValue(MemberAccessToken);
+				break;
+			case Elastic.Clients.Elasticsearch.Security.GrantType.Password:
+				writer.WriteStringValue(MemberPassword);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.GrantType)}'.");
@@ -307,30 +307,30 @@ internal sealed partial class RemoteClusterPrivilegeConverter : System.Text.Json
 
 internal sealed partial class TemplateFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.TemplateFormat>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string");
 	private static readonly System.Text.Json.JsonEncodedText MemberJson = System.Text.Json.JsonEncodedText.Encode("json");
+	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string");
 
 	public override Elastic.Clients.Elasticsearch.Security.TemplateFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberString))
-		{
-			return Elastic.Clients.Elasticsearch.Security.TemplateFormat.String;
-		}
-
 		if (reader.ValueTextEquals(MemberJson))
 		{
 			return Elastic.Clients.Elasticsearch.Security.TemplateFormat.Json;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberString.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberString))
 		{
 			return Elastic.Clients.Elasticsearch.Security.TemplateFormat.String;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberJson.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Security.TemplateFormat.Json;
+		}
+
+		if (string.Equals(value, MemberString.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Security.TemplateFormat.String;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.TemplateFormat)}'.");
@@ -340,11 +340,11 @@ internal sealed partial class TemplateFormatConverter : System.Text.Json.Seriali
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Security.TemplateFormat.String:
-				writer.WriteStringValue(MemberString);
-				break;
 			case Elastic.Clients.Elasticsearch.Security.TemplateFormat.Json:
 				writer.WriteStringValue(MemberJson);
+				break;
+			case Elastic.Clients.Elasticsearch.Security.TemplateFormat.String:
+				writer.WriteStringValue(MemberString);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.TemplateFormat)}'.");
@@ -377,30 +377,30 @@ internal sealed partial class RestrictionWorkflowConverter : System.Text.Json.Se
 
 internal sealed partial class ApiKeyTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKeyType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberRest = System.Text.Json.JsonEncodedText.Encode("rest");
 	private static readonly System.Text.Json.JsonEncodedText MemberCrossCluster = System.Text.Json.JsonEncodedText.Encode("cross_cluster");
+	private static readonly System.Text.Json.JsonEncodedText MemberRest = System.Text.Json.JsonEncodedText.Encode("rest");
 
 	public override Elastic.Clients.Elasticsearch.Security.ApiKeyType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberRest))
-		{
-			return Elastic.Clients.Elasticsearch.Security.ApiKeyType.Rest;
-		}
-
 		if (reader.ValueTextEquals(MemberCrossCluster))
 		{
 			return Elastic.Clients.Elasticsearch.Security.ApiKeyType.CrossCluster;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberRest.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberRest))
 		{
 			return Elastic.Clients.Elasticsearch.Security.ApiKeyType.Rest;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberCrossCluster.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Security.ApiKeyType.CrossCluster;
+		}
+
+		if (string.Equals(value, MemberRest.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Security.ApiKeyType.Rest;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.ApiKeyType)}'.");
@@ -410,11 +410,11 @@ internal sealed partial class ApiKeyTypeConverter : System.Text.Json.Serializati
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Security.ApiKeyType.Rest:
-				writer.WriteStringValue(MemberRest);
-				break;
 			case Elastic.Clients.Elasticsearch.Security.ApiKeyType.CrossCluster:
 				writer.WriteStringValue(MemberCrossCluster);
+				break;
+			case Elastic.Clients.Elasticsearch.Security.ApiKeyType.Rest:
+				writer.WriteStringValue(MemberRest);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.ApiKeyType)}'.");
@@ -437,14 +437,12 @@ public enum AccessTokenGrantType
 {
 	/// <summary>
 	/// <para>
-	/// This grant type implements the Resource Owner Password Credentials Grant of OAuth2.
-	/// In this grant, a trusted client exchanges the end user's credentials for an access token and (possibly) a refresh token.
-	/// The request needs to be made by an authenticated user but happens on behalf of another authenticated user (the one whose credentials are passed as request parameters).
-	/// This grant type is not suitable or designed for the self-service user creation of tokens.
+	/// This grant type is supported internally and implements SPNEGO based Kerberos support.
+	/// The <c>_kerberos</c> grant type may change from version to version.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "password")]
-	Password,
+	[System.Runtime.Serialization.EnumMember(Value = "_kerberos")]
+	Kerberos,
 	/// <summary>
 	/// <para>
 	/// This grant type implements the Client Credentials Grant of OAuth2.
@@ -457,12 +455,14 @@ public enum AccessTokenGrantType
 	ClientCredentials,
 	/// <summary>
 	/// <para>
-	/// This grant type is supported internally and implements SPNEGO based Kerberos support.
-	/// The <c>_kerberos</c> grant type may change from version to version.
+	/// This grant type implements the Resource Owner Password Credentials Grant of OAuth2.
+	/// In this grant, a trusted client exchanges the end user's credentials for an access token and (possibly) a refresh token.
+	/// The request needs to be made by an authenticated user but happens on behalf of another authenticated user (the one whose credentials are passed as request parameters).
+	/// This grant type is not suitable or designed for the self-service user creation of tokens.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "_kerberos")]
-	Kerberos,
+	[System.Runtime.Serialization.EnumMember(Value = "password")]
+	Password,
 	/// <summary>
 	/// <para>
 	/// This grant type implements the Refresh Token Grant of OAuth2.
@@ -487,19 +487,19 @@ public enum GrantType
 {
 	/// <summary>
 	/// <para>
-	/// In this type of grant, you must supply the user ID and password for which you want to create the API key.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "password")]
-	Password,
-	/// <summary>
-	/// <para>
 	/// In this type of grant, you must supply an access token that was created by the Elasticsearch token service.
 	/// If you are activating a user profile, you can alternatively supply a JWT (either a JWT <c>access_token</c> or a JWT <c>id_token</c>).
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "access_token")]
-	AccessToken
+	AccessToken,
+	/// <summary>
+	/// <para>
+	/// In this type of grant, you must supply the user ID and password for which you want to create the API key.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "password")]
+	Password
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ClusterPrivilegeConverter))]
@@ -643,10 +643,10 @@ public enum RemoteClusterPrivilege
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.TemplateFormatConverter))]
 public enum TemplateFormat
 {
-	[System.Runtime.Serialization.EnumMember(Value = "string")]
-	String,
 	[System.Runtime.Serialization.EnumMember(Value = "json")]
-	Json
+	Json,
+	[System.Runtime.Serialization.EnumMember(Value = "string")]
+	String
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RestrictionWorkflowConverter))]
@@ -677,8 +677,8 @@ public readonly partial struct RestrictionWorkflow : Elastic.Clients.Elasticsear
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ApiKeyTypeConverter))]
 public enum ApiKeyType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "rest")]
-	Rest,
 	[System.Runtime.Serialization.EnumMember(Value = "cross_cluster")]
-	CrossCluster
+	CrossCluster,
+	[System.Runtime.Serialization.EnumMember(Value = "rest")]
+	Rest
 }

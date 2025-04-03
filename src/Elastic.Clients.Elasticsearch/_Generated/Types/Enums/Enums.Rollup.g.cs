@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 internal sealed partial class IndexingJobStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.IndexingJobState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndexing = System.Text.Json.JsonEncodedText.Encode("indexing");
-	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
-	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
 	private static readonly System.Text.Json.JsonEncodedText MemberAborting = System.Text.Json.JsonEncodedText.Encode("aborting");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexing = System.Text.Json.JsonEncodedText.Encode("indexing");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
 
 	public override Elastic.Clients.Elasticsearch.Rollup.IndexingJobState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberStarted))
+		if (reader.ValueTextEquals(MemberAborting))
 		{
-			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started;
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting;
 		}
 
 		if (reader.ValueTextEquals(MemberIndexing))
@@ -43,9 +43,9 @@ internal sealed partial class IndexingJobStateConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Indexing;
 		}
 
-		if (reader.ValueTextEquals(MemberStopping))
+		if (reader.ValueTextEquals(MemberStarted))
 		{
-			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping;
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started;
 		}
 
 		if (reader.ValueTextEquals(MemberStopped))
@@ -53,15 +53,15 @@ internal sealed partial class IndexingJobStateConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopped;
 		}
 
-		if (reader.ValueTextEquals(MemberAborting))
+		if (reader.ValueTextEquals(MemberStopping))
 		{
-			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting;
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping;
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberAborting.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started;
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting;
 		}
 
 		if (string.Equals(value, MemberIndexing.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -69,9 +69,9 @@ internal sealed partial class IndexingJobStateConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Indexing;
 		}
 
-		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping;
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started;
 		}
 
 		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -79,9 +79,9 @@ internal sealed partial class IndexingJobStateConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopped;
 		}
 
-		if (string.Equals(value, MemberAborting.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting;
+			return Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Rollup.IndexingJobState)}'.");
@@ -91,20 +91,20 @@ internal sealed partial class IndexingJobStateConverter : System.Text.Json.Seria
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started:
-				writer.WriteStringValue(MemberStarted);
+			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting:
+				writer.WriteStringValue(MemberAborting);
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Indexing:
 				writer.WriteStringValue(MemberIndexing);
 				break;
-			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping:
-				writer.WriteStringValue(MemberStopping);
+			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started:
+				writer.WriteStringValue(MemberStarted);
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopped:
 				writer.WriteStringValue(MemberStopped);
 				break;
-			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting:
-				writer.WriteStringValue(MemberAborting);
+			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping:
+				writer.WriteStringValue(MemberStopping);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Rollup.IndexingJobState)}'.");
@@ -124,17 +124,17 @@ internal sealed partial class IndexingJobStateConverter : System.Text.Json.Seria
 
 internal sealed partial class MetricConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.Metric>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
-	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
-	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
 	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
 	private static readonly System.Text.Json.JsonEncodedText MemberValueCount = System.Text.Json.JsonEncodedText.Encode("value_count");
 
 	public override Elastic.Clients.Elasticsearch.Rollup.Metric Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberMin))
+		if (reader.ValueTextEquals(MemberAvg))
 		{
-			return Elastic.Clients.Elasticsearch.Rollup.Metric.Min;
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Avg;
 		}
 
 		if (reader.ValueTextEquals(MemberMax))
@@ -142,14 +142,14 @@ internal sealed partial class MetricConverter : System.Text.Json.Serialization.J
 			return Elastic.Clients.Elasticsearch.Rollup.Metric.Max;
 		}
 
+		if (reader.ValueTextEquals(MemberMin))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Min;
+		}
+
 		if (reader.ValueTextEquals(MemberSum))
 		{
 			return Elastic.Clients.Elasticsearch.Rollup.Metric.Sum;
-		}
-
-		if (reader.ValueTextEquals(MemberAvg))
-		{
-			return Elastic.Clients.Elasticsearch.Rollup.Metric.Avg;
 		}
 
 		if (reader.ValueTextEquals(MemberValueCount))
@@ -158,9 +158,9 @@ internal sealed partial class MetricConverter : System.Text.Json.Serialization.J
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Rollup.Metric.Min;
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Avg;
 		}
 
 		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -168,14 +168,14 @@ internal sealed partial class MetricConverter : System.Text.Json.Serialization.J
 			return Elastic.Clients.Elasticsearch.Rollup.Metric.Max;
 		}
 
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Rollup.Metric.Min;
+		}
+
 		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Rollup.Metric.Sum;
-		}
-
-		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Rollup.Metric.Avg;
 		}
 
 		if (string.Equals(value, MemberValueCount.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -190,17 +190,17 @@ internal sealed partial class MetricConverter : System.Text.Json.Serialization.J
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Rollup.Metric.Min:
-				writer.WriteStringValue(MemberMin);
+			case Elastic.Clients.Elasticsearch.Rollup.Metric.Avg:
+				writer.WriteStringValue(MemberAvg);
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Max:
 				writer.WriteStringValue(MemberMax);
 				break;
+			case Elastic.Clients.Elasticsearch.Rollup.Metric.Min:
+				writer.WriteStringValue(MemberMin);
+				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Sum:
 				writer.WriteStringValue(MemberSum);
-				break;
-			case Elastic.Clients.Elasticsearch.Rollup.Metric.Avg:
-				writer.WriteStringValue(MemberAvg);
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.ValueCount:
 				writer.WriteStringValue(MemberValueCount);
@@ -224,29 +224,29 @@ internal sealed partial class MetricConverter : System.Text.Json.Serialization.J
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.IndexingJobStateConverter))]
 public enum IndexingJobState
 {
-	[System.Runtime.Serialization.EnumMember(Value = "started")]
-	Started,
+	[System.Runtime.Serialization.EnumMember(Value = "aborting")]
+	Aborting,
 	[System.Runtime.Serialization.EnumMember(Value = "indexing")]
 	Indexing,
-	[System.Runtime.Serialization.EnumMember(Value = "stopping")]
-	Stopping,
+	[System.Runtime.Serialization.EnumMember(Value = "started")]
+	Started,
 	[System.Runtime.Serialization.EnumMember(Value = "stopped")]
 	Stopped,
-	[System.Runtime.Serialization.EnumMember(Value = "aborting")]
-	Aborting
+	[System.Runtime.Serialization.EnumMember(Value = "stopping")]
+	Stopping
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.MetricConverter))]
 public enum Metric
 {
-	[System.Runtime.Serialization.EnumMember(Value = "min")]
-	Min,
-	[System.Runtime.Serialization.EnumMember(Value = "max")]
-	Max,
-	[System.Runtime.Serialization.EnumMember(Value = "sum")]
-	Sum,
 	[System.Runtime.Serialization.EnumMember(Value = "avg")]
 	Avg,
+	[System.Runtime.Serialization.EnumMember(Value = "max")]
+	Max,
+	[System.Runtime.Serialization.EnumMember(Value = "min")]
+	Min,
+	[System.Runtime.Serialization.EnumMember(Value = "sum")]
+	Sum,
 	[System.Runtime.Serialization.EnumMember(Value = "value_count")]
 	ValueCount
 }

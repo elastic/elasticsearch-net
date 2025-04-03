@@ -25,38 +25,28 @@ namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute;
 
 internal sealed partial class PainlessContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberPainlessTest = System.Text.Json.JsonEncodedText.Encode("painless_test");
-	private static readonly System.Text.Json.JsonEncodedText MemberFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score");
 	private static readonly System.Text.Json.JsonEncodedText MemberBooleanField = System.Text.Json.JsonEncodedText.Encode("boolean_field");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompositeField = System.Text.Json.JsonEncodedText.Encode("composite_field");
 	private static readonly System.Text.Json.JsonEncodedText MemberDateField = System.Text.Json.JsonEncodedText.Encode("date_field");
 	private static readonly System.Text.Json.JsonEncodedText MemberDoubleField = System.Text.Json.JsonEncodedText.Encode("double_field");
+	private static readonly System.Text.Json.JsonEncodedText MemberFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText MemberGeoPointField = System.Text.Json.JsonEncodedText.Encode("geo_point_field");
 	private static readonly System.Text.Json.JsonEncodedText MemberIpField = System.Text.Json.JsonEncodedText.Encode("ip_field");
 	private static readonly System.Text.Json.JsonEncodedText MemberKeywordField = System.Text.Json.JsonEncodedText.Encode("keyword_field");
 	private static readonly System.Text.Json.JsonEncodedText MemberLongField = System.Text.Json.JsonEncodedText.Encode("long_field");
-	private static readonly System.Text.Json.JsonEncodedText MemberCompositeField = System.Text.Json.JsonEncodedText.Encode("composite_field");
+	private static readonly System.Text.Json.JsonEncodedText MemberPainlessTest = System.Text.Json.JsonEncodedText.Encode("painless_test");
+	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score");
 
 	public override Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberPainlessTest))
-		{
-			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.PainlessTest;
-		}
-
-		if (reader.ValueTextEquals(MemberFilter))
-		{
-			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Filter;
-		}
-
-		if (reader.ValueTextEquals(MemberScore))
-		{
-			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Score;
-		}
-
 		if (reader.ValueTextEquals(MemberBooleanField))
 		{
 			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.BooleanField;
+		}
+
+		if (reader.ValueTextEquals(MemberCompositeField))
+		{
+			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.CompositeField;
 		}
 
 		if (reader.ValueTextEquals(MemberDateField))
@@ -67,6 +57,11 @@ internal sealed partial class PainlessContextConverter : System.Text.Json.Serial
 		if (reader.ValueTextEquals(MemberDoubleField))
 		{
 			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.DoubleField;
+		}
+
+		if (reader.ValueTextEquals(MemberFilter))
+		{
+			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Filter;
 		}
 
 		if (reader.ValueTextEquals(MemberGeoPointField))
@@ -89,30 +84,25 @@ internal sealed partial class PainlessContextConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.LongField;
 		}
 
-		if (reader.ValueTextEquals(MemberCompositeField))
-		{
-			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.CompositeField;
-		}
-
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberPainlessTest.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberPainlessTest))
 		{
 			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.PainlessTest;
 		}
 
-		if (string.Equals(value, MemberFilter.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Filter;
-		}
-
-		if (string.Equals(value, MemberScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberScore))
 		{
 			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Score;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberBooleanField.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.BooleanField;
+		}
+
+		if (string.Equals(value, MemberCompositeField.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.CompositeField;
 		}
 
 		if (string.Equals(value, MemberDateField.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -123,6 +113,11 @@ internal sealed partial class PainlessContextConverter : System.Text.Json.Serial
 		if (string.Equals(value, MemberDoubleField.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.DoubleField;
+		}
+
+		if (string.Equals(value, MemberFilter.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Filter;
 		}
 
 		if (string.Equals(value, MemberGeoPointField.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -145,9 +140,14 @@ internal sealed partial class PainlessContextConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.LongField;
 		}
 
-		if (string.Equals(value, MemberCompositeField.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberPainlessTest.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.CompositeField;
+			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.PainlessTest;
+		}
+
+		if (string.Equals(value, MemberScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Score;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext)}'.");
@@ -157,23 +157,20 @@ internal sealed partial class PainlessContextConverter : System.Text.Json.Serial
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.PainlessTest:
-				writer.WriteStringValue(MemberPainlessTest);
-				break;
-			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Filter:
-				writer.WriteStringValue(MemberFilter);
-				break;
-			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Score:
-				writer.WriteStringValue(MemberScore);
-				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.BooleanField:
 				writer.WriteStringValue(MemberBooleanField);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.CompositeField:
+				writer.WriteStringValue(MemberCompositeField);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.DateField:
 				writer.WriteStringValue(MemberDateField);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.DoubleField:
 				writer.WriteStringValue(MemberDoubleField);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Filter:
+				writer.WriteStringValue(MemberFilter);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.GeoPointField:
 				writer.WriteStringValue(MemberGeoPointField);
@@ -187,8 +184,11 @@ internal sealed partial class PainlessContextConverter : System.Text.Json.Serial
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.LongField:
 				writer.WriteStringValue(MemberLongField);
 				break;
-			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.CompositeField:
-				writer.WriteStringValue(MemberCompositeField);
+			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.PainlessTest:
+				writer.WriteStringValue(MemberPainlessTest);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Score:
+				writer.WriteStringValue(MemberScore);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext)}'.");
@@ -211,32 +211,18 @@ public enum PainlessContext
 {
 	/// <summary>
 	/// <para>
-	/// The default context if no other context is specified.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "painless_test")]
-	PainlessTest,
-	/// <summary>
-	/// <para>
-	/// Treats scripts as if they were run inside a script query.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "filter")]
-	Filter,
-	/// <summary>
-	/// <para>
-	/// Treats scripts as if they were run inside a <c>script_score</c> function in a <c>function_score</c> query.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "score")]
-	Score,
-	/// <summary>
-	/// <para>
 	/// The context for boolean fields. The script returns a <c>true</c> or <c>false</c> response.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "boolean_field")]
 	BooleanField,
+	/// <summary>
+	/// <para>
+	/// The context for composite runtime fields. The script returns a map of values.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "composite_field")]
+	CompositeField,
 	/// <summary>
 	/// <para>
 	/// The context for date fields. <c>emit</c> takes a long value and the script returns a sorted list of dates.
@@ -251,6 +237,13 @@ public enum PainlessContext
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "double_field")]
 	DoubleField,
+	/// <summary>
+	/// <para>
+	/// Treats scripts as if they were run inside a script query.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "filter")]
+	Filter,
 	/// <summary>
 	/// <para>
 	/// The context for geo-point fields. <c>emit</c> takes two double parameters, the latitude and longitude values, and the script returns an object in GeoJSON format containing the coordinates for the geo point.
@@ -281,9 +274,16 @@ public enum PainlessContext
 	LongField,
 	/// <summary>
 	/// <para>
-	/// The context for composite runtime fields. The script returns a map of values.
+	/// The default context if no other context is specified.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "composite_field")]
-	CompositeField
+	[System.Runtime.Serialization.EnumMember(Value = "painless_test")]
+	PainlessTest,
+	/// <summary>
+	/// <para>
+	/// Treats scripts as if they were run inside a <c>script_score</c> function in a <c>function_score</c> query.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "score")]
+	Score
 }

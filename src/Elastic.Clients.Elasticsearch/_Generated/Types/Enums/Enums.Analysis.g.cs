@@ -25,12 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 internal sealed partial class KuromojiTokenizationModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberExtended = System.Text.Json.JsonEncodedText.Encode("extended");
 	private static readonly System.Text.Json.JsonEncodedText MemberNormal = System.Text.Json.JsonEncodedText.Encode("normal");
 	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
-	private static readonly System.Text.Json.JsonEncodedText MemberExtended = System.Text.Json.JsonEncodedText.Encode("extended");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberExtended))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended;
+		}
+
 		if (reader.ValueTextEquals(MemberNormal))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Normal;
@@ -41,12 +46,12 @@ internal sealed partial class KuromojiTokenizationModeConverter : System.Text.Js
 			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Search;
 		}
 
-		if (reader.ValueTextEquals(MemberExtended))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberExtended.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberNormal.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Normal;
@@ -57,11 +62,6 @@ internal sealed partial class KuromojiTokenizationModeConverter : System.Text.Js
 			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Search;
 		}
 
-		if (string.Equals(value, MemberExtended.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode)}'.");
 	}
 
@@ -69,14 +69,14 @@ internal sealed partial class KuromojiTokenizationModeConverter : System.Text.Js
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended:
+				writer.WriteStringValue(MemberExtended);
+				break;
 			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Normal:
 				writer.WriteStringValue(MemberNormal);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Search:
 				writer.WriteStringValue(MemberSearch);
-				break;
-			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended:
-				writer.WriteStringValue(MemberExtended);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode)}'.");
@@ -97,8 +97,8 @@ internal sealed partial class KuromojiTokenizationModeConverter : System.Text.Js
 internal sealed partial class NoriDecompoundModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberDiscard = System.Text.Json.JsonEncodedText.Encode("discard");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 	private static readonly System.Text.Json.JsonEncodedText MemberMixed = System.Text.Json.JsonEncodedText.Encode("mixed");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -107,14 +107,14 @@ internal sealed partial class NoriDecompoundModeConverter : System.Text.Json.Ser
 			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Discard;
 		}
 
-		if (reader.ValueTextEquals(MemberNone))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None;
-		}
-
 		if (reader.ValueTextEquals(MemberMixed))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Mixed;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None;
 		}
 
 		var value = reader.GetString()!;
@@ -123,14 +123,14 @@ internal sealed partial class NoriDecompoundModeConverter : System.Text.Json.Ser
 			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Discard;
 		}
 
-		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None;
-		}
-
 		if (string.Equals(value, MemberMixed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Mixed;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode)}'.");
@@ -143,11 +143,11 @@ internal sealed partial class NoriDecompoundModeConverter : System.Text.Json.Ser
 			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Discard:
 				writer.WriteStringValue(MemberDiscard);
 				break;
-			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None:
-				writer.WriteStringValue(MemberNone);
-				break;
 			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Mixed:
 				writer.WriteStringValue(MemberMixed);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None:
+				writer.WriteStringValue(MemberNone);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode)}'.");
@@ -167,30 +167,30 @@ internal sealed partial class NoriDecompoundModeConverter : System.Text.Json.Ser
 
 internal sealed partial class IcuNormalizationModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDecompose = System.Text.Json.JsonEncodedText.Encode("decompose");
 	private static readonly System.Text.Json.JsonEncodedText MemberCompose = System.Text.Json.JsonEncodedText.Encode("compose");
+	private static readonly System.Text.Json.JsonEncodedText MemberDecompose = System.Text.Json.JsonEncodedText.Encode("decompose");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberDecompose))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose;
-		}
-
 		if (reader.ValueTextEquals(MemberCompose))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Compose;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberDecompose.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberDecompose))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberCompose.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Compose;
+		}
+
+		if (string.Equals(value, MemberDecompose.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode)}'.");
@@ -200,11 +200,11 @@ internal sealed partial class IcuNormalizationModeConverter : System.Text.Json.S
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose:
-				writer.WriteStringValue(MemberDecompose);
-				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Compose:
 				writer.WriteStringValue(MemberCompose);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose:
+				writer.WriteStringValue(MemberDecompose);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode)}'.");
@@ -295,17 +295,12 @@ internal sealed partial class IcuNormalizationTypeConverter : System.Text.Json.S
 
 internal sealed partial class DelimitedPayloadEncodingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("int");
 	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
 	private static readonly System.Text.Json.JsonEncodedText MemberIdentity = System.Text.Json.JsonEncodedText.Encode("identity");
+	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("int");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberInteger))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer;
-		}
-
 		if (reader.ValueTextEquals(MemberFloat))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Float;
@@ -316,12 +311,12 @@ internal sealed partial class DelimitedPayloadEncodingConverter : System.Text.Js
 			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Identity;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberInteger.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberInteger))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberFloat.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Float;
@@ -332,6 +327,11 @@ internal sealed partial class DelimitedPayloadEncodingConverter : System.Text.Js
 			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Identity;
 		}
 
+		if (string.Equals(value, MemberInteger.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding)}'.");
 	}
 
@@ -339,14 +339,14 @@ internal sealed partial class DelimitedPayloadEncodingConverter : System.Text.Js
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer:
-				writer.WriteStringValue(MemberInteger);
-				break;
 			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Float:
 				writer.WriteStringValue(MemberFloat);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Identity:
 				writer.WriteStringValue(MemberIdentity);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer:
+				writer.WriteStringValue(MemberInteger);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding)}'.");
@@ -366,30 +366,30 @@ internal sealed partial class DelimitedPayloadEncodingConverter : System.Text.Js
 
 internal sealed partial class EdgeNGramSideConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFront = System.Text.Json.JsonEncodedText.Encode("front");
 	private static readonly System.Text.Json.JsonEncodedText MemberBack = System.Text.Json.JsonEncodedText.Encode("back");
+	private static readonly System.Text.Json.JsonEncodedText MemberFront = System.Text.Json.JsonEncodedText.Encode("front");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberFront))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front;
-		}
-
 		if (reader.ValueTextEquals(MemberBack))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Back;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberFront.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberFront))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberBack.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Back;
+		}
+
+		if (string.Equals(value, MemberFront.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide)}'.");
@@ -399,11 +399,11 @@ internal sealed partial class EdgeNGramSideConverter : System.Text.Json.Serializ
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front:
-				writer.WriteStringValue(MemberFront);
-				break;
 			case Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Back:
 				writer.WriteStringValue(MemberBack);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front:
+				writer.WriteStringValue(MemberFront);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide)}'.");
@@ -423,30 +423,30 @@ internal sealed partial class EdgeNGramSideConverter : System.Text.Json.Serializ
 
 internal sealed partial class KeepTypesModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberInclude = System.Text.Json.JsonEncodedText.Encode("include");
 	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText MemberInclude = System.Text.Json.JsonEncodedText.Encode("include");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberInclude))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include;
-		}
-
 		if (reader.ValueTextEquals(MemberExclude))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Exclude;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberInclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberInclude))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberExclude.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Exclude;
+		}
+
+		if (string.Equals(value, MemberInclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode)}'.");
@@ -456,11 +456,11 @@ internal sealed partial class KeepTypesModeConverter : System.Text.Json.Serializ
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include:
-				writer.WriteStringValue(MemberInclude);
-				break;
 			case Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Exclude:
 				writer.WriteStringValue(MemberExclude);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include:
+				writer.WriteStringValue(MemberInclude);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode)}'.");
@@ -874,30 +874,30 @@ internal sealed partial class SynonymFormatConverter : System.Text.Json.Serializ
 
 internal sealed partial class IcuCollationAlternateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberShifted = System.Text.Json.JsonEncodedText.Encode("shifted");
 	private static readonly System.Text.Json.JsonEncodedText MemberNonIgnorable = System.Text.Json.JsonEncodedText.Encode("non-ignorable");
+	private static readonly System.Text.Json.JsonEncodedText MemberShifted = System.Text.Json.JsonEncodedText.Encode("shifted");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberShifted))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted;
-		}
-
 		if (reader.ValueTextEquals(MemberNonIgnorable))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.NonIgnorable;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberShifted.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberShifted))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberNonIgnorable.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.NonIgnorable;
+		}
+
+		if (string.Equals(value, MemberShifted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate)}'.");
@@ -907,11 +907,11 @@ internal sealed partial class IcuCollationAlternateConverter : System.Text.Json.
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted:
-				writer.WriteStringValue(MemberShifted);
-				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.NonIgnorable:
 				writer.WriteStringValue(MemberNonIgnorable);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted:
+				writer.WriteStringValue(MemberShifted);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate)}'.");
@@ -988,30 +988,30 @@ internal sealed partial class IcuCollationCaseFirstConverter : System.Text.Json.
 
 internal sealed partial class IcuCollationDecompositionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
 	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical");
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberNo))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No;
-		}
-
 		if (reader.ValueTextEquals(MemberIdentical))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.Identical;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberNo.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberNo))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberIdentical.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.Identical;
+		}
+
+		if (string.Equals(value, MemberNo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition)}'.");
@@ -1021,11 +1021,11 @@ internal sealed partial class IcuCollationDecompositionConverter : System.Text.J
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No:
-				writer.WriteStringValue(MemberNo);
-				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.Identical:
 				writer.WriteStringValue(MemberIdentical);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No:
+				writer.WriteStringValue(MemberNo);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition)}'.");
@@ -1045,17 +1045,27 @@ internal sealed partial class IcuCollationDecompositionConverter : System.Text.J
 
 internal sealed partial class IcuCollationStrengthConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical");
 	private static readonly System.Text.Json.JsonEncodedText MemberPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
+	private static readonly System.Text.Json.JsonEncodedText MemberQuaternary = System.Text.Json.JsonEncodedText.Encode("quaternary");
 	private static readonly System.Text.Json.JsonEncodedText MemberSecondary = System.Text.Json.JsonEncodedText.Encode("secondary");
 	private static readonly System.Text.Json.JsonEncodedText MemberTertiary = System.Text.Json.JsonEncodedText.Encode("tertiary");
-	private static readonly System.Text.Json.JsonEncodedText MemberQuaternary = System.Text.Json.JsonEncodedText.Encode("quaternary");
-	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberIdentical))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical;
+		}
+
 		if (reader.ValueTextEquals(MemberPrimary))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Primary;
+		}
+
+		if (reader.ValueTextEquals(MemberQuaternary))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary;
 		}
 
 		if (reader.ValueTextEquals(MemberSecondary))
@@ -1068,20 +1078,20 @@ internal sealed partial class IcuCollationStrengthConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Tertiary;
 		}
 
-		if (reader.ValueTextEquals(MemberQuaternary))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary;
-		}
-
-		if (reader.ValueTextEquals(MemberIdentical))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberIdentical.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberPrimary.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Primary;
+		}
+
+		if (string.Equals(value, MemberQuaternary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary;
 		}
 
 		if (string.Equals(value, MemberSecondary.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1094,16 +1104,6 @@ internal sealed partial class IcuCollationStrengthConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Tertiary;
 		}
 
-		if (string.Equals(value, MemberQuaternary.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary;
-		}
-
-		if (string.Equals(value, MemberIdentical.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength)}'.");
 	}
 
@@ -1111,20 +1111,20 @@ internal sealed partial class IcuCollationStrengthConverter : System.Text.Json.S
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical:
+				writer.WriteStringValue(MemberIdentical);
+				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Primary:
 				writer.WriteStringValue(MemberPrimary);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary:
+				writer.WriteStringValue(MemberQuaternary);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Secondary:
 				writer.WriteStringValue(MemberSecondary);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Tertiary:
 				writer.WriteStringValue(MemberTertiary);
-				break;
-			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary:
-				writer.WriteStringValue(MemberQuaternary);
-				break;
-			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical:
-				writer.WriteStringValue(MemberIdentical);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength)}'.");
@@ -1201,39 +1201,24 @@ internal sealed partial class IcuTransformDirectionConverter : System.Text.Json.
 
 internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMetaphone = System.Text.Json.JsonEncodedText.Encode("metaphone");
-	private static readonly System.Text.Json.JsonEncodedText MemberDoubleMetaphone = System.Text.Json.JsonEncodedText.Encode("double_metaphone");
-	private static readonly System.Text.Json.JsonEncodedText MemberSoundex = System.Text.Json.JsonEncodedText.Encode("soundex");
-	private static readonly System.Text.Json.JsonEncodedText MemberRefinedSoundex = System.Text.Json.JsonEncodedText.Encode("refined_soundex");
+	private static readonly System.Text.Json.JsonEncodedText MemberBeiderMorse = System.Text.Json.JsonEncodedText.Encode("beider_morse");
 	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone1 = System.Text.Json.JsonEncodedText.Encode("caverphone1");
 	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone2 = System.Text.Json.JsonEncodedText.Encode("caverphone2");
 	private static readonly System.Text.Json.JsonEncodedText MemberCologne = System.Text.Json.JsonEncodedText.Encode("cologne");
-	private static readonly System.Text.Json.JsonEncodedText MemberNysiis = System.Text.Json.JsonEncodedText.Encode("nysiis");
-	private static readonly System.Text.Json.JsonEncodedText MemberKoelnerphonetik = System.Text.Json.JsonEncodedText.Encode("koelnerphonetik");
-	private static readonly System.Text.Json.JsonEncodedText MemberHaasephonetik = System.Text.Json.JsonEncodedText.Encode("haasephonetik");
-	private static readonly System.Text.Json.JsonEncodedText MemberBeiderMorse = System.Text.Json.JsonEncodedText.Encode("beider_morse");
 	private static readonly System.Text.Json.JsonEncodedText MemberDaitchMokotoff = System.Text.Json.JsonEncodedText.Encode("daitch_mokotoff");
+	private static readonly System.Text.Json.JsonEncodedText MemberDoubleMetaphone = System.Text.Json.JsonEncodedText.Encode("double_metaphone");
+	private static readonly System.Text.Json.JsonEncodedText MemberHaasephonetik = System.Text.Json.JsonEncodedText.Encode("haasephonetik");
+	private static readonly System.Text.Json.JsonEncodedText MemberKoelnerphonetik = System.Text.Json.JsonEncodedText.Encode("koelnerphonetik");
+	private static readonly System.Text.Json.JsonEncodedText MemberMetaphone = System.Text.Json.JsonEncodedText.Encode("metaphone");
+	private static readonly System.Text.Json.JsonEncodedText MemberNysiis = System.Text.Json.JsonEncodedText.Encode("nysiis");
+	private static readonly System.Text.Json.JsonEncodedText MemberRefinedSoundex = System.Text.Json.JsonEncodedText.Encode("refined_soundex");
+	private static readonly System.Text.Json.JsonEncodedText MemberSoundex = System.Text.Json.JsonEncodedText.Encode("soundex");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberMetaphone))
+		if (reader.ValueTextEquals(MemberBeiderMorse))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone;
-		}
-
-		if (reader.ValueTextEquals(MemberDoubleMetaphone))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone;
-		}
-
-		if (reader.ValueTextEquals(MemberSoundex))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex;
-		}
-
-		if (reader.ValueTextEquals(MemberRefinedSoundex))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse;
 		}
 
 		if (reader.ValueTextEquals(MemberCaverphone1))
@@ -1251,14 +1236,14 @@ internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Cologne;
 		}
 
-		if (reader.ValueTextEquals(MemberNysiis))
+		if (reader.ValueTextEquals(MemberDaitchMokotoff))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff;
 		}
 
-		if (reader.ValueTextEquals(MemberKoelnerphonetik))
+		if (reader.ValueTextEquals(MemberDoubleMetaphone))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone;
 		}
 
 		if (reader.ValueTextEquals(MemberHaasephonetik))
@@ -1266,35 +1251,35 @@ internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Haasephonetik;
 		}
 
-		if (reader.ValueTextEquals(MemberBeiderMorse))
+		if (reader.ValueTextEquals(MemberKoelnerphonetik))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik;
 		}
 
-		if (reader.ValueTextEquals(MemberDaitchMokotoff))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff;
-		}
-
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberMetaphone.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberMetaphone))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone;
 		}
 
-		if (string.Equals(value, MemberDoubleMetaphone.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberNysiis))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis;
 		}
 
-		if (string.Equals(value, MemberSoundex.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberRefinedSoundex))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex;
+		}
+
+		if (reader.ValueTextEquals(MemberSoundex))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex;
 		}
 
-		if (string.Equals(value, MemberRefinedSoundex.Value, System.StringComparison.OrdinalIgnoreCase))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberBeiderMorse.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse;
 		}
 
 		if (string.Equals(value, MemberCaverphone1.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1312,14 +1297,14 @@ internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Cologne;
 		}
 
-		if (string.Equals(value, MemberNysiis.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberDaitchMokotoff.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff;
 		}
 
-		if (string.Equals(value, MemberKoelnerphonetik.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberDoubleMetaphone.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone;
 		}
 
 		if (string.Equals(value, MemberHaasephonetik.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1327,14 +1312,29 @@ internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Haasephonetik;
 		}
 
-		if (string.Equals(value, MemberBeiderMorse.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberKoelnerphonetik.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik;
 		}
 
-		if (string.Equals(value, MemberDaitchMokotoff.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberMetaphone.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff;
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone;
+		}
+
+		if (string.Equals(value, MemberNysiis.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis;
+		}
+
+		if (string.Equals(value, MemberRefinedSoundex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex;
+		}
+
+		if (string.Equals(value, MemberSoundex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder)}'.");
@@ -1344,17 +1344,8 @@ internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serial
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone:
-				writer.WriteStringValue(MemberMetaphone);
-				break;
-			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone:
-				writer.WriteStringValue(MemberDoubleMetaphone);
-				break;
-			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex:
-				writer.WriteStringValue(MemberSoundex);
-				break;
-			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex:
-				writer.WriteStringValue(MemberRefinedSoundex);
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse:
+				writer.WriteStringValue(MemberBeiderMorse);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone1:
 				writer.WriteStringValue(MemberCaverphone1);
@@ -1365,20 +1356,29 @@ internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serial
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Cologne:
 				writer.WriteStringValue(MemberCologne);
 				break;
-			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis:
-				writer.WriteStringValue(MemberNysiis);
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff:
+				writer.WriteStringValue(MemberDaitchMokotoff);
 				break;
-			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik:
-				writer.WriteStringValue(MemberKoelnerphonetik);
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone:
+				writer.WriteStringValue(MemberDoubleMetaphone);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Haasephonetik:
 				writer.WriteStringValue(MemberHaasephonetik);
 				break;
-			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse:
-				writer.WriteStringValue(MemberBeiderMorse);
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik:
+				writer.WriteStringValue(MemberKoelnerphonetik);
 				break;
-			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff:
-				writer.WriteStringValue(MemberDaitchMokotoff);
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone:
+				writer.WriteStringValue(MemberMetaphone);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis:
+				writer.WriteStringValue(MemberNysiis);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex:
+				writer.WriteStringValue(MemberRefinedSoundex);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex:
+				writer.WriteStringValue(MemberSoundex);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder)}'.");
@@ -1398,20 +1398,20 @@ internal sealed partial class PhoneticEncoderConverter : System.Text.Json.Serial
 
 internal sealed partial class PhoneticNameTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGeneric = System.Text.Json.JsonEncodedText.Encode("generic");
 	private static readonly System.Text.Json.JsonEncodedText MemberAshkenazi = System.Text.Json.JsonEncodedText.Encode("ashkenazi");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeneric = System.Text.Json.JsonEncodedText.Encode("generic");
 	private static readonly System.Text.Json.JsonEncodedText MemberSephardic = System.Text.Json.JsonEncodedText.Encode("sephardic");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberGeneric))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic;
-		}
-
 		if (reader.ValueTextEquals(MemberAshkenazi))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Ashkenazi;
+		}
+
+		if (reader.ValueTextEquals(MemberGeneric))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic;
 		}
 
 		if (reader.ValueTextEquals(MemberSephardic))
@@ -1420,14 +1420,14 @@ internal sealed partial class PhoneticNameTypeConverter : System.Text.Json.Seria
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberGeneric.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic;
-		}
-
 		if (string.Equals(value, MemberAshkenazi.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Ashkenazi;
+		}
+
+		if (string.Equals(value, MemberGeneric.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic;
 		}
 
 		if (string.Equals(value, MemberSephardic.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1442,11 +1442,11 @@ internal sealed partial class PhoneticNameTypeConverter : System.Text.Json.Seria
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic:
-				writer.WriteStringValue(MemberGeneric);
-				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Ashkenazi:
 				writer.WriteStringValue(MemberAshkenazi);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic:
+				writer.WriteStringValue(MemberGeneric);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Sephardic:
 				writer.WriteStringValue(MemberSephardic);
@@ -1526,18 +1526,18 @@ internal sealed partial class PhoneticRuleTypeConverter : System.Text.Json.Seria
 
 internal sealed partial class TokenCharConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.TokenChar>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberLetter = System.Text.Json.JsonEncodedText.Encode("letter");
+	private static readonly System.Text.Json.JsonEncodedText MemberCustom = System.Text.Json.JsonEncodedText.Encode("custom");
 	private static readonly System.Text.Json.JsonEncodedText MemberDigit = System.Text.Json.JsonEncodedText.Encode("digit");
-	private static readonly System.Text.Json.JsonEncodedText MemberWhitespace = System.Text.Json.JsonEncodedText.Encode("whitespace");
+	private static readonly System.Text.Json.JsonEncodedText MemberLetter = System.Text.Json.JsonEncodedText.Encode("letter");
 	private static readonly System.Text.Json.JsonEncodedText MemberPunctuation = System.Text.Json.JsonEncodedText.Encode("punctuation");
 	private static readonly System.Text.Json.JsonEncodedText MemberSymbol = System.Text.Json.JsonEncodedText.Encode("symbol");
-	private static readonly System.Text.Json.JsonEncodedText MemberCustom = System.Text.Json.JsonEncodedText.Encode("custom");
+	private static readonly System.Text.Json.JsonEncodedText MemberWhitespace = System.Text.Json.JsonEncodedText.Encode("whitespace");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.TokenChar Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberLetter))
+		if (reader.ValueTextEquals(MemberCustom))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter;
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom;
 		}
 
 		if (reader.ValueTextEquals(MemberDigit))
@@ -1545,9 +1545,9 @@ internal sealed partial class TokenCharConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Digit;
 		}
 
-		if (reader.ValueTextEquals(MemberWhitespace))
+		if (reader.ValueTextEquals(MemberLetter))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace;
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter;
 		}
 
 		if (reader.ValueTextEquals(MemberPunctuation))
@@ -1560,15 +1560,15 @@ internal sealed partial class TokenCharConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Symbol;
 		}
 
-		if (reader.ValueTextEquals(MemberCustom))
+		if (reader.ValueTextEquals(MemberWhitespace))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom;
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace;
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberLetter.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberCustom.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter;
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom;
 		}
 
 		if (string.Equals(value, MemberDigit.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1576,9 +1576,9 @@ internal sealed partial class TokenCharConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Digit;
 		}
 
-		if (string.Equals(value, MemberWhitespace.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberLetter.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace;
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter;
 		}
 
 		if (string.Equals(value, MemberPunctuation.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1591,9 +1591,9 @@ internal sealed partial class TokenCharConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Symbol;
 		}
 
-		if (string.Equals(value, MemberCustom.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberWhitespace.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom;
+			return Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.TokenChar)}'.");
@@ -1603,14 +1603,14 @@ internal sealed partial class TokenCharConverter : System.Text.Json.Serializatio
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter:
-				writer.WriteStringValue(MemberLetter);
+			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom:
+				writer.WriteStringValue(MemberCustom);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Digit:
 				writer.WriteStringValue(MemberDigit);
 				break;
-			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace:
-				writer.WriteStringValue(MemberWhitespace);
+			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter:
+				writer.WriteStringValue(MemberLetter);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Punctuation:
 				writer.WriteStringValue(MemberPunctuation);
@@ -1618,8 +1618,8 @@ internal sealed partial class TokenCharConverter : System.Text.Json.Serializatio
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Symbol:
 				writer.WriteStringValue(MemberSymbol);
 				break;
-			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom:
-				writer.WriteStringValue(MemberCustom);
+			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace:
+				writer.WriteStringValue(MemberWhitespace);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.TokenChar)}'.");
@@ -1837,12 +1837,12 @@ internal sealed partial class PhoneticLanguageConverter : System.Text.Json.Seria
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeConverter))]
 public enum KuromojiTokenizationMode
 {
+	[System.Runtime.Serialization.EnumMember(Value = "extended")]
+	Extended,
 	[System.Runtime.Serialization.EnumMember(Value = "normal")]
 	Normal,
 	[System.Runtime.Serialization.EnumMember(Value = "search")]
-	Search,
-	[System.Runtime.Serialization.EnumMember(Value = "extended")]
-	Extended
+	Search
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeConverter))]
@@ -1850,19 +1850,19 @@ public enum NoriDecompoundMode
 {
 	[System.Runtime.Serialization.EnumMember(Value = "discard")]
 	Discard,
-	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None,
 	[System.Runtime.Serialization.EnumMember(Value = "mixed")]
-	Mixed
+	Mixed,
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeConverter))]
 public enum IcuNormalizationMode
 {
-	[System.Runtime.Serialization.EnumMember(Value = "decompose")]
-	Decompose,
 	[System.Runtime.Serialization.EnumMember(Value = "compose")]
-	Compose
+	Compose,
+	[System.Runtime.Serialization.EnumMember(Value = "decompose")]
+	Decompose
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeConverter))]
@@ -1879,30 +1879,30 @@ public enum IcuNormalizationType
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingConverter))]
 public enum DelimitedPayloadEncoding
 {
-	[System.Runtime.Serialization.EnumMember(Value = "int")]
-	Integer,
 	[System.Runtime.Serialization.EnumMember(Value = "float")]
 	Float,
 	[System.Runtime.Serialization.EnumMember(Value = "identity")]
-	Identity
+	Identity,
+	[System.Runtime.Serialization.EnumMember(Value = "int")]
+	Integer
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSideConverter))]
 public enum EdgeNGramSide
 {
-	[System.Runtime.Serialization.EnumMember(Value = "front")]
-	Front,
 	[System.Runtime.Serialization.EnumMember(Value = "back")]
-	Back
+	Back,
+	[System.Runtime.Serialization.EnumMember(Value = "front")]
+	Front
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeConverter))]
 public enum KeepTypesMode
 {
-	[System.Runtime.Serialization.EnumMember(Value = "include")]
-	Include,
 	[System.Runtime.Serialization.EnumMember(Value = "exclude")]
-	Exclude
+	Exclude,
+	[System.Runtime.Serialization.EnumMember(Value = "include")]
+	Include
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageConverter))]
@@ -1966,10 +1966,10 @@ public enum SynonymFormat
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateConverter))]
 public enum IcuCollationAlternate
 {
-	[System.Runtime.Serialization.EnumMember(Value = "shifted")]
-	Shifted,
 	[System.Runtime.Serialization.EnumMember(Value = "non-ignorable")]
-	NonIgnorable
+	NonIgnorable,
+	[System.Runtime.Serialization.EnumMember(Value = "shifted")]
+	Shifted
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstConverter))]
@@ -1984,25 +1984,25 @@ public enum IcuCollationCaseFirst
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionConverter))]
 public enum IcuCollationDecomposition
 {
-	[System.Runtime.Serialization.EnumMember(Value = "no")]
-	No,
 	[System.Runtime.Serialization.EnumMember(Value = "identical")]
-	Identical
+	Identical,
+	[System.Runtime.Serialization.EnumMember(Value = "no")]
+	No
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthConverter))]
 public enum IcuCollationStrength
 {
+	[System.Runtime.Serialization.EnumMember(Value = "identical")]
+	Identical,
 	[System.Runtime.Serialization.EnumMember(Value = "primary")]
 	Primary,
+	[System.Runtime.Serialization.EnumMember(Value = "quaternary")]
+	Quaternary,
 	[System.Runtime.Serialization.EnumMember(Value = "secondary")]
 	Secondary,
 	[System.Runtime.Serialization.EnumMember(Value = "tertiary")]
-	Tertiary,
-	[System.Runtime.Serialization.EnumMember(Value = "quaternary")]
-	Quaternary,
-	[System.Runtime.Serialization.EnumMember(Value = "identical")]
-	Identical
+	Tertiary
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirectionConverter))]
@@ -2017,39 +2017,39 @@ public enum IcuTransformDirection
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoderConverter))]
 public enum PhoneticEncoder
 {
-	[System.Runtime.Serialization.EnumMember(Value = "metaphone")]
-	Metaphone,
-	[System.Runtime.Serialization.EnumMember(Value = "double_metaphone")]
-	DoubleMetaphone,
-	[System.Runtime.Serialization.EnumMember(Value = "soundex")]
-	Soundex,
-	[System.Runtime.Serialization.EnumMember(Value = "refined_soundex")]
-	RefinedSoundex,
+	[System.Runtime.Serialization.EnumMember(Value = "beider_morse")]
+	BeiderMorse,
 	[System.Runtime.Serialization.EnumMember(Value = "caverphone1")]
 	Caverphone1,
 	[System.Runtime.Serialization.EnumMember(Value = "caverphone2")]
 	Caverphone2,
 	[System.Runtime.Serialization.EnumMember(Value = "cologne")]
 	Cologne,
-	[System.Runtime.Serialization.EnumMember(Value = "nysiis")]
-	Nysiis,
-	[System.Runtime.Serialization.EnumMember(Value = "koelnerphonetik")]
-	Koelnerphonetik,
+	[System.Runtime.Serialization.EnumMember(Value = "daitch_mokotoff")]
+	DaitchMokotoff,
+	[System.Runtime.Serialization.EnumMember(Value = "double_metaphone")]
+	DoubleMetaphone,
 	[System.Runtime.Serialization.EnumMember(Value = "haasephonetik")]
 	Haasephonetik,
-	[System.Runtime.Serialization.EnumMember(Value = "beider_morse")]
-	BeiderMorse,
-	[System.Runtime.Serialization.EnumMember(Value = "daitch_mokotoff")]
-	DaitchMokotoff
+	[System.Runtime.Serialization.EnumMember(Value = "koelnerphonetik")]
+	Koelnerphonetik,
+	[System.Runtime.Serialization.EnumMember(Value = "metaphone")]
+	Metaphone,
+	[System.Runtime.Serialization.EnumMember(Value = "nysiis")]
+	Nysiis,
+	[System.Runtime.Serialization.EnumMember(Value = "refined_soundex")]
+	RefinedSoundex,
+	[System.Runtime.Serialization.EnumMember(Value = "soundex")]
+	Soundex
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticNameTypeConverter))]
 public enum PhoneticNameType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "generic")]
-	Generic,
 	[System.Runtime.Serialization.EnumMember(Value = "ashkenazi")]
 	Ashkenazi,
+	[System.Runtime.Serialization.EnumMember(Value = "generic")]
+	Generic,
 	[System.Runtime.Serialization.EnumMember(Value = "sephardic")]
 	Sephardic
 }
@@ -2066,18 +2066,18 @@ public enum PhoneticRuleType
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.TokenCharConverter))]
 public enum TokenChar
 {
-	[System.Runtime.Serialization.EnumMember(Value = "letter")]
-	Letter,
+	[System.Runtime.Serialization.EnumMember(Value = "custom")]
+	Custom,
 	[System.Runtime.Serialization.EnumMember(Value = "digit")]
 	Digit,
-	[System.Runtime.Serialization.EnumMember(Value = "whitespace")]
-	Whitespace,
+	[System.Runtime.Serialization.EnumMember(Value = "letter")]
+	Letter,
 	[System.Runtime.Serialization.EnumMember(Value = "punctuation")]
 	Punctuation,
 	[System.Runtime.Serialization.EnumMember(Value = "symbol")]
 	Symbol,
-	[System.Runtime.Serialization.EnumMember(Value = "custom")]
-	Custom
+	[System.Runtime.Serialization.EnumMember(Value = "whitespace")]
+	Whitespace
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguageConverter))]

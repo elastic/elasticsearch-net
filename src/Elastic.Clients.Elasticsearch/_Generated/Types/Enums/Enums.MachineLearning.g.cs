@@ -26,16 +26,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 internal sealed partial class IncludeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Include>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberDefinition = System.Text.Json.JsonEncodedText.Encode("definition");
+	private static readonly System.Text.Json.JsonEncodedText MemberDefinitionStatus = System.Text.Json.JsonEncodedText.Encode("definition_status");
 	private static readonly System.Text.Json.JsonEncodedText MemberFeatureImportanceBaseline = System.Text.Json.JsonEncodedText.Encode("feature_importance_baseline");
 	private static readonly System.Text.Json.JsonEncodedText MemberHyperparameters = System.Text.Json.JsonEncodedText.Encode("hyperparameters");
 	private static readonly System.Text.Json.JsonEncodedText MemberTotalFeatureImportance = System.Text.Json.JsonEncodedText.Encode("total_feature_importance");
-	private static readonly System.Text.Json.JsonEncodedText MemberDefinitionStatus = System.Text.Json.JsonEncodedText.Encode("definition_status");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Include Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		if (reader.ValueTextEquals(MemberDefinition))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.Include.Definition;
+		}
+
+		if (reader.ValueTextEquals(MemberDefinitionStatus))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.Include.DefinitionStatus;
 		}
 
 		if (reader.ValueTextEquals(MemberFeatureImportanceBaseline))
@@ -53,15 +58,15 @@ internal sealed partial class IncludeConverter : System.Text.Json.Serialization.
 			return Elastic.Clients.Elasticsearch.MachineLearning.Include.TotalFeatureImportance;
 		}
 
-		if (reader.ValueTextEquals(MemberDefinitionStatus))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.Include.DefinitionStatus;
-		}
-
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberDefinition.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.Include.Definition;
+		}
+
+		if (string.Equals(value, MemberDefinitionStatus.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.Include.DefinitionStatus;
 		}
 
 		if (string.Equals(value, MemberFeatureImportanceBaseline.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -79,11 +84,6 @@ internal sealed partial class IncludeConverter : System.Text.Json.Serialization.
 			return Elastic.Clients.Elasticsearch.MachineLearning.Include.TotalFeatureImportance;
 		}
 
-		if (string.Equals(value, MemberDefinitionStatus.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.Include.DefinitionStatus;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.Include)}'.");
 	}
 
@@ -94,6 +94,9 @@ internal sealed partial class IncludeConverter : System.Text.Json.Serialization.
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.Definition:
 				writer.WriteStringValue(MemberDefinition);
 				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.Include.DefinitionStatus:
+				writer.WriteStringValue(MemberDefinitionStatus);
+				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.FeatureImportanceBaseline:
 				writer.WriteStringValue(MemberFeatureImportanceBaseline);
 				break;
@@ -102,9 +105,6 @@ internal sealed partial class IncludeConverter : System.Text.Json.Serialization.
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.TotalFeatureImportance:
 				writer.WriteStringValue(MemberTotalFeatureImportance);
-				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.Include.DefinitionStatus:
-				writer.WriteStringValue(MemberDefinitionStatus);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.Include)}'.");
@@ -124,30 +124,30 @@ internal sealed partial class IncludeConverter : System.Text.Json.Serialization.
 
 internal sealed partial class TrainingPriorityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNormal = System.Text.Json.JsonEncodedText.Encode("normal");
 	private static readonly System.Text.Json.JsonEncodedText MemberLow = System.Text.Json.JsonEncodedText.Encode("low");
+	private static readonly System.Text.Json.JsonEncodedText MemberNormal = System.Text.Json.JsonEncodedText.Encode("normal");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberNormal))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Normal;
-		}
-
 		if (reader.ValueTextEquals(MemberLow))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Low;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberNormal.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberNormal))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Normal;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberLow.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Low;
+		}
+
+		if (string.Equals(value, MemberNormal.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Normal;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority)}'.");
@@ -157,11 +157,11 @@ internal sealed partial class TrainingPriorityConverter : System.Text.Json.Seria
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Normal:
-				writer.WriteStringValue(MemberNormal);
-				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Low:
 				writer.WriteStringValue(MemberLow);
+				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Normal:
+				writer.WriteStringValue(MemberNormal);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority)}'.");
@@ -181,12 +181,17 @@ internal sealed partial class TrainingPriorityConverter : System.Text.Json.Seria
 
 internal sealed partial class DeploymentAllocationStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberFullyAllocated = System.Text.Json.JsonEncodedText.Encode("fully_allocated");
 	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
 	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
-	private static readonly System.Text.Json.JsonEncodedText MemberFullyAllocated = System.Text.Json.JsonEncodedText.Encode("fully_allocated");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberFullyAllocated))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.FullyAllocated;
+		}
+
 		if (reader.ValueTextEquals(MemberStarted))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Started;
@@ -197,12 +202,12 @@ internal sealed partial class DeploymentAllocationStateConverter : System.Text.J
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Starting;
 		}
 
-		if (reader.ValueTextEquals(MemberFullyAllocated))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFullyAllocated.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.FullyAllocated;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Started;
@@ -213,11 +218,6 @@ internal sealed partial class DeploymentAllocationStateConverter : System.Text.J
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Starting;
 		}
 
-		if (string.Equals(value, MemberFullyAllocated.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.FullyAllocated;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState)}'.");
 	}
 
@@ -225,14 +225,14 @@ internal sealed partial class DeploymentAllocationStateConverter : System.Text.J
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.FullyAllocated:
+				writer.WriteStringValue(MemberFullyAllocated);
+				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Started:
 				writer.WriteStringValue(MemberStarted);
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Starting:
 				writer.WriteStringValue(MemberStarting);
-				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.FullyAllocated:
-				writer.WriteStringValue(MemberFullyAllocated);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState)}'.");
@@ -252,17 +252,12 @@ internal sealed partial class DeploymentAllocationStateConverter : System.Text.J
 
 internal sealed partial class TrainedModelTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberTreeEnsemble = System.Text.Json.JsonEncodedText.Encode("tree_ensemble");
 	private static readonly System.Text.Json.JsonEncodedText MemberLangIdent = System.Text.Json.JsonEncodedText.Encode("lang_ident");
 	private static readonly System.Text.Json.JsonEncodedText MemberPytorch = System.Text.Json.JsonEncodedText.Encode("pytorch");
+	private static readonly System.Text.Json.JsonEncodedText MemberTreeEnsemble = System.Text.Json.JsonEncodedText.Encode("tree_ensemble");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberTreeEnsemble))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.TreeEnsemble;
-		}
-
 		if (reader.ValueTextEquals(MemberLangIdent))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.LangIdent;
@@ -273,12 +268,12 @@ internal sealed partial class TrainedModelTypeConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.Pytorch;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberTreeEnsemble.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberTreeEnsemble))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.TreeEnsemble;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberLangIdent.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.LangIdent;
@@ -289,6 +284,11 @@ internal sealed partial class TrainedModelTypeConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.Pytorch;
 		}
 
+		if (string.Equals(value, MemberTreeEnsemble.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.TreeEnsemble;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType)}'.");
 	}
 
@@ -296,14 +296,14 @@ internal sealed partial class TrainedModelTypeConverter : System.Text.Json.Seria
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.TreeEnsemble:
-				writer.WriteStringValue(MemberTreeEnsemble);
-				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.LangIdent:
 				writer.WriteStringValue(MemberLangIdent);
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.Pytorch:
 				writer.WriteStringValue(MemberPytorch);
+				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.TreeEnsemble:
+				writer.WriteStringValue(MemberTreeEnsemble);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType)}'.");
@@ -324,8 +324,8 @@ internal sealed partial class TrainedModelTypeConverter : System.Text.Json.Seria
 internal sealed partial class ExcludeFrequentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 	private static readonly System.Text.Json.JsonEncodedText MemberBy = System.Text.Json.JsonEncodedText.Encode("by");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 	private static readonly System.Text.Json.JsonEncodedText MemberOver = System.Text.Json.JsonEncodedText.Encode("over");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -335,14 +335,14 @@ internal sealed partial class ExcludeFrequentConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.All;
 		}
 
-		if (reader.ValueTextEquals(MemberNone))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.None;
-		}
-
 		if (reader.ValueTextEquals(MemberBy))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.By;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.None;
 		}
 
 		if (reader.ValueTextEquals(MemberOver))
@@ -356,14 +356,14 @@ internal sealed partial class ExcludeFrequentConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.All;
 		}
 
-		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.None;
-		}
-
 		if (string.Equals(value, MemberBy.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.By;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.None;
 		}
 
 		if (string.Equals(value, MemberOver.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -381,11 +381,11 @@ internal sealed partial class ExcludeFrequentConverter : System.Text.Json.Serial
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.All:
 				writer.WriteStringValue(MemberAll);
 				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.None:
-				writer.WriteStringValue(MemberNone);
-				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.By:
 				writer.WriteStringValue(MemberBy);
+				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.None:
+				writer.WriteStringValue(MemberNone);
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.Over:
 				writer.WriteStringValue(MemberOver);
@@ -479,13 +479,18 @@ internal sealed partial class ChunkingModeConverter : System.Text.Json.Serializa
 
 internal sealed partial class DeploymentAssignmentStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
 	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
 	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
 	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
-	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Failed;
+		}
+
 		if (reader.ValueTextEquals(MemberStarted))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Started;
@@ -501,12 +506,12 @@ internal sealed partial class DeploymentAssignmentStateConverter : System.Text.J
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Stopping;
 		}
 
-		if (reader.ValueTextEquals(MemberFailed))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Failed;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Started;
@@ -522,11 +527,6 @@ internal sealed partial class DeploymentAssignmentStateConverter : System.Text.J
 			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Stopping;
 		}
 
-		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Failed;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState)}'.");
 	}
 
@@ -534,6 +534,9 @@ internal sealed partial class DeploymentAssignmentStateConverter : System.Text.J
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Failed:
+				writer.WriteStringValue(MemberFailed);
+				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Started:
 				writer.WriteStringValue(MemberStarted);
 				break;
@@ -542,9 +545,6 @@ internal sealed partial class DeploymentAssignmentStateConverter : System.Text.J
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Stopping:
 				writer.WriteStringValue(MemberStopping);
-				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Failed:
-				writer.WriteStringValue(MemberFailed);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState)}'.");
@@ -564,22 +564,22 @@ internal sealed partial class DeploymentAssignmentStateConverter : System.Text.J
 
 internal sealed partial class DataframeStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
-	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
-	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
-	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
 	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Failed;
+		}
+
 		if (reader.ValueTextEquals(MemberStarted))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Started;
-		}
-
-		if (reader.ValueTextEquals(MemberStopped))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopped;
 		}
 
 		if (reader.ValueTextEquals(MemberStarting))
@@ -587,25 +587,25 @@ internal sealed partial class DataframeStateConverter : System.Text.Json.Seriali
 			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Starting;
 		}
 
+		if (reader.ValueTextEquals(MemberStopped))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopped;
+		}
+
 		if (reader.ValueTextEquals(MemberStopping))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopping;
 		}
 
-		if (reader.ValueTextEquals(MemberFailed))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Failed;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Started;
-		}
-
-		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopped;
 		}
 
 		if (string.Equals(value, MemberStarting.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -613,14 +613,14 @@ internal sealed partial class DataframeStateConverter : System.Text.Json.Seriali
 			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Starting;
 		}
 
+		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopped;
+		}
+
 		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopping;
-		}
-
-		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Failed;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeState)}'.");
@@ -630,20 +630,20 @@ internal sealed partial class DataframeStateConverter : System.Text.Json.Seriali
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Failed:
+				writer.WriteStringValue(MemberFailed);
+				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Started:
 				writer.WriteStringValue(MemberStarted);
-				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopped:
-				writer.WriteStringValue(MemberStopped);
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Starting:
 				writer.WriteStringValue(MemberStarting);
 				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopped:
+				writer.WriteStringValue(MemberStopped);
+				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopping:
 				writer.WriteStringValue(MemberStopping);
-				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Failed:
-				writer.WriteStringValue(MemberFailed);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeState)}'.");
@@ -664,8 +664,8 @@ internal sealed partial class DataframeStateConverter : System.Text.Json.Seriali
 internal sealed partial class DatafeedStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
-	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
 	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
 	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -675,14 +675,14 @@ internal sealed partial class DatafeedStateConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Started;
 		}
 
-		if (reader.ValueTextEquals(MemberStopped))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopped;
-		}
-
 		if (reader.ValueTextEquals(MemberStarting))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Starting;
+		}
+
+		if (reader.ValueTextEquals(MemberStopped))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopped;
 		}
 
 		if (reader.ValueTextEquals(MemberStopping))
@@ -696,14 +696,14 @@ internal sealed partial class DatafeedStateConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Started;
 		}
 
-		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopped;
-		}
-
 		if (string.Equals(value, MemberStarting.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Starting;
+		}
+
+		if (string.Equals(value, MemberStopped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopped;
 		}
 
 		if (string.Equals(value, MemberStopping.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -721,11 +721,11 @@ internal sealed partial class DatafeedStateConverter : System.Text.Json.Serializ
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Started:
 				writer.WriteStringValue(MemberStarted);
 				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopped:
-				writer.WriteStringValue(MemberStopped);
-				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Starting:
 				writer.WriteStringValue(MemberStarting);
+				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopped:
+				writer.WriteStringValue(MemberStopped);
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopping:
 				writer.WriteStringValue(MemberStopping);
@@ -748,32 +748,32 @@ internal sealed partial class DatafeedStateConverter : System.Text.Json.Serializ
 
 internal sealed partial class JobStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.JobState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberClosing = System.Text.Json.JsonEncodedText.Encode("closing");
 	private static readonly System.Text.Json.JsonEncodedText MemberClosed = System.Text.Json.JsonEncodedText.Encode("closed");
-	private static readonly System.Text.Json.JsonEncodedText MemberOpened = System.Text.Json.JsonEncodedText.Encode("opened");
+	private static readonly System.Text.Json.JsonEncodedText MemberClosing = System.Text.Json.JsonEncodedText.Encode("closing");
 	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+	private static readonly System.Text.Json.JsonEncodedText MemberOpened = System.Text.Json.JsonEncodedText.Encode("opened");
 	private static readonly System.Text.Json.JsonEncodedText MemberOpening = System.Text.Json.JsonEncodedText.Encode("opening");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.JobState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberClosing))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closing;
-		}
-
 		if (reader.ValueTextEquals(MemberClosed))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closed;
 		}
 
-		if (reader.ValueTextEquals(MemberOpened))
+		if (reader.ValueTextEquals(MemberClosing))
 		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opened;
+			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closing;
 		}
 
 		if (reader.ValueTextEquals(MemberFailed))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Failed;
+		}
+
+		if (reader.ValueTextEquals(MemberOpened))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opened;
 		}
 
 		if (reader.ValueTextEquals(MemberOpening))
@@ -782,24 +782,24 @@ internal sealed partial class JobStateConverter : System.Text.Json.Serialization
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberClosing.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closing;
-		}
-
 		if (string.Equals(value, MemberClosed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closed;
 		}
 
-		if (string.Equals(value, MemberOpened.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberClosing.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opened;
+			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closing;
 		}
 
 		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Failed;
+		}
+
+		if (string.Equals(value, MemberOpened.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opened;
 		}
 
 		if (string.Equals(value, MemberOpening.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -814,17 +814,17 @@ internal sealed partial class JobStateConverter : System.Text.Json.Serialization
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closing:
-				writer.WriteStringValue(MemberClosing);
-				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closed:
 				writer.WriteStringValue(MemberClosed);
 				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opened:
-				writer.WriteStringValue(MemberOpened);
+			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closing:
+				writer.WriteStringValue(MemberClosing);
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Failed:
 				writer.WriteStringValue(MemberFailed);
+				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opened:
+				writer.WriteStringValue(MemberOpened);
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opening:
 				writer.WriteStringValue(MemberOpening);
@@ -847,13 +847,18 @@ internal sealed partial class JobStateConverter : System.Text.Json.Serialization
 
 internal sealed partial class SnapshotUpgradeStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
 	private static readonly System.Text.Json.JsonEncodedText MemberLoadingOldState = System.Text.Json.JsonEncodedText.Encode("loading_old_state");
 	private static readonly System.Text.Json.JsonEncodedText MemberSavingNewState = System.Text.Json.JsonEncodedText.Encode("saving_new_state");
 	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
-	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Failed;
+		}
+
 		if (reader.ValueTextEquals(MemberLoadingOldState))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.LoadingOldState;
@@ -869,12 +874,12 @@ internal sealed partial class SnapshotUpgradeStateConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Stopped;
 		}
 
-		if (reader.ValueTextEquals(MemberFailed))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Failed;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberLoadingOldState.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.LoadingOldState;
@@ -890,11 +895,6 @@ internal sealed partial class SnapshotUpgradeStateConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Stopped;
 		}
 
-		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Failed;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState)}'.");
 	}
 
@@ -902,6 +902,9 @@ internal sealed partial class SnapshotUpgradeStateConverter : System.Text.Json.S
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Failed:
+				writer.WriteStringValue(MemberFailed);
+				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.LoadingOldState:
 				writer.WriteStringValue(MemberLoadingOldState);
 				break;
@@ -910,9 +913,6 @@ internal sealed partial class SnapshotUpgradeStateConverter : System.Text.Json.S
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Stopped:
 				writer.WriteStringValue(MemberStopped);
-				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Failed:
-				writer.WriteStringValue(MemberFailed);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState)}'.");
@@ -932,12 +932,17 @@ internal sealed partial class SnapshotUpgradeStateConverter : System.Text.Json.S
 
 internal sealed partial class MemoryStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberHardLimit = System.Text.Json.JsonEncodedText.Encode("hard_limit");
 	private static readonly System.Text.Json.JsonEncodedText MemberOk = System.Text.Json.JsonEncodedText.Encode("ok");
 	private static readonly System.Text.Json.JsonEncodedText MemberSoftLimit = System.Text.Json.JsonEncodedText.Encode("soft_limit");
-	private static readonly System.Text.Json.JsonEncodedText MemberHardLimit = System.Text.Json.JsonEncodedText.Encode("hard_limit");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberHardLimit))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.HardLimit;
+		}
+
 		if (reader.ValueTextEquals(MemberOk))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.Ok;
@@ -948,12 +953,12 @@ internal sealed partial class MemoryStatusConverter : System.Text.Json.Serializa
 			return Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.SoftLimit;
 		}
 
-		if (reader.ValueTextEquals(MemberHardLimit))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberHardLimit.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.HardLimit;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberOk.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.Ok;
@@ -964,11 +969,6 @@ internal sealed partial class MemoryStatusConverter : System.Text.Json.Serializa
 			return Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.SoftLimit;
 		}
 
-		if (string.Equals(value, MemberHardLimit.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.HardLimit;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus)}'.");
 	}
 
@@ -976,14 +976,14 @@ internal sealed partial class MemoryStatusConverter : System.Text.Json.Serializa
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.HardLimit:
+				writer.WriteStringValue(MemberHardLimit);
+				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.Ok:
 				writer.WriteStringValue(MemberOk);
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.SoftLimit:
 				writer.WriteStringValue(MemberSoftLimit);
-				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.HardLimit:
-				writer.WriteStringValue(MemberHardLimit);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus)}'.");
@@ -1230,30 +1230,30 @@ internal sealed partial class RoutingStateConverter : System.Text.Json.Serializa
 
 internal sealed partial class RuleActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberSkipResult = System.Text.Json.JsonEncodedText.Encode("skip_result");
 	private static readonly System.Text.Json.JsonEncodedText MemberSkipModelUpdate = System.Text.Json.JsonEncodedText.Encode("skip_model_update");
+	private static readonly System.Text.Json.JsonEncodedText MemberSkipResult = System.Text.Json.JsonEncodedText.Encode("skip_result");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.RuleAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberSkipResult))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipResult;
-		}
-
 		if (reader.ValueTextEquals(MemberSkipModelUpdate))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipModelUpdate;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberSkipResult.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberSkipResult))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipResult;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberSkipModelUpdate.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipModelUpdate;
+		}
+
+		if (string.Equals(value, MemberSkipResult.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipResult;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.RuleAction)}'.");
@@ -1263,11 +1263,11 @@ internal sealed partial class RuleActionConverter : System.Text.Json.Serializati
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipResult:
-				writer.WriteStringValue(MemberSkipResult);
-				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipModelUpdate:
 				writer.WriteStringValue(MemberSkipModelUpdate);
+				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipResult:
+				writer.WriteStringValue(MemberSkipResult);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.RuleAction)}'.");
@@ -1288,8 +1288,8 @@ internal sealed partial class RuleActionConverter : System.Text.Json.Serializati
 internal sealed partial class TokenizationTruncateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberFirst = System.Text.Json.JsonEncodedText.Encode("first");
-	private static readonly System.Text.Json.JsonEncodedText MemberSecond = System.Text.Json.JsonEncodedText.Encode("second");
 	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberSecond = System.Text.Json.JsonEncodedText.Encode("second");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -1298,14 +1298,14 @@ internal sealed partial class TokenizationTruncateConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.First;
 		}
 
-		if (reader.ValueTextEquals(MemberSecond))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.Second;
-		}
-
 		if (reader.ValueTextEquals(MemberNone))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.None;
+		}
+
+		if (reader.ValueTextEquals(MemberSecond))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.Second;
 		}
 
 		var value = reader.GetString()!;
@@ -1314,14 +1314,14 @@ internal sealed partial class TokenizationTruncateConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.First;
 		}
 
-		if (string.Equals(value, MemberSecond.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.Second;
-		}
-
 		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.None;
+		}
+
+		if (string.Equals(value, MemberSecond.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.Second;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate)}'.");
@@ -1334,11 +1334,11 @@ internal sealed partial class TokenizationTruncateConverter : System.Text.Json.S
 			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.First:
 				writer.WriteStringValue(MemberFirst);
 				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.Second:
-				writer.WriteStringValue(MemberSecond);
-				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.None:
 				writer.WriteStringValue(MemberNone);
+				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.Second:
+				writer.WriteStringValue(MemberSecond);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate)}'.");
@@ -1359,20 +1359,15 @@ internal sealed partial class TokenizationTruncateConverter : System.Text.Json.S
 internal sealed partial class AppliesToConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberActual = System.Text.Json.JsonEncodedText.Encode("actual");
-	private static readonly System.Text.Json.JsonEncodedText MemberTypical = System.Text.Json.JsonEncodedText.Encode("typical");
 	private static readonly System.Text.Json.JsonEncodedText MemberDiffFromTypical = System.Text.Json.JsonEncodedText.Encode("diff_from_typical");
 	private static readonly System.Text.Json.JsonEncodedText MemberTime = System.Text.Json.JsonEncodedText.Encode("time");
+	private static readonly System.Text.Json.JsonEncodedText MemberTypical = System.Text.Json.JsonEncodedText.Encode("typical");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		if (reader.ValueTextEquals(MemberActual))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Actual;
-		}
-
-		if (reader.ValueTextEquals(MemberTypical))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Typical;
 		}
 
 		if (reader.ValueTextEquals(MemberDiffFromTypical))
@@ -1385,15 +1380,15 @@ internal sealed partial class AppliesToConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Time;
 		}
 
+		if (reader.ValueTextEquals(MemberTypical))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Typical;
+		}
+
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberActual.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Actual;
-		}
-
-		if (string.Equals(value, MemberTypical.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Typical;
 		}
 
 		if (string.Equals(value, MemberDiffFromTypical.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1406,6 +1401,11 @@ internal sealed partial class AppliesToConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Time;
 		}
 
+		if (string.Equals(value, MemberTypical.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Typical;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo)}'.");
 	}
 
@@ -1416,14 +1416,14 @@ internal sealed partial class AppliesToConverter : System.Text.Json.Serializatio
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Actual:
 				writer.WriteStringValue(MemberActual);
 				break;
-			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Typical:
-				writer.WriteStringValue(MemberTypical);
-				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.DiffFromTypical:
 				writer.WriteStringValue(MemberDiffFromTypical);
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Time:
 				writer.WriteStringValue(MemberTime);
+				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Typical:
+				writer.WriteStringValue(MemberTypical);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo)}'.");
@@ -1528,30 +1528,30 @@ internal sealed partial class ConditionOperatorConverter : System.Text.Json.Seri
 
 internal sealed partial class FilterTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.FilterType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberInclude = System.Text.Json.JsonEncodedText.Encode("include");
 	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText MemberInclude = System.Text.Json.JsonEncodedText.Encode("include");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.FilterType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberInclude))
-		{
-			return Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Include;
-		}
-
 		if (reader.ValueTextEquals(MemberExclude))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Exclude;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberInclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberInclude))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Include;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberExclude.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Exclude;
+		}
+
+		if (string.Equals(value, MemberInclude.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Include;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.FilterType)}'.");
@@ -1561,11 +1561,11 @@ internal sealed partial class FilterTypeConverter : System.Text.Json.Serializati
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Include:
-				writer.WriteStringValue(MemberInclude);
-				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Exclude:
 				writer.WriteStringValue(MemberExclude);
+				break;
+			case Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Include:
+				writer.WriteStringValue(MemberInclude);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.FilterType)}'.");
@@ -1595,6 +1595,13 @@ public enum Include
 	Definition,
 	/// <summary>
 	/// <para>
+	/// Includes the model definition status.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "definition_status")]
+	DefinitionStatus,
+	/// <summary>
+	/// <para>
 	/// Includes the baseline for feature importance values.
 	/// </para>
 	/// </summary>
@@ -1618,28 +1625,28 @@ public enum Include
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "total_feature_importance")]
-	TotalFeatureImportance,
-	/// <summary>
-	/// <para>
-	/// Includes the model definition status.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "definition_status")]
-	DefinitionStatus
+	TotalFeatureImportance
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityConverter))]
 public enum TrainingPriority
 {
-	[System.Runtime.Serialization.EnumMember(Value = "normal")]
-	Normal,
 	[System.Runtime.Serialization.EnumMember(Value = "low")]
-	Low
+	Low,
+	[System.Runtime.Serialization.EnumMember(Value = "normal")]
+	Normal
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateConverter))]
 public enum DeploymentAllocationState
 {
+	/// <summary>
+	/// <para>
+	/// Trained model deployment has started on all valid nodes.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "fully_allocated")]
+	FullyAllocated,
 	/// <summary>
 	/// <para>
 	/// The trained model is started on at least one node.
@@ -1653,26 +1660,12 @@ public enum DeploymentAllocationState
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "starting")]
-	Starting,
-	/// <summary>
-	/// <para>
-	/// Trained model deployment has started on all valid nodes.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "fully_allocated")]
-	FullyAllocated
+	Starting
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTypeConverter))]
 public enum TrainedModelType
 {
-	/// <summary>
-	/// <para>
-	/// The model definition is an ensemble model of decision trees.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "tree_ensemble")]
-	TreeEnsemble,
 	/// <summary>
 	/// <para>
 	/// A special type reserved for language identification models.
@@ -1687,7 +1680,14 @@ public enum TrainedModelType
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "pytorch")]
-	Pytorch
+	Pytorch,
+	/// <summary>
+	/// <para>
+	/// The model definition is an ensemble model of decision trees.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "tree_ensemble")]
+	TreeEnsemble
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequentConverter))]
@@ -1695,10 +1695,10 @@ public enum ExcludeFrequent
 {
 	[System.Runtime.Serialization.EnumMember(Value = "all")]
 	All,
-	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None,
 	[System.Runtime.Serialization.EnumMember(Value = "by")]
 	By,
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None,
 	[System.Runtime.Serialization.EnumMember(Value = "over")]
 	Over
 }
@@ -1719,6 +1719,13 @@ public enum DeploymentAssignmentState
 {
 	/// <summary>
 	/// <para>
+	/// The deployment is on a failed state and must be re-deployed.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "failed")]
+	Failed,
+	/// <summary>
+	/// <para>
 	/// The deployment is usable; at least one node has the model allocated.
 	/// </para>
 	/// </summary>
@@ -1737,29 +1744,22 @@ public enum DeploymentAssignmentState
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "stopping")]
-	Stopping,
-	/// <summary>
-	/// <para>
-	/// The deployment is on a failed state and must be re-deployed.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "failed")]
-	Failed
+	Stopping
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeStateConverter))]
 public enum DataframeState
 {
+	[System.Runtime.Serialization.EnumMember(Value = "failed")]
+	Failed,
 	[System.Runtime.Serialization.EnumMember(Value = "started")]
 	Started,
-	[System.Runtime.Serialization.EnumMember(Value = "stopped")]
-	Stopped,
 	[System.Runtime.Serialization.EnumMember(Value = "starting")]
 	Starting,
+	[System.Runtime.Serialization.EnumMember(Value = "stopped")]
+	Stopped,
 	[System.Runtime.Serialization.EnumMember(Value = "stopping")]
-	Stopping,
-	[System.Runtime.Serialization.EnumMember(Value = "failed")]
-	Failed
+	Stopping
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStateConverter))]
@@ -1767,10 +1767,10 @@ public enum DatafeedState
 {
 	[System.Runtime.Serialization.EnumMember(Value = "started")]
 	Started,
-	[System.Runtime.Serialization.EnumMember(Value = "stopped")]
-	Stopped,
 	[System.Runtime.Serialization.EnumMember(Value = "starting")]
 	Starting,
+	[System.Runtime.Serialization.EnumMember(Value = "stopped")]
+	Stopped,
 	[System.Runtime.Serialization.EnumMember(Value = "stopping")]
 	Stopping
 }
@@ -1780,13 +1780,6 @@ public enum JobState
 {
 	/// <summary>
 	/// <para>
-	/// The job close action is in progress and has not yet completed. A closing job cannot accept further data.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "closing")]
-	Closing,
-	/// <summary>
-	/// <para>
 	/// The job finished successfully with its model state persisted. The job must be opened before it can accept further data.
 	/// </para>
 	/// </summary>
@@ -1794,11 +1787,11 @@ public enum JobState
 	Closed,
 	/// <summary>
 	/// <para>
-	/// The job is available to receive and process data.
+	/// The job close action is in progress and has not yet completed. A closing job cannot accept further data.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "opened")]
-	Opened,
+	[System.Runtime.Serialization.EnumMember(Value = "closing")]
+	Closing,
 	/// <summary>
 	/// <para>
 	/// The job did not finish successfully due to an error.
@@ -1811,6 +1804,13 @@ public enum JobState
 	Failed,
 	/// <summary>
 	/// <para>
+	/// The job is available to receive and process data.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "opened")]
+	Opened,
+	/// <summary>
+	/// <para>
 	/// The job open action is in progress and has not yet completed.
 	/// </para>
 	/// </summary>
@@ -1821,25 +1821,25 @@ public enum JobState
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeStateConverter))]
 public enum SnapshotUpgradeState
 {
+	[System.Runtime.Serialization.EnumMember(Value = "failed")]
+	Failed,
 	[System.Runtime.Serialization.EnumMember(Value = "loading_old_state")]
 	LoadingOldState,
 	[System.Runtime.Serialization.EnumMember(Value = "saving_new_state")]
 	SavingNewState,
 	[System.Runtime.Serialization.EnumMember(Value = "stopped")]
-	Stopped,
-	[System.Runtime.Serialization.EnumMember(Value = "failed")]
-	Failed
+	Stopped
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatusConverter))]
 public enum MemoryStatus
 {
+	[System.Runtime.Serialization.EnumMember(Value = "hard_limit")]
+	HardLimit,
 	[System.Runtime.Serialization.EnumMember(Value = "ok")]
 	Ok,
 	[System.Runtime.Serialization.EnumMember(Value = "soft_limit")]
-	SoftLimit,
-	[System.Runtime.Serialization.EnumMember(Value = "hard_limit")]
-	HardLimit
+	SoftLimit
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatusConverter))]
@@ -1907,18 +1907,18 @@ public enum RuleAction
 {
 	/// <summary>
 	/// <para>
-	/// The result will not be created. Unless you also specify <c>skip_model_update</c>, the model will be updated as usual with the corresponding series value.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "skip_result")]
-	SkipResult,
-	/// <summary>
-	/// <para>
 	/// The value for that series will not be used to update the model. Unless you also specify <c>skip_result</c>, the results will be created as usual. This action is suitable when certain values are expected to be consistently anomalous and they affect the model in a way that negatively impacts the rest of the results.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "skip_model_update")]
-	SkipModelUpdate
+	SkipModelUpdate,
+	/// <summary>
+	/// <para>
+	/// The result will not be created. Unless you also specify <c>skip_model_update</c>, the model will be updated as usual with the corresponding series value.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "skip_result")]
+	SkipResult
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateConverter))]
@@ -1926,10 +1926,10 @@ public enum TokenizationTruncate
 {
 	[System.Runtime.Serialization.EnumMember(Value = "first")]
 	First,
-	[System.Runtime.Serialization.EnumMember(Value = "second")]
-	Second,
 	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None
+	None,
+	[System.Runtime.Serialization.EnumMember(Value = "second")]
+	Second
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.AppliesToConverter))]
@@ -1937,12 +1937,12 @@ public enum AppliesTo
 {
 	[System.Runtime.Serialization.EnumMember(Value = "actual")]
 	Actual,
-	[System.Runtime.Serialization.EnumMember(Value = "typical")]
-	Typical,
 	[System.Runtime.Serialization.EnumMember(Value = "diff_from_typical")]
 	DiffFromTypical,
 	[System.Runtime.Serialization.EnumMember(Value = "time")]
-	Time
+	Time,
+	[System.Runtime.Serialization.EnumMember(Value = "typical")]
+	Typical
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperatorConverter))]
@@ -1961,8 +1961,8 @@ public enum ConditionOperator
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.FilterTypeConverter))]
 public enum FilterType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "include")]
-	Include,
 	[System.Runtime.Serialization.EnumMember(Value = "exclude")]
-	Exclude
+	Exclude,
+	[System.Runtime.Serialization.EnumMember(Value = "include")]
+	Include
 }

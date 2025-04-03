@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 
 internal sealed partial class ResultPositionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Eql.ResultPosition>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberTail = System.Text.Json.JsonEncodedText.Encode("tail");
 	private static readonly System.Text.Json.JsonEncodedText MemberHead = System.Text.Json.JsonEncodedText.Encode("head");
+	private static readonly System.Text.Json.JsonEncodedText MemberTail = System.Text.Json.JsonEncodedText.Encode("tail");
 
 	public override Elastic.Clients.Elasticsearch.Eql.ResultPosition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberTail))
-		{
-			return Elastic.Clients.Elasticsearch.Eql.ResultPosition.Tail;
-		}
-
 		if (reader.ValueTextEquals(MemberHead))
 		{
 			return Elastic.Clients.Elasticsearch.Eql.ResultPosition.Head;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberTail.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberTail))
 		{
 			return Elastic.Clients.Elasticsearch.Eql.ResultPosition.Tail;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberHead.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Eql.ResultPosition.Head;
+		}
+
+		if (string.Equals(value, MemberTail.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Eql.ResultPosition.Tail;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Eql.ResultPosition)}'.");
@@ -58,11 +58,11 @@ internal sealed partial class ResultPositionConverter : System.Text.Json.Seriali
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Eql.ResultPosition.Tail:
-				writer.WriteStringValue(MemberTail);
-				break;
 			case Elastic.Clients.Elasticsearch.Eql.ResultPosition.Head:
 				writer.WriteStringValue(MemberHead);
+				break;
+			case Elastic.Clients.Elasticsearch.Eql.ResultPosition.Tail:
+				writer.WriteStringValue(MemberTail);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Eql.ResultPosition)}'.");
@@ -85,16 +85,16 @@ public enum ResultPosition
 {
 	/// <summary>
 	/// <para>
-	/// Return the most recent matches, similar to the Unix tail command.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "tail")]
-	Tail,
-	/// <summary>
-	/// <para>
 	/// Return the earliest matches, similar to the Unix head command.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "head")]
-	Head
+	Head,
+	/// <summary>
+	/// <para>
+	/// Return the most recent matches, similar to the Unix tail command.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "tail")]
+	Tail
 }

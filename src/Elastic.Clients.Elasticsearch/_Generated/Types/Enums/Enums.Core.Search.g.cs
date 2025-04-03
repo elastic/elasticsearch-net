@@ -465,30 +465,30 @@ internal sealed partial class ScoreModeConverter : System.Text.Json.Serializatio
 
 internal sealed partial class SuggestSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SuggestSort>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score");
 	private static readonly System.Text.Json.JsonEncodedText MemberFrequency = System.Text.Json.JsonEncodedText.Encode("frequency");
+	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score");
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.SuggestSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberScore))
-		{
-			return Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score;
-		}
-
 		if (reader.ValueTextEquals(MemberFrequency))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Frequency;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberScore))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberFrequency.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Frequency;
+		}
+
+		if (string.Equals(value, MemberScore.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort)}'.");
@@ -498,11 +498,11 @@ internal sealed partial class SuggestSortConverter : System.Text.Json.Serializat
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score:
-				writer.WriteStringValue(MemberScore);
-				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Frequency:
 				writer.WriteStringValue(MemberFrequency);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score:
+				writer.WriteStringValue(MemberScore);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort)}'.");
@@ -522,32 +522,32 @@ internal sealed partial class SuggestSortConverter : System.Text.Json.Serializat
 
 internal sealed partial class StringDistanceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.StringDistance>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberInternal = System.Text.Json.JsonEncodedText.Encode("internal");
 	private static readonly System.Text.Json.JsonEncodedText MemberDamerauLevenshtein = System.Text.Json.JsonEncodedText.Encode("damerau_levenshtein");
-	private static readonly System.Text.Json.JsonEncodedText MemberLevenshtein = System.Text.Json.JsonEncodedText.Encode("levenshtein");
+	private static readonly System.Text.Json.JsonEncodedText MemberInternal = System.Text.Json.JsonEncodedText.Encode("internal");
 	private static readonly System.Text.Json.JsonEncodedText MemberJaroWinkler = System.Text.Json.JsonEncodedText.Encode("jaro_winkler");
+	private static readonly System.Text.Json.JsonEncodedText MemberLevenshtein = System.Text.Json.JsonEncodedText.Encode("levenshtein");
 	private static readonly System.Text.Json.JsonEncodedText MemberNgram = System.Text.Json.JsonEncodedText.Encode("ngram");
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.StringDistance Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberInternal))
-		{
-			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal;
-		}
-
 		if (reader.ValueTextEquals(MemberDamerauLevenshtein))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.DamerauLevenshtein;
 		}
 
-		if (reader.ValueTextEquals(MemberLevenshtein))
+		if (reader.ValueTextEquals(MemberInternal))
 		{
-			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein;
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal;
 		}
 
 		if (reader.ValueTextEquals(MemberJaroWinkler))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.JaroWinkler;
+		}
+
+		if (reader.ValueTextEquals(MemberLevenshtein))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein;
 		}
 
 		if (reader.ValueTextEquals(MemberNgram))
@@ -556,24 +556,24 @@ internal sealed partial class StringDistanceConverter : System.Text.Json.Seriali
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberInternal.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal;
-		}
-
 		if (string.Equals(value, MemberDamerauLevenshtein.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.DamerauLevenshtein;
 		}
 
-		if (string.Equals(value, MemberLevenshtein.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberInternal.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein;
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal;
 		}
 
 		if (string.Equals(value, MemberJaroWinkler.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.JaroWinkler;
+		}
+
+		if (string.Equals(value, MemberLevenshtein.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein;
 		}
 
 		if (string.Equals(value, MemberNgram.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -588,17 +588,17 @@ internal sealed partial class StringDistanceConverter : System.Text.Json.Seriali
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal:
-				writer.WriteStringValue(MemberInternal);
-				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.DamerauLevenshtein:
 				writer.WriteStringValue(MemberDamerauLevenshtein);
 				break;
-			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein:
-				writer.WriteStringValue(MemberLevenshtein);
+			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal:
+				writer.WriteStringValue(MemberInternal);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.JaroWinkler:
 				writer.WriteStringValue(MemberJaroWinkler);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein:
+				writer.WriteStringValue(MemberLevenshtein);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Ngram:
 				writer.WriteStringValue(MemberNgram);
@@ -632,17 +632,17 @@ public readonly partial struct HighlighterType : Elastic.Clients.Elasticsearch.S
 
 	/// <summary>
 	/// <para>
-	/// The <c>plain</c> highlighter uses the standard Lucene highlighter
-	/// </para>
-	/// </summary>
-	public static HighlighterType Plain { get; } = new HighlighterType("plain");
-
-	/// <summary>
-	/// <para>
 	/// The fvh highlighter uses the Lucene Fast Vector highlighter.
 	/// </para>
 	/// </summary>
 	public static HighlighterType FastVector { get; } = new HighlighterType("fvh");
+
+	/// <summary>
+	/// <para>
+	/// The <c>plain</c> highlighter uses the standard Lucene highlighter
+	/// </para>
+	/// </summary>
+	public static HighlighterType Plain { get; } = new HighlighterType("plain");
 
 	/// <summary>
 	/// <para>
@@ -793,30 +793,23 @@ public enum SuggestSort
 {
 	/// <summary>
 	/// <para>
-	/// Sort by score first, then document frequency and then the term itself.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "score")]
-	Score,
-	/// <summary>
-	/// <para>
 	/// Sort by document frequency first, then similarity score and then the term itself.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "frequency")]
-	Frequency
+	Frequency,
+	/// <summary>
+	/// <para>
+	/// Sort by score first, then document frequency and then the term itself.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "score")]
+	Score
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.StringDistanceConverter))]
 public enum StringDistance
 {
-	/// <summary>
-	/// <para>
-	/// Based on the Damerau-Levenshtein algorithm, but highly optimized for comparing string distance for terms inside the index.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "internal")]
-	Internal,
 	/// <summary>
 	/// <para>
 	/// String distance algorithm based on Damerau-Levenshtein algorithm.
@@ -826,11 +819,11 @@ public enum StringDistance
 	DamerauLevenshtein,
 	/// <summary>
 	/// <para>
-	/// String distance algorithm based on the Levenshtein edit distance algorithm.
+	/// Based on the Damerau-Levenshtein algorithm, but highly optimized for comparing string distance for terms inside the index.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "levenshtein")]
-	Levenshtein,
+	[System.Runtime.Serialization.EnumMember(Value = "internal")]
+	Internal,
 	/// <summary>
 	/// <para>
 	/// String distance algorithm based on Jaro-Winkler algorithm.
@@ -838,6 +831,13 @@ public enum StringDistance
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "jaro_winkler")]
 	JaroWinkler,
+	/// <summary>
+	/// <para>
+	/// String distance algorithm based on the Levenshtein edit distance algorithm.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "levenshtein")]
+	Levenshtein,
 	/// <summary>
 	/// <para>
 	/// String distance algorithm based on character n-grams.

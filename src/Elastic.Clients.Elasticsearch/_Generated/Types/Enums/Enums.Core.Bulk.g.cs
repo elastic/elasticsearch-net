@@ -25,26 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
 internal sealed partial class OperationTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Bulk.OperationType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index");
 	private static readonly System.Text.Json.JsonEncodedText MemberCreate = System.Text.Json.JsonEncodedText.Encode("create");
-	private static readonly System.Text.Json.JsonEncodedText MemberUpdate = System.Text.Json.JsonEncodedText.Encode("update");
 	private static readonly System.Text.Json.JsonEncodedText MemberDelete = System.Text.Json.JsonEncodedText.Encode("delete");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText MemberUpdate = System.Text.Json.JsonEncodedText.Encode("update");
 
 	public override Elastic.Clients.Elasticsearch.Core.Bulk.OperationType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberIndex))
-		{
-			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index;
-		}
-
 		if (reader.ValueTextEquals(MemberCreate))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Create;
-		}
-
-		if (reader.ValueTextEquals(MemberUpdate))
-		{
-			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update;
 		}
 
 		if (reader.ValueTextEquals(MemberDelete))
@@ -52,25 +42,35 @@ internal sealed partial class OperationTypeConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Delete;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberIndex.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberIndex))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index;
 		}
 
+		if (reader.ValueTextEquals(MemberUpdate))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update;
+		}
+
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberCreate.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Create;
 		}
 
-		if (string.Equals(value, MemberUpdate.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update;
-		}
-
 		if (string.Equals(value, MemberDelete.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Delete;
+		}
+
+		if (string.Equals(value, MemberIndex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index;
+		}
+
+		if (string.Equals(value, MemberUpdate.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Bulk.OperationType)}'.");
@@ -80,17 +80,17 @@ internal sealed partial class OperationTypeConverter : System.Text.Json.Serializ
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index:
-				writer.WriteStringValue(MemberIndex);
-				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Create:
 				writer.WriteStringValue(MemberCreate);
 				break;
-			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update:
-				writer.WriteStringValue(MemberUpdate);
-				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Delete:
 				writer.WriteStringValue(MemberDelete);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index:
+				writer.WriteStringValue(MemberIndex);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update:
+				writer.WriteStringValue(MemberUpdate);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Bulk.OperationType)}'.");
@@ -110,21 +110,21 @@ internal sealed partial class OperationTypeConverter : System.Text.Json.Serializ
 
 internal sealed partial class FailureStoreStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNotApplicableOrUnknown = System.Text.Json.JsonEncodedText.Encode("not_applicable_or_unknown");
-	private static readonly System.Text.Json.JsonEncodedText MemberUsed = System.Text.Json.JsonEncodedText.Encode("used");
-	private static readonly System.Text.Json.JsonEncodedText MemberNotEnabled = System.Text.Json.JsonEncodedText.Encode("not_enabled");
 	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
+	private static readonly System.Text.Json.JsonEncodedText MemberNotApplicableOrUnknown = System.Text.Json.JsonEncodedText.Encode("not_applicable_or_unknown");
+	private static readonly System.Text.Json.JsonEncodedText MemberNotEnabled = System.Text.Json.JsonEncodedText.Encode("not_enabled");
+	private static readonly System.Text.Json.JsonEncodedText MemberUsed = System.Text.Json.JsonEncodedText.Encode("used");
 
 	public override Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed;
+		}
+
 		if (reader.ValueTextEquals(MemberNotApplicableOrUnknown))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotApplicableOrUnknown;
-		}
-
-		if (reader.ValueTextEquals(MemberUsed))
-		{
-			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used;
 		}
 
 		if (reader.ValueTextEquals(MemberNotEnabled))
@@ -132,20 +132,20 @@ internal sealed partial class FailureStoreStatusConverter : System.Text.Json.Ser
 			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotEnabled;
 		}
 
-		if (reader.ValueTextEquals(MemberFailed))
+		if (reader.ValueTextEquals(MemberUsed))
+		{
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberNotApplicableOrUnknown.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotApplicableOrUnknown;
-		}
-
-		if (string.Equals(value, MemberUsed.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used;
 		}
 
 		if (string.Equals(value, MemberNotEnabled.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -153,9 +153,9 @@ internal sealed partial class FailureStoreStatusConverter : System.Text.Json.Ser
 			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotEnabled;
 		}
 
-		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberUsed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed;
+			return Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus)}'.");
@@ -165,17 +165,17 @@ internal sealed partial class FailureStoreStatusConverter : System.Text.Json.Ser
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed:
+				writer.WriteStringValue(MemberFailed);
+				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotApplicableOrUnknown:
 				writer.WriteStringValue(MemberNotApplicableOrUnknown);
-				break;
-			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used:
-				writer.WriteStringValue(MemberUsed);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotEnabled:
 				writer.WriteStringValue(MemberNotEnabled);
 				break;
-			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed:
-				writer.WriteStringValue(MemberFailed);
+			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used:
+				writer.WriteStringValue(MemberUsed);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus)}'.");
@@ -196,25 +196,25 @@ internal sealed partial class FailureStoreStatusConverter : System.Text.Json.Ser
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Bulk.OperationTypeConverter))]
 public enum OperationType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "index")]
-	Index,
 	[System.Runtime.Serialization.EnumMember(Value = "create")]
 	Create,
-	[System.Runtime.Serialization.EnumMember(Value = "update")]
-	Update,
 	[System.Runtime.Serialization.EnumMember(Value = "delete")]
-	Delete
+	Delete,
+	[System.Runtime.Serialization.EnumMember(Value = "index")]
+	Index,
+	[System.Runtime.Serialization.EnumMember(Value = "update")]
+	Update
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatusConverter))]
 public enum FailureStoreStatus
 {
+	[System.Runtime.Serialization.EnumMember(Value = "failed")]
+	Failed,
 	[System.Runtime.Serialization.EnumMember(Value = "not_applicable_or_unknown")]
 	NotApplicableOrUnknown,
-	[System.Runtime.Serialization.EnumMember(Value = "used")]
-	Used,
 	[System.Runtime.Serialization.EnumMember(Value = "not_enabled")]
 	NotEnabled,
-	[System.Runtime.Serialization.EnumMember(Value = "failed")]
-	Failed
+	[System.Runtime.Serialization.EnumMember(Value = "used")]
+	Used
 }

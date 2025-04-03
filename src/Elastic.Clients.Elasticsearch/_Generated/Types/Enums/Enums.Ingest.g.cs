@@ -82,25 +82,25 @@ internal sealed partial class ShapeTypeConverter : System.Text.Json.Serializatio
 
 internal sealed partial class ConvertTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.ConvertType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("integer");
-	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long");
+	private static readonly System.Text.Json.JsonEncodedText MemberAuto = System.Text.Json.JsonEncodedText.Encode("auto");
+	private static readonly System.Text.Json.JsonEncodedText MemberBoolean = System.Text.Json.JsonEncodedText.Encode("boolean");
 	private static readonly System.Text.Json.JsonEncodedText MemberDouble = System.Text.Json.JsonEncodedText.Encode("double");
 	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
-	private static readonly System.Text.Json.JsonEncodedText MemberBoolean = System.Text.Json.JsonEncodedText.Encode("boolean");
+	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("integer");
 	private static readonly System.Text.Json.JsonEncodedText MemberIp = System.Text.Json.JsonEncodedText.Encode("ip");
+	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long");
 	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string");
-	private static readonly System.Text.Json.JsonEncodedText MemberAuto = System.Text.Json.JsonEncodedText.Encode("auto");
 
 	public override Elastic.Clients.Elasticsearch.Ingest.ConvertType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberInteger))
+		if (reader.ValueTextEquals(MemberAuto))
 		{
-			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Integer;
+			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Auto;
 		}
 
-		if (reader.ValueTextEquals(MemberLong))
+		if (reader.ValueTextEquals(MemberBoolean))
 		{
-			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Long;
+			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Boolean;
 		}
 
 		if (reader.ValueTextEquals(MemberDouble))
@@ -113,9 +113,9 @@ internal sealed partial class ConvertTypeConverter : System.Text.Json.Serializat
 			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Float;
 		}
 
-		if (reader.ValueTextEquals(MemberBoolean))
+		if (reader.ValueTextEquals(MemberInteger))
 		{
-			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Boolean;
+			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Integer;
 		}
 
 		if (reader.ValueTextEquals(MemberIp))
@@ -123,25 +123,25 @@ internal sealed partial class ConvertTypeConverter : System.Text.Json.Serializat
 			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Ip;
 		}
 
+		if (reader.ValueTextEquals(MemberLong))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Long;
+		}
+
 		if (reader.ValueTextEquals(MemberString))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.String;
 		}
 
-		if (reader.ValueTextEquals(MemberAuto))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAuto.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Auto;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberInteger.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberBoolean.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Integer;
-		}
-
-		if (string.Equals(value, MemberLong.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Long;
+			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Boolean;
 		}
 
 		if (string.Equals(value, MemberDouble.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -154,9 +154,9 @@ internal sealed partial class ConvertTypeConverter : System.Text.Json.Serializat
 			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Float;
 		}
 
-		if (string.Equals(value, MemberBoolean.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberInteger.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Boolean;
+			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Integer;
 		}
 
 		if (string.Equals(value, MemberIp.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -164,14 +164,14 @@ internal sealed partial class ConvertTypeConverter : System.Text.Json.Serializat
 			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Ip;
 		}
 
+		if (string.Equals(value, MemberLong.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Long;
+		}
+
 		if (string.Equals(value, MemberString.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.String;
-		}
-
-		if (string.Equals(value, MemberAuto.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Ingest.ConvertType.Auto;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.ConvertType)}'.");
@@ -181,11 +181,11 @@ internal sealed partial class ConvertTypeConverter : System.Text.Json.Serializat
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Integer:
-				writer.WriteStringValue(MemberInteger);
+			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Auto:
+				writer.WriteStringValue(MemberAuto);
 				break;
-			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Long:
-				writer.WriteStringValue(MemberLong);
+			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Boolean:
+				writer.WriteStringValue(MemberBoolean);
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Double:
 				writer.WriteStringValue(MemberDouble);
@@ -193,17 +193,17 @@ internal sealed partial class ConvertTypeConverter : System.Text.Json.Serializat
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Float:
 				writer.WriteStringValue(MemberFloat);
 				break;
-			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Boolean:
-				writer.WriteStringValue(MemberBoolean);
+			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Integer:
+				writer.WriteStringValue(MemberInteger);
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Ip:
 				writer.WriteStringValue(MemberIp);
 				break;
+			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Long:
+				writer.WriteStringValue(MemberLong);
+				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.String:
 				writer.WriteStringValue(MemberString);
-				break;
-			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Auto:
-				writer.WriteStringValue(MemberAuto);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.ConvertType)}'.");
@@ -224,16 +224,21 @@ internal sealed partial class ConvertTypeConverter : System.Text.Json.Serializat
 internal sealed partial class FingerprintDigestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberMd5 = System.Text.Json.JsonEncodedText.Encode("MD5");
+	private static readonly System.Text.Json.JsonEncodedText MemberMurmurHash3 = System.Text.Json.JsonEncodedText.Encode("MurmurHash3");
 	private static readonly System.Text.Json.JsonEncodedText MemberSha1 = System.Text.Json.JsonEncodedText.Encode("SHA-1");
 	private static readonly System.Text.Json.JsonEncodedText MemberSha256 = System.Text.Json.JsonEncodedText.Encode("SHA-256");
 	private static readonly System.Text.Json.JsonEncodedText MemberSha512 = System.Text.Json.JsonEncodedText.Encode("SHA-512");
-	private static readonly System.Text.Json.JsonEncodedText MemberMurmurHash3 = System.Text.Json.JsonEncodedText.Encode("MurmurHash3");
 
 	public override Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		if (reader.ValueTextEquals(MemberMd5))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Md5;
+		}
+
+		if (reader.ValueTextEquals(MemberMurmurHash3))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.MurmurHash3;
 		}
 
 		if (reader.ValueTextEquals(MemberSha1))
@@ -251,15 +256,15 @@ internal sealed partial class FingerprintDigestConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha512;
 		}
 
-		if (reader.ValueTextEquals(MemberMurmurHash3))
-		{
-			return Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.MurmurHash3;
-		}
-
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberMd5.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Md5;
+		}
+
+		if (string.Equals(value, MemberMurmurHash3.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.MurmurHash3;
 		}
 
 		if (string.Equals(value, MemberSha1.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -277,11 +282,6 @@ internal sealed partial class FingerprintDigestConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha512;
 		}
 
-		if (string.Equals(value, MemberMurmurHash3.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.MurmurHash3;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest)}'.");
 	}
 
@@ -292,6 +292,9 @@ internal sealed partial class FingerprintDigestConverter : System.Text.Json.Seri
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Md5:
 				writer.WriteStringValue(MemberMd5);
 				break;
+			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.MurmurHash3:
+				writer.WriteStringValue(MemberMurmurHash3);
+				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha1:
 				writer.WriteStringValue(MemberSha1);
 				break;
@@ -300,9 +303,6 @@ internal sealed partial class FingerprintDigestConverter : System.Text.Json.Seri
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha512:
 				writer.WriteStringValue(MemberSha512);
-				break;
-			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.MurmurHash3:
-				writer.WriteStringValue(MemberMurmurHash3);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest)}'.");
@@ -322,15 +322,15 @@ internal sealed partial class FingerprintDigestConverter : System.Text.Json.Seri
 
 internal sealed partial class GeoGridTileTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGeotile = System.Text.Json.JsonEncodedText.Encode("geotile");
-	private static readonly System.Text.Json.JsonEncodedText MemberGeohex = System.Text.Json.JsonEncodedText.Encode("geohex");
 	private static readonly System.Text.Json.JsonEncodedText MemberGeohash = System.Text.Json.JsonEncodedText.Encode("geohash");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeohex = System.Text.Json.JsonEncodedText.Encode("geohex");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeotile = System.Text.Json.JsonEncodedText.Encode("geotile");
 
 	public override Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberGeotile))
+		if (reader.ValueTextEquals(MemberGeohash))
 		{
-			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geotile;
+			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohash;
 		}
 
 		if (reader.ValueTextEquals(MemberGeohex))
@@ -338,15 +338,15 @@ internal sealed partial class GeoGridTileTypeConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohex;
 		}
 
-		if (reader.ValueTextEquals(MemberGeohash))
+		if (reader.ValueTextEquals(MemberGeotile))
 		{
-			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohash;
+			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geotile;
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberGeotile.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberGeohash.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geotile;
+			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohash;
 		}
 
 		if (string.Equals(value, MemberGeohex.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -354,9 +354,9 @@ internal sealed partial class GeoGridTileTypeConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohex;
 		}
 
-		if (string.Equals(value, MemberGeohash.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberGeotile.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohash;
+			return Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geotile;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType)}'.");
@@ -366,14 +366,14 @@ internal sealed partial class GeoGridTileTypeConverter : System.Text.Json.Serial
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geotile:
-				writer.WriteStringValue(MemberGeotile);
+			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohash:
+				writer.WriteStringValue(MemberGeohash);
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohex:
 				writer.WriteStringValue(MemberGeohex);
 				break;
-			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohash:
-				writer.WriteStringValue(MemberGeohash);
+			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geotile:
+				writer.WriteStringValue(MemberGeotile);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType)}'.");
@@ -450,30 +450,30 @@ internal sealed partial class GeoGridTargetFormatConverter : System.Text.Json.Se
 
 internal sealed partial class JsonProcessorConflictStrategyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberReplace = System.Text.Json.JsonEncodedText.Encode("replace");
 	private static readonly System.Text.Json.JsonEncodedText MemberMerge = System.Text.Json.JsonEncodedText.Encode("merge");
+	private static readonly System.Text.Json.JsonEncodedText MemberReplace = System.Text.Json.JsonEncodedText.Encode("replace");
 
 	public override Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberReplace))
-		{
-			return Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Replace;
-		}
-
 		if (reader.ValueTextEquals(MemberMerge))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Merge;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberReplace.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberReplace))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Replace;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberMerge.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Merge;
+		}
+
+		if (string.Equals(value, MemberReplace.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Replace;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy)}'.");
@@ -483,11 +483,11 @@ internal sealed partial class JsonProcessorConflictStrategyConverter : System.Te
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Replace:
-				writer.WriteStringValue(MemberReplace);
-				break;
 			case Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Merge:
 				writer.WriteStringValue(MemberMerge);
+				break;
+			case Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Replace:
+				writer.WriteStringValue(MemberReplace);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy)}'.");
@@ -507,32 +507,32 @@ internal sealed partial class JsonProcessorConflictStrategyConverter : System.Te
 
 internal sealed partial class UserAgentPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText MemberOs = System.Text.Json.JsonEncodedText.Encode("os");
 	private static readonly System.Text.Json.JsonEncodedText MemberDevice = System.Text.Json.JsonEncodedText.Encode("device");
+	private static readonly System.Text.Json.JsonEncodedText MemberName = System.Text.Json.JsonEncodedText.Encode("name");
 	private static readonly System.Text.Json.JsonEncodedText MemberOriginal = System.Text.Json.JsonEncodedText.Encode("original");
+	private static readonly System.Text.Json.JsonEncodedText MemberOs = System.Text.Json.JsonEncodedText.Encode("os");
 	private static readonly System.Text.Json.JsonEncodedText MemberVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberName))
-		{
-			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Name;
-		}
-
-		if (reader.ValueTextEquals(MemberOs))
-		{
-			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Os;
-		}
-
 		if (reader.ValueTextEquals(MemberDevice))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Device;
 		}
 
+		if (reader.ValueTextEquals(MemberName))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Name;
+		}
+
 		if (reader.ValueTextEquals(MemberOriginal))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Original;
+		}
+
+		if (reader.ValueTextEquals(MemberOs))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Os;
 		}
 
 		if (reader.ValueTextEquals(MemberVersion))
@@ -541,24 +541,24 @@ internal sealed partial class UserAgentPropertyConverter : System.Text.Json.Seri
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberName.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Name;
-		}
-
-		if (string.Equals(value, MemberOs.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Os;
-		}
-
 		if (string.Equals(value, MemberDevice.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Device;
 		}
 
+		if (string.Equals(value, MemberName.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Name;
+		}
+
 		if (string.Equals(value, MemberOriginal.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Original;
+		}
+
+		if (string.Equals(value, MemberOs.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Os;
 		}
 
 		if (string.Equals(value, MemberVersion.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -573,17 +573,17 @@ internal sealed partial class UserAgentPropertyConverter : System.Text.Json.Seri
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Name:
-				writer.WriteStringValue(MemberName);
-				break;
-			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Os:
-				writer.WriteStringValue(MemberOs);
-				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Device:
 				writer.WriteStringValue(MemberDevice);
 				break;
+			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Name:
+				writer.WriteStringValue(MemberName);
+				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Original:
 				writer.WriteStringValue(MemberOriginal);
+				break;
+			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Os:
+				writer.WriteStringValue(MemberOs);
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Version:
 				writer.WriteStringValue(MemberVersion);
@@ -616,22 +616,22 @@ public enum ShapeType
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.ConvertTypeConverter))]
 public enum ConvertType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "integer")]
-	Integer,
-	[System.Runtime.Serialization.EnumMember(Value = "long")]
-	Long,
+	[System.Runtime.Serialization.EnumMember(Value = "auto")]
+	Auto,
+	[System.Runtime.Serialization.EnumMember(Value = "boolean")]
+	Boolean,
 	[System.Runtime.Serialization.EnumMember(Value = "double")]
 	Double,
 	[System.Runtime.Serialization.EnumMember(Value = "float")]
 	Float,
-	[System.Runtime.Serialization.EnumMember(Value = "boolean")]
-	Boolean,
+	[System.Runtime.Serialization.EnumMember(Value = "integer")]
+	Integer,
 	[System.Runtime.Serialization.EnumMember(Value = "ip")]
 	Ip,
+	[System.Runtime.Serialization.EnumMember(Value = "long")]
+	Long,
 	[System.Runtime.Serialization.EnumMember(Value = "string")]
-	String,
-	[System.Runtime.Serialization.EnumMember(Value = "auto")]
-	Auto
+	String
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigestConverter))]
@@ -639,25 +639,25 @@ public enum FingerprintDigest
 {
 	[System.Runtime.Serialization.EnumMember(Value = "MD5")]
 	Md5,
+	[System.Runtime.Serialization.EnumMember(Value = "MurmurHash3")]
+	MurmurHash3,
 	[System.Runtime.Serialization.EnumMember(Value = "SHA-1")]
 	Sha1,
 	[System.Runtime.Serialization.EnumMember(Value = "SHA-256")]
 	Sha256,
 	[System.Runtime.Serialization.EnumMember(Value = "SHA-512")]
-	Sha512,
-	[System.Runtime.Serialization.EnumMember(Value = "MurmurHash3")]
-	MurmurHash3
+	Sha512
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileTypeConverter))]
 public enum GeoGridTileType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "geotile")]
-	Geotile,
+	[System.Runtime.Serialization.EnumMember(Value = "geohash")]
+	Geohash,
 	[System.Runtime.Serialization.EnumMember(Value = "geohex")]
 	Geohex,
-	[System.Runtime.Serialization.EnumMember(Value = "geohash")]
-	Geohash
+	[System.Runtime.Serialization.EnumMember(Value = "geotile")]
+	Geotile
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormatConverter))]
@@ -674,31 +674,31 @@ public enum JsonProcessorConflictStrategy
 {
 	/// <summary>
 	/// <para>
-	/// Root fields that conflict with fields from the parsed JSON will be overridden.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "replace")]
-	Replace,
-	/// <summary>
-	/// <para>
 	/// Conflicting fields will be merged.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "merge")]
-	Merge
+	Merge,
+	/// <summary>
+	/// <para>
+	/// Root fields that conflict with fields from the parsed JSON will be overridden.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "replace")]
+	Replace
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.UserAgentPropertyConverter))]
 public enum UserAgentProperty
 {
-	[System.Runtime.Serialization.EnumMember(Value = "name")]
-	Name,
-	[System.Runtime.Serialization.EnumMember(Value = "os")]
-	Os,
 	[System.Runtime.Serialization.EnumMember(Value = "device")]
 	Device,
+	[System.Runtime.Serialization.EnumMember(Value = "name")]
+	Name,
 	[System.Runtime.Serialization.EnumMember(Value = "original")]
 	Original,
+	[System.Runtime.Serialization.EnumMember(Value = "os")]
+	Os,
 	[System.Runtime.Serialization.EnumMember(Value = "version")]
 	Version
 }

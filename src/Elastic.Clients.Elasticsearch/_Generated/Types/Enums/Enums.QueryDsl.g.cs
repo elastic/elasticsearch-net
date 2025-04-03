@@ -141,30 +141,30 @@ internal sealed partial class ZeroTermsQueryConverter : System.Text.Json.Seriali
 
 internal sealed partial class CombinedFieldsOperatorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberOr = System.Text.Json.JsonEncodedText.Encode("or");
 	private static readonly System.Text.Json.JsonEncodedText MemberAnd = System.Text.Json.JsonEncodedText.Encode("and");
+	private static readonly System.Text.Json.JsonEncodedText MemberOr = System.Text.Json.JsonEncodedText.Encode("or");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberOr))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.Or;
-		}
-
 		if (reader.ValueTextEquals(MemberAnd))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.And;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberOr.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberOr))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.Or;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAnd.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.And;
+		}
+
+		if (string.Equals(value, MemberOr.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.Or;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator)}'.");
@@ -174,11 +174,11 @@ internal sealed partial class CombinedFieldsOperatorConverter : System.Text.Json
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.Or:
-				writer.WriteStringValue(MemberOr);
-				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.And:
 				writer.WriteStringValue(MemberAnd);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.Or:
+				writer.WriteStringValue(MemberOr);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator)}'.");
@@ -198,30 +198,30 @@ internal sealed partial class CombinedFieldsOperatorConverter : System.Text.Json
 
 internal sealed partial class CombinedFieldsZeroTermsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberNone))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.None;
-		}
-
 		if (reader.ValueTextEquals(MemberAll))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.All;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberNone))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.None;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.All;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.None;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms)}'.");
@@ -231,11 +231,11 @@ internal sealed partial class CombinedFieldsZeroTermsConverter : System.Text.Jso
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.None:
-				writer.WriteStringValue(MemberNone);
-				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.All:
 				writer.WriteStringValue(MemberAll);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.None:
+				writer.WriteStringValue(MemberNone);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms)}'.");
@@ -255,30 +255,15 @@ internal sealed partial class CombinedFieldsZeroTermsConverter : System.Text.Jso
 
 internal sealed partial class FunctionBoostModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMultiply = System.Text.Json.JsonEncodedText.Encode("multiply");
-	private static readonly System.Text.Json.JsonEncodedText MemberReplace = System.Text.Json.JsonEncodedText.Encode("replace");
-	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
 	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
 	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
 	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberMultiply = System.Text.Json.JsonEncodedText.Encode("multiply");
+	private static readonly System.Text.Json.JsonEncodedText MemberReplace = System.Text.Json.JsonEncodedText.Encode("replace");
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberMultiply))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Multiply;
-		}
-
-		if (reader.ValueTextEquals(MemberReplace))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Replace;
-		}
-
-		if (reader.ValueTextEquals(MemberSum))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Sum;
-		}
-
 		if (reader.ValueTextEquals(MemberAvg))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Avg;
@@ -294,22 +279,22 @@ internal sealed partial class FunctionBoostModeConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Min;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberMultiply.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberMultiply))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Multiply;
 		}
 
-		if (string.Equals(value, MemberReplace.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberReplace))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Replace;
 		}
 
-		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberSum))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Sum;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Avg;
@@ -325,6 +310,21 @@ internal sealed partial class FunctionBoostModeConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Min;
 		}
 
+		if (string.Equals(value, MemberMultiply.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Multiply;
+		}
+
+		if (string.Equals(value, MemberReplace.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Replace;
+		}
+
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Sum;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode)}'.");
 	}
 
@@ -332,15 +332,6 @@ internal sealed partial class FunctionBoostModeConverter : System.Text.Json.Seri
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Multiply:
-				writer.WriteStringValue(MemberMultiply);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Replace:
-				writer.WriteStringValue(MemberReplace);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Sum:
-				writer.WriteStringValue(MemberSum);
-				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Avg:
 				writer.WriteStringValue(MemberAvg);
 				break;
@@ -349,6 +340,15 @@ internal sealed partial class FunctionBoostModeConverter : System.Text.Json.Seri
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Min:
 				writer.WriteStringValue(MemberMin);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Multiply:
+				writer.WriteStringValue(MemberMultiply);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Replace:
+				writer.WriteStringValue(MemberReplace);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Sum:
+				writer.WriteStringValue(MemberSum);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode)}'.");
@@ -368,25 +368,15 @@ internal sealed partial class FunctionBoostModeConverter : System.Text.Json.Seri
 
 internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMultiply = System.Text.Json.JsonEncodedText.Encode("multiply");
-	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
 	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
 	private static readonly System.Text.Json.JsonEncodedText MemberFirst = System.Text.Json.JsonEncodedText.Encode("first");
 	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
 	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberMultiply = System.Text.Json.JsonEncodedText.Encode("multiply");
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberMultiply))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Multiply;
-		}
-
-		if (reader.ValueTextEquals(MemberSum))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Sum;
-		}
-
 		if (reader.ValueTextEquals(MemberAvg))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Avg;
@@ -407,17 +397,17 @@ internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Min;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberMultiply.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberMultiply))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Multiply;
 		}
 
-		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberSum))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Sum;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Avg;
@@ -438,6 +428,16 @@ internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Min;
 		}
 
+		if (string.Equals(value, MemberMultiply.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Multiply;
+		}
+
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Sum;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode)}'.");
 	}
 
@@ -445,12 +445,6 @@ internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Seri
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Multiply:
-				writer.WriteStringValue(MemberMultiply);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Sum:
-				writer.WriteStringValue(MemberSum);
-				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Avg:
 				writer.WriteStringValue(MemberAvg);
 				break;
@@ -462,6 +456,12 @@ internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Seri
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Min:
 				writer.WriteStringValue(MemberMin);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Multiply:
+				writer.WriteStringValue(MemberMultiply);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Sum:
+				writer.WriteStringValue(MemberSum);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode)}'.");
@@ -481,30 +481,30 @@ internal sealed partial class FunctionScoreModeConverter : System.Text.Json.Seri
 
 internal sealed partial class GeoExecutionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMemory = System.Text.Json.JsonEncodedText.Encode("memory");
 	private static readonly System.Text.Json.JsonEncodedText MemberIndexed = System.Text.Json.JsonEncodedText.Encode("indexed");
+	private static readonly System.Text.Json.JsonEncodedText MemberMemory = System.Text.Json.JsonEncodedText.Encode("memory");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberMemory))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory;
-		}
-
 		if (reader.ValueTextEquals(MemberIndexed))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Indexed;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberMemory.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberMemory))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberIndexed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Indexed;
+		}
+
+		if (string.Equals(value, MemberMemory.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution)}'.");
@@ -514,11 +514,11 @@ internal sealed partial class GeoExecutionConverter : System.Text.Json.Serializa
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory:
-				writer.WriteStringValue(MemberMemory);
-				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Indexed:
 				writer.WriteStringValue(MemberIndexed);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory:
+				writer.WriteStringValue(MemberMemory);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution)}'.");
@@ -609,27 +609,17 @@ internal sealed partial class GeoValidationMethodConverter : System.Text.Json.Se
 
 internal sealed partial class ChildScoreModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
-	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
 	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
 	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberNone))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.None;
-		}
-
 		if (reader.ValueTextEquals(MemberAvg))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Avg;
-		}
-
-		if (reader.ValueTextEquals(MemberSum))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Sum;
 		}
 
 		if (reader.ValueTextEquals(MemberMax))
@@ -642,20 +632,20 @@ internal sealed partial class ChildScoreModeConverter : System.Text.Json.Seriali
 			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Min;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberNone))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.None;
 		}
 
+		if (reader.ValueTextEquals(MemberSum))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Sum;
+		}
+
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Avg;
-		}
-
-		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Sum;
 		}
 
 		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -668,6 +658,16 @@ internal sealed partial class ChildScoreModeConverter : System.Text.Json.Seriali
 			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Min;
 		}
 
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.None;
+		}
+
+		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Sum;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode)}'.");
 	}
 
@@ -675,20 +675,20 @@ internal sealed partial class ChildScoreModeConverter : System.Text.Json.Seriali
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.None:
-				writer.WriteStringValue(MemberNone);
-				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Avg:
 				writer.WriteStringValue(MemberAvg);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Sum:
-				writer.WriteStringValue(MemberSum);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Max:
 				writer.WriteStringValue(MemberMax);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Min:
 				writer.WriteStringValue(MemberMin);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.None:
+				writer.WriteStringValue(MemberNone);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Sum:
+				writer.WriteStringValue(MemberSum);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode)}'.");
@@ -709,11 +709,11 @@ internal sealed partial class ChildScoreModeConverter : System.Text.Json.Seriali
 internal sealed partial class TextQueryTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberBestFields = System.Text.Json.JsonEncodedText.Encode("best_fields");
-	private static readonly System.Text.Json.JsonEncodedText MemberMostFields = System.Text.Json.JsonEncodedText.Encode("most_fields");
+	private static readonly System.Text.Json.JsonEncodedText MemberBoolPrefix = System.Text.Json.JsonEncodedText.Encode("bool_prefix");
 	private static readonly System.Text.Json.JsonEncodedText MemberCrossFields = System.Text.Json.JsonEncodedText.Encode("cross_fields");
+	private static readonly System.Text.Json.JsonEncodedText MemberMostFields = System.Text.Json.JsonEncodedText.Encode("most_fields");
 	private static readonly System.Text.Json.JsonEncodedText MemberPhrase = System.Text.Json.JsonEncodedText.Encode("phrase");
 	private static readonly System.Text.Json.JsonEncodedText MemberPhrasePrefix = System.Text.Json.JsonEncodedText.Encode("phrase_prefix");
-	private static readonly System.Text.Json.JsonEncodedText MemberBoolPrefix = System.Text.Json.JsonEncodedText.Encode("bool_prefix");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -722,14 +722,19 @@ internal sealed partial class TextQueryTypeConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BestFields;
 		}
 
-		if (reader.ValueTextEquals(MemberMostFields))
+		if (reader.ValueTextEquals(MemberBoolPrefix))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.MostFields;
+			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BoolPrefix;
 		}
 
 		if (reader.ValueTextEquals(MemberCrossFields))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.CrossFields;
+		}
+
+		if (reader.ValueTextEquals(MemberMostFields))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.MostFields;
 		}
 
 		if (reader.ValueTextEquals(MemberPhrase))
@@ -742,25 +747,25 @@ internal sealed partial class TextQueryTypeConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.PhrasePrefix;
 		}
 
-		if (reader.ValueTextEquals(MemberBoolPrefix))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BoolPrefix;
-		}
-
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberBestFields.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BestFields;
 		}
 
-		if (string.Equals(value, MemberMostFields.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberBoolPrefix.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.MostFields;
+			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BoolPrefix;
 		}
 
 		if (string.Equals(value, MemberCrossFields.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.CrossFields;
+		}
+
+		if (string.Equals(value, MemberMostFields.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.MostFields;
 		}
 
 		if (string.Equals(value, MemberPhrase.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -773,11 +778,6 @@ internal sealed partial class TextQueryTypeConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.PhrasePrefix;
 		}
 
-		if (string.Equals(value, MemberBoolPrefix.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BoolPrefix;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType)}'.");
 	}
 
@@ -788,20 +788,20 @@ internal sealed partial class TextQueryTypeConverter : System.Text.Json.Serializ
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BestFields:
 				writer.WriteStringValue(MemberBestFields);
 				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.MostFields:
-				writer.WriteStringValue(MemberMostFields);
+			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BoolPrefix:
+				writer.WriteStringValue(MemberBoolPrefix);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.CrossFields:
 				writer.WriteStringValue(MemberCrossFields);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.MostFields:
+				writer.WriteStringValue(MemberMostFields);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.Phrase:
 				writer.WriteStringValue(MemberPhrase);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.PhrasePrefix:
 				writer.WriteStringValue(MemberPhrasePrefix);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BoolPrefix:
-				writer.WriteStringValue(MemberBoolPrefix);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType)}'.");
@@ -836,19 +836,19 @@ internal sealed partial class SimpleQueryStringFlagsConverter : System.Text.Json
 			{
 				result |= flag switch
 				{
-					"NONE" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.None,
+					"ALL" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.All,
 					"AND" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.And,
-					"NOT" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Not,
-					"OR" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Or,
-					"PREFIX" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Prefix,
-					"PHRASE" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Phrase,
-					"PRECEDENCE" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Precedence,
 					"ESCAPE" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Escape,
-					"WHITESPACE" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Whitespace,
 					"FUZZY" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Fuzzy,
 					"NEAR" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Near,
+					"NONE" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.None,
+					"NOT" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Not,
+					"OR" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Or,
+					"PHRASE" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Phrase,
+					"PRECEDENCE" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Precedence,
+					"PREFIX" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Prefix,
 					"SLOP" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Slop,
-					"ALL" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.All,
+					"WHITESPACE" => Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Whitespace,
 					_ => throw new System.Text.Json.JsonException($"Invalid flag value '{flag}' for type '{typeToConvert.Name}'.")
 				};
 			}
@@ -867,32 +867,32 @@ internal sealed partial class SimpleQueryStringFlagsConverter : System.Text.Json
 			}
 
 			var sb = new System.Text.StringBuilder();
-			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.None))
-				sb.Append("NONE|");
+			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.All))
+				sb.Append("ALL|");
 			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.And))
 				sb.Append("AND|");
-			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Not))
-				sb.Append("NOT|");
-			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Or))
-				sb.Append("OR|");
-			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Prefix))
-				sb.Append("PREFIX|");
-			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Phrase))
-				sb.Append("PHRASE|");
-			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Precedence))
-				sb.Append("PRECEDENCE|");
 			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Escape))
 				sb.Append("ESCAPE|");
-			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Whitespace))
-				sb.Append("WHITESPACE|");
 			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Fuzzy))
 				sb.Append("FUZZY|");
 			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Near))
 				sb.Append("NEAR|");
+			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.None))
+				sb.Append("NONE|");
+			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Not))
+				sb.Append("NOT|");
+			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Or))
+				sb.Append("OR|");
+			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Phrase))
+				sb.Append("PHRASE|");
+			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Precedence))
+				sb.Append("PRECEDENCE|");
+			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Prefix))
+				sb.Append("PREFIX|");
 			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Slop))
 				sb.Append("SLOP|");
-			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.All))
-				sb.Append("ALL|");
+			if (value.HasFlag(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.Whitespace))
+				sb.Append("WHITESPACE|");
 			if (sb.Length == 0)
 			{
 				writer.WriteStringValue(string.Empty);
@@ -907,17 +907,12 @@ internal sealed partial class SimpleQueryStringFlagsConverter : System.Text.Json
 
 internal sealed partial class RangeRelationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberWithin = System.Text.Json.JsonEncodedText.Encode("within");
 	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains");
 	private static readonly System.Text.Json.JsonEncodedText MemberIntersects = System.Text.Json.JsonEncodedText.Encode("intersects");
+	private static readonly System.Text.Json.JsonEncodedText MemberWithin = System.Text.Json.JsonEncodedText.Encode("within");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberWithin))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Within;
-		}
-
 		if (reader.ValueTextEquals(MemberContains))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Contains;
@@ -928,12 +923,12 @@ internal sealed partial class RangeRelationConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Intersects;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberWithin.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberWithin))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Within;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberContains.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Contains;
@@ -944,6 +939,11 @@ internal sealed partial class RangeRelationConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Intersects;
 		}
 
+		if (string.Equals(value, MemberWithin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Within;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation)}'.");
 	}
 
@@ -951,14 +951,14 @@ internal sealed partial class RangeRelationConverter : System.Text.Json.Serializ
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Within:
-				writer.WriteStringValue(MemberWithin);
-				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Contains:
 				writer.WriteStringValue(MemberContains);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Intersects:
 				writer.WriteStringValue(MemberIntersects);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Within:
+				writer.WriteStringValue(MemberWithin);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation)}'.");
@@ -978,22 +978,32 @@ internal sealed partial class RangeRelationConverter : System.Text.Json.Serializ
 
 internal sealed partial class FieldValueFactorModifierConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
-	private static readonly System.Text.Json.JsonEncodedText MemberLog = System.Text.Json.JsonEncodedText.Encode("log");
-	private static readonly System.Text.Json.JsonEncodedText MemberLog1p = System.Text.Json.JsonEncodedText.Encode("log1p");
-	private static readonly System.Text.Json.JsonEncodedText MemberLog2p = System.Text.Json.JsonEncodedText.Encode("log2p");
 	private static readonly System.Text.Json.JsonEncodedText MemberLn = System.Text.Json.JsonEncodedText.Encode("ln");
 	private static readonly System.Text.Json.JsonEncodedText MemberLn1p = System.Text.Json.JsonEncodedText.Encode("ln1p");
 	private static readonly System.Text.Json.JsonEncodedText MemberLn2p = System.Text.Json.JsonEncodedText.Encode("ln2p");
-	private static readonly System.Text.Json.JsonEncodedText MemberSquare = System.Text.Json.JsonEncodedText.Encode("square");
-	private static readonly System.Text.Json.JsonEncodedText MemberSqrt = System.Text.Json.JsonEncodedText.Encode("sqrt");
+	private static readonly System.Text.Json.JsonEncodedText MemberLog = System.Text.Json.JsonEncodedText.Encode("log");
+	private static readonly System.Text.Json.JsonEncodedText MemberLog1p = System.Text.Json.JsonEncodedText.Encode("log1p");
+	private static readonly System.Text.Json.JsonEncodedText MemberLog2p = System.Text.Json.JsonEncodedText.Encode("log2p");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 	private static readonly System.Text.Json.JsonEncodedText MemberReciprocal = System.Text.Json.JsonEncodedText.Encode("reciprocal");
+	private static readonly System.Text.Json.JsonEncodedText MemberSqrt = System.Text.Json.JsonEncodedText.Encode("sqrt");
+	private static readonly System.Text.Json.JsonEncodedText MemberSquare = System.Text.Json.JsonEncodedText.Encode("square");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberNone))
+		if (reader.ValueTextEquals(MemberLn))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.None;
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln;
+		}
+
+		if (reader.ValueTextEquals(MemberLn1p))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln1p;
+		}
+
+		if (reader.ValueTextEquals(MemberLn2p))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln2p;
 		}
 
 		if (reader.ValueTextEquals(MemberLog))
@@ -1011,29 +1021,9 @@ internal sealed partial class FieldValueFactorModifierConverter : System.Text.Js
 			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log2p;
 		}
 
-		if (reader.ValueTextEquals(MemberLn))
+		if (reader.ValueTextEquals(MemberNone))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln;
-		}
-
-		if (reader.ValueTextEquals(MemberLn1p))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln1p;
-		}
-
-		if (reader.ValueTextEquals(MemberLn2p))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln2p;
-		}
-
-		if (reader.ValueTextEquals(MemberSquare))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Square;
-		}
-
-		if (reader.ValueTextEquals(MemberSqrt))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Sqrt;
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.None;
 		}
 
 		if (reader.ValueTextEquals(MemberReciprocal))
@@ -1041,10 +1031,30 @@ internal sealed partial class FieldValueFactorModifierConverter : System.Text.Js
 			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Reciprocal;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberSqrt))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.None;
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Sqrt;
+		}
+
+		if (reader.ValueTextEquals(MemberSquare))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Square;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberLn.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln;
+		}
+
+		if (string.Equals(value, MemberLn1p.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln1p;
+		}
+
+		if (string.Equals(value, MemberLn2p.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln2p;
 		}
 
 		if (string.Equals(value, MemberLog.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1062,24 +1072,14 @@ internal sealed partial class FieldValueFactorModifierConverter : System.Text.Js
 			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log2p;
 		}
 
-		if (string.Equals(value, MemberLn.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln;
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.None;
 		}
 
-		if (string.Equals(value, MemberLn1p.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberReciprocal.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln1p;
-		}
-
-		if (string.Equals(value, MemberLn2p.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln2p;
-		}
-
-		if (string.Equals(value, MemberSquare.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Square;
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Reciprocal;
 		}
 
 		if (string.Equals(value, MemberSqrt.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1087,9 +1087,9 @@ internal sealed partial class FieldValueFactorModifierConverter : System.Text.Js
 			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Sqrt;
 		}
 
-		if (string.Equals(value, MemberReciprocal.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberSquare.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Reciprocal;
+			return Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Square;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier)}'.");
@@ -1099,8 +1099,14 @@ internal sealed partial class FieldValueFactorModifierConverter : System.Text.Js
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.None:
-				writer.WriteStringValue(MemberNone);
+			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln:
+				writer.WriteStringValue(MemberLn);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln1p:
+				writer.WriteStringValue(MemberLn1p);
+				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln2p:
+				writer.WriteStringValue(MemberLn2p);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log:
 				writer.WriteStringValue(MemberLog);
@@ -1111,23 +1117,17 @@ internal sealed partial class FieldValueFactorModifierConverter : System.Text.Js
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log2p:
 				writer.WriteStringValue(MemberLog2p);
 				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln:
-				writer.WriteStringValue(MemberLn);
+			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.None:
+				writer.WriteStringValue(MemberNone);
 				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln1p:
-				writer.WriteStringValue(MemberLn1p);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln2p:
-				writer.WriteStringValue(MemberLn2p);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Square:
-				writer.WriteStringValue(MemberSquare);
+			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Reciprocal:
+				writer.WriteStringValue(MemberReciprocal);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Sqrt:
 				writer.WriteStringValue(MemberSqrt);
 				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Reciprocal:
-				writer.WriteStringValue(MemberReciprocal);
+			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Square:
+				writer.WriteStringValue(MemberSquare);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier)}'.");
@@ -1147,16 +1147,16 @@ internal sealed partial class FieldValueFactorModifierConverter : System.Text.Js
 
 internal sealed partial class MultiValueModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
-	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
 	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
 	private static readonly System.Text.Json.JsonEncodedText MemberSum = System.Text.Json.JsonEncodedText.Encode("sum");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberMin))
+		if (reader.ValueTextEquals(MemberAvg))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Min;
+			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Avg;
 		}
 
 		if (reader.ValueTextEquals(MemberMax))
@@ -1164,9 +1164,9 @@ internal sealed partial class MultiValueModeConverter : System.Text.Json.Seriali
 			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Max;
 		}
 
-		if (reader.ValueTextEquals(MemberAvg))
+		if (reader.ValueTextEquals(MemberMin))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Avg;
+			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Min;
 		}
 
 		if (reader.ValueTextEquals(MemberSum))
@@ -1175,9 +1175,9 @@ internal sealed partial class MultiValueModeConverter : System.Text.Json.Seriali
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Min;
+			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Avg;
 		}
 
 		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1185,9 +1185,9 @@ internal sealed partial class MultiValueModeConverter : System.Text.Json.Seriali
 			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Max;
 		}
 
-		if (string.Equals(value, MemberAvg.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Avg;
+			return Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Min;
 		}
 
 		if (string.Equals(value, MemberSum.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1202,14 +1202,14 @@ internal sealed partial class MultiValueModeConverter : System.Text.Json.Seriali
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Min:
-				writer.WriteStringValue(MemberMin);
+			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Avg:
+				writer.WriteStringValue(MemberAvg);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Max:
 				writer.WriteStringValue(MemberMax);
 				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Avg:
-				writer.WriteStringValue(MemberAvg);
+			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Min:
+				writer.WriteStringValue(MemberMin);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Sum:
 				writer.WriteStringValue(MemberSum);
@@ -1261,10 +1261,10 @@ public enum ZeroTermsQuery
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperatorConverter))]
 public enum CombinedFieldsOperator
 {
-	[System.Runtime.Serialization.EnumMember(Value = "or")]
-	Or,
 	[System.Runtime.Serialization.EnumMember(Value = "and")]
-	And
+	And,
+	[System.Runtime.Serialization.EnumMember(Value = "or")]
+	Or
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTermsConverter))]
@@ -1272,23 +1272,44 @@ public enum CombinedFieldsZeroTerms
 {
 	/// <summary>
 	/// <para>
-	/// No documents are returned if the analyzer removes all tokens.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None,
-	/// <summary>
-	/// <para>
 	/// Returns all documents, similar to a <c>match_all</c> query.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "all")]
-	All
+	All,
+	/// <summary>
+	/// <para>
+	/// No documents are returned if the analyzer removes all tokens.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostModeConverter))]
 public enum FunctionBoostMode
 {
+	/// <summary>
+	/// <para>
+	/// Query score and function score are averaged
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "avg")]
+	Avg,
+	/// <summary>
+	/// <para>
+	/// Max of query score and function score
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "max")]
+	Max,
+	/// <summary>
+	/// <para>
+	/// Min of query score and function score
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "min")]
+	Min,
 	/// <summary>
 	/// <para>
 	/// Query score and function score are multiplied
@@ -1310,47 +1331,12 @@ public enum FunctionBoostMode
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "sum")]
-	Sum,
-	/// <summary>
-	/// <para>
-	/// Query score and function score are averaged
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "avg")]
-	Avg,
-	/// <summary>
-	/// <para>
-	/// Max of query score and function score
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "max")]
-	Max,
-	/// <summary>
-	/// <para>
-	/// Min of query score and function score
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "min")]
-	Min
+	Sum
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreModeConverter))]
 public enum FunctionScoreMode
 {
-	/// <summary>
-	/// <para>
-	/// Scores are multiplied.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "multiply")]
-	Multiply,
-	/// <summary>
-	/// <para>
-	/// Scores are summed.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "sum")]
-	Sum,
 	/// <summary>
 	/// <para>
 	/// Scores are averaged.
@@ -1378,16 +1364,30 @@ public enum FunctionScoreMode
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "min")]
-	Min
+	Min,
+	/// <summary>
+	/// <para>
+	/// Scores are multiplied.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "multiply")]
+	Multiply,
+	/// <summary>
+	/// <para>
+	/// Scores are summed.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "sum")]
+	Sum
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecutionConverter))]
 public enum GeoExecution
 {
-	[System.Runtime.Serialization.EnumMember(Value = "memory")]
-	Memory,
 	[System.Runtime.Serialization.EnumMember(Value = "indexed")]
-	Indexed
+	Indexed,
+	[System.Runtime.Serialization.EnumMember(Value = "memory")]
+	Memory
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodConverter))]
@@ -1414,16 +1414,16 @@ public enum GeoValidationMethod
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeConverter))]
 public enum ChildScoreMode
 {
-	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None,
 	[System.Runtime.Serialization.EnumMember(Value = "avg")]
 	Avg,
-	[System.Runtime.Serialization.EnumMember(Value = "sum")]
-	Sum,
 	[System.Runtime.Serialization.EnumMember(Value = "max")]
 	Max,
 	[System.Runtime.Serialization.EnumMember(Value = "min")]
-	Min
+	Min,
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None,
+	[System.Runtime.Serialization.EnumMember(Value = "sum")]
+	Sum
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryTypeConverter))]
@@ -1438,11 +1438,11 @@ public enum TextQueryType
 	BestFields,
 	/// <summary>
 	/// <para>
-	/// Finds documents that match any field and combines the <c>_score</c> from each field.
+	/// Creates a <c>match_bool_prefix</c> query on each field and combines the <c>_score</c> from each field.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "most_fields")]
-	MostFields,
+	[System.Runtime.Serialization.EnumMember(Value = "bool_prefix")]
+	BoolPrefix,
 	/// <summary>
 	/// <para>
 	/// Treats fields with the same analyzer as though they were one big field.
@@ -1451,6 +1451,13 @@ public enum TextQueryType
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "cross_fields")]
 	CrossFields,
+	/// <summary>
+	/// <para>
+	/// Finds documents that match any field and combines the <c>_score</c> from each field.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "most_fields")]
+	MostFields,
 	/// <summary>
 	/// <para>
 	/// Runs a <c>match_phrase</c> query on each field and uses the <c>_score</c> from the best field.
@@ -1464,14 +1471,7 @@ public enum TextQueryType
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "phrase_prefix")]
-	PhrasePrefix,
-	/// <summary>
-	/// <para>
-	/// Creates a <c>match_bool_prefix</c> query on each field and combines the <c>_score</c> from each field.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "bool_prefix")]
-	BoolPrefix
+	PhrasePrefix
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlagsConverter))]
@@ -1480,11 +1480,11 @@ public enum SimpleQueryStringFlags
 {
 	/// <summary>
 	/// <para>
-	/// Disables all operators.
+	/// Enables all optional operators.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "NONE")]
-	None = 1 << 0,
+	[System.Runtime.Serialization.EnumMember(Value = "ALL")]
+	All = 1 << 0,
 	/// <summary>
 	/// <para>
 	/// Enables the <c>+</c> AND operator.
@@ -1494,60 +1494,18 @@ public enum SimpleQueryStringFlags
 	And = 1 << 1,
 	/// <summary>
 	/// <para>
-	/// Enables the <c>-</c> NOT operator.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "NOT")]
-	Not = 1 << 2,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>\|</c> OR operator.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "OR")]
-	Or = 1 << 3,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>*</c> prefix operator.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "PREFIX")]
-	Prefix = 1 << 4,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>"</c> quotes operator used to search for phrases.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "PHRASE")]
-	Phrase = 1 << 5,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>(</c> and <c>)</c> operators to control operator precedence.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "PRECEDENCE")]
-	Precedence = 1 << 6,
-	/// <summary>
-	/// <para>
 	/// Enables <c>\</c> as an escape character.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "ESCAPE")]
-	Escape = 1 << 7,
-	/// <summary>
-	/// <para>
-	/// Enables whitespace as split characters.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "WHITESPACE")]
-	Whitespace = 1 << 8,
+	Escape = 1 << 2,
 	/// <summary>
 	/// <para>
 	/// Enables the <c>~N</c> operator after a word, where <c>N</c> is an integer denoting the allowed edit distance for matching.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "FUZZY")]
-	Fuzzy = 1 << 9,
+	Fuzzy = 1 << 3,
 	/// <summary>
 	/// <para>
 	/// Enables the <c>~N</c> operator, after a phrase where <c>N</c> is the maximum number of positions allowed between matching tokens.
@@ -1555,7 +1513,49 @@ public enum SimpleQueryStringFlags
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "NEAR")]
-	Near = 1 << 10,
+	Near = 1 << 4,
+	/// <summary>
+	/// <para>
+	/// Disables all operators.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "NONE")]
+	None = 1 << 5,
+	/// <summary>
+	/// <para>
+	/// Enables the <c>-</c> NOT operator.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "NOT")]
+	Not = 1 << 6,
+	/// <summary>
+	/// <para>
+	/// Enables the <c>\|</c> OR operator.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "OR")]
+	Or = 1 << 7,
+	/// <summary>
+	/// <para>
+	/// Enables the <c>"</c> quotes operator used to search for phrases.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "PHRASE")]
+	Phrase = 1 << 8,
+	/// <summary>
+	/// <para>
+	/// Enables the <c>(</c> and <c>)</c> operators to control operator precedence.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "PRECEDENCE")]
+	Precedence = 1 << 9,
+	/// <summary>
+	/// <para>
+	/// Enables the <c>*</c> prefix operator.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "PREFIX")]
+	Prefix = 1 << 10,
 	/// <summary>
 	/// <para>
 	/// Enables the <c>~N</c> operator, after a phrase where <c>N</c> is maximum number of positions allowed between matching tokens.
@@ -1566,23 +1566,16 @@ public enum SimpleQueryStringFlags
 	Slop = 1 << 11,
 	/// <summary>
 	/// <para>
-	/// Enables all optional operators.
+	/// Enables whitespace as split characters.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "ALL")]
-	All = 1 << 12
+	[System.Runtime.Serialization.EnumMember(Value = "WHITESPACE")]
+	Whitespace = 1 << 12
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationConverter))]
 public enum RangeRelation
 {
-	/// <summary>
-	/// <para>
-	/// Matches documents with a range field value entirely within the query’s range.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "within")]
-	Within,
 	/// <summary>
 	/// <para>
 	/// Matches documents with a range field value that entirely contains the query’s range.
@@ -1596,41 +1589,19 @@ public enum RangeRelation
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "intersects")]
-	Intersects
+	Intersects,
+	/// <summary>
+	/// <para>
+	/// Matches documents with a range field value entirely within the query’s range.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "within")]
+	Within
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifierConverter))]
 public enum FieldValueFactorModifier
 {
-	/// <summary>
-	/// <para>
-	/// Do not apply any multiplier to the field value.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None,
-	/// <summary>
-	/// <para>
-	/// Take the common logarithm of the field value.
-	/// Because this function will return a negative value and cause an error if used on values between 0 and 1, it is recommended to use <c>log1p</c> instead.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "log")]
-	Log,
-	/// <summary>
-	/// <para>
-	/// Add 1 to the field value and take the common logarithm.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "log1p")]
-	Log1p,
-	/// <summary>
-	/// <para>
-	/// Add 2 to the field value and take the common logarithm.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "log2p")]
-	Log2p,
 	/// <summary>
 	/// <para>
 	/// Take the natural logarithm of the field value.
@@ -1655,11 +1626,40 @@ public enum FieldValueFactorModifier
 	Ln2p,
 	/// <summary>
 	/// <para>
-	/// Square the field value (multiply it by itself).
+	/// Take the common logarithm of the field value.
+	/// Because this function will return a negative value and cause an error if used on values between 0 and 1, it is recommended to use <c>log1p</c> instead.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "square")]
-	Square,
+	[System.Runtime.Serialization.EnumMember(Value = "log")]
+	Log,
+	/// <summary>
+	/// <para>
+	/// Add 1 to the field value and take the common logarithm.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "log1p")]
+	Log1p,
+	/// <summary>
+	/// <para>
+	/// Add 2 to the field value and take the common logarithm.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "log2p")]
+	Log2p,
+	/// <summary>
+	/// <para>
+	/// Do not apply any multiplier to the field value.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None,
+	/// <summary>
+	/// <para>
+	/// Reciprocate the field value, same as <c>1/x</c> where <c>x</c> is the field’s value.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "reciprocal")]
+	Reciprocal,
 	/// <summary>
 	/// <para>
 	/// Take the square root of the field value.
@@ -1669,11 +1669,11 @@ public enum FieldValueFactorModifier
 	Sqrt,
 	/// <summary>
 	/// <para>
-	/// Reciprocate the field value, same as <c>1/x</c> where <c>x</c> is the field’s value.
+	/// Square the field value (multiply it by itself).
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "reciprocal")]
-	Reciprocal
+	[System.Runtime.Serialization.EnumMember(Value = "square")]
+	Square
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueModeConverter))]
@@ -1681,11 +1681,11 @@ public enum MultiValueMode
 {
 	/// <summary>
 	/// <para>
-	/// Distance is the minimum distance.
+	/// Distance is the average distance.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "min")]
-	Min,
+	[System.Runtime.Serialization.EnumMember(Value = "avg")]
+	Avg,
 	/// <summary>
 	/// <para>
 	/// Distance is the maximum distance.
@@ -1695,11 +1695,11 @@ public enum MultiValueMode
 	Max,
 	/// <summary>
 	/// <para>
-	/// Distance is the average distance.
+	/// Distance is the minimum distance.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "avg")]
-	Avg,
+	[System.Runtime.Serialization.EnumMember(Value = "min")]
+	Min,
 	/// <summary>
 	/// <para>
 	/// Distance is the sum of all distances.

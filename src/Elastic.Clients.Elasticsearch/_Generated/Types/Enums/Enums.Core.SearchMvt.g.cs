@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Core.SearchMvt;
 
 internal sealed partial class GridAggregationTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGeotile = System.Text.Json.JsonEncodedText.Encode("geotile");
 	private static readonly System.Text.Json.JsonEncodedText MemberGeohex = System.Text.Json.JsonEncodedText.Encode("geohex");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeotile = System.Text.Json.JsonEncodedText.Encode("geotile");
 
 	public override Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberGeotile))
-		{
-			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geotile;
-		}
-
 		if (reader.ValueTextEquals(MemberGeohex))
 		{
 			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geohex;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberGeotile.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberGeotile))
 		{
 			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geotile;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberGeohex.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geohex;
+		}
+
+		if (string.Equals(value, MemberGeotile.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geotile;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType)}'.");
@@ -58,11 +58,11 @@ internal sealed partial class GridAggregationTypeConverter : System.Text.Json.Se
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geotile:
-				writer.WriteStringValue(MemberGeotile);
-				break;
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geohex:
 				writer.WriteStringValue(MemberGeohex);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geotile:
+				writer.WriteStringValue(MemberGeotile);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType)}'.");
@@ -82,12 +82,17 @@ internal sealed partial class GridAggregationTypeConverter : System.Text.Json.Se
 
 internal sealed partial class GridTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberCentroid = System.Text.Json.JsonEncodedText.Encode("centroid");
 	private static readonly System.Text.Json.JsonEncodedText MemberGrid = System.Text.Json.JsonEncodedText.Encode("grid");
 	private static readonly System.Text.Json.JsonEncodedText MemberPoint = System.Text.Json.JsonEncodedText.Encode("point");
-	private static readonly System.Text.Json.JsonEncodedText MemberCentroid = System.Text.Json.JsonEncodedText.Encode("centroid");
 
 	public override Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberCentroid))
+		{
+			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Centroid;
+		}
+
 		if (reader.ValueTextEquals(MemberGrid))
 		{
 			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Grid;
@@ -98,12 +103,12 @@ internal sealed partial class GridTypeConverter : System.Text.Json.Serialization
 			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Point;
 		}
 
-		if (reader.ValueTextEquals(MemberCentroid))
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCentroid.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Centroid;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberGrid.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Grid;
@@ -114,11 +119,6 @@ internal sealed partial class GridTypeConverter : System.Text.Json.Serialization
 			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Point;
 		}
 
-		if (string.Equals(value, MemberCentroid.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Centroid;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType)}'.");
 	}
 
@@ -126,14 +126,14 @@ internal sealed partial class GridTypeConverter : System.Text.Json.Serialization
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Centroid:
+				writer.WriteStringValue(MemberCentroid);
+				break;
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Grid:
 				writer.WriteStringValue(MemberGrid);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Point:
 				writer.WriteStringValue(MemberPoint);
-				break;
-			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Centroid:
-				writer.WriteStringValue(MemberCentroid);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType)}'.");
@@ -154,19 +154,19 @@ internal sealed partial class GridTypeConverter : System.Text.Json.Serialization
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationTypeConverter))]
 public enum GridAggregationType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "geotile")]
-	Geotile,
 	[System.Runtime.Serialization.EnumMember(Value = "geohex")]
-	Geohex
+	Geohex,
+	[System.Runtime.Serialization.EnumMember(Value = "geotile")]
+	Geotile
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridTypeConverter))]
 public enum GridType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "centroid")]
+	Centroid,
 	[System.Runtime.Serialization.EnumMember(Value = "grid")]
 	Grid,
 	[System.Runtime.Serialization.EnumMember(Value = "point")]
-	Point,
-	[System.Runtime.Serialization.EnumMember(Value = "centroid")]
-	Centroid
+	Point
 }

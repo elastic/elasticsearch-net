@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 internal sealed partial class DynamicMappingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberStrict = System.Text.Json.JsonEncodedText.Encode("strict");
-	private static readonly System.Text.Json.JsonEncodedText MemberRuntime = System.Text.Json.JsonEncodedText.Encode("runtime");
-	private static readonly System.Text.Json.JsonEncodedText MemberTrue = System.Text.Json.JsonEncodedText.Encode("true");
 	private static readonly System.Text.Json.JsonEncodedText MemberFalse = System.Text.Json.JsonEncodedText.Encode("false");
+	private static readonly System.Text.Json.JsonEncodedText MemberRuntime = System.Text.Json.JsonEncodedText.Encode("runtime");
+	private static readonly System.Text.Json.JsonEncodedText MemberStrict = System.Text.Json.JsonEncodedText.Encode("strict");
+	private static readonly System.Text.Json.JsonEncodedText MemberTrue = System.Text.Json.JsonEncodedText.Encode("true");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DynamicMapping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberStrict))
+		if (reader.ValueTextEquals(MemberFalse))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Strict;
+			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.False;
 		}
 
 		if (reader.ValueTextEquals(MemberRuntime))
@@ -42,14 +42,14 @@ internal sealed partial class DynamicMappingConverter : System.Text.Json.Seriali
 			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Runtime;
 		}
 
+		if (reader.ValueTextEquals(MemberStrict))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Strict;
+		}
+
 		if (reader.ValueTextEquals(MemberTrue))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.True;
-		}
-
-		if (reader.ValueTextEquals(MemberFalse))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.False;
 		}
 
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.String)
@@ -58,9 +58,9 @@ internal sealed partial class DynamicMappingConverter : System.Text.Json.Seriali
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberStrict.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberFalse.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Strict;
+			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.False;
 		}
 
 		if (string.Equals(value, MemberRuntime.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -68,14 +68,14 @@ internal sealed partial class DynamicMappingConverter : System.Text.Json.Seriali
 			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Runtime;
 		}
 
+		if (string.Equals(value, MemberStrict.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Strict;
+		}
+
 		if (string.Equals(value, MemberTrue.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.True;
-		}
-
-		if (string.Equals(value, MemberFalse.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.False;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping)}'.");
@@ -85,17 +85,17 @@ internal sealed partial class DynamicMappingConverter : System.Text.Json.Seriali
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Strict:
-				writer.WriteStringValue(MemberStrict);
+			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.False:
+				writer.WriteRawValue(MemberFalse.EncodedUtf8Bytes);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Runtime:
 				writer.WriteStringValue(MemberRuntime);
 				break;
+			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Strict:
+				writer.WriteStringValue(MemberStrict);
+				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.True:
 				writer.WriteRawValue(MemberTrue.EncodedUtf8Bytes);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.False:
-				writer.WriteRawValue(MemberFalse.EncodedUtf8Bytes);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping)}'.");
@@ -115,15 +115,15 @@ internal sealed partial class DynamicMappingConverter : System.Text.Json.Seriali
 
 internal sealed partial class SubobjectsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.Subobjects>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberTrue = System.Text.Json.JsonEncodedText.Encode("true");
-	private static readonly System.Text.Json.JsonEncodedText MemberFalse = System.Text.Json.JsonEncodedText.Encode("false");
 	private static readonly System.Text.Json.JsonEncodedText MemberAuto = System.Text.Json.JsonEncodedText.Encode("auto");
+	private static readonly System.Text.Json.JsonEncodedText MemberFalse = System.Text.Json.JsonEncodedText.Encode("false");
+	private static readonly System.Text.Json.JsonEncodedText MemberTrue = System.Text.Json.JsonEncodedText.Encode("true");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.Subobjects Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberTrue))
+		if (reader.ValueTextEquals(MemberAuto))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.True;
+			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.Auto;
 		}
 
 		if (reader.ValueTextEquals(MemberFalse))
@@ -131,9 +131,9 @@ internal sealed partial class SubobjectsConverter : System.Text.Json.Serializati
 			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.False;
 		}
 
-		if (reader.ValueTextEquals(MemberAuto))
+		if (reader.ValueTextEquals(MemberTrue))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.Auto;
+			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.True;
 		}
 
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.String)
@@ -142,9 +142,9 @@ internal sealed partial class SubobjectsConverter : System.Text.Json.Serializati
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberTrue.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberAuto.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.True;
+			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.Auto;
 		}
 
 		if (string.Equals(value, MemberFalse.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -152,9 +152,9 @@ internal sealed partial class SubobjectsConverter : System.Text.Json.Serializati
 			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.False;
 		}
 
-		if (string.Equals(value, MemberAuto.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberTrue.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.Auto;
+			return Elastic.Clients.Elasticsearch.Mapping.Subobjects.True;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.Subobjects)}'.");
@@ -164,14 +164,14 @@ internal sealed partial class SubobjectsConverter : System.Text.Json.Serializati
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.True:
-				writer.WriteRawValue(MemberTrue.EncodedUtf8Bytes);
+			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.Auto:
+				writer.WriteStringValue(MemberAuto);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.False:
 				writer.WriteRawValue(MemberFalse.EncodedUtf8Bytes);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.Auto:
-				writer.WriteStringValue(MemberAuto);
+			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.True:
+				writer.WriteRawValue(MemberTrue.EncodedUtf8Bytes);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.Subobjects)}'.");
@@ -262,27 +262,22 @@ internal sealed partial class SourceFieldModeConverter : System.Text.Json.Serial
 
 internal sealed partial class TimeSeriesMetricTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGauge = System.Text.Json.JsonEncodedText.Encode("gauge");
 	private static readonly System.Text.Json.JsonEncodedText MemberCounter = System.Text.Json.JsonEncodedText.Encode("counter");
-	private static readonly System.Text.Json.JsonEncodedText MemberSummary = System.Text.Json.JsonEncodedText.Encode("summary");
+	private static readonly System.Text.Json.JsonEncodedText MemberGauge = System.Text.Json.JsonEncodedText.Encode("gauge");
 	private static readonly System.Text.Json.JsonEncodedText MemberHistogram = System.Text.Json.JsonEncodedText.Encode("histogram");
 	private static readonly System.Text.Json.JsonEncodedText MemberPosition = System.Text.Json.JsonEncodedText.Encode("position");
+	private static readonly System.Text.Json.JsonEncodedText MemberSummary = System.Text.Json.JsonEncodedText.Encode("summary");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberGauge))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Gauge;
-		}
-
 		if (reader.ValueTextEquals(MemberCounter))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Counter;
 		}
 
-		if (reader.ValueTextEquals(MemberSummary))
+		if (reader.ValueTextEquals(MemberGauge))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Summary;
+			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Gauge;
 		}
 
 		if (reader.ValueTextEquals(MemberHistogram))
@@ -295,20 +290,20 @@ internal sealed partial class TimeSeriesMetricTypeConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Position;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberGauge.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberSummary))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Gauge;
+			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Summary;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberCounter.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Counter;
 		}
 
-		if (string.Equals(value, MemberSummary.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberGauge.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Summary;
+			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Gauge;
 		}
 
 		if (string.Equals(value, MemberHistogram.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -321,6 +316,11 @@ internal sealed partial class TimeSeriesMetricTypeConverter : System.Text.Json.S
 			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Position;
 		}
 
+		if (string.Equals(value, MemberSummary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Summary;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType)}'.");
 	}
 
@@ -328,20 +328,20 @@ internal sealed partial class TimeSeriesMetricTypeConverter : System.Text.Json.S
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Gauge:
-				writer.WriteStringValue(MemberGauge);
-				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Counter:
 				writer.WriteStringValue(MemberCounter);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Summary:
-				writer.WriteStringValue(MemberSummary);
+			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Gauge:
+				writer.WriteStringValue(MemberGauge);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Histogram:
 				writer.WriteStringValue(MemberHistogram);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Position:
 				writer.WriteStringValue(MemberPosition);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Summary:
+				writer.WriteStringValue(MemberSummary);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType)}'.");
@@ -361,30 +361,30 @@ internal sealed partial class TimeSeriesMetricTypeConverter : System.Text.Json.S
 
 internal sealed partial class MatchTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.MatchType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberSimple = System.Text.Json.JsonEncodedText.Encode("simple");
 	private static readonly System.Text.Json.JsonEncodedText MemberRegex = System.Text.Json.JsonEncodedText.Encode("regex");
+	private static readonly System.Text.Json.JsonEncodedText MemberSimple = System.Text.Json.JsonEncodedText.Encode("simple");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.MatchType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberSimple))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.MatchType.Simple;
-		}
-
 		if (reader.ValueTextEquals(MemberRegex))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.MatchType.Regex;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberSimple.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberSimple))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.MatchType.Simple;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberRegex.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.MatchType.Regex;
+		}
+
+		if (string.Equals(value, MemberSimple.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.MatchType.Simple;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.MatchType)}'.");
@@ -394,11 +394,11 @@ internal sealed partial class MatchTypeConverter : System.Text.Json.Serializatio
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Mapping.MatchType.Simple:
-				writer.WriteStringValue(MemberSimple);
-				break;
 			case Elastic.Clients.Elasticsearch.Mapping.MatchType.Regex:
 				writer.WriteStringValue(MemberRegex);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.MatchType.Simple:
+				writer.WriteStringValue(MemberSimple);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.MatchType)}'.");
@@ -587,15 +587,15 @@ internal sealed partial class RuntimeFieldTypeConverter : System.Text.Json.Seria
 
 internal sealed partial class SyntheticSourceKeepEnumConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
-	private static readonly System.Text.Json.JsonEncodedText MemberArrays = System.Text.Json.JsonEncodedText.Encode("arrays");
 	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText MemberArrays = System.Text.Json.JsonEncodedText.Encode("arrays");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberNone))
+		if (reader.ValueTextEquals(MemberAll))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.None;
+			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.All;
 		}
 
 		if (reader.ValueTextEquals(MemberArrays))
@@ -603,15 +603,15 @@ internal sealed partial class SyntheticSourceKeepEnumConverter : System.Text.Jso
 			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.Arrays;
 		}
 
-		if (reader.ValueTextEquals(MemberAll))
+		if (reader.ValueTextEquals(MemberNone))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.All;
+			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.None;
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.None;
+			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.All;
 		}
 
 		if (string.Equals(value, MemberArrays.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -619,9 +619,9 @@ internal sealed partial class SyntheticSourceKeepEnumConverter : System.Text.Jso
 			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.Arrays;
 		}
 
-		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.All;
+			return Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.None;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum)}'.");
@@ -631,14 +631,14 @@ internal sealed partial class SyntheticSourceKeepEnumConverter : System.Text.Jso
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.None:
-				writer.WriteStringValue(MemberNone);
+			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.All:
+				writer.WriteStringValue(MemberAll);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.Arrays:
 				writer.WriteStringValue(MemberArrays);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.All:
-				writer.WriteStringValue(MemberAll);
+			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.None:
+				writer.WriteStringValue(MemberNone);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum)}'.");
@@ -658,30 +658,30 @@ internal sealed partial class SyntheticSourceKeepEnumConverter : System.Text.Jso
 
 internal sealed partial class OnScriptErrorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.OnScriptError>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFail = System.Text.Json.JsonEncodedText.Encode("fail");
 	private static readonly System.Text.Json.JsonEncodedText MemberContinue = System.Text.Json.JsonEncodedText.Encode("continue");
+	private static readonly System.Text.Json.JsonEncodedText MemberFail = System.Text.Json.JsonEncodedText.Encode("fail");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.OnScriptError Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberFail))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Fail;
-		}
-
 		if (reader.ValueTextEquals(MemberContinue))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Continue;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberFail.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberFail))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Fail;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberContinue.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Continue;
+		}
+
+		if (string.Equals(value, MemberFail.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Fail;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.OnScriptError)}'.");
@@ -691,11 +691,11 @@ internal sealed partial class OnScriptErrorConverter : System.Text.Json.Serializ
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Fail:
-				writer.WriteStringValue(MemberFail);
-				break;
 			case Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Continue:
 				writer.WriteStringValue(MemberContinue);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Fail:
+				writer.WriteStringValue(MemberFail);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.OnScriptError)}'.");
@@ -717,8 +717,8 @@ internal sealed partial class IndexOptionsConverter : System.Text.Json.Serializa
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberDocs = System.Text.Json.JsonEncodedText.Encode("docs");
 	private static readonly System.Text.Json.JsonEncodedText MemberFreqs = System.Text.Json.JsonEncodedText.Encode("freqs");
-	private static readonly System.Text.Json.JsonEncodedText MemberPositions = System.Text.Json.JsonEncodedText.Encode("positions");
 	private static readonly System.Text.Json.JsonEncodedText MemberOffsets = System.Text.Json.JsonEncodedText.Encode("offsets");
+	private static readonly System.Text.Json.JsonEncodedText MemberPositions = System.Text.Json.JsonEncodedText.Encode("positions");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.IndexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -732,14 +732,14 @@ internal sealed partial class IndexOptionsConverter : System.Text.Json.Serializa
 			return Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Freqs;
 		}
 
-		if (reader.ValueTextEquals(MemberPositions))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Positions;
-		}
-
 		if (reader.ValueTextEquals(MemberOffsets))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Offsets;
+		}
+
+		if (reader.ValueTextEquals(MemberPositions))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Positions;
 		}
 
 		var value = reader.GetString()!;
@@ -753,14 +753,14 @@ internal sealed partial class IndexOptionsConverter : System.Text.Json.Serializa
 			return Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Freqs;
 		}
 
-		if (string.Equals(value, MemberPositions.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Positions;
-		}
-
 		if (string.Equals(value, MemberOffsets.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Offsets;
+		}
+
+		if (string.Equals(value, MemberPositions.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Positions;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.IndexOptions)}'.");
@@ -776,11 +776,11 @@ internal sealed partial class IndexOptionsConverter : System.Text.Json.Serializa
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Freqs:
 				writer.WriteStringValue(MemberFreqs);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Positions:
-				writer.WriteStringValue(MemberPositions);
-				break;
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Offsets:
 				writer.WriteStringValue(MemberOffsets);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Positions:
+				writer.WriteStringValue(MemberPositions);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.IndexOptions)}'.");
@@ -801,23 +801,18 @@ internal sealed partial class IndexOptionsConverter : System.Text.Json.Serializa
 internal sealed partial class TermVectorOptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.TermVectorOption>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
-	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("yes");
 	private static readonly System.Text.Json.JsonEncodedText MemberWithOffsets = System.Text.Json.JsonEncodedText.Encode("with_offsets");
 	private static readonly System.Text.Json.JsonEncodedText MemberWithPositions = System.Text.Json.JsonEncodedText.Encode("with_positions");
 	private static readonly System.Text.Json.JsonEncodedText MemberWithPositionsOffsets = System.Text.Json.JsonEncodedText.Encode("with_positions_offsets");
 	private static readonly System.Text.Json.JsonEncodedText MemberWithPositionsOffsetsPayloads = System.Text.Json.JsonEncodedText.Encode("with_positions_offsets_payloads");
 	private static readonly System.Text.Json.JsonEncodedText MemberWithPositionsPayloads = System.Text.Json.JsonEncodedText.Encode("with_positions_payloads");
+	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("yes");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.TermVectorOption Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		if (reader.ValueTextEquals(MemberNo))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.No;
-		}
-
-		if (reader.ValueTextEquals(MemberYes))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.Yes;
 		}
 
 		if (reader.ValueTextEquals(MemberWithOffsets))
@@ -845,15 +840,15 @@ internal sealed partial class TermVectorOptionConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositionsPayloads;
 		}
 
+		if (reader.ValueTextEquals(MemberYes))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.Yes;
+		}
+
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberNo.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.No;
-		}
-
-		if (string.Equals(value, MemberYes.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.Yes;
 		}
 
 		if (string.Equals(value, MemberWithOffsets.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -881,6 +876,11 @@ internal sealed partial class TermVectorOptionConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositionsPayloads;
 		}
 
+		if (string.Equals(value, MemberYes.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.Yes;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption)}'.");
 	}
 
@@ -890,9 +890,6 @@ internal sealed partial class TermVectorOptionConverter : System.Text.Json.Seria
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.No:
 				writer.WriteStringValue(MemberNo);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.Yes:
-				writer.WriteStringValue(MemberYes);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithOffsets:
 				writer.WriteStringValue(MemberWithOffsets);
@@ -908,6 +905,9 @@ internal sealed partial class TermVectorOptionConverter : System.Text.Json.Seria
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositionsPayloads:
 				writer.WriteStringValue(MemberWithPositionsPayloads);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.Yes:
+				writer.WriteStringValue(MemberYes);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption)}'.");
@@ -1083,36 +1083,36 @@ internal sealed partial class DenseVectorSimilarityConverter : System.Text.Json.
 
 internal sealed partial class GeoOrientationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.GeoOrientation>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberRight = System.Text.Json.JsonEncodedText.Encode("right");
-	private static readonly System.Text.Json.JsonEncodedText MemberRight1 = System.Text.Json.JsonEncodedText.Encode("RIGHT");
-	private static readonly System.Text.Json.JsonEncodedText MemberRight2 = System.Text.Json.JsonEncodedText.Encode("counterclockwise");
-	private static readonly System.Text.Json.JsonEncodedText MemberRight3 = System.Text.Json.JsonEncodedText.Encode("ccw");
 	private static readonly System.Text.Json.JsonEncodedText MemberLeft = System.Text.Json.JsonEncodedText.Encode("left");
 	private static readonly System.Text.Json.JsonEncodedText MemberLeft1 = System.Text.Json.JsonEncodedText.Encode("LEFT");
 	private static readonly System.Text.Json.JsonEncodedText MemberLeft2 = System.Text.Json.JsonEncodedText.Encode("clockwise");
 	private static readonly System.Text.Json.JsonEncodedText MemberLeft3 = System.Text.Json.JsonEncodedText.Encode("cw");
+	private static readonly System.Text.Json.JsonEncodedText MemberRight = System.Text.Json.JsonEncodedText.Encode("right");
+	private static readonly System.Text.Json.JsonEncodedText MemberRight1 = System.Text.Json.JsonEncodedText.Encode("RIGHT");
+	private static readonly System.Text.Json.JsonEncodedText MemberRight2 = System.Text.Json.JsonEncodedText.Encode("counterclockwise");
+	private static readonly System.Text.Json.JsonEncodedText MemberRight3 = System.Text.Json.JsonEncodedText.Encode("ccw");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.GeoOrientation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberRight) || reader.ValueTextEquals(MemberRight1) || reader.ValueTextEquals(MemberRight2) || reader.ValueTextEquals(MemberRight3))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Right;
-		}
-
 		if (reader.ValueTextEquals(MemberLeft) || reader.ValueTextEquals(MemberLeft1) || reader.ValueTextEquals(MemberLeft2) || reader.ValueTextEquals(MemberLeft3))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Left;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberRight.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRight1.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRight2.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRight3.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberRight) || reader.ValueTextEquals(MemberRight1) || reader.ValueTextEquals(MemberRight2) || reader.ValueTextEquals(MemberRight3))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Right;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberLeft.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberLeft1.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberLeft2.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberLeft3.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Left;
+		}
+
+		if (string.Equals(value, MemberRight.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRight1.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRight2.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRight3.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Right;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation)}'.");
@@ -1122,11 +1122,11 @@ internal sealed partial class GeoOrientationConverter : System.Text.Json.Seriali
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Right:
-				writer.WriteStringValue(MemberRight);
-				break;
 			case Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Left:
 				writer.WriteStringValue(MemberLeft);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Right:
+				writer.WriteStringValue(MemberRight);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation)}'.");
@@ -1203,220 +1203,60 @@ internal sealed partial class GeoStrategyConverter : System.Text.Json.Serializat
 
 internal sealed partial class FieldTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.FieldType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
-	private static readonly System.Text.Json.JsonEncodedText MemberGeoPoint = System.Text.Json.JsonEncodedText.Encode("geo_point");
-	private static readonly System.Text.Json.JsonEncodedText MemberGeoShape = System.Text.Json.JsonEncodedText.Encode("geo_shape");
-	private static readonly System.Text.Json.JsonEncodedText MemberIp = System.Text.Json.JsonEncodedText.Encode("ip");
-	private static readonly System.Text.Json.JsonEncodedText MemberBinary = System.Text.Json.JsonEncodedText.Encode("binary");
-	private static readonly System.Text.Json.JsonEncodedText MemberKeyword = System.Text.Json.JsonEncodedText.Encode("keyword");
-	private static readonly System.Text.Json.JsonEncodedText MemberText = System.Text.Json.JsonEncodedText.Encode("text");
-	private static readonly System.Text.Json.JsonEncodedText MemberSearchAsYouType = System.Text.Json.JsonEncodedText.Encode("search_as_you_type");
-	private static readonly System.Text.Json.JsonEncodedText MemberDate = System.Text.Json.JsonEncodedText.Encode("date");
-	private static readonly System.Text.Json.JsonEncodedText MemberDateNanos = System.Text.Json.JsonEncodedText.Encode("date_nanos");
-	private static readonly System.Text.Json.JsonEncodedText MemberBoolean = System.Text.Json.JsonEncodedText.Encode("boolean");
-	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
-	private static readonly System.Text.Json.JsonEncodedText MemberNested = System.Text.Json.JsonEncodedText.Encode("nested");
-	private static readonly System.Text.Json.JsonEncodedText MemberObject = System.Text.Json.JsonEncodedText.Encode("object");
-	private static readonly System.Text.Json.JsonEncodedText MemberPassthrough = System.Text.Json.JsonEncodedText.Encode("passthrough");
-	private static readonly System.Text.Json.JsonEncodedText MemberVersion = System.Text.Json.JsonEncodedText.Encode("version");
-	private static readonly System.Text.Json.JsonEncodedText MemberMurmur3 = System.Text.Json.JsonEncodedText.Encode("murmur3");
-	private static readonly System.Text.Json.JsonEncodedText MemberTokenCount = System.Text.Json.JsonEncodedText.Encode("token_count");
-	private static readonly System.Text.Json.JsonEncodedText MemberPercolator = System.Text.Json.JsonEncodedText.Encode("percolator");
-	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("integer");
-	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long");
-	private static readonly System.Text.Json.JsonEncodedText MemberShort = System.Text.Json.JsonEncodedText.Encode("short");
-	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte");
-	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
-	private static readonly System.Text.Json.JsonEncodedText MemberHalfFloat = System.Text.Json.JsonEncodedText.Encode("half_float");
-	private static readonly System.Text.Json.JsonEncodedText MemberScaledFloat = System.Text.Json.JsonEncodedText.Encode("scaled_float");
-	private static readonly System.Text.Json.JsonEncodedText MemberDouble = System.Text.Json.JsonEncodedText.Encode("double");
-	private static readonly System.Text.Json.JsonEncodedText MemberIntegerRange = System.Text.Json.JsonEncodedText.Encode("integer_range");
-	private static readonly System.Text.Json.JsonEncodedText MemberFloatRange = System.Text.Json.JsonEncodedText.Encode("float_range");
-	private static readonly System.Text.Json.JsonEncodedText MemberLongRange = System.Text.Json.JsonEncodedText.Encode("long_range");
-	private static readonly System.Text.Json.JsonEncodedText MemberDoubleRange = System.Text.Json.JsonEncodedText.Encode("double_range");
-	private static readonly System.Text.Json.JsonEncodedText MemberDateRange = System.Text.Json.JsonEncodedText.Encode("date_range");
-	private static readonly System.Text.Json.JsonEncodedText MemberIpRange = System.Text.Json.JsonEncodedText.Encode("ip_range");
+	private static readonly System.Text.Json.JsonEncodedText MemberAggregateMetricDouble = System.Text.Json.JsonEncodedText.Encode("aggregate_metric_double");
 	private static readonly System.Text.Json.JsonEncodedText MemberAlias = System.Text.Json.JsonEncodedText.Encode("alias");
-	private static readonly System.Text.Json.JsonEncodedText MemberJoin = System.Text.Json.JsonEncodedText.Encode("join");
-	private static readonly System.Text.Json.JsonEncodedText MemberRankFeature = System.Text.Json.JsonEncodedText.Encode("rank_feature");
-	private static readonly System.Text.Json.JsonEncodedText MemberRankFeatures = System.Text.Json.JsonEncodedText.Encode("rank_features");
-	private static readonly System.Text.Json.JsonEncodedText MemberFlattened = System.Text.Json.JsonEncodedText.Encode("flattened");
-	private static readonly System.Text.Json.JsonEncodedText MemberShape = System.Text.Json.JsonEncodedText.Encode("shape");
-	private static readonly System.Text.Json.JsonEncodedText MemberHistogram = System.Text.Json.JsonEncodedText.Encode("histogram");
+	private static readonly System.Text.Json.JsonEncodedText MemberBinary = System.Text.Json.JsonEncodedText.Encode("binary");
+	private static readonly System.Text.Json.JsonEncodedText MemberBoolean = System.Text.Json.JsonEncodedText.Encode("boolean");
+	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
 	private static readonly System.Text.Json.JsonEncodedText MemberConstantKeyword = System.Text.Json.JsonEncodedText.Encode("constant_keyword");
 	private static readonly System.Text.Json.JsonEncodedText MemberCountedKeyword = System.Text.Json.JsonEncodedText.Encode("counted_keyword");
-	private static readonly System.Text.Json.JsonEncodedText MemberAggregateMetricDouble = System.Text.Json.JsonEncodedText.Encode("aggregate_metric_double");
+	private static readonly System.Text.Json.JsonEncodedText MemberDate = System.Text.Json.JsonEncodedText.Encode("date");
+	private static readonly System.Text.Json.JsonEncodedText MemberDateNanos = System.Text.Json.JsonEncodedText.Encode("date_nanos");
+	private static readonly System.Text.Json.JsonEncodedText MemberDateRange = System.Text.Json.JsonEncodedText.Encode("date_range");
 	private static readonly System.Text.Json.JsonEncodedText MemberDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector");
-	private static readonly System.Text.Json.JsonEncodedText MemberSemanticText = System.Text.Json.JsonEncodedText.Encode("semantic_text");
-	private static readonly System.Text.Json.JsonEncodedText MemberSparseVector = System.Text.Json.JsonEncodedText.Encode("sparse_vector");
-	private static readonly System.Text.Json.JsonEncodedText MemberMatchOnlyText = System.Text.Json.JsonEncodedText.Encode("match_only_text");
+	private static readonly System.Text.Json.JsonEncodedText MemberDouble = System.Text.Json.JsonEncodedText.Encode("double");
+	private static readonly System.Text.Json.JsonEncodedText MemberDoubleRange = System.Text.Json.JsonEncodedText.Encode("double_range");
+	private static readonly System.Text.Json.JsonEncodedText MemberFlattened = System.Text.Json.JsonEncodedText.Encode("flattened");
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
+	private static readonly System.Text.Json.JsonEncodedText MemberFloatRange = System.Text.Json.JsonEncodedText.Encode("float_range");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoPoint = System.Text.Json.JsonEncodedText.Encode("geo_point");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoShape = System.Text.Json.JsonEncodedText.Encode("geo_shape");
+	private static readonly System.Text.Json.JsonEncodedText MemberHalfFloat = System.Text.Json.JsonEncodedText.Encode("half_float");
+	private static readonly System.Text.Json.JsonEncodedText MemberHistogram = System.Text.Json.JsonEncodedText.Encode("histogram");
 	private static readonly System.Text.Json.JsonEncodedText MemberIcuCollationKeyword = System.Text.Json.JsonEncodedText.Encode("icu_collation_keyword");
+	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("integer");
+	private static readonly System.Text.Json.JsonEncodedText MemberIntegerRange = System.Text.Json.JsonEncodedText.Encode("integer_range");
+	private static readonly System.Text.Json.JsonEncodedText MemberIp = System.Text.Json.JsonEncodedText.Encode("ip");
+	private static readonly System.Text.Json.JsonEncodedText MemberIpRange = System.Text.Json.JsonEncodedText.Encode("ip_range");
+	private static readonly System.Text.Json.JsonEncodedText MemberJoin = System.Text.Json.JsonEncodedText.Encode("join");
+	private static readonly System.Text.Json.JsonEncodedText MemberKeyword = System.Text.Json.JsonEncodedText.Encode("keyword");
+	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long");
+	private static readonly System.Text.Json.JsonEncodedText MemberLongRange = System.Text.Json.JsonEncodedText.Encode("long_range");
+	private static readonly System.Text.Json.JsonEncodedText MemberMatchOnlyText = System.Text.Json.JsonEncodedText.Encode("match_only_text");
+	private static readonly System.Text.Json.JsonEncodedText MemberMurmur3 = System.Text.Json.JsonEncodedText.Encode("murmur3");
+	private static readonly System.Text.Json.JsonEncodedText MemberNested = System.Text.Json.JsonEncodedText.Encode("nested");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberObject = System.Text.Json.JsonEncodedText.Encode("object");
+	private static readonly System.Text.Json.JsonEncodedText MemberPassthrough = System.Text.Json.JsonEncodedText.Encode("passthrough");
+	private static readonly System.Text.Json.JsonEncodedText MemberPercolator = System.Text.Json.JsonEncodedText.Encode("percolator");
+	private static readonly System.Text.Json.JsonEncodedText MemberRankFeature = System.Text.Json.JsonEncodedText.Encode("rank_feature");
+	private static readonly System.Text.Json.JsonEncodedText MemberRankFeatures = System.Text.Json.JsonEncodedText.Encode("rank_features");
+	private static readonly System.Text.Json.JsonEncodedText MemberScaledFloat = System.Text.Json.JsonEncodedText.Encode("scaled_float");
+	private static readonly System.Text.Json.JsonEncodedText MemberSearchAsYouType = System.Text.Json.JsonEncodedText.Encode("search_as_you_type");
+	private static readonly System.Text.Json.JsonEncodedText MemberSemanticText = System.Text.Json.JsonEncodedText.Encode("semantic_text");
+	private static readonly System.Text.Json.JsonEncodedText MemberShape = System.Text.Json.JsonEncodedText.Encode("shape");
+	private static readonly System.Text.Json.JsonEncodedText MemberShort = System.Text.Json.JsonEncodedText.Encode("short");
+	private static readonly System.Text.Json.JsonEncodedText MemberSparseVector = System.Text.Json.JsonEncodedText.Encode("sparse_vector");
+	private static readonly System.Text.Json.JsonEncodedText MemberText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText MemberTokenCount = System.Text.Json.JsonEncodedText.Encode("token_count");
+	private static readonly System.Text.Json.JsonEncodedText MemberVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.FieldType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberNone))
+		if (reader.ValueTextEquals(MemberAggregateMetricDouble))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.None;
-		}
-
-		if (reader.ValueTextEquals(MemberGeoPoint))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoPoint;
-		}
-
-		if (reader.ValueTextEquals(MemberGeoShape))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoShape;
-		}
-
-		if (reader.ValueTextEquals(MemberIp))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Ip;
-		}
-
-		if (reader.ValueTextEquals(MemberBinary))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Binary;
-		}
-
-		if (reader.ValueTextEquals(MemberKeyword))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Keyword;
-		}
-
-		if (reader.ValueTextEquals(MemberText))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Text;
-		}
-
-		if (reader.ValueTextEquals(MemberSearchAsYouType))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SearchAsYouType;
-		}
-
-		if (reader.ValueTextEquals(MemberDate))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Date;
-		}
-
-		if (reader.ValueTextEquals(MemberDateNanos))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DateNanos;
-		}
-
-		if (reader.ValueTextEquals(MemberBoolean))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Boolean;
-		}
-
-		if (reader.ValueTextEquals(MemberCompletion))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Completion;
-		}
-
-		if (reader.ValueTextEquals(MemberNested))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Nested;
-		}
-
-		if (reader.ValueTextEquals(MemberObject))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Object;
-		}
-
-		if (reader.ValueTextEquals(MemberPassthrough))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Passthrough;
-		}
-
-		if (reader.ValueTextEquals(MemberVersion))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Version;
-		}
-
-		if (reader.ValueTextEquals(MemberMurmur3))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Murmur3;
-		}
-
-		if (reader.ValueTextEquals(MemberTokenCount))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.TokenCount;
-		}
-
-		if (reader.ValueTextEquals(MemberPercolator))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Percolator;
-		}
-
-		if (reader.ValueTextEquals(MemberInteger))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Integer;
-		}
-
-		if (reader.ValueTextEquals(MemberLong))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Long;
-		}
-
-		if (reader.ValueTextEquals(MemberShort))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Short;
-		}
-
-		if (reader.ValueTextEquals(MemberByte))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Byte;
-		}
-
-		if (reader.ValueTextEquals(MemberFloat))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Float;
-		}
-
-		if (reader.ValueTextEquals(MemberHalfFloat))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.HalfFloat;
-		}
-
-		if (reader.ValueTextEquals(MemberScaledFloat))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.ScaledFloat;
-		}
-
-		if (reader.ValueTextEquals(MemberDouble))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Double;
-		}
-
-		if (reader.ValueTextEquals(MemberIntegerRange))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IntegerRange;
-		}
-
-		if (reader.ValueTextEquals(MemberFloatRange))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.FloatRange;
-		}
-
-		if (reader.ValueTextEquals(MemberLongRange))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.LongRange;
-		}
-
-		if (reader.ValueTextEquals(MemberDoubleRange))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DoubleRange;
-		}
-
-		if (reader.ValueTextEquals(MemberDateRange))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DateRange;
-		}
-
-		if (reader.ValueTextEquals(MemberIpRange))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IpRange;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.AggregateMetricDouble;
 		}
 
 		if (reader.ValueTextEquals(MemberAlias))
@@ -1424,34 +1264,24 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Alias;
 		}
 
-		if (reader.ValueTextEquals(MemberJoin))
+		if (reader.ValueTextEquals(MemberBinary))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Join;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Binary;
 		}
 
-		if (reader.ValueTextEquals(MemberRankFeature))
+		if (reader.ValueTextEquals(MemberBoolean))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeature;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Boolean;
 		}
 
-		if (reader.ValueTextEquals(MemberRankFeatures))
+		if (reader.ValueTextEquals(MemberByte))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeatures;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Byte;
 		}
 
-		if (reader.ValueTextEquals(MemberFlattened))
+		if (reader.ValueTextEquals(MemberCompletion))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Flattened;
-		}
-
-		if (reader.ValueTextEquals(MemberShape))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Shape;
-		}
-
-		if (reader.ValueTextEquals(MemberHistogram))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Histogram;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Completion;
 		}
 
 		if (reader.ValueTextEquals(MemberConstantKeyword))
@@ -1464,9 +1294,19 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.CountedKeyword;
 		}
 
-		if (reader.ValueTextEquals(MemberAggregateMetricDouble))
+		if (reader.ValueTextEquals(MemberDate))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.AggregateMetricDouble;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Date;
+		}
+
+		if (reader.ValueTextEquals(MemberDateNanos))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DateNanos;
+		}
+
+		if (reader.ValueTextEquals(MemberDateRange))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DateRange;
 		}
 
 		if (reader.ValueTextEquals(MemberDenseVector))
@@ -1474,19 +1314,49 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DenseVector;
 		}
 
-		if (reader.ValueTextEquals(MemberSemanticText))
+		if (reader.ValueTextEquals(MemberDouble))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SemanticText;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Double;
 		}
 
-		if (reader.ValueTextEquals(MemberSparseVector))
+		if (reader.ValueTextEquals(MemberDoubleRange))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SparseVector;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DoubleRange;
 		}
 
-		if (reader.ValueTextEquals(MemberMatchOnlyText))
+		if (reader.ValueTextEquals(MemberFlattened))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.MatchOnlyText;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Flattened;
+		}
+
+		if (reader.ValueTextEquals(MemberFloat))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Float;
+		}
+
+		if (reader.ValueTextEquals(MemberFloatRange))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.FloatRange;
+		}
+
+		if (reader.ValueTextEquals(MemberGeoPoint))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoPoint;
+		}
+
+		if (reader.ValueTextEquals(MemberGeoShape))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoShape;
+		}
+
+		if (reader.ValueTextEquals(MemberHalfFloat))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.HalfFloat;
+		}
+
+		if (reader.ValueTextEquals(MemberHistogram))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Histogram;
 		}
 
 		if (reader.ValueTextEquals(MemberIcuCollationKeyword))
@@ -1494,170 +1364,140 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IcuCollationKeyword;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.None;
-		}
-
-		if (string.Equals(value, MemberGeoPoint.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoPoint;
-		}
-
-		if (string.Equals(value, MemberGeoShape.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoShape;
-		}
-
-		if (string.Equals(value, MemberIp.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Ip;
-		}
-
-		if (string.Equals(value, MemberBinary.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Binary;
-		}
-
-		if (string.Equals(value, MemberKeyword.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Keyword;
-		}
-
-		if (string.Equals(value, MemberText.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Text;
-		}
-
-		if (string.Equals(value, MemberSearchAsYouType.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SearchAsYouType;
-		}
-
-		if (string.Equals(value, MemberDate.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Date;
-		}
-
-		if (string.Equals(value, MemberDateNanos.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DateNanos;
-		}
-
-		if (string.Equals(value, MemberBoolean.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Boolean;
-		}
-
-		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Completion;
-		}
-
-		if (string.Equals(value, MemberNested.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Nested;
-		}
-
-		if (string.Equals(value, MemberObject.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Object;
-		}
-
-		if (string.Equals(value, MemberPassthrough.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Passthrough;
-		}
-
-		if (string.Equals(value, MemberVersion.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Version;
-		}
-
-		if (string.Equals(value, MemberMurmur3.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Murmur3;
-		}
-
-		if (string.Equals(value, MemberTokenCount.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.TokenCount;
-		}
-
-		if (string.Equals(value, MemberPercolator.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Percolator;
-		}
-
-		if (string.Equals(value, MemberInteger.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberInteger))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Integer;
 		}
 
-		if (string.Equals(value, MemberLong.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Long;
-		}
-
-		if (string.Equals(value, MemberShort.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Short;
-		}
-
-		if (string.Equals(value, MemberByte.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Byte;
-		}
-
-		if (string.Equals(value, MemberFloat.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Float;
-		}
-
-		if (string.Equals(value, MemberHalfFloat.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.HalfFloat;
-		}
-
-		if (string.Equals(value, MemberScaledFloat.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.ScaledFloat;
-		}
-
-		if (string.Equals(value, MemberDouble.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Double;
-		}
-
-		if (string.Equals(value, MemberIntegerRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberIntegerRange))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IntegerRange;
 		}
 
-		if (string.Equals(value, MemberFloatRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberIp))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.FloatRange;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Ip;
 		}
 
-		if (string.Equals(value, MemberLongRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberIpRange))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IpRange;
+		}
+
+		if (reader.ValueTextEquals(MemberJoin))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Join;
+		}
+
+		if (reader.ValueTextEquals(MemberKeyword))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Keyword;
+		}
+
+		if (reader.ValueTextEquals(MemberLong))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Long;
+		}
+
+		if (reader.ValueTextEquals(MemberLongRange))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.LongRange;
 		}
 
-		if (string.Equals(value, MemberDoubleRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberMatchOnlyText))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DoubleRange;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.MatchOnlyText;
 		}
 
-		if (string.Equals(value, MemberDateRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberMurmur3))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DateRange;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Murmur3;
 		}
 
-		if (string.Equals(value, MemberIpRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberNested))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IpRange;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Nested;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.None;
+		}
+
+		if (reader.ValueTextEquals(MemberObject))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Object;
+		}
+
+		if (reader.ValueTextEquals(MemberPassthrough))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Passthrough;
+		}
+
+		if (reader.ValueTextEquals(MemberPercolator))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Percolator;
+		}
+
+		if (reader.ValueTextEquals(MemberRankFeature))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeature;
+		}
+
+		if (reader.ValueTextEquals(MemberRankFeatures))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeatures;
+		}
+
+		if (reader.ValueTextEquals(MemberScaledFloat))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.ScaledFloat;
+		}
+
+		if (reader.ValueTextEquals(MemberSearchAsYouType))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SearchAsYouType;
+		}
+
+		if (reader.ValueTextEquals(MemberSemanticText))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SemanticText;
+		}
+
+		if (reader.ValueTextEquals(MemberShape))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Shape;
+		}
+
+		if (reader.ValueTextEquals(MemberShort))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Short;
+		}
+
+		if (reader.ValueTextEquals(MemberSparseVector))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SparseVector;
+		}
+
+		if (reader.ValueTextEquals(MemberText))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Text;
+		}
+
+		if (reader.ValueTextEquals(MemberTokenCount))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.TokenCount;
+		}
+
+		if (reader.ValueTextEquals(MemberVersion))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Version;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAggregateMetricDouble.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.AggregateMetricDouble;
 		}
 
 		if (string.Equals(value, MemberAlias.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1665,34 +1505,24 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Alias;
 		}
 
-		if (string.Equals(value, MemberJoin.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberBinary.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Join;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Binary;
 		}
 
-		if (string.Equals(value, MemberRankFeature.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberBoolean.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeature;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Boolean;
 		}
 
-		if (string.Equals(value, MemberRankFeatures.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberByte.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeatures;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Byte;
 		}
 
-		if (string.Equals(value, MemberFlattened.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Flattened;
-		}
-
-		if (string.Equals(value, MemberShape.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Shape;
-		}
-
-		if (string.Equals(value, MemberHistogram.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Histogram;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Completion;
 		}
 
 		if (string.Equals(value, MemberConstantKeyword.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1705,9 +1535,19 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.CountedKeyword;
 		}
 
-		if (string.Equals(value, MemberAggregateMetricDouble.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberDate.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.AggregateMetricDouble;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Date;
+		}
+
+		if (string.Equals(value, MemberDateNanos.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DateNanos;
+		}
+
+		if (string.Equals(value, MemberDateRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DateRange;
 		}
 
 		if (string.Equals(value, MemberDenseVector.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1715,14 +1555,94 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DenseVector;
 		}
 
-		if (string.Equals(value, MemberSemanticText.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberDouble.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SemanticText;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Double;
 		}
 
-		if (string.Equals(value, MemberSparseVector.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberDoubleRange.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SparseVector;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.DoubleRange;
+		}
+
+		if (string.Equals(value, MemberFlattened.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Flattened;
+		}
+
+		if (string.Equals(value, MemberFloat.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Float;
+		}
+
+		if (string.Equals(value, MemberFloatRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.FloatRange;
+		}
+
+		if (string.Equals(value, MemberGeoPoint.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoPoint;
+		}
+
+		if (string.Equals(value, MemberGeoShape.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoShape;
+		}
+
+		if (string.Equals(value, MemberHalfFloat.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.HalfFloat;
+		}
+
+		if (string.Equals(value, MemberHistogram.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Histogram;
+		}
+
+		if (string.Equals(value, MemberIcuCollationKeyword.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IcuCollationKeyword;
+		}
+
+		if (string.Equals(value, MemberInteger.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Integer;
+		}
+
+		if (string.Equals(value, MemberIntegerRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IntegerRange;
+		}
+
+		if (string.Equals(value, MemberIp.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Ip;
+		}
+
+		if (string.Equals(value, MemberIpRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IpRange;
+		}
+
+		if (string.Equals(value, MemberJoin.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Join;
+		}
+
+		if (string.Equals(value, MemberKeyword.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Keyword;
+		}
+
+		if (string.Equals(value, MemberLong.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Long;
+		}
+
+		if (string.Equals(value, MemberLongRange.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.LongRange;
 		}
 
 		if (string.Equals(value, MemberMatchOnlyText.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -1730,9 +1650,89 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.MatchOnlyText;
 		}
 
-		if (string.Equals(value, MemberIcuCollationKeyword.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberMurmur3.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Mapping.FieldType.IcuCollationKeyword;
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Murmur3;
+		}
+
+		if (string.Equals(value, MemberNested.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Nested;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.None;
+		}
+
+		if (string.Equals(value, MemberObject.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Object;
+		}
+
+		if (string.Equals(value, MemberPassthrough.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Passthrough;
+		}
+
+		if (string.Equals(value, MemberPercolator.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Percolator;
+		}
+
+		if (string.Equals(value, MemberRankFeature.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeature;
+		}
+
+		if (string.Equals(value, MemberRankFeatures.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeatures;
+		}
+
+		if (string.Equals(value, MemberScaledFloat.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.ScaledFloat;
+		}
+
+		if (string.Equals(value, MemberSearchAsYouType.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SearchAsYouType;
+		}
+
+		if (string.Equals(value, MemberSemanticText.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SemanticText;
+		}
+
+		if (string.Equals(value, MemberShape.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Shape;
+		}
+
+		if (string.Equals(value, MemberShort.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Short;
+		}
+
+		if (string.Equals(value, MemberSparseVector.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.SparseVector;
+		}
+
+		if (string.Equals(value, MemberText.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Text;
+		}
+
+		if (string.Equals(value, MemberTokenCount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.TokenCount;
+		}
+
+		if (string.Equals(value, MemberVersion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Version;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.FieldType)}'.");
@@ -1742,125 +1742,23 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.None:
-				writer.WriteStringValue(MemberNone);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoPoint:
-				writer.WriteStringValue(MemberGeoPoint);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoShape:
-				writer.WriteStringValue(MemberGeoShape);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Ip:
-				writer.WriteStringValue(MemberIp);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Binary:
-				writer.WriteStringValue(MemberBinary);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Keyword:
-				writer.WriteStringValue(MemberKeyword);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Text:
-				writer.WriteStringValue(MemberText);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.SearchAsYouType:
-				writer.WriteStringValue(MemberSearchAsYouType);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Date:
-				writer.WriteStringValue(MemberDate);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DateNanos:
-				writer.WriteStringValue(MemberDateNanos);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Boolean:
-				writer.WriteStringValue(MemberBoolean);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Completion:
-				writer.WriteStringValue(MemberCompletion);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Nested:
-				writer.WriteStringValue(MemberNested);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Object:
-				writer.WriteStringValue(MemberObject);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Passthrough:
-				writer.WriteStringValue(MemberPassthrough);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Version:
-				writer.WriteStringValue(MemberVersion);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Murmur3:
-				writer.WriteStringValue(MemberMurmur3);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.TokenCount:
-				writer.WriteStringValue(MemberTokenCount);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Percolator:
-				writer.WriteStringValue(MemberPercolator);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Integer:
-				writer.WriteStringValue(MemberInteger);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Long:
-				writer.WriteStringValue(MemberLong);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Short:
-				writer.WriteStringValue(MemberShort);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Byte:
-				writer.WriteStringValue(MemberByte);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Float:
-				writer.WriteStringValue(MemberFloat);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.HalfFloat:
-				writer.WriteStringValue(MemberHalfFloat);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.ScaledFloat:
-				writer.WriteStringValue(MemberScaledFloat);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Double:
-				writer.WriteStringValue(MemberDouble);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.IntegerRange:
-				writer.WriteStringValue(MemberIntegerRange);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.FloatRange:
-				writer.WriteStringValue(MemberFloatRange);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.LongRange:
-				writer.WriteStringValue(MemberLongRange);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DoubleRange:
-				writer.WriteStringValue(MemberDoubleRange);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DateRange:
-				writer.WriteStringValue(MemberDateRange);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.IpRange:
-				writer.WriteStringValue(MemberIpRange);
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.AggregateMetricDouble:
+				writer.WriteStringValue(MemberAggregateMetricDouble);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Alias:
 				writer.WriteStringValue(MemberAlias);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Join:
-				writer.WriteStringValue(MemberJoin);
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Binary:
+				writer.WriteStringValue(MemberBinary);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeature:
-				writer.WriteStringValue(MemberRankFeature);
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Boolean:
+				writer.WriteStringValue(MemberBoolean);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeatures:
-				writer.WriteStringValue(MemberRankFeatures);
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Byte:
+				writer.WriteStringValue(MemberByte);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Flattened:
-				writer.WriteStringValue(MemberFlattened);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Shape:
-				writer.WriteStringValue(MemberShape);
-				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Histogram:
-				writer.WriteStringValue(MemberHistogram);
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Completion:
+				writer.WriteStringValue(MemberCompletion);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.ConstantKeyword:
 				writer.WriteStringValue(MemberConstantKeyword);
@@ -1868,23 +1766,125 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.CountedKeyword:
 				writer.WriteStringValue(MemberCountedKeyword);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.AggregateMetricDouble:
-				writer.WriteStringValue(MemberAggregateMetricDouble);
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Date:
+				writer.WriteStringValue(MemberDate);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DateNanos:
+				writer.WriteStringValue(MemberDateNanos);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DateRange:
+				writer.WriteStringValue(MemberDateRange);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DenseVector:
 				writer.WriteStringValue(MemberDenseVector);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.SemanticText:
-				writer.WriteStringValue(MemberSemanticText);
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Double:
+				writer.WriteStringValue(MemberDouble);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.SparseVector:
-				writer.WriteStringValue(MemberSparseVector);
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DoubleRange:
+				writer.WriteStringValue(MemberDoubleRange);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Flattened:
+				writer.WriteStringValue(MemberFlattened);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Float:
+				writer.WriteStringValue(MemberFloat);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.FloatRange:
+				writer.WriteStringValue(MemberFloatRange);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoPoint:
+				writer.WriteStringValue(MemberGeoPoint);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoShape:
+				writer.WriteStringValue(MemberGeoShape);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.HalfFloat:
+				writer.WriteStringValue(MemberHalfFloat);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Histogram:
+				writer.WriteStringValue(MemberHistogram);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.IcuCollationKeyword:
+				writer.WriteStringValue(MemberIcuCollationKeyword);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Integer:
+				writer.WriteStringValue(MemberInteger);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.IntegerRange:
+				writer.WriteStringValue(MemberIntegerRange);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Ip:
+				writer.WriteStringValue(MemberIp);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.IpRange:
+				writer.WriteStringValue(MemberIpRange);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Join:
+				writer.WriteStringValue(MemberJoin);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Keyword:
+				writer.WriteStringValue(MemberKeyword);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Long:
+				writer.WriteStringValue(MemberLong);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.LongRange:
+				writer.WriteStringValue(MemberLongRange);
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.MatchOnlyText:
 				writer.WriteStringValue(MemberMatchOnlyText);
 				break;
-			case Elastic.Clients.Elasticsearch.Mapping.FieldType.IcuCollationKeyword:
-				writer.WriteStringValue(MemberIcuCollationKeyword);
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Murmur3:
+				writer.WriteStringValue(MemberMurmur3);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Nested:
+				writer.WriteStringValue(MemberNested);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.None:
+				writer.WriteStringValue(MemberNone);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Object:
+				writer.WriteStringValue(MemberObject);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Passthrough:
+				writer.WriteStringValue(MemberPassthrough);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Percolator:
+				writer.WriteStringValue(MemberPercolator);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeature:
+				writer.WriteStringValue(MemberRankFeature);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeatures:
+				writer.WriteStringValue(MemberRankFeatures);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.ScaledFloat:
+				writer.WriteStringValue(MemberScaledFloat);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.SearchAsYouType:
+				writer.WriteStringValue(MemberSearchAsYouType);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.SemanticText:
+				writer.WriteStringValue(MemberSemanticText);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Shape:
+				writer.WriteStringValue(MemberShape);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Short:
+				writer.WriteStringValue(MemberShort);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.SparseVector:
+				writer.WriteStringValue(MemberSparseVector);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Text:
+				writer.WriteStringValue(MemberText);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.TokenCount:
+				writer.WriteStringValue(MemberTokenCount);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Version:
+				writer.WriteStringValue(MemberVersion);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.FieldType)}'.");
@@ -2018,25 +2018,25 @@ internal sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.DynamicMappingConverter))]
 public enum DynamicMapping
 {
-	[System.Runtime.Serialization.EnumMember(Value = "strict")]
-	Strict,
+	[System.Runtime.Serialization.EnumMember(Value = "false")]
+	False,
 	[System.Runtime.Serialization.EnumMember(Value = "runtime")]
 	Runtime,
+	[System.Runtime.Serialization.EnumMember(Value = "strict")]
+	Strict,
 	[System.Runtime.Serialization.EnumMember(Value = "true")]
-	True,
-	[System.Runtime.Serialization.EnumMember(Value = "false")]
-	False
+	True
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.SubobjectsConverter))]
 public enum Subobjects
 {
-	[System.Runtime.Serialization.EnumMember(Value = "true")]
-	True,
+	[System.Runtime.Serialization.EnumMember(Value = "auto")]
+	Auto,
 	[System.Runtime.Serialization.EnumMember(Value = "false")]
 	False,
-	[System.Runtime.Serialization.EnumMember(Value = "auto")]
-	Auto
+	[System.Runtime.Serialization.EnumMember(Value = "true")]
+	True
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.SourceFieldModeConverter))]
@@ -2059,25 +2059,25 @@ public enum SourceFieldMode
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeConverter))]
 public enum TimeSeriesMetricType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "gauge")]
-	Gauge,
 	[System.Runtime.Serialization.EnumMember(Value = "counter")]
 	Counter,
-	[System.Runtime.Serialization.EnumMember(Value = "summary")]
-	Summary,
+	[System.Runtime.Serialization.EnumMember(Value = "gauge")]
+	Gauge,
 	[System.Runtime.Serialization.EnumMember(Value = "histogram")]
 	Histogram,
 	[System.Runtime.Serialization.EnumMember(Value = "position")]
-	Position
+	Position,
+	[System.Runtime.Serialization.EnumMember(Value = "summary")]
+	Summary
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.MatchTypeConverter))]
 public enum MatchType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "simple")]
-	Simple,
 	[System.Runtime.Serialization.EnumMember(Value = "regex")]
-	Regex
+	Regex,
+	[System.Runtime.Serialization.EnumMember(Value = "simple")]
+	Simple
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeConverter))]
@@ -2110,11 +2110,13 @@ public enum SyntheticSourceKeepEnum
 {
 	/// <summary>
 	/// <para>
-	/// Synthetic source diverges from the original source (default)
+	/// The source for both singleton instances and arrays of the corresponding field or object gets recorded.
+	/// When applied to objects, the source of all sub-objects and sub-fields gets captured.
+	/// Furthermore, the original source of arrays gets captured and appears in synthetic source with no modifications.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None,
+	[System.Runtime.Serialization.EnumMember(Value = "all")]
+	All,
 	/// <summary>
 	/// <para>
 	/// Arrays of the corresponding field or object preserve the original element ordering and duplicate elements.
@@ -2127,22 +2129,20 @@ public enum SyntheticSourceKeepEnum
 	Arrays,
 	/// <summary>
 	/// <para>
-	/// The source for both singleton instances and arrays of the corresponding field or object gets recorded.
-	/// When applied to objects, the source of all sub-objects and sub-fields gets captured.
-	/// Furthermore, the original source of arrays gets captured and appears in synthetic source with no modifications.
+	/// Synthetic source diverges from the original source (default)
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "all")]
-	All
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.OnScriptErrorConverter))]
 public enum OnScriptError
 {
-	[System.Runtime.Serialization.EnumMember(Value = "fail")]
-	Fail,
 	[System.Runtime.Serialization.EnumMember(Value = "continue")]
-	Continue
+	Continue,
+	[System.Runtime.Serialization.EnumMember(Value = "fail")]
+	Fail
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.IndexOptionsConverter))]
@@ -2152,10 +2152,10 @@ public enum IndexOptions
 	Docs,
 	[System.Runtime.Serialization.EnumMember(Value = "freqs")]
 	Freqs,
-	[System.Runtime.Serialization.EnumMember(Value = "positions")]
-	Positions,
 	[System.Runtime.Serialization.EnumMember(Value = "offsets")]
-	Offsets
+	Offsets,
+	[System.Runtime.Serialization.EnumMember(Value = "positions")]
+	Positions
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.TermVectorOptionConverter))]
@@ -2163,8 +2163,6 @@ public enum TermVectorOption
 {
 	[System.Runtime.Serialization.EnumMember(Value = "no")]
 	No,
-	[System.Runtime.Serialization.EnumMember(Value = "yes")]
-	Yes,
 	[System.Runtime.Serialization.EnumMember(Value = "with_offsets")]
 	WithOffsets,
 	[System.Runtime.Serialization.EnumMember(Value = "with_positions")]
@@ -2174,7 +2172,9 @@ public enum TermVectorOption
 	[System.Runtime.Serialization.EnumMember(Value = "with_positions_offsets_payloads")]
 	WithPositionsOffsetsPayloads,
 	[System.Runtime.Serialization.EnumMember(Value = "with_positions_payloads")]
-	WithPositionsPayloads
+	WithPositionsPayloads,
+	[System.Runtime.Serialization.EnumMember(Value = "yes")]
+	Yes
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementTypeConverter))]
@@ -2281,10 +2281,10 @@ public enum DenseVectorSimilarity
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.GeoOrientationConverter))]
 public enum GeoOrientation
 {
-	[System.Runtime.Serialization.EnumMember(Value = "right")]
-	Right,
 	[System.Runtime.Serialization.EnumMember(Value = "left")]
-	Left
+	Left,
+	[System.Runtime.Serialization.EnumMember(Value = "right")]
+	Right
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.GeoStrategyConverter))]
@@ -2299,102 +2299,102 @@ public enum GeoStrategy
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.FieldTypeConverter))]
 public enum FieldType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None,
-	[System.Runtime.Serialization.EnumMember(Value = "geo_point")]
-	GeoPoint,
-	[System.Runtime.Serialization.EnumMember(Value = "geo_shape")]
-	GeoShape,
-	[System.Runtime.Serialization.EnumMember(Value = "ip")]
-	Ip,
-	[System.Runtime.Serialization.EnumMember(Value = "binary")]
-	Binary,
-	[System.Runtime.Serialization.EnumMember(Value = "keyword")]
-	Keyword,
-	[System.Runtime.Serialization.EnumMember(Value = "text")]
-	Text,
-	[System.Runtime.Serialization.EnumMember(Value = "search_as_you_type")]
-	SearchAsYouType,
-	[System.Runtime.Serialization.EnumMember(Value = "date")]
-	Date,
-	[System.Runtime.Serialization.EnumMember(Value = "date_nanos")]
-	DateNanos,
-	[System.Runtime.Serialization.EnumMember(Value = "boolean")]
-	Boolean,
-	[System.Runtime.Serialization.EnumMember(Value = "completion")]
-	Completion,
-	[System.Runtime.Serialization.EnumMember(Value = "nested")]
-	Nested,
-	[System.Runtime.Serialization.EnumMember(Value = "object")]
-	Object,
-	[System.Runtime.Serialization.EnumMember(Value = "passthrough")]
-	Passthrough,
-	[System.Runtime.Serialization.EnumMember(Value = "version")]
-	Version,
-	[System.Runtime.Serialization.EnumMember(Value = "murmur3")]
-	Murmur3,
-	[System.Runtime.Serialization.EnumMember(Value = "token_count")]
-	TokenCount,
-	[System.Runtime.Serialization.EnumMember(Value = "percolator")]
-	Percolator,
-	[System.Runtime.Serialization.EnumMember(Value = "integer")]
-	Integer,
-	[System.Runtime.Serialization.EnumMember(Value = "long")]
-	Long,
-	[System.Runtime.Serialization.EnumMember(Value = "short")]
-	Short,
-	[System.Runtime.Serialization.EnumMember(Value = "byte")]
-	Byte,
-	[System.Runtime.Serialization.EnumMember(Value = "float")]
-	Float,
-	[System.Runtime.Serialization.EnumMember(Value = "half_float")]
-	HalfFloat,
-	[System.Runtime.Serialization.EnumMember(Value = "scaled_float")]
-	ScaledFloat,
-	[System.Runtime.Serialization.EnumMember(Value = "double")]
-	Double,
-	[System.Runtime.Serialization.EnumMember(Value = "integer_range")]
-	IntegerRange,
-	[System.Runtime.Serialization.EnumMember(Value = "float_range")]
-	FloatRange,
-	[System.Runtime.Serialization.EnumMember(Value = "long_range")]
-	LongRange,
-	[System.Runtime.Serialization.EnumMember(Value = "double_range")]
-	DoubleRange,
-	[System.Runtime.Serialization.EnumMember(Value = "date_range")]
-	DateRange,
-	[System.Runtime.Serialization.EnumMember(Value = "ip_range")]
-	IpRange,
+	[System.Runtime.Serialization.EnumMember(Value = "aggregate_metric_double")]
+	AggregateMetricDouble,
 	[System.Runtime.Serialization.EnumMember(Value = "alias")]
 	Alias,
-	[System.Runtime.Serialization.EnumMember(Value = "join")]
-	Join,
-	[System.Runtime.Serialization.EnumMember(Value = "rank_feature")]
-	RankFeature,
-	[System.Runtime.Serialization.EnumMember(Value = "rank_features")]
-	RankFeatures,
-	[System.Runtime.Serialization.EnumMember(Value = "flattened")]
-	Flattened,
-	[System.Runtime.Serialization.EnumMember(Value = "shape")]
-	Shape,
-	[System.Runtime.Serialization.EnumMember(Value = "histogram")]
-	Histogram,
+	[System.Runtime.Serialization.EnumMember(Value = "binary")]
+	Binary,
+	[System.Runtime.Serialization.EnumMember(Value = "boolean")]
+	Boolean,
+	[System.Runtime.Serialization.EnumMember(Value = "byte")]
+	Byte,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
 	[System.Runtime.Serialization.EnumMember(Value = "constant_keyword")]
 	ConstantKeyword,
 	[System.Runtime.Serialization.EnumMember(Value = "counted_keyword")]
 	CountedKeyword,
-	[System.Runtime.Serialization.EnumMember(Value = "aggregate_metric_double")]
-	AggregateMetricDouble,
+	[System.Runtime.Serialization.EnumMember(Value = "date")]
+	Date,
+	[System.Runtime.Serialization.EnumMember(Value = "date_nanos")]
+	DateNanos,
+	[System.Runtime.Serialization.EnumMember(Value = "date_range")]
+	DateRange,
 	[System.Runtime.Serialization.EnumMember(Value = "dense_vector")]
 	DenseVector,
-	[System.Runtime.Serialization.EnumMember(Value = "semantic_text")]
-	SemanticText,
-	[System.Runtime.Serialization.EnumMember(Value = "sparse_vector")]
-	SparseVector,
+	[System.Runtime.Serialization.EnumMember(Value = "double")]
+	Double,
+	[System.Runtime.Serialization.EnumMember(Value = "double_range")]
+	DoubleRange,
+	[System.Runtime.Serialization.EnumMember(Value = "flattened")]
+	Flattened,
+	[System.Runtime.Serialization.EnumMember(Value = "float")]
+	Float,
+	[System.Runtime.Serialization.EnumMember(Value = "float_range")]
+	FloatRange,
+	[System.Runtime.Serialization.EnumMember(Value = "geo_point")]
+	GeoPoint,
+	[System.Runtime.Serialization.EnumMember(Value = "geo_shape")]
+	GeoShape,
+	[System.Runtime.Serialization.EnumMember(Value = "half_float")]
+	HalfFloat,
+	[System.Runtime.Serialization.EnumMember(Value = "histogram")]
+	Histogram,
+	[System.Runtime.Serialization.EnumMember(Value = "icu_collation_keyword")]
+	IcuCollationKeyword,
+	[System.Runtime.Serialization.EnumMember(Value = "integer")]
+	Integer,
+	[System.Runtime.Serialization.EnumMember(Value = "integer_range")]
+	IntegerRange,
+	[System.Runtime.Serialization.EnumMember(Value = "ip")]
+	Ip,
+	[System.Runtime.Serialization.EnumMember(Value = "ip_range")]
+	IpRange,
+	[System.Runtime.Serialization.EnumMember(Value = "join")]
+	Join,
+	[System.Runtime.Serialization.EnumMember(Value = "keyword")]
+	Keyword,
+	[System.Runtime.Serialization.EnumMember(Value = "long")]
+	Long,
+	[System.Runtime.Serialization.EnumMember(Value = "long_range")]
+	LongRange,
 	[System.Runtime.Serialization.EnumMember(Value = "match_only_text")]
 	MatchOnlyText,
-	[System.Runtime.Serialization.EnumMember(Value = "icu_collation_keyword")]
-	IcuCollationKeyword
+	[System.Runtime.Serialization.EnumMember(Value = "murmur3")]
+	Murmur3,
+	[System.Runtime.Serialization.EnumMember(Value = "nested")]
+	Nested,
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None,
+	[System.Runtime.Serialization.EnumMember(Value = "object")]
+	Object,
+	[System.Runtime.Serialization.EnumMember(Value = "passthrough")]
+	Passthrough,
+	[System.Runtime.Serialization.EnumMember(Value = "percolator")]
+	Percolator,
+	[System.Runtime.Serialization.EnumMember(Value = "rank_feature")]
+	RankFeature,
+	[System.Runtime.Serialization.EnumMember(Value = "rank_features")]
+	RankFeatures,
+	[System.Runtime.Serialization.EnumMember(Value = "scaled_float")]
+	ScaledFloat,
+	[System.Runtime.Serialization.EnumMember(Value = "search_as_you_type")]
+	SearchAsYouType,
+	[System.Runtime.Serialization.EnumMember(Value = "semantic_text")]
+	SemanticText,
+	[System.Runtime.Serialization.EnumMember(Value = "shape")]
+	Shape,
+	[System.Runtime.Serialization.EnumMember(Value = "short")]
+	Short,
+	[System.Runtime.Serialization.EnumMember(Value = "sparse_vector")]
+	SparseVector,
+	[System.Runtime.Serialization.EnumMember(Value = "text")]
+	Text,
+	[System.Runtime.Serialization.EnumMember(Value = "token_count")]
+	TokenCount,
+	[System.Runtime.Serialization.EnumMember(Value = "version")]
+	Version
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeConverter))]

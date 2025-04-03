@@ -26,20 +26,15 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green");
-	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
 	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
 	private static readonly System.Text.Json.JsonEncodedText MemberUnknown = System.Text.Json.JsonEncodedText.Encode("unknown");
+	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		if (reader.ValueTextEquals(MemberGreen))
 		{
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Green;
-		}
-
-		if (reader.ValueTextEquals(MemberYellow))
-		{
-			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow;
 		}
 
 		if (reader.ValueTextEquals(MemberRed))
@@ -52,15 +47,15 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unknown;
 		}
 
+		if (reader.ValueTextEquals(MemberYellow))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow;
+		}
+
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberGreen.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Green;
-		}
-
-		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow;
 		}
 
 		if (string.Equals(value, MemberRed.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -73,6 +68,11 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unknown;
 		}
 
+		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus)}'.");
 	}
 
@@ -83,14 +83,14 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Green:
 				writer.WriteStringValue(MemberGreen);
 				break;
-			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow:
-				writer.WriteStringValue(MemberYellow);
-				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Red:
 				writer.WriteStringValue(MemberRed);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unknown:
 				writer.WriteStringValue(MemberUnknown);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow:
+				writer.WriteStringValue(MemberYellow);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus)}'.");
@@ -110,23 +110,13 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 
 internal sealed partial class ImpactAreaConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
-	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
 	private static readonly System.Text.Json.JsonEncodedText MemberBackup = System.Text.Json.JsonEncodedText.Encode("backup");
 	private static readonly System.Text.Json.JsonEncodedText MemberDeploymentManagement = System.Text.Json.JsonEncodedText.Encode("deployment_management");
+	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberSearch))
-		{
-			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search;
-		}
-
-		if (reader.ValueTextEquals(MemberIngest))
-		{
-			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest;
-		}
-
 		if (reader.ValueTextEquals(MemberBackup))
 		{
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Backup;
@@ -137,17 +127,17 @@ internal sealed partial class ImpactAreaConverter : System.Text.Json.Serializati
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.DeploymentManagement;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search;
-		}
-
-		if (string.Equals(value, MemberIngest.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberIngest))
 		{
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest;
 		}
 
+		if (reader.ValueTextEquals(MemberSearch))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search;
+		}
+
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberBackup.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Backup;
@@ -158,6 +148,16 @@ internal sealed partial class ImpactAreaConverter : System.Text.Json.Serializati
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.DeploymentManagement;
 		}
 
+		if (string.Equals(value, MemberIngest.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest;
+		}
+
+		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea)}'.");
 	}
 
@@ -165,17 +165,17 @@ internal sealed partial class ImpactAreaConverter : System.Text.Json.Serializati
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search:
-				writer.WriteStringValue(MemberSearch);
-				break;
-			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest:
-				writer.WriteStringValue(MemberIngest);
-				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Backup:
 				writer.WriteStringValue(MemberBackup);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.DeploymentManagement:
 				writer.WriteStringValue(MemberDeploymentManagement);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest:
+				writer.WriteStringValue(MemberIngest);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search:
+				writer.WriteStringValue(MemberSearch);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea)}'.");
@@ -198,23 +198,23 @@ public enum IndicatorHealthStatus
 {
 	[System.Runtime.Serialization.EnumMember(Value = "green")]
 	Green,
-	[System.Runtime.Serialization.EnumMember(Value = "yellow")]
-	Yellow,
 	[System.Runtime.Serialization.EnumMember(Value = "red")]
 	Red,
 	[System.Runtime.Serialization.EnumMember(Value = "unknown")]
-	Unknown
+	Unknown,
+	[System.Runtime.Serialization.EnumMember(Value = "yellow")]
+	Yellow
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactAreaConverter))]
 public enum ImpactArea
 {
-	[System.Runtime.Serialization.EnumMember(Value = "search")]
-	Search,
-	[System.Runtime.Serialization.EnumMember(Value = "ingest")]
-	Ingest,
 	[System.Runtime.Serialization.EnumMember(Value = "backup")]
 	Backup,
 	[System.Runtime.Serialization.EnumMember(Value = "deployment_management")]
-	DeploymentManagement
+	DeploymentManagement,
+	[System.Runtime.Serialization.EnumMember(Value = "ingest")]
+	Ingest,
+	[System.Runtime.Serialization.EnumMember(Value = "search")]
+	Search
 }

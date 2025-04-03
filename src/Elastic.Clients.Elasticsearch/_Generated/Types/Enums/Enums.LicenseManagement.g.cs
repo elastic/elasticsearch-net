@@ -26,9 +26,9 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 internal sealed partial class LicenseStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberActive = System.Text.Json.JsonEncodedText.Encode("active");
-	private static readonly System.Text.Json.JsonEncodedText MemberValid = System.Text.Json.JsonEncodedText.Encode("valid");
-	private static readonly System.Text.Json.JsonEncodedText MemberInvalid = System.Text.Json.JsonEncodedText.Encode("invalid");
 	private static readonly System.Text.Json.JsonEncodedText MemberExpired = System.Text.Json.JsonEncodedText.Encode("expired");
+	private static readonly System.Text.Json.JsonEncodedText MemberInvalid = System.Text.Json.JsonEncodedText.Encode("invalid");
+	private static readonly System.Text.Json.JsonEncodedText MemberValid = System.Text.Json.JsonEncodedText.Encode("valid");
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -37,9 +37,9 @@ internal sealed partial class LicenseStatusConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Active;
 		}
 
-		if (reader.ValueTextEquals(MemberValid))
+		if (reader.ValueTextEquals(MemberExpired))
 		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Valid;
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Expired;
 		}
 
 		if (reader.ValueTextEquals(MemberInvalid))
@@ -47,9 +47,9 @@ internal sealed partial class LicenseStatusConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Invalid;
 		}
 
-		if (reader.ValueTextEquals(MemberExpired))
+		if (reader.ValueTextEquals(MemberValid))
 		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Expired;
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Valid;
 		}
 
 		var value = reader.GetString()!;
@@ -58,9 +58,9 @@ internal sealed partial class LicenseStatusConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Active;
 		}
 
-		if (string.Equals(value, MemberValid.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberExpired.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Valid;
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Expired;
 		}
 
 		if (string.Equals(value, MemberInvalid.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -68,9 +68,9 @@ internal sealed partial class LicenseStatusConverter : System.Text.Json.Serializ
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Invalid;
 		}
 
-		if (string.Equals(value, MemberExpired.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberValid.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Expired;
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Valid;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus)}'.");
@@ -83,14 +83,14 @@ internal sealed partial class LicenseStatusConverter : System.Text.Json.Serializ
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Active:
 				writer.WriteStringValue(MemberActive);
 				break;
-			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Valid:
-				writer.WriteStringValue(MemberValid);
+			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Expired:
+				writer.WriteStringValue(MemberExpired);
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Invalid:
 				writer.WriteStringValue(MemberInvalid);
 				break;
-			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Expired:
-				writer.WriteStringValue(MemberExpired);
+			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Valid:
+				writer.WriteStringValue(MemberValid);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus)}'.");
@@ -110,36 +110,21 @@ internal sealed partial class LicenseStatusConverter : System.Text.Json.Serializ
 
 internal sealed partial class LicenseTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMissing = System.Text.Json.JsonEncodedText.Encode("missing");
-	private static readonly System.Text.Json.JsonEncodedText MemberTrial = System.Text.Json.JsonEncodedText.Encode("trial");
 	private static readonly System.Text.Json.JsonEncodedText MemberBasic = System.Text.Json.JsonEncodedText.Encode("basic");
-	private static readonly System.Text.Json.JsonEncodedText MemberStandard = System.Text.Json.JsonEncodedText.Encode("standard");
 	private static readonly System.Text.Json.JsonEncodedText MemberDev = System.Text.Json.JsonEncodedText.Encode("dev");
-	private static readonly System.Text.Json.JsonEncodedText MemberSilver = System.Text.Json.JsonEncodedText.Encode("silver");
-	private static readonly System.Text.Json.JsonEncodedText MemberGold = System.Text.Json.JsonEncodedText.Encode("gold");
-	private static readonly System.Text.Json.JsonEncodedText MemberPlatinum = System.Text.Json.JsonEncodedText.Encode("platinum");
 	private static readonly System.Text.Json.JsonEncodedText MemberEnterprise = System.Text.Json.JsonEncodedText.Encode("enterprise");
+	private static readonly System.Text.Json.JsonEncodedText MemberGold = System.Text.Json.JsonEncodedText.Encode("gold");
+	private static readonly System.Text.Json.JsonEncodedText MemberMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText MemberPlatinum = System.Text.Json.JsonEncodedText.Encode("platinum");
+	private static readonly System.Text.Json.JsonEncodedText MemberSilver = System.Text.Json.JsonEncodedText.Encode("silver");
+	private static readonly System.Text.Json.JsonEncodedText MemberStandard = System.Text.Json.JsonEncodedText.Encode("standard");
+	private static readonly System.Text.Json.JsonEncodedText MemberTrial = System.Text.Json.JsonEncodedText.Encode("trial");
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberMissing))
-		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Missing;
-		}
-
-		if (reader.ValueTextEquals(MemberTrial))
-		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Trial;
-		}
-
 		if (reader.ValueTextEquals(MemberBasic))
 		{
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Basic;
-		}
-
-		if (reader.ValueTextEquals(MemberStandard))
-		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Standard;
 		}
 
 		if (reader.ValueTextEquals(MemberDev))
@@ -147,9 +132,9 @@ internal sealed partial class LicenseTypeConverter : System.Text.Json.Serializat
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Dev;
 		}
 
-		if (reader.ValueTextEquals(MemberSilver))
+		if (reader.ValueTextEquals(MemberEnterprise))
 		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Silver;
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Enterprise;
 		}
 
 		if (reader.ValueTextEquals(MemberGold))
@@ -157,35 +142,35 @@ internal sealed partial class LicenseTypeConverter : System.Text.Json.Serializat
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Gold;
 		}
 
+		if (reader.ValueTextEquals(MemberMissing))
+		{
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Missing;
+		}
+
 		if (reader.ValueTextEquals(MemberPlatinum))
 		{
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Platinum;
 		}
 
-		if (reader.ValueTextEquals(MemberEnterprise))
+		if (reader.ValueTextEquals(MemberSilver))
 		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Enterprise;
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Silver;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberMissing.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberStandard))
 		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Missing;
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Standard;
 		}
 
-		if (string.Equals(value, MemberTrial.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberTrial))
 		{
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Trial;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberBasic.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Basic;
-		}
-
-		if (string.Equals(value, MemberStandard.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Standard;
 		}
 
 		if (string.Equals(value, MemberDev.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -193,9 +178,9 @@ internal sealed partial class LicenseTypeConverter : System.Text.Json.Serializat
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Dev;
 		}
 
-		if (string.Equals(value, MemberSilver.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberEnterprise.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Silver;
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Enterprise;
 		}
 
 		if (string.Equals(value, MemberGold.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -203,14 +188,29 @@ internal sealed partial class LicenseTypeConverter : System.Text.Json.Serializat
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Gold;
 		}
 
+		if (string.Equals(value, MemberMissing.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Missing;
+		}
+
 		if (string.Equals(value, MemberPlatinum.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Platinum;
 		}
 
-		if (string.Equals(value, MemberEnterprise.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberSilver.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Enterprise;
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Silver;
+		}
+
+		if (string.Equals(value, MemberStandard.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Standard;
+		}
+
+		if (string.Equals(value, MemberTrial.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Trial;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType)}'.");
@@ -220,32 +220,32 @@ internal sealed partial class LicenseTypeConverter : System.Text.Json.Serializat
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Missing:
-				writer.WriteStringValue(MemberMissing);
-				break;
-			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Trial:
-				writer.WriteStringValue(MemberTrial);
-				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Basic:
 				writer.WriteStringValue(MemberBasic);
-				break;
-			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Standard:
-				writer.WriteStringValue(MemberStandard);
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Dev:
 				writer.WriteStringValue(MemberDev);
 				break;
-			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Silver:
-				writer.WriteStringValue(MemberSilver);
+			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Enterprise:
+				writer.WriteStringValue(MemberEnterprise);
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Gold:
 				writer.WriteStringValue(MemberGold);
 				break;
+			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Missing:
+				writer.WriteStringValue(MemberMissing);
+				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Platinum:
 				writer.WriteStringValue(MemberPlatinum);
 				break;
-			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Enterprise:
-				writer.WriteStringValue(MemberEnterprise);
+			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Silver:
+				writer.WriteStringValue(MemberSilver);
+				break;
+			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Standard:
+				writer.WriteStringValue(MemberStandard);
+				break;
+			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Trial:
+				writer.WriteStringValue(MemberTrial);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType)}'.");
@@ -268,33 +268,33 @@ public enum LicenseStatus
 {
 	[System.Runtime.Serialization.EnumMember(Value = "active")]
 	Active,
-	[System.Runtime.Serialization.EnumMember(Value = "valid")]
-	Valid,
+	[System.Runtime.Serialization.EnumMember(Value = "expired")]
+	Expired,
 	[System.Runtime.Serialization.EnumMember(Value = "invalid")]
 	Invalid,
-	[System.Runtime.Serialization.EnumMember(Value = "expired")]
-	Expired
+	[System.Runtime.Serialization.EnumMember(Value = "valid")]
+	Valid
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeConverter))]
 public enum LicenseType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "missing")]
-	Missing,
-	[System.Runtime.Serialization.EnumMember(Value = "trial")]
-	Trial,
 	[System.Runtime.Serialization.EnumMember(Value = "basic")]
 	Basic,
-	[System.Runtime.Serialization.EnumMember(Value = "standard")]
-	Standard,
 	[System.Runtime.Serialization.EnumMember(Value = "dev")]
 	Dev,
-	[System.Runtime.Serialization.EnumMember(Value = "silver")]
-	Silver,
+	[System.Runtime.Serialization.EnumMember(Value = "enterprise")]
+	Enterprise,
 	[System.Runtime.Serialization.EnumMember(Value = "gold")]
 	Gold,
+	[System.Runtime.Serialization.EnumMember(Value = "missing")]
+	Missing,
 	[System.Runtime.Serialization.EnumMember(Value = "platinum")]
 	Platinum,
-	[System.Runtime.Serialization.EnumMember(Value = "enterprise")]
-	Enterprise
+	[System.Runtime.Serialization.EnumMember(Value = "silver")]
+	Silver,
+	[System.Runtime.Serialization.EnumMember(Value = "standard")]
+	Standard,
+	[System.Runtime.Serialization.EnumMember(Value = "trial")]
+	Trial
 }

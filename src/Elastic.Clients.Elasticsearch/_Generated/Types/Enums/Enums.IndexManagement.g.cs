@@ -210,21 +210,21 @@ internal sealed partial class ShardStoreAllocationConverter : System.Text.Json.S
 
 internal sealed partial class ShardStoreStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green");
-	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
-	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
 	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green");
+	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
+	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberAll))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All;
+		}
+
 		if (reader.ValueTextEquals(MemberGreen))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Green;
-		}
-
-		if (reader.ValueTextEquals(MemberYellow))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow;
 		}
 
 		if (reader.ValueTextEquals(MemberRed))
@@ -232,20 +232,20 @@ internal sealed partial class ShardStoreStatusConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Red;
 		}
 
-		if (reader.ValueTextEquals(MemberAll))
+		if (reader.ValueTextEquals(MemberYellow))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All;
 		}
 
-		var value = reader.GetString()!;
 		if (string.Equals(value, MemberGreen.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Green;
-		}
-
-		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow;
 		}
 
 		if (string.Equals(value, MemberRed.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -253,9 +253,9 @@ internal sealed partial class ShardStoreStatusConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Red;
 		}
 
-		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All;
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus)}'.");
@@ -265,17 +265,17 @@ internal sealed partial class ShardStoreStatusConverter : System.Text.Json.Seria
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All:
+				writer.WriteStringValue(MemberAll);
+				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Green:
 				writer.WriteStringValue(MemberGreen);
-				break;
-			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow:
-				writer.WriteStringValue(MemberYellow);
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Red:
 				writer.WriteStringValue(MemberRed);
 				break;
-			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All:
-				writer.WriteStringValue(MemberAll);
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow:
+				writer.WriteStringValue(MemberYellow);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus)}'.");
@@ -295,30 +295,30 @@ internal sealed partial class ShardStoreStatusConverter : System.Text.Json.Seria
 
 internal sealed partial class IndexMetadataStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberOpen = System.Text.Json.JsonEncodedText.Encode("open");
 	private static readonly System.Text.Json.JsonEncodedText MemberClose = System.Text.Json.JsonEncodedText.Encode("close");
+	private static readonly System.Text.Json.JsonEncodedText MemberOpen = System.Text.Json.JsonEncodedText.Encode("open");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberOpen))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open;
-		}
-
 		if (reader.ValueTextEquals(MemberClose))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Close;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberOpen.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberOpen))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberClose.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Close;
+		}
+
+		if (string.Equals(value, MemberOpen.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState)}'.");
@@ -328,11 +328,11 @@ internal sealed partial class IndexMetadataStateConverter : System.Text.Json.Ser
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open:
-				writer.WriteStringValue(MemberOpen);
-				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Close:
 				writer.WriteStringValue(MemberClose);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open:
+				writer.WriteStringValue(MemberOpen);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState)}'.");
@@ -352,26 +352,16 @@ internal sealed partial class IndexMetadataStateConverter : System.Text.Json.Ser
 
 internal sealed partial class ShardRoutingStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberUnassigned = System.Text.Json.JsonEncodedText.Encode("UNASSIGNED");
 	private static readonly System.Text.Json.JsonEncodedText MemberInitializing = System.Text.Json.JsonEncodedText.Encode("INITIALIZING");
-	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("STARTED");
 	private static readonly System.Text.Json.JsonEncodedText MemberRelocating = System.Text.Json.JsonEncodedText.Encode("RELOCATING");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("STARTED");
+	private static readonly System.Text.Json.JsonEncodedText MemberUnassigned = System.Text.Json.JsonEncodedText.Encode("UNASSIGNED");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberUnassigned))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned;
-		}
-
 		if (reader.ValueTextEquals(MemberInitializing))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Initializing;
-		}
-
-		if (reader.ValueTextEquals(MemberStarted))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Started;
 		}
 
 		if (reader.ValueTextEquals(MemberRelocating))
@@ -379,15 +369,25 @@ internal sealed partial class ShardRoutingStateConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberUnassigned.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberStarted))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Started;
+		}
+
+		if (reader.ValueTextEquals(MemberUnassigned))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberInitializing.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Initializing;
+		}
+
+		if (string.Equals(value, MemberRelocating.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating;
 		}
 
 		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -395,9 +395,9 @@ internal sealed partial class ShardRoutingStateConverter : System.Text.Json.Seri
 			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Started;
 		}
 
-		if (string.Equals(value, MemberRelocating.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberUnassigned.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating;
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState)}'.");
@@ -407,17 +407,17 @@ internal sealed partial class ShardRoutingStateConverter : System.Text.Json.Seri
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned:
-				writer.WriteStringValue(MemberUnassigned);
-				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Initializing:
 				writer.WriteStringValue(MemberInitializing);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating:
+				writer.WriteStringValue(MemberRelocating);
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Started:
 				writer.WriteStringValue(MemberStarted);
 				break;
-			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating:
-				writer.WriteStringValue(MemberRelocating);
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned:
+				writer.WriteStringValue(MemberUnassigned);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState)}'.");
@@ -437,15 +437,15 @@ internal sealed partial class ShardRoutingStateConverter : System.Text.Json.Seri
 
 internal sealed partial class IndexCheckOnStartupConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberTrue = System.Text.Json.JsonEncodedText.Encode("true");
-	private static readonly System.Text.Json.JsonEncodedText MemberFalse = System.Text.Json.JsonEncodedText.Encode("false");
 	private static readonly System.Text.Json.JsonEncodedText MemberChecksum = System.Text.Json.JsonEncodedText.Encode("checksum");
+	private static readonly System.Text.Json.JsonEncodedText MemberFalse = System.Text.Json.JsonEncodedText.Encode("false");
+	private static readonly System.Text.Json.JsonEncodedText MemberTrue = System.Text.Json.JsonEncodedText.Encode("true");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberTrue))
+		if (reader.ValueTextEquals(MemberChecksum))
 		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True;
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum;
 		}
 
 		if (reader.ValueTextEquals(MemberFalse))
@@ -453,9 +453,9 @@ internal sealed partial class IndexCheckOnStartupConverter : System.Text.Json.Se
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.False;
 		}
 
-		if (reader.ValueTextEquals(MemberChecksum))
+		if (reader.ValueTextEquals(MemberTrue))
 		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum;
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True;
 		}
 
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.String)
@@ -464,9 +464,9 @@ internal sealed partial class IndexCheckOnStartupConverter : System.Text.Json.Se
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberTrue.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberChecksum.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True;
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum;
 		}
 
 		if (string.Equals(value, MemberFalse.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -474,9 +474,9 @@ internal sealed partial class IndexCheckOnStartupConverter : System.Text.Json.Se
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.False;
 		}
 
-		if (string.Equals(value, MemberChecksum.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberTrue.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum;
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup)}'.");
@@ -486,14 +486,14 @@ internal sealed partial class IndexCheckOnStartupConverter : System.Text.Json.Se
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True:
-				writer.WriteRawValue(MemberTrue.EncodedUtf8Bytes);
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum:
+				writer.WriteStringValue(MemberChecksum);
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.False:
 				writer.WriteRawValue(MemberFalse.EncodedUtf8Bytes);
 				break;
-			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum:
-				writer.WriteStringValue(MemberChecksum);
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True:
+				writer.WriteRawValue(MemberTrue.EncodedUtf8Bytes);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup)}'.");
@@ -513,20 +513,20 @@ internal sealed partial class IndexCheckOnStartupConverter : System.Text.Json.Se
 
 internal sealed partial class ManagedByConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberIlm = System.Text.Json.JsonEncodedText.Encode("Index Lifecycle Management");
 	private static readonly System.Text.Json.JsonEncodedText MemberDatastream = System.Text.Json.JsonEncodedText.Encode("Data stream lifecycle");
+	private static readonly System.Text.Json.JsonEncodedText MemberIlm = System.Text.Json.JsonEncodedText.Encode("Index Lifecycle Management");
 	private static readonly System.Text.Json.JsonEncodedText MemberUnmanaged = System.Text.Json.JsonEncodedText.Encode("Unmanaged");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberIlm))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm;
-		}
-
 		if (reader.ValueTextEquals(MemberDatastream))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Datastream;
+		}
+
+		if (reader.ValueTextEquals(MemberIlm))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm;
 		}
 
 		if (reader.ValueTextEquals(MemberUnmanaged))
@@ -535,14 +535,14 @@ internal sealed partial class ManagedByConverter : System.Text.Json.Serializatio
 		}
 
 		var value = reader.GetString()!;
-		if (string.Equals(value, MemberIlm.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm;
-		}
-
 		if (string.Equals(value, MemberDatastream.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Datastream;
+		}
+
+		if (string.Equals(value, MemberIlm.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm;
 		}
 
 		if (string.Equals(value, MemberUnmanaged.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -557,11 +557,11 @@ internal sealed partial class ManagedByConverter : System.Text.Json.Serializatio
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm:
-				writer.WriteStringValue(MemberIlm);
-				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Datastream:
 				writer.WriteStringValue(MemberDatastream);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm:
+				writer.WriteStringValue(MemberIlm);
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Unmanaged:
 				writer.WriteStringValue(MemberUnmanaged);
@@ -584,32 +584,32 @@ internal sealed partial class ManagedByConverter : System.Text.Json.Serializatio
 
 internal sealed partial class TranslogDurabilityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberRequest = System.Text.Json.JsonEncodedText.Encode("request");
-	private static readonly System.Text.Json.JsonEncodedText MemberRequest1 = System.Text.Json.JsonEncodedText.Encode("REQUEST");
 	private static readonly System.Text.Json.JsonEncodedText MemberAsync = System.Text.Json.JsonEncodedText.Encode("async");
 	private static readonly System.Text.Json.JsonEncodedText MemberAsync1 = System.Text.Json.JsonEncodedText.Encode("ASYNC");
+	private static readonly System.Text.Json.JsonEncodedText MemberRequest = System.Text.Json.JsonEncodedText.Encode("request");
+	private static readonly System.Text.Json.JsonEncodedText MemberRequest1 = System.Text.Json.JsonEncodedText.Encode("REQUEST");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberRequest) || reader.ValueTextEquals(MemberRequest1))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request;
-		}
-
 		if (reader.ValueTextEquals(MemberAsync) || reader.ValueTextEquals(MemberAsync1))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Async;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberRequest.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRequest1.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberRequest) || reader.ValueTextEquals(MemberRequest1))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAsync.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberAsync1.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Async;
+		}
+
+		if (string.Equals(value, MemberRequest.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRequest1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability)}'.");
@@ -619,11 +619,11 @@ internal sealed partial class TranslogDurabilityConverter : System.Text.Json.Ser
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request:
-				writer.WriteStringValue(MemberRequest);
-				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Async:
 				writer.WriteStringValue(MemberAsync);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request:
+				writer.WriteStringValue(MemberRequest);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability)}'.");
@@ -657,20 +657,15 @@ internal sealed partial class StorageTypeConverter : System.Text.Json.Serializat
 internal sealed partial class IndexRoutingAllocationOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
-	private static readonly System.Text.Json.JsonEncodedText MemberPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
 	private static readonly System.Text.Json.JsonEncodedText MemberNewPrimaries = System.Text.Json.JsonEncodedText.Encode("new_primaries");
 	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		if (reader.ValueTextEquals(MemberAll))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.All;
-		}
-
-		if (reader.ValueTextEquals(MemberPrimaries))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries;
 		}
 
 		if (reader.ValueTextEquals(MemberNewPrimaries))
@@ -683,15 +678,15 @@ internal sealed partial class IndexRoutingAllocationOptionsConverter : System.Te
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.None;
 		}
 
+		if (reader.ValueTextEquals(MemberPrimaries))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries;
+		}
+
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.All;
-		}
-
-		if (string.Equals(value, MemberPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries;
 		}
 
 		if (string.Equals(value, MemberNewPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -704,6 +699,11 @@ internal sealed partial class IndexRoutingAllocationOptionsConverter : System.Te
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.None;
 		}
 
+		if (string.Equals(value, MemberPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions)}'.");
 	}
 
@@ -714,14 +714,14 @@ internal sealed partial class IndexRoutingAllocationOptionsConverter : System.Te
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.All:
 				writer.WriteStringValue(MemberAll);
 				break;
-			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries:
-				writer.WriteStringValue(MemberPrimaries);
-				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.NewPrimaries:
 				writer.WriteStringValue(MemberNewPrimaries);
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.None:
 				writer.WriteStringValue(MemberNone);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries:
+				writer.WriteStringValue(MemberPrimaries);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions)}'.");
@@ -742,15 +742,20 @@ internal sealed partial class IndexRoutingAllocationOptionsConverter : System.Te
 internal sealed partial class IndexRoutingRebalanceOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 	private static readonly System.Text.Json.JsonEncodedText MemberPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
 	private static readonly System.Text.Json.JsonEncodedText MemberReplicas = System.Text.Json.JsonEncodedText.Encode("replicas");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		if (reader.ValueTextEquals(MemberAll))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.All;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None;
 		}
 
 		if (reader.ValueTextEquals(MemberPrimaries))
@@ -763,15 +768,15 @@ internal sealed partial class IndexRoutingRebalanceOptionsConverter : System.Tex
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Replicas;
 		}
 
-		if (reader.ValueTextEquals(MemberNone))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None;
-		}
-
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.All;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None;
 		}
 
 		if (string.Equals(value, MemberPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -784,11 +789,6 @@ internal sealed partial class IndexRoutingRebalanceOptionsConverter : System.Tex
 			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Replicas;
 		}
 
-		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None;
-		}
-
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions)}'.");
 	}
 
@@ -799,14 +799,14 @@ internal sealed partial class IndexRoutingRebalanceOptionsConverter : System.Tex
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.All:
 				writer.WriteStringValue(MemberAll);
 				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None:
+				writer.WriteStringValue(MemberNone);
+				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Primaries:
 				writer.WriteStringValue(MemberPrimaries);
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Replicas:
 				writer.WriteStringValue(MemberReplicas);
-				break;
-			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None:
-				writer.WriteStringValue(MemberNone);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions)}'.");
@@ -885,32 +885,32 @@ internal sealed partial class SegmentSortOrderConverter : System.Text.Json.Seria
 
 internal sealed partial class SegmentSortModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
-	private static readonly System.Text.Json.JsonEncodedText MemberMin1 = System.Text.Json.JsonEncodedText.Encode("MIN");
 	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
 	private static readonly System.Text.Json.JsonEncodedText MemberMax1 = System.Text.Json.JsonEncodedText.Encode("MAX");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin1 = System.Text.Json.JsonEncodedText.Encode("MIN");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberMin) || reader.ValueTextEquals(MemberMin1))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min;
-		}
-
 		if (reader.ValueTextEquals(MemberMax) || reader.ValueTextEquals(MemberMax1))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Max;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMin1.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberMin) || reader.ValueTextEquals(MemberMin1))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMax1.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Max;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMin1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode)}'.");
@@ -920,11 +920,11 @@ internal sealed partial class SegmentSortModeConverter : System.Text.Json.Serial
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min:
-				writer.WriteStringValue(MemberMin);
-				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Max:
 				writer.WriteStringValue(MemberMax);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min:
+				writer.WriteStringValue(MemberMin);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode)}'.");
@@ -944,30 +944,30 @@ internal sealed partial class SegmentSortModeConverter : System.Text.Json.Serial
 
 internal sealed partial class SegmentSortMissingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberLast = System.Text.Json.JsonEncodedText.Encode("_last");
 	private static readonly System.Text.Json.JsonEncodedText MemberFirst = System.Text.Json.JsonEncodedText.Encode("_first");
+	private static readonly System.Text.Json.JsonEncodedText MemberLast = System.Text.Json.JsonEncodedText.Encode("_last");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.ValueTextEquals(MemberLast))
-		{
-			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last;
-		}
-
 		if (reader.ValueTextEquals(MemberFirst))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.First;
 		}
 
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberLast.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (reader.ValueTextEquals(MemberLast))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last;
 		}
 
+		var value = reader.GetString()!;
 		if (string.Equals(value, MemberFirst.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.First;
+		}
+
+		if (string.Equals(value, MemberLast.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing)}'.");
@@ -977,11 +977,11 @@ internal sealed partial class SegmentSortMissingConverter : System.Text.Json.Ser
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last:
-				writer.WriteStringValue(MemberLast);
-				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.First:
 				writer.WriteStringValue(MemberFirst);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last:
+				writer.WriteStringValue(MemberLast);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing)}'.");
@@ -1161,18 +1161,18 @@ public enum ShardStoreStatus
 {
 	/// <summary>
 	/// <para>
+	/// Return all shards, regardless of health status.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "all")]
+	All,
+	/// <summary>
+	/// <para>
 	/// The primary shard and all replica shards are assigned.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "green")]
 	Green,
-	/// <summary>
-	/// <para>
-	/// One or more replica shards are unassigned.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "yellow")]
-	Yellow,
 	/// <summary>
 	/// <para>
 	/// The primary shard is unassigned.
@@ -1182,53 +1182,53 @@ public enum ShardStoreStatus
 	Red,
 	/// <summary>
 	/// <para>
-	/// Return all shards, regardless of health status.
+	/// One or more replica shards are unassigned.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "all")]
-	All
+	[System.Runtime.Serialization.EnumMember(Value = "yellow")]
+	Yellow
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataStateConverter))]
 public enum IndexMetadataState
 {
-	[System.Runtime.Serialization.EnumMember(Value = "open")]
-	Open,
 	[System.Runtime.Serialization.EnumMember(Value = "close")]
-	Close
+	Close,
+	[System.Runtime.Serialization.EnumMember(Value = "open")]
+	Open
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingStateConverter))]
 public enum ShardRoutingState
 {
-	[System.Runtime.Serialization.EnumMember(Value = "UNASSIGNED")]
-	Unassigned,
 	[System.Runtime.Serialization.EnumMember(Value = "INITIALIZING")]
 	Initializing,
+	[System.Runtime.Serialization.EnumMember(Value = "RELOCATING")]
+	Relocating,
 	[System.Runtime.Serialization.EnumMember(Value = "STARTED")]
 	Started,
-	[System.Runtime.Serialization.EnumMember(Value = "RELOCATING")]
-	Relocating
+	[System.Runtime.Serialization.EnumMember(Value = "UNASSIGNED")]
+	Unassigned
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartupConverter))]
 public enum IndexCheckOnStartup
 {
-	[System.Runtime.Serialization.EnumMember(Value = "true")]
-	True,
+	[System.Runtime.Serialization.EnumMember(Value = "checksum")]
+	Checksum,
 	[System.Runtime.Serialization.EnumMember(Value = "false")]
 	False,
-	[System.Runtime.Serialization.EnumMember(Value = "checksum")]
-	Checksum
+	[System.Runtime.Serialization.EnumMember(Value = "true")]
+	True
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ManagedByConverter))]
 public enum ManagedBy
 {
-	[System.Runtime.Serialization.EnumMember(Value = "Index Lifecycle Management")]
-	Ilm,
 	[System.Runtime.Serialization.EnumMember(Value = "Data stream lifecycle")]
 	Datastream,
+	[System.Runtime.Serialization.EnumMember(Value = "Index Lifecycle Management")]
+	Ilm,
 	[System.Runtime.Serialization.EnumMember(Value = "Unmanaged")]
 	Unmanaged
 }
@@ -1238,20 +1238,20 @@ public enum TranslogDurability
 {
 	/// <summary>
 	/// <para>
-	/// (default) fsync and commit after every request. In the event of hardware failure, all acknowledged writes
-	/// will already have been committed to disk.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "request")]
-	Request,
-	/// <summary>
-	/// <para>
 	/// fsync and commit in the background every sync_interval. In the event of a failure, all acknowledged writes
 	/// since the last automatic commit will be discarded.
 	/// </para>
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "async")]
-	Async
+	Async,
+	/// <summary>
+	/// <para>
+	/// (default) fsync and commit after every request. In the event of hardware failure, all acknowledged writes
+	/// will already have been committed to disk.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "request")]
+	Request
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.StorageTypeConverter))]
@@ -1275,12 +1275,13 @@ public readonly partial struct StorageType : Elastic.Clients.Elasticsearch.Seria
 
 	/// <summary>
 	/// <para>
-	/// The NIO FS type stores the shard index on the file system (maps to Lucene NIOFSDirectory) using NIO. It allows multiple
-	/// threads to read from the same file concurrently. It is not recommended on Windows because of a bug in the SUN Java
-	/// implementation and disables some optimizations for heap memory usage.
+	/// The hybridfs type is a hybrid of niofs and mmapfs, which chooses the best file system type for each type of file
+	/// based on the read access pattern. Currently only the Lucene term dictionary, norms and doc values files are memory
+	/// mapped. All other files are opened using Lucene NIOFSDirectory. Similarly to mmapfs be sure you have allowed
+	/// plenty of virtual address space.
 	/// </para>
 	/// </summary>
-	public static StorageType Niofs { get; } = new StorageType("niofs");
+	public static StorageType Hybridfs { get; } = new StorageType("hybridfs");
 
 	/// <summary>
 	/// <para>
@@ -1293,13 +1294,12 @@ public readonly partial struct StorageType : Elastic.Clients.Elasticsearch.Seria
 
 	/// <summary>
 	/// <para>
-	/// The hybridfs type is a hybrid of niofs and mmapfs, which chooses the best file system type for each type of file
-	/// based on the read access pattern. Currently only the Lucene term dictionary, norms and doc values files are memory
-	/// mapped. All other files are opened using Lucene NIOFSDirectory. Similarly to mmapfs be sure you have allowed
-	/// plenty of virtual address space.
+	/// The NIO FS type stores the shard index on the file system (maps to Lucene NIOFSDirectory) using NIO. It allows multiple
+	/// threads to read from the same file concurrently. It is not recommended on Windows because of a bug in the SUN Java
+	/// implementation and disables some optimizations for heap memory usage.
 	/// </para>
 	/// </summary>
-	public static StorageType Hybridfs { get; } = new StorageType("hybridfs");
+	public static StorageType Niofs { get; } = new StorageType("niofs");
 
 	public override string ToString() => Value ?? string.Empty;
 
@@ -1319,12 +1319,12 @@ public enum IndexRoutingAllocationOptions
 {
 	[System.Runtime.Serialization.EnumMember(Value = "all")]
 	All,
-	[System.Runtime.Serialization.EnumMember(Value = "primaries")]
-	Primaries,
 	[System.Runtime.Serialization.EnumMember(Value = "new_primaries")]
 	NewPrimaries,
 	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None
+	None,
+	[System.Runtime.Serialization.EnumMember(Value = "primaries")]
+	Primaries
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsConverter))]
@@ -1332,12 +1332,12 @@ public enum IndexRoutingRebalanceOptions
 {
 	[System.Runtime.Serialization.EnumMember(Value = "all")]
 	All,
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None,
 	[System.Runtime.Serialization.EnumMember(Value = "primaries")]
 	Primaries,
 	[System.Runtime.Serialization.EnumMember(Value = "replicas")]
-	Replicas,
-	[System.Runtime.Serialization.EnumMember(Value = "none")]
-	None
+	Replicas
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrderConverter))]
@@ -1352,19 +1352,19 @@ public enum SegmentSortOrder
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortModeConverter))]
 public enum SegmentSortMode
 {
-	[System.Runtime.Serialization.EnumMember(Value = "min")]
-	Min,
 	[System.Runtime.Serialization.EnumMember(Value = "max")]
-	Max
+	Max,
+	[System.Runtime.Serialization.EnumMember(Value = "min")]
+	Min
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissingConverter))]
 public enum SegmentSortMissing
 {
-	[System.Runtime.Serialization.EnumMember(Value = "_last")]
-	Last,
 	[System.Runtime.Serialization.EnumMember(Value = "_first")]
-	First
+	First,
+	[System.Runtime.Serialization.EnumMember(Value = "_last")]
+	Last
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SourceModeConverter))]
