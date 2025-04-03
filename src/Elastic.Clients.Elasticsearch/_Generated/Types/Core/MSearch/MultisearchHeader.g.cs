@@ -188,3 +188,125 @@ public sealed partial class MultisearchHeader
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
 }
+
+/// <summary>
+/// <para>
+/// Contains parameters used to limit or change the subsequent search body request.
+/// </para>
+/// </summary>
+public readonly partial struct MultisearchHeaderDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultisearchHeaderDescriptor(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MultisearchHeaderDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader instance) => new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor AllowPartialSearchResults(bool? value = true)
+	{
+		Instance.AllowPartialSearchResults = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor CcsMinimizeRoundtrips(bool? value = true)
+	{
+		Instance.CcsMinimizeRoundtrips = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor ExpandWildcards()
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
+	{
+		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor Preference(string? value)
+	{
+		Instance.Preference = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor RequestCache(bool? value = true)
+	{
+		Instance.RequestCache = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	{
+		Instance.Routing = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
+	{
+		Instance.SearchType = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader Build(System.Action<Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor(new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}

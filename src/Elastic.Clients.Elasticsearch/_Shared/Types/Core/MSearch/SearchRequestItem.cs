@@ -14,16 +14,16 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 // POC - If we have more than one union doing this, can we autogenerate with correct ctors etc.
 public sealed class SearchRequestItem : IStreamSerializable
 {
-	public SearchRequestItem(SearchRequestBody body) => Body = body;
+	public SearchRequestItem(MultisearchBody body) => Body = body;
 
-	public SearchRequestItem(MultisearchHeader header, SearchRequestBody body)
+	public SearchRequestItem(MultisearchHeader header, MultisearchBody body)
 	{
 		Header = header;
 		Body = body;
 	}
 
 	public MultisearchHeader Header { get; init; }
-	public SearchRequestBody Body { get; init; }
+	public MultisearchBody Body { get; init; }
 
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{

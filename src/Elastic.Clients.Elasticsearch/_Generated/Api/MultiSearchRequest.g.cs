@@ -573,6 +573,12 @@ public readonly partial struct MultiSearchRequestDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Searches<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<T>>? action)
+	{
+		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<T>.Build(action);
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Searches(params Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem[] values)
 	{
 		Instance.Searches = [.. values];
@@ -879,13 +885,13 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Searches()
 	{
-		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem.Build(null);
+		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Searches(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem>? action)
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Searches(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<TDocument>>? action)
 	{
-		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem.Build(action);
+		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<TDocument>.Build(action);
 		return this;
 	}
 
