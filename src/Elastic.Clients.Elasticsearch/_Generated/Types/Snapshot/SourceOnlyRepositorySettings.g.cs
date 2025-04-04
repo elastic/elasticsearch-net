@@ -252,9 +252,9 @@ public readonly partial struct SourceOnlyRepositorySettingsDescriptor
 	/// The default varies by repository type.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor ChunkSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor ChunkSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.ChunkSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.ChunkSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -314,9 +314,9 @@ public readonly partial struct SourceOnlyRepositorySettingsDescriptor
 	/// Note that restores are also throttled through recovery settings.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor MaxRestoreBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor MaxRestoreBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxRestoreBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxRestoreBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -340,9 +340,9 @@ public readonly partial struct SourceOnlyRepositorySettingsDescriptor
 	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor MaxSnapshotBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor MaxSnapshotBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxSnapshotBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxSnapshotBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

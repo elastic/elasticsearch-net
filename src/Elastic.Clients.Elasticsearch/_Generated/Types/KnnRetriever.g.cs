@@ -283,28 +283,6 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -369,28 +347,6 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector()
-	{
-		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat>? action)
-	{
-		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(action);
 		return this;
 	}
 
@@ -515,39 +471,6 @@ public readonly partial struct KnnRetrieverDescriptor
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -629,28 +552,6 @@ public readonly partial struct KnnRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector()
-	{
-		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat>? action)
-	{
-		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(action);
 		return this;
 	}
 

@@ -198,28 +198,6 @@ public readonly partial struct FrequentItemSetsAggregationDescriptor<TDocument>
 	/// Fields to analyze.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Fields()
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFrequentItemSetsField<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFrequentItemSetsField<TDocument>>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFrequentItemSetsField<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField[] values)
 	{
 		Instance.Fields = [.. values];
@@ -334,39 +312,6 @@ public readonly partial struct FrequentItemSetsAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> value)
 	{
 		Instance.Fields = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields()
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFrequentItemSetsField.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFrequentItemSetsField>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFrequentItemSetsField.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFrequentItemSetsField<T>>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFrequentItemSetsField<T>.Build(action);
 		return this;
 	}
 

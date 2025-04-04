@@ -1033,9 +1033,9 @@ public readonly partial struct ReindexRequestDescriptor
 	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesBuilder, Elastic.Clients.Elasticsearch.Slices> action)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
-		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesBuilder.Build(action);
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 
@@ -1646,9 +1646,9 @@ public readonly partial struct ReindexRequestDescriptor<TDocument>
 	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesBuilder, Elastic.Clients.Elasticsearch.Slices> action)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
-		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesBuilder.Build(action);
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 

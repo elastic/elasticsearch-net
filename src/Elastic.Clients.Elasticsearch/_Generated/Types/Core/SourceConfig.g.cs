@@ -78,7 +78,7 @@ public sealed partial class SourceConfig : Elastic.Clients.Elasticsearch.Union<b
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceConfig(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter value) => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfig(value);
 }
 
-public readonly partial struct SourceConfigBuilder<TDocument>
+public readonly partial struct SourceConfigFactory<TDocument>
 {
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig Fetch(bool value = true)
 	{
@@ -101,14 +101,14 @@ public readonly partial struct SourceConfigBuilder<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Core.Search.SourceConfig Build(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	internal static Elastic.Clients.Elasticsearch.Core.Search.SourceConfig Build(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct SourceConfigBuilder
+public readonly partial struct SourceConfigFactory
 {
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig Fetch(bool value = true)
 	{
@@ -136,9 +136,9 @@ public readonly partial struct SourceConfigBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Core.Search.SourceConfig Build(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	internal static Elastic.Clients.Elasticsearch.Core.Search.SourceConfig Build(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory();
 		return action.Invoke(builder);
 	}
 }

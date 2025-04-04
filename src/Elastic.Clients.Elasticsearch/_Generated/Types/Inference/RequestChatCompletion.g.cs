@@ -257,28 +257,6 @@ public readonly partial struct RequestChatCompletionDescriptor
 	/// A list of objects representing the conversation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Messages()
-	{
-		Instance.Messages = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMessage.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of objects representing the conversation.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Messages(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMessage>? action)
-	{
-		Instance.Messages = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMessage.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of objects representing the conversation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Messages(params Elastic.Clients.Elasticsearch.Inference.Message[] values)
 	{
 		Instance.Messages = [.. values];
@@ -329,28 +307,6 @@ public readonly partial struct RequestChatCompletionDescriptor
 	/// A sequence of strings to control when the model should stop generating additional tokens.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Stop()
-	{
-		Instance.Stop = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sequence of strings to control when the model should stop generating additional tokens.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Stop(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stop = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sequence of strings to control when the model should stop generating additional tokens.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Stop(params string[] values)
 	{
 		Instance.Stop = [.. values];
@@ -387,28 +343,6 @@ public readonly partial struct RequestChatCompletionDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Tools(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.CompletionTool>? value)
 	{
 		Instance.Tools = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of tools that the model can call.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Tools()
-	{
-		Instance.Tools = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionTool.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of tools that the model can call.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Tools(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionTool>? action)
-	{
-		Instance.Tools = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionTool.Build(action);
 		return this;
 	}
 

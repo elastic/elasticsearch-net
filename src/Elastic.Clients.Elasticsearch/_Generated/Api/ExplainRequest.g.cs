@@ -483,9 +483,9 @@ public readonly partial struct ExplainRequestDescriptor
 	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory.Build(action);
 		return this;
 	}
 
@@ -494,9 +494,9 @@ public readonly partial struct ExplainRequestDescriptor
 	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<T>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>.Build(action);
 		return this;
 	}
 
@@ -824,9 +824,9 @@ public readonly partial struct ExplainRequestDescriptor<TDocument>
 	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<TDocument>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>.Build(action);
 		return this;
 	}
 

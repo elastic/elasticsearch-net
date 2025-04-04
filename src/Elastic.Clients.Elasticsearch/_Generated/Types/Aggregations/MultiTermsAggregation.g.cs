@@ -274,7 +274,7 @@ public readonly partial struct MultiTermsAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Order()
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
 		return this;
 	}
 
@@ -284,9 +284,9 @@ public readonly partial struct MultiTermsAggregationDescriptor<TDocument>
 	/// Defaults to sorting by descending document count.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
 		return this;
 	}
 
@@ -357,28 +357,6 @@ public readonly partial struct MultiTermsAggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Terms(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> value)
 	{
 		Instance.Terms = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Terms()
-	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermLookup<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermLookup<TDocument>>? action)
-	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermLookup<TDocument>.Build(action);
 		return this;
 	}
 
@@ -480,7 +458,7 @@ public readonly partial struct MultiTermsAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Order()
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(null);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(null);
 		return this;
 	}
 
@@ -490,9 +468,9 @@ public readonly partial struct MultiTermsAggregationDescriptor
 	/// Defaults to sorting by descending document count.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(action);
 		return this;
 	}
 
@@ -502,9 +480,9 @@ public readonly partial struct MultiTermsAggregationDescriptor
 	/// Defaults to sorting by descending document count.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
 		return this;
 	}
 
@@ -575,39 +553,6 @@ public readonly partial struct MultiTermsAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Terms(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> value)
 	{
 		Instance.Terms = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Terms()
-	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermLookup.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermLookup>? action)
-	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermLookup.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermLookup<T>>? action)
-	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermLookup<T>.Build(action);
 		return this;
 	}
 

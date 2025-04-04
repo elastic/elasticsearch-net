@@ -73,7 +73,7 @@ public sealed partial class CategorizationAnalyzer : Elastic.Clients.Elasticsear
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition value) => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(value);
 }
 
-public readonly partial struct CategorizationAnalyzerBuilder
+public readonly partial struct CategorizationAnalyzerFactory
 {
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer Name(string value)
 	{
@@ -96,9 +96,9 @@ public readonly partial struct CategorizationAnalyzerBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer Build(System.Func<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> action)
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer Build(System.Func<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerFactory, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerFactory();
 		return action.Invoke(builder);
 	}
 }

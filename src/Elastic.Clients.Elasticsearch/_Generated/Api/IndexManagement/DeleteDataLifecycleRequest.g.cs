@@ -198,28 +198,6 @@ public readonly partial struct DeleteDataLifecycleRequestDescriptor
 	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];

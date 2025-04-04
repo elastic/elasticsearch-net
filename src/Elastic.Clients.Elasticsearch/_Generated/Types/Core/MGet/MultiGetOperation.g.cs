@@ -251,9 +251,9 @@ public readonly partial struct MultiGetOperationDescriptor<TDocument>
 	/// If <c>false</c>, excludes all _source fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -368,9 +368,9 @@ public readonly partial struct MultiGetOperationDescriptor
 	/// If <c>false</c>, excludes all _source fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
@@ -379,9 +379,9 @@ public readonly partial struct MultiGetOperationDescriptor
 	/// If <c>false</c>, excludes all _source fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 

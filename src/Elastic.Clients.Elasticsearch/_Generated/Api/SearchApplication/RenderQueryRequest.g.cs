@@ -170,13 +170,13 @@ public readonly partial struct RenderQueryRequestDescriptor
 
 	public Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor Params()
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

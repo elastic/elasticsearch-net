@@ -130,18 +130,6 @@ public readonly partial struct HtmlStripCharFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor EscapedTags()
-	{
-		Instance.EscapedTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor EscapedTags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.EscapedTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor EscapedTags(params string[] values)
 	{
 		Instance.EscapedTags = [.. values];

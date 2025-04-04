@@ -268,28 +268,6 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor
 	/// The API key identifiers.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor Ids()
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The API key identifiers.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The API key identifiers.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor Ids(params string[] values)
 	{
 		Instance.Ids = [.. values];
@@ -318,7 +296,7 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -329,9 +307,9 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor
 	/// Any information specified with this parameter fully replaces metadata previously associated with the API key.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -372,7 +350,7 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor RoleDescriptors()
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx.Build(null);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(null);
 		return this;
 	}
 
@@ -387,9 +365,9 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor
 	/// The structure of a role descriptor is the same as the request for the create API keys API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(action);
 		return this;
 	}
 
@@ -404,9 +382,9 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor
 	/// The structure of a role descriptor is the same as the request for the create API keys API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>.Build(action);
 		return this;
 	}
 
@@ -602,28 +580,6 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor<TDocument>
 	/// The API key identifiers.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument> Ids()
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The API key identifiers.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument> Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The API key identifiers.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument> Ids(params string[] values)
 	{
 		Instance.Ids = [.. values];
@@ -652,7 +608,7 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument> Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -663,9 +619,9 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor<TDocument>
 	/// Any information specified with this parameter fully replaces metadata previously associated with the API key.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -706,7 +662,7 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument> RoleDescriptors()
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
 		return this;
 	}
 
@@ -721,9 +677,9 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor<TDocument>
 	/// The structure of a role descriptor is the same as the request for the create API keys API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
 		return this;
 	}
 

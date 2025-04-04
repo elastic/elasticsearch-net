@@ -247,28 +247,6 @@ public readonly partial struct IndicesPrivilegesDescriptor<TDocument>
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Names()
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Names(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName>? action)
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Names(params Elastic.Clients.Elasticsearch.IndexName[] values)
 	{
 		Instance.Names = [.. values];
@@ -283,28 +261,6 @@ public readonly partial struct IndicesPrivilegesDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Privileges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> value)
 	{
 		Instance.Privileges = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The index level privileges that owners of the role have on the specified indices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Privileges()
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilege.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The index level privileges that owners of the role have on the specified indices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument> Privileges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilege>? action)
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilege.Build(action);
 		return this;
 	}
 
@@ -429,28 +385,6 @@ public readonly partial struct IndicesPrivilegesDescriptor
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Names()
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Names(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName>? action)
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Names(params Elastic.Clients.Elasticsearch.IndexName[] values)
 	{
 		Instance.Names = [.. values];
@@ -465,28 +399,6 @@ public readonly partial struct IndicesPrivilegesDescriptor
 	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Privileges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> value)
 	{
 		Instance.Privileges = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The index level privileges that owners of the role have on the specified indices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Privileges()
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilege.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The index level privileges that owners of the role have on the specified indices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilege>? action)
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilege.Build(action);
 		return this;
 	}
 

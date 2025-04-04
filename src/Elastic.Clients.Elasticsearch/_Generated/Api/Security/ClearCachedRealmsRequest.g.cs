@@ -194,30 +194,6 @@ public readonly partial struct ClearCachedRealmsRequestDescriptor
 	/// If you do not specify this parameter, the API evicts all users from the user cache.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Usernames()
-	{
-		Instance.Usernames = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the users to clear from the cache.
-	/// If you do not specify this parameter, the API evicts all users from the user cache.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Usernames(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Usernames = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the users to clear from the cache.
-	/// If you do not specify this parameter, the API evicts all users from the user cache.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Usernames(params string[] values)
 	{
 		Instance.Usernames = [.. values];

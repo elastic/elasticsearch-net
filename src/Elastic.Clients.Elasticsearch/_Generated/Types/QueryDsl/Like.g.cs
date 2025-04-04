@@ -79,7 +79,7 @@ public sealed partial class Like : Elastic.Clients.Elasticsearch.Union<string, E
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument value) => new Elastic.Clients.Elasticsearch.QueryDsl.Like(value);
 }
 
-public readonly partial struct LikeBuilder<TDocument>
+public readonly partial struct LikeFactory<TDocument>
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.Like Text(string value)
 	{
@@ -102,14 +102,14 @@ public readonly partial struct LikeBuilder<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.Like Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.Like> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.Like Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.Like> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct LikeBuilder
+public readonly partial struct LikeFactory
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.Like Text(string value)
 	{
@@ -137,9 +137,9 @@ public readonly partial struct LikeBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.Like Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder, Elastic.Clients.Elasticsearch.QueryDsl.Like> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.Like Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory, Elastic.Clients.Elasticsearch.QueryDsl.Like> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory();
 		return action.Invoke(builder);
 	}
 }

@@ -146,28 +146,6 @@ public readonly partial struct ClusterInfoRequestDescriptor
 	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor Target()
-	{
-		Instance.Target = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfClusterInfoTarget.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor Target(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfClusterInfoTarget>? action)
-	{
-		Instance.Target = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfClusterInfoTarget.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor Target(params Elastic.Clients.Elasticsearch.ClusterInfoTarget[] values)
 	{
 		Instance.Target = [.. values];

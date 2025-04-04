@@ -342,28 +342,6 @@ public readonly partial struct MountRequestDescriptor
 	/// The names of settings that should be removed from the index when it is mounted.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IgnoreIndexSettings()
-	{
-		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The names of settings that should be removed from the index when it is mounted.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IgnoreIndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The names of settings that should be removed from the index when it is mounted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IgnoreIndexSettings(params string[] values)
 	{
 		Instance.IgnoreIndexSettings = [.. values];
@@ -400,7 +378,7 @@ public readonly partial struct MountRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IndexSettings()
 	{
-		Instance.IndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.IndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -409,9 +387,9 @@ public readonly partial struct MountRequestDescriptor
 	/// The settings that should be added to the index when it is mounted.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.IndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.IndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

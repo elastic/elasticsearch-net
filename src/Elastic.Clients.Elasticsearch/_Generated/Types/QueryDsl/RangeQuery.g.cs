@@ -58,7 +58,7 @@ public partial interface IRangeQuery
 	public string Type { get; }
 }
 
-public readonly partial struct IRangeQueryBuilder<TDocument>
+public readonly partial struct IRangeQueryFactory<TDocument>
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery Date(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery value)
 	{
@@ -101,14 +101,14 @@ public readonly partial struct IRangeQueryBuilder<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct IRangeQueryBuilder
+public readonly partial struct IRangeQueryFactory
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery Date(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery value)
 	{
@@ -171,9 +171,9 @@ public readonly partial struct IRangeQueryBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory();
 		return action.Invoke(builder);
 	}
 }

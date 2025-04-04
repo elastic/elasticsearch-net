@@ -346,7 +346,7 @@ public readonly partial struct UpdateUserProfileDataRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Data()
 	{
-		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -358,9 +358,9 @@ public readonly partial struct UpdateUserProfileDataRequestDescriptor
 	/// The data object is not searchable, but can be retrieved with the get user profile API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Data(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Data(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -393,7 +393,7 @@ public readonly partial struct UpdateUserProfileDataRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Labels()
 	{
-		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -404,9 +404,9 @@ public readonly partial struct UpdateUserProfileDataRequestDescriptor
 	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

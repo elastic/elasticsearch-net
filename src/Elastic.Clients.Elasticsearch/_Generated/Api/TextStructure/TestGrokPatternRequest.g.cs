@@ -221,28 +221,6 @@ public readonly partial struct TestGrokPatternRequestDescriptor
 	/// The lines of text to run the Grok pattern on.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor Text()
-	{
-		Instance.Text = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The lines of text to run the Grok pattern on.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor Text(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Text = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The lines of text to run the Grok pattern on.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor Text(params string[] values)
 	{
 		Instance.Text = [.. values];

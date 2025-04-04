@@ -333,28 +333,6 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Attributes()
-	{
-		Instance.Attributes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Attributes(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Attributes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Attributes(params string[] values)
 	{
 		Instance.Attributes = [.. values];
@@ -377,28 +355,6 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 	/// Array of character filters used to preprocess characters before the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter()
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfICharFilter.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfICharFilter>? action)
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfICharFilter.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(params Elastic.Clients.Elasticsearch.Analysis.ICharFilter[] values)
 	{
 		Instance.CharFilter = [.. values];
@@ -410,12 +366,12 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 	/// Array of character filters used to preprocess characters before the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.ICharFilterBuilder, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>[] actions)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Analysis.ICharFilterBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory.Build(action));
 		}
 
 		Instance.CharFilter = items;
@@ -475,28 +431,6 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 	/// Array of token filters used to apply after the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfITokenFilter.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfITokenFilter>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfITokenFilter.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(params Elastic.Clients.Elasticsearch.Analysis.ITokenFilter[] values)
 	{
 		Instance.Filter = [.. values];
@@ -508,12 +442,12 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 	/// Array of token filters used to apply after the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.ITokenFilterBuilder, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>[] actions)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Analysis.ITokenFilterBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory.Build(action));
 		}
 
 		Instance.Filter = items;
@@ -549,30 +483,6 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 	/// If an array of strings is provided, it is analyzed as a multi-value field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Text()
-	{
-		Instance.Text = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Text to analyze.
-	/// If an array of strings is provided, it is analyzed as a multi-value field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Text(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Text = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Text to analyze.
-	/// If an array of strings is provided, it is analyzed as a multi-value field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Text(params string[] values)
 	{
 		Instance.Text = [.. values];
@@ -595,9 +505,9 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 	/// Tokenizer to use to convert text into tokens.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Tokenizer(System.Func<Elastic.Clients.Elasticsearch.Analysis.ITokenizerBuilder, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Tokenizer(System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
 	{
-		Instance.Tokenizer = Elastic.Clients.Elasticsearch.Analysis.ITokenizerBuilder.Build(action);
+		Instance.Tokenizer = Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Build(action);
 		return this;
 	}
 
@@ -733,28 +643,6 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Attributes()
-	{
-		Instance.Attributes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Attributes(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Attributes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Attributes(params string[] values)
 	{
 		Instance.Attributes = [.. values];
@@ -777,28 +665,6 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 	/// Array of character filters used to preprocess characters before the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter()
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfICharFilter.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfICharFilter>? action)
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfICharFilter.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(params Elastic.Clients.Elasticsearch.Analysis.ICharFilter[] values)
 	{
 		Instance.CharFilter = [.. values];
@@ -810,12 +676,12 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 	/// Array of character filters used to preprocess characters before the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.ICharFilterBuilder, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>[] actions)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Analysis.ICharFilterBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory.Build(action));
 		}
 
 		Instance.CharFilter = items;
@@ -875,28 +741,6 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 	/// Array of token filters used to apply after the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfITokenFilter.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfITokenFilter>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfITokenFilter.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.Analysis.ITokenFilter[] values)
 	{
 		Instance.Filter = [.. values];
@@ -908,12 +752,12 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 	/// Array of token filters used to apply after the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.ITokenFilterBuilder, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>[] actions)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Analysis.ITokenFilterBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory.Build(action));
 		}
 
 		Instance.Filter = items;
@@ -949,30 +793,6 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 	/// If an array of strings is provided, it is analyzed as a multi-value field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Text()
-	{
-		Instance.Text = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Text to analyze.
-	/// If an array of strings is provided, it is analyzed as a multi-value field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Text(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Text = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Text to analyze.
-	/// If an array of strings is provided, it is analyzed as a multi-value field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Text(params string[] values)
 	{
 		Instance.Text = [.. values];
@@ -995,9 +815,9 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 	/// Tokenizer to use to convert text into tokens.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Tokenizer(System.Func<Elastic.Clients.Elasticsearch.Analysis.ITokenizerBuilder, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Tokenizer(System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
 	{
-		Instance.Tokenizer = Elastic.Clients.Elasticsearch.Analysis.ITokenizerBuilder.Build(action);
+		Instance.Tokenizer = Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Build(action);
 		return this;
 	}
 

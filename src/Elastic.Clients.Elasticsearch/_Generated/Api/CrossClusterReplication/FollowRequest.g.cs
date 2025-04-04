@@ -520,9 +520,9 @@ public readonly partial struct FollowRequestDescriptor
 	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -568,9 +568,9 @@ public readonly partial struct FollowRequestDescriptor
 	/// be deferred until the total bytes of queued operations goes below the limit.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -601,9 +601,9 @@ public readonly partial struct FollowRequestDescriptor
 	/// The maximum total bytes of operations per bulk write request executed on the follower.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -867,9 +867,9 @@ public readonly partial struct FollowRequestDescriptor<TDocument>
 	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -915,9 +915,9 @@ public readonly partial struct FollowRequestDescriptor<TDocument>
 	/// be deferred until the total bytes of queued operations goes below the limit.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -948,9 +948,9 @@ public readonly partial struct FollowRequestDescriptor<TDocument>
 	/// The maximum total bytes of operations per bulk write request executed on the follower.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

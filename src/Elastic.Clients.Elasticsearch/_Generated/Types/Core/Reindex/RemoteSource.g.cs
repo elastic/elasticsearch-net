@@ -228,7 +228,7 @@ public readonly partial struct RemoteSourceDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Headers()
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -237,9 +237,9 @@ public readonly partial struct RemoteSourceDescriptor
 	/// An object containing the headers of the request.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 

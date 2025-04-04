@@ -177,28 +177,6 @@ public readonly partial struct SpanOrQueryDescriptor<TDocument>
 	/// Array of one or more other span type queries.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Clauses()
-	{
-		Instance.Clauses = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSpanQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Clauses(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSpanQuery<TDocument>>? action)
-	{
-		Instance.Clauses = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSpanQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Clauses(params Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery[] values)
 	{
 		Instance.Clauses = [.. values];
@@ -278,39 +256,6 @@ public readonly partial struct SpanOrQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> value)
 	{
 		Instance.Clauses = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses()
-	{
-		Instance.Clauses = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSpanQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSpanQuery>? action)
-	{
-		Instance.Clauses = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSpanQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSpanQuery<T>>? action)
-	{
-		Instance.Clauses = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSpanQuery<T>.Build(action);
 		return this;
 	}
 

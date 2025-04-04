@@ -467,7 +467,7 @@ public readonly partial struct CloneIndexRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
 		return this;
 	}
 
@@ -476,9 +476,9 @@ public readonly partial struct CloneIndexRequestDescriptor
 	/// Aliases for the resulting index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
 		return this;
 	}
 
@@ -487,9 +487,9 @@ public readonly partial struct CloneIndexRequestDescriptor
 	/// Aliases for the resulting index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<T>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<T>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
 		return this;
 	}
 
@@ -567,7 +567,7 @@ public readonly partial struct CloneIndexRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Settings()
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -576,9 +576,9 @@ public readonly partial struct CloneIndexRequestDescriptor
 	/// Configuration options for the target index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -831,7 +831,7 @@ public readonly partial struct CloneIndexRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<TDocument>.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
 		return this;
 	}
 
@@ -840,9 +840,9 @@ public readonly partial struct CloneIndexRequestDescriptor<TDocument>
 	/// Aliases for the resulting index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<TDocument>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
 		return this;
 	}
 
@@ -913,7 +913,7 @@ public readonly partial struct CloneIndexRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Settings()
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -922,9 +922,9 @@ public readonly partial struct CloneIndexRequestDescriptor<TDocument>
 	/// Configuration options for the target index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

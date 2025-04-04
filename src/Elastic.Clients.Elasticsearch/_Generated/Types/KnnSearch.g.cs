@@ -311,28 +311,6 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 	/// Filters for the kNN search query
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -419,28 +397,6 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The query vector
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVector()
-	{
-		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The query vector
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat>? action)
-	{
-		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(action);
 		return this;
 	}
 
@@ -587,39 +543,6 @@ public readonly partial struct KnnSearchDescriptor
 	/// Filters for the kNN search query
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -734,28 +657,6 @@ public readonly partial struct KnnSearchDescriptor
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The query vector
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVector()
-	{
-		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The query vector
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat>? action)
-	{
-		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFloat.Build(action);
 		return this;
 	}
 

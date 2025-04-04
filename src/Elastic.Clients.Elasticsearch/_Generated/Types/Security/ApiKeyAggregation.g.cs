@@ -622,7 +622,7 @@ public readonly partial struct ApiKeyAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>.Build(null);
 		return this;
 	}
 
@@ -632,9 +632,9 @@ public readonly partial struct ApiKeyAggregationDescriptor<TDocument>
 	/// Only applies to bucket aggregations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>.Build(action);
 		return this;
 	}
 
@@ -660,13 +660,13 @@ public readonly partial struct ApiKeyAggregationDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -1094,7 +1094,7 @@ public readonly partial struct ApiKeyAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation.Build(null);
 		return this;
 	}
 
@@ -1104,9 +1104,9 @@ public readonly partial struct ApiKeyAggregationDescriptor
 	/// Only applies to bucket aggregations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation>? action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation.Build(action);
 		return this;
 	}
 
@@ -1116,9 +1116,9 @@ public readonly partial struct ApiKeyAggregationDescriptor
 	/// Only applies to bucket aggregations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<T>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<T>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<T>.Build(action);
 		return this;
 	}
 
@@ -1151,13 +1151,13 @@ public readonly partial struct ApiKeyAggregationDescriptor
 
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

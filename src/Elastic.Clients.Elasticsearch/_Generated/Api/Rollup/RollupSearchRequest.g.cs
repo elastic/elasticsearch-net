@@ -400,7 +400,7 @@ public readonly partial struct RollupSearchRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
@@ -409,9 +409,9 @@ public readonly partial struct RollupSearchRequestDescriptor
 	/// Specifies aggregations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation>? action)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
@@ -420,9 +420,9 @@ public readonly partial struct RollupSearchRequestDescriptor
 	/// Specifies aggregations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>>? action)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
 		return this;
 	}
 
@@ -693,7 +693,7 @@ public readonly partial struct RollupSearchRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
@@ -702,9 +702,9 @@ public readonly partial struct RollupSearchRequestDescriptor<TDocument>
 	/// Specifies aggregations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
 		return this;
 	}
 

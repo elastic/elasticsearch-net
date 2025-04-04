@@ -151,9 +151,9 @@ public readonly partial struct AnalysisLimitsDescriptor
 	/// The approximate maximum amount of memory resources that are required for analytical processing. Once this limit is approached, data pruning becomes more aggressive. Upon exceeding this limit, new entities are not modeled. If the <c>xpack.ml.max_model_memory_limit</c> setting has a value greater than 0 and less than 1024mb, that value is used instead of the default. The default value is relatively small to ensure that high resource usage is a conscious decision. If you have jobs that are expected to analyze high cardinality fields, you will likely need to use a higher value. If you specify a number instead of a string, the units are assumed to be MiB. Specifying a string is recommended for clarity. If you specify a byte size unit of <c>b</c> or <c>kb</c> and the number does not equate to a discrete number of megabytes, it is rounded down to the closest MiB. The minimum valid value is 1 MiB. If you specify a value less than 1 MiB, an error occurs. If you specify a value for the <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try to create jobs that have <c>model_memory_limit</c> values greater than that setting value.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor ModelMemoryLimit(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor ModelMemoryLimit(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.ModelMemoryLimit = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.ModelMemoryLimit = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

@@ -284,28 +284,6 @@ public readonly partial struct RankEvalRequestDescriptor
 	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -375,39 +353,6 @@ public readonly partial struct RankEvalRequestDescriptor
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> value)
 	{
 		Instance.Requests = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests()
-	{
-		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem>? action)
-	{
-		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<T>>? action)
-	{
-		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<T>.Build(action);
 		return this;
 	}
 
@@ -580,28 +525,6 @@ public readonly partial struct RankEvalRequestDescriptor<TDocument>
 	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -671,28 +594,6 @@ public readonly partial struct RankEvalRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> value)
 	{
 		Instance.Requests = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests()
-	{
-		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<TDocument>>? action)
-	{
-		Instance.Requests = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRankEvalRequestItem<TDocument>.Build(action);
 		return this;
 	}
 

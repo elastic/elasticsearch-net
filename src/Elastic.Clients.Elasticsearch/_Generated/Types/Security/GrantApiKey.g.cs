@@ -197,7 +197,7 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -208,9 +208,9 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -247,32 +247,6 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors()
-	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringRoleDescriptorx<TDocument>>? action)
-	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>[] values)
 	{
 		Instance.RoleDescriptors = [.. values];
@@ -286,12 +260,12 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>>?[] actions)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(action));
 		}
 
 		Instance.RoleDescriptors = items;
@@ -359,7 +333,7 @@ public readonly partial struct GrantApiKeyDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -370,9 +344,9 @@ public readonly partial struct GrantApiKeyDescriptor
 	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -409,45 +383,6 @@ public readonly partial struct GrantApiKeyDescriptor
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors()
-	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringRoleDescriptorx.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringRoleDescriptorx>? action)
-	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringRoleDescriptorx.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringRoleDescriptorx<T>>? action)
-	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringRoleDescriptorx<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>[] values)
 	{
 		Instance.RoleDescriptors = [.. values];
@@ -461,12 +396,12 @@ public readonly partial struct GrantApiKeyDescriptor
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx>?[] actions)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(action));
 		}
 
 		Instance.RoleDescriptors = items;
@@ -480,12 +415,12 @@ public readonly partial struct GrantApiKeyDescriptor
 	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>>?[] actions)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>.Build(action));
 		}
 
 		Instance.RoleDescriptors = items;

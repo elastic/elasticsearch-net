@@ -221,28 +221,6 @@ public readonly partial struct TopMetricsAggregationDescriptor<TDocument>
 	/// The fields of the top document to return.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Metrics()
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTopMetricsValue<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTopMetricsValue<TDocument>>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTopMetricsValue<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Metrics(params Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue[] values)
 	{
 		Instance.Metrics = [.. values];
@@ -315,28 +293,6 @@ public readonly partial struct TopMetricsAggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
 		return this;
 	}
 
@@ -439,39 +395,6 @@ public readonly partial struct TopMetricsAggregationDescriptor
 	/// The fields of the top document to return.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Metrics()
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTopMetricsValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTopMetricsValue>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTopMetricsValue.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Metrics<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTopMetricsValue<T>>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTopMetricsValue<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Metrics(params Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue[] values)
 	{
 		Instance.Metrics = [.. values];
@@ -561,39 +484,6 @@ public readonly partial struct TopMetricsAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
 		return this;
 	}
 

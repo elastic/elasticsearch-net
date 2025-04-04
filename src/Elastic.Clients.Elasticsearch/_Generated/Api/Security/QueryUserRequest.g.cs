@@ -320,28 +320,6 @@ public readonly partial struct QueryUserRequestDescriptor
 	/// The search after definition
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SearchAfter()
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The search after definition
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The search after definition
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
@@ -372,45 +350,6 @@ public readonly partial struct QueryUserRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
 		return this;
 	}
 
@@ -623,28 +562,6 @@ public readonly partial struct QueryUserRequestDescriptor<TDocument>
 	/// The search after definition
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SearchAfter()
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The search after definition
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The search after definition
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
@@ -675,32 +592,6 @@ public readonly partial struct QueryUserRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
 		return this;
 	}
 

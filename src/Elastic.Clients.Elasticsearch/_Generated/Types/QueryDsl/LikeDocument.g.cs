@@ -259,7 +259,7 @@ public readonly partial struct LikeDocumentDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> PerFieldAnalyzer()
 	{
-		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString<TDocument>.Build(null);
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(null);
 		return this;
 	}
 
@@ -268,9 +268,9 @@ public readonly partial struct LikeDocumentDescriptor<TDocument>
 	/// Overrides the default analyzer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>>? action)
 	{
-		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString<TDocument>.Build(action);
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(action);
 		return this;
 	}
 
@@ -402,7 +402,7 @@ public readonly partial struct LikeDocumentDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer()
 	{
-		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString.Build(null);
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString.Build(null);
 		return this;
 	}
 
@@ -411,9 +411,9 @@ public readonly partial struct LikeDocumentDescriptor
 	/// Overrides the default analyzer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString>? action)
 	{
-		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString.Build(action);
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString.Build(action);
 		return this;
 	}
 
@@ -422,9 +422,9 @@ public readonly partial struct LikeDocumentDescriptor
 	/// Overrides the default analyzer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString<T>>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<T>>? action)
 	{
-		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString<T>.Build(action);
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<T>.Build(action);
 		return this;
 	}
 

@@ -224,36 +224,6 @@ public readonly partial struct SuggestUserProfilesRequestDescriptor
 	/// It is an error to specify <c>data</c> as both the query parameter and the request body field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Data()
-	{
-		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content, use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default, the API returns no <c>data</c> content.
-	/// It is an error to specify <c>data</c> as both the query parameter and the request body field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Data(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content, use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default, the API returns no <c>data</c> content.
-	/// It is an error to specify <c>data</c> as both the query parameter and the request body field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Data(params string[] values)
 	{
 		Instance.Data = [.. values];

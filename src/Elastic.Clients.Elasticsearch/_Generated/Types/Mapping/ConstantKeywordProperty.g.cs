@@ -222,7 +222,7 @@ public readonly partial struct ConstantKeywordPropertyDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -231,9 +231,9 @@ public readonly partial struct ConstantKeywordPropertyDescriptor<TDocument>
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -349,7 +349,7 @@ public readonly partial struct ConstantKeywordPropertyDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -358,9 +358,9 @@ public readonly partial struct ConstantKeywordPropertyDescriptor
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 

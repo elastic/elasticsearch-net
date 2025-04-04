@@ -228,28 +228,6 @@ public readonly partial struct HealthReportRequestDescriptor
 	/// A feature of the cluster, as returned by the top-level health report API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Feature()
-	{
-		Instance.Feature = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A feature of the cluster, as returned by the top-level health report API.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Feature(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Feature = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A feature of the cluster, as returned by the top-level health report API.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor Feature(params string[] values)
 	{
 		Instance.Feature = [.. values];

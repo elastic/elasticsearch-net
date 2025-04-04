@@ -361,28 +361,6 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 	/// Fields for which to return doc values.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields()
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>>? action)
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
@@ -448,30 +426,6 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields()
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(action);
 		return this;
 	}
 
@@ -586,7 +540,7 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> ScriptFields()
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
@@ -595,9 +549,9 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 	/// Returns the result of one or more script evaluations for each hit.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
 		return this;
 	}
 
@@ -655,30 +609,6 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 	/// By default, the hits are sorted by the score of the main query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
@@ -719,9 +649,9 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 	/// Selects the fields of the source that are returned.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -818,39 +748,6 @@ public readonly partial struct TopHitsAggregationDescriptor
 	/// Fields for which to return doc values.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields()
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat>? action)
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>>? action)
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
@@ -933,42 +830,6 @@ public readonly partial struct TopHitsAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields()
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>.Build(action);
 		return this;
 	}
 
@@ -1112,7 +973,7 @@ public readonly partial struct TopHitsAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor ScriptFields()
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
@@ -1121,9 +982,9 @@ public readonly partial struct TopHitsAggregationDescriptor
 	/// Returns the result of one or more script evaluations for each hit.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
 		return this;
 	}
 
@@ -1172,42 +1033,6 @@ public readonly partial struct TopHitsAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
 		return this;
 	}
 
@@ -1275,9 +1100,9 @@ public readonly partial struct TopHitsAggregationDescriptor
 	/// Selects the fields of the source that are returned.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
@@ -1286,9 +1111,9 @@ public readonly partial struct TopHitsAggregationDescriptor
 	/// Selects the fields of the source that are returned.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 

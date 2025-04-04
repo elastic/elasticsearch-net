@@ -423,13 +423,13 @@ public readonly partial struct PutJobRequestDescriptor
 
 	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Headers()
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
 		return this;
 	}
 
@@ -437,20 +437,6 @@ public readonly partial struct PutJobRequestDescriptor
 	{
 		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
 		Instance.Headers.Add(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor AddHeader(string key)
-	{
-		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor AddHeader(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
 		return this;
 	}
 
@@ -483,45 +469,6 @@ public readonly partial struct PutJobRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? value)
 	{
 		Instance.Metrics = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
-	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
-	/// on a per-field basis and for each field you configure which metric should be collected.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Metrics()
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldMetric.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
-	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
-	/// on a per-field basis and for each field you configure which metric should be collected.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldMetric>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldMetric.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
-	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
-	/// on a per-field basis and for each field you configure which metric should be collected.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor Metrics<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldMetric<T>>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldMetric<T>.Build(action);
 		return this;
 	}
 
@@ -788,13 +735,13 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Headers()
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
 		return this;
 	}
 
@@ -802,20 +749,6 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 	{
 		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
 		Instance.Headers.Add(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> AddHeader(string key)
-	{
-		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> AddHeader(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
 		return this;
 	}
 
@@ -848,32 +781,6 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? value)
 	{
 		Instance.Metrics = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
-	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
-	/// on a per-field basis and for each field you configure which metric should be collected.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Metrics()
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldMetric<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
-	/// group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
-	/// on a per-field basis and for each field you configure which metric should be collected.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldMetric<TDocument>>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldMetric<TDocument>.Build(action);
 		return this;
 	}
 

@@ -199,28 +199,6 @@ public readonly partial struct PutCalendarRequestDescriptor
 	/// An array of anomaly detection job identifiers.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestDescriptor JobIds()
-	{
-		Instance.JobIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of anomaly detection job identifiers.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestDescriptor JobIds(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.JobIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of anomaly detection job identifiers.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequestDescriptor JobIds(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.JobIds = [.. values];

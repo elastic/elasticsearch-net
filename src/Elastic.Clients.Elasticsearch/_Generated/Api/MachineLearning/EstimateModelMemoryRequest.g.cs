@@ -244,7 +244,7 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor MaxBucketCardinality()
 	{
-		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong.Build(null);
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong.Build(null);
 		return this;
 	}
 
@@ -257,9 +257,9 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor
 	/// has no effect on the estimation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor MaxBucketCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor MaxBucketCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong>? action)
 	{
-		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong.Build(action);
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong.Build(action);
 		return this;
 	}
 
@@ -272,9 +272,9 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor
 	/// has no effect on the estimation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor MaxBucketCardinality<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<T>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor MaxBucketCardinality<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<T>>? action)
 	{
-		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<T>.Build(action);
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<T>.Build(action);
 		return this;
 	}
 
@@ -322,7 +322,7 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor OverallCardinality()
 	{
-		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong.Build(null);
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong.Build(null);
 		return this;
 	}
 
@@ -337,9 +337,9 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor
 	/// <c>over_field_name</c> or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor OverallCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor OverallCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong>? action)
 	{
-		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong.Build(action);
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong.Build(action);
 		return this;
 	}
 
@@ -354,9 +354,9 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor
 	/// <c>over_field_name</c> or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor OverallCardinality<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<T>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor OverallCardinality<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<T>>? action)
 	{
-		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<T>.Build(action);
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<T>.Build(action);
 		return this;
 	}
 
@@ -508,7 +508,7 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> MaxBucketCardinality()
 	{
-		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<TDocument>.Build(null);
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>.Build(null);
 		return this;
 	}
 
@@ -521,9 +521,9 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor<TDocument>
 	/// has no effect on the estimation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> MaxBucketCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> MaxBucketCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>>? action)
 	{
-		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<TDocument>.Build(action);
+		Instance.MaxBucketCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>.Build(action);
 		return this;
 	}
 
@@ -571,7 +571,7 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> OverallCardinality()
 	{
-		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<TDocument>.Build(null);
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>.Build(null);
 		return this;
 	}
 
@@ -586,9 +586,9 @@ public readonly partial struct EstimateModelMemoryRequestDescriptor<TDocument>
 	/// <c>over_field_name</c> or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> OverallCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument> OverallCardinality(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>>? action)
 	{
-		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldLong<TDocument>.Build(action);
+		Instance.OverallCardinality = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldLong<TDocument>.Build(action);
 		return this;
 	}
 

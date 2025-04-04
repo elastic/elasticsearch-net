@@ -158,9 +158,9 @@ public readonly partial struct DateAggregationRangeDescriptor
 	/// Start of the range (inclusive).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor From(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor From(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
 	{
-		Instance.From = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder.Build(action);
+		Instance.From = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(action);
 		return this;
 	}
 
@@ -191,9 +191,9 @@ public readonly partial struct DateAggregationRangeDescriptor
 	/// End of the range (exclusive).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor To(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRangeDescriptor To(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
 	{
-		Instance.To = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder.Build(action);
+		Instance.To = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(action);
 		return this;
 	}
 

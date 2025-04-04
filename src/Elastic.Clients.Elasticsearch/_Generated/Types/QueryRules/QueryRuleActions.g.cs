@@ -186,58 +186,6 @@ public readonly partial struct QueryRuleActionsDescriptor
 	/// </item>
 	/// </list>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The documents to apply the rule to.
-	/// Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
-	/// There is a maximum value of 100 documents in a rule.
-	/// You can specify the following attributes for each document:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>_index</c>: The index of the document to pin.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_id</c>: The unique document ID.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The documents to apply the rule to.
-	/// Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
-	/// There is a maximum value of 100 documents in a rule.
-	/// You can specify the following attributes for each document:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>_index</c>: The index of the document to pin.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_id</c>: The unique document ID.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor Docs(params Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc[] values)
 	{
 		Instance.Docs = [.. values];
@@ -285,30 +233,6 @@ public readonly partial struct QueryRuleActionsDescriptor
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The unique document IDs of the documents to apply the rule to.
-	/// Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor Ids()
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The unique document IDs of the documents to apply the rule to.
-	/// Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
 		return this;
 	}
 

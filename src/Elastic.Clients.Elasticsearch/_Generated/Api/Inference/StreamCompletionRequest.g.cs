@@ -229,36 +229,6 @@ public readonly partial struct StreamCompletionRequestDescriptor
 	/// NOTE: Inference endpoints for the completion task type currently only support a single string as input.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor Input()
-	{
-		Instance.Input = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// NOTE: Inference endpoints for the completion task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor Input(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Input = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// NOTE: Inference endpoints for the completion task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];

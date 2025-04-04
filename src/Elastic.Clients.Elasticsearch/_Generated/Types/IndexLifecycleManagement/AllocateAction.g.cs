@@ -151,13 +151,13 @@ public readonly partial struct AllocateActionDescriptor
 
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor Exclude()
 	{
-		Instance.Exclude = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Exclude = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor Exclude(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor Exclude(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Exclude = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Exclude = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -176,13 +176,13 @@ public readonly partial struct AllocateActionDescriptor
 
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor Include()
 	{
-		Instance.Include = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Include = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor Include(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor Include(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Include = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Include = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -207,13 +207,13 @@ public readonly partial struct AllocateActionDescriptor
 
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor Require()
 	{
-		Instance.Require = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Require = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor Require(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor Require(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Require = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Require = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 

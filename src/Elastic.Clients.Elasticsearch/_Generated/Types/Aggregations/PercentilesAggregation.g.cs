@@ -282,28 +282,6 @@ public readonly partial struct PercentilesAggregationDescriptor<TDocument>
 	/// The percentiles to calculate.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<TDocument> Percents()
-	{
-		Instance.Percents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The percentiles to calculate.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<TDocument> Percents(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		Instance.Percents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The percentiles to calculate.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<TDocument> Percents(params double[] values)
 	{
 		Instance.Percents = [.. values];
@@ -475,28 +453,6 @@ public readonly partial struct PercentilesAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor Percents(System.Collections.Generic.ICollection<double>? value)
 	{
 		Instance.Percents = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The percentiles to calculate.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor Percents()
-	{
-		Instance.Percents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The percentiles to calculate.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor Percents(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		Instance.Percents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
 		return this;
 	}
 

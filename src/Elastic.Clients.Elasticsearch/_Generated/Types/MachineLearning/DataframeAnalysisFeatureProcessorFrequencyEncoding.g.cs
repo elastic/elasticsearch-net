@@ -195,7 +195,7 @@ public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodin
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap()
 	{
-		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(null);
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(null);
 		return this;
 	}
 
@@ -204,9 +204,9 @@ public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodin
 	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble>? action)
 	{
-		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(action);
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(action);
 		return this;
 	}
 
@@ -286,7 +286,7 @@ public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodin
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap()
 	{
-		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(null);
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(null);
 		return this;
 	}
 
@@ -295,9 +295,9 @@ public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodin
 	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble>? action)
 	{
-		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(action);
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(action);
 		return this;
 	}
 

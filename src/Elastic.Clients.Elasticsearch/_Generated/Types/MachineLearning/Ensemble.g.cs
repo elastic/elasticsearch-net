@@ -177,18 +177,6 @@ public readonly partial struct EnsembleDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor ClassificationLabels()
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor ClassificationLabels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor ClassificationLabels(params string[] values)
 	{
 		Instance.ClassificationLabels = [.. values];
@@ -198,18 +186,6 @@ public readonly partial struct EnsembleDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor FeatureNames(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.FeatureNames = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor FeatureNames()
-	{
-		Instance.FeatureNames = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor FeatureNames(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.FeatureNames = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -228,18 +204,6 @@ public readonly partial struct EnsembleDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor TrainedModels(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel> value)
 	{
 		Instance.TrainedModels = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor TrainedModels()
-	{
-		Instance.TrainedModels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTrainedModel.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor TrainedModels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTrainedModel>? action)
-	{
-		Instance.TrainedModels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTrainedModel.Build(action);
 		return this;
 	}
 

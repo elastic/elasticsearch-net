@@ -476,28 +476,6 @@ public readonly partial struct NodesStatsRequestDescriptor
 	/// A comma-separated list of document types for the indexing index metric.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Types()
-	{
-		Instance.Types = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Types(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Types = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Types(params string[] values)
 	{
 		Instance.Types = [.. values];
@@ -772,28 +750,6 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Types(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Types = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Types()
-	{
-		Instance.Types = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Types(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Types = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

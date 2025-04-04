@@ -262,38 +262,6 @@ public readonly partial struct RerankRequestDescriptor
 	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input()
-	{
-		Instance.Input = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Input = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];

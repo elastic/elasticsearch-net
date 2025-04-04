@@ -129,18 +129,6 @@ public readonly partial struct CustomNormalizerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor CharFilter()
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor CharFilter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor CharFilter(params string[] values)
 	{
 		Instance.CharFilter = [.. values];
@@ -150,18 +138,6 @@ public readonly partial struct CustomNormalizerDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor Filter(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Filter = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CustomNormalizerDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

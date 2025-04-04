@@ -326,28 +326,6 @@ public readonly partial struct TermsSetQueryDescriptor<TDocument>
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Terms()
-	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Terms(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.Terms = [.. values];
@@ -488,28 +466,6 @@ public readonly partial struct TermsSetQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Terms(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
 	{
 		Instance.Terms = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Terms()
-	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
 		return this;
 	}
 

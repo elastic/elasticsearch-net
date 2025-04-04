@@ -162,28 +162,6 @@ public readonly partial struct GetUserRequestDescriptor
 	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor Username()
-	{
-		Instance.Username = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUsername.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor Username(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUsername>? action)
-	{
-		Instance.Username = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUsername.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor Username(params Elastic.Clients.Elasticsearch.Username[] values)
 	{
 		Instance.Username = [.. values];

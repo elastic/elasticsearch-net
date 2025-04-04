@@ -139,18 +139,6 @@ public readonly partial struct BasqueAnalyzerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor StemExclusion()
-	{
-		Instance.StemExclusion = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor StemExclusion(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.StemExclusion = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor StemExclusion(params string[] values)
 	{
 		Instance.StemExclusion = [.. values];
@@ -160,18 +148,6 @@ public readonly partial struct BasqueAnalyzerDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor Stopwords(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stopwords = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor Stopwords()
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzerDescriptor Stopwords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

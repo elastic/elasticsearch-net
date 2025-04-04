@@ -55,7 +55,7 @@ public partial interface IDistanceFeatureQuery
 	public string Type { get; }
 }
 
-public readonly partial struct IDistanceFeatureQueryBuilder<TDocument>
+public readonly partial struct IDistanceFeatureQueryFactory<TDocument>
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery Date(Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery value)
 	{
@@ -88,14 +88,14 @@ public readonly partial struct IDistanceFeatureQueryBuilder<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<TDocument>();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct IDistanceFeatureQueryBuilder
+public readonly partial struct IDistanceFeatureQueryFactory
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery Date(Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery value)
 	{
@@ -143,9 +143,9 @@ public readonly partial struct IDistanceFeatureQueryBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory();
 		return action.Invoke(builder);
 	}
 }

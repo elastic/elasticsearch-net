@@ -218,18 +218,6 @@ public readonly partial struct SynonymTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Synonyms()
-	{
-		Instance.Synonyms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Synonyms(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Synonyms = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilterDescriptor Synonyms(params string[] values)
 	{
 		Instance.Synonyms = [.. values];

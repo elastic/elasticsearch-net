@@ -360,7 +360,7 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation.Build(null);
 		return this;
 	}
 
@@ -373,9 +373,9 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 	/// Additionally, aggregations only run over the same subset of fields that query works with.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation>? action)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation.Build(action);
 		return this;
 	}
 
@@ -388,9 +388,9 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 	/// Additionally, aggregations only run over the same subset of fields that query works with.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<T>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<T>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<T>.Build(action);
 		return this;
 	}
 
@@ -508,28 +508,6 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 	/// The search after definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SearchAfter()
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
@@ -561,45 +539,6 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
 		return this;
 	}
 
@@ -804,7 +743,7 @@ public readonly partial struct QueryApiKeysRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>.Build(null);
 		return this;
 	}
 
@@ -817,9 +756,9 @@ public readonly partial struct QueryApiKeysRequestDescriptor<TDocument>
 	/// Additionally, aggregations only run over the same subset of fields that query works with.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyAggregation<TDocument>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>.Build(action);
 		return this;
 	}
 
@@ -909,28 +848,6 @@ public readonly partial struct QueryApiKeysRequestDescriptor<TDocument>
 	/// The search after definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SearchAfter()
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
@@ -962,32 +879,6 @@ public readonly partial struct QueryApiKeysRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
 		return this;
 	}
 

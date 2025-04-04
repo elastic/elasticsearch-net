@@ -149,18 +149,6 @@ public readonly partial struct PrivilegeActionsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Actions()
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Actions(params string[] values)
 	{
 		Instance.Actions = [.. values];
@@ -181,13 +169,13 @@ public readonly partial struct PrivilegeActionsDescriptor
 
 	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.PrivilegeActionsDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

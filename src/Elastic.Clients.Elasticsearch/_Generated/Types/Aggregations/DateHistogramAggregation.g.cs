@@ -493,7 +493,7 @@ public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Order()
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
 		return this;
 	}
 
@@ -502,9 +502,9 @@ public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 	/// The sort order of the returned buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
 		return this;
 	}
 
@@ -530,13 +530,13 @@ public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Params()
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -793,7 +793,7 @@ public readonly partial struct DateHistogramAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Order()
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(null);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(null);
 		return this;
 	}
 
@@ -802,9 +802,9 @@ public readonly partial struct DateHistogramAggregationDescriptor
 	/// The sort order of the returned buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(action);
 		return this;
 	}
 
@@ -813,9 +813,9 @@ public readonly partial struct DateHistogramAggregationDescriptor
 	/// The sort order of the returned buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
 		return this;
 	}
 
@@ -841,13 +841,13 @@ public readonly partial struct DateHistogramAggregationDescriptor
 
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Params()
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

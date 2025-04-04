@@ -135,18 +135,6 @@ public readonly partial struct PrivilegesCheckDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Application()
-	{
-		Instance.Application = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApplicationPrivilegesCheck.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Application(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApplicationPrivilegesCheck>? action)
-	{
-		Instance.Application = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApplicationPrivilegesCheck.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Application(params Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck[] values)
 	{
 		Instance.Application = [.. values];
@@ -181,28 +169,6 @@ public readonly partial struct PrivilegesCheckDescriptor
 	/// A list of the cluster privileges that you want to check.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Cluster()
-	{
-		Instance.Cluster = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfClusterPrivilege.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Cluster(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfClusterPrivilege>? action)
-	{
-		Instance.Cluster = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfClusterPrivilege.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
 	{
 		Instance.Cluster = [.. values];
@@ -212,18 +178,6 @@ public readonly partial struct PrivilegesCheckDescriptor
 	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Index(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? value)
 	{
 		Instance.Index = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Index()
-	{
-		Instance.Index = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilegesCheck.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Index(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilegesCheck>? action)
-	{
-		Instance.Index = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilegesCheck.Build(action);
 		return this;
 	}
 

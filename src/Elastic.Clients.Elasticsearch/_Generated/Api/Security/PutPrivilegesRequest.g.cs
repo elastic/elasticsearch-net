@@ -251,13 +251,13 @@ public readonly partial struct PutPrivilegesRequestDescriptor
 
 	public Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor Privileges()
 	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIDictionaryOfStringPrivilegeActions.Build(null);
+		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDictionaryOfStringPrivilegeActions.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIDictionaryOfStringPrivilegeActions>? action)
+	public Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDictionaryOfStringPrivilegeActions>? action)
 	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIDictionaryOfStringPrivilegeActions.Build(action);
+		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDictionaryOfStringPrivilegeActions.Build(action);
 		return this;
 	}
 
@@ -271,14 +271,14 @@ public readonly partial struct PutPrivilegesRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor AddPrivilege(string key)
 	{
 		Instance.Privileges ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>>();
-		Instance.Privileges.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPrivilegeActions.Build(null));
+		Instance.Privileges.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPrivilegeActions.Build(null));
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor AddPrivilege(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPrivilegeActions>? action)
+	public Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor AddPrivilege(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPrivilegeActions>? action)
 	{
 		Instance.Privileges ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>>();
-		Instance.Privileges.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPrivilegeActions.Build(action));
+		Instance.Privileges.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPrivilegeActions.Build(action));
 		return this;
 	}
 

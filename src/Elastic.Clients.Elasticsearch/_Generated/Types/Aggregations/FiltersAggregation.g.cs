@@ -156,9 +156,9 @@ public readonly partial struct FiltersAggregationDescriptor<TDocument>
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<TDocument>.Build(action);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -233,9 +233,9 @@ public readonly partial struct FiltersAggregationDescriptor
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder.Build(action);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory.Build(action);
 		return this;
 	}
 
@@ -244,9 +244,9 @@ public readonly partial struct FiltersAggregationDescriptor
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters<T>(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<T>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters<T>(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<T>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<T>.Build(action);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<T>.Build(action);
 		return this;
 	}
 

@@ -217,28 +217,6 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges()
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange>? action)
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
@@ -250,12 +228,12 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory.Build(action));
 		}
 
 		Instance.Ranges = items;
@@ -369,28 +347,6 @@ public readonly partial struct RangeAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges()
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange>? action)
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
@@ -402,12 +358,12 @@ public readonly partial struct RangeAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory.Build(action));
 		}
 
 		Instance.Ranges = items;

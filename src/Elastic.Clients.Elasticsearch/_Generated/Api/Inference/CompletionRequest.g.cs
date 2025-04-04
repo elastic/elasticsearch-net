@@ -228,30 +228,6 @@ public readonly partial struct CompletionRequestDescriptor
 	/// Either a string or an array of strings.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor Input()
-	{
-		Instance.Input = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor Input(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Input = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];

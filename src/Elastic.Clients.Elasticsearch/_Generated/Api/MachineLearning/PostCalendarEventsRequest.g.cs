@@ -185,28 +185,6 @@ public readonly partial struct PostCalendarEventsRequestDescriptor
 	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor Events()
-	{
-		Instance.Events = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCalendarEvent.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor Events(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCalendarEvent>? action)
-	{
-		Instance.Events = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCalendarEvent.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor Events(params Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent[] values)
 	{
 		Instance.Events = [.. values];

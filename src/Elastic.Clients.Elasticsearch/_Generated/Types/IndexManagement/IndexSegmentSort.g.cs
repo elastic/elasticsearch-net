@@ -151,18 +151,6 @@ public readonly partial struct IndexSegmentSortDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<TDocument> Missing()
-	{
-		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMissing.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<TDocument> Missing(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMissing>? action)
-	{
-		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMissing.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<TDocument> Missing(params Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing[] values)
 	{
 		Instance.Missing = [.. values];
@@ -175,18 +163,6 @@ public readonly partial struct IndexSegmentSortDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<TDocument> Mode()
-	{
-		Instance.Mode = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMode.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<TDocument> Mode(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMode>? action)
-	{
-		Instance.Mode = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMode.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<TDocument> Mode(params Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode[] values)
 	{
 		Instance.Mode = [.. values];
@@ -196,18 +172,6 @@ public readonly partial struct IndexSegmentSortDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<TDocument> Order(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? value)
 	{
 		Instance.Order = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<TDocument> Order()
-	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortOrder.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortOrder>? action)
-	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortOrder.Build(action);
 		return this;
 	}
 
@@ -268,18 +232,6 @@ public readonly partial struct IndexSegmentSortDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor Missing()
-	{
-		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMissing.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor Missing(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMissing>? action)
-	{
-		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMissing.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor Missing(params Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing[] values)
 	{
 		Instance.Missing = [.. values];
@@ -292,18 +244,6 @@ public readonly partial struct IndexSegmentSortDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor Mode()
-	{
-		Instance.Mode = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMode.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor Mode(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMode>? action)
-	{
-		Instance.Mode = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortMode.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor Mode(params Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode[] values)
 	{
 		Instance.Mode = [.. values];
@@ -313,18 +253,6 @@ public readonly partial struct IndexSegmentSortDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor Order(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? value)
 	{
 		Instance.Order = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor Order()
-	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortOrder.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortOrder>? action)
-	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSegmentSortOrder.Build(action);
 		return this;
 	}
 

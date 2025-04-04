@@ -309,18 +309,6 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SearchTemplates()
-	{
-		Instance.SearchTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SearchTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem>? action)
-	{
-		Instance.SearchTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SearchTemplates(params Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem[] values)
 	{
 		Instance.SearchTemplates = [.. values];
@@ -494,18 +482,6 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SearchTemplates(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> value)
 	{
 		Instance.SearchTemplates = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SearchTemplates()
-	{
-		Instance.SearchTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SearchTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem>? action)
-	{
-		Instance.SearchTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchTemplateRequestItem.Build(action);
 		return this;
 	}
 

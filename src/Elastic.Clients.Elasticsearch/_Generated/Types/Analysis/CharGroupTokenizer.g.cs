@@ -156,18 +156,6 @@ public readonly partial struct CharGroupTokenizerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerDescriptor TokenizeOnChars()
-	{
-		Instance.TokenizeOnChars = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerDescriptor TokenizeOnChars(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.TokenizeOnChars = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerDescriptor TokenizeOnChars(params string[] values)
 	{
 		Instance.TokenizeOnChars = [.. values];

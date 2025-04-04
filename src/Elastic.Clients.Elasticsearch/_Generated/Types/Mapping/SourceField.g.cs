@@ -177,18 +177,6 @@ public readonly partial struct SourceFieldDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Excludes()
-	{
-		Instance.Excludes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Excludes(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Excludes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Excludes(params string[] values)
 	{
 		Instance.Excludes = [.. values];
@@ -198,18 +186,6 @@ public readonly partial struct SourceFieldDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Includes(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Includes = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Includes()
-	{
-		Instance.Includes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Includes(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Includes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

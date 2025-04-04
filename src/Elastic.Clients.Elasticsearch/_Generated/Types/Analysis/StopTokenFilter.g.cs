@@ -172,18 +172,6 @@ public readonly partial struct StopTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor Stopwords()
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor Stopwords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor Stopwords(params string[] values)
 	{
 		Instance.Stopwords = [.. values];

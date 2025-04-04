@@ -349,7 +349,7 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -360,9 +360,9 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor
 	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -566,7 +566,7 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor<TDocume
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -577,9 +577,9 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor<TDocume
 	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

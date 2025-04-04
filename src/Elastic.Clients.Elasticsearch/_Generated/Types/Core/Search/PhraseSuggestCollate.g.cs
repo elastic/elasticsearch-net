@@ -168,7 +168,7 @@ public readonly partial struct PhraseSuggestCollateDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Params()
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -177,9 +177,9 @@ public readonly partial struct PhraseSuggestCollateDescriptor
 	/// Parameters to use if the query is templated.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

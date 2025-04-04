@@ -271,18 +271,6 @@ public readonly partial struct CompletionPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument> Contexts()
-	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSuggestContext<TDocument>.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument> Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSuggestContext<TDocument>>? action)
-	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSuggestContext<TDocument>.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument> Contexts(params Elastic.Clients.Elasticsearch.Mapping.SuggestContext[] values)
 	{
 		Instance.Contexts = [.. values];
@@ -367,7 +355,7 @@ public readonly partial struct CompletionPropertyDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -376,9 +364,9 @@ public readonly partial struct CompletionPropertyDescriptor<TDocument>
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -473,24 +461,6 @@ public readonly partial struct CompletionPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Contexts(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? value)
 	{
 		Instance.Contexts = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Contexts()
-	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSuggestContext.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSuggestContext>? action)
-	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSuggestContext.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Contexts<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSuggestContext<T>>? action)
-	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSuggestContext<T>.Build(action);
 		return this;
 	}
 
@@ -596,7 +566,7 @@ public readonly partial struct CompletionPropertyDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -605,9 +575,9 @@ public readonly partial struct CompletionPropertyDescriptor
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 

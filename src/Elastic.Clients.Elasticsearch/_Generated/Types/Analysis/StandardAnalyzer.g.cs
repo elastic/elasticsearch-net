@@ -182,30 +182,6 @@ public readonly partial struct StandardAnalyzerDescriptor
 	/// Defaults to <c>_none_</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor Stopwords()
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor Stopwords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor Stopwords(params string[] values)
 	{
 		Instance.Stopwords = [.. values];

@@ -609,13 +609,13 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Headers()
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
 		return this;
 	}
 
@@ -623,20 +623,6 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 	{
 		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
 		Instance.Headers.Add(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AddHeader(string key)
-	{
-		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AddHeader(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
 		return this;
 	}
 
@@ -669,13 +655,13 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -1043,13 +1029,13 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Headers()
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
 	{
-		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1057,20 +1043,6 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 	{
 		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
 		Instance.Headers.Add(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AddHeader(string key)
-	{
-		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AddHeader(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Headers.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
 		return this;
 	}
 
@@ -1103,13 +1075,13 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

@@ -365,30 +365,6 @@ public readonly partial struct ListRequestDescriptor
 	/// For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor Actions()
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions used to limit the request.
-	/// For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions used to limit the request.
-	/// For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor Actions(params string[] values)
 	{
 		Instance.Actions = [.. values];

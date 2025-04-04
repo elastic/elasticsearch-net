@@ -149,28 +149,6 @@ public readonly partial struct DataframeAnalysisAnalyzedFieldsDescriptor
 	/// An array of strings that defines the fields that will be included in the analysis.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Excludes()
-	{
-		Instance.Excludes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be included in the analysis.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Excludes(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Excludes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be included in the analysis.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Excludes(params string[] values)
 	{
 		Instance.Excludes = [.. values];
@@ -185,28 +163,6 @@ public readonly partial struct DataframeAnalysisAnalyzedFieldsDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Includes(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Includes = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Includes()
-	{
-		Instance.Includes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Includes(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Includes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

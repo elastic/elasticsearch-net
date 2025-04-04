@@ -261,28 +261,6 @@ public readonly partial struct PostRequestDescriptor
 	/// A sequence of one or more JSON documents containing the license information.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Licenses()
-	{
-		Instance.Licenses = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLicense.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sequence of one or more JSON documents containing the license information.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Licenses(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLicense>? action)
-	{
-		Instance.Licenses = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLicense.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sequence of one or more JSON documents containing the license information.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Licenses(params Elastic.Clients.Elasticsearch.LicenseManagement.License[] values)
 	{
 		Instance.Licenses = [.. values];

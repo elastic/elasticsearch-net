@@ -396,28 +396,6 @@ public readonly partial struct UserAgentProcessorDescriptor<TDocument>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
@@ -449,28 +427,6 @@ public readonly partial struct UserAgentProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? value)
 	{
 		Instance.Properties = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to <c>target_field</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Properties()
-	{
-		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to <c>target_field</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty>? action)
-	{
-		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty.Build(action);
 		return this;
 	}
 
@@ -674,39 +630,6 @@ public readonly partial struct UserAgentProcessorDescriptor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
@@ -755,28 +678,6 @@ public readonly partial struct UserAgentProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Properties(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? value)
 	{
 		Instance.Properties = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to <c>target_field</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Properties()
-	{
-		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to <c>target_field</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty>? action)
-	{
-		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfUserAgentProperty.Build(action);
 		return this;
 	}
 

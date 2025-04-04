@@ -422,28 +422,6 @@ public readonly partial struct ForcemergeRequestDescriptor
 	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -699,28 +677,6 @@ public readonly partial struct ForcemergeRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
 		return this;
 	}
 

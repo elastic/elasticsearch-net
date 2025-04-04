@@ -504,9 +504,9 @@ public readonly partial struct S3RepositorySettingsDescriptor
 	/// Defaults to <c>100mb</c> or 5% of JVM heap, whichever is smaller.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor BufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor BufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.BufferSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.BufferSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -547,9 +547,9 @@ public readonly partial struct S3RepositorySettingsDescriptor
 	/// The default varies by repository type.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor ChunkSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor ChunkSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.ChunkSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.ChunkSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -646,9 +646,9 @@ public readonly partial struct S3RepositorySettingsDescriptor
 	/// Note that restores are also throttled through recovery settings.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor MaxRestoreBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor MaxRestoreBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxRestoreBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxRestoreBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -672,9 +672,9 @@ public readonly partial struct S3RepositorySettingsDescriptor
 	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor MaxSnapshotBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor MaxSnapshotBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxSnapshotBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxSnapshotBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

@@ -436,28 +436,6 @@ public readonly partial struct IpLocationProcessorDescriptor<TDocument>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
@@ -489,28 +467,6 @@ public readonly partial struct IpLocationProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Properties = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Properties()
-	{
-		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -726,39 +682,6 @@ public readonly partial struct IpLocationProcessorDescriptor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
@@ -807,28 +730,6 @@ public readonly partial struct IpLocationProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Properties(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Properties = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Properties()
-	{
-		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to the <c>target_field</c> based on the IP location lookup.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Properties = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

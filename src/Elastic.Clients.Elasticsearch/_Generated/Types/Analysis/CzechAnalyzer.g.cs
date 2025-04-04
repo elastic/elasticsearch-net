@@ -139,18 +139,6 @@ public readonly partial struct CzechAnalyzerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor StemExclusion()
-	{
-		Instance.StemExclusion = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor StemExclusion(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.StemExclusion = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor StemExclusion(params string[] values)
 	{
 		Instance.StemExclusion = [.. values];
@@ -160,18 +148,6 @@ public readonly partial struct CzechAnalyzerDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor Stopwords(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stopwords = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor Stopwords()
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzerDescriptor Stopwords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

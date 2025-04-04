@@ -159,7 +159,7 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> After()
 	{
-		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFieldValue<TDocument>.Build(null);
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<TDocument>.Build(null);
 		return this;
 	}
 
@@ -168,9 +168,9 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> After(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFieldValue<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> After(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<TDocument>>? action)
 	{
-		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFieldValue<TDocument>.Build(action);
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<TDocument>.Build(action);
 		return this;
 	}
 
@@ -217,30 +217,6 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources()
-	{
-		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringCompositeAggregationSource<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringCompositeAggregationSource<TDocument>>? action)
-	{
-		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringCompositeAggregationSource<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>[] values)
 	{
 		Instance.Sources = [.. values];
@@ -253,12 +229,12 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeAggregationSource<TDocument>>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<TDocument>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeAggregationSource<TDocument>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<TDocument>.Build(action));
 		}
 
 		Instance.Sources = items;
@@ -316,7 +292,7 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After()
 	{
-		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFieldValue.Build(null);
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue.Build(null);
 		return this;
 	}
 
@@ -325,9 +301,9 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFieldValue>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue>? action)
 	{
-		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFieldValue.Build(action);
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue.Build(action);
 		return this;
 	}
 
@@ -336,9 +312,9 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFieldValue<T>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<T>>? action)
 	{
-		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFieldValue<T>.Build(action);
+		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<T>.Build(action);
 		return this;
 	}
 
@@ -385,42 +361,6 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources()
-	{
-		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringCompositeAggregationSource.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringCompositeAggregationSource>? action)
-	{
-		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringCompositeAggregationSource.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringCompositeAggregationSource<T>>? action)
-	{
-		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringCompositeAggregationSource<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>[] values)
 	{
 		Instance.Sources = [.. values];
@@ -433,12 +373,12 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeAggregationSource>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeAggregationSource.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource.Build(action));
 		}
 
 		Instance.Sources = items;
@@ -451,12 +391,12 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeAggregationSource<T>>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<T>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeAggregationSource<T>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<T>.Build(action));
 		}
 
 		Instance.Sources = items;

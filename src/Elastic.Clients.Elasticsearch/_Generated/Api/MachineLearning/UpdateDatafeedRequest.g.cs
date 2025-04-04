@@ -580,84 +580,6 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// </item>
 	/// </list>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -707,7 +629,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
@@ -717,9 +639,9 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// with low cardinality data.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
@@ -729,9 +651,9 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// with low cardinality data.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
 		return this;
 	}
 
@@ -836,30 +758,6 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Indices(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Indices = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Indices()
-	{
-		Instance.Indices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Indices(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Indices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1011,7 +909,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
@@ -1020,9 +918,9 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// Specifies runtime fields for the datafeed search.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
@@ -1031,9 +929,9 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// Specifies runtime fields for the datafeed search.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
 		return this;
 	}
 
@@ -1099,7 +997,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ScriptFields()
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
@@ -1109,9 +1007,9 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// The detector configuration objects in a job can contain functions that use these script fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
 		return this;
 	}
 
@@ -1322,84 +1220,6 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	/// </item>
 	/// </list>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -1449,7 +1269,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
@@ -1459,9 +1279,9 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	/// with low cardinality data.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
 		return this;
 	}
 
@@ -1559,30 +1379,6 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Indices(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Indices = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Indices()
-	{
-		Instance.Indices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Indices(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Indices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1717,7 +1513,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
@@ -1726,9 +1522,9 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	/// Specifies runtime fields for the datafeed search.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
 		return this;
 	}
 
@@ -1780,7 +1576,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ScriptFields()
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
@@ -1790,9 +1586,9 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	/// The detector configuration objects in a job can contain functions that use these script fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
 		return this;
 	}
 

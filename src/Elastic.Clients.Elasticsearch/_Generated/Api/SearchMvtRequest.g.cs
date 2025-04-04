@@ -1110,7 +1110,7 @@ public readonly partial struct SearchMvtRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs()
 	{
-		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(null);
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
@@ -1187,9 +1187,9 @@ public readonly partial struct SearchMvtRequestDescriptor
 	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation>? action)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
-		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(action);
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
@@ -1266,9 +1266,9 @@ public readonly partial struct SearchMvtRequestDescriptor
 	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>>? action)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
-		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>.Build(action);
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
 		return this;
 	}
 
@@ -1449,7 +1449,7 @@ public readonly partial struct SearchMvtRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
@@ -1459,9 +1459,9 @@ public readonly partial struct SearchMvtRequestDescriptor
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField>? action)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
@@ -1471,9 +1471,9 @@ public readonly partial struct SearchMvtRequestDescriptor
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>>? action)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
 		return this;
 	}
 
@@ -1551,45 +1551,6 @@ public readonly partial struct SearchMvtRequestDescriptor
 	/// from longest to shortest.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
@@ -1654,9 +1615,9 @@ public readonly partial struct SearchMvtRequestDescriptor
 	/// not include the total number of hits matching the query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
-		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder.Build(action);
+		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
@@ -2188,7 +2149,7 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Aggs()
 	{
-		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(null);
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
@@ -2265,9 +2226,9 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Aggs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Aggs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
-		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(action);
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
 		return this;
 	}
 
@@ -2430,7 +2391,7 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
@@ -2440,9 +2401,9 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
 		return this;
 	}
 
@@ -2506,32 +2467,6 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 	/// from longest to shortest.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
@@ -2577,9 +2512,9 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 	/// not include the total number of hits matching the query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
-		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder.Build(action);
+		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 

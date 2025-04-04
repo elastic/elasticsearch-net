@@ -520,28 +520,6 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor<TDocument>
 	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors()
-	{
-		Instance.FeatureProcessors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDataframeAnalysisFeatureProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDataframeAnalysisFeatureProcessor<TDocument>>? action)
-	{
-		Instance.FeatureProcessors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDataframeAnalysisFeatureProcessor<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(params Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor[] values)
 	{
 		Instance.FeatureProcessors = [.. values];
@@ -713,9 +691,9 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor<TDocument>
 	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> TrainingPercent(System.Func<Elastic.Clients.Elasticsearch.PercentageBuilder, Elastic.Clients.Elasticsearch.Percentage> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> TrainingPercent(System.Func<Elastic.Clients.Elasticsearch.PercentageFactory, Elastic.Clients.Elasticsearch.Percentage> action)
 	{
-		Instance.TrainingPercent = Elastic.Clients.Elasticsearch.PercentageBuilder.Build(action);
+		Instance.TrainingPercent = Elastic.Clients.Elasticsearch.PercentageFactory.Build(action);
 		return this;
 	}
 
@@ -834,39 +812,6 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? value)
 	{
 		Instance.FeatureProcessors = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors()
-	{
-		Instance.FeatureProcessors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDataframeAnalysisFeatureProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDataframeAnalysisFeatureProcessor>? action)
-	{
-		Instance.FeatureProcessors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDataframeAnalysisFeatureProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDataframeAnalysisFeatureProcessor<T>>? action)
-	{
-		Instance.FeatureProcessors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDataframeAnalysisFeatureProcessor<T>.Build(action);
 		return this;
 	}
 
@@ -1063,9 +1008,9 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor
 	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor TrainingPercent(System.Func<Elastic.Clients.Elasticsearch.PercentageBuilder, Elastic.Clients.Elasticsearch.Percentage> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor TrainingPercent(System.Func<Elastic.Clients.Elasticsearch.PercentageFactory, Elastic.Clients.Elasticsearch.Percentage> action)
 	{
-		Instance.TrainingPercent = Elastic.Clients.Elasticsearch.PercentageBuilder.Build(action);
+		Instance.TrainingPercent = Elastic.Clients.Elasticsearch.PercentageFactory.Build(action);
 		return this;
 	}
 

@@ -226,28 +226,6 @@ public readonly partial struct SearchAccessDescriptor<TDocument>
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> Names()
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> Names(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName>? action)
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> Names(params Elastic.Clients.Elasticsearch.IndexName[] values)
 	{
 		Instance.Names = [.. values];
@@ -356,28 +334,6 @@ public readonly partial struct SearchAccessDescriptor
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor Names(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> value)
 	{
 		Instance.Names = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor Names()
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor Names(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName>? action)
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(action);
 		return this;
 	}
 

@@ -466,7 +466,7 @@ public readonly partial struct ShrinkIndexRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
 		return this;
 	}
 
@@ -476,9 +476,9 @@ public readonly partial struct ShrinkIndexRequestDescriptor
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
 		return this;
 	}
 
@@ -488,9 +488,9 @@ public readonly partial struct ShrinkIndexRequestDescriptor
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<T>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<T>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
 		return this;
 	}
 
@@ -570,7 +570,7 @@ public readonly partial struct ShrinkIndexRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Settings()
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -579,9 +579,9 @@ public readonly partial struct ShrinkIndexRequestDescriptor
 	/// Configuration options for the target index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -834,7 +834,7 @@ public readonly partial struct ShrinkIndexRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<TDocument>.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
 		return this;
 	}
 
@@ -844,9 +844,9 @@ public readonly partial struct ShrinkIndexRequestDescriptor<TDocument>
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<TDocument>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
 		return this;
 	}
 
@@ -919,7 +919,7 @@ public readonly partial struct ShrinkIndexRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Settings()
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -928,9 +928,9 @@ public readonly partial struct ShrinkIndexRequestDescriptor<TDocument>
 	/// Configuration options for the target index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

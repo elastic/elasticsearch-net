@@ -231,32 +231,6 @@ public readonly partial struct InferTrainedModelRequestDescriptor
 	/// Currently, for NLP models, only a single value is allowed.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringObject.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringObject>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringObject.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(params System.Collections.Generic.IDictionary<string, object>[] values)
 	{
 		Instance.Docs = [.. values];
@@ -270,12 +244,12 @@ public readonly partial struct InferTrainedModelRequestDescriptor
 	/// Currently, for NLP models, only a single value is allowed.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>?[] actions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, object>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action));
 		}
 
 		Instance.Docs = items;
@@ -439,32 +413,6 @@ public readonly partial struct InferTrainedModelRequestDescriptor<TDocument>
 	/// Currently, for NLP models, only a single value is allowed.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringObject.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringObject>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringObject.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(params System.Collections.Generic.IDictionary<string, object>[] values)
 	{
 		Instance.Docs = [.. values];
@@ -478,12 +426,12 @@ public readonly partial struct InferTrainedModelRequestDescriptor<TDocument>
 	/// Currently, for NLP models, only a single value is allowed.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>?[] actions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, object>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action));
 		}
 
 		Instance.Docs = items;

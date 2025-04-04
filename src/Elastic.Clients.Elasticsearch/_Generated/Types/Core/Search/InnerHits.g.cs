@@ -297,18 +297,6 @@ public readonly partial struct InnerHitsDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> DocvalueFields()
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> DocvalueFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>>? action)
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
@@ -394,13 +382,13 @@ public readonly partial struct InnerHitsDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> ScriptFields()
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldScriptField<TDocument>.Build(null);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldScriptField<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField<TDocument>>? action)
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldScriptField<TDocument>.Build(action);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField<TDocument>.Build(action);
 		return this;
 	}
 
@@ -467,30 +455,6 @@ public readonly partial struct InnerHitsDescriptor<TDocument>
 	/// By default, inner hits are sorted by score.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
@@ -521,9 +485,9 @@ public readonly partial struct InnerHitsDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -605,24 +569,6 @@ public readonly partial struct InnerHitsDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor DocvalueFields()
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor DocvalueFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat>? action)
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor DocvalueFields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>>? action)
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>.Build(action);
 		return this;
 	}
 
@@ -729,19 +675,19 @@ public readonly partial struct InnerHitsDescriptor
 
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor ScriptFields()
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldScriptField.Build(null);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldScriptField>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField>? action)
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldScriptField.Build(action);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor ScriptFields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldScriptField<T>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor ScriptFields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField<T>>? action)
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldScriptField<T>.Build(action);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField<T>.Build(action);
 		return this;
 	}
 
@@ -808,42 +754,6 @@ public readonly partial struct InnerHitsDescriptor
 	/// By default, inner hits are sorted by score.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
@@ -892,15 +802,15 @@ public readonly partial struct InnerHitsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 

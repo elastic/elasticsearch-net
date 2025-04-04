@@ -89,7 +89,7 @@ public partial interface IRepository
 	public string Type { get; }
 }
 
-public readonly partial struct IRepositoryBuilder
+public readonly partial struct RepositoryFactory
 {
 	public Elastic.Clients.Elasticsearch.Snapshot.IRepository Azure(Elastic.Clients.Elasticsearch.Snapshot.AzureRepository value)
 	{
@@ -157,9 +157,9 @@ public readonly partial struct IRepositoryBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Snapshot.IRepository Build(System.Func<Elastic.Clients.Elasticsearch.Snapshot.IRepositoryBuilder, Elastic.Clients.Elasticsearch.Snapshot.IRepository> action)
+	internal static Elastic.Clients.Elasticsearch.Snapshot.IRepository Build(System.Func<Elastic.Clients.Elasticsearch.Snapshot.RepositoryFactory, Elastic.Clients.Elasticsearch.Snapshot.IRepository> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Snapshot.IRepositoryBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryFactory();
 		return action.Invoke(builder);
 	}
 }

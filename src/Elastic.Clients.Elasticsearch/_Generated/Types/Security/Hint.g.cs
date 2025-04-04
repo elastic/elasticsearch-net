@@ -148,7 +148,7 @@ public readonly partial struct HintDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Labels()
 	{
-		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
 		return this;
 	}
 
@@ -159,9 +159,9 @@ public readonly partial struct HintDescriptor
 	/// at least one of the strings.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
 	{
-		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
 		return this;
 	}
 
@@ -169,20 +169,6 @@ public readonly partial struct HintDescriptor
 	{
 		Instance.Labels ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
 		Instance.Labels.Add(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.HintDescriptor AddLabel(string key)
-	{
-		Instance.Labels ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Labels.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.HintDescriptor AddLabel(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Labels ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Labels.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
 		return this;
 	}
 
@@ -201,28 +187,6 @@ public readonly partial struct HintDescriptor
 	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Uids(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Uids = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of profile UIDs to match against.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Uids()
-	{
-		Instance.Uids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of profile UIDs to match against.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Uids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Uids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

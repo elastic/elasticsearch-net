@@ -311,9 +311,9 @@ public readonly partial struct CategorizeTextAggregationDescriptor<TDocument>
 	/// cannot be used at the same time as categorization_filters.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerBuilder, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
 	{
-		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerBuilder.Build(action);
+		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory.Build(action);
 		return this;
 	}
 
@@ -331,40 +331,6 @@ public readonly partial struct CategorizeTextAggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationFilters(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.CategorizationFilters = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// This property expects an array of regular expressions. The expressions are used to filter out matching
-	/// sequences from the categorization field values. You can use this functionality to fine tune the categorization
-	/// by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
-	/// statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
-	/// If you only want to define simple regular expression filters that are applied prior to tokenization, setting
-	/// this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
-	/// use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationFilters()
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// This property expects an array of regular expressions. The expressions are used to filter out matching
-	/// sequences from the categorization field values. You can use this functionality to fine tune the categorization
-	/// by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
-	/// statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
-	/// If you only want to define simple regular expression filters that are applied prior to tokenization, setting
-	/// this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
-	/// use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationFilters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -545,9 +511,9 @@ public readonly partial struct CategorizeTextAggregationDescriptor
 	/// cannot be used at the same time as categorization_filters.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerBuilder, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
 	{
-		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerBuilder.Build(action);
+		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory.Build(action);
 		return this;
 	}
 
@@ -565,40 +531,6 @@ public readonly partial struct CategorizeTextAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationFilters(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.CategorizationFilters = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// This property expects an array of regular expressions. The expressions are used to filter out matching
-	/// sequences from the categorization field values. You can use this functionality to fine tune the categorization
-	/// by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
-	/// statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
-	/// If you only want to define simple regular expression filters that are applied prior to tokenization, setting
-	/// this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
-	/// use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationFilters()
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// This property expects an array of regular expressions. The expressions are used to filter out matching
-	/// sequences from the categorization field values. You can use this functionality to fine tune the categorization
-	/// by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
-	/// statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
-	/// If you only want to define simple regular expression filters that are applied prior to tokenization, setting
-	/// this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
-	/// use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationFilters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

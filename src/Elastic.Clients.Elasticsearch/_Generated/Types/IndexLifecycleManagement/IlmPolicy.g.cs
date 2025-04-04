@@ -146,7 +146,7 @@ public readonly partial struct IlmPolicyDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -155,9 +155,9 @@ public readonly partial struct IlmPolicyDescriptor
 	/// Arbitrary metadata that is not automatically generated or used by Elasticsearch.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

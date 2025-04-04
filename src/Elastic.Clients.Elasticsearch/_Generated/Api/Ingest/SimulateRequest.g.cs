@@ -244,28 +244,6 @@ public readonly partial struct SimulateRequestDescriptor
 	/// Sample documents to test in the pipeline.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Docs(params Elastic.Clients.Elasticsearch.Ingest.Document[] values)
 	{
 		Instance.Docs = [.. values];
@@ -457,28 +435,6 @@ public readonly partial struct SimulateRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
 		Instance.Docs = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(action);
 		return this;
 	}
 

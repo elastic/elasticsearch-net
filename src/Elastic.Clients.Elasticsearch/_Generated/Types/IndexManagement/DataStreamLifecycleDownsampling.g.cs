@@ -134,28 +134,6 @@ public readonly partial struct DataStreamLifecycleDownsamplingDescriptor
 	/// The list of downsampling rounds to execute as part of this downsampling configuration
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor Rounds()
-	{
-		Instance.Rounds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDownsamplingRound.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor Rounds(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDownsamplingRound>? action)
-	{
-		Instance.Rounds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDownsamplingRound.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor Rounds(params Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound[] values)
 	{
 		Instance.Rounds = [.. values];

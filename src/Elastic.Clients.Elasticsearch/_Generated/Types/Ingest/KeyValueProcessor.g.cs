@@ -402,28 +402,6 @@ public readonly partial struct KeyValueProcessorDescriptor<TDocument>
 	/// List of keys to exclude from document.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ExcludeKeys()
-	{
-		Instance.ExcludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ExcludeKeys(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.ExcludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ExcludeKeys(params string[] values)
 	{
 		Instance.ExcludeKeys = [.. values];
@@ -538,30 +516,6 @@ public readonly partial struct KeyValueProcessorDescriptor<TDocument>
 	/// Defaults to including all keys.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IncludeKeys()
-	{
-		Instance.IncludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of keys to filter and insert into document.
-	/// Defaults to including all keys.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IncludeKeys(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.IncludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of keys to filter and insert into document.
-	/// Defaults to including all keys.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IncludeKeys(params string[] values)
 	{
 		Instance.IncludeKeys = [.. values];
@@ -576,28 +530,6 @@ public readonly partial struct KeyValueProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -778,28 +710,6 @@ public readonly partial struct KeyValueProcessorDescriptor
 	/// List of keys to exclude from document.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ExcludeKeys()
-	{
-		Instance.ExcludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ExcludeKeys(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.ExcludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ExcludeKeys(params string[] values)
 	{
 		Instance.ExcludeKeys = [.. values];
@@ -914,30 +824,6 @@ public readonly partial struct KeyValueProcessorDescriptor
 	/// Defaults to including all keys.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IncludeKeys()
-	{
-		Instance.IncludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of keys to filter and insert into document.
-	/// Defaults to including all keys.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IncludeKeys(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.IncludeKeys = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of keys to filter and insert into document.
-	/// Defaults to including all keys.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IncludeKeys(params string[] values)
 	{
 		Instance.IncludeKeys = [.. values];
@@ -952,39 +838,6 @@ public readonly partial struct KeyValueProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
 		return this;
 	}
 

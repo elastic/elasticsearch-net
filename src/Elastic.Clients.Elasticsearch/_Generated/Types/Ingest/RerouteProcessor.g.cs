@@ -277,48 +277,6 @@ public readonly partial struct RerouteProcessorDescriptor<TDocument>
 	/// default {{data_stream.dataset}}
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Dataset()
-	{
-		Instance.Dataset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the dataset part of the data stream name.
-	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
-	/// Example values are nginx.access and nginx.error.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.dataset}}
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Dataset(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Dataset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the dataset part of the data stream name.
-	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
-	/// Example values are nginx.access and nginx.error.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.dataset}}
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Dataset(params string[] values)
 	{
 		Instance.Dataset = [.. values];
@@ -426,46 +384,6 @@ public readonly partial struct RerouteProcessorDescriptor<TDocument>
 	/// default {{data_stream.namespace}}
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Namespace()
-	{
-		Instance.Namespace = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Namespace(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Namespace = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Namespace(params string[] values)
 	{
 		Instance.Namespace = [.. values];
@@ -480,28 +398,6 @@ public readonly partial struct RerouteProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -596,48 +492,6 @@ public readonly partial struct RerouteProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Dataset(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Dataset = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the dataset part of the data stream name.
-	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
-	/// Example values are nginx.access and nginx.error.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.dataset}}
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Dataset()
-	{
-		Instance.Dataset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the dataset part of the data stream name.
-	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
-	/// Example values are nginx.access and nginx.error.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.dataset}}
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Dataset(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Dataset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -763,46 +617,6 @@ public readonly partial struct RerouteProcessorDescriptor
 	/// default {{data_stream.namespace}}
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Namespace()
-	{
-		Instance.Namespace = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Namespace(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Namespace = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Namespace(params string[] values)
 	{
 		Instance.Namespace = [.. values];
@@ -817,39 +631,6 @@ public readonly partial struct RerouteProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
 		return this;
 	}
 

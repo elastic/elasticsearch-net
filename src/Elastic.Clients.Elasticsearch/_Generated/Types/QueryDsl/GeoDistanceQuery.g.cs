@@ -279,9 +279,9 @@ public readonly partial struct GeoDistanceQueryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument> Location(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument> Location(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		Instance.Location = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		Instance.Location = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
@@ -399,9 +399,9 @@ public readonly partial struct GeoDistanceQueryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor Location(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor Location(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		Instance.Location = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		Instance.Location = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 

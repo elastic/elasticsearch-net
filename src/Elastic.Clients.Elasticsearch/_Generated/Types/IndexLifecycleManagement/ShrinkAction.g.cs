@@ -135,9 +135,9 @@ public readonly partial struct ShrinkActionDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor MaxPrimaryShardSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor MaxPrimaryShardSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxPrimaryShardSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxPrimaryShardSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

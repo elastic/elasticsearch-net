@@ -150,18 +150,6 @@ public readonly partial struct MultiplexerTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor Filters()
-	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor Filters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor Filters(params string[] values)
 	{
 		Instance.Filters = [.. values];

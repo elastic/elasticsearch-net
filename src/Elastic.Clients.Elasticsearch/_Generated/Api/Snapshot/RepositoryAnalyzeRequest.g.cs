@@ -639,9 +639,9 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// For realistic experiments, you should set it to at least <c>2gb</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxBlobSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxBlobSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxBlobSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxBlobSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -663,9 +663,9 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// For realistic experiments, you should set it to at least <c>1tb</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxTotalDataSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxTotalDataSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxTotalDataSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxTotalDataSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

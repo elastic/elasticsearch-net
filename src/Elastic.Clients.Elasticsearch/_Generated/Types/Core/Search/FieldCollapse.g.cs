@@ -211,28 +211,6 @@ public readonly partial struct FieldCollapseDescriptor<TDocument>
 	/// The number of inner hits and their sort order
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> InnerHits()
-	{
-		Instance.InnerHits = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInnerHits<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> InnerHits(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInnerHits<TDocument>>? action)
-	{
-		Instance.InnerHits = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInnerHits<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> InnerHits(params Elastic.Clients.Elasticsearch.Core.Search.InnerHits[] values)
 	{
 		Instance.InnerHits = [.. values];
@@ -343,39 +321,6 @@ public readonly partial struct FieldCollapseDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor InnerHits(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? value)
 	{
 		Instance.InnerHits = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor InnerHits()
-	{
-		Instance.InnerHits = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInnerHits.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor InnerHits(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInnerHits>? action)
-	{
-		Instance.InnerHits = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInnerHits.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor InnerHits<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInnerHits<T>>? action)
-	{
-		Instance.InnerHits = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInnerHits<T>.Build(action);
 		return this;
 	}
 

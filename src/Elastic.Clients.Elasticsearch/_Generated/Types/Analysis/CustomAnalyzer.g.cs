@@ -169,18 +169,6 @@ public readonly partial struct CustomAnalyzerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor CharFilter()
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor CharFilter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor CharFilter(params string[] values)
 	{
 		Instance.CharFilter = [.. values];
@@ -190,18 +178,6 @@ public readonly partial struct CustomAnalyzerDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor Filter(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Filter = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzerDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

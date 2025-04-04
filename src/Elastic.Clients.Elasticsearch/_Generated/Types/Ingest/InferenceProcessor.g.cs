@@ -281,7 +281,7 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> FieldMap()
 	{
-		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldObject<TDocument>.Build(null);
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<TDocument>.Build(null);
 		return this;
 	}
 
@@ -291,9 +291,9 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 	/// This mapping takes precedence over any default mappings provided in the model configuration.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> FieldMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldObject<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> FieldMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<TDocument>>? action)
 	{
-		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldObject<TDocument>.Build(action);
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<TDocument>.Build(action);
 		return this;
 	}
 
@@ -396,28 +396,6 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -543,7 +521,7 @@ public readonly partial struct InferenceProcessorDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap()
 	{
-		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldObject.Build(null);
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject.Build(null);
 		return this;
 	}
 
@@ -553,9 +531,9 @@ public readonly partial struct InferenceProcessorDescriptor
 	/// This mapping takes precedence over any default mappings provided in the model configuration.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldObject>? action)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject>? action)
 	{
-		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldObject.Build(action);
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject.Build(action);
 		return this;
 	}
 
@@ -565,9 +543,9 @@ public readonly partial struct InferenceProcessorDescriptor
 	/// This mapping takes precedence over any default mappings provided in the model configuration.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldObject<T>>? action)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<T>>? action)
 	{
-		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldObject<T>.Build(action);
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<T>.Build(action);
 		return this;
 	}
 
@@ -681,39 +659,6 @@ public readonly partial struct InferenceProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
 		return this;
 	}
 

@@ -176,9 +176,9 @@ public readonly partial struct TermsQueryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument> Terms(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument> Terms(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
 	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder<TDocument>.Build(action);
+		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -248,15 +248,15 @@ public readonly partial struct TermsQueryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor Terms(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor Terms(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
 	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder.Build(action);
+		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor Terms<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor Terms<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
 	{
-		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder<T>.Build(action);
+		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory<T>.Build(action);
 		return this;
 	}
 

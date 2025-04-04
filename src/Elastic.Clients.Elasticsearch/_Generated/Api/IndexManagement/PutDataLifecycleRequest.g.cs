@@ -268,32 +268,6 @@ public readonly partial struct PutDataLifecycleRequestDescriptor
 	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];

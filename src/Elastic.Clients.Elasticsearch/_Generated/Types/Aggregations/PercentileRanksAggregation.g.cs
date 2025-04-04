@@ -328,28 +328,6 @@ public readonly partial struct PercentileRanksAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of values for which to calculate the percentile ranks.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Values()
-	{
-		Instance.Values = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of values for which to calculate the percentile ranks.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Values(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		Instance.Values = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
-		return this;
-	}
-
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	internal static Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>>? action)
 	{
@@ -515,28 +493,6 @@ public readonly partial struct PercentileRanksAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Values(System.Collections.Generic.ICollection<double>? value)
 	{
 		Instance.Values = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of values for which to calculate the percentile ranks.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Values()
-	{
-		Instance.Values = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of values for which to calculate the percentile ranks.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Values(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		Instance.Values = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
 		return this;
 	}
 

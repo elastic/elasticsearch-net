@@ -198,28 +198,6 @@ public readonly partial struct RrfRetrieverDescriptor<TDocument>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -292,28 +270,6 @@ public readonly partial struct RrfRetrieverDescriptor<TDocument>
 	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers()
-	{
-		Instance.Retrievers = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRetriever<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRetriever<TDocument>>? action)
-	{
-		Instance.Retrievers = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRetriever<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(params Elastic.Clients.Elasticsearch.Retriever[] values)
 	{
 		Instance.Retrievers = [.. values];
@@ -373,39 +329,6 @@ public readonly partial struct RrfRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
 		return this;
 	}
 
@@ -495,39 +418,6 @@ public readonly partial struct RrfRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> value)
 	{
 		Instance.Retrievers = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers()
-	{
-		Instance.Retrievers = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRetriever.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRetriever>? action)
-	{
-		Instance.Retrievers = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRetriever.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRetriever<T>>? action)
-	{
-		Instance.Retrievers = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRetriever<T>.Build(action);
 		return this;
 	}
 

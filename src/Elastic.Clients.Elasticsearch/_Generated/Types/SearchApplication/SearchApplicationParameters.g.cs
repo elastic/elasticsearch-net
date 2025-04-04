@@ -177,28 +177,6 @@ public readonly partial struct SearchApplicationParametersDescriptor
 	/// Indices that are part of the Search Application.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor Indices()
-	{
-		Instance.Indices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Indices that are part of the Search Application.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor Indices(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName>? action)
-	{
-		Instance.Indices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Indices that are part of the Search Application.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor Indices(params Elastic.Clients.Elasticsearch.IndexName[] values)
 	{
 		Instance.Indices = [.. values];

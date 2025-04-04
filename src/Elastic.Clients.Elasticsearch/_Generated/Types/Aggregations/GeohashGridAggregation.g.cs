@@ -190,9 +190,9 @@ public readonly partial struct GeohashGridAggregationDescriptor<TDocument>
 	/// The bounding box to filter the points in each bucket.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
@@ -236,9 +236,9 @@ public readonly partial struct GeohashGridAggregationDescriptor<TDocument>
 	/// The string length of the geohashes used to define cells/buckets in the results.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Precision(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionBuilder, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Precision(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionFactory, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
 	{
-		Instance.Precision = Elastic.Clients.Elasticsearch.GeohashPrecisionBuilder.Build(action);
+		Instance.Precision = Elastic.Clients.Elasticsearch.GeohashPrecisionFactory.Build(action);
 		return this;
 	}
 
@@ -314,9 +314,9 @@ public readonly partial struct GeohashGridAggregationDescriptor
 	/// The bounding box to filter the points in each bucket.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
@@ -360,9 +360,9 @@ public readonly partial struct GeohashGridAggregationDescriptor
 	/// The string length of the geohashes used to define cells/buckets in the results.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Precision(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionBuilder, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Precision(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionFactory, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
 	{
-		Instance.Precision = Elastic.Clients.Elasticsearch.GeohashPrecisionBuilder.Build(action);
+		Instance.Precision = Elastic.Clients.Elasticsearch.GeohashPrecisionFactory.Build(action);
 		return this;
 	}
 

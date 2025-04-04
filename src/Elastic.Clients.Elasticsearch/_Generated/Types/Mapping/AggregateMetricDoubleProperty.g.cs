@@ -262,7 +262,7 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor<TDocument
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -271,9 +271,9 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor<TDocument
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -287,18 +287,6 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor<TDocument
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> Metrics(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Metrics = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> Metrics()
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -414,7 +402,7 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -423,9 +411,9 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -439,18 +427,6 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor Metrics(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Metrics = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor Metrics()
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

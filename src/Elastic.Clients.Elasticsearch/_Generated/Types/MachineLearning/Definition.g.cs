@@ -150,28 +150,6 @@ public readonly partial struct DefinitionDescriptor
 	/// Collection of preprocessors
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor Preprocessors()
-	{
-		Instance.Preprocessors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPreprocessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Collection of preprocessors
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor Preprocessors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPreprocessor>? action)
-	{
-		Instance.Preprocessors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPreprocessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Collection of preprocessors
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor Preprocessors(params Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor[] values)
 	{
 		Instance.Preprocessors = [.. values];

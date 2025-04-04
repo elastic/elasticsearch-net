@@ -178,18 +178,6 @@ public readonly partial struct EdgeNGramTokenizerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor TokenChars()
-	{
-		Instance.TokenChars = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTokenChar.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor TokenChars(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTokenChar>? action)
-	{
-		Instance.TokenChars = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTokenChar.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor TokenChars(params Elastic.Clients.Elasticsearch.Analysis.TokenChar[] values)
 	{
 		Instance.TokenChars = [.. values];

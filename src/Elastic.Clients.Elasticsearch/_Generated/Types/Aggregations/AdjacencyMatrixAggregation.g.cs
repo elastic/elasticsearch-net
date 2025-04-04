@@ -145,7 +145,7 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument> Filters()
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<TDocument>.Build(null);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<TDocument>.Build(null);
 		return this;
 	}
 
@@ -155,9 +155,9 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor<TDocument>
 	/// At least one filter is required.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument> Filters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument> Filters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<TDocument>>? action)
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<TDocument>.Build(action);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<TDocument>.Build(action);
 		return this;
 	}
 
@@ -239,7 +239,7 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Filters()
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery.Build(null);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery.Build(null);
 		return this;
 	}
 
@@ -249,9 +249,9 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor
 	/// At least one filter is required.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Filters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Filters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery>? action)
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery.Build(action);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery.Build(action);
 		return this;
 	}
 
@@ -261,9 +261,9 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor
 	/// At least one filter is required.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Filters<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<T>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Filters<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<T>>? action)
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<T>.Build(action);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<T>.Build(action);
 		return this;
 	}
 

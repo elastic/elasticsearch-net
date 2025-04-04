@@ -536,36 +536,6 @@ public readonly partial struct RestoreRequestDescriptor
 	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor FeatureStates()
-	{
-		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The feature states to restore.
-	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
-	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
-	/// Note that specifying an empty array will result in the default behavior.
-	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor FeatureStates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The feature states to restore.
-	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
-	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
-	/// Note that specifying an empty array will result in the default behavior.
-	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor FeatureStates(params string[] values)
 	{
 		Instance.FeatureStates = [.. values];
@@ -585,38 +555,6 @@ public readonly partial struct RestoreRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IgnoreIndexSettings(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IgnoreIndexSettings = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The index settings to not restore from the snapshot.
-	/// You can't use this option to ignore <c>index.number_of_shards</c>.
-	/// </para>
-	/// <para>
-	/// For data streams, this option applies only to restored backing indices.
-	/// New backing indices are configured using the data stream's matching index template.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IgnoreIndexSettings()
-	{
-		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The index settings to not restore from the snapshot.
-	/// You can't use this option to ignore <c>index.number_of_shards</c>.
-	/// </para>
-	/// <para>
-	/// For data streams, this option applies only to restored backing indices.
-	/// New backing indices are configured using the data stream's matching index template.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor IgnoreIndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1017,36 +955,6 @@ public readonly partial struct RestoreRequestDescriptor<TDocument>
 	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> FeatureStates()
-	{
-		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The feature states to restore.
-	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
-	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
-	/// Note that specifying an empty array will result in the default behavior.
-	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> FeatureStates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The feature states to restore.
-	/// If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
-	/// If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
-	/// Note that specifying an empty array will result in the default behavior.
-	/// To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> FeatureStates(params string[] values)
 	{
 		Instance.FeatureStates = [.. values];
@@ -1066,38 +974,6 @@ public readonly partial struct RestoreRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IgnoreIndexSettings(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IgnoreIndexSettings = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The index settings to not restore from the snapshot.
-	/// You can't use this option to ignore <c>index.number_of_shards</c>.
-	/// </para>
-	/// <para>
-	/// For data streams, this option applies only to restored backing indices.
-	/// New backing indices are configured using the data stream's matching index template.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IgnoreIndexSettings()
-	{
-		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The index settings to not restore from the snapshot.
-	/// You can't use this option to ignore <c>index.number_of_shards</c>.
-	/// </para>
-	/// <para>
-	/// For data streams, this option applies only to restored backing indices.
-	/// New backing indices are configured using the data stream's matching index template.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> IgnoreIndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.IgnoreIndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

@@ -139,18 +139,6 @@ public readonly partial struct RomanianAnalyzerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor StemExclusion()
-	{
-		Instance.StemExclusion = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor StemExclusion(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.StemExclusion = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor StemExclusion(params string[] values)
 	{
 		Instance.StemExclusion = [.. values];
@@ -160,18 +148,6 @@ public readonly partial struct RomanianAnalyzerDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor Stopwords(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stopwords = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor Stopwords()
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzerDescriptor Stopwords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stopwords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

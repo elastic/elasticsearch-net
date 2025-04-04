@@ -273,9 +273,9 @@ public readonly partial struct RolloverConditionsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor MaxPrimaryShardSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor MaxPrimaryShardSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxPrimaryShardSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxPrimaryShardSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -291,9 +291,9 @@ public readonly partial struct RolloverConditionsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor MaxSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor MaxSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -327,9 +327,9 @@ public readonly partial struct RolloverConditionsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor MinPrimaryShardSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor MinPrimaryShardSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MinPrimaryShardSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MinPrimaryShardSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -345,9 +345,9 @@ public readonly partial struct RolloverConditionsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor MinSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor MinSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MinSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MinSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

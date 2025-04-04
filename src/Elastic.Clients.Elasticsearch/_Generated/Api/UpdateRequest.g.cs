@@ -805,9 +805,9 @@ public readonly partial struct UpdateRequestDescriptor<TDocument, TPartialDocume
 	/// You can also specify a comma-separated list of the fields you want to retrieve.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 

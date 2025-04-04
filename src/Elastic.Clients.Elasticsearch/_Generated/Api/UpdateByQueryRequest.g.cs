@@ -1082,34 +1082,6 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -1293,9 +1265,9 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 	/// The number of slices this task should be divided into.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesBuilder, Elastic.Clients.Elasticsearch.Slices> action)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
-		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesBuilder.Build(action);
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 
@@ -1307,28 +1279,6 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Sort(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1351,28 +1301,6 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Stats()
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Stats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1918,34 +1846,6 @@ public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -2129,9 +2029,9 @@ public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 	/// The number of slices this task should be divided into.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesBuilder, Elastic.Clients.Elasticsearch.Slices> action)
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
-		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesBuilder.Build(action);
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 
@@ -2143,28 +2043,6 @@ public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -2187,28 +2065,6 @@ public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Stats()
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Stats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

@@ -540,34 +540,6 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -662,32 +634,6 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// a new date field is added instead of string.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicDateFormats()
-	{
-		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If date detection is enabled then new string fields are checked
-	/// against 'dynamic_date_formats' and if the value matches then
-	/// a new date field is added instead of string.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicDateFormats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If date detection is enabled then new string fields are checked
-	/// against 'dynamic_date_formats' and if the value matches then
-	/// a new date field is added instead of string.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicDateFormats(params string[] values)
 	{
 		Instance.DynamicDateFormats = [.. values];
@@ -712,7 +658,7 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicTemplates()
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate.Build(null);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate.Build(null);
 		return this;
 	}
 
@@ -721,9 +667,9 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// Specify dynamic templates for the mapping.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate>? action)
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate.Build(action);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate.Build(action);
 		return this;
 	}
 
@@ -732,9 +678,9 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// Specify dynamic templates for the mapping.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicTemplates<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<T>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicTemplates<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<T>>? action)
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<T>.Build(action);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<T>.Build(action);
 		return this;
 	}
 
@@ -803,7 +749,7 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -814,9 +760,9 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// application-specific metadata.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -962,7 +908,7 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Runtime()
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(null);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
@@ -971,9 +917,9 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// Mapping of runtime fields for the index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(action);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
@@ -982,9 +928,9 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// Mapping of runtime fields for the index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Runtime<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Runtime<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>.Build(action);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
 		return this;
 	}
 
@@ -1224,34 +1170,6 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -1346,32 +1264,6 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// a new date field is added instead of string.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicDateFormats()
-	{
-		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If date detection is enabled then new string fields are checked
-	/// against 'dynamic_date_formats' and if the value matches then
-	/// a new date field is added instead of string.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicDateFormats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If date detection is enabled then new string fields are checked
-	/// against 'dynamic_date_formats' and if the value matches then
-	/// a new date field is added instead of string.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicDateFormats(params string[] values)
 	{
 		Instance.DynamicDateFormats = [.. values];
@@ -1396,7 +1288,7 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicTemplates()
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(null);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(null);
 		return this;
 	}
 
@@ -1405,9 +1297,9 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// Specify dynamic templates for the mapping.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>>? action)
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(action);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(action);
 		return this;
 	}
 
@@ -1469,7 +1361,7 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -1480,9 +1372,9 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// application-specific metadata.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -1600,7 +1492,7 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Runtime()
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
@@ -1609,9 +1501,9 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// Mapping of runtime fields for the index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
 		return this;
 	}
 

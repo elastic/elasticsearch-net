@@ -210,28 +210,6 @@ public readonly partial struct HopDescriptor<TDocument>
 	/// Contains the fields you are interested in.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices()
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<TDocument>>? action)
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices(params Elastic.Clients.Elasticsearch.Graph.VertexDefinition[] values)
 	{
 		Instance.Vertices = [.. values];
@@ -357,39 +335,6 @@ public readonly partial struct HopDescriptor
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> value)
 	{
 		Instance.Vertices = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices()
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition>? action)
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<T>>? action)
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<T>.Build(action);
 		return this;
 	}
 

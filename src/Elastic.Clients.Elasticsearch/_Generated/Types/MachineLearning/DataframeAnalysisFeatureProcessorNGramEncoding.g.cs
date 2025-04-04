@@ -264,28 +264,6 @@ public readonly partial struct DataframeAnalysisFeatureProcessorNGramEncodingDes
 	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> NGrams()
-	{
-		Instance.NGrams = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInt.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> NGrams(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInt>? action)
-	{
-		Instance.NGrams = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInt.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> NGrams(params int[] values)
 	{
 		Instance.NGrams = [.. values];
@@ -389,28 +367,6 @@ public readonly partial struct DataframeAnalysisFeatureProcessorNGramEncodingDes
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor NGrams(System.Collections.Generic.ICollection<int> value)
 	{
 		Instance.NGrams = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor NGrams()
-	{
-		Instance.NGrams = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInt.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor NGrams(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInt>? action)
-	{
-		Instance.NGrams = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInt.Build(action);
 		return this;
 	}
 

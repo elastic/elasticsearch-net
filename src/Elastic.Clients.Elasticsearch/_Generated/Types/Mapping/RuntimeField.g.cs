@@ -246,28 +246,6 @@ public readonly partial struct RuntimeFieldDescriptor<TDocument>
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> FetchFields()
-	{
-		Instance.FetchFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuntimeFieldFetchFields<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> FetchFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuntimeFieldFetchFields<TDocument>>? action)
-	{
-		Instance.FetchFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuntimeFieldFetchFields<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> FetchFields(params Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields[] values)
 	{
 		Instance.FetchFields = [.. values];
@@ -309,7 +287,7 @@ public readonly partial struct RuntimeFieldDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Fields()
 	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeSubField.Build(null);
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(null);
 		return this;
 	}
 
@@ -318,9 +296,9 @@ public readonly partial struct RuntimeFieldDescriptor<TDocument>
 	/// For type <c>composite</c>
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeSubField>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField>? action)
 	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeSubField.Build(action);
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(action);
 		return this;
 	}
 
@@ -492,39 +470,6 @@ public readonly partial struct RuntimeFieldDescriptor
 	/// For type <c>lookup</c>
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields()
-	{
-		Instance.FetchFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuntimeFieldFetchFields.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuntimeFieldFetchFields>? action)
-	{
-		Instance.FetchFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuntimeFieldFetchFields.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuntimeFieldFetchFields<T>>? action)
-	{
-		Instance.FetchFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuntimeFieldFetchFields<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields(params Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields[] values)
 	{
 		Instance.FetchFields = [.. values];
@@ -583,7 +528,7 @@ public readonly partial struct RuntimeFieldDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Fields()
 	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeSubField.Build(null);
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(null);
 		return this;
 	}
 
@@ -592,9 +537,9 @@ public readonly partial struct RuntimeFieldDescriptor
 	/// For type <c>composite</c>
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeSubField>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField>? action)
 	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringCompositeSubField.Build(action);
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(action);
 		return this;
 	}
 

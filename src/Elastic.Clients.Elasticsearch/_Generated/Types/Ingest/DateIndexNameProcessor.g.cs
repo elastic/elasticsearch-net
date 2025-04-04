@@ -325,30 +325,6 @@ public readonly partial struct DateIndexNameProcessorDescriptor<TDocument>
 	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> DateFormats()
-	{
-		Instance.DateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> DateFormats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.DateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> DateFormats(params string[] values)
 	{
 		Instance.DateFormats = [.. values];
@@ -498,28 +474,6 @@ public readonly partial struct DateIndexNameProcessorDescriptor<TDocument>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
@@ -603,30 +557,6 @@ public readonly partial struct DateIndexNameProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor DateFormats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.DateFormats = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor DateFormats()
-	{
-		Instance.DateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor DateFormats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.DateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -777,39 +707,6 @@ public readonly partial struct DateIndexNameProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
 		return this;
 	}
 

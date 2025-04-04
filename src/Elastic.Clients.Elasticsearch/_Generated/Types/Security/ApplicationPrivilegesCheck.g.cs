@@ -190,30 +190,6 @@ public readonly partial struct ApplicationPrivilegesCheckDescriptor
 	/// It may be either application privilege names or the names of actions that are granted by those privileges
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Privileges()
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified resources.
-	/// It may be either application privilege names or the names of actions that are granted by those privileges
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified resources.
-	/// It may be either application privilege names or the names of actions that are granted by those privileges
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Privileges(params string[] values)
 	{
 		Instance.Privileges = [.. values];
@@ -228,28 +204,6 @@ public readonly partial struct ApplicationPrivilegesCheckDescriptor
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Resources(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Resources = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of resource names against which the privileges should be checked.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Resources()
-	{
-		Instance.Resources = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of resource names against which the privileges should be checked.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Resources(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Resources = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

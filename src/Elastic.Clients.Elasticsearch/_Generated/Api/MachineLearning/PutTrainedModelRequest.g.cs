@@ -603,28 +603,6 @@ public readonly partial struct PutTrainedModelRequestDescriptor
 	/// An array of tags to organize the model.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Tags()
-	{
-		Instance.Tags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of tags to organize the model.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Tags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Tags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of tags to organize the model.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Tags(params string[] values)
 	{
 		Instance.Tags = [.. values];
@@ -939,28 +917,6 @@ public readonly partial struct PutTrainedModelRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Tags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Tags = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of tags to organize the model.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Tags()
-	{
-		Instance.Tags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of tags to organize the model.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Tags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Tags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

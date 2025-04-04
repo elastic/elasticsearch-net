@@ -318,18 +318,6 @@ public readonly partial struct WordDelimiterGraphTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor ProtectedWords()
-	{
-		Instance.ProtectedWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor ProtectedWords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.ProtectedWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor ProtectedWords(params string[] values)
 	{
 		Instance.ProtectedWords = [.. values];
@@ -363,18 +351,6 @@ public readonly partial struct WordDelimiterGraphTokenFilterDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor TypeTable(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.TypeTable = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor TypeTable()
-	{
-		Instance.TypeTable = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilterDescriptor TypeTable(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.TypeTable = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

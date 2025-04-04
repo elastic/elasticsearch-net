@@ -79,7 +79,7 @@ public sealed partial class FieldDateMath : Elastic.Clients.Elasticsearch.Union<
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(double value) => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
 }
 
-public readonly partial struct FieldDateMathBuilder
+public readonly partial struct FieldDateMathFactory
 {
 	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath Expr(Elastic.Clients.Elasticsearch.DateMath value)
 	{
@@ -92,9 +92,9 @@ public readonly partial struct FieldDateMathBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory();
 		return action.Invoke(builder);
 	}
 }

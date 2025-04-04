@@ -508,28 +508,6 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Like()
-	{
-		Instance.Like = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Like(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<TDocument>>? action)
-	{
-		Instance.Like = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Like(params Elastic.Clients.Elasticsearch.QueryDsl.Like[] values)
 	{
 		Instance.Like = [.. values];
@@ -541,12 +519,12 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Like(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Like(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<TDocument>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>.Build(action));
 		}
 
 		Instance.Like = items;
@@ -661,30 +639,6 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 	/// Any word in this set is ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> StopWords()
-	{
-		Instance.StopWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of stop words.
-	/// Any word in this set is ignored.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> StopWords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.StopWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of stop words.
-	/// Any word in this set is ignored.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> StopWords(params string[] values)
 	{
 		Instance.StopWords = [.. values];
@@ -707,28 +661,6 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Unlike()
-	{
-		Instance.Unlike = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Unlike(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<TDocument>>? action)
-	{
-		Instance.Unlike = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Unlike(params Elastic.Clients.Elasticsearch.QueryDsl.Like[] values)
 	{
 		Instance.Unlike = [.. values];
@@ -740,12 +672,12 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Unlike(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Unlike(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<TDocument>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>.Build(action));
 		}
 
 		Instance.Unlike = items;
@@ -893,39 +825,6 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like()
-	{
-		Instance.Like = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike>? action)
-	{
-		Instance.Like = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<T>>? action)
-	{
-		Instance.Like = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like(params Elastic.Clients.Elasticsearch.QueryDsl.Like[] values)
 	{
 		Instance.Like = [.. values];
@@ -937,12 +836,12 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory.Build(action));
 		}
 
 		Instance.Like = items;
@@ -954,12 +853,12 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like<T>(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like<T>(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<T>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<T>.Build(action));
 		}
 
 		Instance.Like = items;
@@ -1074,30 +973,6 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 	/// Any word in this set is ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor StopWords()
-	{
-		Instance.StopWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of stop words.
-	/// Any word in this set is ignored.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor StopWords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.StopWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of stop words.
-	/// Any word in this set is ignored.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor StopWords(params string[] values)
 	{
 		Instance.StopWords = [.. values];
@@ -1120,39 +995,6 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike()
-	{
-		Instance.Unlike = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike>? action)
-	{
-		Instance.Unlike = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<T>>? action)
-	{
-		Instance.Unlike = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfLike<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike(params Elastic.Clients.Elasticsearch.QueryDsl.Like[] values)
 	{
 		Instance.Unlike = [.. values];
@@ -1164,12 +1006,12 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory.Build(action));
 		}
 
 		Instance.Unlike = items;
@@ -1181,12 +1023,12 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike<T>(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike<T>(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeBuilder<T>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<T>.Build(action));
 		}
 
 		Instance.Unlike = items;

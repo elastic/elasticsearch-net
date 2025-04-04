@@ -290,30 +290,6 @@ public readonly partial struct ShardStoresRequestDescriptor
 	/// this argument determines whether wildcard expressions match hidden data streams.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -339,28 +315,6 @@ public readonly partial struct ShardStoresRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor Status(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? value)
 	{
 		Instance.Status = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor Status()
-	{
-		Instance.Status = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfShardStoreStatus.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor Status(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfShardStoreStatus>? action)
-	{
-		Instance.Status = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfShardStoreStatus.Build(action);
 		return this;
 	}
 
@@ -531,30 +485,6 @@ public readonly partial struct ShardStoresRequestDescriptor<TDocument>
 	/// this argument determines whether wildcard expressions match hidden data streams.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -580,28 +510,6 @@ public readonly partial struct ShardStoresRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Status(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? value)
 	{
 		Instance.Status = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Status()
-	{
-		Instance.Status = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfShardStoreStatus.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Status(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfShardStoreStatus>? action)
-	{
-		Instance.Status = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfShardStoreStatus.Build(action);
 		return this;
 	}
 

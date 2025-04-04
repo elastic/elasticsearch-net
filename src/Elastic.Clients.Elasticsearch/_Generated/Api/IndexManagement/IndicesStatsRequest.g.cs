@@ -371,32 +371,6 @@ public readonly partial struct IndicesStatsRequestDescriptor
 	/// such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -466,28 +440,6 @@ public readonly partial struct IndicesStatsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Groups()
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Groups(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -706,32 +658,6 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 	/// such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -801,28 +727,6 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Groups()
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Groups(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

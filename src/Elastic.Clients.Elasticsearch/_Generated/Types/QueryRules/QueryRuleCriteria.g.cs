@@ -302,32 +302,6 @@ public readonly partial struct QueryRuleCriteriaDescriptor
 	/// It is required for all criteria types except <c>always</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor Values()
-	{
-		Instance.Values = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The values to match against the <c>metadata</c> field.
-	/// Only one value must match for the criteria to be met.
-	/// It is required for all criteria types except <c>always</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor Values(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject>? action)
-	{
-		Instance.Values = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The values to match against the <c>metadata</c> field.
-	/// Only one value must match for the criteria to be met.
-	/// It is required for all criteria types except <c>always</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor Values(params object[] values)
 	{
 		Instance.Values = [.. values];

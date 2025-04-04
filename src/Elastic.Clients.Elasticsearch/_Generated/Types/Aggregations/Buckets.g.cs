@@ -96,7 +96,7 @@ public sealed partial class Buckets<TBucket> : Elastic.Clients.Elasticsearch.Uni
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>(TBucket[] value) => new Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>(value);
 }
 
-public readonly partial struct BucketsOfQueryBuilder<TDocument>
+public readonly partial struct BucketsOfQueryFactory<TDocument>
 {
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query> value)
 	{
@@ -105,27 +105,17 @@ public readonly partial struct BucketsOfQueryBuilder<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed()
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<TDocument>.Build(null));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<TDocument>.Build(null));
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<TDocument>>? action)
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<TDocument>.Build(action));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<TDocument>.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Array(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> value)
 	{
 		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(value);
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Array()
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null));
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Array(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Array(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
@@ -145,14 +135,14 @@ public readonly partial struct BucketsOfQueryBuilder<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<TDocument>();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct BucketsOfQueryBuilder
+public readonly partial struct BucketsOfQueryFactory
 {
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query> value)
 	{
@@ -161,37 +151,22 @@ public readonly partial struct BucketsOfQueryBuilder
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed()
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery.Build(null));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery.Build(null));
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery>? action)
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery.Build(action));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery.Build(action));
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<T>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Keyed<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<T>>? action)
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQuery<T>.Build(action));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<T>.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Array(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> value)
 	{
 		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(value);
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Array()
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null));
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Array(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action));
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Array<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Array(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
@@ -222,14 +197,14 @@ public readonly partial struct BucketsOfQueryBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query> Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct BucketsOfApiKeyQueryBuilder<TDocument>
+public readonly partial struct BucketsOfApiKeyQueryFactory<TDocument>
 {
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> value)
 	{
@@ -238,27 +213,17 @@ public readonly partial struct BucketsOfApiKeyQueryBuilder<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed()
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyQuery<TDocument>.Build(null));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyQuery<TDocument>.Build(null));
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyQuery<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyQuery<TDocument>>? action)
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyQuery<TDocument>.Build(action));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyQuery<TDocument>.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Array(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> value)
 	{
 		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(value);
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Array()
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApiKeyQuery<TDocument>.Build(null));
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Array(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApiKeyQuery<TDocument>>? action)
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApiKeyQuery<TDocument>.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Array(params Elastic.Clients.Elasticsearch.Security.ApiKeyQuery[] values)
@@ -278,14 +243,14 @@ public readonly partial struct BucketsOfApiKeyQueryBuilder<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct BucketsOfApiKeyQueryBuilder
+public readonly partial struct BucketsOfApiKeyQueryFactory
 {
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> value)
 	{
@@ -294,37 +259,22 @@ public readonly partial struct BucketsOfApiKeyQueryBuilder
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed()
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyQuery.Build(null));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyQuery.Build(null));
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyQuery>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyQuery>? action)
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyQuery.Build(action));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyQuery.Build(action));
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyQuery<T>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Keyed<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyQuery<T>>? action)
 	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringApiKeyQuery<T>.Build(action));
+		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyQuery<T>.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Array(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> value)
 	{
 		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(value);
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Array()
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApiKeyQuery.Build(null));
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Array(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApiKeyQuery>? action)
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApiKeyQuery.Build(action));
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Array<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApiKeyQuery<T>>? action)
-	{
-		return new Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfApiKeyQuery<T>.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Array(params Elastic.Clients.Elasticsearch.Security.ApiKeyQuery[] values)
@@ -355,9 +305,9 @@ public readonly partial struct BucketsOfApiKeyQueryBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery> Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory();
 		return action.Invoke(builder);
 	}
 }

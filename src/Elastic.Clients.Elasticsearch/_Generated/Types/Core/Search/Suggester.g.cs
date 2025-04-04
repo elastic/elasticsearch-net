@@ -139,7 +139,7 @@ public readonly partial struct SuggesterDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> Suggesters()
 	{
-		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFieldSuggester<TDocument>.Build(null);
+		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<TDocument>.Build(null);
 		return this;
 	}
 
@@ -148,9 +148,9 @@ public readonly partial struct SuggesterDescriptor<TDocument>
 	/// The named suggesters
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> Suggesters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFieldSuggester<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> Suggesters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<TDocument>>? action)
 	{
-		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFieldSuggester<TDocument>.Build(action);
+		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<TDocument>.Build(action);
 		return this;
 	}
 
@@ -230,7 +230,7 @@ public readonly partial struct SuggesterDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Suggesters()
 	{
-		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFieldSuggester.Build(null);
+		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester.Build(null);
 		return this;
 	}
 
@@ -239,9 +239,9 @@ public readonly partial struct SuggesterDescriptor
 	/// The named suggesters
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Suggesters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFieldSuggester>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Suggesters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester>? action)
 	{
-		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFieldSuggester.Build(action);
+		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester.Build(action);
 		return this;
 	}
 
@@ -250,9 +250,9 @@ public readonly partial struct SuggesterDescriptor
 	/// The named suggesters
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Suggesters<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFieldSuggester<T>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Suggesters<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<T>>? action)
 	{
-		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFieldSuggester<T>.Build(action);
+		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<T>.Build(action);
 		return this;
 	}
 

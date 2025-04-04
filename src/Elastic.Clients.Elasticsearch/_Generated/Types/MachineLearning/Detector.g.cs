@@ -290,28 +290,6 @@ public readonly partial struct DetectorDescriptor<TDocument>
 	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules()
-	{
-		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<TDocument>>? action)
-	{
-		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules(params Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule[] values)
 	{
 		Instance.CustomRules = [.. values];
@@ -519,39 +497,6 @@ public readonly partial struct DetectorDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? value)
 	{
 		Instance.CustomRules = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules()
-	{
-		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule>? action)
-	{
-		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<T>>? action)
-	{
-		Instance.CustomRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectionRule<T>.Build(action);
 		return this;
 	}
 

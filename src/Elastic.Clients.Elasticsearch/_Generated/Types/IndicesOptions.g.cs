@@ -205,32 +205,6 @@ public readonly partial struct IndicesOptionsDescriptor
 	/// such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];

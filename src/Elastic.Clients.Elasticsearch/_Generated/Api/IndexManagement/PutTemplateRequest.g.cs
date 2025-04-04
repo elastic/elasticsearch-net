@@ -391,7 +391,7 @@ public readonly partial struct PutTemplateRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
 		return this;
 	}
 
@@ -400,9 +400,9 @@ public readonly partial struct PutTemplateRequestDescriptor
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
 		return this;
 	}
 
@@ -411,9 +411,9 @@ public readonly partial struct PutTemplateRequestDescriptor
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<T>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<T>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
 		return this;
 	}
 
@@ -482,30 +482,6 @@ public readonly partial struct PutTemplateRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor IndexPatterns(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IndexPatterns = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard expressions used to match the names
-	/// of indices during creation.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor IndexPatterns()
-	{
-		Instance.IndexPatterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard expressions used to match the names
-	/// of indices during creation.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor IndexPatterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.IndexPatterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -807,7 +783,7 @@ public readonly partial struct PutTemplateRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<TDocument>.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
 		return this;
 	}
 
@@ -816,9 +792,9 @@ public readonly partial struct PutTemplateRequestDescriptor<TDocument>
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameAlias<TDocument>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
 		return this;
 	}
 
@@ -880,30 +856,6 @@ public readonly partial struct PutTemplateRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> IndexPatterns(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IndexPatterns = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard expressions used to match the names
-	/// of indices during creation.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> IndexPatterns()
-	{
-		Instance.IndexPatterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard expressions used to match the names
-	/// of indices during creation.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> IndexPatterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.IndexPatterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

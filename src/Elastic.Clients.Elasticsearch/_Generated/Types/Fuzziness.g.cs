@@ -76,7 +76,7 @@ public sealed partial class Fuzziness : Elastic.Clients.Elasticsearch.Union<stri
 	public static implicit operator Elastic.Clients.Elasticsearch.Fuzziness(int value) => new Elastic.Clients.Elasticsearch.Fuzziness(value);
 }
 
-public readonly partial struct FuzzinessBuilder
+public readonly partial struct FuzzinessFactory
 {
 	public Elastic.Clients.Elasticsearch.Fuzziness Value(string value)
 	{
@@ -89,9 +89,9 @@ public readonly partial struct FuzzinessBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Fuzziness Build(System.Func<Elastic.Clients.Elasticsearch.FuzzinessBuilder, Elastic.Clients.Elasticsearch.Fuzziness> action)
+	internal static Elastic.Clients.Elasticsearch.Fuzziness Build(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.FuzzinessBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.FuzzinessFactory();
 		return action.Invoke(builder);
 	}
 }

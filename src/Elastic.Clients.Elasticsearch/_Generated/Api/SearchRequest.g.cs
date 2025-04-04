@@ -1483,32 +1483,6 @@ public readonly partial struct SearchRequestDescriptor
 	/// It supports comma-separated values such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -1873,7 +1847,7 @@ public readonly partial struct SearchRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
@@ -1882,9 +1856,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// Defines the aggregations that are run as part of the search request.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
@@ -1893,9 +1867,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// Defines the aggregations that are run as part of the search request.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
 		return this;
 	}
 
@@ -1962,42 +1936,6 @@ public readonly partial struct SearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor DocvalueFields()
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor DocvalueFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat>? action)
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor DocvalueFields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>>? action)
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>.Build(action);
 		return this;
 	}
 
@@ -2078,7 +2016,7 @@ public readonly partial struct SearchRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Ext()
 	{
-		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -2087,9 +2025,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// Configuration of search extensions defined by Elasticsearch plugins.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -2109,42 +2047,6 @@ public readonly partial struct SearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Fields()
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>.Build(action);
 		return this;
 	}
 
@@ -2266,7 +2168,7 @@ public readonly partial struct SearchRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IndicesBoost()
 	{
-		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfIndexNameDouble.Build(null);
+		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
 		return this;
 	}
 
@@ -2278,9 +2180,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfIndexNameDouble>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
 	{
-		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfIndexNameDouble.Build(action);
+		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
 		return this;
 	}
 
@@ -2299,39 +2201,6 @@ public readonly partial struct SearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
 		Instance.Knn = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Knn()
-	{
-		Instance.Knn = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKnnSearch.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Knn(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKnnSearch>? action)
-	{
-		Instance.Knn = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKnnSearch.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Knn<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKnnSearch<T>>? action)
-	{
-		Instance.Knn = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKnnSearch<T>.Build(action);
 		return this;
 	}
 
@@ -2538,39 +2407,6 @@ public readonly partial struct SearchRequestDescriptor
 	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rescore()
-	{
-		Instance.Rescore = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRescore.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rescore(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRescore>? action)
-	{
-		Instance.Rescore = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRescore.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rescore<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRescore<T>>? action)
-	{
-		Instance.Rescore = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRescore<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
 		Instance.Rescore = [.. values];
@@ -2667,7 +2503,7 @@ public readonly partial struct SearchRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
@@ -2677,9 +2513,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
@@ -2689,9 +2525,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
 		return this;
 	}
 
@@ -2755,7 +2591,7 @@ public readonly partial struct SearchRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ScriptFields()
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
@@ -2764,9 +2600,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// Retrieve a script evaluation (based on different fields) for each hit.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
 		return this;
 	}
 
@@ -2792,28 +2628,6 @@ public readonly partial struct SearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SearchAfter()
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
 		return this;
 	}
 
@@ -2901,39 +2715,6 @@ public readonly partial struct SearchRequestDescriptor
 	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
@@ -2996,9 +2777,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// Otherwise, it defaults to <c>true</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
@@ -3010,9 +2791,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// Otherwise, it defaults to <c>true</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<T>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 
@@ -3026,32 +2807,6 @@ public readonly partial struct SearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Stats()
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Stats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -3206,9 +2961,9 @@ public readonly partial struct SearchRequestDescriptor
 	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
-		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder.Build(action);
+		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
@@ -3454,32 +3209,6 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
 		return this;
 	}
 
@@ -3854,7 +3583,7 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
@@ -3863,9 +3592,9 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// Defines the aggregations that are run as part of the search request.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
 		return this;
 	}
 
@@ -3914,30 +3643,6 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> DocvalueFields()
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> DocvalueFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>>? action)
-	{
-		Instance.DocvalueFields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(action);
 		return this;
 	}
 
@@ -4000,7 +3705,7 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Ext()
 	{
-		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -4009,9 +3714,9 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// Configuration of search extensions defined by Elasticsearch plugins.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -4031,30 +3736,6 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Fields()
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(action);
 		return this;
 	}
 
@@ -4147,7 +3828,7 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IndicesBoost()
 	{
-		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfIndexNameDouble.Build(null);
+		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
 		return this;
 	}
 
@@ -4159,9 +3840,9 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfIndexNameDouble>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
 	{
-		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfIndexNameDouble.Build(action);
+		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
 		return this;
 	}
 
@@ -4180,28 +3861,6 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
 		Instance.Knn = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Knn()
-	{
-		Instance.Knn = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKnnSearch<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Knn(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKnnSearch<TDocument>>? action)
-	{
-		Instance.Knn = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKnnSearch<TDocument>.Build(action);
 		return this;
 	}
 
@@ -4367,28 +4026,6 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Rescore()
-	{
-		Instance.Rescore = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRescore<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Rescore(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRescore<TDocument>>? action)
-	{
-		Instance.Rescore = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRescore<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
 		Instance.Rescore = [.. values];
@@ -4456,7 +4093,7 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
@@ -4466,9 +4103,9 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
 		return this;
 	}
 
@@ -4518,7 +4155,7 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ScriptFields()
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(null);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
@@ -4527,9 +4164,9 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// Retrieve a script evaluation (based on different fields) for each hit.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField>? action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
-		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringScriptField.Build(action);
+		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
 		return this;
 	}
 
@@ -4555,28 +4192,6 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SearchAfter()
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
 		return this;
 	}
 
@@ -4653,28 +4268,6 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
@@ -4720,9 +4313,9 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// Otherwise, it defaults to <c>true</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigBuilder<TDocument>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -4736,32 +4329,6 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Stats()
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Stats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -4905,9 +4472,9 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
-		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder.Build(action);
+		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 

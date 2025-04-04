@@ -538,9 +538,9 @@ public readonly partial struct ApiKeyQueryDescriptor<TDocument>
 	/// Returns documents that contain terms within a provided range.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
-		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<TDocument>.Build(action);
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -895,9 +895,9 @@ public readonly partial struct ApiKeyQueryDescriptor
 	/// Returns documents that contain terms within a provided range.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
-		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder.Build(action);
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Build(action);
 		return this;
 	}
 
@@ -906,9 +906,9 @@ public readonly partial struct ApiKeyQueryDescriptor
 	/// Returns documents that contain terms within a provided range.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Range<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Range<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
-		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<T>.Build(action);
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>.Build(action);
 		return this;
 	}
 

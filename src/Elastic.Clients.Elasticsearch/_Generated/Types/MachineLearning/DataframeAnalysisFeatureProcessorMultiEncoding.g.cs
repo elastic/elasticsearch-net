@@ -134,28 +134,6 @@ public readonly partial struct DataframeAnalysisFeatureProcessorMultiEncodingDes
 	/// The ordered array of custom processors to execute. Must be more than 1.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor Processors()
-	{
-		Instance.Processors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInt.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The ordered array of custom processors to execute. Must be more than 1.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor Processors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInt>? action)
-	{
-		Instance.Processors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfInt.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The ordered array of custom processors to execute. Must be more than 1.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor Processors(params int[] values)
 	{
 		Instance.Processors = [.. values];

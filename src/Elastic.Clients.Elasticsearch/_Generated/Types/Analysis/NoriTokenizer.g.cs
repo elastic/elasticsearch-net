@@ -178,18 +178,6 @@ public readonly partial struct NoriTokenizerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor UserDictionaryRules()
-	{
-		Instance.UserDictionaryRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor UserDictionaryRules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.UserDictionaryRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor UserDictionaryRules(params string[] values)
 	{
 		Instance.UserDictionaryRules = [.. values];

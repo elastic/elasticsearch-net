@@ -475,7 +475,7 @@ public readonly partial struct TermsAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Order()
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
 		return this;
 	}
 
@@ -485,9 +485,9 @@ public readonly partial struct TermsAggregationDescriptor<TDocument>
 	/// Defaults to sorting by descending document count.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
 		return this;
 	}
 
@@ -742,7 +742,7 @@ public readonly partial struct TermsAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Order()
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(null);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(null);
 		return this;
 	}
 
@@ -752,9 +752,9 @@ public readonly partial struct TermsAggregationDescriptor
 	/// Defaults to sorting by descending document count.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(action);
 		return this;
 	}
 
@@ -764,9 +764,9 @@ public readonly partial struct TermsAggregationDescriptor
 	/// Defaults to sorting by descending document count.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
 		return this;
 	}
 

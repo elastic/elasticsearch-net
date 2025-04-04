@@ -280,9 +280,9 @@ public readonly partial struct DynamicTemplateDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Mapping(System.Func<Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder<TDocument>, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Mapping(System.Func<Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<TDocument>, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
 	{
-		Instance.Mapping = Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder<TDocument>.Build(action);
+		Instance.Mapping = Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -304,18 +304,6 @@ public readonly partial struct DynamicTemplateDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Match()
-	{
-		Instance.Match = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Match = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Match(params string[] values)
 	{
 		Instance.Match = [.. values];
@@ -325,18 +313,6 @@ public readonly partial struct DynamicTemplateDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> MatchMappingType(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.MatchMappingType = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> MatchMappingType()
-	{
-		Instance.MatchMappingType = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> MatchMappingType(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.MatchMappingType = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -358,18 +334,6 @@ public readonly partial struct DynamicTemplateDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathMatch()
-	{
-		Instance.PathMatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathMatch(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.PathMatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathMatch(params string[] values)
 	{
 		Instance.PathMatch = [.. values];
@@ -379,18 +343,6 @@ public readonly partial struct DynamicTemplateDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathUnmatch(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.PathUnmatch = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathUnmatch()
-	{
-		Instance.PathUnmatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> PathUnmatch(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.PathUnmatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -406,18 +358,6 @@ public readonly partial struct DynamicTemplateDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Unmatch()
-	{
-		Instance.Unmatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Unmatch(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Unmatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> Unmatch(params string[] values)
 	{
 		Instance.Unmatch = [.. values];
@@ -427,18 +367,6 @@ public readonly partial struct DynamicTemplateDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> UnmatchMappingType(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.UnmatchMappingType = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> UnmatchMappingType()
-	{
-		Instance.UnmatchMappingType = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor<TDocument> UnmatchMappingType(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.UnmatchMappingType = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -482,15 +410,15 @@ public readonly partial struct DynamicTemplateDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Mapping(System.Func<Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Mapping(System.Func<Elastic.Clients.Elasticsearch.Mapping.PropertyFactory, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
 	{
-		Instance.Mapping = Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder.Build(action);
+		Instance.Mapping = Elastic.Clients.Elasticsearch.Mapping.PropertyFactory.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Mapping<T>(System.Func<Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder<T>, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Mapping<T>(System.Func<Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<T>, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
 	{
-		Instance.Mapping = Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder<T>.Build(action);
+		Instance.Mapping = Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<T>.Build(action);
 		return this;
 	}
 
@@ -518,18 +446,6 @@ public readonly partial struct DynamicTemplateDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Match()
-	{
-		Instance.Match = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Match = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Match(params string[] values)
 	{
 		Instance.Match = [.. values];
@@ -539,18 +455,6 @@ public readonly partial struct DynamicTemplateDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor MatchMappingType(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.MatchMappingType = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor MatchMappingType()
-	{
-		Instance.MatchMappingType = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor MatchMappingType(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.MatchMappingType = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -572,18 +476,6 @@ public readonly partial struct DynamicTemplateDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathMatch()
-	{
-		Instance.PathMatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathMatch(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.PathMatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathMatch(params string[] values)
 	{
 		Instance.PathMatch = [.. values];
@@ -593,18 +485,6 @@ public readonly partial struct DynamicTemplateDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathUnmatch(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.PathUnmatch = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathUnmatch()
-	{
-		Instance.PathUnmatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor PathUnmatch(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.PathUnmatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -620,18 +500,6 @@ public readonly partial struct DynamicTemplateDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Unmatch()
-	{
-		Instance.Unmatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Unmatch(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Unmatch = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor Unmatch(params string[] values)
 	{
 		Instance.Unmatch = [.. values];
@@ -641,18 +509,6 @@ public readonly partial struct DynamicTemplateDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor UnmatchMappingType(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.UnmatchMappingType = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor UnmatchMappingType()
-	{
-		Instance.UnmatchMappingType = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor UnmatchMappingType(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.UnmatchMappingType = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

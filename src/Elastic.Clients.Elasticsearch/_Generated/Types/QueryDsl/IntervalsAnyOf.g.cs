@@ -172,28 +172,6 @@ public readonly partial struct IntervalsAnyOfDescriptor<TDocument>
 	/// An array of rules to match.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Intervals()
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Intervals(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<TDocument>>? action)
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Intervals(params Elastic.Clients.Elasticsearch.QueryDsl.Intervals[] values)
 	{
 		Instance.Intervals = [.. values];
@@ -286,39 +264,6 @@ public readonly partial struct IntervalsAnyOfDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> value)
 	{
 		Instance.Intervals = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals()
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals>? action)
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<T>>? action)
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<T>.Build(action);
 		return this;
 	}
 

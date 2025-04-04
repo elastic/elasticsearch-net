@@ -185,18 +185,6 @@ public readonly partial struct RoleMappingRuleDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> All()
-	{
-		Instance.All = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<TDocument>.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> All(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<TDocument>>? action)
-	{
-		Instance.All = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<TDocument>.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> All(params Elastic.Clients.Elasticsearch.Security.RoleMappingRule[] values)
 	{
 		Instance.All = [.. values];
@@ -218,18 +206,6 @@ public readonly partial struct RoleMappingRuleDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Any(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? value)
 	{
 		Instance.Any = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Any()
-	{
-		Instance.Any = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<TDocument>.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Any(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<TDocument>>? action)
-	{
-		Instance.Any = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<TDocument>.Build(action);
 		return this;
 	}
 
@@ -281,30 +257,6 @@ public readonly partial struct RoleMappingRuleDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field key)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action));
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field key, params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, [.. values]);
@@ -351,24 +303,6 @@ public readonly partial struct RoleMappingRuleDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor All()
-	{
-		Instance.All = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor All(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule>? action)
-	{
-		Instance.All = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor All<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<T>>? action)
-	{
-		Instance.All = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<T>.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor All(params Elastic.Clients.Elasticsearch.Security.RoleMappingRule[] values)
 	{
 		Instance.All = [.. values];
@@ -402,24 +336,6 @@ public readonly partial struct RoleMappingRuleDescriptor
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Any(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? value)
 	{
 		Instance.Any = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Any()
-	{
-		Instance.Any = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Any(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule>? action)
-	{
-		Instance.Any = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Any<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<T>>? action)
-	{
-		Instance.Any = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleMappingRule<T>.Build(action);
 		return this;
 	}
 
@@ -486,30 +402,6 @@ public readonly partial struct RoleMappingRuleDescriptor
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
 	{
 		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field(Elastic.Clients.Elasticsearch.Field key)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action));
 		return this;
 	}
 

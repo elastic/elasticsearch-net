@@ -215,18 +215,6 @@ public readonly partial struct RuleQueryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument> RulesetIds()
-	{
-		Instance.RulesetIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument> RulesetIds(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.RulesetIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument> RulesetIds(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.RulesetIds = [.. values];
@@ -308,18 +296,6 @@ public readonly partial struct RuleQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> value)
 	{
 		Instance.RulesetIds = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor RulesetIds()
-	{
-		Instance.RulesetIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor RulesetIds(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.RulesetIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
 		return this;
 	}
 

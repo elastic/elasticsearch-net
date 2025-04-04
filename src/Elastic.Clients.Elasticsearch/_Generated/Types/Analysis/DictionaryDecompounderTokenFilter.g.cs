@@ -226,18 +226,6 @@ public readonly partial struct DictionaryDecompounderTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor WordList()
-	{
-		Instance.WordList = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor WordList(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.WordList = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor WordList(params string[] values)
 	{
 		Instance.WordList = [.. values];

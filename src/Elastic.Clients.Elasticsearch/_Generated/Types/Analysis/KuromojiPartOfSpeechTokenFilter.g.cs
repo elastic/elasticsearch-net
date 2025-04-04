@@ -140,18 +140,6 @@ public readonly partial struct KuromojiPartOfSpeechTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor Stoptags()
-	{
-		Instance.Stoptags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stoptags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(params string[] values)
 	{
 		Instance.Stoptags = [.. values];

@@ -237,18 +237,6 @@ public readonly partial struct MultisearchHeaderDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];

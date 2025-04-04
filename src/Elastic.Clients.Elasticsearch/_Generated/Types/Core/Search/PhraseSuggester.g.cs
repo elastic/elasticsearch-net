@@ -417,28 +417,6 @@ public readonly partial struct PhraseSuggesterDescriptor<TDocument>
 	/// A list of candidate generators that produce a list of possible terms per term in the given text.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> DirectGenerator()
-	{
-		Instance.DirectGenerator = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDirectGenerator<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> DirectGenerator(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDirectGenerator<TDocument>>? action)
-	{
-		Instance.DirectGenerator = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDirectGenerator<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> DirectGenerator(params Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator[] values)
 	{
 		Instance.DirectGenerator = [.. values];
@@ -709,39 +687,6 @@ public readonly partial struct PhraseSuggesterDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor DirectGenerator(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? value)
 	{
 		Instance.DirectGenerator = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor DirectGenerator()
-	{
-		Instance.DirectGenerator = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDirectGenerator.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor DirectGenerator(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDirectGenerator>? action)
-	{
-		Instance.DirectGenerator = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDirectGenerator.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor DirectGenerator<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDirectGenerator<T>>? action)
-	{
-		Instance.DirectGenerator = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDirectGenerator<T>.Build(action);
 		return this;
 	}
 

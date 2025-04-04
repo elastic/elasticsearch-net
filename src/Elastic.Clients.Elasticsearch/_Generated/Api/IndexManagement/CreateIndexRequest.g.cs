@@ -376,7 +376,7 @@ public readonly partial struct CreateIndexRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfNameAlias.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias.Build(null);
 		return this;
 	}
 
@@ -385,9 +385,9 @@ public readonly partial struct CreateIndexRequestDescriptor
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfNameAlias>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfNameAlias.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias.Build(action);
 		return this;
 	}
 
@@ -396,9 +396,9 @@ public readonly partial struct CreateIndexRequestDescriptor
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfNameAlias<T>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<T>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfNameAlias<T>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<T>.Build(action);
 		return this;
 	}
 
@@ -793,7 +793,7 @@ public readonly partial struct CreateIndexRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfNameAlias<TDocument>.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<TDocument>.Build(null);
 		return this;
 	}
 
@@ -802,9 +802,9 @@ public readonly partial struct CreateIndexRequestDescriptor<TDocument>
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfNameAlias<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<TDocument>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfNameAlias<TDocument>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<TDocument>.Build(action);
 		return this;
 	}
 

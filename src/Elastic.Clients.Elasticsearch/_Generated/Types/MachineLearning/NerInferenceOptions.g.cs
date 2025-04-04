@@ -176,28 +176,6 @@ public readonly partial struct NerInferenceOptionsDescriptor
 	/// The token classification labels. Must be IOB formatted tags
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ClassificationLabels()
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The token classification labels. Must be IOB formatted tags
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ClassificationLabels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The token classification labels. Must be IOB formatted tags
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ClassificationLabels(params string[] values)
 	{
 		Instance.ClassificationLabels = [.. values];

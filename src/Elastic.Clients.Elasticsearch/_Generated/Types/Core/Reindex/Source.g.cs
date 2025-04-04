@@ -304,13 +304,13 @@ public readonly partial struct SourceDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
 		return this;
 	}
 
@@ -391,42 +391,6 @@ public readonly partial struct SourceDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
-		return this;
-	}
-
-	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
 		return this;
 	}
 
@@ -599,19 +563,19 @@ public readonly partial struct SourceDescriptor
 
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField>? action)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
 		return this;
 	}
 
@@ -717,60 +681,6 @@ public readonly partial struct SourceDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
-		return this;
-	}
-
-	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
-		return this;
-	}
-
-	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
 		return this;
 	}
 

@@ -129,18 +129,6 @@ public readonly partial struct CustomCategorizeTextAnalyzerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor CharFilter()
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor CharFilter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CharFilter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor CharFilter(params string[] values)
 	{
 		Instance.CharFilter = [.. values];
@@ -150,18 +138,6 @@ public readonly partial struct CustomCategorizeTextAnalyzerDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor Filter(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Filter = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzerDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

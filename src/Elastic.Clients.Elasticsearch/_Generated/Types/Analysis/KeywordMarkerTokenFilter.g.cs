@@ -166,18 +166,6 @@ public readonly partial struct KeywordMarkerTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor Keywords()
-	{
-		Instance.Keywords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor Keywords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Keywords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor Keywords(params string[] values)
 	{
 		Instance.Keywords = [.. values];

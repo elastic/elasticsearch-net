@@ -227,30 +227,6 @@ public readonly partial struct ZeroShotClassificationInferenceOptionsDescriptor
 	/// Must contain exactly and only entailment, neutral, and contradiction
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels()
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The zero shot classification labels indicating entailment, neutral, and contradiction
-	/// Must contain exactly and only entailment, neutral, and contradiction
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The zero shot classification labels indicating entailment, neutral, and contradiction
-	/// Must contain exactly and only entailment, neutral, and contradiction
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(params string[] values)
 	{
 		Instance.ClassificationLabels = [.. values];
@@ -276,28 +252,6 @@ public readonly partial struct ZeroShotClassificationInferenceOptionsDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Labels(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Labels = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The labels to predict.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Labels()
-	{
-		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The labels to predict.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

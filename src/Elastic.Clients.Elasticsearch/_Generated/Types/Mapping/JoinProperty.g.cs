@@ -237,7 +237,7 @@ public readonly partial struct JoinPropertyDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -246,9 +246,9 @@ public readonly partial struct JoinPropertyDescriptor<TDocument>
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -279,13 +279,13 @@ public readonly partial struct JoinPropertyDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> Relations()
 	{
-		Instance.Relations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		Instance.Relations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> Relations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> Relations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
 	{
-		Instance.Relations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		Instance.Relations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
 		return this;
 	}
 
@@ -293,20 +293,6 @@ public readonly partial struct JoinPropertyDescriptor<TDocument>
 	{
 		Instance.Relations ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
 		Instance.Relations.Add(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> AddRelation(string key)
-	{
-		Instance.Relations ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Relations.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> AddRelation(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Relations ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Relations.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
 		return this;
 	}
 
@@ -410,7 +396,7 @@ public readonly partial struct JoinPropertyDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -419,9 +405,9 @@ public readonly partial struct JoinPropertyDescriptor
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -458,13 +444,13 @@ public readonly partial struct JoinPropertyDescriptor
 
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor Relations()
 	{
-		Instance.Relations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(null);
+		Instance.Relations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor Relations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor Relations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
 	{
-		Instance.Relations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringICollectionOfString.Build(action);
+		Instance.Relations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
 		return this;
 	}
 
@@ -472,20 +458,6 @@ public readonly partial struct JoinPropertyDescriptor
 	{
 		Instance.Relations ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
 		Instance.Relations.Add(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor AddRelation(string key)
-	{
-		Instance.Relations ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Relations.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor AddRelation(string key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Relations ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-		Instance.Relations.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action));
 		return this;
 	}
 

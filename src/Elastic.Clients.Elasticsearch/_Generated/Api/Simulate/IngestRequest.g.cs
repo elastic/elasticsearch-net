@@ -325,7 +325,7 @@ public readonly partial struct IngestRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions()
 	{
-		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode.Build(null);
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode.Build(null);
 		return this;
 	}
 
@@ -334,9 +334,9 @@ public readonly partial struct IngestRequestDescriptor
 	/// A map of component template names to substitute component template definition objects.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode>? action)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode>? action)
 	{
-		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode.Build(action);
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode.Build(action);
 		return this;
 	}
 
@@ -345,9 +345,9 @@ public readonly partial struct IngestRequestDescriptor
 	/// A map of component template names to substitute component template definition objects.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<T>>? action)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<T>>? action)
 	{
-		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<T>.Build(action);
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<T>.Build(action);
 		return this;
 	}
 
@@ -380,28 +380,6 @@ public readonly partial struct IngestRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
 		Instance.Docs = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(action);
 		return this;
 	}
 
@@ -451,7 +429,7 @@ public readonly partial struct IngestRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions()
 	{
-		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate.Build(null);
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate.Build(null);
 		return this;
 	}
 
@@ -460,9 +438,9 @@ public readonly partial struct IngestRequestDescriptor
 	/// A map of index template names to substitute index template definition objects.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate>? action)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate>? action)
 	{
-		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate.Build(action);
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate.Build(action);
 		return this;
 	}
 
@@ -471,9 +449,9 @@ public readonly partial struct IngestRequestDescriptor
 	/// A map of index template names to substitute index template definition objects.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<T>>? action)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<T>>? action)
 	{
-		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<T>.Build(action);
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<T>.Build(action);
 		return this;
 	}
 
@@ -544,7 +522,7 @@ public readonly partial struct IngestRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions()
 	{
-		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline.Build(null);
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline.Build(null);
 		return this;
 	}
 
@@ -555,9 +533,9 @@ public readonly partial struct IngestRequestDescriptor
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline>? action)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline>? action)
 	{
-		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline.Build(action);
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline.Build(action);
 		return this;
 	}
 
@@ -568,9 +546,9 @@ public readonly partial struct IngestRequestDescriptor
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<T>>? action)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<T>>? action)
 	{
-		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<T>.Build(action);
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<T>.Build(action);
 		return this;
 	}
 
@@ -780,7 +758,7 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions()
 	{
-		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<TDocument>.Build(null);
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<TDocument>.Build(null);
 		return this;
 	}
 
@@ -789,9 +767,9 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 	/// A map of component template names to substitute component template definition objects.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<TDocument>>? action)
 	{
-		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringComponentTemplateNode<TDocument>.Build(action);
+		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<TDocument>.Build(action);
 		return this;
 	}
 
@@ -817,28 +795,6 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
 		Instance.Docs = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocument.Build(action);
 		return this;
 	}
 
@@ -888,7 +844,7 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions()
 	{
-		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<TDocument>.Build(null);
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<TDocument>.Build(null);
 		return this;
 	}
 
@@ -897,9 +853,9 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 	/// A map of index template names to substitute index template definition objects.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<TDocument>>? action)
 	{
-		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringIndexTemplate<TDocument>.Build(action);
+		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<TDocument>.Build(action);
 		return this;
 	}
 
@@ -957,7 +913,7 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions()
 	{
-		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<TDocument>.Build(null);
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<TDocument>.Build(null);
 		return this;
 	}
 
@@ -968,9 +924,9 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<TDocument>>? action)
 	{
-		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPipeline<TDocument>.Build(action);
+		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<TDocument>.Build(action);
 		return this;
 	}
 

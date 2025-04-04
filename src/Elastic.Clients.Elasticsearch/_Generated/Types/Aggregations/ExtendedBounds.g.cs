@@ -159,7 +159,7 @@ public readonly partial struct ExtendedBoundsOfFieldDateMathDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Max()
 	{
-		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder.Build(null);
+		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(null);
 		return this;
 	}
 
@@ -168,9 +168,9 @@ public readonly partial struct ExtendedBoundsOfFieldDateMathDescriptor
 	/// Maximum value for the bound.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Max(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Max(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? action)
 	{
-		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder.Build(action);
+		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(action);
 		return this;
 	}
 
@@ -192,7 +192,7 @@ public readonly partial struct ExtendedBoundsOfFieldDateMathDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Min()
 	{
-		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder.Build(null);
+		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(null);
 		return this;
 	}
 
@@ -201,9 +201,9 @@ public readonly partial struct ExtendedBoundsOfFieldDateMathDescriptor
 	/// Minimum value for the bound.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Min(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Min(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? action)
 	{
-		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathBuilder.Build(action);
+		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(action);
 		return this;
 	}
 

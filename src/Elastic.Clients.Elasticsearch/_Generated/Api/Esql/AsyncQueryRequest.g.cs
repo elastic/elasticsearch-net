@@ -482,28 +482,6 @@ public readonly partial struct AsyncQueryRequestDescriptor
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params()
-	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.Params = [.. values];
@@ -748,28 +726,6 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.Params = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params()
-	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
 		return this;
 	}
 

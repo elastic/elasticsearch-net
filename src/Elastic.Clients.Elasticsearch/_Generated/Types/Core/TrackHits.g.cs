@@ -81,7 +81,7 @@ public sealed partial class TrackHits : Elastic.Clients.Elasticsearch.Union<bool
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.TrackHits(int value) => new Elastic.Clients.Elasticsearch.Core.Search.TrackHits(value);
 }
 
-public readonly partial struct TrackHitsBuilder
+public readonly partial struct TrackHitsFactory
 {
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits Enabled(bool value = true)
 	{
@@ -94,9 +94,9 @@ public readonly partial struct TrackHitsBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Core.Search.TrackHits Build(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
+	internal static Elastic.Clients.Elasticsearch.Core.Search.TrackHits Build(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Core.Search.TrackHitsBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory();
 		return action.Invoke(builder);
 	}
 }

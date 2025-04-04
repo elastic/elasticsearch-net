@@ -191,9 +191,9 @@ public readonly partial struct GeotileGridAggregationDescriptor<TDocument>
 	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
@@ -305,9 +305,9 @@ public readonly partial struct GeotileGridAggregationDescriptor
 	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 

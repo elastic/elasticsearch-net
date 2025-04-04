@@ -162,18 +162,6 @@ public readonly partial struct NoriAnalyzerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor Stoptags()
-	{
-		Instance.Stoptags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor Stoptags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stoptags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor Stoptags(params string[] values)
 	{
 		Instance.Stoptags = [.. values];

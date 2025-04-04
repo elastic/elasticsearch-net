@@ -416,28 +416,6 @@ public readonly partial struct RedactProcessorDescriptor<TDocument>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
@@ -469,13 +447,13 @@ public readonly partial struct RedactProcessorDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> PatternDefinitions()
 	{
-		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -494,28 +472,6 @@ public readonly partial struct RedactProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Patterns()
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Patterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -719,39 +675,6 @@ public readonly partial struct RedactProcessorDescriptor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
@@ -800,13 +723,13 @@ public readonly partial struct RedactProcessorDescriptor
 
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor PatternDefinitions()
 	{
-		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -825,28 +748,6 @@ public readonly partial struct RedactProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Patterns()
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Patterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

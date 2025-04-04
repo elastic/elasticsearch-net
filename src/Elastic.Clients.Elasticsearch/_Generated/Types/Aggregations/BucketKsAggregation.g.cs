@@ -211,32 +211,6 @@ public readonly partial struct BucketKsAggregationDescriptor
 	/// when calculating the K-S test. Default value is all possible alternative hypotheses.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor Alternative()
-	{
-		Instance.Alternative = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of string values indicating which K-S test alternative to calculate. The valid values
-	/// are: "greater", "less", "two_sided". This parameter is key for determining the K-S statistic used
-	/// when calculating the K-S test. Default value is all possible alternative hypotheses.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor Alternative(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Alternative = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of string values indicating which K-S test alternative to calculate. The valid values
-	/// are: "greater", "less", "two_sided". This parameter is key for determining the K-S statistic used
-	/// when calculating the K-S test. Default value is all possible alternative hypotheses.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor Alternative(params string[] values)
 	{
 		Instance.Alternative = [.. values];
@@ -266,36 +240,6 @@ public readonly partial struct BucketKsAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor Fractions(System.Collections.Generic.ICollection<double>? value)
 	{
 		Instance.Fractions = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of doubles indicating the distribution of the samples with which to compare to the <c>buckets_path</c> results.
-	/// In typical usage this is the overall proportion of documents in each bucket, which is compared with the actual
-	/// document proportions in each bucket from the sibling aggregation counts. The default is to assume that overall
-	/// documents are uniformly distributed on these buckets, which they would be if one used equal percentiles of a
-	/// metric to define the bucket end points.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor Fractions()
-	{
-		Instance.Fractions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of doubles indicating the distribution of the samples with which to compare to the <c>buckets_path</c> results.
-	/// In typical usage this is the overall proportion of documents in each bucket, which is compared with the actual
-	/// document proportions in each bucket from the sibling aggregation counts. The default is to assume that overall
-	/// documents are uniformly distributed on these buckets, which they would be if one used equal percentiles of a
-	/// metric to define the bucket end points.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor Fractions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		Instance.Fractions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
 		return this;
 	}
 

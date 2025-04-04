@@ -150,18 +150,6 @@ public readonly partial struct KeepWordsTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWords()
-	{
-		Instance.KeepWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.KeepWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWords(params string[] values)
 	{
 		Instance.KeepWords = [.. values];

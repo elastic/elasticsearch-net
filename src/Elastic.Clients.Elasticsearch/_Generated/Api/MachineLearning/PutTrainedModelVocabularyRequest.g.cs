@@ -221,28 +221,6 @@ public readonly partial struct PutTrainedModelVocabularyRequestDescriptor
 	/// The optional model merges if required by the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Merges()
-	{
-		Instance.Merges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The optional model merges if required by the tokenizer.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Merges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Merges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The optional model merges if required by the tokenizer.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Merges(params string[] values)
 	{
 		Instance.Merges = [.. values];
@@ -265,28 +243,6 @@ public readonly partial struct PutTrainedModelVocabularyRequestDescriptor
 	/// The optional vocabulary value scores if required by the tokenizer.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Scores()
-	{
-		Instance.Scores = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The optional vocabulary value scores if required by the tokenizer.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Scores(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		Instance.Scores = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The optional vocabulary value scores if required by the tokenizer.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Scores(params double[] values)
 	{
 		Instance.Scores = [.. values];
@@ -301,28 +257,6 @@ public readonly partial struct PutTrainedModelVocabularyRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Vocabulary(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Vocabulary = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The model vocabulary, which must not be empty.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Vocabulary()
-	{
-		Instance.Vocabulary = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The model vocabulary, which must not be empty.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Vocabulary(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Vocabulary = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

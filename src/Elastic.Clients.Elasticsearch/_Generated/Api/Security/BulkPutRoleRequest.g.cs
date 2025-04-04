@@ -189,7 +189,7 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles()
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx.Build(null);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(null);
 		return this;
 	}
 
@@ -198,9 +198,9 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	/// A dictionary of role name to RoleDescriptor objects to add or update
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx>? action)
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx.Build(action);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(action);
 		return this;
 	}
 
@@ -209,9 +209,9 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	/// A dictionary of role name to RoleDescriptor objects to add or update
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>>? action)
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>.Build(action);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>.Build(action);
 		return this;
 	}
 
@@ -378,7 +378,7 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles()
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
 		return this;
 	}
 
@@ -387,9 +387,9 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 	/// A dictionary of role name to RoleDescriptor objects to add or update
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>>? action)
 	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
+		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
 		return this;
 	}
 

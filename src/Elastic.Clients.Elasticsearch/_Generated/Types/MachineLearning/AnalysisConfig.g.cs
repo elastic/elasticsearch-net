@@ -307,9 +307,9 @@ public readonly partial struct AnalysisConfigDescriptor<TDocument>
 	/// If <c>categorization_field_name</c> is specified, you can also define the analyzer that is used to interpret the categorization field. This property cannot be used at the same time as <c>categorization_filters</c>. The categorization analyzer specifies how the <c>categorization_field</c> is interpreted by the categorization process. The <c>categorization_analyzer</c> field can be specified either as a string or as an object. If it is a string, it must refer to a built-in analyzer or one added by another plugin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerFactory, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> action)
 	{
-		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder.Build(action);
+		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerFactory.Build(action);
 		return this;
 	}
 
@@ -351,28 +351,6 @@ public readonly partial struct AnalysisConfigDescriptor<TDocument>
 	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationFilters()
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationFilters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> CategorizationFilters(params string[] values)
 	{
 		Instance.CategorizationFilters = [.. values];
@@ -387,28 +365,6 @@ public readonly partial struct AnalysisConfigDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Detectors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> value)
 	{
 		Instance.Detectors = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Detectors()
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> Detectors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<TDocument>>? action)
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<TDocument>.Build(action);
 		return this;
 	}
 
@@ -606,9 +562,9 @@ public readonly partial struct AnalysisConfigDescriptor
 	/// If <c>categorization_field_name</c> is specified, you can also define the analyzer that is used to interpret the categorization field. This property cannot be used at the same time as <c>categorization_filters</c>. The categorization analyzer specifies how the <c>categorization_field</c> is interpreted by the categorization process. The <c>categorization_analyzer</c> field can be specified either as a string or as an object. If it is a string, it must refer to a built-in analyzer or one added by another plugin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerFactory, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer> action)
 	{
-		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerBuilder.Build(action);
+		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerFactory.Build(action);
 		return this;
 	}
 
@@ -650,28 +606,6 @@ public readonly partial struct AnalysisConfigDescriptor
 	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationFilters()
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationFilters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>categorization_field_name</c> is specified, you can also define optional filters. This property expects an array of regular expressions. The expressions are used to filter out matching sequences from the categorization field values. You can use this functionality to fine tune the categorization by excluding sequences from consideration when categories are defined. For example, you can exclude SQL statements that appear in your log files. This property cannot be used at the same time as <c>categorization_analyzer</c>. If you only want to define simple regular expression filters that are applied prior to tokenization, setting this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering, use the <c>categorization_analyzer</c> property instead and include the filters as pattern_replace character filters. The effect is exactly the same.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor CategorizationFilters(params string[] values)
 	{
 		Instance.CategorizationFilters = [.. values];
@@ -686,39 +620,6 @@ public readonly partial struct AnalysisConfigDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> value)
 	{
 		Instance.Detectors = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors()
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector>? action)
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor Detectors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<T>>? action)
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetector<T>.Build(action);
 		return this;
 	}
 

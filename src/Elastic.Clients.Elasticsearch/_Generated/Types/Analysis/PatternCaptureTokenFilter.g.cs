@@ -150,18 +150,6 @@ public readonly partial struct PatternCaptureTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Patterns()
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Patterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Patterns(params string[] values)
 	{
 		Instance.Patterns = [.. values];

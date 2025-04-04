@@ -369,7 +369,7 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -381,9 +381,9 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 	/// To unset <c>_meta</c>, replace the template without specifying this information.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -632,7 +632,7 @@ public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -644,9 +644,9 @@ public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 	/// To unset <c>_meta</c>, replace the template without specifying this information.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

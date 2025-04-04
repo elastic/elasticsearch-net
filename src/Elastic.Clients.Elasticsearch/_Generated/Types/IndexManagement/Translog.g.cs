@@ -190,9 +190,9 @@ public readonly partial struct TranslogDescriptor
 	/// maximum size has been reached a flush will happen, generating a new Lucene commit point.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor FlushThresholdSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor FlushThresholdSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.FlushThresholdSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.FlushThresholdSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

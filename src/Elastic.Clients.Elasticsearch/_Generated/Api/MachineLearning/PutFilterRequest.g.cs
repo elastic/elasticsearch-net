@@ -206,30 +206,6 @@ public readonly partial struct PutFilterRequestDescriptor
 	/// Up to 10000 items are allowed in each filter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Items()
-	{
-		Instance.Items = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
-	/// Up to 10000 items are allowed in each filter.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Items(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Items = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
-	/// Up to 10000 items are allowed in each filter.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Items(params string[] values)
 	{
 		Instance.Items = [.. values];

@@ -207,28 +207,6 @@ public readonly partial struct PercentilesBucketAggregationDescriptor
 	/// The list of percentiles to calculate.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Percents()
-	{
-		Instance.Percents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The list of percentiles to calculate.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Percents(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		Instance.Percents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The list of percentiles to calculate.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Percents(params double[] values)
 	{
 		Instance.Percents = [.. values];

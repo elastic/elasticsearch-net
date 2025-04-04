@@ -179,28 +179,6 @@ public readonly partial struct GetUserProfileRequestDescriptor
 	/// A unique identifier for the user profile.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Uid()
-	{
-		Instance.Uid = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the user profile.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Uid(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Uid = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the user profile.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Uid(params string[] values)
 	{
 		Instance.Uid = [.. values];
@@ -218,34 +196,6 @@ public readonly partial struct GetUserProfileRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Data(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Data = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default returns no <c>data</c> content.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Data()
-	{
-		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default returns no <c>data</c> content.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Data(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

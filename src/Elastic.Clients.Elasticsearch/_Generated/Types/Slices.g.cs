@@ -78,7 +78,7 @@ public sealed partial class Slices : Elastic.Clients.Elasticsearch.Union<int, El
 	public static implicit operator Elastic.Clients.Elasticsearch.Slices(Elastic.Clients.Elasticsearch.SlicesCalculation value) => new Elastic.Clients.Elasticsearch.Slices(value);
 }
 
-public readonly partial struct SlicesBuilder
+public readonly partial struct SlicesFactory
 {
 	public Elastic.Clients.Elasticsearch.Slices Value(int value)
 	{
@@ -91,9 +91,9 @@ public readonly partial struct SlicesBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Slices Build(System.Func<Elastic.Clients.Elasticsearch.SlicesBuilder, Elastic.Clients.Elasticsearch.Slices> action)
+	internal static Elastic.Clients.Elasticsearch.Slices Build(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.SlicesBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.SlicesFactory();
 		return action.Invoke(builder);
 	}
 }

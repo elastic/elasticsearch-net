@@ -421,9 +421,9 @@ public readonly partial struct MultiGetRequestDescriptor
 	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory.Build(action);
 		return this;
 	}
 
@@ -432,9 +432,9 @@ public readonly partial struct MultiGetRequestDescriptor
 	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<T>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>.Build(action);
 		return this;
 	}
 
@@ -518,39 +518,6 @@ public readonly partial struct MultiGetRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? value)
 	{
 		Instance.Docs = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiGetOperation.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiGetOperation>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiGetOperation.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Docs<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiGetOperation<T>>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiGetOperation<T>.Build(action);
 		return this;
 	}
 
@@ -799,9 +766,9 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
+	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
-		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamBuilder<TDocument>.Build(action);
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -885,28 +852,6 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? value)
 	{
 		Instance.Docs = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiGetOperation<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiGetOperation<TDocument>>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiGetOperation<TDocument>.Build(action);
 		return this;
 	}
 

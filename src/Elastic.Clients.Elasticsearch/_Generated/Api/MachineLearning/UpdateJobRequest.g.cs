@@ -449,18 +449,6 @@ public readonly partial struct UpdateJobRequestDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CategorizationFilters()
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CategorizationFilters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CategorizationFilters(params string[] values)
 	{
 		Instance.CategorizationFilters = [.. values];
@@ -489,7 +477,7 @@ public readonly partial struct UpdateJobRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CustomSettings()
 	{
-		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -500,9 +488,9 @@ public readonly partial struct UpdateJobRequestDescriptor
 	/// custom URLs to machine learning results.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CustomSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CustomSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -549,39 +537,6 @@ public readonly partial struct UpdateJobRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? value)
 	{
 		Instance.Detectors = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors()
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectorUpdate.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectorUpdate>? action)
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectorUpdate.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectorUpdate<T>>? action)
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectorUpdate<T>.Build(action);
 		return this;
 	}
 
@@ -638,28 +593,6 @@ public readonly partial struct UpdateJobRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Groups()
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Groups(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -928,18 +861,6 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CategorizationFilters()
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CategorizationFilters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CategorizationFilters = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CategorizationFilters(params string[] values)
 	{
 		Instance.CategorizationFilters = [.. values];
@@ -968,7 +889,7 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CustomSettings()
 	{
-		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -979,9 +900,9 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 	/// custom URLs to machine learning results.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CustomSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CustomSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -1036,28 +957,6 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 	/// An array of detector update objects.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Detectors()
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectorUpdate<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Detectors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectorUpdate<TDocument>>? action)
-	{
-		Instance.Detectors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDetectorUpdate<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Detectors(params Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate[] values)
 	{
 		Instance.Detectors = [.. values];
@@ -1089,28 +988,6 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Groups()
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Groups(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

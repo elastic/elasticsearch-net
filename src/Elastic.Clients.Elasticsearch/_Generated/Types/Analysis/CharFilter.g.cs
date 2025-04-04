@@ -85,7 +85,7 @@ public partial interface ICharFilter
 	public string Type { get; }
 }
 
-public readonly partial struct ICharFilterBuilder
+public readonly partial struct CharFilterFactory
 {
 	public Elastic.Clients.Elasticsearch.Analysis.ICharFilter HtmlStrip(Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter value)
 	{
@@ -153,9 +153,9 @@ public readonly partial struct ICharFilterBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Analysis.ICharFilter Build(System.Func<Elastic.Clients.Elasticsearch.Analysis.ICharFilterBuilder, Elastic.Clients.Elasticsearch.Analysis.ICharFilter> action)
+	internal static Elastic.Clients.Elasticsearch.Analysis.ICharFilter Build(System.Func<Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ICharFilter> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Analysis.ICharFilterBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory();
 		return action.Invoke(builder);
 	}
 }

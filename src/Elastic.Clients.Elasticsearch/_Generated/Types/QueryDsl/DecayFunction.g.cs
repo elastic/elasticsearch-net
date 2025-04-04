@@ -58,7 +58,7 @@ public partial interface IDecayFunction
 	public string Type { get; }
 }
 
-public readonly partial struct IDecayFunctionBuilder<TDocument>
+public readonly partial struct IDecayFunctionFactory<TDocument>
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction Date(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction value)
 	{
@@ -101,14 +101,14 @@ public readonly partial struct IDecayFunctionBuilder<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct IDecayFunctionBuilder
+public readonly partial struct IDecayFunctionFactory
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction Date(Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction value)
 	{
@@ -171,9 +171,9 @@ public readonly partial struct IDecayFunctionBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory();
 		return action.Invoke(builder);
 	}
 }

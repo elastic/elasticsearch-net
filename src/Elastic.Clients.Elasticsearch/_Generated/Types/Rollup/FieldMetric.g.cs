@@ -177,28 +177,6 @@ public readonly partial struct FieldMetricDescriptor<TDocument>
 	/// An array of metrics to collect for the field. At least one metric must be configured.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Metrics()
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMetric.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of metrics to collect for the field. At least one metric must be configured.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMetric>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMetric.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of metrics to collect for the field. At least one metric must be configured.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Metrics(params Elastic.Clients.Elasticsearch.Rollup.Metric[] values)
 	{
 		Instance.Metrics = [.. values];
@@ -263,28 +241,6 @@ public readonly partial struct FieldMetricDescriptor
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> value)
 	{
 		Instance.Metrics = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of metrics to collect for the field. At least one metric must be configured.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Metrics()
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMetric.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of metrics to collect for the field. At least one metric must be configured.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMetric>? action)
-	{
-		Instance.Metrics = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMetric.Build(action);
 		return this;
 	}
 

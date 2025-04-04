@@ -1090,7 +1090,7 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> OtherSettings()
 	{
-		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -1099,9 +1099,9 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	/// Additional settings not covered in this type.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> OtherSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> OtherSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -1187,18 +1187,6 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> RoutingPath(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RoutingPath = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> RoutingPath()
-	{
-		Instance.RoutingPath = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> RoutingPath(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.RoutingPath = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1826,7 +1814,7 @@ public readonly partial struct IndexSettingsDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor OtherSettings()
 	{
-		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -1835,9 +1823,9 @@ public readonly partial struct IndexSettingsDescriptor
 	/// Additional settings not covered in this type.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor OtherSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor OtherSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -1923,18 +1911,6 @@ public readonly partial struct IndexSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor RoutingPath(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RoutingPath = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor RoutingPath()
-	{
-		Instance.RoutingPath = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor RoutingPath(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.RoutingPath = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

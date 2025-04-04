@@ -197,28 +197,6 @@ public readonly partial struct PutSynonymRequestDescriptor
 	/// The synonym rules definitions for the synonyms set.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor SynonymsSet()
-	{
-		Instance.SynonymsSet = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSynonymRule.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The synonym rules definitions for the synonyms set.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor SynonymsSet(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSynonymRule>? action)
-	{
-		Instance.SynonymsSet = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSynonymRule.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The synonym rules definitions for the synonyms set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor SynonymsSet(params Elastic.Clients.Elasticsearch.Synonyms.SynonymRule[] values)
 	{
 		Instance.SynonymsSet = [.. values];

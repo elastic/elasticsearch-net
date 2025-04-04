@@ -332,7 +332,7 @@ public readonly partial struct PutUserRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -341,9 +341,9 @@ public readonly partial struct PutUserRequestDescriptor
 	/// Arbitrary metadata that you want to associate with the user.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -393,32 +393,6 @@ public readonly partial struct PutUserRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Roles(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Roles = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A set of roles the user has.
-	/// The roles determine the user's access permissions.
-	/// To create a user without any roles, specify an empty list (<c>[]</c>).
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Roles()
-	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A set of roles the user has.
-	/// The roles determine the user's access permissions.
-	/// To create a user without any roles, specify an empty list (<c>[]</c>).
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

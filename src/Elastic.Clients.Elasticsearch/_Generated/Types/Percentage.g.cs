@@ -73,7 +73,7 @@ public sealed partial class Percentage : Elastic.Clients.Elasticsearch.Union<str
 	public static implicit operator Elastic.Clients.Elasticsearch.Percentage(float value) => new Elastic.Clients.Elasticsearch.Percentage(value);
 }
 
-public readonly partial struct PercentageBuilder
+public readonly partial struct PercentageFactory
 {
 	public Elastic.Clients.Elasticsearch.Percentage Value(string value)
 	{
@@ -86,9 +86,9 @@ public readonly partial struct PercentageBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Percentage Build(System.Func<Elastic.Clients.Elasticsearch.PercentageBuilder, Elastic.Clients.Elasticsearch.Percentage> action)
+	internal static Elastic.Clients.Elasticsearch.Percentage Build(System.Func<Elastic.Clients.Elasticsearch.PercentageFactory, Elastic.Clients.Elasticsearch.Percentage> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.PercentageBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.PercentageFactory();
 		return action.Invoke(builder);
 	}
 }

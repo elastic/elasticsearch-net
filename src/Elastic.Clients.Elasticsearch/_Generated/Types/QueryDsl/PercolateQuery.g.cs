@@ -316,28 +316,6 @@ public readonly partial struct PercolateQueryDescriptor<TDocument>
 	/// An array of sources of the documents being percolated.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Documents()
-	{
-		Instance.Documents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of sources of the documents being percolated.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Documents(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject>? action)
-	{
-		Instance.Documents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of sources of the documents being percolated.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Documents(params object[] values)
 	{
 		Instance.Documents = [.. values];
@@ -499,28 +477,6 @@ public readonly partial struct PercolateQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Documents(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Documents = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of sources of the documents being percolated.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Documents()
-	{
-		Instance.Documents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of sources of the documents being percolated.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Documents(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject>? action)
-	{
-		Instance.Documents = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfObject.Build(action);
 		return this;
 	}
 

@@ -141,13 +141,13 @@ public readonly partial struct LearningToRankConfigDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument> DefaultParams()
 	{
-		Instance.DefaultParams = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.DefaultParams = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument> DefaultParams(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument> DefaultParams(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.DefaultParams = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.DefaultParams = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -164,30 +164,18 @@ public readonly partial struct LearningToRankConfigDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument> FeatureExtractors()
-	{
-		Instance.FeatureExtractors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringQueryFeatureExtractor<TDocument>.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument> FeatureExtractors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringQueryFeatureExtractor<TDocument>>? action)
-	{
-		Instance.FeatureExtractors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringQueryFeatureExtractor<TDocument>.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument> FeatureExtractors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>[] values)
 	{
 		Instance.FeatureExtractors = [.. values];
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument> FeatureExtractors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQueryFeatureExtractor<TDocument>>?[] actions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument> FeatureExtractors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQueryFeatureExtractor<TDocument>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQueryFeatureExtractor<TDocument>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQueryFeatureExtractor<TDocument>.Build(action));
 		}
 
 		Instance.FeatureExtractors = items;
@@ -236,13 +224,13 @@ public readonly partial struct LearningToRankConfigDescriptor
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor DefaultParams()
 	{
-		Instance.DefaultParams = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.DefaultParams = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor DefaultParams(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor DefaultParams(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.DefaultParams = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.DefaultParams = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -259,48 +247,30 @@ public readonly partial struct LearningToRankConfigDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor FeatureExtractors()
-	{
-		Instance.FeatureExtractors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringQueryFeatureExtractor.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor FeatureExtractors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringQueryFeatureExtractor>? action)
-	{
-		Instance.FeatureExtractors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringQueryFeatureExtractor.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor FeatureExtractors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringQueryFeatureExtractor<T>>? action)
-	{
-		Instance.FeatureExtractors = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIDictionaryOfStringQueryFeatureExtractor<T>.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor FeatureExtractors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>[] values)
 	{
 		Instance.FeatureExtractors = [.. values];
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor FeatureExtractors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQueryFeatureExtractor>?[] actions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor FeatureExtractors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQueryFeatureExtractor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQueryFeatureExtractor.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQueryFeatureExtractor.Build(action));
 		}
 
 		Instance.FeatureExtractors = items;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor FeatureExtractors<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQueryFeatureExtractor<T>>?[] actions)
+	public Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor FeatureExtractors<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQueryFeatureExtractor<T>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringQueryFeatureExtractor<T>.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQueryFeatureExtractor<T>.Build(action));
 		}
 
 		Instance.FeatureExtractors = items;

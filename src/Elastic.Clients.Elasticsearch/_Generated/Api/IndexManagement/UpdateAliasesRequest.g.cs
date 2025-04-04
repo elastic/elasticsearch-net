@@ -202,39 +202,6 @@ public readonly partial struct UpdateAliasesRequestDescriptor
 	/// Actions to perform.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions()
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction>? action)
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<T>>? action)
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions(params Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction[] values)
 	{
 		Instance.Actions = [.. values];
@@ -387,28 +354,6 @@ public readonly partial struct UpdateAliasesRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? value)
 	{
 		Instance.Actions = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions()
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<TDocument>>? action)
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexUpdateAliasesAction<TDocument>.Build(action);
 		return this;
 	}
 

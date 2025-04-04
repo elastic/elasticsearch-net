@@ -163,13 +163,13 @@ public readonly partial struct FrequencyEncodingPreprocessorDescriptor
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessorDescriptor FrequencyMap()
 	{
-		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(null);
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessorDescriptor FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessorDescriptor FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble>? action)
 	{
-		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(action);
+		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(action);
 		return this;
 	}
 

@@ -182,28 +182,6 @@ public readonly partial struct ZeroShotClassificationInferenceUpdateOptionsDescr
 	/// The labels to predict.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptionsDescriptor Labels()
-	{
-		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The labels to predict.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptionsDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The labels to predict.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptionsDescriptor Labels(params string[] values)
 	{
 		Instance.Labels = [.. values];

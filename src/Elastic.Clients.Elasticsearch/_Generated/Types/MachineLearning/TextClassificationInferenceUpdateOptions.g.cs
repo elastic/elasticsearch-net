@@ -172,28 +172,6 @@ public readonly partial struct TextClassificationInferenceUpdateOptionsDescripto
 	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor ClassificationLabels()
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor ClassificationLabels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor ClassificationLabels(params string[] values)
 	{
 		Instance.ClassificationLabels = [.. values];

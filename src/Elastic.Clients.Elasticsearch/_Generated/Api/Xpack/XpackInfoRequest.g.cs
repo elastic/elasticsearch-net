@@ -206,30 +206,6 @@ public readonly partial struct XpackInfoRequestDescriptor
 	/// For example, <c>build,license,features</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Categories()
-	{
-		Instance.Categories = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfXPackCategory.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the information categories to include in the response.
-	/// For example, <c>build,license,features</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Categories(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfXPackCategory>? action)
-	{
-		Instance.Categories = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfXPackCategory.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the information categories to include in the response.
-	/// For example, <c>build,license,features</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Categories(params Elastic.Clients.Elasticsearch.Xpack.XPackCategory[] values)
 	{
 		Instance.Categories = [.. values];

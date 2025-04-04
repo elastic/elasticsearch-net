@@ -140,18 +140,6 @@ public readonly partial struct StemmerOverrideTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Rules()
-	{
-		Instance.Rules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Rules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Rules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Rules(params string[] values)
 	{
 		Instance.Rules = [.. values];

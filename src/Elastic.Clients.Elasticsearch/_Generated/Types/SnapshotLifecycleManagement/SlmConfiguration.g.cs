@@ -208,30 +208,6 @@ public readonly partial struct SlmConfigurationDescriptor
 	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor FeatureStates()
-	{
-		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.
-	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor FeatureStates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.FeatureStates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.
-	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor FeatureStates(params string[] values)
 	{
 		Instance.FeatureStates = [.. values];
@@ -290,7 +266,7 @@ public readonly partial struct SlmConfigurationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -299,9 +275,9 @@ public readonly partial struct SlmConfigurationDescriptor
 	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

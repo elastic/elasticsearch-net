@@ -280,9 +280,9 @@ public readonly partial struct FunctionScoreDescriptor<TDocument>
 	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Exp(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Exp(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<TDocument>.Build(action);
+		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -326,9 +326,9 @@ public readonly partial struct FunctionScoreDescriptor<TDocument>
 	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Gauss(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Gauss(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<TDocument>.Build(action);
+		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -348,9 +348,9 @@ public readonly partial struct FunctionScoreDescriptor<TDocument>
 	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Linear(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Linear(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<TDocument>.Build(action);
+		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -474,9 +474,9 @@ public readonly partial struct FunctionScoreDescriptor
 	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder.Build(action);
+		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.Build(action);
 		return this;
 	}
 
@@ -485,9 +485,9 @@ public readonly partial struct FunctionScoreDescriptor
 	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<T>.Build(action);
+		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>.Build(action);
 		return this;
 	}
 
@@ -543,9 +543,9 @@ public readonly partial struct FunctionScoreDescriptor
 	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder.Build(action);
+		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.Build(action);
 		return this;
 	}
 
@@ -554,9 +554,9 @@ public readonly partial struct FunctionScoreDescriptor
 	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<T>.Build(action);
+		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>.Build(action);
 		return this;
 	}
 
@@ -576,9 +576,9 @@ public readonly partial struct FunctionScoreDescriptor
 	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder.Build(action);
+		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.Build(action);
 		return this;
 	}
 
@@ -587,9 +587,9 @@ public readonly partial struct FunctionScoreDescriptor
 	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
-		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionBuilder<T>.Build(action);
+		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>.Build(action);
 		return this;
 	}
 

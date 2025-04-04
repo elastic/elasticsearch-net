@@ -119,30 +119,18 @@ public readonly partial struct GeoPolygonPointsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPointsDescriptor Points()
-	{
-		Instance.Points = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfGeoLocation.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPointsDescriptor Points(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfGeoLocation>? action)
-	{
-		Instance.Points = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfGeoLocation.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPointsDescriptor Points(params Elastic.Clients.Elasticsearch.GeoLocation[] values)
 	{
 		Instance.Points = [.. values];
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPointsDescriptor Points(params System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation>[] actions)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPointsDescriptor Points(params System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.GeoLocation>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action));
 		}
 
 		Instance.Points = items;

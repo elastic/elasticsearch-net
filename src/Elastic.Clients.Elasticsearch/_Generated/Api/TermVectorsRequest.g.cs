@@ -743,7 +743,7 @@ public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> PerFieldAnalyzer()
 	{
-		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString<TDocument>.Build(null);
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(null);
 		return this;
 	}
 
@@ -754,9 +754,9 @@ public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>>? action)
 	{
-		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldString<TDocument>.Build(action);
+		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(action);
 		return this;
 	}
 

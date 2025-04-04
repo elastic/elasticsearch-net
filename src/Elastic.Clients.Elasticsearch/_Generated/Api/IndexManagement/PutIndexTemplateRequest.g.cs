@@ -494,30 +494,6 @@ public readonly partial struct PutIndexTemplateRequestDescriptor
 	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor ComposedOf()
-	{
-		Instance.ComposedOf = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An ordered list of component template names.
-	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor ComposedOf(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName>? action)
-	{
-		Instance.ComposedOf = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An ordered list of component template names.
-	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor ComposedOf(params Elastic.Clients.Elasticsearch.Name[] values)
 	{
 		Instance.ComposedOf = [.. values];
@@ -593,30 +569,6 @@ public readonly partial struct PutIndexTemplateRequestDescriptor
 	/// references a component template that might not exist
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor IgnoreMissingComponentTemplates()
-	{
-		Instance.IgnoreMissingComponentTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The configuration option ignore_missing_component_templates can be used when an index template
-	/// references a component template that might not exist
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor IgnoreMissingComponentTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.IgnoreMissingComponentTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The configuration option ignore_missing_component_templates can be used when an index template
-	/// references a component template that might not exist
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor IgnoreMissingComponentTemplates(params string[] values)
 	{
 		Instance.IgnoreMissingComponentTemplates = [.. values];
@@ -660,7 +612,7 @@ public readonly partial struct PutIndexTemplateRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -673,9 +625,9 @@ public readonly partial struct PutIndexTemplateRequestDescriptor
 	/// To unset the metadata, replace the template without specifying it.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -952,30 +904,6 @@ public readonly partial struct PutIndexTemplateRequestDescriptor<TDocument>
 	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> ComposedOf()
-	{
-		Instance.ComposedOf = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An ordered list of component template names.
-	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> ComposedOf(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName>? action)
-	{
-		Instance.ComposedOf = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An ordered list of component template names.
-	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> ComposedOf(params Elastic.Clients.Elasticsearch.Name[] values)
 	{
 		Instance.ComposedOf = [.. values];
@@ -1051,30 +979,6 @@ public readonly partial struct PutIndexTemplateRequestDescriptor<TDocument>
 	/// references a component template that might not exist
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates()
-	{
-		Instance.IgnoreMissingComponentTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The configuration option ignore_missing_component_templates can be used when an index template
-	/// references a component template that might not exist
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.IgnoreMissingComponentTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The configuration option ignore_missing_component_templates can be used when an index template
-	/// references a component template that might not exist
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates(params string[] values)
 	{
 		Instance.IgnoreMissingComponentTemplates = [.. values];
@@ -1118,7 +1022,7 @@ public readonly partial struct PutIndexTemplateRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -1131,9 +1035,9 @@ public readonly partial struct PutIndexTemplateRequestDescriptor<TDocument>
 	/// To unset the metadata, replace the template without specifying it.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

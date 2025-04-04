@@ -207,7 +207,7 @@ public readonly partial struct DataframeEvaluationRegressionMetricsDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Mse()
 	{
-		Instance.Mse = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Mse = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -216,9 +216,9 @@ public readonly partial struct DataframeEvaluationRegressionMetricsDescriptor
 	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Mse(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Mse(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Mse = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Mse = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -280,7 +280,7 @@ public readonly partial struct DataframeEvaluationRegressionMetricsDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor RSquared()
 	{
-		Instance.RSquared = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.RSquared = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -289,9 +289,9 @@ public readonly partial struct DataframeEvaluationRegressionMetricsDescriptor
 	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor RSquared(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor RSquared(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.RSquared = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.RSquared = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

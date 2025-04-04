@@ -241,28 +241,6 @@ public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -399,39 +377,6 @@ public readonly partial struct TextSimilarityRerankerDescriptor
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
 		return this;
 	}
 

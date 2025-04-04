@@ -1512,9 +1512,9 @@ public readonly partial struct QueryDescriptor<TDocument>
 	/// For example, you can use this query to give more weight to documents closer to a certain date or location.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> DistanceFeature(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> DistanceFeature(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
 	{
-		Instance.DistanceFeature = Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder<TDocument>.Build(action);
+		Instance.DistanceFeature = Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -2194,9 +2194,9 @@ public readonly partial struct QueryDescriptor<TDocument>
 	/// Returns documents that contain terms within a provided range.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
-		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<TDocument>.Build(action);
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -3014,9 +3014,9 @@ public readonly partial struct QueryDescriptor
 	/// For example, you can use this query to give more weight to documents closer to a certain date or location.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DistanceFeature(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DistanceFeature(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
 	{
-		Instance.DistanceFeature = Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder.Build(action);
+		Instance.DistanceFeature = Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory.Build(action);
 		return this;
 	}
 
@@ -3026,9 +3026,9 @@ public readonly partial struct QueryDescriptor
 	/// For example, you can use this query to give more weight to documents closer to a certain date or location.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DistanceFeature<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DistanceFeature<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
 	{
-		Instance.DistanceFeature = Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryBuilder<T>.Build(action);
+		Instance.DistanceFeature = Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<T>.Build(action);
 		return this;
 	}
 
@@ -3965,9 +3965,9 @@ public readonly partial struct QueryDescriptor
 	/// Returns documents that contain terms within a provided range.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
-		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder.Build(action);
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Build(action);
 		return this;
 	}
 
@@ -3976,9 +3976,9 @@ public readonly partial struct QueryDescriptor
 	/// Returns documents that contain terms within a provided range.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Range<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<T>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Range<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
-		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryBuilder<T>.Build(action);
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>.Build(action);
 		return this;
 	}
 

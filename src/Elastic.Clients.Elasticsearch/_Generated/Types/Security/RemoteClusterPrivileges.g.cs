@@ -176,28 +176,6 @@ public readonly partial struct RemoteClusterPrivilegesDescriptor
 	/// The cluster level privileges that owners of the role have on the remote cluster.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Privileges()
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRemoteClusterPrivilege.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The cluster level privileges that owners of the role have on the remote cluster.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRemoteClusterPrivilege>? action)
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRemoteClusterPrivilege.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The cluster level privileges that owners of the role have on the remote cluster.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Privileges(params Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege[] values)
 	{
 		Instance.Privileges = [.. values];

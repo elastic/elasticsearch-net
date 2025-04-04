@@ -509,13 +509,13 @@ public readonly partial struct HighlightDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fields()
 	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<TDocument>.Build(null);
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldHighlightField<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldHighlightField<TDocument>>? action)
 	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<TDocument>.Build(action);
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldHighlightField<TDocument>.Build(action);
 		return this;
 	}
 
@@ -697,13 +697,13 @@ public readonly partial struct HighlightDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Options()
 	{
-		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Options(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Options(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -760,30 +760,6 @@ public readonly partial struct HighlightDescriptor<TDocument>
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PostTags()
-	{
-		Instance.PostTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PostTags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.PostTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PostTags(params string[] values)
 	{
 		Instance.PostTags = [.. values];
@@ -799,30 +775,6 @@ public readonly partial struct HighlightDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PreTags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.PreTags = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PreTags()
-	{
-		Instance.PreTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PreTags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.PreTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -956,19 +908,19 @@ public readonly partial struct HighlightDescriptor
 
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields()
 	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField.Build(null);
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldHighlightField.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldHighlightField>? action)
 	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField.Build(action);
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldHighlightField.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<T>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldHighlightField<T>>? action)
 	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldHighlightField<T>.Build(action);
+		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldHighlightField<T>.Build(action);
 		return this;
 	}
 
@@ -1176,13 +1128,13 @@ public readonly partial struct HighlightDescriptor
 
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Options()
 	{
-		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Options(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Options(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -1239,30 +1191,6 @@ public readonly partial struct HighlightDescriptor
 	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PostTags()
-	{
-		Instance.PostTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PostTags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.PostTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PostTags(params string[] values)
 	{
 		Instance.PostTags = [.. values];
@@ -1278,30 +1206,6 @@ public readonly partial struct HighlightDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PreTags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.PreTags = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PreTags()
-	{
-		Instance.PreTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PreTags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.PreTags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

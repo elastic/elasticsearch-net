@@ -199,32 +199,6 @@ public readonly partial struct DisMaxQueryDescriptor<TDocument>
 	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries()
-	{
-		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Queries = [.. values];
@@ -319,45 +293,6 @@ public readonly partial struct DisMaxQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> value)
 	{
 		Instance.Queries = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries()
-	{
-		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Queries = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
 		return this;
 	}
 

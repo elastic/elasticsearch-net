@@ -157,28 +157,6 @@ public readonly partial struct ModifyDataStreamRequestDescriptor
 	/// Actions to perform.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions()
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexModifyDataStreamAction.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexModifyDataStreamAction>? action)
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexModifyDataStreamAction.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions(params Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction[] values)
 	{
 		Instance.Actions = [.. values];

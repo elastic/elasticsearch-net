@@ -267,28 +267,6 @@ public readonly partial struct FunctionScoreQueryDescriptor<TDocument>
 	/// One or more functions that compute a new score for each document returned by the query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> Functions()
-	{
-		Instance.Functions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFunctionScore<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> Functions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFunctionScore<TDocument>>? action)
-	{
-		Instance.Functions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFunctionScore<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> Functions(params Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore[] values)
 	{
 		Instance.Functions = [.. values];
@@ -439,39 +417,6 @@ public readonly partial struct FunctionScoreQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Functions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? value)
 	{
 		Instance.Functions = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Functions()
-	{
-		Instance.Functions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFunctionScore.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Functions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFunctionScore>? action)
-	{
-		Instance.Functions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFunctionScore.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Functions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFunctionScore<T>>? action)
-	{
-		Instance.Functions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFunctionScore<T>.Build(action);
 		return this;
 	}
 

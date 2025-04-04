@@ -216,7 +216,7 @@ public readonly partial struct RankEvalRequestItemDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Params()
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -225,9 +225,9 @@ public readonly partial struct RankEvalRequestItemDescriptor<TDocument>
 	/// The search template parameters.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -246,28 +246,6 @@ public readonly partial struct RankEvalRequestItemDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> value)
 	{
 		Instance.Ratings = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings()
-	{
-		Instance.Ratings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating>? action)
-	{
-		Instance.Ratings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating.Build(action);
 		return this;
 	}
 
@@ -389,7 +367,7 @@ public readonly partial struct RankEvalRequestItemDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Params()
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -398,9 +376,9 @@ public readonly partial struct RankEvalRequestItemDescriptor
 	/// The search template parameters.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -419,28 +397,6 @@ public readonly partial struct RankEvalRequestItemDescriptor
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> value)
 	{
 		Instance.Ratings = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings()
-	{
-		Instance.Ratings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating>? action)
-	{
-		Instance.Ratings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDocumentRating.Build(action);
 		return this;
 	}
 

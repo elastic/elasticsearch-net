@@ -140,28 +140,6 @@ public readonly partial struct AccessDescriptor<TDocument>
 	/// A list of indices permission entries for cross-cluster replication.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Replication()
-	{
-		Instance.Replication = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfReplicationAccess.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Replication(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfReplicationAccess>? action)
-	{
-		Instance.Replication = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfReplicationAccess.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Replication(params Elastic.Clients.Elasticsearch.Security.ReplicationAccess[] values)
 	{
 		Instance.Replication = [.. values];
@@ -193,28 +171,6 @@ public readonly partial struct AccessDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Search(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? value)
 	{
 		Instance.Search = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Search()
-	{
-		Instance.Search = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchAccess<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Search(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchAccess<TDocument>>? action)
-	{
-		Instance.Search = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchAccess<TDocument>.Build(action);
 		return this;
 	}
 
@@ -295,28 +251,6 @@ public readonly partial struct AccessDescriptor
 	/// A list of indices permission entries for cross-cluster replication.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Replication()
-	{
-		Instance.Replication = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfReplicationAccess.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Replication(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfReplicationAccess>? action)
-	{
-		Instance.Replication = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfReplicationAccess.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Replication(params Elastic.Clients.Elasticsearch.Security.ReplicationAccess[] values)
 	{
 		Instance.Replication = [.. values];
@@ -348,39 +282,6 @@ public readonly partial struct AccessDescriptor
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? value)
 	{
 		Instance.Search = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search()
-	{
-		Instance.Search = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchAccess.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchAccess>? action)
-	{
-		Instance.Search = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchAccess.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchAccess<T>>? action)
-	{
-		Instance.Search = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchAccess<T>.Build(action);
 		return this;
 	}
 

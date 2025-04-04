@@ -185,18 +185,6 @@ public readonly partial struct PutRulesetRequestDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Rules()
-	{
-		Instance.Rules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRule.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Rules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRule>? action)
-	{
-		Instance.Rules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRule.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor Rules(params Elastic.Clients.Elasticsearch.QueryRules.QueryRule[] values)
 	{
 		Instance.Rules = [.. values];

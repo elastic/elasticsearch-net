@@ -142,13 +142,13 @@ public readonly partial struct OneHotEncodingPreprocessorDescriptor
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessorDescriptor HotMap()
 	{
-		Instance.HotMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.HotMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessorDescriptor HotMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessorDescriptor HotMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.HotMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.HotMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 

@@ -238,30 +238,6 @@ public readonly partial struct PinnedQueryDescriptor<TDocument>
 	/// Required if <c>ids</c> is not specified.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc[] values)
 	{
 		Instance.Docs = [.. values];
@@ -295,30 +271,6 @@ public readonly partial struct PinnedQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Document IDs listed in the order they are to appear in results.
-	/// Required if <c>docs</c> is not specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Ids()
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Document IDs listed in the order they are to appear in results.
-	/// Required if <c>docs</c> is not specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
 		return this;
 	}
 
@@ -422,30 +374,6 @@ public readonly partial struct PinnedQueryDescriptor
 	/// Required if <c>ids</c> is not specified.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPinnedDoc.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs(params Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc[] values)
 	{
 		Instance.Docs = [.. values];
@@ -479,30 +407,6 @@ public readonly partial struct PinnedQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Document IDs listed in the order they are to appear in results.
-	/// Required if <c>docs</c> is not specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Ids()
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Document IDs listed in the order they are to appear in results.
-	/// Required if <c>docs</c> is not specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
 		return this;
 	}
 

@@ -196,38 +196,6 @@ public readonly partial struct DelegatePkiRequestDescriptor
 	/// This may be followed by additional certificates; each subsequent certificate is used to certify the previous one.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor X509CertificateChain()
-	{
-		Instance.X509CertificateChain = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The X509Certificate chain, which is represented as an ordered string array.
-	/// Each string in the array is a base64-encoded (Section 4 of RFC4648 - not base64url-encoded) of the certificate's DER encoding.
-	/// </para>
-	/// <para>
-	/// The first element is the target certificate that contains the subject distinguished name that is requesting access.
-	/// This may be followed by additional certificates; each subsequent certificate is used to certify the previous one.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor X509CertificateChain(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.X509CertificateChain = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The X509Certificate chain, which is represented as an ordered string array.
-	/// Each string in the array is a base64-encoded (Section 4 of RFC4648 - not base64url-encoded) of the certificate's DER encoding.
-	/// </para>
-	/// <para>
-	/// The first element is the target certificate that contains the subject distinguished name that is requesting access.
-	/// This may be followed by additional certificates; each subsequent certificate is used to certify the previous one.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor X509CertificateChain(params string[] values)
 	{
 		Instance.X509CertificateChain = [.. values];

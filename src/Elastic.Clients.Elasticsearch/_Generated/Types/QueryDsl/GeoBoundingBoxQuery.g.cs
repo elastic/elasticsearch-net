@@ -209,9 +209,9 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument> BoundingBox(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument> BoundingBox(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.BoundingBox = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.BoundingBox = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
@@ -312,9 +312,9 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor BoundingBox(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor BoundingBox(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.BoundingBox = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.BoundingBox = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 

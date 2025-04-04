@@ -171,9 +171,9 @@ public readonly partial struct TranslogRetentionDescriptor
 	/// versions 7.0.0 and later.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor Size(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetentionDescriptor Size(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.Size = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.Size = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

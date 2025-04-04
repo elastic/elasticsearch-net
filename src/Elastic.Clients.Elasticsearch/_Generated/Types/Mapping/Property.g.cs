@@ -269,7 +269,7 @@ public partial interface IProperty
 	public string Type { get; }
 }
 
-public readonly partial struct IPropertyBuilder<TDocument>
+public readonly partial struct PropertyFactory<TDocument>
 {
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty value)
 	{
@@ -1032,14 +1032,14 @@ public readonly partial struct IPropertyBuilder<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Mapping.IProperty Build(System.Func<Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder<TDocument>, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
+	internal static Elastic.Clients.Elasticsearch.Mapping.IProperty Build(System.Func<Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<TDocument>, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.PropertyFactory<TDocument>();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct IPropertyBuilder
+public readonly partial struct PropertyFactory
 {
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty value)
 	{
@@ -2057,9 +2057,9 @@ public readonly partial struct IPropertyBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Mapping.IProperty Build(System.Func<Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
+	internal static Elastic.Clients.Elasticsearch.Mapping.IProperty Build(System.Func<Elastic.Clients.Elasticsearch.Mapping.PropertyFactory, Elastic.Clients.Elasticsearch.Mapping.IProperty> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Mapping.IPropertyBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.PropertyFactory();
 		return action.Invoke(builder);
 	}
 }

@@ -507,39 +507,6 @@ public readonly partial struct MultiTermVectorsRequestDescriptor
 	/// An array of existing or artificial documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<T>>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs(params Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation[] values)
 	{
 		Instance.Docs = [.. values];
@@ -588,28 +555,6 @@ public readonly partial struct MultiTermVectorsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Ids()
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
 		return this;
 	}
 
@@ -884,28 +829,6 @@ public readonly partial struct MultiTermVectorsRequestDescriptor<TDocument>
 	/// An array of existing or artificial documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs()
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<TDocument>>? action)
-	{
-		Instance.Docs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfMultiTermVectorsOperation<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation[] values)
 	{
 		Instance.Docs = [.. values];
@@ -937,28 +860,6 @@ public readonly partial struct MultiTermVectorsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Ids()
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
 		return this;
 	}
 

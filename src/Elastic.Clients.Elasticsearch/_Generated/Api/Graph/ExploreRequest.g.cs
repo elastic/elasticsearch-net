@@ -384,39 +384,6 @@ public readonly partial struct ExploreRequestDescriptor
 	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Vertices()
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Vertices(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition>? action)
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Vertices<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<T>>? action)
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Vertices(params Elastic.Clients.Elasticsearch.Graph.VertexDefinition[] values)
 	{
 		Instance.Vertices = [.. values];
@@ -650,28 +617,6 @@ public readonly partial struct ExploreRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Vertices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? value)
 	{
 		Instance.Vertices = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Vertices()
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Vertices(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<TDocument>>? action)
-	{
-		Instance.Vertices = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexDefinition<TDocument>.Build(action);
 		return this;
 	}
 

@@ -253,7 +253,7 @@ public partial interface ITokenFilter
 	public string Type { get; }
 }
 
-public readonly partial struct ITokenFilterBuilder
+public readonly partial struct TokenFilterFactory
 {
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter AsciiFolding(Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter value)
 	{
@@ -896,9 +896,9 @@ public readonly partial struct ITokenFilterBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Analysis.ITokenFilter Build(System.Func<Elastic.Clients.Elasticsearch.Analysis.ITokenFilterBuilder, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter> action)
+	internal static Elastic.Clients.Elasticsearch.Analysis.ITokenFilter Build(System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Analysis.ITokenFilterBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory();
 		return action.Invoke(builder);
 	}
 }

@@ -190,7 +190,7 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Accuracy()
 	{
-		Instance.Accuracy = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Accuracy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -199,9 +199,9 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 	/// Accuracy of predictions (per-class and overall).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Accuracy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Accuracy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Accuracy = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Accuracy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -263,7 +263,7 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix()
 	{
-		Instance.MulticlassConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.MulticlassConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -272,9 +272,9 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 	/// Multiclass confusion matrix.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.MulticlassConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.MulticlassConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -303,7 +303,7 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Precision()
 	{
-		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -312,9 +312,9 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 	/// Precision of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Precision(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Precision(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -343,7 +343,7 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Recall()
 	{
-		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -352,9 +352,9 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 	/// Recall of predictions (per-class and average).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Recall(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Recall(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

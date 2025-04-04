@@ -297,32 +297,6 @@ public readonly partial struct GetIndexRequestDescriptor
 	/// such as open,hidden.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -337,28 +311,6 @@ public readonly partial struct GetIndexRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor Features(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? value)
 	{
 		Instance.Features = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor Features()
-	{
-		Instance.Features = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFeature.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor Features(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFeature>? action)
-	{
-		Instance.Features = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFeature.Build(action);
 		return this;
 	}
 
@@ -554,32 +506,6 @@ public readonly partial struct GetIndexRequestDescriptor<TDocument>
 	/// such as open,hidden.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -594,28 +520,6 @@ public readonly partial struct GetIndexRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Features(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? value)
 	{
 		Instance.Features = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Features()
-	{
-		Instance.Features = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFeature.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Features(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFeature>? action)
-	{
-		Instance.Features = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFeature.Build(action);
 		return this;
 	}
 

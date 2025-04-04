@@ -192,7 +192,7 @@ public readonly partial struct TestRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor MatchCriteria()
 	{
-		Instance.MatchCriteria = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.MatchCriteria = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -202,9 +202,9 @@ public readonly partial struct TestRequestDescriptor
 	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor MatchCriteria(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor MatchCriteria(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.MatchCriteria = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.MatchCriteria = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

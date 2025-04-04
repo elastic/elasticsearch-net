@@ -249,9 +249,9 @@ public readonly partial struct CreateRepositoryRequestDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Repository(System.Func<Elastic.Clients.Elasticsearch.Snapshot.IRepositoryBuilder, Elastic.Clients.Elasticsearch.Snapshot.IRepository> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Repository(System.Func<Elastic.Clients.Elasticsearch.Snapshot.RepositoryFactory, Elastic.Clients.Elasticsearch.Snapshot.IRepository> action)
 	{
-		Instance.Repository = Elastic.Clients.Elasticsearch.Snapshot.IRepositoryBuilder.Build(action);
+		Instance.Repository = Elastic.Clients.Elasticsearch.Snapshot.RepositoryFactory.Build(action);
 		return this;
 	}
 

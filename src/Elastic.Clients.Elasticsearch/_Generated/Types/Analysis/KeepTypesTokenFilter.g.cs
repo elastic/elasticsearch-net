@@ -146,18 +146,6 @@ public readonly partial struct KeepTypesTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types()
-	{
-		Instance.Types = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Types = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types(params string[] values)
 	{
 		Instance.Types = [.. values];

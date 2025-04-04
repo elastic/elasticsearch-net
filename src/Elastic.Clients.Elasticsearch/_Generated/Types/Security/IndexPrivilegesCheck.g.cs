@@ -197,28 +197,6 @@ public readonly partial struct IndexPrivilegesCheckDescriptor
 	/// A list of the privileges that you want to check for the specified indices.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor Privileges()
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilege.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified indices.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilege>? action)
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexPrivilege.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified indices.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor Privileges(params Elastic.Clients.Elasticsearch.Security.IndexPrivilege[] values)
 	{
 		Instance.Privileges = [.. values];

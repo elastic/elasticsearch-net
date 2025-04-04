@@ -119,18 +119,6 @@ public readonly partial struct ManageUserPrivilegesDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor Applications()
-	{
-		Instance.Applications = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor Applications(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Applications = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor Applications(params string[] values)
 	{
 		Instance.Applications = [.. values];

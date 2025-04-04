@@ -140,18 +140,6 @@ public readonly partial struct MappingCharFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor Mappings()
-	{
-		Instance.Mappings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor Mappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Mappings = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor Mappings(params string[] values)
 	{
 		Instance.Mappings = [.. values];

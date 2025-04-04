@@ -162,7 +162,7 @@ public sealed partial class GeoBounds : Elastic.Clients.Elasticsearch.Core.IComp
 	public static implicit operator Elastic.Clients.Elasticsearch.GeoBounds(Elastic.Clients.Elasticsearch.WktGeoBounds wkt) => GeoBounds.Wkt(wkt);
 }
 
-public readonly partial struct GeoBoundsBuilder
+public readonly partial struct GeoBoundsFactory
 {
 	public Elastic.Clients.Elasticsearch.GeoBounds Coordinates(Elastic.Clients.Elasticsearch.CoordsGeoBounds value)
 	{
@@ -205,9 +205,9 @@ public readonly partial struct GeoBoundsBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.GeoBounds Build(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	internal static Elastic.Clients.Elasticsearch.GeoBounds Build(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.GeoBoundsBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.GeoBoundsFactory();
 		return action.Invoke(builder);
 	}
 }

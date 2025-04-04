@@ -411,28 +411,6 @@ public readonly partial struct MultiSearchRequestDescriptor
 	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -558,24 +536,6 @@ public readonly partial struct MultiSearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Searches(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> value)
 	{
 		Instance.Searches = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Searches()
-	{
-		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Searches(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem>? action)
-	{
-		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Searches<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<T>>? action)
-	{
-		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<T>.Build(action);
 		return this;
 	}
 
@@ -733,28 +693,6 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -880,18 +818,6 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Searches(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> value)
 	{
 		Instance.Searches = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Searches()
-	{
-		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<TDocument>.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Searches(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<TDocument>>? action)
-	{
-		Instance.Searches = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSearchRequestItem<TDocument>.Build(action);
 		return this;
 	}
 

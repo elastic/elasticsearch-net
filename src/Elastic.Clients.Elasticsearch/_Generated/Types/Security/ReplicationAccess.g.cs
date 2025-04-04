@@ -161,28 +161,6 @@ public readonly partial struct ReplicationAccessDescriptor
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor Names()
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor Names(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName>? action)
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexName.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor Names(params Elastic.Clients.Elasticsearch.IndexName[] values)
 	{
 		Instance.Names = [.. values];

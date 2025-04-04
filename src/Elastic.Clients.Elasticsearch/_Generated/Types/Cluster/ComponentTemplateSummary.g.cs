@@ -161,13 +161,13 @@ public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAliasDefinition<TDocument>.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAliasDefinition<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAliasDefinition<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAliasDefinition<TDocument>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAliasDefinition<TDocument>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAliasDefinition<TDocument>.Build(action);
 		return this;
 	}
 
@@ -254,13 +254,13 @@ public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -279,13 +279,13 @@ public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Settings()
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameIndexSettings<TDocument>.Build(null);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameIndexSettings<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameIndexSettings<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameIndexSettings<TDocument>>? action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameIndexSettings<TDocument>.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameIndexSettings<TDocument>.Build(action);
 		return this;
 	}
 
@@ -375,19 +375,19 @@ public readonly partial struct ComponentTemplateSummaryDescriptor
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Aliases()
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAliasDefinition.Build(null);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAliasDefinition.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAliasDefinition>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAliasDefinition>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAliasDefinition.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAliasDefinition.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAliasDefinition<T>>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAliasDefinition<T>>? action)
 	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAliasDefinition<T>.Build(action);
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAliasDefinition<T>.Build(action);
 		return this;
 	}
 
@@ -487,13 +487,13 @@ public readonly partial struct ComponentTemplateSummaryDescriptor
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -512,19 +512,19 @@ public readonly partial struct ComponentTemplateSummaryDescriptor
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Settings()
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameIndexSettings.Build(null);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameIndexSettings.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameIndexSettings>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameIndexSettings>? action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameIndexSettings.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameIndexSettings.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Settings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameIndexSettings<T>>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Settings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameIndexSettings<T>>? action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfIndexNameIndexSettings<T>.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameIndexSettings<T>.Build(action);
 		return this;
 	}
 

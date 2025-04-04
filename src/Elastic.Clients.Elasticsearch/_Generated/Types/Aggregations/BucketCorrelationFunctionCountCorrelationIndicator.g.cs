@@ -191,30 +191,6 @@ public readonly partial struct BucketCorrelationFunctionCountCorrelationIndicato
 	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Expectations()
-	{
-		Instance.Expectations = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of numbers with which to correlate the configured <c>bucket_path</c> values.
-	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Expectations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		Instance.Expectations = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of numbers with which to correlate the configured <c>bucket_path</c> values.
-	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Expectations(params double[] values)
 	{
 		Instance.Expectations = [.. values];
@@ -231,32 +207,6 @@ public readonly partial struct BucketCorrelationFunctionCountCorrelationIndicato
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Fractions(System.Collections.Generic.ICollection<double>? value)
 	{
 		Instance.Fractions = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of fractions to use when averaging and calculating variance. This should be used if
-	/// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
-	/// must equal expectations.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Fractions()
-	{
-		Instance.Fractions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of fractions to use when averaging and calculating variance. This should be used if
-	/// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
-	/// must equal expectations.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor Fractions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		Instance.Fractions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action);
 		return this;
 	}
 

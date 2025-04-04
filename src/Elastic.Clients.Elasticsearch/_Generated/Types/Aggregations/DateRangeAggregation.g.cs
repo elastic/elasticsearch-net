@@ -234,28 +234,6 @@ public readonly partial struct DateRangeAggregationDescriptor<TDocument>
 	/// Array of date ranges.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges()
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDateAggregationRange.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDateAggregationRange>? action)
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDateAggregationRange.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
@@ -376,28 +354,6 @@ public readonly partial struct DateRangeAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange>? value)
 	{
 		Instance.Ranges = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges()
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDateAggregationRange.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDateAggregationRange>? action)
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDateAggregationRange.Build(action);
 		return this;
 	}
 

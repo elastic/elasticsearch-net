@@ -1021,32 +1021,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	/// It supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -1219,9 +1193,9 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	/// The number of slices this task should be divided into.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesBuilder, Elastic.Clients.Elasticsearch.Slices> action)
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
-		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesBuilder.Build(action);
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 
@@ -1233,28 +1207,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1277,28 +1229,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Stats()
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Stats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1787,32 +1717,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	/// It supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -1985,9 +1889,9 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	/// The number of slices this task should be divided into.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesBuilder, Elastic.Clients.Elasticsearch.Slices> action)
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
-		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesBuilder.Build(action);
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 
@@ -1999,28 +1903,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -2043,28 +1925,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Stats()
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Stats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

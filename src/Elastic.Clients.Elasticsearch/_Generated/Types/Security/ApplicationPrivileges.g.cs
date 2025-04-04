@@ -187,28 +187,6 @@ public readonly partial struct ApplicationPrivilegesDescriptor
 	/// A list of strings, where each element is the name of an application privilege or action.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Privileges()
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of strings, where each element is the name of an application privilege or action.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Privileges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of strings, where each element is the name of an application privilege or action.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Privileges(params string[] values)
 	{
 		Instance.Privileges = [.. values];
@@ -223,28 +201,6 @@ public readonly partial struct ApplicationPrivilegesDescriptor
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Resources(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Resources = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list resources to which the privileges are applied.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Resources()
-	{
-		Instance.Resources = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list resources to which the privileges are applied.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Resources(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Resources = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

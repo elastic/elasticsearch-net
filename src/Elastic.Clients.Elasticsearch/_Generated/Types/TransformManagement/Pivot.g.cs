@@ -153,7 +153,7 @@ public readonly partial struct PivotDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
@@ -165,9 +165,9 @@ public readonly partial struct PivotDescriptor<TDocument>
 	/// average.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<TDocument>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
 		return this;
 	}
 
@@ -205,7 +205,7 @@ public readonly partial struct PivotDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> GroupBy()
 	{
-		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPivotGroupBy<TDocument>.Build(null);
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<TDocument>.Build(null);
 		return this;
 	}
 
@@ -215,9 +215,9 @@ public readonly partial struct PivotDescriptor<TDocument>
 	/// currently supported: date histogram, geotile grid, histogram, terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> GroupBy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPivotGroupBy<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> GroupBy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<TDocument>>? action)
 	{
-		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPivotGroupBy<TDocument>.Build(action);
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<TDocument>.Build(action);
 		return this;
 	}
 
@@ -292,7 +292,7 @@ public readonly partial struct PivotDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations()
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(null);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
@@ -304,9 +304,9 @@ public readonly partial struct PivotDescriptor
 	/// average.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation>? action)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
@@ -318,9 +318,9 @@ public readonly partial struct PivotDescriptor
 	/// average.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>>? action)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
-		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringAggregation<T>.Build(action);
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
 		return this;
 	}
 
@@ -365,7 +365,7 @@ public readonly partial struct PivotDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy()
 	{
-		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPivotGroupBy.Build(null);
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy.Build(null);
 		return this;
 	}
 
@@ -375,9 +375,9 @@ public readonly partial struct PivotDescriptor
 	/// currently supported: date histogram, geotile grid, histogram, terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPivotGroupBy>? action)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy>? action)
 	{
-		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPivotGroupBy.Build(action);
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy.Build(action);
 		return this;
 	}
 
@@ -387,9 +387,9 @@ public readonly partial struct PivotDescriptor
 	/// currently supported: date histogram, geotile grid, histogram, terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPivotGroupBy<T>>? action)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<T>>? action)
 	{
-		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringPivotGroupBy<T>.Build(action);
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<T>.Build(action);
 		return this;
 	}
 

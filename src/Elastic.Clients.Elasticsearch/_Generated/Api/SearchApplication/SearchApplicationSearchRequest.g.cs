@@ -202,7 +202,7 @@ public readonly partial struct SearchApplicationSearchRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Params()
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -211,9 +211,9 @@ public readonly partial struct SearchApplicationSearchRequestDescriptor
 	/// Query parameters specific to this request, which will override any defaults specified in the template.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

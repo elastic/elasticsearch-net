@@ -410,32 +410,6 @@ public readonly partial struct GetTrainedModelsRequestDescriptor
 	/// tags are returned.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Tags()
-	{
-		Instance.Tags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma delimited string of tags. A trained model can have many tags, or
-	/// none. When supplied, only trained models that contain all the supplied
-	/// tags are returned.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Tags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Tags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma delimited string of tags. A trained model can have many tags, or
-	/// none. When supplied, only trained models that contain all the supplied
-	/// tags are returned.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Tags(params string[] values)
 	{
 		Instance.Tags = [.. values];

@@ -387,34 +387,6 @@ public readonly partial struct NetworkDirectionProcessorDescriptor<TDocument>
 	/// internal_networks or internal_networks_field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> InternalNetworks()
-	{
-		Instance.InternalNetworks = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
-	/// CIDR notation. Also supports the named ranges listed below. These may be
-	/// constructed with template snippets. Must specify only one of
-	/// internal_networks or internal_networks_field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> InternalNetworks(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.InternalNetworks = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
-	/// CIDR notation. Also supports the named ranges listed below. These may be
-	/// constructed with template snippets. Must specify only one of
-	/// internal_networks or internal_networks_field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> InternalNetworks(params string[] values)
 	{
 		Instance.InternalNetworks = [.. values];
@@ -453,28 +425,6 @@ public readonly partial struct NetworkDirectionProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -707,34 +657,6 @@ public readonly partial struct NetworkDirectionProcessorDescriptor
 	/// internal_networks or internal_networks_field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor InternalNetworks()
-	{
-		Instance.InternalNetworks = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
-	/// CIDR notation. Also supports the named ranges listed below. These may be
-	/// constructed with template snippets. Must specify only one of
-	/// internal_networks or internal_networks_field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor InternalNetworks(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.InternalNetworks = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
-	/// CIDR notation. Also supports the named ranges listed below. These may be
-	/// constructed with template snippets. Must specify only one of
-	/// internal_networks or internal_networks_field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor InternalNetworks(params string[] values)
 	{
 		Instance.InternalNetworks = [.. values];
@@ -773,39 +695,6 @@ public readonly partial struct NetworkDirectionProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
 		return this;
 	}
 

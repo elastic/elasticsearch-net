@@ -313,30 +313,6 @@ public readonly partial struct PutRuleRequestDescriptor
 	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Criteria()
-	{
-		Instance.Criteria = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRuleCriteria.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Criteria(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRuleCriteria>? action)
-	{
-		Instance.Criteria = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQueryRuleCriteria.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Criteria(params Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria[] values)
 	{
 		Instance.Criteria = [.. values];

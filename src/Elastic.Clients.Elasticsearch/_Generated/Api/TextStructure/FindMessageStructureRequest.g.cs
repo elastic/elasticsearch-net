@@ -963,28 +963,6 @@ public readonly partial struct FindMessageStructureRequestDescriptor
 	/// The list of messages you want to analyze.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Messages()
-	{
-		Instance.Messages = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The list of messages you want to analyze.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Messages(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Messages = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The list of messages you want to analyze.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Messages(params string[] values)
 	{
 		Instance.Messages = [.. values];
@@ -1399,28 +1377,6 @@ public readonly partial struct FindMessageStructureRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Messages(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Messages = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The list of messages you want to analyze.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Messages()
-	{
-		Instance.Messages = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The list of messages you want to analyze.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Messages(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Messages = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

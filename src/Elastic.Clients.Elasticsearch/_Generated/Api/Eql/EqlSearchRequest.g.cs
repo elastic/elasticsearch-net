@@ -429,18 +429,6 @@ public readonly partial struct EqlSearchRequestDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -539,39 +527,6 @@ public readonly partial struct EqlSearchRequestDescriptor
 	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields()
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
@@ -620,39 +575,6 @@ public readonly partial struct EqlSearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
 		return this;
 	}
 
@@ -751,19 +673,19 @@ public readonly partial struct EqlSearchRequestDescriptor
 
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField>? action)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>>? action)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<T>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
 		return this;
 	}
 
@@ -978,18 +900,6 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -1088,28 +998,6 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Fields()
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>>? action)
-	{
-		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldAndFormat<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
@@ -1141,28 +1029,6 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
 		return this;
 	}
 
@@ -1244,13 +1110,13 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> RuntimeMappings()
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
-		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
 		return this;
 	}
 

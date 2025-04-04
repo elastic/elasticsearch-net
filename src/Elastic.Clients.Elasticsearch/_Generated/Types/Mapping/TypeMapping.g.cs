@@ -305,18 +305,6 @@ public readonly partial struct TypeMappingDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicDateFormats()
-	{
-		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicDateFormats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicDateFormats(params string[] values)
 	{
 		Instance.DynamicDateFormats = [.. values];
@@ -331,13 +319,13 @@ public readonly partial struct TypeMappingDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicTemplates()
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(null);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>>? action)
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(action);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(action);
 		return this;
 	}
 
@@ -393,13 +381,13 @@ public readonly partial struct TypeMappingDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -448,13 +436,13 @@ public readonly partial struct TypeMappingDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Runtime()
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<TDocument>.Build(null);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRuntimeField<TDocument>>? action)
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<TDocument>.Build(action);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRuntimeField<TDocument>.Build(action);
 		return this;
 	}
 
@@ -583,18 +571,6 @@ public readonly partial struct TypeMappingDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicDateFormats()
-	{
-		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicDateFormats(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.DynamicDateFormats = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicDateFormats(params string[] values)
 	{
 		Instance.DynamicDateFormats = [.. values];
@@ -609,19 +585,19 @@ public readonly partial struct TypeMappingDescriptor
 
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicTemplates()
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate.Build(null);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate>? action)
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate.Build(action);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicTemplates<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<T>>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor DynamicTemplates<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<T>>? action)
 	{
-		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfStringDynamicTemplate<T>.Build(action);
+		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<T>.Build(action);
 		return this;
 	}
 
@@ -684,13 +660,13 @@ public readonly partial struct TypeMappingDescriptor
 
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -745,19 +721,19 @@ public readonly partial struct TypeMappingDescriptor
 
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Runtime()
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField.Build(null);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRuntimeField.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRuntimeField>? action)
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField.Build(action);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRuntimeField.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Runtime<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<T>>? action)
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor Runtime<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRuntimeField<T>>? action)
 	{
-		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRuntimeField<T>.Build(action);
+		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRuntimeField<T>.Build(action);
 		return this;
 	}
 

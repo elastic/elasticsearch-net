@@ -246,7 +246,7 @@ public readonly partial struct CompletionSuggesterDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Contexts()
 	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldICollectionOfCompletionContext<TDocument>.Build(null);
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<TDocument>.Build(null);
 		return this;
 	}
 
@@ -255,9 +255,9 @@ public readonly partial struct CompletionSuggesterDescriptor<TDocument>
 	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldICollectionOfCompletionContext<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<TDocument>>? action)
 	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldICollectionOfCompletionContext<TDocument>.Build(action);
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<TDocument>.Build(action);
 		return this;
 	}
 
@@ -272,34 +272,6 @@ public readonly partial struct CompletionSuggesterDescriptor<TDocument>
 	{
 		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
 		Instance.Contexts.Add(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(Elastic.Clients.Elasticsearch.Field key)
-	{
-		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
-		Instance.Contexts.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
-	{
-		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
-		Instance.Contexts.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext>? action)
-	{
-		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
-		Instance.Contexts.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext.Build(action));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext>? action)
-	{
-		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
-		Instance.Contexts.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext.Build(action));
 		return this;
 	}
 
@@ -513,7 +485,7 @@ public readonly partial struct CompletionSuggesterDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts()
 	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldICollectionOfCompletionContext.Build(null);
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext.Build(null);
 		return this;
 	}
 
@@ -522,9 +494,9 @@ public readonly partial struct CompletionSuggesterDescriptor
 	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldICollectionOfCompletionContext>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext>? action)
 	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldICollectionOfCompletionContext.Build(action);
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext.Build(action);
 		return this;
 	}
 
@@ -533,9 +505,9 @@ public readonly partial struct CompletionSuggesterDescriptor
 	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldICollectionOfCompletionContext<T>>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<T>>? action)
 	{
-		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldICollectionOfCompletionContext<T>.Build(action);
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<T>.Build(action);
 		return this;
 	}
 
@@ -550,34 +522,6 @@ public readonly partial struct CompletionSuggesterDescriptor
 	{
 		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
 		Instance.Contexts.Add(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext(Elastic.Clients.Elasticsearch.Field key)
-	{
-		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
-		Instance.Contexts.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
-	{
-		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
-		Instance.Contexts.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext>? action)
-	{
-		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
-		Instance.Contexts.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext.Build(action));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext>? action)
-	{
-		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
-		Instance.Contexts.Add(key, Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfCompletionContext.Build(action));
 		return this;
 	}
 

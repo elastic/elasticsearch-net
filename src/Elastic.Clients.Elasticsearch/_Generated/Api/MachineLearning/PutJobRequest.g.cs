@@ -591,84 +591,6 @@ public readonly partial struct PutJobRequestDescriptor
 	/// </item>
 	/// </list>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -915,28 +837,6 @@ public readonly partial struct PutJobRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor Groups()
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor Groups(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -1212,84 +1112,6 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 	/// </item>
 	/// </list>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ExpandWildcards()
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ExpandWildcards(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard>? action)
-	{
-		Instance.ExpandWildcards = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfExpandWildcard.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -1503,28 +1325,6 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> Groups()
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> Groups(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Groups = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

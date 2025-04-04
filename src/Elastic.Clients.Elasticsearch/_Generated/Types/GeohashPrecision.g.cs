@@ -78,7 +78,7 @@ public sealed partial class GeohashPrecision : Elastic.Clients.Elasticsearch.Uni
 	public static implicit operator Elastic.Clients.Elasticsearch.GeohashPrecision(string value) => new Elastic.Clients.Elasticsearch.GeohashPrecision(value);
 }
 
-public readonly partial struct GeohashPrecisionBuilder
+public readonly partial struct GeohashPrecisionFactory
 {
 	public Elastic.Clients.Elasticsearch.GeohashPrecision GeohashLength(long value)
 	{
@@ -91,9 +91,9 @@ public readonly partial struct GeohashPrecisionBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.GeohashPrecision Build(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionBuilder, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
+	internal static Elastic.Clients.Elasticsearch.GeohashPrecision Build(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionFactory, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.GeohashPrecisionBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.GeohashPrecisionFactory();
 		return action.Invoke(builder);
 	}
 }

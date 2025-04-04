@@ -183,7 +183,7 @@ public readonly partial struct MatrixStatsAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> Missing()
 	{
-		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldDouble<TDocument>.Build(null);
+		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<TDocument>.Build(null);
 		return this;
 	}
 
@@ -193,9 +193,9 @@ public readonly partial struct MatrixStatsAggregationDescriptor<TDocument>
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> Missing(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldDouble<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> Missing(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<TDocument>>? action)
 	{
-		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldDouble<TDocument>.Build(action);
+		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<TDocument>.Build(action);
 		return this;
 	}
 
@@ -299,7 +299,7 @@ public readonly partial struct MatrixStatsAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Missing()
 	{
-		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldDouble.Build(null);
+		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble.Build(null);
 		return this;
 	}
 
@@ -309,9 +309,9 @@ public readonly partial struct MatrixStatsAggregationDescriptor
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Missing(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldDouble>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Missing(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble>? action)
 	{
-		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldDouble.Build(action);
+		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble.Build(action);
 		return this;
 	}
 
@@ -321,9 +321,9 @@ public readonly partial struct MatrixStatsAggregationDescriptor
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Missing<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldDouble<T>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Missing<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<T>>? action)
 	{
-		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldDouble<T>.Build(action);
+		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<T>.Build(action);
 		return this;
 	}
 

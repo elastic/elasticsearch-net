@@ -150,18 +150,6 @@ public readonly partial struct ElisionTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor Articles()
-	{
-		Instance.Articles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor Articles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Articles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilterDescriptor Articles(params string[] values)
 	{
 		Instance.Articles = [.. values];

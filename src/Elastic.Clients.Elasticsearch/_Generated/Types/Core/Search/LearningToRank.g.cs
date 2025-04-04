@@ -163,7 +163,7 @@ public readonly partial struct LearningToRankDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor Params()
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -172,9 +172,9 @@ public readonly partial struct LearningToRankDescriptor
 	/// Named parameters to be passed to the query templates used for feature
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

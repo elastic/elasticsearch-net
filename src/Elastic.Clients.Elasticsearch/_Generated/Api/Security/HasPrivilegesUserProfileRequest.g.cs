@@ -223,28 +223,6 @@ public readonly partial struct HasPrivilegesUserProfileRequestDescriptor
 	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Uids()
-	{
-		Instance.Uids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Uids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Uids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Uids(params string[] values)
 	{
 		Instance.Uids = [.. values];

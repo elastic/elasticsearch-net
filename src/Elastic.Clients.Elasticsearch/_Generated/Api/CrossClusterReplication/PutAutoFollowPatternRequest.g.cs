@@ -458,28 +458,6 @@ public readonly partial struct PutAutoFollowPatternRequestDescriptor
 	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexExclusionPatterns()
-	{
-		Instance.LeaderIndexExclusionPatterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexExclusionPatterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.LeaderIndexExclusionPatterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexExclusionPatterns(params string[] values)
 	{
 		Instance.LeaderIndexExclusionPatterns = [.. values];
@@ -494,28 +472,6 @@ public readonly partial struct PutAutoFollowPatternRequestDescriptor
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexPatterns(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.LeaderIndexPatterns = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexPatterns()
-	{
-		Instance.LeaderIndexPatterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexPatterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.LeaderIndexPatterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -579,9 +535,9 @@ public readonly partial struct PutAutoFollowPatternRequestDescriptor
 	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -623,9 +579,9 @@ public readonly partial struct PutAutoFollowPatternRequestDescriptor
 	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -656,9 +612,9 @@ public readonly partial struct PutAutoFollowPatternRequestDescriptor
 	/// The maximum total bytes of operations per bulk write request executed on the follower.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeBuilder.Build(action);
+		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -702,7 +658,7 @@ public readonly partial struct PutAutoFollowPatternRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Settings()
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -711,9 +667,9 @@ public readonly partial struct PutAutoFollowPatternRequestDescriptor
 	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

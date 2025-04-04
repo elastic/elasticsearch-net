@@ -187,28 +187,6 @@ public readonly partial struct BulkDeleteRoleRequestDescriptor
 	/// An array of role names to delete
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Names()
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of role names to delete
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Names(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Names = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of role names to delete
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Names(params string[] values)
 	{
 		Instance.Names = [.. values];

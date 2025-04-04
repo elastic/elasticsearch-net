@@ -411,7 +411,7 @@ public readonly partial struct HistogramAggregationDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Order()
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
 		return this;
 	}
 
@@ -421,9 +421,9 @@ public readonly partial struct HistogramAggregationDescriptor<TDocument>
 	/// By default, the returned buckets are sorted by their key ascending.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
 		return this;
 	}
 
@@ -657,7 +657,7 @@ public readonly partial struct HistogramAggregationDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order()
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(null);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(null);
 		return this;
 	}
 
@@ -667,9 +667,9 @@ public readonly partial struct HistogramAggregationDescriptor
 	/// By default, the returned buckets are sorted by their key ascending.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(action);
 		return this;
 	}
 
@@ -679,9 +679,9 @@ public readonly partial struct HistogramAggregationDescriptor
 	/// By default, the returned buckets are sorted by their key ascending.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
+	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
 	{
-		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
+		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
 		return this;
 	}
 

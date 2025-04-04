@@ -205,28 +205,6 @@ public readonly partial struct IntervalsAllOfDescriptor<TDocument>
 	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> Intervals()
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> Intervals(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<TDocument>>? action)
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> Intervals(params Elastic.Clients.Elasticsearch.QueryDsl.Intervals[] values)
 	{
 		Instance.Intervals = [.. values];
@@ -342,39 +320,6 @@ public readonly partial struct IntervalsAllOfDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Intervals(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> value)
 	{
 		Instance.Intervals = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Intervals()
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Intervals(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals>? action)
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Intervals<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<T>>? action)
-	{
-		Instance.Intervals = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIntervals<T>.Build(action);
 		return this;
 	}
 

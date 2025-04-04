@@ -76,7 +76,7 @@ public sealed partial class ByteSize : Elastic.Clients.Elasticsearch.Union<long,
 	public static implicit operator Elastic.Clients.Elasticsearch.ByteSize(string value) => new Elastic.Clients.Elasticsearch.ByteSize(value);
 }
 
-public readonly partial struct ByteSizeBuilder
+public readonly partial struct ByteSizeFactory
 {
 	public Elastic.Clients.Elasticsearch.ByteSize Value(long value)
 	{
@@ -89,9 +89,9 @@ public readonly partial struct ByteSizeBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.ByteSize Build(System.Func<Elastic.Clients.Elasticsearch.ByteSizeBuilder, Elastic.Clients.Elasticsearch.ByteSize> action)
+	internal static Elastic.Clients.Elasticsearch.ByteSize Build(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.ByteSizeBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.ByteSizeFactory();
 		return action.Invoke(builder);
 	}
 }

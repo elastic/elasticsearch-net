@@ -160,18 +160,6 @@ public readonly partial struct CommonGramsTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor CommonWords()
-	{
-		Instance.CommonWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor CommonWords(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.CommonWords = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor CommonWords(params string[] values)
 	{
 		Instance.CommonWords = [.. values];

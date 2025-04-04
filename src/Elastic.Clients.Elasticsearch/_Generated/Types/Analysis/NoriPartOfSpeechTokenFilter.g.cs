@@ -130,18 +130,6 @@ public readonly partial struct NoriPartOfSpeechTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor Stoptags()
-	{
-		Instance.Stoptags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor Stoptags(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Stoptags = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor Stoptags(params string[] values)
 	{
 		Instance.Stoptags = [.. values];

@@ -191,9 +191,9 @@ public readonly partial struct CompositeGeoTileGridAggregationDescriptor<TDocume
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
@@ -321,9 +321,9 @@ public readonly partial struct CompositeGeoTileGridAggregationDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 

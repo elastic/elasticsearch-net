@@ -405,28 +405,6 @@ public readonly partial struct GrokProcessorDescriptor<TDocument>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
@@ -470,7 +448,7 @@ public readonly partial struct GrokProcessorDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> PatternDefinitions()
 	{
-		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -480,9 +458,9 @@ public readonly partial struct GrokProcessorDescriptor<TDocument>
 	/// Patterns matching existing names will override the pre-existing definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -502,30 +480,6 @@ public readonly partial struct GrokProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An ordered list of grok expression to match and extract named captures with.
-	/// Returns on the first expression in the list that matches.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> Patterns()
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An ordered list of grok expression to match and extract named captures with.
-	/// Returns on the first expression in the list that matches.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> Patterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -709,39 +663,6 @@ public readonly partial struct GrokProcessorDescriptor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor OnFailure()
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor OnFailure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor OnFailure<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>>? action)
-	{
-		Instance.OnFailure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfProcessor<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
@@ -802,7 +723,7 @@ public readonly partial struct GrokProcessorDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor PatternDefinitions()
 	{
-		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(null);
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
@@ -812,9 +733,9 @@ public readonly partial struct GrokProcessorDescriptor
 	/// Patterns matching existing names will override the pre-existing definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString>? action)
+	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringString.Build(action);
+		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 
@@ -834,30 +755,6 @@ public readonly partial struct GrokProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An ordered list of grok expression to match and extract named captures with.
-	/// Returns on the first expression in the list that matches.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor Patterns()
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An ordered list of grok expression to match and extract named captures with.
-	/// Returns on the first expression in the list that matches.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor Patterns(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Patterns = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

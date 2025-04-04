@@ -262,9 +262,9 @@ public readonly partial struct GeoDistanceFeatureQueryDescriptor<TDocument>
 	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument> Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument> Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
@@ -378,9 +378,9 @@ public readonly partial struct GeoDistanceFeatureQueryDescriptor
 	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 

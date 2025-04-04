@@ -292,30 +292,6 @@ public readonly partial struct InvalidateApiKeyRequestDescriptor
 	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c>, or <c>username</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Ids()
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of API key ids.
-	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c>, or <c>username</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.Ids = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of API key ids.
-	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c>, or <c>username</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Ids(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.Ids = [.. values];

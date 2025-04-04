@@ -189,9 +189,9 @@ public readonly partial struct SuggestFuzzinessDescriptor
 	/// The fuzziness factor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessBuilder, Elastic.Clients.Elasticsearch.Fuzziness> action)
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
-		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessBuilder.Build(action);
+		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 

@@ -263,7 +263,7 @@ public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens()
 	{
-		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFloat.Build(null);
+		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
 		return this;
 	}
 
@@ -272,9 +272,9 @@ public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 	/// The tokens representing this query
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFloat>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
 	{
-		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFloat.Build(action);
+		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);
 		return this;
 	}
 
@@ -396,7 +396,7 @@ public readonly partial struct WeightedTokensQueryDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens()
 	{
-		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFloat.Build(null);
+		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
 		return this;
 	}
 
@@ -405,9 +405,9 @@ public readonly partial struct WeightedTokensQueryDescriptor
 	/// The tokens representing this query
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFloat>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
 	{
-		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringFloat.Build(action);
+		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);
 		return this;
 	}
 

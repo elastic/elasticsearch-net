@@ -206,28 +206,6 @@ public readonly partial struct UpdateFilterRequestDescriptor
 	/// The items to add to the filter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor AddItems()
-	{
-		Instance.AddItems = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The items to add to the filter.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor AddItems(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.AddItems = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The items to add to the filter.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor AddItems(params string[] values)
 	{
 		Instance.AddItems = [.. values];
@@ -253,28 +231,6 @@ public readonly partial struct UpdateFilterRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RemoveItems(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RemoveItems = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The items to remove from the filter.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RemoveItems()
-	{
-		Instance.RemoveItems = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The items to remove from the filter.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RemoveItems(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.RemoveItems = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

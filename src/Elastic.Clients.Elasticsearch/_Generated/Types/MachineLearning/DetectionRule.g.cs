@@ -156,28 +156,6 @@ public readonly partial struct DetectionRuleDescriptor<TDocument>
 	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Actions()
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction>? action)
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Actions(params Elastic.Clients.Elasticsearch.MachineLearning.RuleAction[] values)
 	{
 		Instance.Actions = [.. values];
@@ -192,28 +170,6 @@ public readonly partial struct DetectionRuleDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Conditions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? value)
 	{
 		Instance.Conditions = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Conditions()
-	{
-		Instance.Conditions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Conditions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition>? action)
-	{
-		Instance.Conditions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition.Build(action);
 		return this;
 	}
 
@@ -263,7 +219,7 @@ public readonly partial struct DetectionRuleDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Scope()
 	{
-		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<TDocument>.Build(null);
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFilterRef<TDocument>.Build(null);
 		return this;
 	}
 
@@ -272,9 +228,9 @@ public readonly partial struct DetectionRuleDescriptor<TDocument>
 	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Scope(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument> Scope(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFilterRef<TDocument>>? action)
 	{
-		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<TDocument>.Build(action);
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFilterRef<TDocument>.Build(action);
 		return this;
 	}
 
@@ -355,28 +311,6 @@ public readonly partial struct DetectionRuleDescriptor
 	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Actions()
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction>? action)
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleAction.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Actions(params Elastic.Clients.Elasticsearch.MachineLearning.RuleAction[] values)
 	{
 		Instance.Actions = [.. values];
@@ -391,28 +325,6 @@ public readonly partial struct DetectionRuleDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Conditions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>? value)
 	{
 		Instance.Conditions = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Conditions()
-	{
-		Instance.Conditions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Conditions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition>? action)
-	{
-		Instance.Conditions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRuleCondition.Build(action);
 		return this;
 	}
 
@@ -462,7 +374,7 @@ public readonly partial struct DetectionRuleDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Scope()
 	{
-		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef.Build(null);
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFilterRef.Build(null);
 		return this;
 	}
 
@@ -471,9 +383,9 @@ public readonly partial struct DetectionRuleDescriptor
 	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Scope(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Scope(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFilterRef>? action)
 	{
-		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef.Build(action);
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFilterRef.Build(action);
 		return this;
 	}
 
@@ -482,9 +394,9 @@ public readonly partial struct DetectionRuleDescriptor
 	/// A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Scope<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<T>>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor Scope<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFilterRef<T>>? action)
 	{
-		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfFieldFilterRef<T>.Build(action);
+		Instance.Scope = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFilterRef<T>.Build(action);
 		return this;
 	}
 

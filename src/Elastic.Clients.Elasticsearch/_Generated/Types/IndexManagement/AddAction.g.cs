@@ -307,30 +307,6 @@ public readonly partial struct AddActionDescriptor<TDocument>
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Aliases()
-	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexAlias.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexAlias>? action)
-	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexAlias.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexAlias[] values)
 	{
 		Instance.Aliases = [.. values];
@@ -508,30 +484,6 @@ public readonly partial struct AddActionDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Aliases(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? value)
 	{
 		Instance.Aliases = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Aliases()
-	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexAlias.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexAlias>? action)
-	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexAlias.Build(action);
 		return this;
 	}
 

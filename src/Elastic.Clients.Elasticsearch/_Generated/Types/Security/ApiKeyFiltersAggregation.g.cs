@@ -173,9 +173,9 @@ public readonly partial struct ApiKeyFiltersAggregationDescriptor<TDocument>
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder<TDocument>.Build(action);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -262,9 +262,9 @@ public readonly partial struct ApiKeyFiltersAggregationDescriptor
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder.Build(action);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory.Build(action);
 		return this;
 	}
 
@@ -273,9 +273,9 @@ public readonly partial struct ApiKeyFiltersAggregationDescriptor
 	/// Collection of queries from which to build buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters<T>(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder<T>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
+	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters<T>(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<T>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
-		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryBuilder<T>.Build(action);
+		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<T>.Build(action);
 		return this;
 	}
 

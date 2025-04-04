@@ -73,7 +73,7 @@ public sealed partial class CategorizeTextAnalyzer : Elastic.Clients.Elasticsear
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer(Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer value) => new Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer(value);
 }
 
-public readonly partial struct CategorizeTextAnalyzerBuilder
+public readonly partial struct CategorizeTextAnalyzerFactory
 {
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer Builtin(string value)
 	{
@@ -96,9 +96,9 @@ public readonly partial struct CategorizeTextAnalyzerBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerBuilder, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory();
 		return action.Invoke(builder);
 	}
 }

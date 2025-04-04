@@ -237,28 +237,6 @@ public readonly partial struct CancelRequestDescriptor
 	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Actions()
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Actions = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Actions(params string[] values)
 	{
 		Instance.Actions = [.. values];
@@ -273,28 +251,6 @@ public readonly partial struct CancelRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Nodes(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Nodes = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names that is used to limit the request.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Nodes()
-	{
-		Instance.Nodes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names that is used to limit the request.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Nodes(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Nodes = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

@@ -58,7 +58,7 @@ public partial interface IAggregationRange
 	public string Type { get; }
 }
 
-public readonly partial struct IAggregationRangeBuilder
+public readonly partial struct IAggregationRangeFactory
 {
 	public Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Date(Elastic.Clients.Elasticsearch.Aggregations.DateAggregationRange value)
 	{
@@ -121,9 +121,9 @@ public readonly partial struct IAggregationRangeBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange> action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory();
 		return action.Invoke(builder);
 	}
 }

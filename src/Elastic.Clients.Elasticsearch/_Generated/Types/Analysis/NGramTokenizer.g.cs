@@ -178,18 +178,6 @@ public readonly partial struct NGramTokenizerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.NGramTokenizerDescriptor TokenChars()
-	{
-		Instance.TokenChars = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTokenChar.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.NGramTokenizerDescriptor TokenChars(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTokenChar>? action)
-	{
-		Instance.TokenChars = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTokenChar.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.NGramTokenizerDescriptor TokenChars(params Elastic.Clients.Elasticsearch.Analysis.TokenChar[] values)
 	{
 		Instance.TokenChars = [.. values];

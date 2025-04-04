@@ -137,7 +137,7 @@ public partial interface ITokenizer
 	public string Type { get; }
 }
 
-public readonly partial struct ITokenizerBuilder
+public readonly partial struct TokenizerFactory
 {
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenizer CharGroup(Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer value)
 	{
@@ -395,9 +395,9 @@ public readonly partial struct ITokenizerBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Analysis.ITokenizer Build(System.Func<Elastic.Clients.Elasticsearch.Analysis.ITokenizerBuilder, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
+	internal static Elastic.Clients.Elasticsearch.Analysis.ITokenizer Build(System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Analysis.ITokenizerBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory();
 		return action.Invoke(builder);
 	}
 }

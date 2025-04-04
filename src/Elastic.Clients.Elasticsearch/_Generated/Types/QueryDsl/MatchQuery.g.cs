@@ -439,9 +439,9 @@ public readonly partial struct MatchQueryDescriptor<TDocument>
 	/// Maximum edit distance allowed for matching.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessBuilder, Elastic.Clients.Elasticsearch.Fuzziness> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
-		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessBuilder.Build(action);
+		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
@@ -649,9 +649,9 @@ public readonly partial struct MatchQueryDescriptor
 	/// Maximum edit distance allowed for matching.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessBuilder, Elastic.Clients.Elasticsearch.Fuzziness> action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
-		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessBuilder.Build(action);
+		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 

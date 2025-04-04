@@ -290,7 +290,7 @@ public readonly partial struct DecayPlacementOfGeoLocationStringDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Origin()
 	{
-		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(null);
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(null);
 		return this;
 	}
 
@@ -299,9 +299,9 @@ public readonly partial struct DecayPlacementOfGeoLocationStringDescriptor
 	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation>? action)
 	{
-		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 

@@ -162,7 +162,7 @@ public sealed partial class GeoLocation : Elastic.Clients.Elasticsearch.Core.ICo
 	public static implicit operator Elastic.Clients.Elasticsearch.GeoLocation(string text) => GeoLocation.Text(text);
 }
 
-public readonly partial struct GeoLocationBuilder
+public readonly partial struct GeoLocationFactory
 {
 	public Elastic.Clients.Elasticsearch.GeoLocation LatitudeLongitude(Elastic.Clients.Elasticsearch.LatLonGeoLocation value)
 	{
@@ -189,16 +189,6 @@ public readonly partial struct GeoLocationBuilder
 		return new Elastic.Clients.Elasticsearch.GeoLocation(value);
 	}
 
-	public Elastic.Clients.Elasticsearch.GeoLocation Coordinates()
-	{
-		return new Elastic.Clients.Elasticsearch.GeoLocation(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(null));
-	}
-
-	public Elastic.Clients.Elasticsearch.GeoLocation Coordinates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble>? action)
-	{
-		return new Elastic.Clients.Elasticsearch.GeoLocation(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfDouble.Build(action));
-	}
-
 	public Elastic.Clients.Elasticsearch.GeoLocation Coordinates(params double[] values)
 	{
 		return new Elastic.Clients.Elasticsearch.GeoLocation([.. values]);
@@ -210,9 +200,9 @@ public readonly partial struct GeoLocationBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.GeoLocation Build(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	internal static Elastic.Clients.Elasticsearch.GeoLocation Build(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.GeoLocationBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.GeoLocationFactory();
 		return action.Invoke(builder);
 	}
 }

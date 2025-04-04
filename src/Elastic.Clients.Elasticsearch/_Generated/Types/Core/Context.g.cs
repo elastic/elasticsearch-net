@@ -79,7 +79,7 @@ public sealed partial class Context : Elastic.Clients.Elasticsearch.Union<string
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Context(Elastic.Clients.Elasticsearch.GeoLocation value) => new Elastic.Clients.Elasticsearch.Core.Search.Context(value);
 }
 
-public readonly partial struct ContextBuilder
+public readonly partial struct ContextFactory
 {
 	public Elastic.Clients.Elasticsearch.Core.Search.Context Category(string value)
 	{
@@ -91,15 +91,15 @@ public readonly partial struct ContextBuilder
 		return new Elastic.Clients.Elasticsearch.Core.Search.Context(value);
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.Context Location(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	public Elastic.Clients.Elasticsearch.Core.Search.Context Location(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		return new Elastic.Clients.Elasticsearch.Core.Search.Context(Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action));
+		return new Elastic.Clients.Elasticsearch.Core.Search.Context(Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action));
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Core.Search.Context Build(System.Func<Elastic.Clients.Elasticsearch.Core.Search.ContextBuilder, Elastic.Clients.Elasticsearch.Core.Search.Context> action)
+	internal static Elastic.Clients.Elasticsearch.Core.Search.Context Build(System.Func<Elastic.Clients.Elasticsearch.Core.Search.ContextFactory, Elastic.Clients.Elasticsearch.Core.Search.Context> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Core.Search.ContextBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.ContextFactory();
 		return action.Invoke(builder);
 	}
 }

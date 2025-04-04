@@ -200,9 +200,9 @@ public readonly partial struct GeohexGridAggregationDescriptor<TDocument>
 	/// Bounding box used to filter the geo-points in each bucket.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
@@ -308,9 +308,9 @@ public readonly partial struct GeohexGridAggregationDescriptor
 	/// Bounding box used to filter the geo-points in each bucket.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsBuilder, Elastic.Clients.Elasticsearch.GeoBounds> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
-		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsBuilder.Build(action);
+		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 

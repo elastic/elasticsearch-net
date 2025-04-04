@@ -184,13 +184,13 @@ public readonly partial struct TargetMeanEncodingPreprocessorDescriptor
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor TargetMap()
 	{
-		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(null);
+		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor TargetMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorDescriptor TargetMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble>? action)
 	{
-		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringDouble.Build(action);
+		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(action);
 		return this;
 	}
 

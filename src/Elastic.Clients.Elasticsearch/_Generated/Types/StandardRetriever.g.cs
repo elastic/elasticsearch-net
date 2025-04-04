@@ -242,28 +242,6 @@ public readonly partial struct StandardRetrieverDescriptor<TDocument>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -336,28 +314,6 @@ public readonly partial struct StandardRetrieverDescriptor<TDocument>
 	/// Defines a search after object parameter used for pagination.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> SearchAfter()
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
@@ -372,28 +328,6 @@ public readonly partial struct StandardRetrieverDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<TDocument>.Build(action);
 		return this;
 	}
 
@@ -518,39 +452,6 @@ public readonly partial struct StandardRetrieverDescriptor
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -651,28 +552,6 @@ public readonly partial struct StandardRetrieverDescriptor
 	/// Defines a search after object parameter used for pagination.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor SearchAfter()
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor SearchAfter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		Instance.SearchAfter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
@@ -687,39 +566,6 @@ public readonly partial struct StandardRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort()
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>>? action)
-	{
-		Instance.Sort = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfSortOptions<T>.Build(action);
 		return this;
 	}
 

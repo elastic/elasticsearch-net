@@ -73,21 +73,11 @@ public sealed partial class TermsQueryField : Elastic.Clients.Elasticsearch.Unio
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup value) => new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(value);
 }
 
-public readonly partial struct TermsQueryFieldBuilder<TDocument>
+public readonly partial struct TermsQueryFieldFactory<TDocument>
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Value(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
 	{
 		return new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(value);
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Value()
-	{
-		return new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null));
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Value(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		return new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Value(params Elastic.Clients.Elasticsearch.FieldValue[] values)
@@ -106,28 +96,18 @@ public readonly partial struct TermsQueryFieldBuilder<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory<TDocument>();
 		return action.Invoke(builder);
 	}
 }
 
-public readonly partial struct TermsQueryFieldBuilder
+public readonly partial struct TermsQueryFieldFactory
 {
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Value(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
 	{
 		return new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(value);
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Value()
-	{
-		return new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(null));
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Value(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue>? action)
-	{
-		return new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfFieldValue.Build(action));
 	}
 
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Value(params Elastic.Clients.Elasticsearch.FieldValue[] values)
@@ -151,9 +131,9 @@ public readonly partial struct TermsQueryFieldBuilder
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory, Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldBuilder();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory();
 		return action.Invoke(builder);
 	}
 }

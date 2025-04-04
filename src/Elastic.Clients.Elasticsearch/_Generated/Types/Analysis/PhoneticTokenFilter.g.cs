@@ -196,18 +196,6 @@ public readonly partial struct PhoneticTokenFilterDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor Languageset()
-	{
-		Instance.Languageset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPhoneticLanguage.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor Languageset(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPhoneticLanguage>? action)
-	{
-		Instance.Languageset = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfPhoneticLanguage.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor Languageset(params Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage[] values)
 	{
 		Instance.Languageset = [.. values];

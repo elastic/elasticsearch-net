@@ -235,30 +235,6 @@ public readonly partial struct BoolQueryDescriptor<TDocument>
 	/// However, unlike <c>must</c>, the score of the query will be ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -310,28 +286,6 @@ public readonly partial struct BoolQueryDescriptor<TDocument>
 	/// The clause (query) must appear in matching documents and will contribute to the score.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must()
-	{
-		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Must = [.. values];
@@ -364,30 +318,6 @@ public readonly partial struct BoolQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.MustNot = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot()
-	{
-		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
 		return this;
 	}
 
@@ -435,28 +365,6 @@ public readonly partial struct BoolQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Should = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should()
-	{
-		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
 		return this;
 	}
 
@@ -553,42 +461,6 @@ public readonly partial struct BoolQueryDescriptor
 	/// However, unlike <c>must</c>, the score of the query will be ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -658,39 +530,6 @@ public readonly partial struct BoolQueryDescriptor
 	/// The clause (query) must appear in matching documents and will contribute to the score.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must()
-	{
-		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Must = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Must = [.. values];
@@ -740,42 +579,6 @@ public readonly partial struct BoolQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.MustNot = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot()
-	{
-		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.MustNot = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
 		return this;
 	}
 
@@ -841,39 +644,6 @@ public readonly partial struct BoolQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Should = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should()
-	{
-		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Should = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
 		return this;
 	}
 

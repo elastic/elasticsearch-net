@@ -221,9 +221,9 @@ public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 	/// The origin  used to evaluate the distance.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
@@ -243,28 +243,6 @@ public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges()
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange>? action)
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
@@ -276,12 +254,12 @@ public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory.Build(action));
 		}
 
 		Instance.Ranges = items;
@@ -381,9 +359,9 @@ public readonly partial struct GeoDistanceAggregationDescriptor
 	/// The origin  used to evaluate the distance.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
@@ -403,28 +381,6 @@ public readonly partial struct GeoDistanceAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges()
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange>? action)
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIAggregationRange.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
@@ -436,12 +392,12 @@ public readonly partial struct GeoDistanceAggregationDescriptor
 	/// An array of ranges used to bucket documents.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params System.Func<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory, Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IAggregationRange>();
 		foreach (var action in actions)
 		{
-			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeBuilder.Build(action));
+			items.Add(Elastic.Clients.Elasticsearch.Aggregations.IAggregationRangeFactory.Build(action));
 		}
 
 		Instance.Ranges = items;

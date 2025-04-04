@@ -357,7 +357,7 @@ public readonly partial struct PutRoleMappingRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -367,9 +367,9 @@ public readonly partial struct PutRoleMappingRequestDescriptor
 	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -398,30 +398,6 @@ public readonly partial struct PutRoleMappingRequestDescriptor
 	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor Roles()
-	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of role names that are granted to the users that match the role mapping rules.
-	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of role names that are granted to the users that match the role mapping rules.
-	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor Roles(params string[] values)
 	{
 		Instance.Roles = [.. values];
@@ -437,30 +413,6 @@ public readonly partial struct PutRoleMappingRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor RoleTemplates(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? value)
 	{
 		Instance.RoleTemplates = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of Mustache templates that will be evaluated to determine the roles names that should granted to the users that match the role mapping rules.
-	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor RoleTemplates()
-	{
-		Instance.RoleTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleTemplate.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of Mustache templates that will be evaluated to determine the roles names that should granted to the users that match the role mapping rules.
-	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor RoleTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleTemplate>? action)
-	{
-		Instance.RoleTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleTemplate.Build(action);
 		return this;
 	}
 
@@ -533,18 +485,6 @@ public readonly partial struct PutRoleMappingRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor RunAs(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RunAs = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor RunAs()
-	{
-		Instance.RunAs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor RunAs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.RunAs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -721,7 +661,7 @@ public readonly partial struct PutRoleMappingRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -731,9 +671,9 @@ public readonly partial struct PutRoleMappingRequestDescriptor<TDocument>
 	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -762,30 +702,6 @@ public readonly partial struct PutRoleMappingRequestDescriptor<TDocument>
 	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> Roles()
-	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of role names that are granted to the users that match the role mapping rules.
-	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of role names that are granted to the users that match the role mapping rules.
-	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> Roles(params string[] values)
 	{
 		Instance.Roles = [.. values];
@@ -801,30 +717,6 @@ public readonly partial struct PutRoleMappingRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> RoleTemplates(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? value)
 	{
 		Instance.RoleTemplates = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of Mustache templates that will be evaluated to determine the roles names that should granted to the users that match the role mapping rules.
-	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> RoleTemplates()
-	{
-		Instance.RoleTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleTemplate.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of Mustache templates that will be evaluated to determine the roles names that should granted to the users that match the role mapping rules.
-	/// Exactly one of <c>roles</c> or <c>role_templates</c> must be specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> RoleTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleTemplate>? action)
-	{
-		Instance.RoleTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRoleTemplate.Build(action);
 		return this;
 	}
 
@@ -885,18 +777,6 @@ public readonly partial struct PutRoleMappingRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> RunAs(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RunAs = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> RunAs()
-	{
-		Instance.RunAs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument> RunAs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.RunAs = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 

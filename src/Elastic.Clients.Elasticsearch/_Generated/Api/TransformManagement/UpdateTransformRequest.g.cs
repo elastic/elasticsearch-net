@@ -422,7 +422,7 @@ public readonly partial struct UpdateTransformRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -431,9 +431,9 @@ public readonly partial struct UpdateTransformRequestDescriptor
 	/// Defines optional transform metadata.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -791,7 +791,7 @@ public readonly partial struct UpdateTransformRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Meta()
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -800,9 +800,9 @@ public readonly partial struct UpdateTransformRequestDescriptor<TDocument>
 	/// Defines optional transform metadata.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 

@@ -215,28 +215,6 @@ public readonly partial struct VertexDefinitionDescriptor<TDocument>
 	/// Prevents the specified terms from being included in the results.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Exclude()
-	{
-		Instance.Exclude = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prevents the specified terms from being included in the results.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Exclude(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Exclude = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prevents the specified terms from being included in the results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Exclude(params string[] values)
 	{
 		Instance.Exclude = [.. values];
@@ -273,28 +251,6 @@ public readonly partial struct VertexDefinitionDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Include(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? value)
 	{
 		Instance.Include = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Include()
-	{
-		Instance.Include = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexInclude.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Include(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexInclude>? action)
-	{
-		Instance.Include = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexInclude.Build(action);
 		return this;
 	}
 
@@ -404,28 +360,6 @@ public readonly partial struct VertexDefinitionDescriptor
 	/// Prevents the specified terms from being included in the results.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Exclude()
-	{
-		Instance.Exclude = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prevents the specified terms from being included in the results.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Exclude(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.Exclude = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prevents the specified terms from being included in the results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Exclude(params string[] values)
 	{
 		Instance.Exclude = [.. values];
@@ -462,28 +396,6 @@ public readonly partial struct VertexDefinitionDescriptor
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Include(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? value)
 	{
 		Instance.Include = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Include()
-	{
-		Instance.Include = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexInclude.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Include(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexInclude>? action)
-	{
-		Instance.Include = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfVertexInclude.Build(action);
 		return this;
 	}
 

@@ -134,9 +134,9 @@ public readonly partial struct TopLeftBottomRightGeoBoundsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBoundsDescriptor BottomRight(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	public Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBoundsDescriptor BottomRight(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		Instance.BottomRight = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		Instance.BottomRight = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
@@ -146,9 +146,9 @@ public readonly partial struct TopLeftBottomRightGeoBoundsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBoundsDescriptor TopLeft(System.Func<Elastic.Clients.Elasticsearch.GeoLocationBuilder, Elastic.Clients.Elasticsearch.GeoLocation> action)
+	public Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBoundsDescriptor TopLeft(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
-		Instance.TopLeft = Elastic.Clients.Elasticsearch.GeoLocationBuilder.Build(action);
+		Instance.TopLeft = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 

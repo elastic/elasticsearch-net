@@ -236,18 +236,6 @@ public readonly partial struct KuromojiTokenizerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor UserDictionaryRules()
-	{
-		Instance.UserDictionaryRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor UserDictionaryRules(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.UserDictionaryRules = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor UserDictionaryRules(params string[] values)
 	{
 		Instance.UserDictionaryRules = [.. values];

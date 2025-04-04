@@ -154,18 +154,6 @@ public readonly partial struct TrainedModelTreeDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor ClassificationLabels()
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor ClassificationLabels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.ClassificationLabels = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor ClassificationLabels(params string[] values)
 	{
 		Instance.ClassificationLabels = [.. values];
@@ -175,18 +163,6 @@ public readonly partial struct TrainedModelTreeDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor FeatureNames(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.FeatureNames = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor FeatureNames()
-	{
-		Instance.FeatureNames = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor FeatureNames(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString>? action)
-	{
-		Instance.FeatureNames = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfString.Build(action);
 		return this;
 	}
 
@@ -205,18 +181,6 @@ public readonly partial struct TrainedModelTreeDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor TreeStructure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode> value)
 	{
 		Instance.TreeStructure = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor TreeStructure()
-	{
-		Instance.TreeStructure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTrainedModelTreeNode.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor TreeStructure(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTrainedModelTreeNode>? action)
-	{
-		Instance.TreeStructure = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfTrainedModelTreeNode.Build(action);
 		return this;
 	}
 

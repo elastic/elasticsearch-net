@@ -162,28 +162,6 @@ public readonly partial struct IpRangeAggregationDescriptor<TDocument>
 	/// Array of IP ranges.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument> Ranges()
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIpRangeAggregationRange.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument> Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIpRangeAggregationRange>? action)
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIpRangeAggregationRange.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
@@ -270,28 +248,6 @@ public readonly partial struct IpRangeAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? value)
 	{
 		Instance.Ranges = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor Ranges()
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIpRangeAggregationRange.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor Ranges(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIpRangeAggregationRange>? action)
-	{
-		Instance.Ranges = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIpRangeAggregationRange.Build(action);
 		return this;
 	}
 

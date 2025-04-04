@@ -206,30 +206,6 @@ public readonly partial struct RemoveActionDescriptor
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Aliases()
-	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexAlias.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexAlias>? action)
-	{
-		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfIndexAlias.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexAlias[] values)
 	{
 		Instance.Aliases = [.. values];

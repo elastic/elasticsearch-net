@@ -137,30 +137,6 @@ public readonly partial struct RestrictionDescriptor
 	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor Workflows()
-	{
-		Instance.Workflows = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRestrictionWorkflow.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of workflows to which the API key is restricted.
-	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor Workflows(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRestrictionWorkflow>? action)
-	{
-		Instance.Workflows = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfRestrictionWorkflow.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of workflows to which the API key is restricted.
-	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor Workflows(params Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow[] values)
 	{
 		Instance.Workflows = [.. values];

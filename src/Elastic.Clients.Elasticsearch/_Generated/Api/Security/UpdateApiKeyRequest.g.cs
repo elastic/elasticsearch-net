@@ -286,7 +286,7 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -298,9 +298,9 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 	/// When specified, this value fully replaces the metadata previously associated with the API key.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -341,7 +341,7 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors()
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx.Build(null);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(null);
 		return this;
 	}
 
@@ -356,9 +356,9 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 	/// The structure of a role descriptor is the same as the request for the create API keys API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx>? action)
+	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(action);
 		return this;
 	}
 
@@ -373,9 +373,9 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 	/// The structure of a role descriptor is the same as the request for the create API keys API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>.Build(action);
 		return this;
 	}
 
@@ -600,7 +600,7 @@ public readonly partial struct UpdateApiKeyRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -612,9 +612,9 @@ public readonly partial struct UpdateApiKeyRequestDescriptor<TDocument>
 	/// When specified, this value fully replaces the metadata previously associated with the API key.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -655,7 +655,7 @@ public readonly partial struct UpdateApiKeyRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> RoleDescriptors()
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
 		return this;
 	}
 
@@ -670,9 +670,9 @@ public readonly partial struct UpdateApiKeyRequestDescriptor<TDocument>
 	/// The structure of a role descriptor is the same as the request for the create API keys API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
 		return this;
 	}
 

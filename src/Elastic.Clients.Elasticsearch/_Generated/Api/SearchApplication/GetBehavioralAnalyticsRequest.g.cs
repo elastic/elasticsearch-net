@@ -143,28 +143,6 @@ public readonly partial struct GetBehavioralAnalyticsRequestDescriptor
 	/// A list of analytics collections to limit the returned information
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor Name()
-	{
-		Instance.Name = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of analytics collections to limit the returned information
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor Name(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName>? action)
-	{
-		Instance.Name = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfName.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of analytics collections to limit the returned information
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor Name(params Elastic.Clients.Elasticsearch.Name[] values)
 	{
 		Instance.Name = [.. values];

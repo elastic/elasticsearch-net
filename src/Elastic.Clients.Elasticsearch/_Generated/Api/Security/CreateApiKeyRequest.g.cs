@@ -277,7 +277,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -286,9 +286,9 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -346,7 +346,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors()
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx.Build(null);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(null);
 		return this;
 	}
 
@@ -364,9 +364,9 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx.Build(action);
 		return this;
 	}
 
@@ -384,9 +384,9 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<T>.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<T>.Build(action);
 		return this;
 	}
 
@@ -602,7 +602,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Metadata()
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(null);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
@@ -611,9 +611,9 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringObject.Build(action);
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
 		return this;
 	}
 
@@ -671,7 +671,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors()
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(null);
 		return this;
 	}
 
@@ -689,9 +689,9 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>>? action)
 	{
-		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentIDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptorx<TDocument>.Build(action);
 		return this;
 	}
 

@@ -224,28 +224,6 @@ public readonly partial struct RuleRetrieverDescriptor<TDocument>
 	/// Query to filter the documents that can match.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
@@ -340,28 +318,6 @@ public readonly partial struct RuleRetrieverDescriptor<TDocument>
 	/// The ruleset IDs containing the rules this retriever is evaluating against.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> RulesetIds()
-	{
-		Instance.RulesetIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The ruleset IDs containing the rules this retriever is evaluating against.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> RulesetIds(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.RulesetIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The ruleset IDs containing the rules this retriever is evaluating against.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> RulesetIds(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.RulesetIds = [.. values];
@@ -404,39 +360,6 @@ public readonly partial struct RuleRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter()
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>>? action)
-	{
-		Instance.Filter = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfQuery<T>.Build(action);
 		return this;
 	}
 
@@ -559,28 +482,6 @@ public readonly partial struct RuleRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> value)
 	{
 		Instance.RulesetIds = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The ruleset IDs containing the rules this retriever is evaluating against.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor RulesetIds()
-	{
-		Instance.RulesetIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The ruleset IDs containing the rules this retriever is evaluating against.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor RulesetIds(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId>? action)
-	{
-		Instance.RulesetIds = Elastic.Clients.Elasticsearch.Fluent.FluentICollectionOfId.Build(action);
 		return this;
 	}
 
