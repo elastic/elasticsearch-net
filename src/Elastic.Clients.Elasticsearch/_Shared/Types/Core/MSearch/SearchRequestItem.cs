@@ -5,7 +5,6 @@
 using System.IO;
 using System.Threading.Tasks;
 
-using Elastic.Clients.Elasticsearch.Core.Search;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
