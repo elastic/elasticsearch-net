@@ -36,9 +36,9 @@ public sealed class BulkIndexOperationDescriptor<TSource> :
 		return Self;
 	}
 
-	public BulkIndexOperationDescriptor<TSource> DynamicTemplates(Action<FluentIDictionaryOfStringString> action)
+	public BulkIndexOperationDescriptor<TSource> DynamicTemplates(Action<FluentDictionaryOfStringString> action)
 	{
-		Instance.DynamicTemplates = FluentIDictionaryOfStringString.Build(action);
+		Instance.DynamicTemplates = FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 }

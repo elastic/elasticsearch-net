@@ -41,7 +41,7 @@ internal sealed partial class InferenceResponseResultConverter : System.Text.Jso
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelEntities>?> propEntities = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceFeatureImportance>?> propFeatureImportance = default;
 		LocalJsonValue<bool?> propIsTruncated = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>?> propPredictedValue = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>?> propPredictedValue = default;
 		LocalJsonValue<string?> propPredictedValueSequence = default;
 		LocalJsonValue<double?> propPredictionProbability = default;
 		LocalJsonValue<double?> propPredictionScore = default;
@@ -64,7 +64,7 @@ internal sealed partial class InferenceResponseResultConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propPredictedValue.TryReadProperty(ref reader, options, PropPredictedValue, static System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<System.Collections.Generic.ICollection<object>>(o, static System.Collections.Generic.ICollection<object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<object>(o, null)!)))
+			if (propPredictedValue.TryReadProperty(ref reader, options, PropPredictedValue, static System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)!)))
 			{
 				continue;
 			}
@@ -124,7 +124,7 @@ internal sealed partial class InferenceResponseResultConverter : System.Text.Jso
 		writer.WriteProperty(options, PropEntities, value.Entities, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelEntities>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelEntities>(o, v, null));
 		writer.WriteProperty(options, PropFeatureImportance, value.FeatureImportance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceFeatureImportance>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceFeatureImportance>(o, v, null));
 		writer.WriteProperty(options, PropIsTruncated, value.IsTruncated, null, null);
-		writer.WriteProperty(options, PropPredictedValue, value.PredictedValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.ICollection<object>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<object> v) => w.WriteSingleOrManyCollectionValue<object>(o, v, null)));
+		writer.WriteProperty(options, PropPredictedValue, value.PredictedValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null)));
 		writer.WriteProperty(options, PropPredictedValueSequence, value.PredictedValueSequence, null, null);
 		writer.WriteProperty(options, PropPredictionProbability, value.PredictionProbability, null, null);
 		writer.WriteProperty(options, PropPredictionScore, value.PredictionScore, null, null);
@@ -186,7 +186,7 @@ public sealed partial class InferenceResponseResult
 	/// For classification models, it may be an integer, double, boolean or string depending on prediction type
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>? PredictedValue { get; set; }
+	public System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? PredictedValue { get; set; }
 
 	/// <summary>
 	/// <para>

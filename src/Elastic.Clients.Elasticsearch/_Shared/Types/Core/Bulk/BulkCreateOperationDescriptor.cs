@@ -36,9 +36,9 @@ public sealed class BulkCreateOperationDescriptor<TSource> :
 		return Self;
 	}
 
-	public BulkCreateOperationDescriptor<TSource> DynamicTemplates(Action<FluentIDictionaryOfStringString> action)
+	public BulkCreateOperationDescriptor<TSource> DynamicTemplates(Action<FluentDictionaryOfStringString> action)
 	{
-		Instance.DynamicTemplates = FluentIDictionaryOfStringString.Build(action);
+		Instance.DynamicTemplates = FluentDictionaryOfStringString.Build(action);
 		return this;
 	}
 }
