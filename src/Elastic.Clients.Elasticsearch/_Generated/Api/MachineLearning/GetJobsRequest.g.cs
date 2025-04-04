@@ -201,7 +201,7 @@ public readonly partial struct GetJobsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids jobId)
+	public GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? jobId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest(jobId);
 	}

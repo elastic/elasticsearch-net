@@ -153,7 +153,7 @@ public readonly partial struct GetPipelineRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	public GetPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest(id);
 	}

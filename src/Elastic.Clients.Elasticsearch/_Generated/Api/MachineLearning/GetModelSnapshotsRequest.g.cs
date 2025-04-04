@@ -230,7 +230,7 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
+	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? snapshotId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(jobId, snapshotId);
 	}
@@ -240,7 +240,7 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetModelSnapshotsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -434,7 +434,7 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
+	public GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? snapshotId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(jobId, snapshotId);
 	}
@@ -444,7 +444,7 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetModelSnapshotsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

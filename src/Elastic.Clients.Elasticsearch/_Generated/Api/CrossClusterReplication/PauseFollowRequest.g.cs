@@ -148,7 +148,7 @@ public readonly partial struct PauseFollowRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest(index);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PauseFollowRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

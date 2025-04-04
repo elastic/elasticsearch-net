@@ -152,14 +152,14 @@ public readonly partial struct UpdateInferenceRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	public UpdateInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public UpdateInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest(taskType, inferenceId);
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateInferenceRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

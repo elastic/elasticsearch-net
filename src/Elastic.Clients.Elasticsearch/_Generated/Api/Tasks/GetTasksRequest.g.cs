@@ -164,7 +164,7 @@ public readonly partial struct GetTasksRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest(taskId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetTasksRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

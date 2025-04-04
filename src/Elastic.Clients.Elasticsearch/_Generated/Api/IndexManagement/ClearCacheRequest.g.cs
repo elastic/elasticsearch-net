@@ -237,7 +237,7 @@ public readonly partial struct ClearCacheRequestDescriptor
 		Instance = instance;
 	}
 
-	public ClearCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public ClearCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest(indices);
 	}
@@ -448,7 +448,7 @@ public readonly partial struct ClearCacheRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public ClearCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public ClearCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest(indices);
 	}

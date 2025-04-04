@@ -219,7 +219,7 @@ public readonly partial struct FlushRequestDescriptor
 		Instance = instance;
 	}
 
-	public FlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public FlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest(indices);
 	}
@@ -402,7 +402,7 @@ public readonly partial struct FlushRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public FlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public FlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest(indices);
 	}

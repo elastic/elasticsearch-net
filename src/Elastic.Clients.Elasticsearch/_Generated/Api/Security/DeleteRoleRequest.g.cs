@@ -142,7 +142,7 @@ public readonly partial struct DeleteRoleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteRoleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -129,7 +129,7 @@ public readonly partial struct ClearApiKeyCacheRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest(ids);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ClearApiKeyCacheRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

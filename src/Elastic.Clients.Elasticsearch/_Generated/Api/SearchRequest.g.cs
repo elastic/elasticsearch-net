@@ -1338,7 +1338,7 @@ public readonly partial struct SearchRequestDescriptor
 		Instance = instance;
 	}
 
-	public SearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public SearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchRequest(indices);
 	}
@@ -3074,7 +3074,7 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public SearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public SearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchRequest(indices);
 	}

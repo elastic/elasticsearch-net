@@ -245,7 +245,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids? id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(id);
 		var request = builder.Instance;
@@ -253,7 +253,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(id);
 		action.Invoke(builder);
@@ -285,7 +285,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(id);
 		var request = builder.Instance;
@@ -293,7 +293,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(id);
 		action.Invoke(builder);
@@ -325,7 +325,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids id)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids? id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(id);
 		var request = builder.Instance;
@@ -333,7 +333,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(id);
 		action.Invoke(builder);
@@ -365,7 +365,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(id);
 		var request = builder.Instance;
@@ -373,7 +373,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(id);
 		action.Invoke(builder);
@@ -405,7 +405,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id id)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(id);
 		var request = builder.Instance;
@@ -413,7 +413,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(id);
 		action.Invoke(builder);
@@ -445,7 +445,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(id);
 		var request = builder.Instance;
@@ -453,7 +453,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(id);
 		action.Invoke(builder);
@@ -679,7 +679,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id id)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(id);
 		var request = builder.Instance;
@@ -687,7 +687,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(id);
 		action.Invoke(builder);
@@ -705,7 +705,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate<TDocument>(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>(id);
 		action.Invoke(builder);
@@ -729,7 +729,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(id);
 		var request = builder.Instance;
@@ -737,7 +737,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(id);
 		action.Invoke(builder);
@@ -755,7 +755,7 @@ public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>(id);
 		action.Invoke(builder);

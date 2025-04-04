@@ -319,7 +319,7 @@ public readonly partial struct PutTemplateRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutTemplateRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -711,7 +711,7 @@ public readonly partial struct PutTemplateRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutTemplateRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

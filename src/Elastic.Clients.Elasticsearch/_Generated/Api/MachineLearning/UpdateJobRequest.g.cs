@@ -372,7 +372,7 @@ public readonly partial struct UpdateJobRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateJobRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -784,7 +784,7 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateJobRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

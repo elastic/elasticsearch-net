@@ -188,7 +188,7 @@ public readonly partial struct GetCalendarEventsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest(calendarId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetCalendarEventsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

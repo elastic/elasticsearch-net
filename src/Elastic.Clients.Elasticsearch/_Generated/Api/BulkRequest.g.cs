@@ -679,7 +679,7 @@ public readonly partial struct BulkRequestDescriptor
 		Instance = instance;
 	}
 
-	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(index);
 	}
@@ -1154,7 +1154,7 @@ public readonly partial struct BulkRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(index);
 	}

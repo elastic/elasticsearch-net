@@ -158,12 +158,12 @@ public readonly partial struct GetPrivilegesRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Name application)
+	public GetPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Name? application)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest(application);
 	}
 
-	public GetPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name)
+	public GetPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest(application, name);
 	}

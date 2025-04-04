@@ -129,7 +129,7 @@ public readonly partial struct DeleteAsyncSearchRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteAsyncSearchRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -53,7 +53,7 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName index)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
 		var request = builder.Instance;
@@ -61,7 +61,7 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
 		action.Invoke(builder);
@@ -87,7 +87,7 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(index);
 		action.Invoke(builder);
@@ -111,7 +111,7 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
 		var request = builder.Instance;
@@ -119,7 +119,7 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
 		action.Invoke(builder);
@@ -145,7 +145,7 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(index);
 		action.Invoke(builder);

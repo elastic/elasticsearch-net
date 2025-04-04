@@ -157,7 +157,7 @@ public readonly partial struct CreateDataStreamRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public CreateDataStreamRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -133,7 +133,7 @@ public readonly partial struct GetIpLocationDatabaseRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids id)
+	public GetIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest(id);
 	}

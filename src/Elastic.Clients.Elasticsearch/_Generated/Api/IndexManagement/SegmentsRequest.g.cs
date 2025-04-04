@@ -169,7 +169,7 @@ public readonly partial struct SegmentsRequestDescriptor
 		Instance = instance;
 	}
 
-	public SegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public SegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest(indices);
 	}
@@ -319,7 +319,7 @@ public readonly partial struct SegmentsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public SegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public SegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest(indices);
 	}

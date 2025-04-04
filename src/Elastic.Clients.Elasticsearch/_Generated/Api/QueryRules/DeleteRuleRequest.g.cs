@@ -134,7 +134,7 @@ public readonly partial struct DeleteRuleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest(rulesetId, ruleId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteRuleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

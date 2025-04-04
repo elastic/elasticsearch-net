@@ -183,7 +183,7 @@ public readonly partial struct PutPolicyRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutPolicyRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -385,7 +385,7 @@ public readonly partial struct PutPolicyRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutPolicyRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -167,7 +167,7 @@ public readonly partial struct UpdateModelSnapshotRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest(jobId, snapshotId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateModelSnapshotRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -203,7 +203,7 @@ public readonly partial struct GetDatafeedsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetDatafeedsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids datafeedId)
+	public GetDatafeedsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? datafeedId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest(datafeedId);
 	}

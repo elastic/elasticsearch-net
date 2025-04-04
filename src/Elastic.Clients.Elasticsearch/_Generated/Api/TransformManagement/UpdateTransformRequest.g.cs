@@ -301,7 +301,7 @@ public readonly partial struct UpdateTransformRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(transformId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateTransformRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -670,7 +670,7 @@ public readonly partial struct UpdateTransformRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(transformId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateTransformRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

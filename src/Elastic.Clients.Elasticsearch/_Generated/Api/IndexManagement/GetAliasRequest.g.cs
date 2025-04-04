@@ -200,17 +200,17 @@ public readonly partial struct GetAliasRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest(name);
 	}
 
-	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
+	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest(indices, name);
 	}
 
-	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest(indices);
 	}
@@ -384,17 +384,17 @@ public readonly partial struct GetAliasRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest(name);
 	}
 
-	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
+	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest(indices, name);
 	}
 
-	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest(indices);
 	}

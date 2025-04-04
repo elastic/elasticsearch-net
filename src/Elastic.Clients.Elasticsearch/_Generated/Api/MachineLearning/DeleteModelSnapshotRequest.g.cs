@@ -140,7 +140,7 @@ public readonly partial struct DeleteModelSnapshotRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest(jobId, snapshotId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteModelSnapshotRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -174,7 +174,7 @@ public readonly partial struct StopDatafeedRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest(datafeedId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public StopDatafeedRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -161,7 +161,7 @@ public readonly partial struct HasPrivilegesRequestDescriptor
 		Instance = instance;
 	}
 
-	public HasPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Name user)
+	public HasPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Name? user)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest(user);
 	}

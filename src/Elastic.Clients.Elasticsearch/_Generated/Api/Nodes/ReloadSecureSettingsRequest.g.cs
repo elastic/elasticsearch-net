@@ -166,7 +166,7 @@ public readonly partial struct ReloadSecureSettingsRequestDescriptor
 		Instance = instance;
 	}
 
-	public ReloadSecureSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public ReloadSecureSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest(nodeId);
 	}

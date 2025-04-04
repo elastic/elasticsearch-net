@@ -127,7 +127,7 @@ public readonly partial struct GetJobsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	public GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest(id);
 	}

@@ -207,14 +207,14 @@ public readonly partial struct PutScriptRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name context)
+	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.PutScriptRequest(id, context);
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutScriptRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

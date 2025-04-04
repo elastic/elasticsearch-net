@@ -132,7 +132,7 @@ public readonly partial struct ClearRepositoriesMeteringArchiveRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest(nodeId, maxArchiveVersion);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ClearRepositoriesMeteringArchiveRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

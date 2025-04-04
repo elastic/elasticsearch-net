@@ -203,12 +203,12 @@ public readonly partial struct ExistsAliasRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest(name);
 	}
 
-	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
+	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest(indices, name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ExistsAliasRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -377,12 +377,12 @@ public readonly partial struct ExistsAliasRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest(name);
 	}
 
-	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
+	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest(indices, name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ExistsAliasRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

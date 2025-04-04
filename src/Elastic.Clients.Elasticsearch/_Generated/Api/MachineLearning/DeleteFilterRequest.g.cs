@@ -127,7 +127,7 @@ public readonly partial struct DeleteFilterRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest(filterId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteFilterRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

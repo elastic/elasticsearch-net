@@ -150,7 +150,7 @@ public readonly partial struct GetMemoryStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetMemoryStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id nodeId)
+	public GetMemoryStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? nodeId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest(nodeId);
 	}

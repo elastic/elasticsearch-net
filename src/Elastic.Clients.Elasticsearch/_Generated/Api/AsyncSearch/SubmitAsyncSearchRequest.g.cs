@@ -1022,7 +1022,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		Instance = instance;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(indices);
 	}
@@ -2401,7 +2401,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(indices);
 	}

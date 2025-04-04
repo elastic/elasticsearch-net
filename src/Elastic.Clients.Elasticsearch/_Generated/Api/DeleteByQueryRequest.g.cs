@@ -907,7 +907,7 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.DeleteByQueryRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteByQueryRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

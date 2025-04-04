@@ -316,7 +316,7 @@ public readonly partial struct PutJobRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutJobRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -643,7 +643,7 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutJobRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

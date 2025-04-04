@@ -199,7 +199,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names policyId)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
 		var request = builder.Instance;
@@ -207,7 +207,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
 		action.Invoke(builder);
@@ -239,7 +239,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names policyId, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
 		var request = builder.Instance;
@@ -247,7 +247,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
 		action.Invoke(builder);

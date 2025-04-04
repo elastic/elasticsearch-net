@@ -130,7 +130,7 @@ public readonly partial struct GetPolicyRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	public GetPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest(name);
 	}

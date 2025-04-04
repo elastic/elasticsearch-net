@@ -217,7 +217,7 @@ public readonly partial struct DiskUsageRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DiskUsageRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

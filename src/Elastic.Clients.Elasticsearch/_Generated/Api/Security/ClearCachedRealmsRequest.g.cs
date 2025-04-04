@@ -154,7 +154,7 @@ public readonly partial struct ClearCachedRealmsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest(realms);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ClearCachedRealmsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

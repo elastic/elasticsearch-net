@@ -314,7 +314,7 @@ public readonly partial struct ValidateQueryRequestDescriptor
 		Instance = instance;
 	}
 
-	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(indices);
 	}
@@ -597,7 +597,7 @@ public readonly partial struct ValidateQueryRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(indices);
 	}

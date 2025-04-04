@@ -273,27 +273,27 @@ public readonly partial struct NodesStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics metric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(metric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId, Elastic.Clients.Elasticsearch.Metrics metric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId, metric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics metric, Elastic.Clients.Elasticsearch.Metrics indexMetric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(metric, indexMetric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId, Elastic.Clients.Elasticsearch.Metrics metric, Elastic.Clients.Elasticsearch.Metrics indexMetric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId, metric, indexMetric);
 	}
@@ -555,27 +555,27 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics metric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(metric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId, Elastic.Clients.Elasticsearch.Metrics metric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId, metric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics metric, Elastic.Clients.Elasticsearch.Metrics indexMetric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(metric, indexMetric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId, Elastic.Clients.Elasticsearch.Metrics metric, Elastic.Clients.Elasticsearch.Metrics indexMetric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId, metric, indexMetric);
 	}

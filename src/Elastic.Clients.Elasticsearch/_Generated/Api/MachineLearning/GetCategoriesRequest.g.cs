@@ -189,7 +189,7 @@ public readonly partial struct GetCategoriesRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, string categoryId)
+	public GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, string? categoryId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest(jobId, categoryId);
 	}
@@ -199,7 +199,7 @@ public readonly partial struct GetCategoriesRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetCategoriesRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

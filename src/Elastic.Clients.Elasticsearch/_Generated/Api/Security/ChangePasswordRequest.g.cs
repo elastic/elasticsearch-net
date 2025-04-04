@@ -170,7 +170,7 @@ public readonly partial struct ChangePasswordRequestDescriptor
 		Instance = instance;
 	}
 
-	public ChangePasswordRequestDescriptor(Elastic.Clients.Elasticsearch.Username username)
+	public ChangePasswordRequestDescriptor(Elastic.Clients.Elasticsearch.Username? username)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest(username);
 	}

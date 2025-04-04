@@ -153,7 +153,7 @@ public readonly partial struct DeletePipelineRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeletePipelineRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

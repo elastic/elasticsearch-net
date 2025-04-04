@@ -133,7 +133,7 @@ public readonly partial struct SamlServiceProviderMetadataRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest(realmName);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public SamlServiceProviderMetadataRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

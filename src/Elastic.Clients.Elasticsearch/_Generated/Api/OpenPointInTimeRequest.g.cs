@@ -337,7 +337,7 @@ public readonly partial struct OpenPointInTimeRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public OpenPointInTimeRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

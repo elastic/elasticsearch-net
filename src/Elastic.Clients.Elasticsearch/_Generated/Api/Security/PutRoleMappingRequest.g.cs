@@ -294,7 +294,7 @@ public readonly partial struct PutRoleMappingRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutRoleMappingRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -598,7 +598,7 @@ public readonly partial struct PutRoleMappingRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutRoleMappingRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

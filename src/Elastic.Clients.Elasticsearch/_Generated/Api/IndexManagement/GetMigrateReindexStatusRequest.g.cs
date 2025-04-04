@@ -125,7 +125,7 @@ public readonly partial struct GetMigrateReindexStatusRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetMigrateReindexStatusRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

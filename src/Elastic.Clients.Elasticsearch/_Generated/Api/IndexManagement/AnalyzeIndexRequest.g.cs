@@ -279,7 +279,7 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 		Instance = instance;
 	}
 
-	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(index);
 	}
@@ -589,7 +589,7 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(index);
 	}

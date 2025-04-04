@@ -216,7 +216,7 @@ public readonly partial struct StopDataFrameAnalyticsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public StopDataFrameAnalyticsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

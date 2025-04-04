@@ -118,7 +118,7 @@ public readonly partial struct CacheStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public CacheStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public CacheStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest(nodeId);
 	}

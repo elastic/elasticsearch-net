@@ -174,7 +174,7 @@ public readonly partial struct DeletePrivilegesRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest(application, name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeletePrivilegesRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

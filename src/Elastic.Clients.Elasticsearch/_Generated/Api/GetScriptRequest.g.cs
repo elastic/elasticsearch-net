@@ -138,7 +138,7 @@ public readonly partial struct GetScriptRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.GetScriptRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetScriptRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

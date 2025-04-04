@@ -147,7 +147,7 @@ public readonly partial struct GetLifecycleRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Names policyId)
+	public GetLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Names? policyId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest(policyId);
 	}

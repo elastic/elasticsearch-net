@@ -229,7 +229,7 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateApiKeyRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -543,7 +543,7 @@ public readonly partial struct UpdateApiKeyRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateApiKeyRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

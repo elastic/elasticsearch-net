@@ -486,7 +486,7 @@ public readonly partial struct PutMappingRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutMappingRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

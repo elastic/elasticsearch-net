@@ -361,7 +361,7 @@ public readonly partial struct DeleteRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(index, id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -611,7 +611,22 @@ public readonly partial struct DeleteRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(index, id);
 	}
 
-	[System.Obsolete("TODO")]
+	public DeleteRequestDescriptor(TDocument document)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document));
+	}
+
+	public DeleteRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(typeof(TDocument), id);
+	}
+
+	public DeleteRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(typeof(TDocument), id);
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

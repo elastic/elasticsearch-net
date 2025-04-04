@@ -169,7 +169,7 @@ public readonly partial struct DeleteExpiredDataRequestDescriptor
 		Instance = instance;
 	}
 
-	public DeleteExpiredDataRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
+	public DeleteExpiredDataRequestDescriptor(Elastic.Clients.Elasticsearch.Id? jobId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest(jobId);
 	}

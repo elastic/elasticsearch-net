@@ -383,7 +383,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse GetRepository(Elastic.Clients.Elasticsearch.Names name)
+	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse GetRepository(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(name);
 		var request = builder.Instance;
@@ -391,7 +391,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse GetRepository(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse GetRepository(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(name);
 		action.Invoke(builder);
@@ -423,7 +423,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse> GetRepositoryAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse> GetRepositoryAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(name);
 		var request = builder.Instance;
@@ -431,7 +431,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse> GetRepositoryAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse> GetRepositoryAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(name);
 		action.Invoke(builder);
@@ -619,7 +619,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name repository)
+	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository);
 		var request = builder.Instance;
@@ -627,7 +627,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name repository, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository);
 		action.Invoke(builder);
@@ -636,7 +636,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot)
+	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository, snapshot);
 		var request = builder.Instance;
@@ -644,7 +644,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository, snapshot);
 		action.Invoke(builder);
@@ -676,7 +676,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name repository, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository);
 		var request = builder.Instance;
@@ -684,7 +684,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name repository, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository);
 		action.Invoke(builder);
@@ -693,7 +693,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository, snapshot);
 		var request = builder.Instance;
@@ -701,7 +701,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository, snapshot);
 		action.Invoke(builder);

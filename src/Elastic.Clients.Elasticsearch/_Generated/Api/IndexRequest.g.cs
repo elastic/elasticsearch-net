@@ -673,12 +673,12 @@ public readonly partial struct IndexRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexRequest<TDocument>(document, index, id);
 	}
 
-	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id id)
+	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexRequest<TDocument>(document, id);
 	}
@@ -688,7 +688,7 @@ public readonly partial struct IndexRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexRequest<TDocument>(document);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public IndexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -119,7 +119,7 @@ public readonly partial struct PutBehavioralAnalyticsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutBehavioralAnalyticsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

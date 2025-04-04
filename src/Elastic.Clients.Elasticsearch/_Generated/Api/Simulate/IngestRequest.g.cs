@@ -267,7 +267,7 @@ public readonly partial struct IngestRequestDescriptor
 		Instance = instance;
 	}
 
-	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(index);
@@ -698,7 +698,7 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public IngestRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(index);

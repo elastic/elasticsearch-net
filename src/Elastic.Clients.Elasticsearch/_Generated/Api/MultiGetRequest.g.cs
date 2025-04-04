@@ -324,7 +324,7 @@ public readonly partial struct MultiGetRequestDescriptor
 		Instance = instance;
 	}
 
-	public MultiGetRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public MultiGetRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MultiGetRequest(index);
 	}
@@ -669,7 +669,7 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public MultiGetRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public MultiGetRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MultiGetRequest(index);
 	}

@@ -534,7 +534,7 @@ public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public TermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	public TermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>(index, id);
 	}

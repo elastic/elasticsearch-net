@@ -129,7 +129,7 @@ public readonly partial struct ClearCachedPrivilegesRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest(application);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ClearCachedPrivilegesRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

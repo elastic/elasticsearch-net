@@ -162,7 +162,7 @@ public readonly partial struct EnableUserProfileRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest(uid);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public EnableUserProfileRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -184,16 +184,7 @@ public partial class AsyncSearchNamespacedClient : Elastic.Clients.Elasticsearch
 
 	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>()
 	{
-		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor();
-		action.Invoke(builder);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
@@ -208,30 +199,29 @@ public partial class AsyncSearchNamespacedClient : Elastic.Clients.Elasticsearch
 		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor(indices);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor(indices);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse> Submit<TDocument, TDocumentResponse>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse> Submit<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action)
@@ -243,7 +233,15 @@ public partial class AsyncSearchNamespacedClient : Elastic.Clients.Elasticsearch
 		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse> Submit<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse> Submit<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse> Submit<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
 		action.Invoke(builder);
@@ -260,16 +258,7 @@ public partial class AsyncSearchNamespacedClient : Elastic.Clients.Elasticsearch
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor();
-		action.Invoke(builder);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
@@ -284,30 +273,29 @@ public partial class AsyncSearchNamespacedClient : Elastic.Clients.Elasticsearch
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor(indices);
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor(indices);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>> SubmitAsync<TDocument, TDocumentResponse>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>> SubmitAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
@@ -319,7 +307,15 @@ public partial class AsyncSearchNamespacedClient : Elastic.Clients.Elasticsearch
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>> SubmitAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>> SubmitAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchResponse<TDocumentResponse>> SubmitAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(indices);
 		action.Invoke(builder);

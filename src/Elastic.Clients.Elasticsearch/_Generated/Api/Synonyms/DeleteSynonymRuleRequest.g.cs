@@ -132,7 +132,7 @@ public readonly partial struct DeleteSynonymRuleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest(setId, ruleId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteSynonymRuleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

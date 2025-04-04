@@ -164,7 +164,7 @@ public readonly partial struct DeleteTransformRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest(transformId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteTransformRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

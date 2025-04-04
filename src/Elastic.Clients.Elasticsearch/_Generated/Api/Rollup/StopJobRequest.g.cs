@@ -180,7 +180,7 @@ public readonly partial struct StopJobRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Rollup.StopJobRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public StopJobRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

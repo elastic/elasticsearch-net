@@ -187,7 +187,7 @@ public readonly partial struct GetDatafeedStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetDatafeedStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids datafeedId)
+	public GetDatafeedStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? datafeedId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest(datafeedId);
 	}

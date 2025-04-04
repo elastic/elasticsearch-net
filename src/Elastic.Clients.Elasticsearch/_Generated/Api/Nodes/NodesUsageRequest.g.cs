@@ -145,17 +145,17 @@ public readonly partial struct NodesUsageRequestDescriptor
 		Instance = instance;
 	}
 
-	public NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest(nodeId);
 	}
 
-	public NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics metric)
+	public NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest(metric);
 	}
 
-	public NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId, Elastic.Clients.Elasticsearch.Metrics metric)
+	public NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest(nodeId, metric);
 	}

@@ -158,12 +158,12 @@ public readonly partial struct DeleteInferenceRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest(inferenceId);
 	}
 
-	public DeleteInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public DeleteInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest(taskType, inferenceId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteInferenceRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

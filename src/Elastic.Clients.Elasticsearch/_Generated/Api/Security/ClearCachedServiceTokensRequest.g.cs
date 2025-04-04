@@ -161,7 +161,7 @@ public readonly partial struct ClearCachedServiceTokensRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest(@namespace, service, name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ClearCachedServiceTokensRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

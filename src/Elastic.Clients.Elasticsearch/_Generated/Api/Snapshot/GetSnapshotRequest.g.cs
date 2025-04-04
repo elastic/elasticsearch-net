@@ -369,7 +369,7 @@ public readonly partial struct GetSnapshotRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest(repository, snapshot);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetSnapshotRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

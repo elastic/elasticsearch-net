@@ -182,12 +182,12 @@ public readonly partial struct DeleteForecastRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest(jobId);
 	}
 
-	public DeleteForecastRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id forecastId)
+	public DeleteForecastRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? forecastId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest(jobId, forecastId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteForecastRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

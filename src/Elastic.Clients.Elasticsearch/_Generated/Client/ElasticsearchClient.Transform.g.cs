@@ -107,7 +107,7 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names transformId)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
 		var request = builder.Instance;
@@ -115,7 +115,7 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
 		action.Invoke(builder);
@@ -147,7 +147,7 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names transformId, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
 		var request = builder.Instance;
@@ -155,7 +155,7 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
 		action.Invoke(builder);
@@ -216,35 +216,9 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TTransform>()
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>()
 	{
-		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Elastic.Clients.Elasticsearch.Id transformId)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor(transformId);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor(transformId);
-		action.Invoke(builder);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
@@ -259,7 +233,15 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
 		action.Invoke(builder);
@@ -274,35 +256,9 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor();
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor(transformId);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor(transformId);
-		action.Invoke(builder);
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
@@ -317,7 +273,15 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
 		action.Invoke(builder);

@@ -317,7 +317,7 @@ public readonly partial struct RollupSearchRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public RollupSearchRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

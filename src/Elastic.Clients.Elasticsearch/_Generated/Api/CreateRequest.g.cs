@@ -585,7 +585,7 @@ public readonly partial struct CreateRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(document);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public CreateRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

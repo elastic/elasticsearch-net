@@ -307,7 +307,7 @@ public readonly partial struct PutRoleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.PutRoleRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutRoleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -795,7 +795,7 @@ public readonly partial struct PutRoleRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.Security.PutRoleRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutRoleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

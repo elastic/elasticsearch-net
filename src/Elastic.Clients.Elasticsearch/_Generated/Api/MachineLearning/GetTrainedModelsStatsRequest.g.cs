@@ -202,7 +202,7 @@ public readonly partial struct GetTrainedModelsStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetTrainedModelsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids modelId)
+	public GetTrainedModelsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? modelId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest(modelId);
 	}

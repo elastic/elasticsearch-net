@@ -293,7 +293,7 @@ public readonly partial struct HealthRequestDescriptor
 		Instance = instance;
 	}
 
-	public HealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public HealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Cluster.HealthRequest(indices);
 	}
@@ -533,7 +533,7 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public HealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public HealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Cluster.HealthRequest(indices);
 	}

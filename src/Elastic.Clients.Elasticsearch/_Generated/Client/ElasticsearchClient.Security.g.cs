@@ -263,7 +263,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username username)
+	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username? username)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(username);
 		var request = builder.Instance;
@@ -271,7 +271,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username? username, System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(username);
 		action.Invoke(builder);
@@ -303,7 +303,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username username, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username? username, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(username);
 		var request = builder.Instance;
@@ -311,7 +311,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username? username, System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(username);
 		action.Invoke(builder);
@@ -668,7 +668,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name)
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
 		var request = builder.Instance;
@@ -676,7 +676,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
 		action.Invoke(builder);
@@ -708,7 +708,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
 		var request = builder.Instance;
@@ -716,7 +716,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
 		action.Invoke(builder);
@@ -1393,7 +1393,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name application)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
 		var request = builder.Instance;
@@ -1401,7 +1401,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name application, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
 		action.Invoke(builder);
@@ -1410,7 +1410,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application, name);
 		var request = builder.Instance;
@@ -1418,7 +1418,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application, name);
 		action.Invoke(builder);
@@ -1450,7 +1450,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
 		var request = builder.Instance;
@@ -1458,7 +1458,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
 		action.Invoke(builder);
@@ -1467,7 +1467,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application, name);
 		var request = builder.Instance;
@@ -1475,7 +1475,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application, name);
 		action.Invoke(builder);
@@ -1507,7 +1507,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names name)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(name);
 		var request = builder.Instance;
@@ -1515,7 +1515,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(name);
 		action.Invoke(builder);
@@ -1547,7 +1547,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(name);
 		var request = builder.Instance;
@@ -1555,7 +1555,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(name);
 		action.Invoke(builder);
@@ -1587,7 +1587,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names name)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(name);
 		var request = builder.Instance;
@@ -1595,7 +1595,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(name);
 		action.Invoke(builder);
@@ -1627,7 +1627,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(name);
 		var request = builder.Instance;
@@ -1635,7 +1635,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(name);
 		action.Invoke(builder);
@@ -1667,7 +1667,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string @namespace, string service)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string? @namespace, string? service)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
 		var request = builder.Instance;
@@ -1675,7 +1675,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string? @namespace, string? service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
 		action.Invoke(builder);
@@ -1684,7 +1684,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string @namespace)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string? @namespace)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace);
 		var request = builder.Instance;
@@ -1692,7 +1692,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string @namespace, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string? @namespace, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace);
 		action.Invoke(builder);
@@ -1724,7 +1724,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string @namespace, string service, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string? @namespace, string? service, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
 		var request = builder.Instance;
@@ -1732,7 +1732,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string? @namespace, string? service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
 		action.Invoke(builder);
@@ -1741,7 +1741,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string @namespace, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string? @namespace, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace);
 		var request = builder.Instance;
@@ -1749,7 +1749,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string @namespace, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string? @namespace, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace);
 		action.Invoke(builder);
@@ -1919,7 +1919,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username> username)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(username);
 		var request = builder.Instance;
@@ -1927,7 +1927,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username> username, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(username);
 		action.Invoke(builder);
@@ -1959,7 +1959,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username> username, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(username);
 		var request = builder.Instance;
@@ -1967,7 +1967,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username> username, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(username);
 		action.Invoke(builder);
@@ -2139,7 +2139,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name user)
+	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name? user)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(user);
 		var request = builder.Instance;
@@ -2147,7 +2147,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name user, System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name? user, System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(user);
 		action.Invoke(builder);
@@ -2179,7 +2179,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name user, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? user, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(user);
 		var request = builder.Instance;
@@ -2187,7 +2187,7 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name user, System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? user, System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(user);
 		action.Invoke(builder);

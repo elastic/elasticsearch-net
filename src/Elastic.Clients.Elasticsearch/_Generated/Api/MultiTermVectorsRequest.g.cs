@@ -332,7 +332,7 @@ public readonly partial struct MultiTermVectorsRequestDescriptor
 		Instance = instance;
 	}
 
-	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(index);
 	}
@@ -654,7 +654,7 @@ public readonly partial struct MultiTermVectorsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(index);
 	}

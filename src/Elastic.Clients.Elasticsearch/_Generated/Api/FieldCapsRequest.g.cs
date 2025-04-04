@@ -290,7 +290,7 @@ public readonly partial struct FieldCapsRequestDescriptor
 		Instance = instance;
 	}
 
-	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.FieldCapsRequest(indices);
 	}
@@ -658,7 +658,7 @@ public readonly partial struct FieldCapsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.FieldCapsRequest(indices);
 	}

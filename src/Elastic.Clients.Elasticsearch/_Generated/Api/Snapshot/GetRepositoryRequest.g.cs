@@ -151,7 +151,7 @@ public readonly partial struct GetRepositoryRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	public GetRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest(name);
 	}

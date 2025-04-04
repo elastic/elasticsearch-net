@@ -107,7 +107,7 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name name)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
 		var request = builder.Instance;
@@ -115,7 +115,7 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
 		action.Invoke(builder);
@@ -147,7 +147,7 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
 		var request = builder.Instance;
@@ -155,7 +155,7 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
 		action.Invoke(builder);

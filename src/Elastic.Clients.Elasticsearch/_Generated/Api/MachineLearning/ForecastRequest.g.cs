@@ -181,7 +181,7 @@ public readonly partial struct ForecastRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ForecastRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

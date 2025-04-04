@@ -156,7 +156,7 @@ public readonly partial struct VerifyRepositoryRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public VerifyRepositoryRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

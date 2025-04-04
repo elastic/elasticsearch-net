@@ -124,7 +124,7 @@ public readonly partial struct GetRoleMappingRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetRoleMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	public GetRoleMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest(name);
 	}

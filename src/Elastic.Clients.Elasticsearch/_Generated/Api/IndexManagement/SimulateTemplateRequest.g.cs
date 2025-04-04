@@ -347,7 +347,7 @@ public readonly partial struct SimulateTemplateRequestDescriptor
 		Instance = instance;
 	}
 
-	public SimulateTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
+	public SimulateTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest(name);
 	}
@@ -731,7 +731,7 @@ public readonly partial struct SimulateTemplateRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public SimulateTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
+	public SimulateTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest(name);
 	}

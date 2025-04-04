@@ -127,7 +127,7 @@ public readonly partial struct ClearCachedRolesRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ClearCachedRolesRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

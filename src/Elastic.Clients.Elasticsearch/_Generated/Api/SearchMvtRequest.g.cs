@@ -881,7 +881,7 @@ public readonly partial struct SearchMvtRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SearchMvtRequest(indices, field, zoom, x, y);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public SearchMvtRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -1920,7 +1920,7 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.SearchMvtRequest(indices, field, zoom, x, y);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public SearchMvtRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

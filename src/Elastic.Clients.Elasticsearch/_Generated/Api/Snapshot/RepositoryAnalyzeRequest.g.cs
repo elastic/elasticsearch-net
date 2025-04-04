@@ -554,7 +554,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public RepositoryAnalyzeRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -154,7 +154,7 @@ public readonly partial struct StopTrainedModelDeploymentRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest(modelId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public StopTrainedModelDeploymentRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

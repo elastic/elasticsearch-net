@@ -371,7 +371,7 @@ public readonly partial struct ForcemergeRequestDescriptor
 		Instance = instance;
 	}
 
-	public ForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public ForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest(indices);
 	}
@@ -634,7 +634,7 @@ public readonly partial struct ForcemergeRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public ForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public ForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest(indices);
 	}

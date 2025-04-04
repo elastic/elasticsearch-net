@@ -256,7 +256,7 @@ public readonly partial struct PutAliasRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(indices, name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutAliasRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -472,7 +472,7 @@ public readonly partial struct PutAliasRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(indices, name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutAliasRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

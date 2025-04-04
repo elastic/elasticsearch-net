@@ -225,7 +225,7 @@ public readonly partial struct ExploreRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Graph.ExploreRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ExploreRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

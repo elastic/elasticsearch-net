@@ -148,7 +148,7 @@ public readonly partial struct GetRollupIndexCapsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest(index);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetRollupIndexCapsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

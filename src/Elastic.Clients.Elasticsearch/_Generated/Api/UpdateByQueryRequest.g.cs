@@ -977,7 +977,7 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.UpdateByQueryRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateByQueryRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -199,7 +199,7 @@ public readonly partial struct GetMappingRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public GetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest(indices);
 	}
@@ -372,7 +372,7 @@ public readonly partial struct GetMappingRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public GetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public GetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest(indices);
 	}

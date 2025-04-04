@@ -199,12 +199,12 @@ public readonly partial struct SnapshotStatusRequestDescriptor
 		Instance = instance;
 	}
 
-	public SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository)
+	public SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Name? repository)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(repository);
 	}
 
-	public SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot)
+	public SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(repository, snapshot);
 	}

@@ -279,7 +279,7 @@ public readonly partial struct GetBucketsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime timestamp)
+	public GetBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest(jobId, timestamp);
 	}
@@ -289,7 +289,7 @@ public readonly partial struct GetBucketsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetBucketsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -516,7 +516,7 @@ public readonly partial struct GetBucketsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public GetBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime timestamp)
+	public GetBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest(jobId, timestamp);
 	}
@@ -526,7 +526,7 @@ public readonly partial struct GetBucketsRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetBucketsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

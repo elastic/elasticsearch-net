@@ -125,7 +125,7 @@ public readonly partial struct CancelMigrateReindexRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public CancelMigrateReindexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

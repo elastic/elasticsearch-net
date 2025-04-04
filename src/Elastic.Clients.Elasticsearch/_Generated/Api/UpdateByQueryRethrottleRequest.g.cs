@@ -142,7 +142,7 @@ public readonly partial struct UpdateByQueryRethrottleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest(taskId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateByQueryRethrottleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

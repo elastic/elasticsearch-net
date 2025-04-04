@@ -247,7 +247,7 @@ public readonly partial struct RecoveryRequestDescriptor
 		Instance = instance;
 	}
 
-	public RecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public RecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest(indices);
 	}
@@ -418,7 +418,7 @@ public readonly partial struct RecoveryRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public RecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public RecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest(indices);
 	}

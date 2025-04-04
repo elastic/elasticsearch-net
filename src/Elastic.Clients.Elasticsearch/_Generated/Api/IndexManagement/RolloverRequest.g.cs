@@ -380,12 +380,12 @@ public readonly partial struct RolloverRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(alias);
 	}
 
-	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName newIndex)
+	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(alias, newIndex);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public RolloverRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -839,12 +839,12 @@ public readonly partial struct RolloverRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(alias);
 	}
 
-	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName newIndex)
+	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(alias, newIndex);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public RolloverRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

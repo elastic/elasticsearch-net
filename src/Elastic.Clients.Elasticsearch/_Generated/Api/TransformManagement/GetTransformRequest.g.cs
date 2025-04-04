@@ -220,7 +220,7 @@ public readonly partial struct GetTransformRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Names transformId)
+	public GetTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Names? transformId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest(transformId);
 	}

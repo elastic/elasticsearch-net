@@ -206,7 +206,7 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 	}
 
 	[System.Obsolete("Deprecated in '9.0.0'.")]
-	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> name)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(name);
 		var request = builder.Instance;
@@ -215,7 +215,7 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 	}
 
 	[System.Obsolete("Deprecated in '9.0.0'.")]
-	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(name);
 		action.Invoke(builder);
@@ -250,7 +250,7 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 	}
 
 	[System.Obsolete("Deprecated in '9.0.0'.")]
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> name, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(name);
 		var request = builder.Instance;
@@ -259,7 +259,7 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 	}
 
 	[System.Obsolete("Deprecated in '9.0.0'.")]
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(name);
 		action.Invoke(builder);

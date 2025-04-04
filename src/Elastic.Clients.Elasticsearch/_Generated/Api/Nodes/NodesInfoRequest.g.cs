@@ -162,17 +162,17 @@ public readonly partial struct NodesInfoRequestDescriptor
 		Instance = instance;
 	}
 
-	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(nodeId);
 	}
 
-	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics metric)
+	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(metric);
 	}
 
-	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId, Elastic.Clients.Elasticsearch.Metrics metric)
+	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(nodeId, metric);
 	}

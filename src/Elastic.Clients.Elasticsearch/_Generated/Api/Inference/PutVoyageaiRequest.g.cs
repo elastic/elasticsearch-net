@@ -220,7 +220,7 @@ public readonly partial struct PutVoyageaiRequestDescriptor
 #pragma warning restore CS0618
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutVoyageaiRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

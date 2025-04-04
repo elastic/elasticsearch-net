@@ -127,7 +127,7 @@ public readonly partial struct SearchableSnapshotsStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public SearchableSnapshotsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public SearchableSnapshotsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(indices);
 	}
@@ -233,7 +233,7 @@ public readonly partial struct SearchableSnapshotsStatsRequestDescriptor<TDocume
 		Instance = instance;
 	}
 
-	public SearchableSnapshotsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public SearchableSnapshotsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(indices);
 	}

@@ -452,7 +452,7 @@ public readonly partial struct RestoreRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(repository, snapshot);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public RestoreRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -871,7 +871,7 @@ public readonly partial struct RestoreRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(repository, snapshot);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public RestoreRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -142,7 +142,7 @@ public readonly partial struct DeleteAutoFollowPatternRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteAutoFollowPatternRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

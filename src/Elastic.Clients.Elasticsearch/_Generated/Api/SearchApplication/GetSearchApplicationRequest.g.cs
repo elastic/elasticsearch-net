@@ -119,7 +119,7 @@ public readonly partial struct GetSearchApplicationRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetSearchApplicationRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -122,7 +122,7 @@ public readonly partial struct GetGeoipDatabaseRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids id)
+	public GetGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest(id);
 	}

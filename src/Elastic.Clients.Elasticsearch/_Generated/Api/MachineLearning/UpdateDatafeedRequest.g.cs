@@ -474,7 +474,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest(datafeedId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateDatafeedRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -1114,7 +1114,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest(datafeedId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateDatafeedRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

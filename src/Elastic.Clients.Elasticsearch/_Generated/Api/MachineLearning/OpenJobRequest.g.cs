@@ -152,7 +152,7 @@ public readonly partial struct OpenJobRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public OpenJobRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

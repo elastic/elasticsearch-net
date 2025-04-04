@@ -289,7 +289,7 @@ public readonly partial struct PutIndicesSettingsRequestDescriptor
 		Instance = instance;
 	}
 
-	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(indices);
@@ -538,7 +538,7 @@ public readonly partial struct PutIndicesSettingsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(indices);

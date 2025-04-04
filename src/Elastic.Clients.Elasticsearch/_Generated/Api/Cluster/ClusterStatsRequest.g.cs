@@ -147,7 +147,7 @@ public readonly partial struct ClusterStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest(nodeId);
 	}

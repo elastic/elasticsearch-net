@@ -134,7 +134,7 @@ public readonly partial struct DeletePolicyRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeletePolicyRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

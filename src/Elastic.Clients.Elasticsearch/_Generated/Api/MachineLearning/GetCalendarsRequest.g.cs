@@ -158,7 +158,7 @@ public readonly partial struct GetCalendarsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetCalendarsRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId)
+	public GetCalendarsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? calendarId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest(calendarId);
 	}

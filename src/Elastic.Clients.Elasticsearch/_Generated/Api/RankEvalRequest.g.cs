@@ -229,7 +229,7 @@ public readonly partial struct RankEvalRequestDescriptor
 		Instance = instance;
 	}
 
-	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.RankEvalRequest(indices);
@@ -470,7 +470,7 @@ public readonly partial struct RankEvalRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.RankEvalRequest(indices);

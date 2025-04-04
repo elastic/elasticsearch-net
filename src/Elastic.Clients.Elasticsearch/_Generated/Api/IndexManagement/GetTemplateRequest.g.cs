@@ -167,7 +167,7 @@ public readonly partial struct GetTemplateRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	public GetTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest(name);
 	}

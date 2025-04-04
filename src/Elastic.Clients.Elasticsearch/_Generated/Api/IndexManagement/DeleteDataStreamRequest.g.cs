@@ -148,7 +148,7 @@ public readonly partial struct DeleteDataStreamRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteDataStreamRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

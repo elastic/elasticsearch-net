@@ -154,7 +154,7 @@ public readonly partial struct DeleteIpLocationDatabaseRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteIpLocationDatabaseRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

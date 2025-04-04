@@ -175,7 +175,7 @@ public readonly partial struct ResolveIndexRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ResolveIndexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

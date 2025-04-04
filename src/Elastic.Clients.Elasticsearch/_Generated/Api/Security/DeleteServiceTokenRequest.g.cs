@@ -160,7 +160,7 @@ public readonly partial struct DeleteServiceTokenRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest(@namespace, service, name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteServiceTokenRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

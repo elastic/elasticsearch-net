@@ -114,7 +114,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	}
 
 	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id id)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(id);
 		var request = builder.Instance;
@@ -123,7 +123,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	}
 
 	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(id);
 		action.Invoke(builder);
@@ -158,7 +158,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	}
 
 	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(id);
 		var request = builder.Instance;
@@ -167,7 +167,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	}
 
 	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(id);
 		action.Invoke(builder);
@@ -202,7 +202,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	}
 
 	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id id)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(id);
 		var request = builder.Instance;
@@ -211,7 +211,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	}
 
 	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(id);
 		action.Invoke(builder);
@@ -246,7 +246,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	}
 
 	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(id);
 		var request = builder.Instance;
@@ -255,7 +255,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	}
 
 	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(id);
 		action.Invoke(builder);
@@ -412,17 +412,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor(indices);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
-	}
-
-	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor(indices);
-		action.Invoke(builder);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
@@ -452,6 +442,15 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse> RollupSearch<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
@@ -495,17 +494,7 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor(indices);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
-	}
-
-	[System.Obsolete("Deprecated in '8.11.0'.")]
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor(indices);
-		action.Invoke(builder);
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
@@ -535,6 +524,15 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>();
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
+	}
+
+	[System.Obsolete("Deprecated in '8.11.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>> RollupSearchAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);

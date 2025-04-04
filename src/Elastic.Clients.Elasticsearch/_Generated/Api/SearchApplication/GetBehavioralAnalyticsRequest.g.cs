@@ -114,7 +114,7 @@ public readonly partial struct GetBehavioralAnalyticsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetBehavioralAnalyticsRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> name)
+	public GetBehavioralAnalyticsRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest(name);
 	}

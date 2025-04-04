@@ -376,7 +376,7 @@ public readonly partial struct SplitIndexRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest(index, target);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public SplitIndexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -737,7 +737,7 @@ public readonly partial struct SplitIndexRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest(index, target);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public SplitIndexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

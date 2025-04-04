@@ -301,7 +301,7 @@ public readonly partial struct GetSourceRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(index, id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetSourceRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -584,7 +584,22 @@ public readonly partial struct GetSourceRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(index, id);
 	}
 
-	[System.Obsolete("TODO")]
+	public GetSourceRequestDescriptor(TDocument document)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document));
+	}
+
+	public GetSourceRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(typeof(TDocument), id);
+	}
+
+	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.GetSourceRequest(typeof(TDocument), id);
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetSourceRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

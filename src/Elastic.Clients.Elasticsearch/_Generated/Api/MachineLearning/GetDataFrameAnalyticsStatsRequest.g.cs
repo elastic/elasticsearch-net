@@ -219,7 +219,7 @@ public readonly partial struct GetDataFrameAnalyticsStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetDataFrameAnalyticsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	public GetDataFrameAnalyticsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest(id);
 	}

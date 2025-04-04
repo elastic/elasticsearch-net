@@ -199,7 +199,7 @@ public readonly partial struct RefreshRequestDescriptor
 		Instance = instance;
 	}
 
-	public RefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public RefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest(indices);
 	}
@@ -364,7 +364,7 @@ public readonly partial struct RefreshRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public RefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public RefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest(indices);
 	}

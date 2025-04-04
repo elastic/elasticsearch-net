@@ -148,7 +148,7 @@ public readonly partial struct DeleteLifecycleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteLifecycleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

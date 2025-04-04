@@ -157,7 +157,7 @@ public readonly partial struct PutFilterRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest(filterId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutFilterRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

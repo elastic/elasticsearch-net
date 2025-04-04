@@ -125,12 +125,12 @@ public readonly partial struct GetInferenceRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Id inferenceId)
+	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Id? inferenceId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(inferenceId);
 	}
 
-	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(taskType, inferenceId);
 	}

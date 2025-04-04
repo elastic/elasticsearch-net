@@ -241,7 +241,7 @@ public readonly partial struct ResumeFollowRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest(index);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ResumeFollowRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

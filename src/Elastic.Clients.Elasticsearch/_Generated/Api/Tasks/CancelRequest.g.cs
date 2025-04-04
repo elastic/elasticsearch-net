@@ -197,7 +197,7 @@ public readonly partial struct CancelRequestDescriptor
 		Instance = instance;
 	}
 
-	public CancelRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId taskId)
+	public CancelRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId? taskId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Tasks.CancelRequest(taskId);
 	}

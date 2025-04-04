@@ -176,7 +176,7 @@ public readonly partial struct GetComponentTemplateRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
+	public GetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest(name);
 	}

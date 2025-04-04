@@ -284,17 +284,17 @@ public readonly partial struct IndicesStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics metric)
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(metric);
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices);
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Metrics metric)
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices, metric);
 	}
@@ -571,17 +571,17 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics metric)
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(metric);
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices);
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Metrics metric)
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices, metric);
 	}

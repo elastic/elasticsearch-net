@@ -241,7 +241,7 @@ public readonly partial struct PutLifecycleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest(policyId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutLifecycleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

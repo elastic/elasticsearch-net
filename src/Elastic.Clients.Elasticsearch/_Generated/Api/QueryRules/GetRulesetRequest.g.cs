@@ -121,7 +121,7 @@ public readonly partial struct GetRulesetRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest(rulesetId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetRulesetRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

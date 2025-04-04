@@ -142,7 +142,7 @@ public readonly partial struct FollowStatsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public FollowStatsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

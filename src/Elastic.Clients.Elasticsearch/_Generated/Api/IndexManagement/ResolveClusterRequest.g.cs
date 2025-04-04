@@ -411,7 +411,7 @@ public readonly partial struct ResolveClusterRequestDescriptor
 		Instance = instance;
 	}
 
-	public ResolveClusterRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	public ResolveClusterRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest(name);
 	}

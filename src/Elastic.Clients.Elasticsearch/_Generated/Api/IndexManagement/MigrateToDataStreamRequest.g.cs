@@ -166,7 +166,7 @@ public readonly partial struct MigrateToDataStreamRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public MigrateToDataStreamRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

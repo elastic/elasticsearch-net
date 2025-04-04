@@ -393,7 +393,7 @@ public readonly partial struct CountRequestDescriptor
 		Instance = instance;
 	}
 
-	public CountRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public CountRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.CountRequest(indices);
 	}
@@ -725,7 +725,7 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public CountRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public CountRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.CountRequest(indices);
 	}

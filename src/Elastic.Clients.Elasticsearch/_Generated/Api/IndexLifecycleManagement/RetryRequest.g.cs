@@ -125,7 +125,7 @@ public readonly partial struct RetryRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest(index);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public RetryRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

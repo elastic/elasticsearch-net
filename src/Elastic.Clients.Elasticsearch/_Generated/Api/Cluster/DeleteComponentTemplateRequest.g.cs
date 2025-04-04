@@ -152,7 +152,7 @@ public readonly partial struct DeleteComponentTemplateRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteComponentTemplateRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

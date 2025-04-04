@@ -250,17 +250,17 @@ public readonly partial struct GetIndicesSettingsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(indices);
 	}
 
-	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(indices, name);
 	}
 
-	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(name);
 	}
@@ -469,17 +469,17 @@ public readonly partial struct GetIndicesSettingsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(indices);
 	}
 
-	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(indices, name);
 	}
 
-	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names name)
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(name);
 	}

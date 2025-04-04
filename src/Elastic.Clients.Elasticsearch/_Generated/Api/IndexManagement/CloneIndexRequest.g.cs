@@ -382,7 +382,7 @@ public readonly partial struct CloneIndexRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest(index, target);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public CloneIndexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -746,7 +746,7 @@ public readonly partial struct CloneIndexRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest(index, target);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public CloneIndexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

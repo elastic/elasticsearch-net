@@ -142,7 +142,7 @@ public readonly partial struct RenderQueryRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public RenderQueryRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

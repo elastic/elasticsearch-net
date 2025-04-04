@@ -294,7 +294,7 @@ public readonly partial struct PreviewTransformRequestDescriptor
 		Instance = instance;
 	}
 
-	public PreviewTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId)
+	public PreviewTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id? transformId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest(transformId);
 	}
@@ -689,7 +689,7 @@ public readonly partial struct PreviewTransformRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public PreviewTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id transformId)
+	public PreviewTransformRequestDescriptor(Elastic.Clients.Elasticsearch.Id? transformId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest(transformId);
 	}

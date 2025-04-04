@@ -138,7 +138,7 @@ public readonly partial struct GetAutoFollowPatternRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
+	public GetAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest(name);
 	}

@@ -160,7 +160,7 @@ public readonly partial struct ResetJobRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ResetJobRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

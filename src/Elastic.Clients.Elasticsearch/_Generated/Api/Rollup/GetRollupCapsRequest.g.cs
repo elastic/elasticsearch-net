@@ -151,7 +151,7 @@ public readonly partial struct GetRollupCapsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetRollupCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	public GetRollupCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest(id);
 	}

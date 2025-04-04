@@ -146,7 +146,7 @@ public readonly partial struct GetSynonymRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetSynonymRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

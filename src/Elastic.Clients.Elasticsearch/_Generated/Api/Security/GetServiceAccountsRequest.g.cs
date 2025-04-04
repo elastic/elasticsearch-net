@@ -140,12 +140,12 @@ public readonly partial struct GetServiceAccountsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetServiceAccountsRequestDescriptor(string @namespace, string service)
+	public GetServiceAccountsRequestDescriptor(string? @namespace, string? service)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(@namespace, service);
 	}
 
-	public GetServiceAccountsRequestDescriptor(string @namespace)
+	public GetServiceAccountsRequestDescriptor(string? @namespace)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(@namespace);
 	}

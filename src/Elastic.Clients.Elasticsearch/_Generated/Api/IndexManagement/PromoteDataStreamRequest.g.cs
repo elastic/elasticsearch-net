@@ -156,7 +156,7 @@ public readonly partial struct PromoteDataStreamRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PromoteDataStreamRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

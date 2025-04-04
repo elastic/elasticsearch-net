@@ -121,7 +121,7 @@ public readonly partial struct DeleteBehavioralAnalyticsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteBehavioralAnalyticsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

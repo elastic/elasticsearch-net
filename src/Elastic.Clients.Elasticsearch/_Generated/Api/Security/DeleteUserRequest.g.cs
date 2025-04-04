@@ -138,7 +138,7 @@ public readonly partial struct DeleteUserRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.DeleteUserRequest(username);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteUserRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

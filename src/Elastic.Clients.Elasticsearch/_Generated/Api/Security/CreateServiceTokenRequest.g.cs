@@ -173,7 +173,7 @@ public readonly partial struct CreateServiceTokenRequestDescriptor
 		Instance = instance;
 	}
 
-	public CreateServiceTokenRequestDescriptor(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name)
+	public CreateServiceTokenRequestDescriptor(string @namespace, string service, Elastic.Clients.Elasticsearch.Name? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest(@namespace, service, name);
 	}
@@ -183,7 +183,7 @@ public readonly partial struct CreateServiceTokenRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest(@namespace, service);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public CreateServiceTokenRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -196,7 +196,7 @@ public readonly partial struct FieldUsageStatsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public FieldUsageStatsRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

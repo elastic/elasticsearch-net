@@ -219,7 +219,7 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor
 		Instance = instance;
 	}
 
-	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(indices);
@@ -395,7 +395,7 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
+	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(indices);

@@ -219,7 +219,7 @@ public readonly partial struct HotThreadsRequestDescriptor
 		Instance = instance;
 	}
 
-	public HotThreadsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public HotThreadsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest(nodeId);
 	}

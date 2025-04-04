@@ -125,7 +125,7 @@ public readonly partial struct EqlDeleteRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public EqlDeleteRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

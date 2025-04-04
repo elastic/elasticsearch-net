@@ -163,7 +163,7 @@ public readonly partial struct RevertModelSnapshotRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest(jobId, snapshotId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public RevertModelSnapshotRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

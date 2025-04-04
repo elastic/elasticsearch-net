@@ -260,7 +260,7 @@ public readonly partial struct PutPipelineRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutPipelineRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -571,7 +571,7 @@ public readonly partial struct PutPipelineRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest(id);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutPipelineRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

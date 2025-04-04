@@ -176,7 +176,7 @@ public readonly partial struct SimulateIndexTemplateRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public SimulateIndexTemplateRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

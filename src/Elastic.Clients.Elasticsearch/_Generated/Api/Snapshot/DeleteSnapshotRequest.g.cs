@@ -148,7 +148,7 @@ public readonly partial struct DeleteSnapshotRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest(repository, snapshot);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteSnapshotRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

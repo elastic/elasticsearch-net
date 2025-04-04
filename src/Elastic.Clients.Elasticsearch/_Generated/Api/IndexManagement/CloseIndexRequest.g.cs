@@ -258,7 +258,7 @@ public readonly partial struct CloseIndexRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public CloseIndexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

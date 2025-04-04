@@ -190,7 +190,7 @@ public readonly partial struct SimulateRequestDescriptor
 		Instance = instance;
 	}
 
-	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(id);
@@ -389,7 +389,7 @@ public readonly partial struct SimulateRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
 	{
 #pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(id);

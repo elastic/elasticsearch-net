@@ -61,7 +61,7 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId taskId)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
 		var request = builder.Instance;
@@ -69,7 +69,7 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
 		action.Invoke(builder);
@@ -101,7 +101,7 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
 		var request = builder.Instance;
@@ -109,7 +109,7 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
 		action.Invoke(builder);

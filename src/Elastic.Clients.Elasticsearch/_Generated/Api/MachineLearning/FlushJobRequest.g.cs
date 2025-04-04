@@ -216,7 +216,7 @@ public readonly partial struct FlushJobRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest(jobId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public FlushJobRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

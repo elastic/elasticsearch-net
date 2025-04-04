@@ -199,7 +199,7 @@ public readonly partial struct HealthReportRequestDescriptor
 		Instance = instance;
 	}
 
-	public HealthReportRequestDescriptor(System.Collections.Generic.ICollection<string> feature)
+	public HealthReportRequestDescriptor(System.Collections.Generic.ICollection<string>? feature)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.HealthReportRequest(feature);
 	}

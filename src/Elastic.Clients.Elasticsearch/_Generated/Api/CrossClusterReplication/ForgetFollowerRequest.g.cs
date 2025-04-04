@@ -199,7 +199,7 @@ public readonly partial struct ForgetFollowerRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(index);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ForgetFollowerRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

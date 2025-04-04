@@ -276,7 +276,7 @@ public readonly partial struct OpenIndexRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest(indices);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public OpenIndexRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

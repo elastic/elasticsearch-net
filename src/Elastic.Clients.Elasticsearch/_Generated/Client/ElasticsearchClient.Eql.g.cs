@@ -182,23 +182,6 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor(indices);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor(indices);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
-	}
-
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
@@ -211,6 +194,14 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
@@ -231,23 +222,6 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor(indices);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor(indices);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
-	}
-
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
@@ -260,6 +234,14 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
 		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);

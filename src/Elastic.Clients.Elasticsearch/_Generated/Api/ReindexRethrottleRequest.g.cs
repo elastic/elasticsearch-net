@@ -158,7 +158,7 @@ public readonly partial struct ReindexRethrottleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.ReindexRethrottleRequest(taskId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ReindexRethrottleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

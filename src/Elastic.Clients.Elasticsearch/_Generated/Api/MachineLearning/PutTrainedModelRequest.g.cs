@@ -345,7 +345,7 @@ public readonly partial struct PutTrainedModelRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(modelId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutTrainedModelRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -681,7 +681,7 @@ public readonly partial struct PutTrainedModelRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(modelId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutTrainedModelRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

@@ -143,7 +143,7 @@ public readonly partial struct GetFiltersRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetFiltersRequestDescriptor(Elastic.Clients.Elasticsearch.Ids filterId)
+	public GetFiltersRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? filterId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest(filterId);
 	}

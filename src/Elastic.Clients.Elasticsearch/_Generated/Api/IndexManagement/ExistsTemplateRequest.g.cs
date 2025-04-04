@@ -175,7 +175,7 @@ public readonly partial struct ExistsTemplateRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ExistsTemplateRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

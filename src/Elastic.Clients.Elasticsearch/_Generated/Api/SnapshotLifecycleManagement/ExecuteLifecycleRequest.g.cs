@@ -154,7 +154,7 @@ public readonly partial struct ExecuteLifecycleRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest(policyId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ExecuteLifecycleRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

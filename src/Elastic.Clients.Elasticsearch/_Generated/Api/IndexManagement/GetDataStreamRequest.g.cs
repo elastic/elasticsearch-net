@@ -178,7 +178,7 @@ public readonly partial struct GetDataStreamRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames name)
+	public GetDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest(name);
 	}

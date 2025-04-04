@@ -135,7 +135,7 @@ public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor
 		Instance = instance;
 	}
 
-	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(id);
 	}
@@ -270,7 +270,7 @@ public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor<TDocum
 		Instance = instance;
 	}
 
-	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
+	public PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(id);
 	}

@@ -217,7 +217,7 @@ public readonly partial struct StopTransformRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest(transformId);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public StopTransformRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

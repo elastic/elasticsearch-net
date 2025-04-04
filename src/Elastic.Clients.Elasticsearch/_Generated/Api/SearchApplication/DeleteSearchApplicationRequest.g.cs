@@ -125,7 +125,7 @@ public readonly partial struct DeleteSearchApplicationRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest(name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteSearchApplicationRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

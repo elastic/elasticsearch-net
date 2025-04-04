@@ -165,7 +165,7 @@ public readonly partial struct DeleteAliasRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest(indices, name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteAliasRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -294,7 +294,7 @@ public readonly partial struct DeleteAliasRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest(indices, name);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteAliasRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");

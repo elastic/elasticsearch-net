@@ -137,7 +137,7 @@ public readonly partial struct DataStreamsStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name)
+	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(name);
 	}
@@ -261,7 +261,7 @@ public readonly partial struct DataStreamsStatsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name)
+	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(name);
 	}

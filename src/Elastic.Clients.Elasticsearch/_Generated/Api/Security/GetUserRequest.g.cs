@@ -133,7 +133,7 @@ public readonly partial struct GetUserRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetUserRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username> username)
+	public GetUserRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.GetUserRequest(username);
 	}

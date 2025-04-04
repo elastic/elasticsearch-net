@@ -221,12 +221,12 @@ public readonly partial struct GetFieldMappingRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest(fields);
 	}
 
-	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Fields fields)
+	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest(indices, fields);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetFieldMappingRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
@@ -421,12 +421,12 @@ public readonly partial struct GetFieldMappingRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest(fields);
 	}
 
-	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Fields fields)
+	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest(indices, fields);
 	}
 
-	[System.Obsolete("TODO")]
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetFieldMappingRequestDescriptor()
 	{
 		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
