@@ -241,53 +241,18 @@ public sealed class Indices :
 	#endregion IParsable
 }
 
-internal sealed class IndicesJsonConverter : JsonConverter<Indices>
+internal sealed class IndicesJsonConverter :
+	JsonConverter<Indices>
 {
-	private IElasticsearchClientSettings _settings;
-
-	public override Indices? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Indices Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType == JsonTokenType.String)
-		{
-			Indices indices = reader.GetString();
-			return indices;
-		}
-		else if (reader.TokenType == JsonTokenType.StartArray)
-		{
-			var indices = new List<string>();
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
-			{
-				var index = reader.GetString();
-				indices.Add(index);
-			}
-			return new Indices(indices);
-		}
+		var indices = reader.ReadSingleOrManyCollectionValue<IndexName>(options, null)!;
 
-		reader.Read();
-		return null;
+		return new Indices(indices);
 	}
 
 	public override void Write(Utf8JsonWriter writer, Indices value, JsonSerializerOptions options)
 	{
-		InitializeSettings(options);
-
-		if (value == null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		writer.WriteStringValue(((IUrlParameter)value).GetString(_settings));
-	}
-
-	private void InitializeSettings(JsonSerializerOptions options)
-	{
-		if (_settings is null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-
-			_settings = settings;
-		}
+		writer.WriteSingleOrManyCollectionValue(options, value.IndexNames, null);
 	}
 }
