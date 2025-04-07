@@ -106,10 +106,10 @@ internal sealed partial class CheckpointingConverter : System.Text.Json.Serializ
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropChangesLastDetectedAt, value.ChangesLastDetectedAt, null, null);
-		writer.WriteProperty(options, PropChangesLastDetectedAtString, value.ChangesLastDetectedAtString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropChangesLastDetectedAtString, value.ChangesLastDetectedAtString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropLast, value.Last, null, null);
 		writer.WriteProperty(options, PropLastSearchTime, value.LastSearchTime, null, null);
-		writer.WriteProperty(options, PropLastSearchTimeString, value.LastSearchTimeString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropLastSearchTimeString, value.LastSearchTimeString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropNext, value.Next, null, null);
 		writer.WriteProperty(options, PropOperationsBehind, value.OperationsBehind, null, null);
 		writer.WriteEndObject();

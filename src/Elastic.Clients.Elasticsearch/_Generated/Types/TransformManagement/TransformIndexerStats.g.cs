@@ -185,7 +185,7 @@ internal sealed partial class TransformIndexerStatsConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDeleteTimeInMs, value.DeleteTimeInMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropDeleteTimeInMs, value.DeleteTimeInMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropDocumentsDeleted, value.DocumentsDeleted, null, null);
 		writer.WriteProperty(options, PropDocumentsIndexed, value.DocumentsIndexed, null, null);
 		writer.WriteProperty(options, PropDocumentsProcessed, value.DocumentsProcessed, null, null);

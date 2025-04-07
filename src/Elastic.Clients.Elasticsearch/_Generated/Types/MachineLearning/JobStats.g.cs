@@ -136,7 +136,7 @@ internal sealed partial class JobStatsConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropModelSizeStats, value.ModelSizeStats, null, null);
 		writer.WriteProperty(options, PropNode, value.Node, null, null);
-		writer.WriteProperty(options, PropOpenTime, value.OpenTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropOpenTime, value.OpenTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropState, value.State, null, null);
 		writer.WriteProperty(options, PropTimingStats, value.TimingStats, null, null);
 		writer.WriteEndObject();

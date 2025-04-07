@@ -83,7 +83,7 @@ internal sealed partial class RecordingConverter : System.Text.Json.Serializatio
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCumulativeExecutionCount, value.CumulativeExecutionCount, null, null);
 		writer.WriteProperty(options, PropCumulativeExecutionTime, value.CumulativeExecutionTime, null, null);
-		writer.WriteProperty(options, PropCumulativeExecutionTimeMillis, value.CumulativeExecutionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropCumulativeExecutionTimeMillis, value.CumulativeExecutionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteEndObject();
 	}

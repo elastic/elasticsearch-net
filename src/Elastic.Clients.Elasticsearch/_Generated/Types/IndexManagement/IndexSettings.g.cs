@@ -501,8 +501,8 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropBlocks, value.Blocks, null, null);
 		writer.WriteProperty(options, PropCheckOnStartup, value.CheckOnStartup, null, null);
 		writer.WriteProperty(options, PropCodec, value.Codec, null, null);
-		writer.WriteProperty(options, PropCreationDate, value.CreationDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropCreationDateString, value.CreationDateString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreationDate, value.CreationDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreationDateString, value.CreationDateString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropDefaultPipeline, value.DefaultPipeline, null, null);
 		writer.WriteProperty(options, PropFinalPipeline, value.FinalPipeline, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, int>? v) => w.WriteUnionValue<string, int>(o, v, null, null));

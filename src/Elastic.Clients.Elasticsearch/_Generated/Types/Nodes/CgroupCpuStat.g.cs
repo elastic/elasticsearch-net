@@ -75,7 +75,7 @@ internal sealed partial class CgroupCpuStatConverter : System.Text.Json.Serializ
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropNumberOfElapsedPeriods, value.NumberOfElapsedPeriods, null, null);
 		writer.WriteProperty(options, PropNumberOfTimesThrottled, value.NumberOfTimesThrottled, null, null);
-		writer.WriteProperty(options, PropTimeThrottledNanos, value.TimeThrottledNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropTimeThrottledNanos, value.TimeThrottledNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
 		writer.WriteEndObject();
 	}
 }

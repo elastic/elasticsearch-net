@@ -251,7 +251,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAllocateExplanation, value.AllocateExplanation, null, null);
 		writer.WriteProperty(options, PropAllocationDelay, value.AllocationDelay, null, null);
-		writer.WriteProperty(options, PropAllocationDelayInMillis, value.AllocationDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropAllocationDelayInMillis, value.AllocationDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropCanAllocate, value.CanAllocate, null, null);
 		writer.WriteProperty(options, PropCanMoveToOtherNode, value.CanMoveToOtherNode, null, null);
 		writer.WriteProperty(options, PropCanRebalanceCluster, value.CanRebalanceCluster, null, null);
@@ -261,7 +261,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 		writer.WriteProperty(options, PropCanRemainOnCurrentNode, value.CanRemainOnCurrentNode, null, null);
 		writer.WriteProperty(options, PropClusterInfo, value.ClusterInfo, null, null);
 		writer.WriteProperty(options, PropConfiguredDelay, value.ConfiguredDelay, null, null);
-		writer.WriteProperty(options, PropConfiguredDelayInMillis, value.ConfiguredDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropConfiguredDelayInMillis, value.ConfiguredDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropCurrentNode, value.CurrentNode, null, null);
 		writer.WriteProperty(options, PropCurrentState, value.CurrentState, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
@@ -271,7 +271,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
 		writer.WriteProperty(options, PropRebalanceExplanation, value.RebalanceExplanation, null, null);
 		writer.WriteProperty(options, PropRemainingDelay, value.RemainingDelay, null, null);
-		writer.WriteProperty(options, PropRemainingDelayInMillis, value.RemainingDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropRemainingDelayInMillis, value.RemainingDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropShard, value.Shard, null, null);
 		writer.WriteProperty(options, PropUnassignedInfo, value.UnassignedInfo, null, null);
 		writer.WriteEndObject();

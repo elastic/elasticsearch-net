@@ -40,7 +40,37 @@ internal static class JsonWriterExtensions
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static void WriteValue<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, T? value)
 	{
-		var converter = options.GetConverter<T?>(null);
+		var converter = options.GetConverter<T>(null);
+
+		if ((value is null) && !converter.HandleNull)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		converter.Write(writer, value, options);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static void WriteValue<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, T? value)
+		where T : struct
+	{
+		var converter = options.GetConverter<T>(null);
+
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		converter.Write(writer, value!.Value, options);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static void WriteValueEx<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, T? value,
+		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type markerType)
+	{
+		var converter = options.GetConverter<T>(markerType);
 
 		if ((value is null) && !converter.HandleNull)
 		{
@@ -54,16 +84,17 @@ internal static class JsonWriterExtensions
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static void WriteValueEx<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, T? value,
 		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type markerType)
+		where T : struct
 	{
-		var converter = options.GetConverter<T?>(markerType);
+		var converter = options.GetConverter<T>(markerType);
 
-		if ((value is null) && !converter.HandleNull)
+		if (value is null)
 		{
 			writer.WriteNullValue();
 			return;
 		}
 
-		converter.Write(writer, value, options);
+		converter.Write(writer, value.Value, options);
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]

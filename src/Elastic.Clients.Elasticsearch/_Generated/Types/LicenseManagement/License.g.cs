@@ -136,7 +136,7 @@ internal sealed partial class LicenseConverter : System.Text.Json.Serialization.
 		writer.WriteProperty(options, PropMaxNodes, value.MaxNodes, null, null);
 		writer.WriteProperty(options, PropMaxResourceUnits, value.MaxResourceUnits, null, null);
 		writer.WriteProperty(options, PropSignature, value.Signature, null, null);
-		writer.WriteProperty(options, PropStartDateInMillis, value.StartDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartDateInMillis, value.StartDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropUid, value.Uid, null, null);
 		writer.WriteEndObject();

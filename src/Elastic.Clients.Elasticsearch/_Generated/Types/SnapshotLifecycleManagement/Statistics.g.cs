@@ -135,7 +135,7 @@ internal sealed partial class StatisticsConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropPolicy, value.Policy, null, null);
 		writer.WriteProperty(options, PropRetentionDeletionTime, value.RetentionDeletionTime, null, null);
-		writer.WriteProperty(options, PropRetentionDeletionTimeMillis, value.RetentionDeletionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropRetentionDeletionTimeMillis, value.RetentionDeletionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropRetentionFailed, value.RetentionFailed, null, null);
 		writer.WriteProperty(options, PropRetentionRuns, value.RetentionRuns, null, null);
 		writer.WriteProperty(options, PropRetentionTimedOut, value.RetentionTimedOut, null, null);

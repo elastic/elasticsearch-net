@@ -115,7 +115,7 @@ internal sealed partial class DetailsInfoConverter : System.Text.Json.Serializat
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBlob, value.Blob, null, null);
 		writer.WriteProperty(options, PropOverwriteElapsed, value.OverwriteElapsed, null, null);
-		writer.WriteProperty(options, PropOverwriteElapsedNanos, value.OverwriteElapsedNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropOverwriteElapsedNanos, value.OverwriteElapsedNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
 		writer.WriteProperty(options, PropWriteElapsed, value.WriteElapsed, null, null);
 		writer.WriteProperty(options, PropWriteElapsedNanos, value.WriteElapsedNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
 		writer.WriteProperty(options, PropWriterNode, value.WriterNode, null, null);
