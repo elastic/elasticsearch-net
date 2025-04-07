@@ -51,7 +51,7 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>?> propHardBounds = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propInterval = default;
 		LocalJsonValue<int?> propMinDocCount = default;
-		LocalJsonValue<System.DateTime?> propMissing = default;
+		LocalJsonValue<System.DateTimeOffset?> propMissing = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propOffset = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?> propOrder = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
@@ -99,7 +99,7 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -175,7 +175,7 @@ internal sealed partial class DateHistogramAggregationConverter : System.Text.Js
 #pragma warning restore CS0618
 		;
 		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
-		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
 		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> v) => w.WriteKeyValuePairValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>(o, v, null, null)));
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
@@ -264,7 +264,7 @@ public sealed partial class DateHistogramAggregation
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Missing { get; set; }
+	public System.DateTimeOffset? Missing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -458,7 +458,7 @@ public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Missing(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Missing(System.DateTimeOffset? value)
 	{
 		Instance.Missing = value;
 		return this;
@@ -758,7 +758,7 @@ public readonly partial struct DateHistogramAggregationDescriptor
 	/// By default, documents without a value are ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Missing(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Missing(System.DateTimeOffset? value)
 	{
 		Instance.Missing = value;
 		return this;

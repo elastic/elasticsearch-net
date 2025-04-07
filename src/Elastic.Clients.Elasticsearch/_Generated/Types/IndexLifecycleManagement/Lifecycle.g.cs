@@ -32,12 +32,12 @@ internal sealed partial class LifecycleConverter : System.Text.Json.Serializatio
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.DateTime> propModifiedDate = default;
+		LocalJsonValue<System.DateTimeOffset> propModifiedDate = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy> propPolicy = default;
 		LocalJsonValue<long> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -73,7 +73,7 @@ internal sealed partial class LifecycleConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropPolicy, value.Policy, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
@@ -84,7 +84,7 @@ internal sealed partial class LifecycleConverter : System.Text.Json.Serializatio
 public sealed partial class Lifecycle
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Lifecycle(System.DateTime modifiedDate, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy policy, long version)
+	public Lifecycle(System.DateTimeOffset modifiedDate, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy policy, long version)
 	{
 		ModifiedDate = modifiedDate;
 		Policy = policy;
@@ -111,7 +111,7 @@ public sealed partial class Lifecycle
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime ModifiedDate { get; set; }
+	System.DateTimeOffset ModifiedDate { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

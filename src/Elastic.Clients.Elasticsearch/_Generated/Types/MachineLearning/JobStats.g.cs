@@ -46,7 +46,7 @@ internal sealed partial class JobStatsConverter : System.Text.Json.Serialization
 		LocalJsonValue<string> propJobId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats> propModelSizeStats = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact?> propNode = default;
-		LocalJsonValue<System.DateTime?> propOpenTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propOpenTime = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.JobState> propState = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.JobTimingStats> propTimingStats = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -86,7 +86,7 @@ internal sealed partial class JobStatsConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propOpenTime.TryReadProperty(ref reader, options, PropOpenTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propOpenTime.TryReadProperty(ref reader, options, PropOpenTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -136,7 +136,7 @@ internal sealed partial class JobStatsConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropModelSizeStats, value.ModelSizeStats, null, null);
 		writer.WriteProperty(options, PropNode, value.Node, null, null);
-		writer.WriteProperty(options, PropOpenTime, value.OpenTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropOpenTime, value.OpenTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropState, value.State, null, null);
 		writer.WriteProperty(options, PropTimingStats, value.TimingStats, null, null);
 		writer.WriteEndObject();
@@ -247,7 +247,7 @@ public sealed partial class JobStats
 	/// For open jobs only, the elapsed time for which the job has been open.
 	/// </para>
 	/// </summary>
-	public System.DateTime? OpenTime { get; set; }
+	public System.DateTimeOffset? OpenTime { get; set; }
 
 	/// <summary>
 	/// <para>

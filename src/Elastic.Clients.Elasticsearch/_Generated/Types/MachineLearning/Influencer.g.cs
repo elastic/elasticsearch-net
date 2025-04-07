@@ -50,7 +50,7 @@ internal sealed partial class InfluencerConverter : System.Text.Json.Serializati
 		LocalJsonValue<string> propJobId = default;
 		LocalJsonValue<double> propProbability = default;
 		LocalJsonValue<string> propResultType = default;
-		LocalJsonValue<System.DateTime> propTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset> propTimestamp = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propBucketSpan.TryReadProperty(ref reader, options, PropBucketSpan, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanSecondsMarker))))
@@ -103,7 +103,7 @@ internal sealed partial class InfluencerConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -147,7 +147,7 @@ internal sealed partial class InfluencerConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropProbability, value.Probability, null, null);
 		writer.WriteProperty(options, PropResultType, value.ResultType, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -156,7 +156,7 @@ internal sealed partial class InfluencerConverter : System.Text.Json.Serializati
 public sealed partial class Influencer
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Influencer(System.TimeSpan bucketSpan, string influencerFieldName, string influencerFieldValue, double influencerScore, double initialInfluencerScore, bool isInterim, string jobId, double probability, string resultType, System.DateTime timestamp)
+	public Influencer(System.TimeSpan bucketSpan, string influencerFieldName, string influencerFieldValue, double influencerScore, double initialInfluencerScore, bool isInterim, string jobId, double probability, string resultType, System.DateTimeOffset timestamp)
 	{
 		BucketSpan = bucketSpan;
 		InfluencerFieldName = influencerFieldName;
@@ -308,5 +308,5 @@ public sealed partial class Influencer
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Timestamp { get; set; }
+	System.DateTimeOffset Timestamp { get; set; }
 }

@@ -53,8 +53,8 @@ internal sealed partial class SnapshotInfoConverter : System.Text.Json.Serializa
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propDataStreams = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDuration = default;
 		LocalJsonValue<System.TimeSpan?> propDurationInMillis = default;
-		LocalJsonValue<System.DateTime?> propEndTime = default;
-		LocalJsonValue<System.DateTime?> propEndTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propEndTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propEndTimeInMillis = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>?> propFailures = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>?> propFeatureStates = default;
 		LocalJsonValue<bool?> propIncludeGlobalState = default;
@@ -65,8 +65,8 @@ internal sealed partial class SnapshotInfoConverter : System.Text.Json.Serializa
 		LocalJsonValue<string?> propRepository = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics?> propShards = default;
 		LocalJsonValue<string> propSnapshot = default;
-		LocalJsonValue<System.DateTime?> propStartTime = default;
-		LocalJsonValue<System.DateTime?> propStartTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propStartTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propStartTimeInMillis = default;
 		LocalJsonValue<string?> propState = default;
 		LocalJsonValue<string> propUuid = default;
 		LocalJsonValue<string?> propVersion = default;
@@ -88,12 +88,12 @@ internal sealed partial class SnapshotInfoConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propEndTime.TryReadProperty(ref reader, options, PropEndTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propEndTime.TryReadProperty(ref reader, options, PropEndTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propEndTimeInMillis.TryReadProperty(ref reader, options, PropEndTimeInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propEndTimeInMillis.TryReadProperty(ref reader, options, PropEndTimeInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -148,12 +148,12 @@ internal sealed partial class SnapshotInfoConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -220,8 +220,8 @@ internal sealed partial class SnapshotInfoConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropDuration, value.Duration, null, null);
 		writer.WriteProperty(options, PropDurationInMillis, value.DurationInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
-		writer.WriteProperty(options, PropEndTime, value.EndTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropEndTimeInMillis, value.EndTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropEndTime, value.EndTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropEndTimeInMillis, value.EndTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>(o, v, null));
 		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>(o, v, null));
 		writer.WriteProperty(options, PropIncludeGlobalState, value.IncludeGlobalState, null, null);
@@ -232,8 +232,8 @@ internal sealed partial class SnapshotInfoConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropRepository, value.Repository, null, null);
 		writer.WriteProperty(options, PropShards, value.Shards, null, null);
 		writer.WriteProperty(options, PropSnapshot, value.Snapshot, null, null);
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropState, value.State, null, null);
 		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
@@ -276,8 +276,8 @@ public sealed partial class SnapshotInfo
 	System.Collections.Generic.IReadOnlyCollection<string> DataStreams { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Duration { get; set; }
 	public System.TimeSpan? DurationInMillis { get; set; }
-	public System.DateTime? EndTime { get; set; }
-	public System.DateTime? EndTimeInMillis { get; set; }
+	public System.DateTimeOffset? EndTime { get; set; }
+	public System.DateTimeOffset? EndTimeInMillis { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>? Failures { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>? FeatureStates { get; set; }
 	public bool? IncludeGlobalState { get; set; }
@@ -292,8 +292,8 @@ public sealed partial class SnapshotInfo
 	required
 #endif
 	string Snapshot { get; set; }
-	public System.DateTime? StartTime { get; set; }
-	public System.DateTime? StartTimeInMillis { get; set; }
+	public System.DateTimeOffset? StartTime { get; set; }
+	public System.DateTimeOffset? StartTimeInMillis { get; set; }
 	public string? State { get; set; }
 	public
 #if NET7_0_OR_GREATER

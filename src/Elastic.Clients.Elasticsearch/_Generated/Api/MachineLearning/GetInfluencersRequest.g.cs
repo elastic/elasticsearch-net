@@ -39,7 +39,7 @@ public sealed partial class GetInfluencersRequestParameters : Elastic.Transport.
 	/// specific timestamps.
 	/// </para>
 	/// </summary>
-	public System.DateTime? End { get => Q<System.DateTime?>("end"); set => Q("end", value); }
+	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
 	/// <para>
@@ -85,7 +85,7 @@ public sealed partial class GetInfluencersRequestParameters : Elastic.Transport.
 	/// means it is unset and results are not limited to specific timestamps.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Start { get => Q<System.DateTime?>("start"); set => Q("start", value); }
+	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
 internal sealed partial class GetInfluencersRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest>
@@ -186,7 +186,7 @@ public sealed partial class GetInfluencersRequest : Elastic.Clients.Elasticsearc
 	/// specific timestamps.
 	/// </para>
 	/// </summary>
-	public System.DateTime? End { get => Q<System.DateTime?>("end"); set => Q("end", value); }
+	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
 	/// <para>
@@ -232,7 +232,7 @@ public sealed partial class GetInfluencersRequest : Elastic.Clients.Elasticsearc
 	/// means it is unset and results are not limited to specific timestamps.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Start { get => Q<System.DateTime?>("start"); set => Q("start", value); }
+	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 
 	/// <summary>
 	/// <para>
@@ -304,7 +304,7 @@ public readonly partial struct GetInfluencersRequestDescriptor
 	/// specific timestamps.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor End(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
@@ -386,7 +386,7 @@ public readonly partial struct GetInfluencersRequestDescriptor
 	/// means it is unset and results are not limited to specific timestamps.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Start(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;
@@ -540,7 +540,7 @@ public readonly partial struct GetInfluencersRequestDescriptor<TDocument>
 	/// specific timestamps.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> End(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
@@ -622,7 +622,7 @@ public readonly partial struct GetInfluencersRequestDescriptor<TDocument>
 	/// means it is unset and results are not limited to specific timestamps.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Start(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;

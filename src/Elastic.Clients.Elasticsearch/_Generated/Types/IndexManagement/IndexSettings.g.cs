@@ -91,8 +91,8 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks?> propBlocks = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup?> propCheckOnStartup = default;
 		LocalJsonValue<string?> propCodec = default;
-		LocalJsonValue<System.DateTime?> propCreationDate = default;
-		LocalJsonValue<System.DateTime?> propCreationDateString = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreationDate = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreationDateString = default;
 		LocalJsonValue<string?> propDefaultPipeline = default;
 		LocalJsonValue<string?> propFinalPipeline = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<string, int>?> propFormat = default;
@@ -174,12 +174,12 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propCreationDate.TryReadProperty(ref reader, options, PropCreationDate, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propCreationDate.TryReadProperty(ref reader, options, PropCreationDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propCreationDateString.TryReadProperty(ref reader, options, PropCreationDateString, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreationDateString.TryReadProperty(ref reader, options, PropCreationDateString, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -501,8 +501,8 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropBlocks, value.Blocks, null, null);
 		writer.WriteProperty(options, PropCheckOnStartup, value.CheckOnStartup, null, null);
 		writer.WriteProperty(options, PropCodec, value.Codec, null, null);
-		writer.WriteProperty(options, PropCreationDate, value.CreationDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropCreationDateString, value.CreationDateString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreationDate, value.CreationDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreationDateString, value.CreationDateString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropDefaultPipeline, value.DefaultPipeline, null, null);
 		writer.WriteProperty(options, PropFinalPipeline, value.FinalPipeline, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, int>? v) => w.WriteUnionValue<string, int>(o, v, null, null));
@@ -597,8 +597,8 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? Blocks { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartup { get; set; }
 	public string? Codec { get; set; }
-	public System.DateTime? CreationDate { get; set; }
-	public System.DateTime? CreationDateString { get; set; }
+	public System.DateTimeOffset? CreationDate { get; set; }
+	public System.DateTimeOffset? CreationDateString { get; set; }
 	public string? DefaultPipeline { get; set; }
 	public string? FinalPipeline { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<string, int>? Format { get; set; }
@@ -789,13 +789,13 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> CreationDate(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> CreationDate(System.DateTimeOffset? value)
 	{
 		Instance.CreationDate = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> CreationDateString(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> CreationDateString(System.DateTimeOffset? value)
 	{
 		Instance.CreationDateString = value;
 		return this;
@@ -1507,13 +1507,13 @@ public readonly partial struct IndexSettingsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor CreationDate(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor CreationDate(System.DateTimeOffset? value)
 	{
 		Instance.CreationDate = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor CreationDateString(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor CreationDateString(System.DateTimeOffset? value)
 	{
 		Instance.CreationDateString = value;
 		return this;

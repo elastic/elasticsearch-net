@@ -43,8 +43,8 @@ internal sealed partial class RepositoryMeteringInformationConverter : System.Te
 		LocalJsonValue<string> propRepositoryEphemeralId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation> propRepositoryLocation = default;
 		LocalJsonValue<string> propRepositoryName = default;
-		LocalJsonValue<System.DateTime> propRepositoryStartedAt = default;
-		LocalJsonValue<System.DateTime?> propRepositoryStoppedAt = default;
+		LocalJsonValue<System.DateTimeOffset> propRepositoryStartedAt = default;
+		LocalJsonValue<System.DateTimeOffset?> propRepositoryStoppedAt = default;
 		LocalJsonValue<string> propRepositoryType = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.RequestCounts> propRequestCounts = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -74,12 +74,12 @@ internal sealed partial class RepositoryMeteringInformationConverter : System.Te
 				continue;
 			}
 
-			if (propRepositoryStartedAt.TryReadProperty(ref reader, options, PropRepositoryStartedAt, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propRepositoryStartedAt.TryReadProperty(ref reader, options, PropRepositoryStartedAt, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propRepositoryStoppedAt.TryReadProperty(ref reader, options, PropRepositoryStoppedAt, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propRepositoryStoppedAt.TryReadProperty(ref reader, options, PropRepositoryStoppedAt, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -126,8 +126,8 @@ internal sealed partial class RepositoryMeteringInformationConverter : System.Te
 		writer.WriteProperty(options, PropRepositoryEphemeralId, value.RepositoryEphemeralId, null, null);
 		writer.WriteProperty(options, PropRepositoryLocation, value.RepositoryLocation, null, null);
 		writer.WriteProperty(options, PropRepositoryName, value.RepositoryName, null, null);
-		writer.WriteProperty(options, PropRepositoryStartedAt, value.RepositoryStartedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropRepositoryStoppedAt, value.RepositoryStoppedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropRepositoryStartedAt, value.RepositoryStartedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropRepositoryStoppedAt, value.RepositoryStoppedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropRepositoryType, value.RepositoryType, null, null);
 		writer.WriteProperty(options, PropRequestCounts, value.RequestCounts, null, null);
 		writer.WriteEndObject();
@@ -138,7 +138,7 @@ internal sealed partial class RepositoryMeteringInformationConverter : System.Te
 public sealed partial class RepositoryMeteringInformation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RepositoryMeteringInformation(bool archived, string repositoryEphemeralId, Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation repositoryLocation, string repositoryName, System.DateTime repositoryStartedAt, string repositoryType, Elastic.Clients.Elasticsearch.Nodes.RequestCounts requestCounts)
+	public RepositoryMeteringInformation(bool archived, string repositoryEphemeralId, Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation repositoryLocation, string repositoryName, System.DateTimeOffset repositoryStartedAt, string repositoryType, Elastic.Clients.Elasticsearch.Nodes.RequestCounts requestCounts)
 	{
 		Archived = archived;
 		RepositoryEphemeralId = repositoryEphemeralId;
@@ -230,14 +230,14 @@ public sealed partial class RepositoryMeteringInformation
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime RepositoryStartedAt { get; set; }
+	System.DateTimeOffset RepositoryStartedAt { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Time the repository was deleted or updated. Recorded in milliseconds since the Unix Epoch.
 	/// </para>
 	/// </summary>
-	public System.DateTime? RepositoryStoppedAt { get; set; }
+	public System.DateTimeOffset? RepositoryStoppedAt { get; set; }
 
 	/// <summary>
 	/// <para>

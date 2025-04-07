@@ -37,7 +37,7 @@ internal sealed partial class UnassignedInformationConverter : System.Text.Json.
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propAllocationStatus = default;
-		LocalJsonValue<System.DateTime> propAt = default;
+		LocalJsonValue<System.DateTimeOffset> propAt = default;
 		LocalJsonValue<bool?> propDelayed = default;
 		LocalJsonValue<string?> propDetails = default;
 		LocalJsonValue<int?> propFailedAllocationAttempts = default;
@@ -50,7 +50,7 @@ internal sealed partial class UnassignedInformationConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propAt.TryReadProperty(ref reader, options, PropAt, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propAt.TryReadProperty(ref reader, options, PropAt, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -106,7 +106,7 @@ internal sealed partial class UnassignedInformationConverter : System.Text.Json.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAllocationStatus, value.AllocationStatus, null, null);
-		writer.WriteProperty(options, PropAt, value.At, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropAt, value.At, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropDelayed, value.Delayed, null, null);
 		writer.WriteProperty(options, PropDetails, value.Details, null, null);
 		writer.WriteProperty(options, PropFailedAllocationAttempts, value.FailedAllocationAttempts, null, null);
@@ -120,7 +120,7 @@ internal sealed partial class UnassignedInformationConverter : System.Text.Json.
 public sealed partial class UnassignedInformation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UnassignedInformation(System.DateTime at, Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason reason)
+	public UnassignedInformation(System.DateTimeOffset at, Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason reason)
 	{
 		At = at;
 		Reason = reason;
@@ -147,7 +147,7 @@ public sealed partial class UnassignedInformation
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime At { get; set; }
+	System.DateTimeOffset At { get; set; }
 	public bool? Delayed { get; set; }
 	public string? Details { get; set; }
 	public int? FailedAllocationAttempts { get; set; }

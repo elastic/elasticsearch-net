@@ -52,10 +52,10 @@ internal sealed partial class GetModelSnapshotsRequestConverter : System.Text.Js
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propDesc = default;
-		LocalJsonValue<System.DateTime?> propEnd = default;
+		LocalJsonValue<System.DateTimeOffset?> propEnd = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Page?> propPage = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propSort = default;
-		LocalJsonValue<System.DateTime?> propStart = default;
+		LocalJsonValue<System.DateTimeOffset?> propStart = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDesc.TryReadProperty(ref reader, options, PropDesc, null))
@@ -63,7 +63,7 @@ internal sealed partial class GetModelSnapshotsRequestConverter : System.Text.Js
 				continue;
 			}
 
-			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -78,7 +78,7 @@ internal sealed partial class GetModelSnapshotsRequestConverter : System.Text.Js
 				continue;
 			}
 
-			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -107,10 +107,10 @@ internal sealed partial class GetModelSnapshotsRequestConverter : System.Text.Js
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDesc, value.Desc, null, null);
-		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropPage, value.Page, null, null);
 		writer.WriteProperty(options, PropSort, value.Sort, null, null);
-		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -197,7 +197,7 @@ public sealed partial class GetModelSnapshotsRequest : Elastic.Clients.Elasticse
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public System.DateTime? End { get; set; }
+	public System.DateTimeOffset? End { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 
 	/// <summary>
@@ -212,7 +212,7 @@ public sealed partial class GetModelSnapshotsRequest : Elastic.Clients.Elasticse
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Start { get; set; }
+	public System.DateTimeOffset? Start { get; set; }
 }
 
 /// <summary>
@@ -311,7 +311,7 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor End(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
@@ -362,7 +362,7 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Start(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;
@@ -515,7 +515,7 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor<TDocument>
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> End(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
@@ -566,7 +566,7 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor<TDocument>
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Start(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;

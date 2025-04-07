@@ -57,14 +57,14 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits?> propAnalysisLimits = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propBackgroundPersistInterval = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.JobBlocked?> propBlocked = default;
-		LocalJsonValue<System.DateTime?> propCreateTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreateTime = default;
 		LocalJsonValue<object?> propCustomSettings = default;
 		LocalJsonValue<long?> propDailyModelSnapshotRetentionAfterDays = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataDescription> propDataDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Datafeed?> propDatafeedConfig = default;
 		LocalJsonValue<bool?> propDeleting = default;
 		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<System.DateTime?> propFinishedTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propFinishedTime = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propGroups = default;
 		LocalJsonValue<string> propJobId = default;
 		LocalJsonValue<string?> propJobType = default;
@@ -102,7 +102,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -137,7 +137,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -238,14 +238,14 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits, null, null);
 		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval, null, null);
 		writer.WriteProperty(options, PropBlocked, value.Blocked, null, null);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings, null, null);
 		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, null);
 		writer.WriteProperty(options, PropDataDescription, value.DataDescription, null, null);
 		writer.WriteProperty(options, PropDatafeedConfig, value.DatafeedConfig, null, null);
 		writer.WriteProperty(options, PropDeleting, value.Deleting, null, null);
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropFinishedTime, value.FinishedTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropFinishedTime, value.FinishedTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropJobType, value.JobType, null, null);
@@ -333,7 +333,7 @@ public sealed partial class Job
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.JobBlocked? Blocked { get; set; }
-	public System.DateTime? CreateTime { get; set; }
+	public System.DateTimeOffset? CreateTime { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -396,7 +396,7 @@ public sealed partial class Job
 	/// This property is informational; you cannot change its value.
 	/// </para>
 	/// </summary>
-	public System.DateTime? FinishedTime { get; set; }
+	public System.DateTimeOffset? FinishedTime { get; set; }
 
 	/// <summary>
 	/// <para>

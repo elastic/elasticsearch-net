@@ -54,14 +54,14 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 		LocalJsonValue<long?> propInferenceCacheHitCount = default;
 		LocalJsonValue<long?> propInferenceCacheHitCountLastMinute = default;
 		LocalJsonValue<long?> propInferenceCount = default;
-		LocalJsonValue<System.DateTime?> propLastAccess = default;
+		LocalJsonValue<System.DateTimeOffset?> propLastAccess = default;
 		LocalJsonValue<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>?> propNode = default;
 		LocalJsonValue<int?> propNumberOfAllocations = default;
 		LocalJsonValue<int?> propNumberOfPendingRequests = default;
 		LocalJsonValue<long> propPeakThroughputPerMinute = default;
 		LocalJsonValue<int?> propRejectedExecutionCount = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingStateAndReason> propRoutingState = default;
-		LocalJsonValue<System.DateTime?> propStartTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propStartTime = default;
 		LocalJsonValue<int?> propThreadsPerAllocation = default;
 		LocalJsonValue<int> propThroughputLastMinute = default;
 		LocalJsonValue<int?> propTimeoutCount = default;
@@ -102,7 +102,7 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 				continue;
 			}
 
-			if (propLastAccess.TryReadProperty(ref reader, options, PropLastAccess, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propLastAccess.TryReadProperty(ref reader, options, PropLastAccess, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -137,7 +137,7 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -200,14 +200,14 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 		writer.WriteProperty(options, PropInferenceCacheHitCount, value.InferenceCacheHitCount, null, null);
 		writer.WriteProperty(options, PropInferenceCacheHitCountLastMinute, value.InferenceCacheHitCountLastMinute, null, null);
 		writer.WriteProperty(options, PropInferenceCount, value.InferenceCount, null, null);
-		writer.WriteProperty(options, PropLastAccess, value.LastAccess, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropLastAccess, value.LastAccess, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropNode, value.Node, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>? v) => w.WriteKeyValuePairValue<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>(o, v, null, null));
 		writer.WriteProperty(options, PropNumberOfAllocations, value.NumberOfAllocations, null, null);
 		writer.WriteProperty(options, PropNumberOfPendingRequests, value.NumberOfPendingRequests, null, null);
 		writer.WriteProperty(options, PropPeakThroughputPerMinute, value.PeakThroughputPerMinute, null, null);
 		writer.WriteProperty(options, PropRejectedExecutionCount, value.RejectedExecutionCount, null, null);
 		writer.WriteProperty(options, PropRoutingState, value.RoutingState, null, null);
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropThreadsPerAllocation, value.ThreadsPerAllocation, null, null);
 		writer.WriteProperty(options, PropThroughputLastMinute, value.ThroughputLastMinute, null, null);
 		writer.WriteProperty(options, PropTimeoutCount, value.TimeoutCount, null, null);
@@ -278,7 +278,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// The epoch time stamp of the last inference call for the model on this node.
 	/// </para>
 	/// </summary>
-	public System.DateTime? LastAccess { get; set; }
+	public System.DateTimeOffset? LastAccess { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -329,7 +329,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// The epoch timestamp when the allocation started.
 	/// </para>
 	/// </summary>
-	public System.DateTime? StartTime { get; set; }
+	public System.DateTimeOffset? StartTime { get; set; }
 
 	/// <summary>
 	/// <para>

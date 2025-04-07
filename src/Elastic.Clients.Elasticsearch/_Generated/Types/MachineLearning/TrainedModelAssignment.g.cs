@@ -41,7 +41,7 @@ internal sealed partial class TrainedModelAssignmentConverter : System.Text.Json
 		LocalJsonValue<int?> propMaxAssignedAllocations = default;
 		LocalJsonValue<string?> propReason = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable>> propRoutingTable = default;
-		LocalJsonValue<System.DateTime> propStartTime = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTime = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters> propTaskParameters = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -70,7 +70,7 @@ internal sealed partial class TrainedModelAssignmentConverter : System.Text.Json
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -110,7 +110,7 @@ internal sealed partial class TrainedModelAssignmentConverter : System.Text.Json
 		writer.WriteProperty(options, PropMaxAssignedAllocations, value.MaxAssignedAllocations, null, null);
 		writer.WriteProperty(options, PropReason, value.Reason, null, null);
 		writer.WriteProperty(options, PropRoutingTable, value.RoutingTable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable>(o, v, null, null));
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropTaskParameters, value.TaskParameters, null, null);
 		writer.WriteEndObject();
 	}
@@ -120,7 +120,7 @@ internal sealed partial class TrainedModelAssignmentConverter : System.Text.Json
 public sealed partial class TrainedModelAssignment
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TrainedModelAssignment(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState assignmentState, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> routingTable, System.DateTime startTime, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters taskParameters)
+	public TrainedModelAssignment(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState assignmentState, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> routingTable, System.DateTimeOffset startTime, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters taskParameters)
 	{
 		AssignmentState = assignmentState;
 		RoutingTable = routingTable;
@@ -179,7 +179,7 @@ public sealed partial class TrainedModelAssignment
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime StartTime { get; set; }
+	System.DateTimeOffset StartTime { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

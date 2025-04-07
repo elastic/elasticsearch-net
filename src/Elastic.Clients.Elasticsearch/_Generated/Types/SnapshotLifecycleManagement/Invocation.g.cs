@@ -32,7 +32,7 @@ internal sealed partial class InvocationConverter : System.Text.Json.Serializati
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propSnapshotName = default;
-		LocalJsonValue<System.DateTime> propTime = default;
+		LocalJsonValue<System.DateTimeOffset> propTime = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propSnapshotName.TryReadProperty(ref reader, options, PropSnapshotName, null))
@@ -40,7 +40,7 @@ internal sealed partial class InvocationConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propTime.TryReadProperty(ref reader, options, PropTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propTime.TryReadProperty(ref reader, options, PropTime, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class InvocationConverter : System.Text.Json.Serializati
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropSnapshotName, value.SnapshotName, null, null);
-		writer.WriteProperty(options, PropTime, value.Time, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropTime, value.Time, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -75,7 +75,7 @@ internal sealed partial class InvocationConverter : System.Text.Json.Serializati
 public sealed partial class Invocation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Invocation(string snapshotName, System.DateTime time)
+	public Invocation(string snapshotName, System.DateTimeOffset time)
 	{
 		SnapshotName = snapshotName;
 		Time = time;
@@ -106,5 +106,5 @@ public sealed partial class Invocation
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Time { get; set; }
+	System.DateTimeOffset Time { get; set; }
 }

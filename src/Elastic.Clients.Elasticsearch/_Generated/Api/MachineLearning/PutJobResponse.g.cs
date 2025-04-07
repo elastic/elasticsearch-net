@@ -53,7 +53,7 @@ internal sealed partial class PutJobResponseConverter : System.Text.Json.Seriali
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead> propAnalysisConfig = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits> propAnalysisLimits = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propBackgroundPersistInterval = default;
-		LocalJsonValue<System.DateTime> propCreateTime = default;
+		LocalJsonValue<System.DateTimeOffset> propCreateTime = default;
 		LocalJsonValue<object?> propCustomSettings = default;
 		LocalJsonValue<long> propDailyModelSnapshotRetentionAfterDays = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataDescription> propDataDescription = default;
@@ -91,7 +91,7 @@ internal sealed partial class PutJobResponseConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -213,7 +213,7 @@ internal sealed partial class PutJobResponseConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig, null, null);
 		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits, null, null);
 		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval, null, null);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings, null, null);
 		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, null);
 		writer.WriteProperty(options, PropDataDescription, value.DataDescription, null, null);
@@ -267,7 +267,7 @@ public sealed partial class PutJobResponse : Elastic.Transport.Products.Elastics
 #if NET7_0_OR_GREATER
 		required
 #endif
-		System.DateTime CreateTime { get; set; }
+		System.DateTimeOffset CreateTime { get; set; }
 	public object? CustomSettings { get; set; }
 	public
 #if NET7_0_OR_GREATER

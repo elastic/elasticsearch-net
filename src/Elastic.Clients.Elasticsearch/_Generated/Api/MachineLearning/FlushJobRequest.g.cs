@@ -38,14 +38,14 @@ internal sealed partial class FlushJobRequestConverter : System.Text.Json.Serial
 	public override Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.DateTime?> propAdvanceTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propAdvanceTime = default;
 		LocalJsonValue<bool?> propCalcInterim = default;
-		LocalJsonValue<System.DateTime?> propEnd = default;
-		LocalJsonValue<System.DateTime?> propSkipTime = default;
-		LocalJsonValue<System.DateTime?> propStart = default;
+		LocalJsonValue<System.DateTimeOffset?> propEnd = default;
+		LocalJsonValue<System.DateTimeOffset?> propSkipTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propStart = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAdvanceTime.TryReadProperty(ref reader, options, PropAdvanceTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propAdvanceTime.TryReadProperty(ref reader, options, PropAdvanceTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -55,17 +55,17 @@ internal sealed partial class FlushJobRequestConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propSkipTime.TryReadProperty(ref reader, options, PropSkipTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propSkipTime.TryReadProperty(ref reader, options, PropSkipTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -93,11 +93,11 @@ internal sealed partial class FlushJobRequestConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAdvanceTime, value.AdvanceTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropAdvanceTime, value.AdvanceTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropCalcInterim, value.CalcInterim, null, null);
-		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropSkipTime, value.SkipTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropSkipTime, value.SkipTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -157,7 +157,7 @@ public sealed partial class FlushJobRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Refer to the description for the <c>advance_time</c> query parameter.
 	/// </para>
 	/// </summary>
-	public System.DateTime? AdvanceTime { get; set; }
+	public System.DateTimeOffset? AdvanceTime { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -171,21 +171,21 @@ public sealed partial class FlushJobRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public System.DateTime? End { get; set; }
+	public System.DateTimeOffset? End { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>skip_time</c> query parameter.
 	/// </para>
 	/// </summary>
-	public System.DateTime? SkipTime { get; set; }
+	public System.DateTimeOffset? SkipTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Start { get; set; }
+	public System.DateTimeOffset? Start { get; set; }
 }
 
 /// <summary>
@@ -241,7 +241,7 @@ public readonly partial struct FlushJobRequestDescriptor
 	/// Refer to the description for the <c>advance_time</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor AdvanceTime(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor AdvanceTime(System.DateTimeOffset? value)
 	{
 		Instance.AdvanceTime = value;
 		return this;
@@ -263,7 +263,7 @@ public readonly partial struct FlushJobRequestDescriptor
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor End(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
@@ -274,7 +274,7 @@ public readonly partial struct FlushJobRequestDescriptor
 	/// Refer to the description for the <c>skip_time</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor SkipTime(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor SkipTime(System.DateTimeOffset? value)
 	{
 		Instance.SkipTime = value;
 		return this;
@@ -285,7 +285,7 @@ public readonly partial struct FlushJobRequestDescriptor
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor Start(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;

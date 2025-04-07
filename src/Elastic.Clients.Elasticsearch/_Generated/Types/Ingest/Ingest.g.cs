@@ -34,7 +34,7 @@ internal sealed partial class IngestConverter : System.Text.Json.Serialization.J
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propPipeline = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.Redact?> propRedact = default;
-		LocalJsonValue<System.DateTime> propTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset> propTimestamp = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propPipeline.TryReadProperty(ref reader, options, PropPipeline, null))
@@ -47,7 +47,7 @@ internal sealed partial class IngestConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class IngestConverter : System.Text.Json.Serialization.J
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropPipeline, value.Pipeline, null, null);
 		writer.WriteProperty(options, PropRedact, value.Redact, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -84,7 +84,7 @@ internal sealed partial class IngestConverter : System.Text.Json.Serialization.J
 public sealed partial class Ingest
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Ingest(System.DateTime timestamp)
+	public Ingest(System.DateTimeOffset timestamp)
 	{
 		Timestamp = timestamp;
 	}
@@ -111,5 +111,5 @@ public sealed partial class Ingest
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Timestamp { get; set; }
+	System.DateTimeOffset Timestamp { get; set; }
 }

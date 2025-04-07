@@ -34,7 +34,7 @@ internal sealed partial class InProgressConverter : System.Text.Json.Serializati
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propName = default;
-		LocalJsonValue<System.DateTime> propStartTimeMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTimeMillis = default;
 		LocalJsonValue<string> propState = default;
 		LocalJsonValue<string> propUuid = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -44,7 +44,7 @@ internal sealed partial class InProgressConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propStartTimeMillis.TryReadProperty(ref reader, options, PropStartTimeMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTimeMillis.TryReadProperty(ref reader, options, PropStartTimeMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class InProgressConverter : System.Text.Json.Serializati
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropStartTimeMillis, value.StartTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTimeMillis, value.StartTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropState, value.State, null, null);
 		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
 		writer.WriteEndObject();
@@ -93,7 +93,7 @@ internal sealed partial class InProgressConverter : System.Text.Json.Serializati
 public sealed partial class InProgress
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public InProgress(string name, System.DateTime startTimeMillis, string state, string uuid)
+	public InProgress(string name, System.DateTimeOffset startTimeMillis, string state, string uuid)
 	{
 		Name = name;
 		StartTimeMillis = startTimeMillis;
@@ -126,7 +126,7 @@ public sealed partial class InProgress
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime StartTimeMillis { get; set; }
+	System.DateTimeOffset StartTimeMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

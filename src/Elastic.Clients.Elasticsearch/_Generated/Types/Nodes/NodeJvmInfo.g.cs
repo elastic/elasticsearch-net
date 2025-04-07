@@ -47,7 +47,7 @@ internal sealed partial class NodeJvmInfoConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory> propMem = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propMemoryPools = default;
 		LocalJsonValue<int> propPid = default;
-		LocalJsonValue<System.DateTime> propStartTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTimeInMillis = default;
 		LocalJsonValue<bool> propUsingBundledJdk = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<bool, string>?> propUsingCompressedOrdinaryObjectPointers = default;
 		LocalJsonValue<string> propVersion = default;
@@ -81,7 +81,7 @@ internal sealed partial class NodeJvmInfoConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -151,7 +151,7 @@ internal sealed partial class NodeJvmInfoConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropMem, value.Mem, null, null);
 		writer.WriteProperty(options, PropMemoryPools, value.MemoryPools, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropPid, value.Pid, null, null);
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropUsingBundledJdk, value.UsingBundledJdk, null, null);
 		writer.WriteProperty(options, PropUsingCompressedOrdinaryObjectPointers, value.UsingCompressedOrdinaryObjectPointers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, string>? v) => w.WriteUnionValue<bool, string>(o, v, null, null));
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
@@ -166,7 +166,7 @@ internal sealed partial class NodeJvmInfoConverter : System.Text.Json.Serializat
 public sealed partial class NodeJvmInfo
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public NodeJvmInfo(System.Collections.Generic.IReadOnlyCollection<string> gcCollectors, System.Collections.Generic.IReadOnlyCollection<string> inputArguments, Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory mem, System.Collections.Generic.IReadOnlyCollection<string> memoryPools, int pid, System.DateTime startTimeInMillis, bool usingBundledJdk, string version, string vmName, string vmVendor, string vmVersion)
+	public NodeJvmInfo(System.Collections.Generic.IReadOnlyCollection<string> gcCollectors, System.Collections.Generic.IReadOnlyCollection<string> inputArguments, Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory mem, System.Collections.Generic.IReadOnlyCollection<string> memoryPools, int pid, System.DateTimeOffset startTimeInMillis, bool usingBundledJdk, string version, string vmName, string vmVendor, string vmVersion)
 	{
 		GcCollectors = gcCollectors;
 		InputArguments = inputArguments;
@@ -226,7 +226,7 @@ public sealed partial class NodeJvmInfo
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime StartTimeInMillis { get; set; }
+	System.DateTimeOffset StartTimeInMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

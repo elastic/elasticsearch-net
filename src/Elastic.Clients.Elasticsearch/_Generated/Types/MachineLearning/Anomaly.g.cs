@@ -75,7 +75,7 @@ internal sealed partial class AnomalyConverter : System.Text.Json.Serialization.
 		LocalJsonValue<double> propProbability = default;
 		LocalJsonValue<double> propRecordScore = default;
 		LocalJsonValue<string> propResultType = default;
-		LocalJsonValue<System.DateTime> propTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset> propTimestamp = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<double>?> propTypical = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -189,7 +189,7 @@ internal sealed partial class AnomalyConverter : System.Text.Json.Serialization.
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -263,7 +263,7 @@ internal sealed partial class AnomalyConverter : System.Text.Json.Serialization.
 		writer.WriteProperty(options, PropProbability, value.Probability, null, null);
 		writer.WriteProperty(options, PropRecordScore, value.RecordScore, null, null);
 		writer.WriteProperty(options, PropResultType, value.ResultType, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropTypical, value.Typical, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<double>? v) => w.WriteCollectionValue<double>(o, v, null));
 		writer.WriteEndObject();
 	}
@@ -273,7 +273,7 @@ internal sealed partial class AnomalyConverter : System.Text.Json.Serialization.
 public sealed partial class Anomaly
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Anomaly(System.TimeSpan bucketSpan, int detectorIndex, double initialRecordScore, bool isInterim, string jobId, double probability, double recordScore, string resultType, System.DateTime timestamp)
+	public Anomaly(System.TimeSpan bucketSpan, int detectorIndex, double initialRecordScore, bool isInterim, string jobId, double probability, double recordScore, string resultType, System.DateTimeOffset timestamp)
 	{
 		BucketSpan = bucketSpan;
 		DetectorIndex = detectorIndex;
@@ -497,7 +497,7 @@ public sealed partial class Anomaly
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Timestamp { get; set; }
+	System.DateTimeOffset Timestamp { get; set; }
 
 	/// <summary>
 	/// <para>

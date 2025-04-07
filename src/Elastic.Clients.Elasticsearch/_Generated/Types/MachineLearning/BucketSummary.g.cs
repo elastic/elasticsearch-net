@@ -49,8 +49,8 @@ internal sealed partial class BucketSummaryConverter : System.Text.Json.Serializ
 		LocalJsonValue<string> propJobId = default;
 		LocalJsonValue<System.TimeSpan> propProcessingTimeMs = default;
 		LocalJsonValue<string> propResultType = default;
-		LocalJsonValue<System.DateTime> propTimestamp = default;
-		LocalJsonValue<System.DateTime?> propTimestampString = default;
+		LocalJsonValue<System.DateTimeOffset> propTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset?> propTimestampString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAnomalyScore.TryReadProperty(ref reader, options, PropAnomalyScore, null))
@@ -98,12 +98,12 @@ internal sealed partial class BucketSummaryConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propTimestampString.TryReadProperty(ref reader, options, PropTimestampString, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propTimestampString.TryReadProperty(ref reader, options, PropTimestampString, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -146,8 +146,8 @@ internal sealed partial class BucketSummaryConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropProcessingTimeMs, value.ProcessingTimeMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropResultType, value.ResultType, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropTimestampString, value.TimestampString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTimestampString, value.TimestampString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -156,7 +156,7 @@ internal sealed partial class BucketSummaryConverter : System.Text.Json.Serializ
 public sealed partial class BucketSummary
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public BucketSummary(double anomalyScore, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketInfluencer> bucketInfluencers, System.TimeSpan bucketSpan, long eventCount, double initialAnomalyScore, bool isInterim, string jobId, System.TimeSpan processingTimeMs, string resultType, System.DateTime timestamp)
+	public BucketSummary(double anomalyScore, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketInfluencer> bucketInfluencers, System.TimeSpan bucketSpan, long eventCount, double initialAnomalyScore, bool isInterim, string jobId, System.TimeSpan processingTimeMs, string resultType, System.DateTimeOffset timestamp)
 	{
 		AnomalyScore = anomalyScore;
 		BucketInfluencers = bucketInfluencers;
@@ -292,7 +292,7 @@ public sealed partial class BucketSummary
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Timestamp { get; set; }
+	System.DateTimeOffset Timestamp { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -300,5 +300,5 @@ public sealed partial class BucketSummary
 	/// timestamp of the bucket are included in the results for the bucket.
 	/// </para>
 	/// </summary>
-	public System.DateTime? TimestampString { get; set; }
+	public System.DateTimeOffset? TimestampString { get; set; }
 }

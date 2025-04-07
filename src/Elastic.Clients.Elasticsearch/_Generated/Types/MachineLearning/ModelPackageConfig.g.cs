@@ -43,7 +43,7 @@ internal sealed partial class ModelPackageConfigConverter : System.Text.Json.Ser
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.DateTime?> propCreateTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreateTime = default;
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propInferenceConfig = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMetadata = default;
@@ -59,7 +59,7 @@ internal sealed partial class ModelPackageConfigConverter : System.Text.Json.Ser
 		LocalJsonValue<string?> propVocabularyFile = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -161,7 +161,7 @@ internal sealed partial class ModelPackageConfigConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
@@ -204,7 +204,7 @@ public sealed partial class ModelPackageConfig
 		_ = sentinel;
 	}
 
-	public System.DateTime? CreateTime { get; set; }
+	public System.DateTimeOffset? CreateTime { get; set; }
 	public string? Description { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? InferenceConfig { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Metadata { get; set; }

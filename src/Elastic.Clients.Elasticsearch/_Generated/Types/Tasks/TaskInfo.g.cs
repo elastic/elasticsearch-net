@@ -52,7 +52,7 @@ internal sealed partial class TaskInfoConverter : System.Text.Json.Serialization
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propParentTaskId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propRunningTime = default;
 		LocalJsonValue<System.TimeSpan> propRunningTimeInNanos = default;
-		LocalJsonValue<System.DateTime> propStartTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTimeInMillis = default;
 		LocalJsonValue<object?> propStatus = default;
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -107,7 +107,7 @@ internal sealed partial class TaskInfoConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -163,7 +163,7 @@ internal sealed partial class TaskInfoConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropParentTaskId, value.ParentTaskId, null, null);
 		writer.WriteProperty(options, PropRunningTime, value.RunningTime, null, null);
 		writer.WriteProperty(options, PropRunningTimeInNanos, value.RunningTimeInNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropStatus, value.Status, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
@@ -174,7 +174,7 @@ internal sealed partial class TaskInfoConverter : System.Text.Json.Serialization
 public sealed partial class TaskInfo
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TaskInfo(string action, bool cancellable, System.Collections.Generic.IReadOnlyDictionary<string, string> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTime startTimeInMillis, string type)
+	public TaskInfo(string action, bool cancellable, System.Collections.Generic.IReadOnlyDictionary<string, string> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTimeOffset startTimeInMillis, string type)
 	{
 		Action = action;
 		Cancellable = cancellable;
@@ -249,7 +249,7 @@ public sealed partial class TaskInfo
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime StartTimeInMillis { get; set; }
+	System.DateTimeOffset StartTimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>

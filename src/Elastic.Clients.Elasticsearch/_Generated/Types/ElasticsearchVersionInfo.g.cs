@@ -38,7 +38,7 @@ internal sealed partial class ElasticsearchVersionInfoConverter : System.Text.Js
 	public override Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.DateTime> propBuildDate = default;
+		LocalJsonValue<System.DateTimeOffset> propBuildDate = default;
 		LocalJsonValue<string> propBuildFlavor = default;
 		LocalJsonValue<string> propBuildHash = default;
 		LocalJsonValue<bool> propBuildSnapshot = default;
@@ -49,7 +49,7 @@ internal sealed partial class ElasticsearchVersionInfoConverter : System.Text.Js
 		LocalJsonValue<string> propNumber = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBuildDate.TryReadProperty(ref reader, options, PropBuildDate, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propBuildDate.TryReadProperty(ref reader, options, PropBuildDate, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -121,7 +121,7 @@ internal sealed partial class ElasticsearchVersionInfoConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBuildDate, value.BuildDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropBuildDate, value.BuildDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropBuildFlavor, value.BuildFlavor, null, null);
 		writer.WriteProperty(options, PropBuildHash, value.BuildHash, null, null);
 		writer.WriteProperty(options, PropBuildSnapshot, value.BuildSnapshot, null, null);
@@ -138,7 +138,7 @@ internal sealed partial class ElasticsearchVersionInfoConverter : System.Text.Js
 public sealed partial class ElasticsearchVersionInfo
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ElasticsearchVersionInfo(System.DateTime buildDate, string buildFlavor, string buildHash, bool buildSnapshot, string buildType, string luceneVersion, string minimumIndexCompatibilityVersion, string minimumWireCompatibilityVersion, string number)
+	public ElasticsearchVersionInfo(System.DateTimeOffset buildDate, string buildFlavor, string buildHash, bool buildSnapshot, string buildType, string luceneVersion, string minimumIndexCompatibilityVersion, string minimumWireCompatibilityVersion, string number)
 	{
 		BuildDate = buildDate;
 		BuildFlavor = buildFlavor;
@@ -176,7 +176,7 @@ public sealed partial class ElasticsearchVersionInfo
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime BuildDate { get; set; }
+	System.DateTimeOffset BuildDate { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -30,7 +30,7 @@ public sealed partial class GetCalendarEventsRequestParameters : Elastic.Transpo
 	/// Specifies to get events with timestamps earlier than this time.
 	/// </para>
 	/// </summary>
-	public System.DateTime? End { get => Q<System.DateTime?>("end"); set => Q("end", value); }
+	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
 	/// <para>
@@ -58,7 +58,7 @@ public sealed partial class GetCalendarEventsRequestParameters : Elastic.Transpo
 	/// Specifies to get events with timestamps after this time.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Start { get => Q<System.DateTime?>("start"); set => Q("start", value); }
+	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
 internal sealed partial class GetCalendarEventsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest>
@@ -137,7 +137,7 @@ public sealed partial class GetCalendarEventsRequest : Elastic.Clients.Elasticse
 	/// Specifies to get events with timestamps earlier than this time.
 	/// </para>
 	/// </summary>
-	public System.DateTime? End { get => Q<System.DateTime?>("end"); set => Q("end", value); }
+	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
 	/// <summary>
 	/// <para>
@@ -165,7 +165,7 @@ public sealed partial class GetCalendarEventsRequest : Elastic.Clients.Elasticse
 	/// Specifies to get events with timestamps after this time.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Start { get => Q<System.DateTime?>("start"); set => Q("start", value); }
+	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
 /// <summary>
@@ -213,7 +213,7 @@ public readonly partial struct GetCalendarEventsRequestDescriptor
 	/// Specifies to get events with timestamps earlier than this time.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor End(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
@@ -257,7 +257,7 @@ public readonly partial struct GetCalendarEventsRequestDescriptor
 	/// Specifies to get events with timestamps after this time.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor Start(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;

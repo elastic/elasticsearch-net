@@ -54,13 +54,13 @@ internal sealed partial class UpdateJobResponseConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead> propAnalysisConfig = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits> propAnalysisLimits = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propBackgroundPersistInterval = default;
-		LocalJsonValue<System.DateTime> propCreateTime = default;
+		LocalJsonValue<System.DateTimeOffset> propCreateTime = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propCustomSettings = default;
 		LocalJsonValue<long> propDailyModelSnapshotRetentionAfterDays = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataDescription> propDataDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Datafeed?> propDatafeedConfig = default;
 		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<System.DateTime?> propFinishedTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propFinishedTime = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propGroups = default;
 		LocalJsonValue<string> propJobId = default;
 		LocalJsonValue<string> propJobType = default;
@@ -93,7 +93,7 @@ internal sealed partial class UpdateJobResponseConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -123,7 +123,7 @@ internal sealed partial class UpdateJobResponseConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -221,13 +221,13 @@ internal sealed partial class UpdateJobResponseConverter : System.Text.Json.Seri
 		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig, null, null);
 		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits, null, null);
 		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval, null, null);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, null);
 		writer.WriteProperty(options, PropDataDescription, value.DataDescription, null, null);
 		writer.WriteProperty(options, PropDatafeedConfig, value.DatafeedConfig, null, null);
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropFinishedTime, value.FinishedTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropFinishedTime, value.FinishedTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropJobType, value.JobType, null, null);
@@ -276,7 +276,7 @@ public sealed partial class UpdateJobResponse : Elastic.Transport.Products.Elast
 #if NET7_0_OR_GREATER
 		required
 #endif
-		System.DateTime CreateTime { get; set; }
+		System.DateTimeOffset CreateTime { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? CustomSettings { get; set; }
 	public
 #if NET7_0_OR_GREATER
@@ -290,7 +290,7 @@ public sealed partial class UpdateJobResponse : Elastic.Transport.Products.Elast
 		Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Datafeed? DatafeedConfig { get; set; }
 	public string? Description { get; set; }
-	public System.DateTime? FinishedTime { get; set; }
+	public System.DateTimeOffset? FinishedTime { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Groups { get; set; }
 	public
 #if NET7_0_OR_GREATER

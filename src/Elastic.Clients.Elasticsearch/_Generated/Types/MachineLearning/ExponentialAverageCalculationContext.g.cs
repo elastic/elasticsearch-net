@@ -33,7 +33,7 @@ internal sealed partial class ExponentialAverageCalculationContextConverter : Sy
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.TimeSpan> propIncrementalMetricValueMs = default;
-		LocalJsonValue<System.DateTime?> propLatestTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset?> propLatestTimestamp = default;
 		LocalJsonValue<System.TimeSpan?> propPreviousExponentialAverageMs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -42,7 +42,7 @@ internal sealed partial class ExponentialAverageCalculationContextConverter : Sy
 				continue;
 			}
 
-			if (propLatestTimestamp.TryReadProperty(ref reader, options, PropLatestTimestamp, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propLatestTimestamp.TryReadProperty(ref reader, options, PropLatestTimestamp, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class ExponentialAverageCalculationContextConverter : Sy
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIncrementalMetricValueMs, value.IncrementalMetricValueMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
-		writer.WriteProperty(options, PropLatestTimestamp, value.LatestTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropLatestTimestamp, value.LatestTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropPreviousExponentialAverageMs, value.PreviousExponentialAverageMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteEndObject();
 	}
@@ -110,6 +110,6 @@ public sealed partial class ExponentialAverageCalculationContext
 	required
 #endif
 	System.TimeSpan IncrementalMetricValueMs { get; set; }
-	public System.DateTime? LatestTimestamp { get; set; }
+	public System.DateTimeOffset? LatestTimestamp { get; set; }
 	public System.TimeSpan? PreviousExponentialAverageMs { get; set; }
 }

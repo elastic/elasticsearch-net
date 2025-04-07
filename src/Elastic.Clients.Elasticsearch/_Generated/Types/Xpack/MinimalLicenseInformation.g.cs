@@ -34,14 +34,14 @@ internal sealed partial class MinimalLicenseInformationConverter : System.Text.J
 	public override Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.DateTime> propExpiryDateInMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propExpiryDateInMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType> propMode = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus> propStatus = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType> propType = default;
 		LocalJsonValue<string> propUid = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExpiryDateInMillis.TryReadProperty(ref reader, options, PropExpiryDateInMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propExpiryDateInMillis.TryReadProperty(ref reader, options, PropExpiryDateInMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ internal sealed partial class MinimalLicenseInformationConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExpiryDateInMillis, value.ExpiryDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropExpiryDateInMillis, value.ExpiryDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropMode, value.Mode, null, null);
 		writer.WriteProperty(options, PropStatus, value.Status, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
@@ -102,7 +102,7 @@ internal sealed partial class MinimalLicenseInformationConverter : System.Text.J
 public sealed partial class MinimalLicenseInformation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public MinimalLicenseInformation(System.DateTime expiryDateInMillis, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType mode, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus status, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType type, string uid)
+	public MinimalLicenseInformation(System.DateTimeOffset expiryDateInMillis, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType mode, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus status, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType type, string uid)
 	{
 		ExpiryDateInMillis = expiryDateInMillis;
 		Mode = mode;
@@ -131,7 +131,7 @@ public sealed partial class MinimalLicenseInformation
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime ExpiryDateInMillis { get; set; }
+	System.DateTimeOffset ExpiryDateInMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

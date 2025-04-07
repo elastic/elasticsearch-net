@@ -36,11 +36,11 @@ internal sealed partial class GetEqlStatusResponseConverter : System.Text.Json.S
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int?> propCompletionStatus = default;
-		LocalJsonValue<System.DateTime?> propExpirationTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propExpirationTimeInMillis = default;
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<bool> propIsPartial = default;
 		LocalJsonValue<bool> propIsRunning = default;
-		LocalJsonValue<System.DateTime?> propStartTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propStartTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propCompletionStatus.TryReadProperty(ref reader, options, PropCompletionStatus, null))
@@ -48,7 +48,7 @@ internal sealed partial class GetEqlStatusResponseConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propExpirationTimeInMillis.TryReadProperty(ref reader, options, PropExpirationTimeInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propExpirationTimeInMillis.TryReadProperty(ref reader, options, PropExpirationTimeInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -68,7 +68,7 @@ internal sealed partial class GetEqlStatusResponseConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -98,11 +98,11 @@ internal sealed partial class GetEqlStatusResponseConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCompletionStatus, value.CompletionStatus, null, null);
-		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);
 		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, null);
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -133,7 +133,7 @@ public sealed partial class GetEqlStatusResponse : Elastic.Transport.Products.El
 	/// Shows a timestamp when the eql search will be expired, in milliseconds since the Unix epoch. When this time is reached, the search and its results are deleted, even if the search is still ongoing.
 	/// </para>
 	/// </summary>
-	public System.DateTime? ExpirationTimeInMillis { get; set; }
+	public System.DateTimeOffset? ExpirationTimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -173,5 +173,5 @@ public sealed partial class GetEqlStatusResponse : Elastic.Transport.Products.El
 	/// For a running search shows a timestamp when the eql search started, in milliseconds since the Unix epoch.
 	/// </para>
 	/// </summary>
-	public System.DateTime? StartTimeInMillis { get; set; }
+	public System.DateTimeOffset? StartTimeInMillis { get; set; }
 }

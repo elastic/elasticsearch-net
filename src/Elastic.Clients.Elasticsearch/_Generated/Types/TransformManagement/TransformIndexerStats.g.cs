@@ -46,7 +46,7 @@ internal sealed partial class TransformIndexerStatsConverter : System.Text.Json.
 	public override Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.DateTime?> propDeleteTimeInMs = default;
+		LocalJsonValue<System.DateTimeOffset?> propDeleteTimeInMs = default;
 		LocalJsonValue<long?> propDocumentsDeleted = default;
 		LocalJsonValue<long> propDocumentsIndexed = default;
 		LocalJsonValue<long> propDocumentsProcessed = default;
@@ -65,7 +65,7 @@ internal sealed partial class TransformIndexerStatsConverter : System.Text.Json.
 		LocalJsonValue<long> propTriggerCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDeleteTimeInMs.TryReadProperty(ref reader, options, PropDeleteTimeInMs, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propDeleteTimeInMs.TryReadProperty(ref reader, options, PropDeleteTimeInMs, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -185,7 +185,7 @@ internal sealed partial class TransformIndexerStatsConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDeleteTimeInMs, value.DeleteTimeInMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropDeleteTimeInMs, value.DeleteTimeInMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropDocumentsDeleted, value.DocumentsDeleted, null, null);
 		writer.WriteProperty(options, PropDocumentsIndexed, value.DocumentsIndexed, null, null);
 		writer.WriteProperty(options, PropDocumentsProcessed, value.DocumentsProcessed, null, null);
@@ -245,7 +245,7 @@ public sealed partial class TransformIndexerStats
 		_ = sentinel;
 	}
 
-	public System.DateTime? DeleteTimeInMs { get; set; }
+	public System.DateTimeOffset? DeleteTimeInMs { get; set; }
 	public long? DocumentsDeleted { get; set; }
 	public
 #if NET7_0_OR_GREATER

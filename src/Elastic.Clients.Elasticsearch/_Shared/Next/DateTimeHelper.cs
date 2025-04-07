@@ -7,158 +7,122 @@ using System;
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
-/// Utility class for converting between epoch time and DateTime objects.
+/// Utility class for converting between epoch time and <see cref="DateTimeOffset"/> objects.
 /// </summary>
 internal static class DateTimeHelper
 {
-	// Unix epoch starts at January 1st, 1970, 00:00:00 UTC.
-	private static readonly DateTime Epoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+	private const int DaysPerYear = 365;
+	private const int DaysPer4Years = DaysPerYear * 4 + 1; // 1461
+	private const int DaysPer100Years = DaysPer4Years * 25 - 1; // 36524
+	private const int DaysPer400Years = DaysPer100Years * 4 + 1; // 146097
+	private const int DaysTo1970 = DaysPer400Years * 4 + DaysPer100Years * 3 + DaysPer4Years * 17 + DaysPerYear; // 719,162
+	private const int DaysTo10000 = DaysPer400Years * 25 - 366; // 3652059
 
-	// 1 Tick = 100 nanoseconds
+	private const long DateTimeMinTicks = 0;
+	private const long DateTimeMaxTicks = DaysTo10000 * TimeSpan.TicksPerDay - 1;
+	private const long DateTimeUnixEpochTicks = DaysTo1970 * TimeSpan.TicksPerDay;
+
+	private const long UnixMinSeconds = DateTimeMinTicks / TimeSpan.TicksPerSecond - UnixEpochSeconds;
+	private const long UnixMaxSeconds = DateTimeMaxTicks / TimeSpan.TicksPerSecond - UnixEpochSeconds;
+	private const long UnixEpochSeconds = DateTimeUnixEpochTicks / TimeSpan.TicksPerSecond; // 62,135,596,800
+	private const long UnixEpochMilliseconds = DateTimeUnixEpochTicks / TimeSpan.TicksPerMillisecond; // 62,135,596,800,000
+	private const long UnixEpochNanoseconds = DateTimeUnixEpochTicks / TicksPerNanosecond;
+
 	private const long TicksPerNanosecond = 100;
 
 	/// <summary>
-	/// Converts epoch time in milliseconds to a UTC <see cref="DateTime"/> object.
+	/// Converts epoch time in milliseconds to a UTC <see cref="DateTimeOffset"/> object.
 	/// </summary>
 	/// <param name="milliseconds">The number of milliseconds since Unix epoch (<c>January 1st, 1970, 00:00:00 UTC</c>).</param>
-	/// <returns>A <see cref="DateTime"/> object representing the specified epoch time.</returns>
+	/// <returns>A <see cref="DateTimeOffset"/> object representing the specified epoch time.</returns>
 	/// <exception cref="ArgumentOutOfRangeException">
-	/// Thrown when the milliseconds value would result in a <see cref="DateTime"/> outside the valid range.
+	/// Thrown when the milliseconds value would result in a <see cref="DateTimeOffset"/> outside the valid range.
 	/// </exception>
-	public static DateTime FromEpochMilliseconds(long milliseconds)
+	public static DateTimeOffset FromEpochMilliseconds(long milliseconds)
 	{
-		try
+		const long minMilliseconds = DateTimeMinTicks / TimeSpan.TicksPerMillisecond - UnixEpochMilliseconds;
+		const long maxMilliseconds = DateTimeMaxTicks / TimeSpan.TicksPerMillisecond - UnixEpochMilliseconds;
+
+		if (milliseconds is < minMilliseconds or > maxMilliseconds)
 		{
-#if NET6_0_OR_GREATER
-			return DateTimeOffset.FromUnixTimeMilliseconds(milliseconds).UtcDateTime;
-#else
-			return Epoch.AddMilliseconds(milliseconds);
-#endif
+			throw new ArgumentOutOfRangeException(nameof(milliseconds));
 		}
-		catch (ArgumentOutOfRangeException ex)
-		{
-			throw new ArgumentOutOfRangeException(
-				$"The epoch milliseconds value {milliseconds} is outside the range of valid '{nameof(DateTime)}' values.", ex);
-		}
+
+		var ticks = milliseconds * TimeSpan.TicksPerMillisecond + DateTimeUnixEpochTicks;
+		return new DateTimeOffset(ticks, TimeSpan.Zero);
 	}
 
 	/// <summary>
-	/// Converts a <see cref="DateTime"/> to epoch time in milliseconds.
+	/// Converts a <see cref="DateTimeOffset"/> to epoch time in milliseconds.
 	/// </summary>
-	/// <param name="dateTime">The <see cref="DateTime"/> to convert (will be treated as UTC if <see cref="DateTime.Kind"/> is unspecified).</param>
+	/// <param name="dateTime">The <see cref="DateTimeOffset"/> to convert.</param>
 	/// <returns>The number of milliseconds since Unix epoch.</returns>
-	public static long ToEpochMilliseconds(DateTime dateTime)
+	public static long ToEpochMilliseconds(DateTimeOffset dateTime)
 	{
-		var utcDateTime = dateTime.Kind is DateTimeKind.Unspecified
-			? DateTime.SpecifyKind(dateTime, DateTimeKind.Utc)
-			: dateTime.ToUniversalTime();
-
-#if NET6_0_OR_GREATER
-		return new DateTimeOffset(utcDateTime).ToUnixTimeMilliseconds();
-#else
-		var delta = utcDateTime - Epoch;
-
-		return (long)delta.TotalMilliseconds;
-#endif
+		var milliseconds = dateTime.UtcDateTime.Ticks / TimeSpan.TicksPerMillisecond;
+		return milliseconds - UnixEpochMilliseconds;
 	}
 
 	/// <summary>
-	/// Converts epoch time in seconds to a UTC <see cref="DateTime"/> object.
+	/// Converts epoch time in seconds to a <see cref="DateTimeOffset"/> object.
 	/// </summary>
 	/// <param name="seconds">The number of seconds since Unix epoch (<c>January 1st, 1970, 00:00:00 UTC</c>).</param>
-	/// <returns>A <see cref="DateTime"/> object representing the specified epoch time.</returns>
+	/// <returns>A <see cref="DateTimeOffset"/> object representing the specified epoch time.</returns>
 	/// <exception cref="ArgumentOutOfRangeException">
-	/// Thrown when the seconds value would result in a <see cref="DateTime"/> outside the valid range.
+	/// Thrown when the seconds value would result in a <see cref="DateTimeOffset"/> outside the valid range.
 	/// </exception>
-	public static DateTime FromEpochSeconds(long seconds)
+	public static DateTimeOffset FromEpochSeconds(long seconds)
 	{
-		try
+		if (seconds is < UnixMinSeconds or > UnixMaxSeconds)
 		{
-#if NET6_0_OR_GREATER
-			return DateTimeOffset.FromUnixTimeSeconds(seconds).UtcDateTime;
-#else
-			return Epoch.AddSeconds(seconds);
-#endif
+			throw new ArgumentOutOfRangeException(nameof(seconds));
 		}
-		catch (ArgumentOutOfRangeException ex)
-		{
-			throw new ArgumentOutOfRangeException(
-				$"The epoch seconds value {seconds} is outside the range of valid {nameof(DateTime)} values.", ex);
-		}
+
+		var ticks = seconds * TimeSpan.TicksPerSecond + DateTimeUnixEpochTicks;
+		return new DateTimeOffset(ticks, TimeSpan.Zero);
 	}
 
 	/// <summary>
-	/// Converts a <see cref="DateTime"/> to epoch time in seconds.
+	/// Converts a <see cref="DateTimeOffset"/> to epoch time in seconds.
 	/// </summary>
-	/// <param name="dateTime">The DateTime to convert (will be treated as UTC if <see cref="DateTime.Kind"/> is unspecified).</param>
+	/// <param name="dateTime">The <see cref="DateTimeOffset"/> to convert.</param>
 	/// <returns>The number of seconds since Unix epoch.</returns>
-	public static long ToEpochSeconds(DateTime dateTime)
+	public static long ToEpochSeconds(DateTimeOffset dateTime)
 	{
-		var utcDateTime = dateTime.Kind == DateTimeKind.Unspecified
-			? DateTime.SpecifyKind(dateTime, DateTimeKind.Utc)
-			: dateTime.ToUniversalTime();
-
-#if NET6_0_OR_GREATER
-		return new DateTimeOffset(utcDateTime).ToUnixTimeSeconds();
-#else
-		var delta = utcDateTime - Epoch;
-
-		return (long)delta.TotalSeconds;
-#endif
+		var seconds = dateTime.UtcDateTime.Ticks / TimeSpan.TicksPerSecond;
+		return seconds - UnixEpochSeconds;
 	}
 
 	/// <summary>
-	/// Converts epoch time in nanoseconds to a UTC <see cref="DateTime"/> object.
+	/// Converts epoch time in nanoseconds to a <see cref="DateTimeOffset"/> object.
 	/// </summary>
 	/// <param name="nanoseconds">The number of nanoseconds since Unix epoch (<c>January 1st, 1970, 00:00:00 UTC</c>).</param>
-	/// <returns>A <see cref="DateTime"/> object representing the specified epoch time,</returns>
+	/// <returns>A <see cref="DateTimeOffset"/> object representing the specified epoch time,</returns>
 	/// <exception cref="ArgumentOutOfRangeException">
-	/// Thrown when the nanoseconds value would result in a <see cref="DateTime"/> outside the valid range.
+	/// Thrown when the nanoseconds value would result in a <see cref="DateTimeOffset"/> outside the valid range.
 	/// </exception>
-	public static DateTime FromEpochNanoseconds(long nanoseconds)
+	public static DateTimeOffset FromEpochNanoseconds(long nanoseconds)
 	{
-		try
-		{
-			// Convert nanoseconds to ticks (1 tick = 100 nanoseconds).
-			var ticks = nanoseconds / TicksPerNanosecond;
+		const long minNanoseconds = DateTimeMinTicks / TicksPerNanosecond - UnixEpochNanoseconds;
+		const long maxNanoseconds = DateTimeMaxTicks / TicksPerNanosecond - UnixEpochNanoseconds;
 
-			// Handle remainder for higher precision.
-			var remainderNanoseconds = nanoseconds % TicksPerNanosecond;
-			if (remainderNanoseconds >= TicksPerNanosecond / 2)
-			{
-				ticks++;
-			}
-
-#if NET6_0_OR_GREATER
-			return DateTime.UnixEpoch.AddTicks(ticks);
-#else
-			return Epoch.AddTicks(ticks);
-#endif
-		}
-		catch (ArgumentOutOfRangeException ex)
+		if (nanoseconds is < minNanoseconds or > maxNanoseconds)
 		{
-			throw new ArgumentOutOfRangeException(
-				$"The epoch nanoseconds value {nanoseconds} is outside the range of valid {nameof(DateTime)} values.", ex);
+			throw new ArgumentOutOfRangeException(nameof(nanoseconds));
 		}
+
+		var ticks = nanoseconds * TicksPerNanosecond + DateTimeUnixEpochTicks;
+		return new DateTimeOffset(ticks, TimeSpan.Zero);
 	}
 
 	/// <summary>
-	/// Converts a <see cref="DateTime"/> to epoch time in nanoseconds.
+	/// Converts a <see cref="DateTimeOffset"/> to epoch time in nanoseconds.
 	/// </summary>
-	/// <param name="dateTime">The <see cref="DateTime"/> to convert (will be treated as UTC if <see cref="DateTime.Kind"/> is unspecified).</param>
+	/// <param name="dateTime">The <see cref="DateTimeOffset"/> to convert.</param>
 	/// <returns>The number of nanoseconds since Unix epoch.</returns>
-	public static long ToEpochNanoseconds(DateTime dateTime)
+	public static long ToEpochNanoseconds(DateTimeOffset dateTime)
 	{
-		var utcDateTime = dateTime.Kind == DateTimeKind.Unspecified
-			? DateTime.SpecifyKind(dateTime, DateTimeKind.Utc)
-			: dateTime.ToUniversalTime();
-
-#if NET6_0_OR_GREATER
-		return (utcDateTime - DateTime.UnixEpoch).Ticks * TicksPerNanosecond;
-#else
-		var delta = utcDateTime - Epoch;
-
-		return delta.Ticks * TicksPerNanosecond;
-#endif
+		var seconds = dateTime.UtcDateTime.Ticks / TicksPerNanosecond;
+		return seconds - UnixEpochNanoseconds;
 	}
 }

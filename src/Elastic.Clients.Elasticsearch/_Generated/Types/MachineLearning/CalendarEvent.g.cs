@@ -39,12 +39,12 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propCalendarId = default;
 		LocalJsonValue<string> propDescription = default;
-		LocalJsonValue<System.DateTime> propEndTime = default;
+		LocalJsonValue<System.DateTimeOffset> propEndTime = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propEventId = default;
 		LocalJsonValue<int?> propForceTimeShift = default;
 		LocalJsonValue<bool?> propSkipModelUpdate = default;
 		LocalJsonValue<bool?> propSkipResult = default;
-		LocalJsonValue<System.DateTime> propStartTime = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTime = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propCalendarId.TryReadProperty(ref reader, options, PropCalendarId, null))
@@ -57,7 +57,7 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propEndTime.TryReadProperty(ref reader, options, PropEndTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propEndTime.TryReadProperty(ref reader, options, PropEndTime, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -115,12 +115,12 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCalendarId, value.CalendarId, null, null);
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropEndTime, value.EndTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropEndTime, value.EndTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropEventId, value.EventId, null, null);
 		writer.WriteProperty(options, PropForceTimeShift, value.ForceTimeShift, null, null);
 		writer.WriteProperty(options, PropSkipModelUpdate, value.SkipModelUpdate, null, null);
 		writer.WriteProperty(options, PropSkipResult, value.SkipResult, null, null);
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -129,7 +129,7 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 public sealed partial class CalendarEvent
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CalendarEvent(string description, System.DateTime endTime, System.DateTime startTime)
+	public CalendarEvent(string description, System.DateTimeOffset endTime, System.DateTimeOffset startTime)
 	{
 		Description = description;
 		EndTime = endTime;
@@ -179,7 +179,7 @@ public sealed partial class CalendarEvent
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime EndTime { get; set; }
+	System.DateTimeOffset EndTime { get; set; }
 	public Elastic.Clients.Elasticsearch.Id? EventId { get; set; }
 
 	/// <summary>
@@ -212,7 +212,7 @@ public sealed partial class CalendarEvent
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime StartTime { get; set; }
+	System.DateTimeOffset StartTime { get; set; }
 }
 
 public readonly partial struct CalendarEventDescriptor
@@ -261,7 +261,7 @@ public readonly partial struct CalendarEventDescriptor
 	/// The timestamp for the end of the scheduled event in milliseconds since the epoch or ISO 8601 format.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor EndTime(System.DateTime value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor EndTime(System.DateTimeOffset value)
 	{
 		Instance.EndTime = value;
 		return this;
@@ -311,7 +311,7 @@ public readonly partial struct CalendarEventDescriptor
 	/// The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor StartTime(System.DateTime value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor StartTime(System.DateTimeOffset value)
 	{
 		Instance.StartTime = value;
 		return this;

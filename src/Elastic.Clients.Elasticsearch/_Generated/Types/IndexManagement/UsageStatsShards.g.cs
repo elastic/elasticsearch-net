@@ -36,7 +36,7 @@ internal sealed partial class UsageStatsShardsConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting> propRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardsStats> propStats = default;
 		LocalJsonValue<string> propTrackingId = default;
-		LocalJsonValue<System.DateTime> propTrackingStartedAtMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propTrackingStartedAtMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
@@ -54,7 +54,7 @@ internal sealed partial class UsageStatsShardsConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propTrackingStartedAtMillis.TryReadProperty(ref reader, options, PropTrackingStartedAtMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propTrackingStartedAtMillis.TryReadProperty(ref reader, options, PropTrackingStartedAtMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class UsageStatsShardsConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropStats, value.Stats, null, null);
 		writer.WriteProperty(options, PropTrackingId, value.TrackingId, null, null);
-		writer.WriteProperty(options, PropTrackingStartedAtMillis, value.TrackingStartedAtMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTrackingStartedAtMillis, value.TrackingStartedAtMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -93,7 +93,7 @@ internal sealed partial class UsageStatsShardsConverter : System.Text.Json.Seria
 public sealed partial class UsageStatsShards
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UsageStatsShards(Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting routing, Elastic.Clients.Elasticsearch.IndexManagement.ShardsStats stats, string trackingId, System.DateTime trackingStartedAtMillis)
+	public UsageStatsShards(Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting routing, Elastic.Clients.Elasticsearch.IndexManagement.ShardsStats stats, string trackingId, System.DateTimeOffset trackingStartedAtMillis)
 	{
 		Routing = routing;
 		Stats = stats;
@@ -136,5 +136,5 @@ public sealed partial class UsageStatsShards
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime TrackingStartedAtMillis { get; set; }
+	System.DateTimeOffset TrackingStartedAtMillis { get; set; }
 }

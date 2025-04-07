@@ -37,8 +37,8 @@ internal sealed partial class TransformHealthIssueConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int> propCount = default;
 		LocalJsonValue<string?> propDetails = default;
-		LocalJsonValue<System.DateTime?> propFirstOccurenceString = default;
-		LocalJsonValue<System.DateTime?> propFirstOccurrence = default;
+		LocalJsonValue<System.DateTimeOffset?> propFirstOccurenceString = default;
+		LocalJsonValue<System.DateTimeOffset?> propFirstOccurrence = default;
 		LocalJsonValue<string> propIssue = default;
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -53,12 +53,12 @@ internal sealed partial class TransformHealthIssueConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propFirstOccurenceString.TryReadProperty(ref reader, options, PropFirstOccurenceString, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propFirstOccurenceString.TryReadProperty(ref reader, options, PropFirstOccurenceString, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propFirstOccurrence.TryReadProperty(ref reader, options, PropFirstOccurrence, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propFirstOccurrence.TryReadProperty(ref reader, options, PropFirstOccurrence, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -99,8 +99,8 @@ internal sealed partial class TransformHealthIssueConverter : System.Text.Json.S
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteProperty(options, PropDetails, value.Details, null, null);
-		writer.WriteProperty(options, PropFirstOccurenceString, value.FirstOccurenceString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropFirstOccurrence, value.FirstOccurrence, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropFirstOccurenceString, value.FirstOccurenceString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropFirstOccurrence, value.FirstOccurrence, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropIssue, value.Issue, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
@@ -151,14 +151,14 @@ public sealed partial class TransformHealthIssue
 	/// </para>
 	/// </summary>
 	public string? Details { get; set; }
-	public System.DateTime? FirstOccurenceString { get; set; }
+	public System.DateTimeOffset? FirstOccurenceString { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The timestamp this issue occurred for for the first time
 	/// </para>
 	/// </summary>
-	public System.DateTime? FirstOccurrence { get; set; }
+	public System.DateTimeOffset? FirstOccurrence { get; set; }
 
 	/// <summary>
 	/// <para>

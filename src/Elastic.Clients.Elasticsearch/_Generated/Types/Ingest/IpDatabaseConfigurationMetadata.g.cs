@@ -36,8 +36,8 @@ internal sealed partial class IpDatabaseConfigurationMetadataConverter : System.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFull> propDatabase = default;
 		LocalJsonValue<string> propId = default;
-		LocalJsonValue<System.DateTime?> propModifiedDate = default;
-		LocalJsonValue<System.DateTime?> propModifiedDateMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDate = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDateMillis = default;
 		LocalJsonValue<long> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -51,12 +51,12 @@ internal sealed partial class IpDatabaseConfigurationMetadataConverter : System.
 				continue;
 			}
 
-			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -91,8 +91,8 @@ internal sealed partial class IpDatabaseConfigurationMetadataConverter : System.
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDatabase, value.Database, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
@@ -135,8 +135,8 @@ public sealed partial class IpDatabaseConfigurationMetadata
 	required
 #endif
 	string Id { get; set; }
-	public System.DateTime? ModifiedDate { get; set; }
-	public System.DateTime? ModifiedDateMillis { get; set; }
+	public System.DateTimeOffset? ModifiedDate { get; set; }
+	public System.DateTimeOffset? ModifiedDateMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

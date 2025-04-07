@@ -46,11 +46,11 @@ internal sealed partial class ApiKeyConverter : System.Text.Json.Serialization.J
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.Access?> propAccess = default;
-		LocalJsonValue<System.DateTime> propCreation = default;
-		LocalJsonValue<System.DateTime?> propExpiration = default;
+		LocalJsonValue<System.DateTimeOffset> propCreation = default;
+		LocalJsonValue<System.DateTimeOffset?> propExpiration = default;
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<bool> propInvalidated = default;
-		LocalJsonValue<System.DateTime?> propInvalidation = default;
+		LocalJsonValue<System.DateTimeOffset?> propInvalidation = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>?> propLimitedBy = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propMetadata = default;
 		LocalJsonValue<string> propName = default;
@@ -68,12 +68,12 @@ internal sealed partial class ApiKeyConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propCreation.TryReadProperty(ref reader, options, PropCreation, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propCreation.TryReadProperty(ref reader, options, PropCreation, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -88,7 +88,7 @@ internal sealed partial class ApiKeyConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propInvalidation.TryReadProperty(ref reader, options, PropInvalidation, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propInvalidation.TryReadProperty(ref reader, options, PropInvalidation, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -178,11 +178,11 @@ internal sealed partial class ApiKeyConverter : System.Text.Json.Serialization.J
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAccess, value.Access, null, null);
-		writer.WriteProperty(options, PropCreation, value.Creation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropExpiration, value.Expiration, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreation, value.Creation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropInvalidated, value.Invalidated, null, null);
-		writer.WriteProperty(options, PropInvalidation, value.Invalidation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropInvalidation, value.Invalidation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropLimitedBy, value.LimitedBy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>? v) => w.WriteCollectionValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorx>(o, v, null, null)));
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
@@ -201,7 +201,7 @@ internal sealed partial class ApiKeyConverter : System.Text.Json.Serialization.J
 public sealed partial class ApiKey
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ApiKey(System.DateTime creation, string id, bool invalidated, System.Collections.Generic.IReadOnlyDictionary<string, object> metadata, string name, string realm, Elastic.Clients.Elasticsearch.Security.ApiKeyType type, string username)
+	public ApiKey(System.DateTimeOffset creation, string id, bool invalidated, System.Collections.Generic.IReadOnlyDictionary<string, object> metadata, string name, string realm, Elastic.Clients.Elasticsearch.Security.ApiKeyType type, string username)
 	{
 		Creation = creation;
 		Id = id;
@@ -248,14 +248,14 @@ public sealed partial class ApiKey
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Creation { get; set; }
+	System.DateTimeOffset Creation { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Expiration time for the API key in milliseconds.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Expiration { get; set; }
+	public System.DateTimeOffset? Expiration { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -285,7 +285,7 @@ public sealed partial class ApiKey
 	/// If the key has been invalidated, invalidation time in milliseconds.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Invalidation { get; set; }
+	public System.DateTimeOffset? Invalidation { get; set; }
 
 	/// <summary>
 	/// <para>

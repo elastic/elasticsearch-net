@@ -35,7 +35,7 @@ internal sealed partial class DatabaseConfigurationMetadataConverter : System.Te
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration> propDatabase = default;
 		LocalJsonValue<string> propId = default;
-		LocalJsonValue<System.DateTime> propModifiedDateMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propModifiedDateMillis = default;
 		LocalJsonValue<long> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -49,7 +49,7 @@ internal sealed partial class DatabaseConfigurationMetadataConverter : System.Te
 				continue;
 			}
 
-			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ internal sealed partial class DatabaseConfigurationMetadataConverter : System.Te
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDatabase, value.Database, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
@@ -93,7 +93,7 @@ internal sealed partial class DatabaseConfigurationMetadataConverter : System.Te
 public sealed partial class DatabaseConfigurationMetadata
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DatabaseConfigurationMetadata(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration database, string id, System.DateTime modifiedDateMillis, long version)
+	public DatabaseConfigurationMetadata(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration database, string id, System.DateTimeOffset modifiedDateMillis, long version)
 	{
 		Database = database;
 		Id = id;
@@ -131,7 +131,7 @@ public sealed partial class DatabaseConfigurationMetadata
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime ModifiedDateMillis { get; set; }
+	System.DateTimeOffset ModifiedDateMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

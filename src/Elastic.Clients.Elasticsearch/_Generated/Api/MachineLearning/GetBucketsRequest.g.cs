@@ -56,12 +56,12 @@ internal sealed partial class GetBucketsRequestConverter : System.Text.Json.Seri
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<double?> propAnomalyScore = default;
 		LocalJsonValue<bool?> propDesc = default;
-		LocalJsonValue<System.DateTime?> propEnd = default;
+		LocalJsonValue<System.DateTimeOffset?> propEnd = default;
 		LocalJsonValue<bool?> propExcludeInterim = default;
 		LocalJsonValue<bool?> propExpand = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Page?> propPage = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propSort = default;
-		LocalJsonValue<System.DateTime?> propStart = default;
+		LocalJsonValue<System.DateTimeOffset?> propStart = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAnomalyScore.TryReadProperty(ref reader, options, PropAnomalyScore, null))
@@ -74,7 +74,7 @@ internal sealed partial class GetBucketsRequestConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -99,7 +99,7 @@ internal sealed partial class GetBucketsRequestConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -132,12 +132,12 @@ internal sealed partial class GetBucketsRequestConverter : System.Text.Json.Seri
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAnomalyScore, value.AnomalyScore, null, null);
 		writer.WriteProperty(options, PropDesc, value.Desc, null, null);
-		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropExcludeInterim, value.ExcludeInterim, null, null);
 		writer.WriteProperty(options, PropExpand, value.Expand, null, null);
 		writer.WriteProperty(options, PropPage, value.Page, null, null);
 		writer.WriteProperty(options, PropSort, value.Sort, null, null);
-		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -152,7 +152,7 @@ internal sealed partial class GetBucketsRequestConverter : System.Text.Json.Seri
 public sealed partial class GetBucketsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetBucketsRequest(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp) : base(r => r.Required("job_id", jobId).Optional("timestamp", timestamp))
+	public GetBucketsRequest(Elastic.Clients.Elasticsearch.Id jobId, System.DateTimeOffset? timestamp) : base(r => r.Required("job_id", jobId).Optional("timestamp", timestamp))
 	{
 	}
 
@@ -196,7 +196,7 @@ public sealed partial class GetBucketsRequest : Elastic.Clients.Elasticsearch.Re
 	/// parameter, the API returns information about all buckets.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Timestamp { get => P<System.DateTime?>("timestamp"); set => PO("timestamp", value); }
+	public System.DateTimeOffset? Timestamp { get => P<System.DateTimeOffset?>("timestamp"); set => PO("timestamp", value); }
 
 	/// <summary>
 	/// <para>
@@ -231,7 +231,7 @@ public sealed partial class GetBucketsRequest : Elastic.Clients.Elasticsearch.Re
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public System.DateTime? End { get; set; }
+	public System.DateTimeOffset? End { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -260,7 +260,7 @@ public sealed partial class GetBucketsRequest : Elastic.Clients.Elasticsearch.Re
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public System.DateTime? Start { get; set; }
+	public System.DateTimeOffset? Start { get; set; }
 }
 
 /// <summary>
@@ -279,7 +279,7 @@ public readonly partial struct GetBucketsRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp)
+	public GetBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, System.DateTimeOffset? timestamp)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest(jobId, timestamp);
 	}
@@ -315,7 +315,7 @@ public readonly partial struct GetBucketsRequestDescriptor
 	/// parameter, the API returns information about all buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Timestamp(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Timestamp(System.DateTimeOffset? value)
 	{
 		Instance.Timestamp = value;
 		return this;
@@ -370,7 +370,7 @@ public readonly partial struct GetBucketsRequestDescriptor
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor End(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
@@ -443,7 +443,7 @@ public readonly partial struct GetBucketsRequestDescriptor
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Start(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;
@@ -516,7 +516,7 @@ public readonly partial struct GetBucketsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public GetBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp)
+	public GetBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, System.DateTimeOffset? timestamp)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest(jobId, timestamp);
 	}
@@ -552,7 +552,7 @@ public readonly partial struct GetBucketsRequestDescriptor<TDocument>
 	/// parameter, the API returns information about all buckets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Timestamp(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Timestamp(System.DateTimeOffset? value)
 	{
 		Instance.Timestamp = value;
 		return this;
@@ -607,7 +607,7 @@ public readonly partial struct GetBucketsRequestDescriptor<TDocument>
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> End(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
@@ -680,7 +680,7 @@ public readonly partial struct GetBucketsRequestDescriptor<TDocument>
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Start(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;

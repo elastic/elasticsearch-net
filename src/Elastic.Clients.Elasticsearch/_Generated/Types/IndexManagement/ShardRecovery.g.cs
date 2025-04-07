@@ -51,10 +51,10 @@ internal sealed partial class ShardRecoveryConverter : System.Text.Json.Serializ
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin> propSource = default;
 		LocalJsonValue<string> propStage = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStartStatus?> propStart = default;
-		LocalJsonValue<System.DateTime?> propStartTime = default;
-		LocalJsonValue<System.DateTime> propStartTimeInMillis = default;
-		LocalJsonValue<System.DateTime?> propStopTime = default;
-		LocalJsonValue<System.DateTime?> propStopTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propStartTime = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propStopTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propStopTimeInMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin> propTarget = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalTime = default;
 		LocalJsonValue<System.TimeSpan> propTotalTimeInMillis = default;
@@ -93,22 +93,22 @@ internal sealed partial class ShardRecoveryConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propStopTime.TryReadProperty(ref reader, options, PropStopTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStopTime.TryReadProperty(ref reader, options, PropStopTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propStopTimeInMillis.TryReadProperty(ref reader, options, PropStopTimeInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStopTimeInMillis.TryReadProperty(ref reader, options, PropStopTimeInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -183,10 +183,10 @@ internal sealed partial class ShardRecoveryConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteProperty(options, PropStage, value.Stage, null, null);
 		writer.WriteProperty(options, PropStart, value.Start, null, null);
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropStopTime, value.StopTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropStopTimeInMillis, value.StopTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStopTime, value.StopTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStopTimeInMillis, value.StopTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropTarget, value.Target, null, null);
 		writer.WriteProperty(options, PropTotalTime, value.TotalTime, null, null);
 		writer.WriteProperty(options, PropTotalTimeInMillis, value.TotalTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
@@ -201,7 +201,7 @@ internal sealed partial class ShardRecoveryConverter : System.Text.Json.Serializ
 public sealed partial class ShardRecovery
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ShardRecovery(long id, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus index, bool primary, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin source, string stage, System.DateTime startTimeInMillis, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin target, System.TimeSpan totalTimeInMillis, Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus translog, string type, Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex verifyIndex)
+	public ShardRecovery(long id, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus index, bool primary, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin source, string stage, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin target, System.TimeSpan totalTimeInMillis, Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus translog, string type, Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex verifyIndex)
 	{
 		Id = id;
 		Index = index;
@@ -258,14 +258,14 @@ public sealed partial class ShardRecovery
 #endif
 	string Stage { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStartStatus? Start { get; set; }
-	public System.DateTime? StartTime { get; set; }
+	public System.DateTimeOffset? StartTime { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime StartTimeInMillis { get; set; }
-	public System.DateTime? StopTime { get; set; }
-	public System.DateTime? StopTimeInMillis { get; set; }
+	System.DateTimeOffset StartTimeInMillis { get; set; }
+	public System.DateTimeOffset? StopTime { get; set; }
+	public System.DateTimeOffset? StopTimeInMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

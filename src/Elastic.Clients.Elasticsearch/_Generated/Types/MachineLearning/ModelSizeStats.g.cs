@@ -59,7 +59,7 @@ internal sealed partial class ModelSizeStatsConverter : System.Text.Json.Seriali
 		LocalJsonValue<int> propFailedCategoryCount = default;
 		LocalJsonValue<int> propFrequentCategoryCount = default;
 		LocalJsonValue<string> propJobId = default;
-		LocalJsonValue<System.DateTime> propLogTime = default;
+		LocalJsonValue<System.DateTimeOffset> propLogTime = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus> propMemoryStatus = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propModelBytes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propModelBytesExceeded = default;
@@ -115,7 +115,7 @@ internal sealed partial class ModelSizeStatsConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propLogTime.TryReadProperty(ref reader, options, PropLogTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propLogTime.TryReadProperty(ref reader, options, PropLogTime, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -233,7 +233,7 @@ internal sealed partial class ModelSizeStatsConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropFailedCategoryCount, value.FailedCategoryCount, null, null);
 		writer.WriteProperty(options, PropFrequentCategoryCount, value.FrequentCategoryCount, null, null);
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
-		writer.WriteProperty(options, PropLogTime, value.LogTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropLogTime, value.LogTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropMemoryStatus, value.MemoryStatus, null, null);
 		writer.WriteProperty(options, PropModelBytes, value.ModelBytes, null, null);
 		writer.WriteProperty(options, PropModelBytesExceeded, value.ModelBytesExceeded, null, null);
@@ -255,7 +255,7 @@ internal sealed partial class ModelSizeStatsConverter : System.Text.Json.Seriali
 public sealed partial class ModelSizeStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ModelSizeStats(long bucketAllocationFailuresCount, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus categorizationStatus, int categorizedDocCount, int deadCategoryCount, int failedCategoryCount, int frequentCategoryCount, string jobId, System.DateTime logTime, Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus memoryStatus, Elastic.Clients.Elasticsearch.ByteSize modelBytes, int rareCategoryCount, string resultType, long totalByFieldCount, int totalCategoryCount, long totalOverFieldCount, long totalPartitionFieldCount)
+	public ModelSizeStats(long bucketAllocationFailuresCount, Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus categorizationStatus, int categorizedDocCount, int deadCategoryCount, int failedCategoryCount, int frequentCategoryCount, string jobId, System.DateTimeOffset logTime, Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus memoryStatus, Elastic.Clients.Elasticsearch.ByteSize modelBytes, int rareCategoryCount, string resultType, long totalByFieldCount, int totalCategoryCount, long totalOverFieldCount, long totalPartitionFieldCount)
 	{
 		BucketAllocationFailuresCount = bucketAllocationFailuresCount;
 		CategorizationStatus = categorizationStatus;
@@ -331,7 +331,7 @@ public sealed partial class ModelSizeStats
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime LogTime { get; set; }
+	System.DateTimeOffset LogTime { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

@@ -42,10 +42,10 @@ internal sealed partial class SnapshotLifecycleConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.InProgress?> propInProgress = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation?> propLastFailure = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation?> propLastSuccess = default;
-		LocalJsonValue<System.DateTime?> propModifiedDate = default;
-		LocalJsonValue<System.DateTime> propModifiedDateMillis = default;
-		LocalJsonValue<System.DateTime?> propNextExecution = default;
-		LocalJsonValue<System.DateTime> propNextExecutionMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDate = default;
+		LocalJsonValue<System.DateTimeOffset> propModifiedDateMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propNextExecution = default;
+		LocalJsonValue<System.DateTimeOffset> propNextExecutionMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy> propPolicy = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics> propStats = default;
 		LocalJsonValue<long> propVersion = default;
@@ -66,22 +66,22 @@ internal sealed partial class SnapshotLifecycleConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propNextExecution.TryReadProperty(ref reader, options, PropNextExecution, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propNextExecution.TryReadProperty(ref reader, options, PropNextExecution, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propNextExecutionMillis.TryReadProperty(ref reader, options, PropNextExecutionMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propNextExecutionMillis.TryReadProperty(ref reader, options, PropNextExecutionMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -132,10 +132,10 @@ internal sealed partial class SnapshotLifecycleConverter : System.Text.Json.Seri
 		writer.WriteProperty(options, PropInProgress, value.InProgress, null, null);
 		writer.WriteProperty(options, PropLastFailure, value.LastFailure, null, null);
 		writer.WriteProperty(options, PropLastSuccess, value.LastSuccess, null, null);
-		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropNextExecution, value.NextExecution, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropNextExecutionMillis, value.NextExecutionMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropNextExecution, value.NextExecution, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropNextExecutionMillis, value.NextExecutionMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropPolicy, value.Policy, null, null);
 		writer.WriteProperty(options, PropStats, value.Stats, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
@@ -147,7 +147,7 @@ internal sealed partial class SnapshotLifecycleConverter : System.Text.Json.Seri
 public sealed partial class SnapshotLifecycle
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SnapshotLifecycle(System.DateTime modifiedDateMillis, System.DateTime nextExecutionMillis, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy policy, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics stats, long version)
+	public SnapshotLifecycle(System.DateTimeOffset modifiedDateMillis, System.DateTimeOffset nextExecutionMillis, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy policy, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics stats, long version)
 	{
 		ModifiedDateMillis = modifiedDateMillis;
 		NextExecutionMillis = nextExecutionMillis;
@@ -181,24 +181,24 @@ public sealed partial class SnapshotLifecycle
 	/// The last time the policy was modified.
 	/// </para>
 	/// </summary>
-	public System.DateTime? ModifiedDate { get; set; }
+	public System.DateTimeOffset? ModifiedDate { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime ModifiedDateMillis { get; set; }
+	System.DateTimeOffset ModifiedDateMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The next time the policy will run.
 	/// </para>
 	/// </summary>
-	public System.DateTime? NextExecution { get; set; }
+	public System.DateTimeOffset? NextExecution { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime NextExecutionMillis { get; set; }
+	System.DateTimeOffset NextExecutionMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

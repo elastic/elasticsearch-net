@@ -61,7 +61,7 @@ internal sealed partial class TrainedModelDeploymentStatsConverter : System.Text
 		LocalJsonValue<int?> propQueueCapacity = default;
 		LocalJsonValue<string?> propReason = default;
 		LocalJsonValue<int?> propRejectedExecutionCount = default;
-		LocalJsonValue<System.DateTime> propStartTime = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTime = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState?> propState = default;
 		LocalJsonValue<int?> propThreadsPerAllocation = default;
 		LocalJsonValue<int?> propTimeoutCount = default;
@@ -137,7 +137,7 @@ internal sealed partial class TrainedModelDeploymentStatsConverter : System.Text
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -207,7 +207,7 @@ internal sealed partial class TrainedModelDeploymentStatsConverter : System.Text
 		writer.WriteProperty(options, PropQueueCapacity, value.QueueCapacity, null, null);
 		writer.WriteProperty(options, PropReason, value.Reason, null, null);
 		writer.WriteProperty(options, PropRejectedExecutionCount, value.RejectedExecutionCount, null, null);
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropState, value.State, null, null);
 		writer.WriteProperty(options, PropThreadsPerAllocation, value.ThreadsPerAllocation, null, null);
 		writer.WriteProperty(options, PropTimeoutCount, value.TimeoutCount, null, null);
@@ -219,7 +219,7 @@ internal sealed partial class TrainedModelDeploymentStatsConverter : System.Text
 public sealed partial class TrainedModelDeploymentStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TrainedModelDeploymentStats(string deploymentId, string modelId, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats> nodes, long peakThroughputPerMinute, Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority priority, System.DateTime startTime)
+	public TrainedModelDeploymentStats(string deploymentId, string modelId, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats> nodes, long peakThroughputPerMinute, Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority priority, System.DateTimeOffset startTime)
 	{
 		DeploymentId = deploymentId;
 		ModelId = modelId;
@@ -354,7 +354,7 @@ public sealed partial class TrainedModelDeploymentStats
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime StartTime { get; set; }
+	System.DateTimeOffset StartTime { get; set; }
 
 	/// <summary>
 	/// <para>

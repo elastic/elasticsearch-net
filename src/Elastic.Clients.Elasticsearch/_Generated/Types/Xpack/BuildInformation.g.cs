@@ -31,11 +31,11 @@ internal sealed partial class BuildInformationConverter : System.Text.Json.Seria
 	public override Elastic.Clients.Elasticsearch.Xpack.BuildInformation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.DateTime> propDate = default;
+		LocalJsonValue<System.DateTimeOffset> propDate = default;
 		LocalJsonValue<string> propHash = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDate.TryReadProperty(ref reader, options, PropDate, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propDate.TryReadProperty(ref reader, options, PropDate, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -65,7 +65,7 @@ internal sealed partial class BuildInformationConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.BuildInformation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDate, value.Date, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropDate, value.Date, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropHash, value.Hash, null, null);
 		writer.WriteEndObject();
 	}
@@ -75,7 +75,7 @@ internal sealed partial class BuildInformationConverter : System.Text.Json.Seria
 public sealed partial class BuildInformation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public BuildInformation(System.DateTime date, string hash)
+	public BuildInformation(System.DateTimeOffset date, string hash)
 	{
 		Date = date;
 		Hash = hash;
@@ -101,7 +101,7 @@ public sealed partial class BuildInformation
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Date { get; set; }
+	System.DateTimeOffset Date { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

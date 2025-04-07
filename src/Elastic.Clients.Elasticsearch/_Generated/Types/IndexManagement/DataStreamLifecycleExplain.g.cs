@@ -41,10 +41,10 @@ internal sealed partial class DataStreamLifecycleExplainConverter : System.Text.
 		LocalJsonValue<string?> propError = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propGenerationTime = default;
 		LocalJsonValue<string> propIndex = default;
-		LocalJsonValue<System.DateTime?> propIndexCreationDateMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propIndexCreationDateMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover?> propLifecycle = default;
 		LocalJsonValue<bool> propManagedByLifecycle = default;
-		LocalJsonValue<System.DateTime?> propRolloverDateMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propRolloverDateMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeSinceIndexCreation = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeSinceRollover = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -64,7 +64,7 @@ internal sealed partial class DataStreamLifecycleExplainConverter : System.Text.
 				continue;
 			}
 
-			if (propIndexCreationDateMillis.TryReadProperty(ref reader, options, PropIndexCreationDateMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propIndexCreationDateMillis.TryReadProperty(ref reader, options, PropIndexCreationDateMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -79,7 +79,7 @@ internal sealed partial class DataStreamLifecycleExplainConverter : System.Text.
 				continue;
 			}
 
-			if (propRolloverDateMillis.TryReadProperty(ref reader, options, PropRolloverDateMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propRolloverDateMillis.TryReadProperty(ref reader, options, PropRolloverDateMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -124,10 +124,10 @@ internal sealed partial class DataStreamLifecycleExplainConverter : System.Text.
 		writer.WriteProperty(options, PropError, value.Error, null, null);
 		writer.WriteProperty(options, PropGenerationTime, value.GenerationTime, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropIndexCreationDateMillis, value.IndexCreationDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropIndexCreationDateMillis, value.IndexCreationDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
 		writer.WriteProperty(options, PropManagedByLifecycle, value.ManagedByLifecycle, null, null);
-		writer.WriteProperty(options, PropRolloverDateMillis, value.RolloverDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropRolloverDateMillis, value.RolloverDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropTimeSinceIndexCreation, value.TimeSinceIndexCreation, null, null);
 		writer.WriteProperty(options, PropTimeSinceRollover, value.TimeSinceRollover, null, null);
 		writer.WriteEndObject();
@@ -167,14 +167,14 @@ public sealed partial class DataStreamLifecycleExplain
 	required
 #endif
 	string Index { get; set; }
-	public System.DateTime? IndexCreationDateMillis { get; set; }
+	public System.DateTimeOffset? IndexCreationDateMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	bool ManagedByLifecycle { get; set; }
-	public System.DateTime? RolloverDateMillis { get; set; }
+	public System.DateTimeOffset? RolloverDateMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeSinceIndexCreation { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeSinceRollover { get; set; }
 }

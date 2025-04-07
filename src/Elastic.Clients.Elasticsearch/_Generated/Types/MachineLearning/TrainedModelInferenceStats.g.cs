@@ -38,7 +38,7 @@ internal sealed partial class TrainedModelInferenceStatsConverter : System.Text.
 		LocalJsonValue<int> propFailureCount = default;
 		LocalJsonValue<int> propInferenceCount = default;
 		LocalJsonValue<int> propMissingAllFieldsCount = default;
-		LocalJsonValue<System.DateTime> propTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset> propTimestamp = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propCacheMissCount.TryReadProperty(ref reader, options, PropCacheMissCount, null))
@@ -61,7 +61,7 @@ internal sealed partial class TrainedModelInferenceStatsConverter : System.Text.
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class TrainedModelInferenceStatsConverter : System.Text.
 		writer.WriteProperty(options, PropFailureCount, value.FailureCount, null, null);
 		writer.WriteProperty(options, PropInferenceCount, value.InferenceCount, null, null);
 		writer.WriteProperty(options, PropMissingAllFieldsCount, value.MissingAllFieldsCount, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -102,7 +102,7 @@ internal sealed partial class TrainedModelInferenceStatsConverter : System.Text.
 public sealed partial class TrainedModelInferenceStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TrainedModelInferenceStats(int cacheMissCount, int failureCount, int inferenceCount, int missingAllFieldsCount, System.DateTime timestamp)
+	public TrainedModelInferenceStats(int cacheMissCount, int failureCount, int inferenceCount, int missingAllFieldsCount, System.DateTimeOffset timestamp)
 	{
 		CacheMissCount = cacheMissCount;
 		FailureCount = failureCount;
@@ -184,5 +184,5 @@ public sealed partial class TrainedModelInferenceStats
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Timestamp { get; set; }
+	System.DateTimeOffset Timestamp { get; set; }
 }

@@ -34,7 +34,7 @@ internal sealed partial class DateHistogramBucketConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>? propAggregations = default;
 		LocalJsonValue<long> propDocCount = default;
-		LocalJsonValue<System.DateTime> propKey = default;
+		LocalJsonValue<System.DateTimeOffset> propKey = default;
 		LocalJsonValue<string?> propKeyAsString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -43,7 +43,7 @@ internal sealed partial class DateHistogramBucketConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propKey.TryReadProperty(ref reader, options, PropKey, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propKey.TryReadProperty(ref reader, options, PropKey, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class DateHistogramBucketConverter : System.Text.Json.Se
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
-		writer.WriteProperty(options, PropKey, value.Key, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropKey, value.Key, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropKeyAsString, value.KeyAsString, null, null);
 		if (value.Aggregations is not null)
 		{
@@ -90,7 +90,7 @@ internal sealed partial class DateHistogramBucketConverter : System.Text.Json.Se
 public sealed partial class DateHistogramBucket
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DateHistogramBucket(long docCount, System.DateTime key)
+	public DateHistogramBucket(long docCount, System.DateTimeOffset key)
 	{
 		DocCount = docCount;
 		Key = key;
@@ -127,6 +127,6 @@ public sealed partial class DateHistogramBucket
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Key { get; set; }
+	System.DateTimeOffset Key { get; set; }
 	public string? KeyAsString { get; set; }
 }

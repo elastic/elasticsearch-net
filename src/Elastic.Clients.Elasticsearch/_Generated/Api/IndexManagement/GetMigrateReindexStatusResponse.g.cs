@@ -44,8 +44,8 @@ internal sealed partial class GetMigrateReindexStatusResponseConverter : System.
 		LocalJsonValue<string?> propException = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress>> propInProgress = default;
 		LocalJsonValue<int> propPending = default;
-		LocalJsonValue<System.DateTime?> propStartTime = default;
-		LocalJsonValue<System.DateTime> propStartTimeMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propStartTime = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTimeMillis = default;
 		LocalJsonValue<int> propSuccesses = default;
 		LocalJsonValue<int> propTotalIndicesInDataStream = default;
 		LocalJsonValue<int> propTotalIndicesRequiringUpgrade = default;
@@ -76,12 +76,12 @@ internal sealed partial class GetMigrateReindexStatusResponseConverter : System.
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propStartTimeMillis.TryReadProperty(ref reader, options, PropStartTimeMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTimeMillis.TryReadProperty(ref reader, options, PropStartTimeMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -134,8 +134,8 @@ internal sealed partial class GetMigrateReindexStatusResponseConverter : System.
 		writer.WriteProperty(options, PropException, value.Exception, null, null);
 		writer.WriteProperty(options, PropInProgress, value.InProgress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress>(o, v, null));
 		writer.WriteProperty(options, PropPending, value.Pending, null, null);
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropStartTimeMillis, value.StartTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStartTimeMillis, value.StartTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropSuccesses, value.Successes, null, null);
 		writer.WriteProperty(options, PropTotalIndicesInDataStream, value.TotalIndicesInDataStream, null, null);
 		writer.WriteProperty(options, PropTotalIndicesRequiringUpgrade, value.TotalIndicesRequiringUpgrade, null, null);
@@ -178,12 +178,12 @@ public sealed partial class GetMigrateReindexStatusResponse : Elastic.Transport.
 		required
 #endif
 		int Pending { get; set; }
-	public System.DateTime? StartTime { get; set; }
+	public System.DateTimeOffset? StartTime { get; set; }
 	public
 #if NET7_0_OR_GREATER
 		required
 #endif
-		System.DateTime StartTimeMillis { get; set; }
+		System.DateTimeOffset StartTimeMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 		required

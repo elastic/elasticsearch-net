@@ -36,7 +36,7 @@ internal sealed partial class GrantApiKeyResponseConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propApiKey = default;
 		LocalJsonValue<string> propEncoded = default;
-		LocalJsonValue<System.DateTime?> propExpiration = default;
+		LocalJsonValue<System.DateTimeOffset?> propExpiration = default;
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<string> propName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -51,7 +51,7 @@ internal sealed partial class GrantApiKeyResponseConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class GrantApiKeyResponseConverter : System.Text.Json.Se
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
 		writer.WriteProperty(options, PropEncoded, value.Encoded, null, null);
-		writer.WriteProperty(options, PropExpiration, value.Expiration, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteEndObject();
@@ -122,7 +122,7 @@ public sealed partial class GrantApiKeyResponse : Elastic.Transport.Products.Ela
 		required
 #endif
 		string Encoded { get; set; }
-	public System.DateTime? Expiration { get; set; }
+	public System.DateTimeOffset? Expiration { get; set; }
 	public
 #if NET7_0_OR_GREATER
 		required

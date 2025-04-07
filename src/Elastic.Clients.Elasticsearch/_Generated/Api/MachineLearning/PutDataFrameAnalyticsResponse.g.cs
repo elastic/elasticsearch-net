@@ -46,7 +46,7 @@ internal sealed partial class PutDataFrameAnalyticsResponseConverter : System.Te
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis> propAnalysis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields?> propAnalyzedFields = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsAuthorization?> propAuthorization = default;
-		LocalJsonValue<System.DateTime> propCreateTime = default;
+		LocalJsonValue<System.DateTimeOffset> propCreateTime = default;
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination> propDest = default;
 		LocalJsonValue<string> propId = default;
@@ -77,7 +77,7 @@ internal sealed partial class PutDataFrameAnalyticsResponseConverter : System.Te
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -157,7 +157,7 @@ internal sealed partial class PutDataFrameAnalyticsResponseConverter : System.Te
 		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
 		writer.WriteProperty(options, PropAnalyzedFields, value.AnalyzedFields, null, null);
 		writer.WriteProperty(options, PropAuthorization, value.Authorization, null, null);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropDest, value.Dest, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);
@@ -200,7 +200,7 @@ public sealed partial class PutDataFrameAnalyticsResponse : Elastic.Transport.Pr
 #if NET7_0_OR_GREATER
 		required
 #endif
-		System.DateTime CreateTime { get; set; }
+		System.DateTimeOffset CreateTime { get; set; }
 	public string? Description { get; set; }
 	public
 #if NET7_0_OR_GREATER

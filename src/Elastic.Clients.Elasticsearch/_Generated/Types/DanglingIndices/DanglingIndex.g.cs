@@ -33,13 +33,13 @@ internal sealed partial class DanglingIndexConverter : System.Text.Json.Serializ
 	public override Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.DateTime> propCreationDateMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propCreationDateMillis = default;
 		LocalJsonValue<string> propIndexName = default;
 		LocalJsonValue<string> propIndexUuid = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>> propNodeIds = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCreationDateMillis.TryReadProperty(ref reader, options, PropCreationDateMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propCreationDateMillis.TryReadProperty(ref reader, options, PropCreationDateMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class DanglingIndexConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCreationDateMillis, value.CreationDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreationDateMillis, value.CreationDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropIndexName, value.IndexName, null, null);
 		writer.WriteProperty(options, PropIndexUuid, value.IndexUuid, null, null);
 		writer.WriteProperty(options, PropNodeIds, value.NodeIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
@@ -93,7 +93,7 @@ internal sealed partial class DanglingIndexConverter : System.Text.Json.Serializ
 public sealed partial class DanglingIndex
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DanglingIndex(System.DateTime creationDateMillis, string indexName, string indexUuid, System.Collections.Generic.ICollection<string> nodeIds)
+	public DanglingIndex(System.DateTimeOffset creationDateMillis, string indexName, string indexUuid, System.Collections.Generic.ICollection<string> nodeIds)
 	{
 		CreationDateMillis = creationDateMillis;
 		IndexName = indexName;
@@ -121,7 +121,7 @@ public sealed partial class DanglingIndex
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime CreationDateMillis { get; set; }
+	System.DateTimeOffset CreationDateMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

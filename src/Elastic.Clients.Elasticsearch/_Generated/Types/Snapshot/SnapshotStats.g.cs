@@ -35,7 +35,7 @@ internal sealed partial class SnapshotStatsConverter : System.Text.Json.Serializ
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats> propIncremental = default;
-		LocalJsonValue<System.DateTime> propStartTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTimeInMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTime = default;
 		LocalJsonValue<System.TimeSpan> propTimeInMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats> propTotal = default;
@@ -46,7 +46,7 @@ internal sealed partial class SnapshotStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -90,7 +90,7 @@ internal sealed partial class SnapshotStatsConverter : System.Text.Json.Serializ
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIncremental, value.Incremental, null, null);
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropTime, value.Time, null, null);
 		writer.WriteProperty(options, PropTimeInMillis, value.TimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
@@ -102,7 +102,7 @@ internal sealed partial class SnapshotStatsConverter : System.Text.Json.Serializ
 public sealed partial class SnapshotStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SnapshotStats(Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats incremental, System.DateTime startTimeInMillis, System.TimeSpan timeInMillis, Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats total)
+	public SnapshotStats(Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats incremental, System.DateTimeOffset startTimeInMillis, System.TimeSpan timeInMillis, Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats total)
 	{
 		Incremental = incremental;
 		StartTimeInMillis = startTimeInMillis;
@@ -147,7 +147,7 @@ public sealed partial class SnapshotStats
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime StartTimeInMillis { get; set; }
+	System.DateTimeOffset StartTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
 
 	/// <summary>

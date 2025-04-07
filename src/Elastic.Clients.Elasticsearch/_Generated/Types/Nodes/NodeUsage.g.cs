@@ -35,8 +35,8 @@ internal sealed partial class NodeUsageConverter : System.Text.Json.Serializatio
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propAggregations = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propRestActions = default;
-		LocalJsonValue<System.DateTime> propSince = default;
-		LocalJsonValue<System.DateTime> propTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset> propSince = default;
+		LocalJsonValue<System.DateTimeOffset> propTimestamp = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
@@ -49,12 +49,12 @@ internal sealed partial class NodeUsageConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propSince.TryReadProperty(ref reader, options, PropSince, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propSince.TryReadProperty(ref reader, options, PropSince, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -83,8 +83,8 @@ internal sealed partial class NodeUsageConverter : System.Text.Json.Serializatio
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropRestActions, value.RestActions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
-		writer.WriteProperty(options, PropSince, value.Since, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropSince, value.Since, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -93,7 +93,7 @@ internal sealed partial class NodeUsageConverter : System.Text.Json.Serializatio
 public sealed partial class NodeUsage
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public NodeUsage(System.Collections.Generic.IReadOnlyDictionary<string, object> aggregations, System.Collections.Generic.IReadOnlyDictionary<string, int> restActions, System.DateTime since, System.DateTime timestamp)
+	public NodeUsage(System.Collections.Generic.IReadOnlyDictionary<string, object> aggregations, System.Collections.Generic.IReadOnlyDictionary<string, int> restActions, System.DateTimeOffset since, System.DateTimeOffset timestamp)
 	{
 		Aggregations = aggregations;
 		RestActions = restActions;
@@ -131,10 +131,10 @@ public sealed partial class NodeUsage
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Since { get; set; }
+	System.DateTimeOffset Since { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Timestamp { get; set; }
+	System.DateTimeOffset Timestamp { get; set; }
 }

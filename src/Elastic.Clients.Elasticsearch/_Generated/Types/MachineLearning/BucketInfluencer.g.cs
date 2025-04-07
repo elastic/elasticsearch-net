@@ -49,8 +49,8 @@ internal sealed partial class BucketInfluencerConverter : System.Text.Json.Seria
 		LocalJsonValue<double> propProbability = default;
 		LocalJsonValue<double> propRawAnomalyScore = default;
 		LocalJsonValue<string> propResultType = default;
-		LocalJsonValue<System.DateTime> propTimestamp = default;
-		LocalJsonValue<System.DateTime?> propTimestampString = default;
+		LocalJsonValue<System.DateTimeOffset> propTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset?> propTimestampString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAnomalyScore.TryReadProperty(ref reader, options, PropAnomalyScore, null))
@@ -98,12 +98,12 @@ internal sealed partial class BucketInfluencerConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propTimestampString.TryReadProperty(ref reader, options, PropTimestampString, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propTimestampString.TryReadProperty(ref reader, options, PropTimestampString, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -146,8 +146,8 @@ internal sealed partial class BucketInfluencerConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropProbability, value.Probability, null, null);
 		writer.WriteProperty(options, PropRawAnomalyScore, value.RawAnomalyScore, null, null);
 		writer.WriteProperty(options, PropResultType, value.ResultType, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropTimestampString, value.TimestampString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTimestampString, value.TimestampString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -156,7 +156,7 @@ internal sealed partial class BucketInfluencerConverter : System.Text.Json.Seria
 public sealed partial class BucketInfluencer
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public BucketInfluencer(double anomalyScore, System.TimeSpan bucketSpan, string influencerFieldName, double initialAnomalyScore, bool isInterim, string jobId, double probability, double rawAnomalyScore, string resultType, System.DateTime timestamp)
+	public BucketInfluencer(double anomalyScore, System.TimeSpan bucketSpan, string influencerFieldName, double initialAnomalyScore, bool isInterim, string jobId, double probability, double rawAnomalyScore, string resultType, System.DateTimeOffset timestamp)
 	{
 		AnomalyScore = anomalyScore;
 		BucketSpan = bucketSpan;
@@ -298,12 +298,12 @@ public sealed partial class BucketInfluencer
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime Timestamp { get; set; }
+	System.DateTimeOffset Timestamp { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The start time of the bucket for which these results were calculated.
 	/// </para>
 	/// </summary>
-	public System.DateTime? TimestampString { get; set; }
+	public System.DateTimeOffset? TimestampString { get; set; }
 }

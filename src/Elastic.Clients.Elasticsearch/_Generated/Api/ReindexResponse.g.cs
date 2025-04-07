@@ -54,8 +54,8 @@ internal sealed partial class ReindexResponseConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retries?> propRetries = default;
 		LocalJsonValue<int?> propSliceId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propTask = default;
-		LocalJsonValue<System.DateTime?> propThrottledMillis = default;
-		LocalJsonValue<System.DateTime?> propThrottledUntilMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propThrottledMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propThrottledUntilMillis = default;
 		LocalJsonValue<bool?> propTimedOut = default;
 		LocalJsonValue<System.TimeSpan?> propTook = default;
 		LocalJsonValue<long?> propTotal = default;
@@ -108,12 +108,12 @@ internal sealed partial class ReindexResponseConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propThrottledMillis.TryReadProperty(ref reader, options, PropThrottledMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propThrottledMillis.TryReadProperty(ref reader, options, PropThrottledMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propThrottledUntilMillis.TryReadProperty(ref reader, options, PropThrottledUntilMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propThrottledUntilMillis.TryReadProperty(ref reader, options, PropThrottledUntilMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -186,8 +186,8 @@ internal sealed partial class ReindexResponseConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropRetries, value.Retries, null, null);
 		writer.WriteProperty(options, PropSliceId, value.SliceId, null, null);
 		writer.WriteProperty(options, PropTask, value.Task, null, null);
-		writer.WriteProperty(options, PropThrottledMillis, value.ThrottledMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropThrottledUntilMillis, value.ThrottledUntilMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropThrottledMillis, value.ThrottledMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropThrottledUntilMillis, value.ThrottledUntilMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
 		writer.WriteProperty(options, PropTook, value.Took, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
@@ -270,7 +270,7 @@ public sealed partial class ReindexResponse : Elastic.Transport.Products.Elastic
 	/// The number of milliseconds the request slept to conform to <c>requests_per_second</c>.
 	/// </para>
 	/// </summary>
-	public System.DateTime? ThrottledMillis { get; set; }
+	public System.DateTimeOffset? ThrottledMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -278,7 +278,7 @@ public sealed partial class ReindexResponse : Elastic.Transport.Products.Elastic
 	/// It has meaning only when using the task API, where it indicates the next time (in milliseconds since epoch) that a throttled request will be run again in order to conform to <c>requests_per_second</c>.
 	/// </para>
 	/// </summary>
-	public System.DateTime? ThrottledUntilMillis { get; set; }
+	public System.DateTimeOffset? ThrottledUntilMillis { get; set; }
 
 	/// <summary>
 	/// <para>

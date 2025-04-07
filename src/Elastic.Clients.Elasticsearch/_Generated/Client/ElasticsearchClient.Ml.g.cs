@@ -1076,7 +1076,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets(Elastic.Clients.Elasticsearch.Id jobId, System.DateTimeOffset? timestamp)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId, timestamp);
 		var request = builder.Instance;
@@ -1084,7 +1084,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets(Elastic.Clients.Elasticsearch.Id jobId, System.DateTimeOffset? timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId, timestamp);
 		action.Invoke(builder);
@@ -1110,7 +1110,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse GetBuckets<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.DateTimeOffset? timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>(jobId, timestamp);
 		action.Invoke(builder);
@@ -1134,7 +1134,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.DateTimeOffset? timestamp, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId, timestamp);
 		var request = builder.Instance;
@@ -1142,7 +1142,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync(Elastic.Clients.Elasticsearch.Id jobId, System.DateTimeOffset? timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(jobId, timestamp);
 		action.Invoke(builder);
@@ -1168,7 +1168,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse, Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.DateTime? timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsResponse> GetBucketsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.DateTimeOffset? timestamp, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>(jobId, timestamp);
 		action.Invoke(builder);

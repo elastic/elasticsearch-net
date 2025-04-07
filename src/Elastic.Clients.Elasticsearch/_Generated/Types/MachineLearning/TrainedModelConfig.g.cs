@@ -52,7 +52,7 @@ internal sealed partial class TrainedModelConfigConverter : System.Text.Json.Ser
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propCompressedDefinition = default;
 		LocalJsonValue<string?> propCreatedBy = default;
-		LocalJsonValue<System.DateTime?> propCreateTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreateTime = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propDefaultFieldMap = default;
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<int?> propEstimatedHeapMemoryUsageBytes = default;
@@ -83,7 +83,7 @@ internal sealed partial class TrainedModelConfigConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -219,7 +219,7 @@ internal sealed partial class TrainedModelConfigConverter : System.Text.Json.Ser
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCompressedDefinition, value.CompressedDefinition, null, null);
 		writer.WriteProperty(options, PropCreatedBy, value.CreatedBy, null, null);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropDefaultFieldMap, value.DefaultFieldMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropEstimatedHeapMemoryUsageBytes, value.EstimatedHeapMemoryUsageBytes, null, null);
@@ -283,7 +283,7 @@ public sealed partial class TrainedModelConfig
 	/// The time when the trained model was created.
 	/// </para>
 	/// </summary>
-	public System.DateTime? CreateTime { get; set; }
+	public System.DateTimeOffset? CreateTime { get; set; }
 
 	/// <summary>
 	/// <para>

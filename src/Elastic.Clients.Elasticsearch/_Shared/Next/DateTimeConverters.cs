@@ -4,15 +4,10 @@
 
 using System;
 using System.Buffers.Text;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
-using Elastic.Transport.Extensions;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
@@ -43,9 +38,9 @@ internal sealed class DateTimeMarkerConverter :
 }
 
 internal sealed class DateTimeConverter :
-	JsonConverter<DateTime>
+	JsonConverter<DateTimeOffset>
 {
-	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
 			(consumed == reader.ValueSpan.Length))
@@ -62,23 +57,23 @@ internal sealed class DateTimeConverter :
 		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
 	{
 		writer.WriteNumberValue(DateTimeHelper.ToEpochMilliseconds(value));
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	private static DateTime ParseValue(ref Utf8JsonReader reader)
+	private static DateTimeOffset ParseValue(ref Utf8JsonReader reader)
 	{
-		return DateTime.TryParse(reader.GetString()!, CultureInfo.InvariantCulture, out var result)
+		return DateTimeOffset.TryParse(reader.GetString()!, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var result)
 			? result
-			: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(DateTime)}'.");
+			: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(DateTimeOffset)}'.");
 
 		// TODO: https://github.com/dotnet/runtime/issues/28942#issuecomment-724161375
 
-		//return Utf8Parser.TryParse(reader.ValueSpan, out DateTime result, out var consumed, 'O') && (consumed == reader.ValueSpan.Length)
+		//return Utf8Parser.TryParse(reader.ValueSpan, out DateTimeOffset result, out var consumed, 'O') && (consumed == reader.ValueSpan.Length)
 		//	? result
-		//	: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(DateTime)}'.");
+		//	: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(DateTimeOffset)}'.");
 	}
 }
 
@@ -111,9 +106,9 @@ internal sealed class DateTimeSecondsMarkerConverter :
 }
 
 internal sealed class DateTimeSecondsConverter :
-	JsonConverter<DateTime>
+	JsonConverter<DateTimeOffset>
 {
-	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
 			(consumed == reader.ValueSpan.Length))
@@ -127,7 +122,7 @@ internal sealed class DateTimeSecondsConverter :
 		return DateTimeHelper.FromEpochSeconds(reader.GetInt64());
 	}
 
-	public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
 	{
 		writer.WriteNumberValue(DateTimeHelper.ToEpochSeconds(value));
 	}
@@ -162,9 +157,9 @@ internal sealed class DateTimeMillisMarkerConverter :
 }
 
 internal sealed class DateTimeMillisConverter :
-	JsonConverter<DateTime>
+	JsonConverter<DateTimeOffset>
 {
-	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
 			(consumed == reader.ValueSpan.Length))
@@ -178,7 +173,7 @@ internal sealed class DateTimeMillisConverter :
 		return DateTimeHelper.FromEpochMilliseconds(reader.GetInt64());
 	}
 
-	public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
 	{
 		writer.WriteNumberValue(DateTimeHelper.ToEpochMilliseconds(value));
 	}
@@ -213,9 +208,9 @@ internal sealed class DateTimeNanosMarkerConverter :
 }
 
 internal sealed class DateTimeNanosConverter :
-	JsonConverter<DateTime>
+	JsonConverter<DateTimeOffset>
 {
-	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
 			(consumed == reader.ValueSpan.Length))
@@ -229,7 +224,7 @@ internal sealed class DateTimeNanosConverter :
 		return DateTimeHelper.FromEpochNanoseconds(reader.GetInt64());
 	}
 
-	public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
 	{
 		writer.WriteNumberValue(DateTimeHelper.ToEpochNanoseconds(value));
 	}
@@ -264,9 +259,9 @@ internal sealed class DateTimeSecondsFloatMarkerConverter :
 }
 
 internal sealed class DateTimeSecondsFloatConverter :
-	JsonConverter<DateTime>
+	JsonConverter<DateTimeOffset>
 {
-	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double timestamp, out var consumed) &&
 			(consumed == reader.ValueSpan.Length))
@@ -280,7 +275,7 @@ internal sealed class DateTimeSecondsFloatConverter :
 		return DateTimeHelper.FromEpochSeconds((long)reader.GetDouble());
 	}
 
-	public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
 	{
 		writer.WriteNumberValue((double)DateTimeHelper.ToEpochSeconds(value));
 	}
@@ -315,9 +310,9 @@ internal sealed class DateTimeMillisFloatMarkerConverter :
 }
 
 internal sealed class DateTimeMillisFloatConverter :
-	JsonConverter<DateTime>
+	JsonConverter<DateTimeOffset>
 {
-	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double timestamp, out var consumed) &&
 			(consumed == reader.ValueSpan.Length))
@@ -331,7 +326,7 @@ internal sealed class DateTimeMillisFloatConverter :
 		return DateTimeHelper.FromEpochMilliseconds((long)reader.GetDouble());
 	}
 
-	public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
 	{
 		writer.WriteNumberValue((double)DateTimeHelper.ToEpochMilliseconds(value));
 	}

@@ -46,7 +46,7 @@ internal sealed partial class ReindexTaskConverter : System.Text.Json.Serializat
 		LocalJsonValue<long> propId = default;
 		LocalJsonValue<string> propNode = default;
 		LocalJsonValue<System.TimeSpan> propRunningTimeInNanos = default;
-		LocalJsonValue<System.DateTime> propStartTimeInMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propStartTimeInMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus> propStatus = default;
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -86,7 +86,7 @@ internal sealed partial class ReindexTaskConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTimeInMillis.TryReadProperty(ref reader, options, PropStartTimeInMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -136,7 +136,7 @@ internal sealed partial class ReindexTaskConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropNode, value.Node, null, null);
 		writer.WriteProperty(options, PropRunningTimeInNanos, value.RunningTimeInNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
-		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropStatus, value.Status, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
@@ -147,7 +147,7 @@ internal sealed partial class ReindexTaskConverter : System.Text.Json.Serializat
 public sealed partial class ReindexTask
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ReindexTask(string action, bool cancellable, string description, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTime startTimeInMillis, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus status, string type)
+	public ReindexTask(string action, bool cancellable, string description, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus status, string type)
 	{
 		Action = action;
 		Cancellable = cancellable;
@@ -216,7 +216,7 @@ public sealed partial class ReindexTask
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime StartTimeInMillis { get; set; }
+	System.DateTimeOffset StartTimeInMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

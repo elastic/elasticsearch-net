@@ -57,7 +57,7 @@ internal sealed partial class DateNanosPropertyConverter : System.Text.Json.Seri
 		LocalJsonValue<bool?> propIgnoreMalformed = default;
 		LocalJsonValue<bool?> propIndex = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
-		LocalJsonValue<System.DateTime?> propNullValue = default;
+		LocalJsonValue<System.DateTimeOffset?> propNullValue = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.OnScriptError?> propOnScriptError = default;
 		LocalJsonValue<int?> propPrecisionStep = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
@@ -116,7 +116,7 @@ internal sealed partial class DateNanosPropertyConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -202,7 +202,7 @@ internal sealed partial class DateNanosPropertyConverter : System.Text.Json.Seri
 		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
-		writer.WriteProperty(options, PropNullValue, value.NullValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropNullValue, value.NullValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropOnScriptError, value.OnScriptError, null, null);
 		writer.WriteProperty(options, PropPrecisionStep, value.PrecisionStep, null, null);
 		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
@@ -249,7 +249,7 @@ public sealed partial class DateNanosProperty : Elastic.Clients.Elasticsearch.Ma
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
-	public System.DateTime? NullValue { get; set; }
+	public System.DateTimeOffset? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
 	public int? PrecisionStep { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -385,7 +385,7 @@ public readonly partial struct DateNanosPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument> NullValue(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument> NullValue(System.DateTimeOffset? value)
 	{
 		Instance.NullValue = value;
 		return this;
@@ -590,7 +590,7 @@ public readonly partial struct DateNanosPropertyDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor NullValue(System.DateTime? value)
+	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor NullValue(System.DateTimeOffset? value)
 	{
 		Instance.NullValue = value;
 		return this;

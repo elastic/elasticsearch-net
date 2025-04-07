@@ -38,7 +38,7 @@ internal sealed partial class SearchApplicationConverter : System.Text.Json.Seri
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propIndices = default;
 		LocalJsonValue<string> propName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate?> propTemplate = default;
-		LocalJsonValue<System.DateTime> propUpdatedAtMillis = default;
+		LocalJsonValue<System.DateTimeOffset> propUpdatedAtMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAnalyticsCollectionName.TryReadProperty(ref reader, options, PropAnalyticsCollectionName, null))
@@ -61,7 +61,7 @@ internal sealed partial class SearchApplicationConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propUpdatedAtMillis.TryReadProperty(ref reader, options, PropUpdatedAtMillis, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propUpdatedAtMillis.TryReadProperty(ref reader, options, PropUpdatedAtMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class SearchApplicationConverter : System.Text.Json.Seri
 		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
-		writer.WriteProperty(options, PropUpdatedAtMillis, value.UpdatedAtMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropUpdatedAtMillis, value.UpdatedAtMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteEndObject();
 	}
 }
@@ -102,7 +102,7 @@ internal sealed partial class SearchApplicationConverter : System.Text.Json.Seri
 public sealed partial class SearchApplication
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SearchApplication(System.Collections.Generic.IReadOnlyCollection<string> indices, string name, System.DateTime updatedAtMillis)
+	public SearchApplication(System.Collections.Generic.IReadOnlyCollection<string> indices, string name, System.DateTimeOffset updatedAtMillis)
 	{
 		Indices = indices;
 		Name = name;
@@ -170,5 +170,5 @@ public sealed partial class SearchApplication
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime UpdatedAtMillis { get; set; }
+	System.DateTimeOffset UpdatedAtMillis { get; set; }
 }

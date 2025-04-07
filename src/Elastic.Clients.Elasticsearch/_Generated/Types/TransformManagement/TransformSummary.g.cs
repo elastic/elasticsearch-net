@@ -45,8 +45,8 @@ internal sealed partial class TransformSummaryConverter : System.Text.Json.Seria
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization?> propAuthorization = default;
-		LocalJsonValue<System.DateTime?> propCreateTime = default;
-		LocalJsonValue<System.DateTime?> propCreateTimeString = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreateTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreateTimeString = default;
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Destination> propDest = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
@@ -66,12 +66,12 @@ internal sealed partial class TransformSummaryConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propCreateTimeString.TryReadProperty(ref reader, options, PropCreateTimeString, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreateTimeString.TryReadProperty(ref reader, options, PropCreateTimeString, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -170,8 +170,8 @@ internal sealed partial class TransformSummaryConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAuthorization, value.Authorization, null, null);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropCreateTimeString, value.CreateTimeString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime? v) => w.WriteValueEx<System.DateTime?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreateTimeString, value.CreateTimeString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropDest, value.Dest, null, null);
 		writer.WriteProperty(options, PropFrequency, value.Frequency, null, null);
@@ -227,8 +227,8 @@ public sealed partial class TransformSummary
 	/// The time the transform was created.
 	/// </para>
 	/// </summary>
-	public System.DateTime? CreateTime { get; set; }
-	public System.DateTime? CreateTimeString { get; set; }
+	public System.DateTimeOffset? CreateTime { get; set; }
+	public System.DateTimeOffset? CreateTimeString { get; set; }
 
 	/// <summary>
 	/// <para>

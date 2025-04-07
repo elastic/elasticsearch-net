@@ -36,7 +36,7 @@ internal sealed partial class DataStreamsStatsItemConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int> propBackingIndices = default;
 		LocalJsonValue<string> propDataStream = default;
-		LocalJsonValue<System.DateTime> propMaximumTimestamp = default;
+		LocalJsonValue<System.DateTimeOffset> propMaximumTimestamp = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propStoreSize = default;
 		LocalJsonValue<long> propStoreSizeBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -51,7 +51,7 @@ internal sealed partial class DataStreamsStatsItemConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propMaximumTimestamp.TryReadProperty(ref reader, options, PropMaximumTimestamp, static System.DateTime (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propMaximumTimestamp.TryReadProperty(ref reader, options, PropMaximumTimestamp, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class DataStreamsStatsItemConverter : System.Text.Json.S
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBackingIndices, value.BackingIndices, null, null);
 		writer.WriteProperty(options, PropDataStream, value.DataStream, null, null);
-		writer.WriteProperty(options, PropMaximumTimestamp, value.MaximumTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTime v) => w.WriteValueEx<System.DateTime>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropMaximumTimestamp, value.MaximumTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropStoreSize, value.StoreSize, null, null);
 		writer.WriteProperty(options, PropStoreSizeBytes, value.StoreSizeBytes, null, null);
 		writer.WriteEndObject();
@@ -102,7 +102,7 @@ internal sealed partial class DataStreamsStatsItemConverter : System.Text.Json.S
 public sealed partial class DataStreamsStatsItem
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DataStreamsStatsItem(int backingIndices, string dataStream, System.DateTime maximumTimestamp, long storeSizeBytes)
+	public DataStreamsStatsItem(int backingIndices, string dataStream, System.DateTimeOffset maximumTimestamp, long storeSizeBytes)
 	{
 		BackingIndices = backingIndices;
 		DataStream = dataStream;
@@ -161,7 +161,7 @@ public sealed partial class DataStreamsStatsItem
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.DateTime MaximumTimestamp { get; set; }
+	System.DateTimeOffset MaximumTimestamp { get; set; }
 
 	/// <summary>
 	/// <para>
