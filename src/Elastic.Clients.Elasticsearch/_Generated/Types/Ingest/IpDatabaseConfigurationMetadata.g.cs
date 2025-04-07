@@ -51,12 +51,12 @@ internal sealed partial class IpDatabaseConfigurationMetadataConverter : System.
 				continue;
 			}
 
-			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}

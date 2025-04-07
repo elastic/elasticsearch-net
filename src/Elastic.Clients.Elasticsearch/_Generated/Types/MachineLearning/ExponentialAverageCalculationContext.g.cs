@@ -42,12 +42,12 @@ internal sealed partial class ExponentialAverageCalculationContextConverter : Sy
 				continue;
 			}
 
-			if (propLatestTimestamp.TryReadProperty(ref reader, options, PropLatestTimestamp, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propLatestTimestamp.TryReadProperty(ref reader, options, PropLatestTimestamp, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propPreviousExponentialAverageMs.TryReadProperty(ref reader, options, PropPreviousExponentialAverageMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propPreviousExponentialAverageMs.TryReadProperty(ref reader, options, PropPreviousExponentialAverageMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

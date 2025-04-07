@@ -55,12 +55,12 @@ internal sealed partial class LicenseInformationConverter : System.Text.Json.Ser
 		LocalJsonValue<string> propUid = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExpiryDate.TryReadProperty(ref reader, options, PropExpiryDate, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propExpiryDate.TryReadProperty(ref reader, options, PropExpiryDate, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propExpiryDateInMillis.TryReadProperty(ref reader, options, PropExpiryDateInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propExpiryDateInMillis.TryReadProperty(ref reader, options, PropExpiryDateInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}

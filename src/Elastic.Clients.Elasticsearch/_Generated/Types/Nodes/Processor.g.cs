@@ -54,7 +54,7 @@ internal sealed partial class ProcessorConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propTimeInMillis.TryReadProperty(ref reader, options, PropTimeInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propTimeInMillis.TryReadProperty(ref reader, options, PropTimeInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

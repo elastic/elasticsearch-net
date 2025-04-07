@@ -91,7 +91,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 				continue;
 			}
 
-			if (propAllocationDelayInMillis.TryReadProperty(ref reader, options, PropAllocationDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAllocationDelayInMillis.TryReadProperty(ref reader, options, PropAllocationDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -141,7 +141,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 				continue;
 			}
 
-			if (propConfiguredDelayInMillis.TryReadProperty(ref reader, options, PropConfiguredDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propConfiguredDelayInMillis.TryReadProperty(ref reader, options, PropConfiguredDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -191,7 +191,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 				continue;
 			}
 
-			if (propRemainingDelayInMillis.TryReadProperty(ref reader, options, PropRemainingDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propRemainingDelayInMillis.TryReadProperty(ref reader, options, PropRemainingDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

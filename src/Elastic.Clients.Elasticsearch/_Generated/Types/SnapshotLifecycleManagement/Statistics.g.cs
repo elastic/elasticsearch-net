@@ -65,7 +65,7 @@ internal sealed partial class StatisticsConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propRetentionDeletionTimeMillis.TryReadProperty(ref reader, options, PropRetentionDeletionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propRetentionDeletionTimeMillis.TryReadProperty(ref reader, options, PropRetentionDeletionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

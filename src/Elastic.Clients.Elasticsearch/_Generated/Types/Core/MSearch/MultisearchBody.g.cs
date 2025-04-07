@@ -459,7 +459,7 @@ public sealed partial class MultisearchBody
 	/// <summary>
 	/// <para>
 	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in the search results.
+	/// Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public double? MinScore { get; set; }
@@ -1006,7 +1006,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in the search results.
+	/// Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> MinScore(double? value)
@@ -2056,7 +2056,7 @@ public readonly partial struct MultisearchBodyDescriptor
 	/// <summary>
 	/// <para>
 	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in the search results.
+	/// Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor MinScore(double? value)

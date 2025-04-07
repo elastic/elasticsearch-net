@@ -1100,7 +1100,7 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 	/// <summary>
 	/// <para>
 	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in the search results.
+	/// Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public double? MinScore { get; set; }
@@ -2252,7 +2252,7 @@ public readonly partial struct SearchRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in the search results.
+	/// Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor MinScore(double? value)
@@ -3895,7 +3895,7 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in the search results.
+	/// Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> MinScore(double? value)

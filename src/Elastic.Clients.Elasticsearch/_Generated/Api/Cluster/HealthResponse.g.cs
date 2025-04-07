@@ -27,6 +27,7 @@ internal sealed partial class HealthResponseConverter : System.Text.Json.Seriali
 {
 	private static readonly System.Text.Json.JsonEncodedText PropActivePrimaryShards = System.Text.Json.JsonEncodedText.Encode("active_primary_shards");
 	private static readonly System.Text.Json.JsonEncodedText PropActiveShards = System.Text.Json.JsonEncodedText.Encode("active_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropActiveShardsPercent = System.Text.Json.JsonEncodedText.Encode("active_shards_percent");
 	private static readonly System.Text.Json.JsonEncodedText PropActiveShardsPercentAsNumber = System.Text.Json.JsonEncodedText.Encode("active_shards_percent_as_number");
 	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
 	private static readonly System.Text.Json.JsonEncodedText PropDelayedUnassignedShards = System.Text.Json.JsonEncodedText.Encode("delayed_unassigned_shards");
@@ -49,7 +50,8 @@ internal sealed partial class HealthResponseConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int> propActivePrimaryShards = default;
 		LocalJsonValue<int> propActiveShards = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Percentage> propActiveShardsPercentAsNumber = default;
+		LocalJsonValue<string?> propActiveShardsPercent = default;
+		LocalJsonValue<double> propActiveShardsPercentAsNumber = default;
 		LocalJsonValue<string> propClusterName = default;
 		LocalJsonValue<int> propDelayedUnassignedShards = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>?> propIndices = default;
@@ -73,6 +75,11 @@ internal sealed partial class HealthResponseConverter : System.Text.Json.Seriali
 			}
 
 			if (propActiveShards.TryReadProperty(ref reader, options, PropActiveShards, null))
+			{
+				continue;
+			}
+
+			if (propActiveShardsPercent.TryReadProperty(ref reader, options, PropActiveShardsPercent, null))
 			{
 				continue;
 			}
@@ -171,6 +178,7 @@ internal sealed partial class HealthResponseConverter : System.Text.Json.Seriali
 		{
 			ActivePrimaryShards = propActivePrimaryShards.Value,
 			ActiveShards = propActiveShards.Value,
+			ActiveShardsPercent = propActiveShardsPercent.Value,
 			ActiveShardsPercentAsNumber = propActiveShardsPercentAsNumber.Value,
 			ClusterName = propClusterName.Value,
 			DelayedUnassignedShards = propDelayedUnassignedShards.Value,
@@ -195,6 +203,7 @@ internal sealed partial class HealthResponseConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropActivePrimaryShards, value.ActivePrimaryShards, null, null);
 		writer.WriteProperty(options, PropActiveShards, value.ActiveShards, null, null);
+		writer.WriteProperty(options, PropActiveShardsPercent, value.ActiveShardsPercent, null, null);
 		writer.WriteProperty(options, PropActiveShardsPercentAsNumber, value.ActiveShardsPercentAsNumber, null, null);
 		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
 		writer.WriteProperty(options, PropDelayedUnassignedShards, value.DelayedUnassignedShards, null, null);
@@ -253,6 +262,13 @@ public sealed partial class HealthResponse : Elastic.Transport.Products.Elastics
 
 	/// <summary>
 	/// <para>
+	/// The ratio of active shards in the cluster expressed as a string formatted percentage.
+	/// </para>
+	/// </summary>
+	public string? ActiveShardsPercent { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The ratio of active shards in the cluster expressed as a percentage.
 	/// </para>
 	/// </summary>
@@ -260,7 +276,7 @@ public sealed partial class HealthResponse : Elastic.Transport.Products.Elastics
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.Percentage ActiveShardsPercentAsNumber { get; set; }
+	double ActiveShardsPercentAsNumber { get; set; }
 
 	/// <summary>
 	/// <para>

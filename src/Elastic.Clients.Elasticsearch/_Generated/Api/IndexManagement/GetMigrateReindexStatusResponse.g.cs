@@ -76,7 +76,7 @@ internal sealed partial class GetMigrateReindexStatusResponseConverter : System.
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}

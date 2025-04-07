@@ -86,7 +86,7 @@ internal sealed partial class LicenseConverter : System.Text.Json.Serialization.
 				continue;
 			}
 
-			if (propStartDateInMillis.TryReadProperty(ref reader, options, PropStartDateInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartDateInMillis.TryReadProperty(ref reader, options, PropStartDateInMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}

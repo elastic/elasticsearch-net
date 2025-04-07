@@ -108,12 +108,12 @@ internal sealed partial class ReindexResponseConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propThrottledMillis.TryReadProperty(ref reader, options, PropThrottledMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propThrottledMillis.TryReadProperty(ref reader, options, PropThrottledMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propThrottledUntilMillis.TryReadProperty(ref reader, options, PropThrottledUntilMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propThrottledUntilMillis.TryReadProperty(ref reader, options, PropThrottledUntilMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -123,7 +123,7 @@ internal sealed partial class ReindexResponseConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propTook.TryReadProperty(ref reader, options, PropTook, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

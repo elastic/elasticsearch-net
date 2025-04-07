@@ -47,7 +47,7 @@ internal sealed partial class CgroupCpuStatConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propTimeThrottledNanos.TryReadProperty(ref reader, options, PropTimeThrottledNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			if (propTimeThrottledNanos.TryReadProperty(ref reader, options, PropTimeThrottledNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
 			{
 				continue;
 			}

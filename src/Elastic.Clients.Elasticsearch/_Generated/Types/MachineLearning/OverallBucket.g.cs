@@ -75,7 +75,7 @@ internal sealed partial class OverallBucketConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propTimestampString.TryReadProperty(ref reader, options, PropTimestampString, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propTimestampString.TryReadProperty(ref reader, options, PropTimestampString, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}

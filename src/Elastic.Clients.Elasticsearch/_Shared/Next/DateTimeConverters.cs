@@ -6,6 +6,7 @@ using System;
 using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -46,6 +47,13 @@ internal sealed class DateTimeConverter :
 {
 	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return DateTimeHelper.FromEpochMilliseconds(timestamp);
+		}
+
 		return reader.TokenType switch
 		{
 			JsonTokenType.String => ParseValue(ref reader),
@@ -62,11 +70,15 @@ internal sealed class DateTimeConverter :
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static DateTime ParseValue(ref Utf8JsonReader reader)
 	{
-		Debug.Assert(!reader.HasValueSequence);
-
-		return Utf8Parser.TryParse(reader.ValueSpan, out DateTime result, out var consumed) && (consumed == reader.ValueSpan.Length)
+		return DateTime.TryParse(reader.GetString()!, CultureInfo.InvariantCulture, out var result)
 			? result
 			: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(DateTime)}'.");
+
+		// TODO: https://github.com/dotnet/runtime/issues/28942#issuecomment-724161375
+
+		//return Utf8Parser.TryParse(reader.ValueSpan, out DateTime result, out var consumed, 'O') && (consumed == reader.ValueSpan.Length)
+		//	? result
+		//	: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(DateTime)}'.");
 	}
 }
 
@@ -103,6 +115,13 @@ internal sealed class DateTimeSecondsConverter :
 {
 	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return DateTimeHelper.FromEpochSeconds(timestamp);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return DateTimeHelper.FromEpochSeconds(reader.GetInt64());
@@ -147,6 +166,13 @@ internal sealed class DateTimeMillisConverter :
 {
 	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return DateTimeHelper.FromEpochMilliseconds(timestamp);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return DateTimeHelper.FromEpochMilliseconds(reader.GetInt64());
@@ -191,6 +217,13 @@ internal sealed class DateTimeNanosConverter :
 {
 	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return DateTimeHelper.FromEpochNanoseconds(timestamp);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return DateTimeHelper.FromEpochNanoseconds(reader.GetInt64());
@@ -235,6 +268,13 @@ internal sealed class DateTimeSecondsFloatConverter :
 {
 	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double timestamp, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return DateTimeHelper.FromEpochSeconds((long)timestamp);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return DateTimeHelper.FromEpochSeconds((long)reader.GetDouble());
@@ -279,6 +319,13 @@ internal sealed class DateTimeMillisFloatConverter :
 {
 	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double timestamp, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return DateTimeHelper.FromEpochMilliseconds((long)timestamp);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return DateTimeHelper.FromEpochMilliseconds((long)reader.GetDouble());

@@ -139,7 +139,7 @@ public sealed partial class DenseVectorIndexOptions
 	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
 	public int? EfConstruction { get; set; }
@@ -149,7 +149,7 @@ public sealed partial class DenseVectorIndexOptions
 	/// The number of neighbors each node will be connected to in the HNSW graph.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
 	public int? M { get; set; }
@@ -214,7 +214,7 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor EfConstruction(int? value)
@@ -228,7 +228,7 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 	/// The number of neighbors each node will be connected to in the HNSW graph.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor M(int? value)

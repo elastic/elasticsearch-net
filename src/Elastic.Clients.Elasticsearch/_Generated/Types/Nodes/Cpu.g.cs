@@ -62,7 +62,7 @@ internal sealed partial class CpuConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propSysInMillis.TryReadProperty(ref reader, options, PropSysInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propSysInMillis.TryReadProperty(ref reader, options, PropSysInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class CpuConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propTotalInMillis.TryReadProperty(ref reader, options, PropTotalInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propTotalInMillis.TryReadProperty(ref reader, options, PropTotalInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class CpuConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propUserInMillis.TryReadProperty(ref reader, options, PropUserInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propUserInMillis.TryReadProperty(ref reader, options, PropUserInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

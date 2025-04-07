@@ -83,7 +83,7 @@ internal sealed partial class TrainedModelConfigConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}

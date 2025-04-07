@@ -67,17 +67,17 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 		LocalJsonValue<int?> propTimeoutCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAverageInferenceTimeMs.TryReadProperty(ref reader, options, PropAverageInferenceTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAverageInferenceTimeMs.TryReadProperty(ref reader, options, PropAverageInferenceTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propAverageInferenceTimeMsExcludingCacheHits.TryReadProperty(ref reader, options, PropAverageInferenceTimeMsExcludingCacheHits, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAverageInferenceTimeMsExcludingCacheHits.TryReadProperty(ref reader, options, PropAverageInferenceTimeMsExcludingCacheHits, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propAverageInferenceTimeMsLastMinute.TryReadProperty(ref reader, options, PropAverageInferenceTimeMsLastMinute, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAverageInferenceTimeMsLastMinute.TryReadProperty(ref reader, options, PropAverageInferenceTimeMsLastMinute, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -102,7 +102,7 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 				continue;
 			}
 
-			if (propLastAccess.TryReadProperty(ref reader, options, PropLastAccess, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propLastAccess.TryReadProperty(ref reader, options, PropLastAccess, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -137,7 +137,7 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}

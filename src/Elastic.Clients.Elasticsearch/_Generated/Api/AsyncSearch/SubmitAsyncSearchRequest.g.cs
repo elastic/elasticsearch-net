@@ -868,7 +868,7 @@ public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Re
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are
-	/// not included in the search results.
+	/// not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public double? MinScore { get; set; }
@@ -1776,7 +1776,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are
-	/// not included in the search results.
+	/// not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MinScore(double? value)
@@ -3077,7 +3077,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Minimum _score for matching documents. Documents with a lower _score are
-	/// not included in the search results.
+	/// not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MinScore(double? value)

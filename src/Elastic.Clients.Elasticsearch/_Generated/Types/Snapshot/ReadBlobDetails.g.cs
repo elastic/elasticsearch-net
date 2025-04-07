@@ -59,7 +59,7 @@ internal sealed partial class ReadBlobDetailsConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propElapsedNanos.TryReadProperty(ref reader, options, PropElapsedNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			if (propElapsedNanos.TryReadProperty(ref reader, options, PropElapsedNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ internal sealed partial class ReadBlobDetailsConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propThrottledNanos.TryReadProperty(ref reader, options, PropThrottledNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			if (propThrottledNanos.TryReadProperty(ref reader, options, PropThrottledNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
 			{
 				continue;
 			}

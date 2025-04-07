@@ -49,7 +49,7 @@ internal sealed partial class RecordingConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propCumulativeExecutionTimeMillis.TryReadProperty(ref reader, options, PropCumulativeExecutionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propCumulativeExecutionTimeMillis.TryReadProperty(ref reader, options, PropCumulativeExecutionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

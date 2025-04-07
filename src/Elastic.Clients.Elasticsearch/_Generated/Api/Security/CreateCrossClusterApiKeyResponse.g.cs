@@ -51,7 +51,7 @@ internal sealed partial class CreateCrossClusterApiKeyResponseConverter : System
 				continue;
 			}
 
-			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

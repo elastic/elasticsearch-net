@@ -49,12 +49,12 @@ internal sealed partial class GetDataLifecycleStatsResponseConverter : System.Te
 				continue;
 			}
 
-			if (propLastRunDurationInMillis.TryReadProperty(ref reader, options, PropLastRunDurationInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propLastRunDurationInMillis.TryReadProperty(ref reader, options, PropLastRunDurationInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propTimeBetweenStartsInMillis.TryReadProperty(ref reader, options, PropTimeBetweenStartsInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propTimeBetweenStartsInMillis.TryReadProperty(ref reader, options, PropTimeBetweenStartsInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

@@ -47,7 +47,7 @@ internal sealed partial class JobTimingStatsConverter : System.Text.Json.Seriali
 		LocalJsonValue<System.TimeSpan> propTotalBucketProcessingTimeMs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAverageBucketProcessingTimeMs.TryReadProperty(ref reader, options, PropAverageBucketProcessingTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAverageBucketProcessingTimeMs.TryReadProperty(ref reader, options, PropAverageBucketProcessingTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class JobTimingStatsConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propExponentialAverageBucketProcessingTimeMs.TryReadProperty(ref reader, options, PropExponentialAverageBucketProcessingTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propExponentialAverageBucketProcessingTimeMs.TryReadProperty(ref reader, options, PropExponentialAverageBucketProcessingTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -72,12 +72,12 @@ internal sealed partial class JobTimingStatsConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propMaximumBucketProcessingTimeMs.TryReadProperty(ref reader, options, PropMaximumBucketProcessingTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propMaximumBucketProcessingTimeMs.TryReadProperty(ref reader, options, PropMaximumBucketProcessingTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propMinimumBucketProcessingTimeMs.TryReadProperty(ref reader, options, PropMinimumBucketProcessingTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propMinimumBucketProcessingTimeMs.TryReadProperty(ref reader, options, PropMinimumBucketProcessingTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

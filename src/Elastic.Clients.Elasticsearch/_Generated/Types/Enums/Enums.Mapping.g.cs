@@ -1904,6 +1904,8 @@ internal sealed partial class FieldTypeConverter : System.Text.Json.Serializatio
 
 internal sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberBbqFlat = System.Text.Json.JsonEncodedText.Encode("bbq_flat");
+	private static readonly System.Text.Json.JsonEncodedText MemberBbqHnsw = System.Text.Json.JsonEncodedText.Encode("bbq_hnsw");
 	private static readonly System.Text.Json.JsonEncodedText MemberFlat = System.Text.Json.JsonEncodedText.Encode("flat");
 	private static readonly System.Text.Json.JsonEncodedText MemberHnsw = System.Text.Json.JsonEncodedText.Encode("hnsw");
 	private static readonly System.Text.Json.JsonEncodedText MemberInt4Flat = System.Text.Json.JsonEncodedText.Encode("int4_flat");
@@ -1913,6 +1915,16 @@ internal sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberBbqFlat))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqFlat;
+		}
+
+		if (reader.ValueTextEquals(MemberBbqHnsw))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqHnsw;
+		}
+
 		if (reader.ValueTextEquals(MemberFlat))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Flat;
@@ -1944,6 +1956,16 @@ internal sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberBbqFlat.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqFlat;
+		}
+
+		if (string.Equals(value, MemberBbqHnsw.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqHnsw;
+		}
+
 		if (string.Equals(value, MemberFlat.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Flat;
@@ -1981,6 +2003,12 @@ internal sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqFlat:
+				writer.WriteStringValue(MemberBbqFlat);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqHnsw:
+				writer.WriteStringValue(MemberBbqHnsw);
+				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Flat:
 				writer.WriteStringValue(MemberFlat);
 				break;
@@ -2400,6 +2428,25 @@ public enum FieldType
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeConverter))]
 public enum DenseVectorIndexOptionsType
 {
+	/// <summary>
+	/// <para>
+	/// This utilizes a brute-force search algorithm in addition to automatically quantizing to binary vectors.
+	/// Only supports <c>element_type</c> of <c>float</c>.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "bbq_flat")]
+	BbqFlat,
+	/// <summary>
+	/// <para>
+	/// This utilizes the HNSW algorithm in addition to automatic binary quantization for scalable approximate kNN
+	/// search with <c>element_type</c> of <c>float</c>.
+	/// </para>
+	/// <para>
+	/// This can reduce the memory footprint by nearly 32x at the cost of some accuracy.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "bbq_hnsw")]
+	BbqHnsw,
 	/// <summary>
 	/// <para>
 	/// This utilizes a brute-force search algorithm for exact kNN search. This supports all <c>element_type</c> values.

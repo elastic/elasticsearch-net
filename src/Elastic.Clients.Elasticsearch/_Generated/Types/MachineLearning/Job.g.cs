@@ -102,7 +102,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -137,7 +137,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}

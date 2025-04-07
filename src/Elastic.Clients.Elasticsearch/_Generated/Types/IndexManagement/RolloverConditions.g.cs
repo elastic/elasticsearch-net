@@ -66,7 +66,7 @@ internal sealed partial class RolloverConditionsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMaxAgeMillis.TryReadProperty(ref reader, options, PropMaxAgeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propMaxAgeMillis.TryReadProperty(ref reader, options, PropMaxAgeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

@@ -169,7 +169,7 @@ internal sealed partial class ExistsRequestConverter : System.Text.Json.Serializ
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ExistsRequestConverter))]
-public partial class ExistsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ExistsRequestParameters>
+public sealed partial class ExistsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ExistsRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ExistsRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))

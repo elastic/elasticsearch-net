@@ -29,7 +29,9 @@ internal sealed partial class InferenceProcessorConverter : System.Text.Json.Ser
 	private static readonly System.Text.Json.JsonEncodedText PropFieldMap = System.Text.Json.JsonEncodedText.Encode("field_map");
 	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
 	private static readonly System.Text.Json.JsonEncodedText PropInferenceConfig = System.Text.Json.JsonEncodedText.Encode("inference_config");
+	private static readonly System.Text.Json.JsonEncodedText PropInputOutput = System.Text.Json.JsonEncodedText.Encode("input_output");
 	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
 	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
 	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
@@ -42,7 +44,9 @@ internal sealed partial class InferenceProcessorConverter : System.Text.Json.Ser
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>?> propFieldMap = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
 		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.InferenceConfig?> propInferenceConfig = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>?> propInputOutput = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propModelId = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
 		LocalJsonValue<string?> propTag = default;
@@ -69,7 +73,17 @@ internal sealed partial class InferenceProcessorConverter : System.Text.Json.Ser
 				continue;
 			}
 
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
 			if (propInferenceConfig.TryReadProperty(ref reader, options, PropInferenceConfig, null))
+			{
+				continue;
+			}
+
+			if (propInputOutput.TryReadProperty(ref reader, options, PropInputOutput, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Ingest.InputConfig>(o, null)))
 			{
 				continue;
 			}
@@ -110,7 +124,9 @@ internal sealed partial class InferenceProcessorConverter : System.Text.Json.Ser
 			FieldMap = propFieldMap.Value,
 			If = propIf.Value,
 			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
 			InferenceConfig = propInferenceConfig.Value,
+			InputOutput = propInputOutput.Value,
 			ModelId = propModelId.Value,
 			OnFailure = propOnFailure.Value,
 			Tag = propTag.Value,
@@ -125,7 +141,9 @@ internal sealed partial class InferenceProcessorConverter : System.Text.Json.Ser
 		writer.WriteProperty(options, PropFieldMap, value.FieldMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, object>(o, v, null, null));
 		writer.WriteProperty(options, PropIf, value.If, null, null);
 		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
 		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, null);
+		writer.WriteProperty(options, PropInputOutput, value.InputOutput, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Ingest.InputConfig>(o, v, null));
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
@@ -191,10 +209,27 @@ public sealed partial class InferenceProcessor
 
 	/// <summary>
 	/// <para>
+	/// If true and any of the input fields defined in input_ouput are missing
+	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
+	/// Only applies when using input_output configurations to explicitly list the input fields.
+	/// </para>
+	/// </summary>
+	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Contains the inference type and its options.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfig { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? InputOutput { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -357,6 +392,19 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// If true and any of the input fields defined in input_ouput are missing
+	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
+	/// Only applies when using input_output configurations to explicitly list the input fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
+	{
+		Instance.IgnoreMissing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Contains the inference type and its options.
 	/// </para>
 	/// </summary>
@@ -374,6 +422,48 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InputOutput(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? value)
+	{
+		Instance.InputOutput = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InputOutput(params Elastic.Clients.Elasticsearch.Ingest.InputConfig[] values)
+	{
+		Instance.InputOutput = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InputOutput(params System.Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.InputConfig>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor.Build(action));
+		}
+
+		Instance.InputOutput = items;
 		return this;
 	}
 
@@ -609,6 +699,19 @@ public readonly partial struct InferenceProcessorDescriptor
 
 	/// <summary>
 	/// <para>
+	/// If true and any of the input fields defined in input_ouput are missing
+	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
+	/// Only applies when using input_output configurations to explicitly list the input fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor IgnoreMissing(bool? value = true)
+	{
+		Instance.IgnoreMissing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Contains the inference type and its options.
 	/// </para>
 	/// </summary>
@@ -637,6 +740,48 @@ public readonly partial struct InferenceProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InferenceConfig<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<T>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InputOutput(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? value)
+	{
+		Instance.InputOutput = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InputOutput(params Elastic.Clients.Elasticsearch.Ingest.InputConfig[] values)
+	{
+		Instance.InputOutput = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InputOutput(params System.Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.InputConfig>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor.Build(action));
+		}
+
+		Instance.InputOutput = items;
 		return this;
 	}
 

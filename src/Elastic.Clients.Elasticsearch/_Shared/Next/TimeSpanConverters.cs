@@ -46,6 +46,13 @@ internal sealed class TimeSpanSecondsConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long value, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return TimeSpan.FromSeconds(value);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return TimeSpan.FromSeconds(reader.GetInt64());
@@ -90,6 +97,13 @@ internal sealed class TimeSpanMillisConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long value, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return TimeSpan.FromMilliseconds(value);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return TimeSpan.FromMilliseconds(reader.GetInt64());
@@ -134,6 +148,13 @@ internal sealed class TimeSpanNanosConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long value, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return TimeSpanHelper.FromNanoseconds(value);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return TimeSpanHelper.FromNanoseconds(reader.GetInt64());
@@ -178,6 +199,13 @@ internal sealed class TimeSpanSecondsFloatConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double value, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return TimeSpan.FromSeconds(value);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return TimeSpan.FromSeconds(reader.GetDouble());
@@ -222,6 +250,13 @@ internal sealed class TimeSpanMillisFloatConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double value, out var consumed) &&
+			(consumed == reader.ValueSpan.Length))
+		{
+			// Leniency for stringified numbers.
+			return TimeSpan.FromMilliseconds(value);
+		}
+
 		reader.ValidateToken(JsonTokenType.Number);
 
 		return TimeSpan.FromMilliseconds(reader.GetDouble());

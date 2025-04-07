@@ -79,7 +79,7 @@ public sealed partial class HealthRequestParameters : Elastic.Transport.RequestP
 	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Union<string, int>? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Union<string, int>?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
+	public Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Cluster.WaitForNodes?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 
 	/// <summary>
 	/// <para>
@@ -241,7 +241,7 @@ public sealed partial class HealthRequest : Elastic.Clients.Elasticsearch.Reques
 	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Union<string, int>? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Union<string, int>?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
+	public Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Cluster.WaitForNodes?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 
 	/// <summary>
 	/// <para>
@@ -410,7 +410,7 @@ public readonly partial struct HealthRequestDescriptor
 	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForNodes(Elastic.Clients.Elasticsearch.Union<string, int>? value)
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForNodes(Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? value)
 	{
 		Instance.WaitForNodes = value;
 		return this;
@@ -650,7 +650,7 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNodes(Elastic.Clients.Elasticsearch.Union<string, int>? value)
+	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNodes(Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? value)
 	{
 		Instance.WaitForNodes = value;
 		return this;

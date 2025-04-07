@@ -69,7 +69,7 @@ internal sealed partial class AutoDateHistogramAggregationConverter : System.Tex
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}

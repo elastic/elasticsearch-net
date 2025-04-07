@@ -148,7 +148,6 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferenceCompletion = new ApiUrls(new[] { "_inference/completion/{inference_id}" });
 	internal static ApiUrls InferenceDelete = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferenceGet = new ApiUrls(new[] { "_inference", "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
-	internal static ApiUrls InferencePostEisChatCompletion = new ApiUrls(new[] { "_inference/chat_completion/{eis_inference_id}/_stream" });
 	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePutAlibabacloud = new ApiUrls(new[] { "_inference/{task_type}/{alibabacloud_inference_id}" });
 	internal static ApiUrls InferencePutAmazonbedrock = new ApiUrls(new[] { "_inference/{task_type}/{amazonbedrock_inference_id}" });
@@ -156,7 +155,6 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferencePutAzureaistudio = new ApiUrls(new[] { "_inference/{task_type}/{azureaistudio_inference_id}" });
 	internal static ApiUrls InferencePutAzureopenai = new ApiUrls(new[] { "_inference/{task_type}/{azureopenai_inference_id}" });
 	internal static ApiUrls InferencePutCohere = new ApiUrls(new[] { "_inference/{task_type}/{cohere_inference_id}" });
-	internal static ApiUrls InferencePutEis = new ApiUrls(new[] { "_inference/{task_type}/{eis_inference_id}" });
 	internal static ApiUrls InferencePutElasticsearch = new ApiUrls(new[] { "_inference/{task_type}/{elasticsearch_inference_id}" });
 	internal static ApiUrls InferencePutElser = new ApiUrls(new[] { "_inference/{task_type}/{elser_inference_id}" });
 	internal static ApiUrls InferencePutGoogleaistudio = new ApiUrls(new[] { "_inference/{task_type}/{googleaistudio_inference_id}" });

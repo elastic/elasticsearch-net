@@ -65,7 +65,7 @@ internal sealed partial class TransformIndexerStatsConverter : System.Text.Json.
 		LocalJsonValue<long> propTriggerCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDeleteTimeInMs.TryReadProperty(ref reader, options, PropDeleteTimeInMs, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propDeleteTimeInMs.TryReadProperty(ref reader, options, PropDeleteTimeInMs, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}

@@ -57,7 +57,7 @@ internal sealed partial class DetailsInfoConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propOverwriteElapsedNanos.TryReadProperty(ref reader, options, PropOverwriteElapsedNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			if (propOverwriteElapsedNanos.TryReadProperty(ref reader, options, PropOverwriteElapsedNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
 			{
 				continue;
 			}

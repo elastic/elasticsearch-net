@@ -492,49 +492,6 @@ internal sealed partial class CohereTaskTypeConverter : System.Text.Json.Seriali
 	}
 }
 
-internal sealed partial class EisTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.EisTaskType>
-{
-	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
-
-	public override Elastic.Clients.Elasticsearch.Inference.EisTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		if (reader.ValueTextEquals(MemberChatCompletion))
-		{
-			return Elastic.Clients.Elasticsearch.Inference.EisTaskType.ChatCompletion;
-		}
-
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.Inference.EisTaskType.ChatCompletion;
-		}
-
-		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.EisTaskType)}'.");
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.EisTaskType value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case Elastic.Clients.Elasticsearch.Inference.EisTaskType.ChatCompletion:
-				writer.WriteStringValue(MemberChatCompletion);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.EisTaskType)}'.");
-		}
-	}
-
-	public override Elastic.Clients.Elasticsearch.Inference.EisTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return Read(ref reader, typeToConvert, options);
-	}
-
-	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.EisTaskType value, System.Text.Json.JsonSerializerOptions options)
-	{
-		Write(writer, value, options);
-	}
-}
-
 internal sealed partial class ElasticsearchTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
@@ -1602,13 +1559,6 @@ public enum CohereTaskType
 	Rerank,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.EisTaskTypeConverter))]
-public enum EisTaskType
-{
-	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
-	ChatCompletion
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskTypeConverter))]

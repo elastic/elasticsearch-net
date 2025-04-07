@@ -64,7 +64,7 @@ internal sealed partial class DataStreamLifecycleExplainConverter : System.Text.
 				continue;
 			}
 
-			if (propIndexCreationDateMillis.TryReadProperty(ref reader, options, PropIndexCreationDateMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propIndexCreationDateMillis.TryReadProperty(ref reader, options, PropIndexCreationDateMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -79,7 +79,7 @@ internal sealed partial class DataStreamLifecycleExplainConverter : System.Text.
 				continue;
 			}
 
-			if (propRolloverDateMillis.TryReadProperty(ref reader, options, PropRolloverDateMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propRolloverDateMillis.TryReadProperty(ref reader, options, PropRolloverDateMillis, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}

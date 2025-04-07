@@ -123,7 +123,7 @@ internal sealed partial class UpdateJobResponseConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}

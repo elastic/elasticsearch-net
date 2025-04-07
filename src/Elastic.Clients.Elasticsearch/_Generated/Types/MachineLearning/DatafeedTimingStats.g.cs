@@ -45,7 +45,7 @@ internal sealed partial class DatafeedTimingStatsConverter : System.Text.Json.Se
 		LocalJsonValue<System.TimeSpan> propTotalSearchTimeMs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAverageSearchTimePerBucketMs.TryReadProperty(ref reader, options, PropAverageSearchTimePerBucketMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAverageSearchTimePerBucketMs.TryReadProperty(ref reader, options, PropAverageSearchTimePerBucketMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}

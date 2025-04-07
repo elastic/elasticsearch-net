@@ -116,7 +116,7 @@ internal sealed partial class DateNanosPropertyConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, static System.DateTime? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTime>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
