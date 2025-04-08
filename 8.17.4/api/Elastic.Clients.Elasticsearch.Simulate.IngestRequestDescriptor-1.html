@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class IngestRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class IngestRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Simulate data ingestion. Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.   This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.   The API runs the default and final pipeline for that index against a set of documents provided in the body of the request. If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index&#39;s pipelines as well the same way that a non-simulated ingest would. No data is indexed into Elasticsearch. Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation. The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.   This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline. The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.   By default, the pipeline definitions that are currently in the system are used. However, you can supply substitute pipeline definitions in the body of the request. These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.17.4/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1" class="text-break">
+Class IngestRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.html">Simulate</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Simulate data ingestion.
+Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
+</p>
+<p>
+This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
+</p>
+<p>
+The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
+If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
+No data is indexed into Elasticsearch.
+Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
+The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
+</p>
+<p>
+This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
+The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
+</p>
+<p>
+By default, the pipeline definitions that are currently in the system are used.
+However, you can supply substitute pipeline definitions in the body of the request.
+These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class IngestRequestDescriptor&lt;TDocument&gt; : RequestDescriptor&lt;IngestRequestDescriptor&lt;TDocument&gt;, IngestRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters.html">IngestRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html">RequestDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters.html">IngestRequestParameters</a>&gt;</div>
+      <div><span class="xref">IngestRequestDescriptor&lt;TDocument&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__">RequestDescriptor&lt;IngestRequestDescriptor&lt;TDocument&gt;, IngestRequestParameters&gt;.RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_FilterPath_System_String___">RequestDescriptor&lt;IngestRequestDescriptor&lt;TDocument&gt;, IngestRequestParameters&gt;.FilterPath(params string[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Human_System_Nullable_System_Boolean__">RequestDescriptor&lt;IngestRequestDescriptor&lt;TDocument&gt;, IngestRequestParameters&gt;.Human(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Pretty_System_Nullable_System_Boolean__">RequestDescriptor&lt;IngestRequestDescriptor&lt;TDocument&gt;, IngestRequestParameters&gt;.Pretty(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.#ctor">
+  IngestRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L166"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.IndexName)">
+  IngestRequestDescriptor(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor(IndexName? index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.17.4/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_ComponentTemplateSubstitutions_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.ComponentTemplateSubstitutions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_ComponentTemplateSubstitutions_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Cluster_ComponentTemplateNodeDescriptor__0___Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Cluster_ComponentTemplateNodeDescriptor__0____" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.ComponentTemplateSubstitutions(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor{`0}},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor{`0}}})">
+  ComponentTemplateSubstitutions(Func&lt;FluentDescriptorDictionary&lt;string, ComponentTemplateNodeDescriptor&lt;TDocument&gt;&gt;, FluentDescriptorDictionary&lt;string, ComponentTemplateNodeDescriptor&lt;TDocument&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A map of component template names to substitute component template definition objects.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; ComponentTemplateSubstitutions(Func&lt;FluentDescriptorDictionary&lt;string, ComponentTemplateNodeDescriptor&lt;TDocument&gt;&gt;, FluentDescriptorDictionary&lt;string, ComponentTemplateNodeDescriptor&lt;TDocument&gt;&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor-1.html">ComponentTemplateNodeDescriptor</a>&lt;TDocument&gt;&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor-1.html">ComponentTemplateNodeDescriptor</a>&lt;TDocument&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Docs_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Docs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Docs_Elastic_Clients_Elasticsearch_Ingest_DocumentDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Docs(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor)">
+  Docs(DocumentDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L222"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; Docs(DocumentDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor.html">DocumentDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Docs_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Docs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Docs_System_Action_Elastic_Clients_Elasticsearch_Ingest_DocumentDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Docs(System.Action{Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor})">
+  Docs(Action&lt;DocumentDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; Docs(Action&lt;DocumentDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor.html">DocumentDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Docs_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Docs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Docs_System_Action_Elastic_Clients_Elasticsearch_Ingest_DocumentDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Docs(System.Action{Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor}[])">
+  Docs(params Action&lt;DocumentDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L240"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; Docs(params Action&lt;DocumentDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor.html">DocumentDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Docs_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Docs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Docs_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Ingest_Document__" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Docs(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Ingest.Document})">
+  Docs(ICollection&lt;Document&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sample documents to test in the pipeline.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; Docs(ICollection&lt;Document&gt; docs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>docs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Document.html">Document</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Index_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Index_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Index(Elastic.Clients.Elasticsearch.IndexName)">
+  Index(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L180"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; Index(IndexName? index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_IndexTemplateSubstitutions_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.IndexTemplateSubstitutions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_IndexTemplateSubstitutions_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_IndexManagement_IndexTemplateDescriptor__0___Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_IndexManagement_IndexTemplateDescriptor__0____" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.IndexTemplateSubstitutions(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor{`0}},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor{`0}}})">
+  IndexTemplateSubstitutions(Func&lt;FluentDescriptorDictionary&lt;string, IndexTemplateDescriptor&lt;TDocument&gt;&gt;, FluentDescriptorDictionary&lt;string, IndexTemplateDescriptor&lt;TDocument&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A map of index template names to substitute index template definition objects.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; IndexTemplateSubstitutions(Func&lt;FluentDescriptorDictionary&lt;string, IndexTemplateDescriptor&lt;TDocument&gt;&gt;, FluentDescriptorDictionary&lt;string, IndexTemplateDescriptor&lt;TDocument&gt;&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor-1.html">IndexTemplateDescriptor</a>&lt;TDocument&gt;&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor-1.html">IndexTemplateDescriptor</a>&lt;TDocument&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_MappingAddition_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.MappingAddition*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_MappingAddition_Elastic_Clients_Elasticsearch_Mapping_TypeMapping_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.MappingAddition(Elastic.Clients.Elasticsearch.Mapping.TypeMapping)">
+  MappingAddition(TypeMapping?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L260"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; MappingAddition(TypeMapping? mappingAddition)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mappingAddition</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMapping.html">TypeMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_MappingAddition_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.MappingAddition*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_MappingAddition_Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.MappingAddition(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor{`0})">
+  MappingAddition(TypeMappingDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; MappingAddition(TypeMappingDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor-1.html">TypeMappingDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_MappingAddition_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.MappingAddition*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_MappingAddition_System_Action_Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.MappingAddition(System.Action{Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor{`0}})">
+  MappingAddition(Action&lt;TypeMappingDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; MappingAddition(Action&lt;TypeMappingDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor-1.html">TypeMappingDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Pipeline_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Pipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Pipeline_System_String_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Pipeline(System.String)">
+  Pipeline(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; Pipeline(string? pipeline)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pipeline</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_PipelineSubstitutions_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.PipelineSubstitutions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_PipelineSubstitutions_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor__0___Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor__0____" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.PipelineSubstitutions(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor{`0}},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor{`0}}})">
+  PipelineSubstitutions(Func&lt;FluentDescriptorDictionary&lt;string, PipelineDescriptor&lt;TDocument&gt;&gt;, FluentDescriptorDictionary&lt;string, PipelineDescriptor&lt;TDocument&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Pipelines to test.
+If you don’t specify the <code>pipeline</code> request path parameter, this parameter is required.
+If you specify both this and the request path parameter, the API only uses the request path parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IngestRequestDescriptor&lt;TDocument&gt; PipelineSubstitutions(Func&lt;FluentDescriptorDictionary&lt;string, PipelineDescriptor&lt;TDocument&gt;&gt;, FluentDescriptorDictionary&lt;string, PipelineDescriptor&lt;TDocument&gt;&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Simulate_IngestRequestDescriptor_1_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor`1.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.17.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Simulate/IngestRequest.g.cs/#L297"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
