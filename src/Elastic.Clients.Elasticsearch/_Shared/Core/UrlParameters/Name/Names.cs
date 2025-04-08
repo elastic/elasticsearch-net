@@ -6,14 +6,20 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
+[JsonConverter(typeof(NamesConverter))]
 public sealed class Names : IEquatable<Names>, IUrlParameter
 {
-	public Names(IEnumerable<string> names) : this(names?.Select(n => (Name)n).ToList()) { }
+	public Names(IEnumerable<string> names) : this(names?.Select(n => (Name)n).ToList())
+	{
+	}
 
 	public Names(IEnumerable<Name> names)
 	{
@@ -60,4 +66,45 @@ public sealed class Names : IEquatable<Names>, IUrlParameter
 	public override bool Equals(object obj) => obj is string s ? Equals(Parse(s)) : obj is Names i && Equals(i);
 
 	public override int GetHashCode() => Value.GetHashCode();
+}
+
+internal sealed class NamesConverter :
+	JsonConverter<Names>
+{
+	public override Names? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		switch (reader.TokenType)
+		{
+			case JsonTokenType.Null:
+				return null;
+
+			case JsonTokenType.String:
+				var name = JsonSerializer.Deserialize<Name>(ref reader, options);
+				return new Names([name]);
+
+			case JsonTokenType.StartArray:
+				var names = JsonSerializer.Deserialize<List<Name>>(ref reader, options);
+				return new Names(names);
+
+			default:
+				throw new JsonException("Unexpected token.");
+		}
+	}
+
+	public override void Write(Utf8JsonWriter writer, Names value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		if (value.Value.Count == 1)
+		{
+			JsonSerializer.Serialize(writer, value.Value[0], options);
+			return;
+		}
+
+		JsonSerializer.Serialize(writer, value.Value, options);
+	}
 }
