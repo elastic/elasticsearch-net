@@ -33,14 +33,6 @@ public sealed partial class CloneSnapshotRequestParameters : Elastic.Transport.R
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>
-	/// The period of time to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 internal sealed partial class CloneSnapshotRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest>
@@ -165,14 +157,6 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
-	/// The period of time to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-	/// <summary>
-	/// <para>
 	/// A comma-separated list of indices to include in the snapshot.
 	/// Multi-target syntax is supported.
 	/// </para>
@@ -259,18 +243,6 @@ public readonly partial struct CloneSnapshotRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The period of time to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
-	{
-		Instance.Timeout = value;
 		return this;
 	}
 
