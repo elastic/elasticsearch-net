@@ -21,3 +21,14 @@ toc:
       - file: recommendations.md
       - file: transport.md
       - file: migration-guide.md
+  - file: troubleshoot/index.md
+    children:
+      - file: troubleshoot/logging.md
+        children:
+          - file: troubleshoot/logging-with-onrequestcompleted.md
+          - file: troubleshoot/logging-with-fiddler.md
+      - file: troubleshoot/debugging.md
+        children:
+          - file: troubleshoot/audit-trail.md
+          - file: troubleshoot/debug-information.md
+          - file: troubleshoot/debug-mode.md
